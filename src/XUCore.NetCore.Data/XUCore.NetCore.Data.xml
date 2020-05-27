@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.Data</name>
+    </assembly>
+    <members>
+        <member name="M:XUCore.NetCore.Data.BulkExtensions.BatchUtil.GetSqlUpdate``1(System.Linq.IQueryable{``0},Microsoft.EntityFrameworkCore.DbContext,System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            get Update Sql
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.BulkExtensions.BatchUtil.CreateUpdateBody(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Linq.Expressions.Expression,XUCore.NetCore.Data.BulkExtensions.DbServer,System.Text.StringBuilder@,System.Collections.Generic.List{System.Object}@)">
+            <summary>
+            Recursive analytic expression 
+            </summary>
+            <param name="tableAlias"></param>
+            <param name="expression"></param>
+            <param name="sqlColumns"></param>
+            <param name="sqlParameters"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.BulkExtensions.SqlQueryBuilder.DeleteTable(System.String)">
+            <summary>
+            Used for Sqlite, Truncate table 
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.ToMap``2(XUCore.Paging.PagedList{``0},System.Func{``0,``1})">
+            <summary>
+            模型转换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="pagedList"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.ToMap``2(XUCore.Paging.PagedList{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            模型转换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="pagedList"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.ToMap``2(XUCore.Paging.PagedSkipList{``0},System.Func{``0,``1})">
+            <summary>
+            模型转换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="pagedList"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.ToMap``2(XUCore.Paging.PagedSkipList{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            模型转换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="pagedList"></param>
+            <param name="converter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.CreatePagedList``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            创建分页对象
+            </summary>
+            <param name="source"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.CreatePagedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步创建分页对象
+            </summary>
+            <param name="source"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.CreatePagedSkipList``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            创建分页对象
+            </summary>
+            <param name="source"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.PagedExtensions.CreatePagedSkipListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步创建分页对象
+            </summary>
+            <param name="source"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            执行异步存储操作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.IBaseRepository`1">
+            <summary>
+            通用仓储库的方法定义
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.IDbContext">
+            <summary>
+            多数据库操作继承该接口
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.IDbServiceBase`1">
+            <summary>
+            数据领域层接口
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1">
+            <summary>
+            net core 跟 netFramework下面的EF统一配置字段不一致
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.tableName">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.primaryKey">
+            <summary>
+            设置主键
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.Identity">
+            <summary>
+            设置自增
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.NoIdentity">
+            <summary>
+            ef设置不自增
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.ignores">
+            <summary>
+            需要排除的字段
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertDefault">
+            <summary>
+            仅在添加时设置指定字段默认值
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertOrUpdates">
+            <summary>
+            仅在添加或者修改时设置默认值
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetIndentity(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            设置自增属性
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <param name="Identity"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetIgnore(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+             <summary>
+            在ef映射过程中排除的字段,允许多个字段排除
+             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetValueDefaultAdd(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            在ef添加记录的时候默认值添加，即不赋值
+            </summary>
+            <param name="insertDefault"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.DbBaseRepository`1">
+            <summary>
+            数据库的基础仓储库
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.DBContextFactory">
+            <summary>
+            基于db上下文拓展工厂，用于拓展XUCore.NetCore.Data.BulkExtensions的GitHub开源项目
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.DBContextFactory.mappingPath">
+            <summary>
+            映射的路径
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.DbServiceBaseProvider`1">
+            <summary>
+            数据库领域操作的基础对象
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.MsSqlRepository`1">
+            <summary>
+            sql server的仓库
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.IMsSqlRepository`1">
+            <summary>
+            定义SqlServer仓库
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.ExecuteSql(System.String,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过EF执行原生SQL 返回影响行数
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.Select``1(System.String,System.Data.CommandType,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.SelectList``1(System.String,System.Data.CommandType,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.SelectList(System.String,System.Data.CommandType,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果集合(DataTable)
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.SelectDataSet(System.String,System.Data.CommandType,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL返回数据集(DataSet);
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMsSqlRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,Microsoft.Data.SqlClient.SqlParameter[])">
+            <summary>
+            通过原生执行ADONET查询操作
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.ExecuteSql(System.String,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过EF执行原生SQL 返回影响行数
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.Select``1(System.String,System.Data.CommandType,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.SelectList``1(System.String,System.Data.CommandType,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果集合
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.SelectList(System.String,System.Data.CommandType,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL 返回查询结果集合(DataTable)
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.SelectDataSet(System.String,System.Data.CommandType,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过ADO.NET执行SQL返回数据集(DataSet);
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IMySqlRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,MySql.Data.MySqlClient.MySqlParameter[])">
+            <summary>
+            通过原生执行ADONET查询操作
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="parameters"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1480 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.Redis.ConnectTypeEnum">
+            <summary>
+            连接类型
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.ConnectTypeEnum.Read">
+            <summary>
+            只读连接
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.ConnectTypeEnum.Write">
+            <summary>
+            只写连接
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.ConnectTypeEnum.ReadAndWrite">
+            <summary>
+            读写操作连接
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.OverWrittenTypeDenum">
+            <summary>
+            值覆盖类型枚举
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.OverWrittenTypeDenum.Always">
+            <summary>
+            总是覆盖
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.OverWrittenTypeDenum.Exists">
+            <summary>
+            仅存在再覆盖
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.OverWrittenTypeDenum.NotExists">
+            <summary>
+            不存在的时候再覆盖
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisException">
+            <summary>
+            redis组件异常
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.RedisException.Host">
+            <summary>
+            异常的redis主机地址
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.RedisException.Port">
+            <summary>
+            异常的redis主机端口
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.RedisException.SourceErrorMessage">
+            <summary>
+            缓存服务器原始错误
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.RedisException.CustomErrorMessage">
+            <summary>
+            Redis缓存自定义错误
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisServiceProvider">
+            <summary>
+            缓存操作仓库实现
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.ServiceCollectionExtensions">
+            <summary>
+            服务扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddRedisService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Redis注入
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            Redis注入序列化组件
+            </summary>
+            <param name="services">服务集合</param>
+            <param name="redisSerializer">序列化</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddJsonRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Redis注入Json序列化组件
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddMessagePackRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Redis注入MessagePack序列化组件
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.StackExchangeConnectionSettings">
+            <summary>
+            Redis连接配置
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.ConnectionName">
+            <summary>
+            连接名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.ConnectType">
+            <summary>
+            连接类型
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.EndPoint">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.Password">
+            <summary>
+            连接Redis的密码
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.Connection">
+            <summary>
+            缓存操作对象
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeRedis.configuration">
+            <summary>
+            应用程序的配置接口
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.StackExchangeRedis.#ctor(Microsoft.Extensions.Configuration.IConfiguration,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="configuration"></param>
+            <param name="redisSerializer"></param>
+        </member>
+        <member name="F:XUCore.NetCore.Redis.StackExchangeRedis.connMultiplexer">
+            <summary>
+            延迟加载配置
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.StackExchangeRedisProvider">
+            <summary>
+            Redis的组件服务提供
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.IRedisService">
+            <summary>
+            定义redis连接服务
+            XUCore.NetCore.Redis.IStackExchangeRedis 已经定义了一些操作
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.IStackExchangeRedis">
+            <summary>
+            定义功能操作部分
+            详细命令参考:http://redisdoc.com/
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.IStackExchangeRedis.QueryDataBase(XUCore.NetCore.Redis.ConnectTypeEnum,System.String)">
+            <summary>
+            查询返回IDataBase
+            </summary>
+            <param name="connectTypeEnum"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.IStackExchangeRedis.QuerySubscriber(XUCore.NetCore.Redis.ConnectTypeEnum,System.String)">
+            <summary>
+            查询返回ISubscriber
+            消息中间件使用
+            </summary>
+            <param name="connectTypeEnum"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.IStackExchangeRedis.QueryServerCounters(XUCore.NetCore.Redis.ConnectTypeEnum,System.String)">
+            <summary>
+            查询返回ServerCounters
+            </summary>
+            <param name="connectTypeEnum"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.IStackExchangeRedis.QueryMultiplexer(XUCore.NetCore.Redis.ConnectTypeEnum,System.String)">
+            <summary>
+            获得连接器
+            </summary>
+            <param name="connectTypeEnum"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand">
+            <summary>
+            Hash 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashSet``1(System.String,System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入hash表操作
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId">表ID(可以当成是一行数据）</param>
+            <param name="key">字段名（可以当成是列名）</param>
+            <param name="value">字段值（可以当成是列值）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer">序列化</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashSet``1(System.String,System.String,``0,XUCore.NetCore.Redis.OverWrittenTypeDenum,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入时候判断是否写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="isAlways">0=一直,1=仅存在的时候,2=不存在的时候</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGetOrInsert``1(System.String,System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashKey"></param>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGetOrInsert``2(System.String,System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashKey"></param>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="t"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGet``1(System.String,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据）
+            </summary>
+            <param name="hashId">键ID（行ID）</param>
+            <param name="key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGet``1(System.String,System.String[],System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash指定键值
+            </summary>
+            <param name="hashId"></param>
+            <param name="keys"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashLength(System.String,System.String)">
+            <summary>
+            获得Hash长度
+            </summary>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGetAll(System.String,System.String)">
+            <summary>
+            获得Hash指定行的值
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashGetAll``1(System.String,System.Func{System.Collections.Generic.Dictionary{System.String,System.String},``0},System.String)">
+            <summary>
+            获得Hash指定行的值
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <param name="fetcher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashKeys(System.String,System.String)">
+            <summary>
+            获得指定Hash所有的KEYS
+            </summary>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashValues``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得指定Hash所有的Values
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashDelete(System.String,System.String,System.String)">
+            <summary>
+            删除Hash中指定的key
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashDelete(System.String,System.String[],System.String)">
+            <summary>
+            删除Hash中指定的key
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">批量键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommand.HashExists(System.String,System.String,System.String)">
+            <summary>
+            查询Hash中指定的key是否存在
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync">
+            <summary>
+            Hash 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashSetAsync``1(System.String,System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入hash表操作
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId">表ID(可以当成是一行数据）</param>
+            <param name="key">字段名（可以当成是列名）</param>
+            <param name="value">字段值（可以当成是列值）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashSetAsync``1(System.String,System.String,``0,XUCore.NetCore.Redis.OverWrittenTypeDenum,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入时候判断是否写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashId"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="isAlways">0=一直,1=仅存在的时候,2=不存在的时候</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``1(System.String,System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashKey"></param>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``2(System.String,System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashKey"></param>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="t"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetAsync``1(System.String,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash键值对值（可以理解为获得某一行中的某一列数据）
+            </summary>
+            <param name="hashId">键ID（行ID）</param>
+            <param name="key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetAsync``1(System.String,System.String[],System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得Hash指定键值
+            </summary>
+            <param name="hashId"></param>
+            <param name="keys"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashLengthAsync(System.String,System.String)">
+            <summary>
+            获得Hash长度
+            </summary>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetAllAsync(System.String,System.String)">
+            <summary>
+            获得Hash指定行的值
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetAllAsync``1(System.String,System.Func{System.Collections.Generic.Dictionary{System.String,System.String},``0},System.String)">
+            <summary>
+            获得Hash指定行的值
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashId"></param>
+            <param name="connectionRead"></param>
+            <param name="fetcher"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashKeysAsync(System.String,System.String)">
+            <summary>
+            获得指定Hash所有的KEYS
+            </summary>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashValuesAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得指定Hash所有的Values
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="hashId"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashDeleteAsync(System.String,System.String,System.String)">
+            <summary>
+            删除Hash中指定的key
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashDeleteAsync(System.String,System.String[],System.String)">
+            <summary>
+            删除Hash中指定的key
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">批量键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashExistsAsync(System.String,System.String,System.String)">
+            <summary>
+            查询Hash中指定的key是否存在
+            </summary>
+            <param name="hashId">键Id(行ID）</param>
+            <param name="Key">键（列名）</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand">
+            <summary>
+            Redis Key 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand.KeyExists(System.String,System.String)">
+            <summary>
+            判断key是否存在，某些操作需要创建新的对象而不是修改老对象的情况下面请先使用该方法判断key是否存在
+            </summary>
+            <param name="key">键</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand.KeyDump(System.String,System.String)">
+            <summary>
+            序列化给定 key ，并返回被序列化的值，使用 RESTORE 命令可以将这个值反序列化为 Redis 键
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand.KeyExpire(System.String,System.Int32,System.String)">
+            <summary>
+            设置键失效时间，当时间一到自动移除key
+            </summary>
+            <param name="key"></param>
+            <param name="seconds">失效时间为秒（s）</param>
+            <param name="connectionName">连接名称</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand.KeyDelete(System.String,System.String)">
+            <summary>
+            删除Key
+            </summary>
+            <param name="Key">key名称</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommand.KeyPersist(System.String,System.String)">
+            <summary>
+            移除Key设定的生命周期
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync">
+            <summary>
+            Redis Key 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync.KeyExistsAsync(System.String,System.String)">
+            <summary>
+            判断key是否存在，某些操作需要创建新的对象而不是修改老对象的情况下面请先使用该方法判断key是否存在
+            </summary>
+            <param name="key">键</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync.KeyDumpAsync(System.String,System.String)">
+            <summary>
+            序列化给定 key ，并返回被序列化的值，使用 RESTORE 命令可以将这个值反序列化为 Redis 键
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync.KeyExpireAsync(System.String,System.Int32,System.String)">
+            <summary>
+            设置键失效时间，当时间一到自动移除key
+            </summary>
+            <param name="key"></param>
+            <param name="seconds">失效时间为秒（s）</param>
+            <param name="connectionName">连接名称</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync.KeyDeleteAsync(System.String,System.String)">
+            <summary>
+            删除Key
+            </summary>
+            <param name="Key">key名称</param>
+            <param name="connectionName">连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IKeyRedisCommandAsync.KeyPersistAsync(System.String,System.String)">
+            <summary>
+            移除Key设定的生命周期
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand">
+            <summary>
+            Redis 列表命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListLeftPushWhenExists``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(只有当队列存在的时候)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListLeftPush``1(System.String,System.Collections.Generic.List{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(插入多数据)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListLeftPushWhenNoExists``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(只有当队列不存在的时候)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRightPushWhenExists``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(只有当列表存在时)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRightPushWhenNoExists``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(只有当列表不存在时)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRightPush``1(System.String,System.Collections.Generic.List{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(插入多数据)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListLeftPop``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回最前面的一条并且移除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRightPop``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回最后面的一条并且移除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListLength(System.String,System.String)">
+            <summary>
+            获得消息列表长度
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListSetByIndex``1(System.String,System.Int64,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标设置消息列表值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="index">允许负数(如果为负数则从最后开始算起)</param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListTrim(System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            对消息列表进行截取操作
+            </summary>
+            <param name="key"></param>
+            <param name="index"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListGetByIndex``1(System.String,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标获得值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="index"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRange``1(System.String,System.Int64,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标范围取的集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListInsertBefore``1(System.String,``0,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            在消息列表指定值之前插入值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="insertvalue"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListInsertAfter``1(System.String,``0,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            在消息列表指定值之后插入值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="insertvalue"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommand.ListRemove``1(System.String,``0,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            移除消息列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="removecount">0:移除所有相同的,大于0从左边开始移除相同的个数,小于0从末尾开始移除的个数</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync">
+            <summary>
+            Redis 列表命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListLeftPushWhenExistsAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(只有当队列存在的时候)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListLeftPushAsync``1(System.String,System.Collections.Generic.List{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(插入多数据)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListLeftPushWhenNoExistsAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表左侧插入(只有当队列不存在的时候)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRightPushWhenExistsAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(只有当列表存在时)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRightPushWhenNoExistsAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(只有当列表不存在时)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRightPushAsync``1(System.String,System.Collections.Generic.List{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            从列表右侧插入(插入多数据)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListLeftPopAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回最前面的一条并且移除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRightPopAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回最后面的一条并且移除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListLengthAsync(System.String,System.String)">
+            <summary>
+            获得消息列表长度
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListSetByIndexAsync``1(System.String,System.Int64,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标设置消息列表值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="index">允许负数(如果为负数则从最后开始算起)</param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListTrimAsync(System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            对消息列表进行截取操作
+            </summary>
+            <param name="key"></param>
+            <param name="index"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListGetByIndexAsync``1(System.String,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标获得值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="index"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRangeAsync``1(System.String,System.Int64,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            通过下标范围取的集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListInsertBeforeAsync``1(System.String,``0,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            在消息列表指定值之前插入值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="insertvalue"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListInsertAfterAsync``1(System.String,``0,System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            在消息列表指定值之后插入值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="insertvalue"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IListRedisCommandAsync.ListRemoveAsync``1(System.String,``0,System.Int64,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            移除消息列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="removecount">0:移除所有相同的,大于0从左边开始移除相同的个数,小于0从末尾开始移除的个数</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ILockRedisCommand">
+            <summary>
+            Lock 命令
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ILockRedisCommandAsync">
+            <summary>
+            Lock 命令
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand">
+            <summary>
+            Redis Set集合
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetAdd``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            集合添加
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>T
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetMembers``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得集合里面的内容
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetExists``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            查看集合里面是否有该内容
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetRemove``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            移除集合中指定值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetPop``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            随机移除集合中的一个元素并且返回该值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetLength(System.String,System.String)">
+            <summary>
+            返回Set集合长度
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommand.SetRandom``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            随机返回集合中的元素 但是不删除,区别于POP操作
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer">序列化</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync">
+            <summary>
+            Redis Set集合
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetAddAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            集合添加
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>T
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetMembersAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得集合里面的内容
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetExistsAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            查看集合里面是否有该内容
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetRemoveAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            移除集合中指定值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">集合key</param>
+            <param name="value">集合值</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetPopAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            随机移除集合中的一个元素并且返回该值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetLengthAsync(System.String,System.String)">
+            <summary>
+            返回Set集合长度
+            </summary>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISetRedisCommandAsync.SetRandomAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            随机返回集合中的元素 但是不删除,区别于POP操作
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand">
+            <summary>
+            Redis 有序集合命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedAdd``1(System.String,``0,System.Double,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            添加有序集和对象,向有序集合添加一个或多个成员，或者更新已存在成员的分数
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedAdd``1(System.String,System.Collections.Generic.Dictionary{``0,System.Double},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            批量添加有序集合对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="values"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedCount(System.String,System.Double,System.Double,System.String)">
+            <summary>
+            获得有续集和范围内的集合数量
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRemove``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            删除有续集和
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRemove``1(System.String,System.Collections.Generic.IList{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            删除有序集合根据多个values集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="values"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRemove(System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            删除有序集合通过游标
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取有续集和的值
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="skip"></param>
+            <param name="take"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRange``1(System.String,System.Int64,System.Int64,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取有序集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedZrank``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回有序集合中指定成员的索引
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync">
+            <summary>
+            Redis 有序集合命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedAddAsync``1(System.String,``0,System.Double,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            添加有序集和对象,向有序集合添加一个或多个成员，或者更新已存在成员的分数
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedAddAsync``1(System.String,System.Collections.Generic.Dictionary{``0,System.Double},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            批量添加有序集合对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="values"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedCountAsync(System.String,System.Double,System.Double,System.String)">
+            <summary>
+            获得有续集和范围内的集合数量
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRemoveAsync``1(System.String,``0,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            删除有续集和
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRemoveAsync``1(System.String,System.Collections.Generic.IList{``0},System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            删除有序集合根据多个values集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="values"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRemoveAsync(System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            删除有序集合通过游标
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeByScoreAsync``1(System.String,System.Double,System.Double,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取有续集和的值
+            </summary>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="skip"></param>
+            <param name="take"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeAsync``1(System.String,System.Int64,System.Int64,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取有序集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedZrankAsync``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            返回有序集合中指定成员的索引
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="orderby">0：Ascending，1：Descending</param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand">
+            <summary>
+            String 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringSet``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入string命令key-value
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="seconds">失效时间，默认不失效（当业务场景中需要做失效时间时使用）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringGetOrInsert``1(System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取string的value值，如果不存在则写入
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringGetOrInsert``2(System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取string的value值，如果不存在则写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="t"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringIncrement(System.String,System.Int64,System.String)">
+            <summary>
+            原子性自增列
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringGet``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得string的value值
+            </summary>
+            <param name="key">键</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommand.StringGet``1(System.String[],System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            批量获得string类型的值
+            </summary>
+            <param name="keys"></param>
+            <param name="connectionName"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync">
+            <summary>
+            String 命令
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringSetAsync``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            写入string命令key-value
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="seconds">失效时间，默认不失效（当业务场景中需要做失效时间时使用）</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``1(System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取string的value值，如果不存在则写入
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``2(System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获取string的value值，如果不存在则写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="key"></param>
+            <param name="fetcher"></param>
+            <param name="t"></param>
+            <param name="seconds"></param>
+            <param name="connectionRead"></param>
+            <param name="connectionWrite"></param>
+            <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringIncrementAsync(System.String,System.Int64,System.String)">
+            <summary>
+            原子性自增列
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetAsync``1(System.String,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            获得string的value值
+            </summary>
+            <param name="key">键</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetAsync``1(System.String[],System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+            <summary>
+            批量获得string类型的值
+            </summary>
+            <param name="keys">key数组</param>
+            <param name="connectionName">连接名称</param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

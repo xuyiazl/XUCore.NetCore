@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Description>
+			Redis封装服务，基础类库 StackExchange.Redis,JSON和MessageagePack数据格式自由切换。
+		</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Authors>XUCore</Authors>
+		<Company>XUCore</Company>
+		<Description>.NET Core Redis</Description>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<Version>1.0.0</Version>
+		<PackageId>XUCore.NetCore.Redis</PackageId>
+		<Product>XUCore.NetCore.Redis</Product>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>XUCore.NetCore.Redis.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\release\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.NetCore.Redis.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.4" />
+		<PackageReference Include="StackExchange.Redis" Version="2.1.30" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore\XUCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Impl/StackExchangeRedisAsync.*.cs">
+			<DependentUpon>StackExchangeRedisAsync.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Impl/StackExchangeRedis.*.cs">
+			<DependentUpon>StackExchangeRedis.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="XUCore.NetCore.Redis.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

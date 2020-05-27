@@ -1,0 +1,12 @@
+﻿@page
+@model XUCore.RazorTests.CreateModel
+
+<p>Validation: customer name:</p>
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    Name:
+    <input asp-for="Customer.Name" />
+    <span asp-validation-for="Customer.Name"></span>
+    <input type="submit" />
+</form>

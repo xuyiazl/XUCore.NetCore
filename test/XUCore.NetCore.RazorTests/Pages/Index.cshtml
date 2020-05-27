@@ -1,0 +1,51 @@
+﻿@page "{id?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Name</td>
+                        <td>修改</td>
+                        <td>删除</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Customers)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td><a asp-page="edit" asp-route-id="@item.Id">修改</a></td>
+                            <td><button type="submit" asp-page-handler="delete" asp-route-id="@item.Id">删除</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </p>
+    <p><a asp-page="create">添加</a></p>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+
+            //$.post('?handler=delete', { id: 1 })
+            //    .then(function (res) {
+            //        console.log(res);
+            //    })
+            //    .fail(function (res) {
+            //        alert(res);
+            //    });
+
+        })
+    </script>
+}

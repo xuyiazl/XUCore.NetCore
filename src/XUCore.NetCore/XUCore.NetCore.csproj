@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Description>
+			NetCore项目中间件
+		</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Authors>XUCore</Authors>
+		<Company>XUCore</Company>
+		<Description>.NET Core Common</Description>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<Version>1.0.0</Version>
+		<PackageId>XUCore.NetCore</PackageId>
+		<Product>XUCore.NetCore</Product>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>XUCore.NetCore.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\release\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.NetCore.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.1" />
+		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore.Drawing\XUCore.Drawing.csproj" />
+		<ProjectReference Include="..\XUCore\XUCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\LibraryResource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>LibraryResource.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\R.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>R.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\LibraryResource.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>LibraryResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\R.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>R.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="XUCore.NetCore.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

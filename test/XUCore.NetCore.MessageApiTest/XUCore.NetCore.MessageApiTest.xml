@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.MessageApiTest</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.MessageApiTest.ApiControllerBase">
+            <summary>
+            WebApi控制器基类
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.MessageApiTest.ApiControllerBase._logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.MessageApiTest.ApiControllerBase.Success``1(System.String,System.String,``0)">
+            <summary>
+            返回成功消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.MessageApiTest.ApiControllerBase.Fail``1(System.String,System.String,``0)">
+            <summary>
+            返回失败消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

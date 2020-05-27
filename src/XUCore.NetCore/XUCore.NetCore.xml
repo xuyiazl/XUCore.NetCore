@@ -1,0 +1,1673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.Controllers.ApiControllerBase">
+            <summary>
+            WebApi控制器基类
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Controllers.ApiControllerBase._logger">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Controllers.ApiControllerBase.Success(System.String,System.String,System.Object)">
+            <summary>
+            返回成功消息
+            </summary>
+            <param name="subCode">业务状态码</param>
+            <param name="data">数据</param>
+            <param name="message">消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Controllers.ApiControllerBase.Fail(System.String,System.String)">
+            <summary>
+            返回失败消息
+            </summary>
+            <param name="subCode">业务状态码</param>
+            <param name="message">消息</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Controllers.AreaApiControllerBase">
+            <summary>
+            WebApi的区域控制器基类
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Extensions.ActionContextExtensions">
+            <summary>
+            操作上下文(<see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>) 扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetAreaName(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取Area名称
+            </summary>
+            <param name="context">操作上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetControllerName(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取Controller名称
+            </summary>
+            <param name="context">操作上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetActionName(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取Action名称
+            </summary>
+            <param name="context">操作上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetRouteValues(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取所有路由信息
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
+            <summary>
+            根据路由参数进行模板替换
+            </summary>
+            <param name="context"></param>
+            <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Extensions.Extensions">
+            <summary>
+            中间件扩展
+            </summary>
+            <summary>
+            服务扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseErrorLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册错误日志中间件
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRequestLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册请求日志中间件
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseStaticHttpContext(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            启用静态请求上下文
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRealIp(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册真实IP中间件
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRealIp(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.String)">
+            <summary>
+            注册真实IP
+            </summary>
+            <param name="hostBuilder">Web主机生成器</param>
+            <param name="headerKey">请求头键名</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)">
+            <summary>
+            绑定本地缓存管理
+            </summary>
+            <remarks>引入 ICacheManager 使用</remarks>
+            <param name="services">服务集合</param>
+            <param name="memoryCacheOptions"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddUploadService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册上传服务
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddUploadService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册上传服务
+            </summary>
+            <typeparam name="TFileUploadService">文件上传服务类型</typeparam>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddRazorHtml(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册Razor静态Html生成器
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HttpFactory Service
+            </summary>
+            <typeparam name="TImplementation"></typeparam>
+            <param name="services"></param>
+            <param name="clientName"></param>
+            <param name="baseAddress"></param>
+            <param name="messageHandler"></param>
+            <param name="httpClientLeftTime"></param>
+            <param name="serviceLifetime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HTTPFactory Srevice
+            </summary>
+            <param name="services"></param>
+            <param name="clientName"></param>
+            <param name="client"></param>
+            <param name="messageHandler"></param>
+            <param name="httpClientLeftTime"></param>
+            <param name="serviceLifetime"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HTTPFactory Srevice
+            </summary>
+            <typeparam name="TImplementation"></typeparam>
+            <param name="services"></param>
+            <param name="serviceLifetime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HttpFactory Service
+            </summary>
+            <param name="services"></param>
+            <param name="clientName"></param>
+            <param name="baseAddress"></param>
+            <param name="messageHandler"></param>
+            <param name="httpClientLeftTime"></param>
+            <param name="serviceLifetime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HTTPFactory Srevice
+            </summary>
+            <param name="services"></param>
+            <param name="clientName"></param>
+            <param name="client"></param>
+            <param name="messageHandler"></param>
+            <param name="httpClientLeftTime"></param>
+            <param name="serviceLifetime"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageServiceLeftTime(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            注册 HTTPFactory Srevice
+            </summary>
+            <param name="services"></param>
+            <param name="serviceLifetime"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Extensions.ViewResultExtensions">
+            <summary>
+            视图结果 扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.ViewResult,Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
+            <summary>
+            转换成Html
+            </summary>
+            <param name="result">视图结果</param>
+            <param name="httpContext">Http上下文</param>
+            <param name="IsPartialView">是否部分视图，默认：false</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeAttribute">
+            <summary>
+            API查询时间
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Filters.ApiErrorAttribute">
+            <summary>
+            API错误日志过滤器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiErrorAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            异常处理
+            </summary>
+            <param name="context">异常上下文</param>
+        </member>
+        <member name="T:XUCore.NetCore.Filters.ApiTraceAttribute">
+            <summary>
+            API跟踪日志过滤器
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Filters.ApiTraceAttribute.Ignore">
+            <summary>
+            是否忽略，为true不记录日志
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Filters.ApiTraceAttribute._logger">
+            <summary>
+            获取日志操作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            执行
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="next">委托</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.OnActionExecutingAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,XUCore.Helpers.Str)">
+            <summary>
+            执行前
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.WriteLogAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,XUCore.Helpers.Str)">
+            <summary>
+            执行前日志
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddRequestInfoAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,XUCore.Helpers.Str)">
+            <summary>
+            添加请求信息参数
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddHeaders(Microsoft.AspNetCore.Http.HttpRequest,XUCore.Helpers.Str)">
+            <summary>
+            添加请求头
+            </summary>
+            <param name="request">Http请求</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddFormParamsAsync(Microsoft.AspNetCore.Http.HttpRequest,XUCore.Helpers.Str)">
+            <summary>
+            添加表单参数
+            </summary>
+            <param name="request">Http请求</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.IsMultipart(System.String)">
+            <summary>
+            是否multipart内容类型
+            </summary>
+            <param name="contentType">内容类型</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddCookie(Microsoft.AspNetCore.Http.HttpRequest,XUCore.Helpers.Str)">
+            <summary>
+            添加Cookie
+            </summary>
+            <param name="request">Http请求</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,XUCore.Helpers.Str)">
+            <summary>
+            执行后
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.WriteLog(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,XUCore.Helpers.Str)">
+            <summary>
+            执行后的日志
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddResponseInfo(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,XUCore.Helpers.Str)">
+            <summary>
+            添加响应信息参数
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ApiTraceAttribute.AddResult(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,XUCore.Helpers.Str)">
+            <summary>
+            记录响应结果
+            </summary>
+            <param name="context">操作执行上下文</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="T:XUCore.NetCore.Filters.ExceptionHandlerAttribute">
+            <summary>
+            异常处理过滤器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ExceptionHandlerAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            异常处理
+            </summary>
+            <param name="context">异常上下文</param>
+        </member>
+        <member name="T:XUCore.NetCore.Filters.NoCacheAttribute">
+            <summary>
+            无缓存过滤器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.NoCacheAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+            <summary>
+            重写OnResultExecuting()方法，取消页面缓存
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.HttpMediaType">
+            <summary>
+            数据MediaType类型
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.HttpFactory.HttpMediaType.Json">
+            <summary>
+            返回的数据类型为JSON
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.HttpFactory.HttpMediaType.MessagePack">
+            <summary>
+            返回的数据类型为MessagePack
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.HttpFactory.HttpMediaType.MessagePackJackson">
+            <summary>
+            返回的数据类型为MessagePack-Jackson
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.HttpMessageService">
+            <summary>
+            HttpRequestMessage服务类
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.HttpRemote">
+            <summary>
+            Http远程操作
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.HttpFactory.HttpRemote.Service">
+            <summary>
+            获取HttpService
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.HttpFactory.HttpRemote.MessageService">
+            <summary>
+            获取HttpMessageService
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.HttpService">
+            <summary>
+            HttpRequestMessage服务类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.GetAsync``1(XUCore.Webs.UrlArguments,System.Threading.CancellationToken)">
+            <summary>
+            GET请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.GetAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            GET请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PostAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            POST提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PostAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            POST提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PutAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            PUT提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PutAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            PUT提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PatchAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            PATCH提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.PatchAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            PATCH提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.DeleteAsync``1(XUCore.Webs.UrlArguments,System.Threading.CancellationToken)">
+            <summary>
+            DELETE请求删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.DeleteAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            DELETE请求删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.HttpSendAsync``2(XUCore.Webs.UrlArguments,System.Net.Http.HttpMethod,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            发送请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="method">请求类型</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.HttpSendAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpMethod,System.Func{System.Net.Http.HttpContent},XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            发送请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="method">请求类型</param>
+            <param name="contentCall">HttpContent请求内容</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.HttpService.RequestHeaders(System.Net.Http.Headers.HttpRequestHeaders)">
+            <summary>
+            添加Headers消息头
+            </summary>
+            <param name="headers">header</param>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``0},System.Threading.CancellationToken)">
+            <summary>
+            异步GET请求
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PostAsync``2(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``1},System.Threading.CancellationToken)">
+            <summary>
+            异步POST请求
+            </summary>
+            <typeparam name="TModel">提交类型</typeparam>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="model">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PostAsync``1(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``0},System.Threading.CancellationToken)">
+            <summary>
+            异步POST请求
+            </summary>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="content">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PutAsync``2(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``1},System.Threading.CancellationToken)">
+            <summary>
+            异步Put请求
+            </summary>
+            <typeparam name="TModel">提交类型</typeparam>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="model">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PutAsync``1(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``0},System.Threading.CancellationToken)">
+            <summary>
+            异步Put请求
+            </summary>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="content">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PatchAsync``2(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``1},System.Threading.CancellationToken)">
+            <summary>
+            异步Patch请求
+            </summary>
+            <typeparam name="TModel">提交类型</typeparam>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="model">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.PatchAsync``1(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``0},System.Threading.CancellationToken)">
+            <summary>
+            异步Patch请求
+            </summary>
+            <typeparam name="TResult">返回类型</typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="content">提交的模型数据</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpMessageServiceExtensions.DeleteAsync``1(XUCore.NetCore.HttpFactory.IHttpMessageService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,``0},System.Threading.CancellationToken)">
+            <summary>
+            异步DELETE请求
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpMessageService"/>操作服务</param>
+            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
+            <param name="options">序列化方式<see cref="T:XUCore.Json.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
+            <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
+            <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.IHttpService">
+            <summary>
+            HttpRequestMessage服务类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.GetAsync``1(XUCore.Webs.UrlArguments,System.Threading.CancellationToken)">
+            <summary>
+            GET请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.GetAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            GET请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PostAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            POST提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PostAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            POST提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PutAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            PUT提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PutAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            PUT提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PatchAsync``2(XUCore.Webs.UrlArguments,``1,System.Threading.CancellationToken)">
+            <summary>
+            PATCH提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.PatchAsync``2(XUCore.Webs.UrlArguments,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            PATCH提交数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.DeleteAsync``1(XUCore.Webs.UrlArguments,System.Threading.CancellationToken)">
+            <summary>
+            DELETE请求删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.DeleteAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            DELETE请求删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.HttpSendAsync``2(XUCore.Webs.UrlArguments,System.Net.Http.HttpMethod,``1,XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            发送请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="method">请求类型</param>
+            <param name="postData">模型数据</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpService.HttpSendAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpMethod,System.Func{System.Net.Http.HttpContent},XUCore.NetCore.HttpFactory.HttpMediaType,System.Threading.CancellationToken)">
+            <summary>
+            发送请求数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="urlArguments">Url构造器</param>
+            <param name="method">请求类型</param>
+            <param name="contentCall">HttpContent请求内容</param>
+            <param name="mediaType">mediaType数据格式，请求格式和返回格式一致（JSON、MessagePack）</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.AdminSafeListMiddleware">
+            <summary>
+            安全管理列表中间件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.AdminSafeListMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.AdminSafeListMiddleware._whitelist">
+            <summary>
+            IP白名单
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.AdminSafeListMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.Middlewares.AdminSafeListMiddleware},System.String)">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.AdminSafeListMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+            <param name="whitelist">IP白名单</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.AdminSafeListMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行中间件拦截逻辑
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.AllowCorsRequestMiddleware">
+            <summary>
+            允许CORS请求中间件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.AllowCorsRequestMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.AllowCorsRequestMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.AllowCorsRequestMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.AllowCorsRequestMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行中间件拦截逻辑
+            </summary>
+            <param name="context">Http上下文</param>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.ErrorLogMiddleware">
+            <summary>
+            错误日志中间件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.ErrorLogMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.ErrorLogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.Middlewares.ErrorLogMiddleware})">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.ErrorLogMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.ErrorLogMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行方法
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.ErrorLogMiddleware.WriteLog(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            记录错误日志
+            </summary>
+            <param name="context">Http上下文</param>
+            <param name="ex">异常</param>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.IMiddleware">
+            <summary>
+            定义AspNetCore中间件
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.IMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行中间件拦截逻辑
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.RealIpMiddleware">
+            <summary>
+            真实IP中间件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.RealIpMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.RealIpMiddleware._options">
+            <summary>
+            真实IP选项
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RealIpMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{XUCore.NetCore.Middlewares.RealIpOptions})">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.RealIpMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+            <param name="options">真实IP选项</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RealIpMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行方法
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.RealIpOptions">
+            <summary>
+            真实IP选项
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Middlewares.RealIpOptions.HeaderKey">
+            <summary>
+            请求头键名
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.RealIpFilter">
+            <summary>
+            真实IP过滤器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RealIpFilter.Configure(System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            配置
+            </summary>
+            <param name="next">方法</param>
+        </member>
+        <member name="T:XUCore.NetCore.Middlewares.RequestLogMiddleware">
+            <summary>
+            请求日志中间件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Middlewares.RequestLogMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.Middlewares.RequestLogMiddleware})">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.RequestLogMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行方法
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.ExecuteInterception(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            是否执行拦截
+            </summary>
+            <param name="context">Http上下文</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.WriteLogAsync(Microsoft.AspNetCore.Http.HttpContext,System.Diagnostics.Stopwatch)">
+            <summary>
+            记录请求日志
+            </summary>
+            <param name="context">Http上下文</param>
+            <param name="stopwatch">计时器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.FormatRequestAsync(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            格式化请求内容
+            </summary>
+            <param name="request">Http请求</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.FormatResponseAsync(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            格式化响应内容
+            </summary>
+            <param name="response">Http响应</param>
+        </member>
+        <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.IgnoreOctetStream(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            忽略二进制流
+            </summary>
+            <param name="response">Http响应</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Properties.LibraryResource">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.ConcurrencyExceptionMessage">
+            <summary>
+              查找类似 当前操作的数据已被其他人修改，请刷新后重试 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.InvalidIdCard">
+            <summary>
+              查找类似 身份证不正确 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.InvalidMobilePhone">
+            <summary>
+              查找类似 手机号不正确 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.NotSupportMoveToChildren">
+            <summary>
+              查找类似 不允许将节点移动到自己或子节点下 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.OnlyOnePredicate">
+            <summary>
+              查找类似 仅允许添加一个条件,条件：{0} 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.OrderIsEmptyForPage">
+            <summary>
+              查找类似 分页必须设置排序字段 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.LibraryResource.TableIsEmpty">
+            <summary>
+              查找类似 必须设置表名 的本地化字符串。
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Properties.R">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.CanceledMessage">
+            <summary>
+              查找类似 您已取消该操作 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.DeleteSuccess">
+            <summary>
+              查找类似 删除成功 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.GlobalDuplicateRequest">
+            <summary>
+              查找类似 其他用户正在执行该操作,请稍后再试 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.IdIsEmpty">
+            <summary>
+              查找类似 Id不能为空 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.Map_MapperIsNull">
+            <summary>
+              查找类似 MapperExtensions.Mapper不能为空，请先设置值 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.Success">
+            <summary>
+              查找类似 操作成功 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.SystemError">
+            <summary>
+              查找类似 系统忙，请稍后再试 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.UnauthorizedAccessError">
+            <summary>
+              查找类似 授权失败，请重新获取Token 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Properties.R.UserDuplicateRequest">
+            <summary>
+              查找类似 请不要重复提交 的本地化字符串。
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator">
+            <summary>
+            Razor静态Html生成器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.#ctor(Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.Razors.DefaultRazorHtmlGenerator},XUCore.NetCore.Razors.IRouteAnalyzer)">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator"/>类型的实例
+            </summary>
+            <param name="routeAnalyzer">路由分析器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.Generate">
+            <summary>
+            生成Html文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.RenderToStringAsync(XUCore.NetCore.Razors.RouteInformation)">
+            <summary>
+            渲染视图为字符串
+            </summary>
+            <param name="info">路由信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.WriteViewToFileAsync(XUCore.NetCore.Razors.RouteInformation)">
+            <summary>
+            将视图写入文件
+            </summary>
+            <param name="info">路由信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.GetPath(XUCore.NetCore.Razors.RouteInformation)">
+            <summary>
+            获取路径
+            </summary>
+            <param name="info">路由信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.GetView(Microsoft.AspNetCore.Mvc.Razor.IRazorViewEngine,Microsoft.AspNetCore.Mvc.ActionContext,XUCore.NetCore.Razors.RouteInformation)">
+            <summary>
+            获取Razor视图
+            </summary>
+            <param name="razorViewEngine">Razor视图引擎</param>
+            <param name="actionContext">操作上下文</param>
+            <param name="info">路由信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.GetRouteData(XUCore.NetCore.Razors.RouteInformation)">
+            <summary>
+            获取路由数据
+            </summary>
+            <param name="info">路由信息</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.IRazorHtmlGenerator">
+            <summary>
+            Razor Html生成器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.IRazorHtmlGenerator.Generate">
+            <summary>
+            生成Html文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.IRouteAnalyzer">
+            <summary>
+            路由分析器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.IRouteAnalyzer.GetAllRouteInformations">
+            <summary>
+            获取所有路由信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.RazorHtmlAttribute">
+            <summary>
+            Razor生成Html静态文件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlAttribute.Path">
+            <summary>
+            生成路径，相对根路径，范例：/Typings/app/app.component.html
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlAttribute.Template">
+            <summary>
+            路径模板，范例：Typings/app/{area}/{controller}/{controller}-{action}.component.html
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlAttribute.ViewName">
+            <summary>
+            视图名称，范例：/Home/Index
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlAttribute.IsPartialView">
+            <summary>
+            是否部分视图，默认：false
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.RazorHtmlStaticAttribute">
+            <summary>
+            Razor生成Html静态文件（保存目录为wwwroot）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.Template">
+            <summary>
+            路径模板，范例：static/{area}/{controller}/{action}.component.html
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.MinInterval">
+            <summary>
+            生成的最小间隔，单位（秒），比如设置5分钟，那么5分钟之内不会再生成
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.IsPartialView">
+            <summary>
+            是否部分视图，默认：false
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
+            <summary>
+            结果执行之前 before
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            结果执行之后 after
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.IsBuildHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            根据条件判断是否允许生成HTML
+            </summary>
+            <param name="routes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.WriteHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext,Microsoft.AspNetCore.Mvc.ViewResult)">
+            <summary>
+            写HTML
+            </summary>
+            <param name="context"></param>
+            <param name="viewResult"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.RouteAnalyzer">
+            <summary>
+            路由分析器
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Razors.RouteAnalyzer._actionDescriptorCollectionProvider">
+            <summary>
+            操作描述集合提供程序
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RouteAnalyzer.#ctor(Microsoft.AspNetCore.Mvc.Infrastructure.IActionDescriptorCollectionProvider)">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Razors.RouteAnalyzer"/>类型的实例
+            </summary>
+            <param name="actionDescriptorCollectionProvider">操作描述集合提供程序</param>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RouteAnalyzer.GetAllRouteInformations">
+            <summary>
+            获取所有路由信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RouteAnalyzer.SetHtmlInfo(XUCore.NetCore.Razors.RouteInformation,Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)">
+            <summary>
+            设置Html信息
+            </summary>
+            <param name="routeInformation">路由信息</param>
+            <param name="controllerActionDescriptor">控制器</param>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.RouteInformation">
+            <summary>
+            路由信息
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.AreaName">
+            <summary>
+            区域名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.ControllerName">
+            <summary>
+            控制器名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.ActionName">
+            <summary>
+            操作名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.Path">
+            <summary>
+            Razor页面路径
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.Invocation">
+            <summary>
+            调用方法
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.TemplatePath">
+            <summary>
+            模板路径
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.ViewName">
+            <summary>
+            视图名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RouteInformation.IsPartialView">
+            <summary>
+            是否部分视图
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Result">
+            <summary>
+            返回结果
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.subCode">
+            <summary>
+            业务状态码
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.operationTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result.elapsedTime">
+            <summary>
+            请求耗时
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Result.#ctor(System.Int32,System.String,System.String,System.Object)">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Result"/>类型的实例
+            </summary>
+            <param name="code">状态码</param>
+            <param name="subCode">业务状态码</param>
+            <param name="message">消息</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:XUCore.NetCore.Result.#ctor(XUCore.NetCore.StateCode,System.String,System.String,System.Object)">
+            <summary>
+            初始化返回结果
+            </summary>
+            <param name="code">状态码</param>
+            <param name="subCode">业务状态码</param>
+            <param name="message">消息</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:XUCore.NetCore.Result.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Result`1">
+            <summary>
+            返回结构体
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.subCode">
+            <summary>
+            业务状态码
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.operationTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.elapsedTime">
+            <summary>
+            请求耗时
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Result`1.data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.StateCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.StateCode.Ok">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.StateCode.Fail">
+            <summary>
+            失败
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Uploads.DefaultFileUploadService">
+            <summary>
+            默认文件上传服务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.SingleFileUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传文件。单文件
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveAsync(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="relativePath">相对路径</param>
+            <param name="rootPath">根路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.MultipleFileUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传文件。多文件
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传图片。单张图片
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="relativePath">相对路径</param>
+            <param name="rootPath">根路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveAsync(Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="savePath">保存路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveWithMd5Async(Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件并返回文件MD5值
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="savePath">保存路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.Md5(System.IO.Stream)">
+            <summary>
+            MD5哈希
+            </summary>
+            <param name="stream">流</param>
+        </member>
+        <member name="T:XUCore.NetCore.Uploads.IFileUploadService">
+            <summary>
+            文件上传服务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.SingleFileUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传文件。单文件
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传图片。单张图片
+            </summary>
+            <param name="param"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.MultipleFileUploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传文件。多文件
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.SaveAsync(Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="savePath">保存路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.SaveWithMd5Async(Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件并返回文件MD5值
+            </summary>
+            <param name="formFile">表单文件</param>
+            <param name="savePath">保存路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="T:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam">
+            <summary>
+            多文件上传参数
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Request">
+            <summary>
+            当前请求
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.FormFiles">
+            <summary>
+            上传的文件对象
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.RootPath">
+            <summary>
+            存储根路径
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Module">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Group">
+            <summary>
+            分组
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.FullPath">
+            <summary>
+            完整目录
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.RelativePath">
+            <summary>
+            相对目录
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Uploads.Params.SingleFileUploadParam">
+            <summary>
+            单文件上传参数
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Request">
+            <summary>
+            当前请求
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.FormFile">
+            <summary>
+            上传的文件对象
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.RootPath">
+            <summary>
+            存储根路径
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Module">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Group">
+            <summary>
+            分组
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.FullPath">
+            <summary>
+            完整目录
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.RelativePath">
+            <summary>
+            相对目录
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Extensions">
+            <summary>
+            允许上传的文件扩展名
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Size">
+            <summary>
+            允许上传的图片文件大小，默认2M
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.IsCutOriginal">
+            <summary>
+            是否裁剪原图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.OriginalWidth">
+            <summary>
+            裁剪原图的宽度
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.OriginalHeight">
+            <summary>
+            裁剪原图的高度
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.ThumbCutMode">
+            <summary>
+            缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Thumbs">
+            <summary>
+            裁剪缩略图尺寸 item = 300x400
+            </summary>
+        </member>
+    </members>
+</doc>

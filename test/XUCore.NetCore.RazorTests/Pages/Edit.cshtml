@@ -1,0 +1,13 @@
+﻿@page "{id:int?}"
+@model XUCore.RazorTests.EditModel
+
+<p>Validation: customer name:</p>
+
+<form method="post">
+    <input asp-for="Customer.Id" type="hidden" />
+    <div asp-validation-summary="All"></div>
+    Name:
+    <input asp-for="Customer.Name" />
+    <span asp-validation-for="Customer.Name"></span>
+    <input type="submit" />
+</form>

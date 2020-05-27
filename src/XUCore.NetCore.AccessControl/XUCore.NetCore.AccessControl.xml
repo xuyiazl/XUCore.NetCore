@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.AccessControl</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.AccessControl.AccessControlAttribute">
+            <summary>
+            权限控制
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AccessControl.AccessControlMiddleware">
+            <summary>
+            AccessControlHelperMiddleware
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.AccessControlMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{XUCore.NetCore.AccessControl.AccessControlOptions},Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.AccessControl.AccessControlMiddleware})">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.AccessControl.AccessControlMiddleware"/>
+            </summary>
+            <param name="next">The delegate representing the next middleware in the request pipeline.</param>
+            <param name="options"></param>
+            <param name="logger">The Logger Factory.</param>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.AccessControlMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Executes the middleware.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.</param>
+            <returns>A task that represents the execution of this middleware.</returns>
+        </member>
+        <member name="T:XUCore.NetCore.AccessControl.AccessControlTagHelper">
+            <summary>
+            AccessControlTagHelper
+            add support for tagHelper
+            https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-2.1#condition-tag-helper
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.HtmlHelperExtension.SparkActionLink(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper,System.String,System.String,System.String,System.Object,System.Object,System.String)">
+            <summary>
+            SparkActionLink
+            </summary>
+            <param name="helper">HtmlHelper</param>
+            <param name="linkText">linkText</param>
+            <param name="actionName">actionName</param>
+            <param name="controllerName">controllerName</param>
+            <param name="routeValues">routeValues</param>
+            <param name="htmlAttributes">htmlAttributes</param>
+            <param name="accessKey">accessKey</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.HtmlHelperExtension.SparkContainer(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper,System.String,System.Object,System.String)">
+            <summary>
+            SparkContainer
+            </summary>
+            <param name="helper">HtmlHelper</param>
+            <param name="tagName">标签名称</param>
+            <param name="attributes">htmlAttributes</param>
+            <param name="accessKey">accessKey</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.AccessControl.IControlAccessStrategy">
+            <summary>
+            view component access strategy
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.IControlAccessStrategy.IsControlCanAccess(System.String)">
+            <summary>
+            view component access strategy
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AccessControl.IResourceAccessStrategy.IsCanAccess(System.String)">
+            <summary>
+            Is resource can be accessed
+            </summary>
+            <param name="accessKey">accessKey</param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.AccessControl.IResourceAccessStrategy.DisallowedCommonResult">
+            <summary>
+            AccessStrategyName
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AccessControl.NoAccessControlAttribute">
+            <summary>
+            NoAccessControl
+            </summary>
+        </member>
+    </members>
+</doc>

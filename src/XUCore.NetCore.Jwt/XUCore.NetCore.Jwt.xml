@@ -1,0 +1,1196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.Jwt</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.Jwt.ApplicationBuilderExtensions">
+            <summary>
+            Extension methods for <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> to add the JWT authentication/authorization to the pipeline.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.ApplicationBuilderExtensions.UseJwtMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Adds the <see cref="T:XUCore.NetCore.Jwt.JwtAuthenticationMiddleware" /> to the specified <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />, which enables authentication/authorization using JWT.
+            </summary>
+            <returns>
+            The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.
+            </returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.HMACSHA256Algorithm">
+            <summary>
+            HMAC using SHA-256
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.HMACSHA256Algorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA256Algorithm.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA256Algorithm.IsAsymmetric">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.HMACSHA384Algorithm">
+            <summary>
+            HMAC using SHA-384
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.HMACSHA384Algorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA384Algorithm.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA384Algorithm.IsAsymmetric">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.HMACSHA512Algorithm">
+            <summary>
+            HMAC using SHA-512
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.HMACSHA512Algorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA512Algorithm.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.HMACSHA512Algorithm.IsAsymmetric">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.HMACSHAAlgorithmFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.HMACSHAAlgorithmFactory.Create(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.HMACSHAAlgorithmFactory.Create(XUCore.NetCore.Jwt.JwtHashAlgorithm)">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.IAlgorithmFactory">
+            <summary>
+            Provides IJwtAlgorithms.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.IAlgorithmFactory.Create(System.String)">
+            <summary>
+            Creates an AlgorithmFactory using the provided algorithm name.
+            </summary>
+            <param name="algorithmName">The name of the algorithm</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.IAlgorithmFactory.Create(XUCore.NetCore.Jwt.JwtHashAlgorithm)">
+            <summary>
+            Creates an AlgorithmFactory using the provided algorithm enum.
+            </summary>
+            <param name="algorithm">The enum value of the algorithm</param>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm">
+            <summary>
+            Represents an algorithm to generate JWT signature.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm.Sign(System.Byte[],System.Byte[])">
+            <summary>
+            Signs provided byte array with provided key.
+            </summary>
+            <param name="key">The key used to sign the data</param>
+            <param name="bytesToSign">The data to sign</param>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm.Name">
+            <summary>
+            Gets algorithm name.
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm.IsAsymmetric">
+            <summary>
+            Indicates whether algorithm is asymmetric or not.
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm">
+            <summary>
+            RSASSA-PKCS1-v1_5 using SHA-256
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.#ctor(System.Security.Cryptography.RSA,System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm" /> using the provided pair of public and private keys.
+            </summary>
+            <param name="publicKey">The public key for verifying the data.</param>
+            <param name="privateKey">The private key for signing the data.</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.#ctor(System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm" /> using the provided public key only.
+            </summary>
+            <remarks>
+            An instance created using this constructor can only be used for verifying the data, not for signing it.
+            </remarks>
+            <param name="publicKey">The public key for verifying the data.</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Creates an instance using the provided certificate.
+            </summary>
+            <param name="cert">The certificate having a public key and an optional private key.</param>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.IsAsymmetric">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.Sign(System.Byte[])">
+            <summary>
+            Signs the provided bytes.
+            </summary>
+            <param name="bytesToSign">The bytes to sign.</param>
+            <returns>The signed bytes.</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm.Verify(System.Byte[],System.Byte[])">
+            <summary>
+            Verifies provided byte array with provided signature.
+            </summary>
+            <param name="bytesToSign">The data to verify</param>
+            <param name="signature">The signature to verify with</param>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory.#ctor(System.Func{System.Security.Cryptography.X509Certificates.X509Certificate2})">
+            <summary>
+            Creates an instance of the <see cref="T:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory" /> class using the provided <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />.
+            </summary>
+            <param name="certFactory">Func that returns <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> which will be used to instantiate <see cref="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm" /></param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory.#ctor(System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory"/> using the provided public key only.
+            </summary>
+            <param name="publicKey">The public key for verifying the data.</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory.#ctor(System.Security.Cryptography.RSA,System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory"/> using the provided pair of public and private keys.
+            </summary>
+            <param name="publicKey">The public key for verifying the data.</param>
+            <param name="privateKey">The private key for signing the data.</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Algorithms.RSAlgorithmFactory.Create(XUCore.NetCore.Jwt.JwtHashAlgorithm)">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Builder.ClaimName">
+            <summary>
+            All public claims of a JWT specified by IANA, see https://www.iana.org/assignments/jwt/jwt.xhtml
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.EnumExtensions.GetHeaderName(XUCore.NetCore.Jwt.Builder.HeaderName)">
+            <summary>
+            Gets the string representation of a well-known header name enum
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.EnumExtensions.GetPublicClaimName(XUCore.NetCore.Jwt.Builder.ClaimName)">
+            <summary>
+            Gets the string representation of a well-known claim name enum
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.EnumExtensions.GetDescription(System.Object)">
+            <summary>
+            Gets the value of the <see cref="T:System.ComponentModel.DescriptionAttribute" /> from the object.
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Builder.HeaderName">
+            <summary>
+            All predefined headers specified by RFC 7515, see https://tools.ietf.org/html/rfc7515
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Builder.JwtBuilder">
+            <summary>
+            Build and decode JWT with Fluent API.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.AddHeader(XUCore.NetCore.Jwt.Builder.HeaderName,System.String)">
+            <summary>
+            Add header to the JWT.
+            </summary>
+            <param name="name">Well-known header name</param>
+            <param name="value">The value you want give to the header</param>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.AddClaim(System.String,System.Object)">
+            <summary>
+            Adds claim to the JWT.
+            </summary>
+            <param name="name">Claim name</param>
+            <param name="value">Claim value</param>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.AddClaim(System.String,System.String)">
+            <summary>
+            Add string claim to the JWT.
+            </summary>
+            <param name="name">Claim name</param>
+            <param name="value">Claim value</param>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.AddClaims(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Add several claims to the JWT
+            </summary>
+            <param name="claims">IDictionary of claims to be added</param>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.AddClaim(XUCore.NetCore.Jwt.Builder.ClaimName,System.String)">
+            <summary>
+            Adds well-known claim to the JWT.
+            </summary>
+            <param name="name">Well-known claim name</param>
+            <param name="value">Claim value</param>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithSerializer(XUCore.NetCore.Jwt.IJsonSerializer)">
+            <summary>
+            Sets JWT serializer.
+            </summary>
+            <remarks>
+            If not set then default <see cref="T:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer" /> will be used.
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithDateTimeProvider(XUCore.NetCore.Jwt.IDateTimeProvider)">
+            <summary>
+            Sets custom datetime provider.
+            </summary>
+            <remarks>
+            If not set then default <see cref="T:XUCore.NetCore.Jwt.UtcDateTimeProvider" /> will be used.
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithEncoder(XUCore.NetCore.Jwt.IJwtEncoder)">
+            <summary>
+            Sets JWT encoder.
+            </summary>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithDecoder(XUCore.NetCore.Jwt.IJwtDecoder)">
+            <summary>
+            Sets JWT decoder.
+            </summary>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithValidator(XUCore.NetCore.Jwt.IJwtValidator)">
+            <summary>
+            Sets JWT validator.
+            </summary>
+            <remarks>
+            Required to decode with verification.
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithUrlEncoder(XUCore.NetCore.Jwt.IBase64UrlEncoder)">
+            <summary>
+            Sets custom URL encoder.
+            </summary>
+            <remarks>
+            If not set then default <see cref="T:XUCore.NetCore.Jwt.JwtBase64UrlEncoder" /> will be used.
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithAlgorithm(XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm)">
+            <summary>
+            Sets JWT algorithm.
+            </summary>
+            <remarks>
+            Required to create new token.
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithSecret(System.String[])">
+            <summary>
+            Sets certificate secret.
+            </summary>
+            <remarks>
+            Required to create new token that uses an symmetric algorithm such as <seealso cref="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm" />
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithSecret(System.Byte[][])">
+            <summary>
+            Sets certificate secret.
+            </summary>
+            <remarks>
+            Required to create new token that uses an symmetric algorithm such as <seealso cref="T:XUCore.NetCore.Jwt.Algorithms.RS256Algorithm" />
+            </remarks>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.MustVerifySignature">
+            <summary>
+            Instructs to do verify the JWT signature.
+            </summary>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.DoNotVerifySignature">
+            <summary>
+            Instructs to do not verify the JWT signature.
+            </summary>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.WithVerifySignature(System.Boolean)">
+            <summary>
+            Instructs whether to verify the JWT signature.
+            </summary>
+            <returns>Current builder instance</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.Build">
+            <summary>
+            Builds a token using the supplied dependencies.
+            </summary>
+            <returns>The generated JWT</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if either algorithm, serializer, encoder or secret is null</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.Decode(System.String)">
+            <summary>
+            Decodes a token using the supplied dependencies.
+            </summary>
+            <param name="token">The JWT</param>
+            <returns>The JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.Decode``1(System.String)">
+            <summary>
+            Decodes a token using the supplied dependencies.
+            </summary>
+            <param name="token">The JWT</param>
+            <returns>The payload converted to <see cref="!:T" /></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.CanBuild">
+            <summary>
+            Checks whether enough dependencies were supplied to build a new token.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.CanDecode">
+            <summary>
+            Checks whether enough dependencies were supplied to decode a token.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.HasSecrets">
+            <summary>
+            Checks if any secret was supplied to use in token decoding
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtBuilder.HasOnlyOneSecret">
+            <summary>
+            Checks if there is only one secret was supplied for token encoding
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Builder.JwtData">
+            <summary>
+            Represents the Data that will store in a JWT.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtData.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Builder.JwtData" /> with empty Header and Payload.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtData.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Builder.JwtData" />
+            </summary>
+            <param name="payload">Dictionary that contans the payload</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtData.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Builder.JwtData" />
+            </summary>
+            <param name="header">Dictionary that contains the headers</param>
+            <param name="payload">Dictionary that contans the payload</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Builder.JwtData.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Builder.JwtData" />
+            </summary>
+            <param name="token">The JWT token</param>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Builder.JwtData.Header">
+            <summary>
+            The header information as a key-value store of the JWT
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.Builder.JwtData.Payload">
+            <summary>
+            The payload of the JWT as a key-value store
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IBase64UrlEncoder">
+            <summary>
+            Represents a base64 encoder/decoder.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IBase64UrlEncoder.Encode(System.Byte[])">
+            <summary>
+            Encodes the byte array to a Base64 string.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IBase64UrlEncoder.Decode(System.String)">
+            <summary>
+            Decodes the Base64 string to a byte array.
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IDateTimeProvider">
+            <summary>
+            Represents a DateTime provider.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IDateTimeProvider.GetNow">
+            <summary>
+            Gets the current DateTime.
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IJsonSerializer">
+            <summary>
+            Provides JSON Serialize and Deserialize.  Allows custom serializers used.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJsonSerializer.Serialize(System.Object)">
+            <summary>
+            Serialize an object to JSON string
+            </summary>
+            <param name="obj">object</param>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJsonSerializer.Deserialize``1(System.String)">
+            <summary>
+            Deserialize a JSON string to typed object.
+            </summary>
+            <typeparam name="T">type of object</typeparam>
+            <param name="json">JSON string</param>
+            <returns>typed object</returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IJwtDecoder">
+            <summary>
+            Represents a JWT decoder.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(XUCore.NetCore.Jwt.JwtParts)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="jwt">The JWT</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(System.String)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="token">The JWT</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(System.String,System.String,System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(System.String,System.String[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="keys">The keys provided which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(System.String,System.Byte[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="key">The key bytes that were used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.Decode(System.String,System.Byte[][],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the JSON payload.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="keys">The keys bytes provided which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>A string containing the JSON payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject(System.String)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <param name="token">The JWT</param>
+            <returns>An object representing the payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject(System.String,System.String,System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject(System.String,System.String[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="keys">The key which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject(System.String,System.Byte[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject(System.String,System.Byte[][],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <param name="token">The JWT</param>
+            <param name="keys">The key which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject``1(System.String)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <typeparam name="T">The type to return</typeparam>
+            <param name="token">The JWT</param>
+            <returns>An object representing the payload</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject``1(System.String,System.String,System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <typeparam name="T">The type to return</typeparam>
+            <param name="token">The JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject``1(System.String,System.String[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <typeparam name="T">The type to return</typeparam>
+            <param name="token">The JWT</param>
+            <param name="keys">The keys provided which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject``1(System.String,System.Byte[],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <typeparam name="T">The type to return</typeparam>
+            <param name="token">The JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtDecoder.DecodeToObject``1(System.String,System.Byte[][],System.Boolean)">
+            <summary>
+            Given a JWT, decodes it and return the payload as an object.
+            </summary>
+            <typeparam name="T">The type to return</typeparam>
+            <param name="token">The JWT</param>
+            <param name="keys">The keys which one of them was used to sign the JWT</param>
+            <param name="verify">Whether to verify the signature (default is true)</param>
+            <returns>An object representing the payload</returns>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">Thrown if the verify parameter was true and the signature was NOT valid or if the JWT was signed with an unsupported algorithm</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">Thrown if the verify parameter was true and the token has an expired exp claim</exception>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IJwtEncoder">
+            <summary>
+            Represents a JWT encoder.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtEncoder.Encode(System.Object,System.String)">
+            <summary>
+            Creates a JWT given a payload, the signing key, and the algorithm to use.
+            </summary>
+            <param name="payload">An arbitrary payload (must be serializable to JSON)</param>
+            <param name="key">The key used to sign the token</param>
+            <returns>The generated JWT</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtEncoder.Encode(System.Object,System.Byte[])">
+            <summary>
+            Creates a JWT given a payload, the signing key, and the algorithm to use.
+            </summary>
+            <param name="payload">An arbitrary payload (must be serializable to JSON)</param>
+            <param name="key">The key used to sign the token</param>
+            <returns>The generated JWT</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtEncoder.Encode(System.Collections.Generic.IDictionary{System.String,System.Object},System.Object,System.String)">
+            <summary>
+            Creates a JWT given a set of arbitrary extra headers, a payload, the signing key, and the algorithm to use.
+            </summary>
+            <param name="extraHeaders">An arbitrary set of extra headers. Will be augmented with the standard "typ" and "alg" headers</param>
+            <param name="payload">An arbitrary payload (must be serializable to JSON)</param>
+            <param name="key">The key bytes used to sign the token</param>
+            <returns>The generated JWT</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtEncoder.Encode(System.Collections.Generic.IDictionary{System.String,System.Object},System.Object,System.Byte[])">
+            <summary>
+            Creates a JWT given a header, a payload, the signing key, and the algorithm to use.
+            </summary>
+            <param name="extraHeaders">An arbitrary set of extra headers. Will be augmented with the standard "typ" and "alg" headers</param>
+            <param name="payload">An arbitrary payload (must be serializable to JSON)</param>
+            <param name="key">The key bytes used to sign the token</param>
+            <returns>The generated JWT</returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.IJwtValidator">
+            <summary>
+            Represents a JWT validator.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.IJwtValidator.Validate(System.String,System.String,System.String[])">
+            <summary>
+            Given the JWT, verifies its signatures correctness.
+            </summary>
+            <param name="payloadJson">>An arbitrary payload (already serialized to JSON)</param>
+            <param name="decodedCrypto">Decoded body</param>
+            <param name="decodedSignatures">Decoded signatures</param>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException">The signature is invalid</exception>
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException">The token has expired</exception>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Internal.DefaultIdentityFactory.CreateIdentity(System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            Creates user's identity from user's claims
+            </summary>
+            <param name="dic"><see cref="T:System.Collections.Generic.IDictionary`2" /> of user's claims</param>
+            <param name="authenticationType"></param>
+            <returns><see cref="T:System.Security.Claims.ClaimsIdentity" /></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Internal.DefaultTicketFactory.CreateTicket(System.Security.Principal.IIdentity,Microsoft.AspNetCore.Authentication.AuthenticationScheme)">
+            <summary>
+            Creates user's <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationTicket" /> from user's <see cref="T:System.Security.Principal.IIdentity" /> and current <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationScheme" />
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.InvalidTokenPartsException">
+            <summary>
+            Represents an exception thrown when when a token doesn't consist of 3 delimited by dot parts.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.InvalidTokenPartsException.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.InvalidTokenPartsException" />
+            </summary>
+            <param name="paramName">The name of the parameter that caused the exception</param>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtBase64UrlEncoder">
+            <summary>
+            Base64 encoding/decoding implementation according to the JWT spec
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtBase64UrlEncoder.Encode(System.Byte[])">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtBase64UrlEncoder.Decode(System.String)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtDecoder">
+            <summary>
+            Decodes JWT.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.#ctor(XUCore.NetCore.Jwt.IJsonSerializer,XUCore.NetCore.Jwt.IJwtValidator,XUCore.NetCore.Jwt.IBase64UrlEncoder)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.JwtDecoder" />
+            </summary>
+            <param name="jsonSerializer">The Json Serializer</param>
+            <param name="jwtValidator">The Jwt validator</param>
+            <param name="urlEncoder">The Base64 URL Encoder</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.#ctor(XUCore.NetCore.Jwt.IJsonSerializer,XUCore.NetCore.Jwt.IJwtValidator,XUCore.NetCore.Jwt.IBase64UrlEncoder,XUCore.NetCore.Jwt.Algorithms.IAlgorithmFactory)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.JwtDecoder" />
+            </summary>
+            <param name="jsonSerializer">The Json Serializer</param>
+            <param name="jwtValidator">The Jwt validator</param>
+            <param name="urlEncoder">The Base64 URL Encoder</param>
+            <param name="algFactory">The Algorithm Factory</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(XUCore.NetCore.Jwt.JwtParts)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(System.String)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(System.String,System.String,System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(System.String,System.String[],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(System.String,System.Byte[],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Decode(System.String,System.Byte[][],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject(System.String)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject(System.String,System.String,System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject(System.String,System.String[],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject(System.String,System.Byte[],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject(System.String,System.Byte[][],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject``1(System.String)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject``1(System.String,System.String,System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject``1(System.String,System.Byte[],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.DecodeToObject``1(System.String,System.Byte[][],System.Boolean)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Validate(System.String[],System.Byte[])">
+            <summary>
+            Prepares data before calling <see cref="M:XUCore.NetCore.Jwt.IJwtValidator.Validate(System.String,System.String,System.String[])" />
+            </summary>
+            <param name="parts">The array representation of a JWT</param>
+            <param name="key">The key that was used to sign the JWT</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtDecoder.Validate(XUCore.NetCore.Jwt.JwtParts,System.Byte[][])">
+            <summary>
+            Prepares data before calling <see cref="M:XUCore.NetCore.Jwt.IJwtValidator.Validate(System.String,System.String,System.String[])" />
+            </summary>
+            <param name="jwt">The JWT parts</param>
+            <param name="keys">The keys provided which one of them was used to sign the JWT</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+            <exception cref="T:System.FormatException" />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtEncoder">
+            <summary>
+            Encodes Jwt.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtEncoder.#ctor(XUCore.NetCore.Jwt.Algorithms.IJwtAlgorithm,XUCore.NetCore.Jwt.IJsonSerializer,XUCore.NetCore.Jwt.IBase64UrlEncoder)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.JwtEncoder" />
+            </summary>
+            <param name="jsonSerializer">The Json Serializer</param>
+            <param name="algorithm">The Jwt Algorithm</param>
+            <param name="urlEncoder">The Base64 URL Encoder</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtEncoder.Encode(System.Object,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtEncoder.Encode(System.Object,System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtEncoder.Encode(System.Collections.Generic.IDictionary{System.String,System.Object},System.Object,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtEncoder.Encode(System.Collections.Generic.IDictionary{System.String,System.Object},System.Object,System.Byte[])">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentNullException" />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtHashAlgorithm">
+            <summary>
+            Enum representing the various Jwt Hash Algorithms.
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Jwt.JwtHashAlgorithm.HS256">
+            <summary>
+            HMAC using SHA-256
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Jwt.JwtHashAlgorithm.HS384">
+            <summary>
+            HMAC using SHA-384
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Jwt.JwtHashAlgorithm.HS512">
+            <summary>
+            HMAC using SHA-512
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Jwt.JwtHashAlgorithm.RS256">
+            <summary>
+            RSASSA-PKCS1-v1_5 using SHA-256
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtParts">
+            <summary>
+            Represent the parts of a JWT
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtParts.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.JwtParts" /> from the string representation of a JWT
+            </summary>
+            <param name="token">The string representation of a JWT</param>
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtParts.#ctor(System.String[])">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.JwtParts" /> from the array representation of a JWT
+            </summary>
+            <param name="parts">The array representation of a JWT</param>
+            <exception cref="T:System.ArgumentNullException" />
+            <exception cref="T:System.ArgumentOutOfRangeException" />
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtParts.Header">
+            <summary>
+            Gets the Header part of a JWT
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtParts.Payload">
+            <summary>
+            Gets the Payload part of a JWT
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtParts.Signature">
+            <summary>
+            Gets the Signature part of a JWT
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtParts.Parts">
+            <summary>
+            Gets the parts of a JWT
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtParts.JwtPartsIndex">
+            <summary>
+            Helper enum to get the correct part from the array representation of a JWT parts
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtValidator">
+            <summary>
+            Jwt validator.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.#ctor(XUCore.NetCore.Jwt.IJsonSerializer,XUCore.NetCore.Jwt.IDateTimeProvider)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.JwtValidator" />
+            </summary>
+            <param name="jsonSerializer">The Json Serializer</param>
+            <param name="dateTimeProvider">The DateTime Provider</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.Validate(System.String,System.String,System.String[])">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException" />
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.TryValidate(System.String,System.String,System.String,System.Exception@)">
+            <summary>
+            Given the JWT, verifies its signature correctness without throwing an exception but returning it instead
+            </summary>
+            <param name="payloadJson">>An arbitrary payload (already serialized to JSON)</param>
+            <param name="decodedCrypto">Decoded body</param>
+            <param name="decodedSignature">Decoded signature</param>
+            <param name="ex">Validation exception, if any</param>
+            <returns>True if exception is JWT is valid and exception is null, otherwise false</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.TryValidate(System.String,System.String,System.String[],System.Exception@)">
+            <summary>
+            Given the JWT, verifies its signatures correctness without throwing an exception but returning it instead
+            </summary>
+            <param name="payloadJson">>An arbitrary payload (already serialized to JSON)</param>
+            <param name="decodedCrypto">Decoded body</param>
+            <param name="decodedSignature">Decoded signatures</param>
+            <param name="ex">Validation exception, if any</param>
+            <returns>True if exception is JWT is valid and exception is null, otherwise false</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.CompareCryptoWithSignature(System.String,System.String)">
+            <remarks>In the future this method can be opened for extension thus made protected virtual</remarks>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.ValidateExpClaim(System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},System.Double)">
+            <summary>
+            Verifies the 'exp' claim.
+            </summary>
+            <remarks>See https://tools.ietf.org/html/rfc7515#section-4.1.4</remarks>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException" />
+            <exception cref="T:XUCore.NetCore.Jwt.TokenExpiredException" />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtValidator.ValidateNbfClaim(System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},System.Double)">
+            <summary>
+            Verifies the 'nbf' claim.
+            </summary>
+            <remarks>See https://tools.ietf.org/html/rfc7515#section-4.1.5</remarks>
+            <exception cref="T:XUCore.NetCore.Jwt.SignatureVerificationException" />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer">
+            <summary>
+            JSON serializer using Newtonsoft.Json implementation.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer" />
+            </summary>
+            <remarks>Uses <see cref="M:Newtonsoft.Json.JsonSerializer.CreateDefault" /> as internal serializer</remarks>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer.#ctor(Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Creates a new instance of <see cref="T:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer" />
+            </summary>
+            <param name="serializer">Internal <see cref="T:Newtonsoft.Json.JsonSerializer" /> to use for serialization</param>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer.Serialize(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.Serializers.JsonNetSerializer.Deserialize``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.SignatureVerificationException">
+            <summary>
+            Represents an exception thrown when a signature validation fails.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.SignatureVerificationException.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.SignatureVerificationException" />
+            </summary>
+            <param name="message">The error message</param>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.SignatureVerificationException.Expected">
+            <summary>
+            Expected key.
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.SignatureVerificationException.Received">
+            <summary>
+            Received key.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.SignatureVerificationException.GetOrDefault``1(System.String)">
+            <summary>
+            Retrieves the value for the provided key, or default.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.TokenExpiredException">
+            <summary>
+            Represents an exception thrown when when a token is expired.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.TokenExpiredException.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:XUCore.NetCore.Jwt.TokenExpiredException" />
+            </summary>
+            <param name="message">The error message</param>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.TokenExpiredException.PayloadData">
+            <summary>
+            The payload.
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.TokenExpiredException.Expiration">
+            <summary>
+            The expiration DateTime of the token.
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.UnixEpoch.Value">
+            <summary>
+            Describes a point in time, defined as the number of seconds that have elapsed since 00:00:00 UTC, Thursday, 1 January 1970, not counting leap seconds.
+            See https://en.wikipedia.org/wiki/Unix_time />
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.UtcDateTimeProvider">
+            <summary>
+            Provider for UTC DateTime.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.UtcDateTimeProvider.GetNow">
+            <summary>
+            Retuns the current time (UTC).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.JwtAuthenticationDefaults">
+            <summary>
+            Default values related to Jwt authentication/authorization
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Jwt.JwtAuthenticationDefaults.AuthenticationScheme">
+            <summary>
+            The default value used for <see cref="T:XUCore.NetCore.Jwt.JwtAuthenticationOptions" />.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtVerifyExtensions.VerifyToken(System.String,System.String,System.Exception@)">
+            <summary>
+            验证token完整性和时效性
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtAuthenticationOptions.Keys">
+            <summary>
+            The keys used to sign the JWT.
+            </summary>
+            <remarks>
+            <list type="bullet">Plain-text secret for HMACSHA algorithms.</list>
+            <list type="bullet">Public Key for RS algorithms.</list>
+            </remarks>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtAuthenticationOptions.VerifySignature">
+            <summary>
+            The flag whether to verify the signature or not. The default value is <see langword="true" />.
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtAuthenticationOptions.IdentityFactory">
+            <summary>
+            Creates user's <see cref="T:System.Security.Principal.IIdentity" /> from <see cref="T:System.Collections.Generic.IDictionary`2" /> of user's claims
+            </summary>
+            <remarks>
+            For the default behavior <see cref="M:XUCore.NetCore.Jwt.Internal.DefaultIdentityFactory.CreateIdentity(System.Collections.Generic.IDictionary{System.String,System.String},System.String)" />.
+            </remarks>
+        </member>
+        <member name="P:XUCore.NetCore.Jwt.JwtAuthenticationOptions.TicketFactory">
+            <summary>
+            Creates user's <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationTicket" /> from user's <see cref="T:System.Security.Principal.IIdentity" /> and current <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationScheme" />
+            </summary>
+            <remarks>
+            For the default behavior <see cref="M:XUCore.NetCore.Jwt.Internal.DefaultTicketFactory.CreateTicket(System.Security.Principal.IIdentity,Microsoft.AspNetCore.Authentication.AuthenticationScheme)" />.
+            </remarks>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.JwtAuthorizeAttribute.VerifyAttribute(Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
+            <summary>
+            是否跳过验证
+            </summary>
+            <param name="actionDescriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Jwt.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for setting up JWT authentication/authorization middleware in an <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.ServiceCollectionExtensions.AddJwtOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds authentication/authorization using JWT to the specified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add services to.</param>
+            <returns>
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </returns>
+        </member>
+        <member name="M:XUCore.NetCore.Jwt.ServiceCollectionExtensions.AddJwtOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.NetCore.Jwt.JwtOptions})">
+            <summary>
+            Adds authentication/authorization using JWT to the specified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add services to.</param>
+            <param name="configureOptions">An <see cref="T:System.Action`1"/> to configure the provided <see cref="T:XUCore.NetCore.Jwt.JwtOptions"/>.</param>
+            <returns>
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </returns>
+        </member>
+    </members>
+</doc>

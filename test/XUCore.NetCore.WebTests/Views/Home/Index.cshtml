@@ -1,0 +1,43 @@
+﻿@using XUCore.WebTests.Controllers;
+@{
+    ViewData["Title"] = "Home Page";
+
+    var model = (ReturnModel)Model;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    @*new { enctype = "multipart/form-data" }比不可少，否则上传文件不会成功 *@
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <text>选择上传文件：</text><input name="formFile" type="file" id="formFile" />
+        <br />
+        <br />
+        <input type="submit" name="Upload" value="Upload" />
+    }
+
+    @*new { enctype = "multipart/form-data" }比不可少，否则上传文件不会成功 *@
+    @using (Html.BeginForm("UploadImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <text>选择上传文件：</text><input name="formFile" type="file" id="formFile" />
+        <br />
+        <br />
+        <input type="submit" name="Upload" value="Upload" />
+    }
+
+    @*new { enctype = "multipart/form-data" }比不可少，否则上传文件不会成功 *@
+    @using (Html.BeginForm("UploadMulit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <text>选择上传文件：</text><input name="formFile" type="file" id="formFile" multiple />
+        <br />
+        <br />
+        <input type="submit" name="Upload" value="Upload" />
+    }
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @*<p>@(model.bodyMessage)</p>*@
+    <p>分割线</p>
+    <br />
+    @await Html.PartialAsync("IndexView");
+</div>

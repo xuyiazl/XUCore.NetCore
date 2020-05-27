@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Description>
+			XUCore基础类库
+		</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Authors>XUCore</Authors>
+		<Company>XUCore</Company>
+		<Description>.NET Core Common</Description>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<Version>1.0.0</Version>
+		<PackageId>XUCore</PackageId>
+		<Product>XUCore</Product>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>XUCore.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\release\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MessagePack" Version="2.1.115" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+		<PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
+		<PackageReference Include="AspectCore.Extensions.Reflection" Version="2.1.0" />
+		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\R.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>R.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\R.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>R.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Base/Extensions/Bases/StringExtensions.*.cs">
+			<DependentUpon>StringExtensions.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Base/Extensions/IO/FileHelper.*.cs">
+			<DependentUpon>FileHelper.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="XUCore.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
