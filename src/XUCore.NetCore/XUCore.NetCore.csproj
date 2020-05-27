@@ -6,8 +6,8 @@
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>XUCore</Authors>
-		<Company>XUCore</Company>
+		<Authors>xuyi</Authors>
+		<Company>personal</Company>
 		<Description>.NET Core Common</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
 		<Version>1.0.0</Version>
