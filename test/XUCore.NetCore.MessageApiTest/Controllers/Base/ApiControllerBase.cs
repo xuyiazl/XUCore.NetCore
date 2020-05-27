@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 using XUCore.NetCore;
 using XUCore.NetCore.MessagePack;
 using System;
+using XUCore.NetCore.Filters;
 
 namespace XUCore.NetCore.MessageApiTest
 {
@@ -13,6 +14,10 @@ namespace XUCore.NetCore.MessageApiTest
     /// </summary>
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [ApiError]
+    [ApiTrace(Ignore = true)] //忽略API请求业务跟踪
+    [ApiElapsedTime]
+    [MessagePackRequestContentType("application/json")]
     [MessagePackResponseContentType]
     public class ApiControllerBase : ControllerBase
     {

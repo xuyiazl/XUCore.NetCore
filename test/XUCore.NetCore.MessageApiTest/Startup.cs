@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using XUCore.Extensions;
+using XUCore.Json;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.HttpFactory;
 using XUCore.NetCore.MessagePack;
@@ -29,10 +33,41 @@ namespace XUCore.NetCore.MessageApiTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddMessagePackFormatters();
+            services.AddControllers(options =>
+            {
+                options.MaxModelValidationErrors = 50;
+            })
+            //注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
+            .AddMessagePackFormatters(options =>
+            {
+                options.JsonSerializerSettings = new JsonSerializerSettings()
+                {
+                    //统一设置JSON格式输出为utc
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                    //统一设置JSON为小驼峰格式
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+                //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
+                //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
+                options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
+                options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+            });
 
-            services.AddHttpService<HttpService>("msgpack", "http://localhost:5000");
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                //自定义模型验证错误的输出结构
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .Select(e => e.Value.Errors.First().ErrorMessage)
+                    .ToList();
+                    return new BadRequestObjectResult(new Result<string>() { code = 0, subCode = "", message = errors.Join(), data = "", elapsedTime = -1 });
+                };
+            });
+
+            services.AddHttpMessageService();
+            services.AddHttpMessageService("msgpack", "http://localhost:5000");
 
 
             services.AddSwaggerGen(c =>
@@ -59,6 +94,8 @@ namespace XUCore.NetCore.MessageApiTest
             {
                 app.UseDeveloperExceptionPage();
             }
+            //启用静态请求上下文
+            app.UseStaticHttpContext();
 
             app.UseRouting();
 

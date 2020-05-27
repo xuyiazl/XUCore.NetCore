@@ -5,6 +5,8 @@ using XUCore.NetCore.Properties;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using System;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace XUCore.NetCore.Filters
 {
@@ -28,11 +30,20 @@ namespace XUCore.NetCore.Filters
                 //过滤掉客户端取消请求的异常，属于正常异常范围
                 //_logger.LogInformation("Request was cancelled");
                 context.ExceptionHandled = true;
-                context.Result = new Result(StateCode.Fail, "", R.CanceledMessage);
+                //context.Result = new Result(StateCode.Fail, "", R.CanceledMessage);
+                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = R.CanceledMessage, data = "", elapsedTime = -1 })
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
             }
             else if (context.Exception is UnauthorizedAccessException)
             {
-                context.Result = new Result(StateCode.Fail, "", context.Exception.Message);
+                //context.Result = new Result(StateCode.Fail, "", context.Exception.Message);
+
+                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = context.Exception.Message, data = "", elapsedTime = -1 })
+                {
+                    StatusCode = (int)HttpStatusCode.Unauthorized
+                };
             }
             else
             {
@@ -53,7 +64,12 @@ namespace XUCore.NetCore.Filters
                     logger.LogError(context.Exception.FormatMessage(str.ToString()));
                 }
 
-                context.Result = new Result(StateCode.Fail, "", R.SystemError);
+                //context.Result = new Result(StateCode.Fail, "", R.SystemError);
+
+                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = context.Exception.Message, data = "", elapsedTime = -1 })
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
 
                 //context.Result = new RedirectResult(_appSettings.CustomErrorPage);
 

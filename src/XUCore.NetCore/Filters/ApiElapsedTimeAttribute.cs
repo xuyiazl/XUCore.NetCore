@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics;
 
 namespace XUCore.NetCore.Filters
@@ -28,10 +29,11 @@ namespace XUCore.NetCore.Filters
 
             if (actionExecutedContext.Result is Result)
             {
-                var res = (Result)actionExecutedContext.Result;
+                var res = (ObjectResult)actionExecutedContext.Result;
                 if (res != null)
                 {
-                    res.elapsedTime = stopwatch.ElapsedMilliseconds;
+                    res.Value.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+
                     actionExecutedContext.Result = res;
                 }
             }
