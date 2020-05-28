@@ -17,12 +17,12 @@ namespace XUCore.NetCore.Data.BulkExtensions
             return context.Database.ExecuteSqlRaw(sql, sqlParameters);
         }
 
-        //public static int BatchUpdate<T>(this IQueryable<T> query, T updateValues, List<string> updateColumns = null) where T : class, new()
-        //{
-        //    DbContext context = BatchUtil.GetDbContext(query);
-        //    var (sql, sqlParameters) = BatchUtil.GetSqlUpdate(query, context, updateValues, updateColumns);
-        //    return context.Database.ExecuteSqlRaw(sql, sqlParameters);
-        //}
+        public static int BatchUpdate<T>(this IQueryable<T> query, T updateValues, List<string> updateColumns = null) where T : class, new()
+        {
+            DbContext context = BatchUtil.GetDbContext(query);
+            var (sql, sqlParameters) = BatchUtil.GetSqlUpdate(query, context, updateValues, updateColumns);
+            return context.Database.ExecuteSqlRaw(sql, sqlParameters);
+        }
 
         public static int BatchUpdate<T>(this IQueryable<T> query, Expression<Func<T, T>> updateExpression) where T : class
         {
@@ -40,12 +40,12 @@ namespace XUCore.NetCore.Data.BulkExtensions
             return await context.Database.ExecuteSqlRawAsync(sql, sqlParameters, cancellationToken).ConfigureAwait(false);
         }
 
-        //public static async Task<int> BatchUpdateAsync<T>(this IQueryable<T> query, T updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default) where T : class, new()
-        //{
-        //    DbContext context = BatchUtil.GetDbContext(query);
-        //    var (sql, sqlParameters) = BatchUtil.GetSqlUpdate(query, context, updateValues, updateColumns);
-        //    return await context.Database.ExecuteSqlRawAsync(sql, sqlParameters, cancellationToken).ConfigureAwait(false);
-        //}
+        public static async Task<int> BatchUpdateAsync<T>(this IQueryable<T> query, T updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default) where T : class, new()
+        {
+            DbContext context = BatchUtil.GetDbContext(query);
+            var (sql, sqlParameters) = BatchUtil.GetSqlUpdate(query, context, updateValues, updateColumns);
+            return await context.Database.ExecuteSqlRawAsync(sql, sqlParameters, cancellationToken).ConfigureAwait(false);
+        }
 
 
         public static async Task<int> BatchUpdateAsync<T>(this IQueryable<T> query, Expression<Func<T, T>> updateExpression, CancellationToken cancellationToken = default) where T : class

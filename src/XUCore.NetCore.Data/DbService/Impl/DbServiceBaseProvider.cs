@@ -128,7 +128,7 @@ namespace XUCore.NetCore.Data.DbService
                 return readRepository.GetList();
             return default;
         }
-        public virtual async Task<List<TEntity>> GetListAsync( CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
         {
             if (readRepository != null)
                 return await readRepository.GetListAsync(cancellationToken);
@@ -246,6 +246,20 @@ namespace XUCore.NetCore.Data.DbService
         #endregion
 
         #region 增加bulkextensions拓展
+
+        public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
+        {
+            if (writeRepository != null)
+                return writeRepository.BatchUpdate(selector, updateValues, updateColumns);
+            return -1;
+        }
+
+        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
+        {
+            if (writeRepository != null)
+                return await writeRepository.BatchUpdateAsync(selector, updateValues, updateColumns, cancellationToken);
+            return -1;
+        }
 
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {

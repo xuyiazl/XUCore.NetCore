@@ -328,6 +328,17 @@ namespace XUCore.NetCore.Data.DbService
 
         #region 增加bulkextensions拓展
 
+        public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
+        {
+            return Entities.Where(selector).BatchUpdate(updateValues, updateColumns);
+        }
+
+        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
+        }
+
+
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
             return Entities.Where(selector).BatchUpdate(Update);

@@ -61,17 +61,20 @@ namespace XUCore.NetCore.Data.BulkExtensions
             (string sql, string tableAlias, string tableAliasSufixAs, string topStatement, IEnumerable<object> innerParameters) = GetBatchSql(query, context, isUpdate: true);
             var sqlParameters = new List<object>(innerParameters);
 
-            string sqlSET = GetSqlSetSegment(context, updateValues, updateColumns, sqlParameters);
+            var dbType = GetDatabaseType(context);
+
+            string sqlSET = GetSqlSetSegment(context, dbType, updateValues, updateColumns, sqlParameters);
 
             sqlParameters = ReloadSqlParameters(context, sqlParameters); // Sqlite requires SqliteParameters
-            var dbType = GetDatabaseType(context);
 
             if (dbType == DbServer.MySql)
             {
                 sql = sql.Substring(sql.IndexOf(Environment.NewLine) + 6, sql.Length - (sql.IndexOf(Environment.NewLine) + 6));
                 string tbName = sql.Substring(0, sql.IndexOf(Environment.NewLine));
                 string where = sql.Substring(sql.IndexOf(Environment.NewLine), sql.Length - sql.IndexOf(Environment.NewLine));
-                var resultQuery = $"UPDATE {tbName} SET {sqlSET} {where}";
+                sqlSET = Regex.Replace(sqlSET, @$"\[", $"{tableAlias}.`");
+                sqlSET = Regex.Replace(sqlSET, @$"\]", $"`");
+                var resultQuery = $"UPDATE {tbName} {sqlSET} {where}";
                 return (resultQuery, sqlParameters);
             }
             else
@@ -169,7 +172,7 @@ namespace XUCore.NetCore.Data.BulkExtensions
             return (sql, tableAlias, tableAliasSufixAs, topStatement, innerParameters);
         }
 
-        public static string GetSqlSetSegment<T>(DbContext context, T updateValues, List<string> updateColumns, List<object> parameters) where T : class, new()
+        public static string GetSqlSetSegment<T>(DbContext context, DbServer dbType, T updateValues, List<string> updateColumns, List<object> parameters) where T : class, new()
         {
             var tableInfo = TableInfo.CreateInstance<T>(context, new List<T>(), OperationType.Read, new BulkConfig());
             string sql = string.Empty;
@@ -205,7 +208,11 @@ namespace XUCore.NetCore.Data.BulkExtensions
                     {
                         sql += $"[{columnName}] = @{columnName}, ";
                         propertyUpdateValue = propertyUpdateValue ?? DBNull.Value;
-                        parameters.Add(new SqlParameter($"@{columnName}", propertyUpdateValue));
+
+                        if (dbType == DbServer.MySql)
+                            parameters.Add(new MySqlParameter($"@{columnName}", propertyUpdateValue));
+                        else
+                            parameters.Add(new SqlParameter($"@{columnName}", propertyUpdateValue));
                     }
                 }
             }

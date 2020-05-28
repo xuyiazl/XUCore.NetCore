@@ -19,6 +19,8 @@ namespace XUCore.WebTests.Data.DbService
         int Insert(AdminUsers entity);
         int Insert(AdminUsers[] entity);
         int Update(AdminUsers entity);
+        Task<int> BatchUpdateAsync(Expression<Func<AdminUsers, bool>> selector, AdminUsers updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default);
+        int BatchUpdate(Expression<Func<AdminUsers, bool>> selector, AdminUsers updateValues, List<string> updateColumns = null);
         Task<int> BatchUpdateAsync(Expression<Func<AdminUsers, bool>> selector, Expression<Func<AdminUsers, AdminUsers>> update, CancellationToken cancellationToken = default);
         Task<int> BatchDeleteAsync(Expression<Func<AdminUsers, bool>> selector, CancellationToken cancellationToken = default);
     }

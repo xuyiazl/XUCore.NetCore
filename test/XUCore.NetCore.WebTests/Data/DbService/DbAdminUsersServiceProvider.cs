@@ -60,6 +60,15 @@ namespace XUCore.WebTests.Data.DbService
             return writeRepository.Update(entity);
         }
 
+        public new async Task<int> BatchUpdateAsync(Expression<Func<AdminUsers, bool>> selector, AdminUsers updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
+        {
+            return await writeRepository.BatchUpdateAsync(selector, updateValues, updateColumns, cancellationToken);
+        }
+        public new int BatchUpdate(Expression<Func<AdminUsers, bool>> selector, AdminUsers updateValues, List<string> updateColumns = null)
+        {
+            return writeRepository.BatchUpdate(selector, updateValues, updateColumns);
+        }
+
         public new async Task<int> BatchUpdateAsync(Expression<Func<AdminUsers, bool>> selector, Expression<Func<AdminUsers, AdminUsers>> update, CancellationToken cancellationToken = default)
         {
             return await writeRepository.BatchUpdateAsync(selector, update, cancellationToken);

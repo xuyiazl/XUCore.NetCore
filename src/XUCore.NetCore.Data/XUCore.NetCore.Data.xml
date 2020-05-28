@@ -115,7 +115,7 @@
             <summary>
             通用仓储库的方法定义
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="TEntity"></typeparam>
         </member>
         <member name="T:XUCore.NetCore.Data.DbService.IDbContext">
             <summary>

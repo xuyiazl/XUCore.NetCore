@@ -84,7 +84,9 @@ namespace XUCore.WebTests.Controllers
                 list.Add(user);
             }
             var res0 = _dbAdminUsersServiceProvider.Insert(list.ToArray());
-            var re2 = await _dbAdminUsersServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
+            var res3 = _dbAdminUsersServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
+
+            //var re2 = await _dbAdminUsersServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
             var re1 = await _dbAdminUsersServiceProvider.BatchDeleteAsync(c => c.Id > 22);
 
 
