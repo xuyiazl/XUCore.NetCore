@@ -216,6 +216,14 @@ namespace XUCore.NetCore.Data.DbService
         {
             return await this.Entities.FindAsync(id, cancellationToken);
         }
+        public TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
+        {
+            return Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefault();
+        }
+        public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
+        {
+            return await Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefaultAsync();
+        }
         public virtual List<TEntity> GetList()
         {
             return Entities.AsNoTracking().ToList();

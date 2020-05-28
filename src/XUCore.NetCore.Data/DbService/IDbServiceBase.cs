@@ -37,6 +37,8 @@ namespace XUCore.NetCore.Data.DbService
 
         TEntity GetById(object id);
         Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+        TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby);
+        Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default);
         List<TEntity> GetList();
         Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
         List<TEntity> GetList(string orderby);
@@ -61,6 +63,10 @@ namespace XUCore.NetCore.Data.DbService
         #endregion
 
         #region 增加bulkextensions拓展
+
+        int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null);
+
+        Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default);
 
         int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update);
 

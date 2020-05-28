@@ -32,6 +32,8 @@ namespace XUCore.NetCore.Data.DbService
         Task<int> BatchDeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
         TEntity GetById(object id);
         Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+        TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby);
+        Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default);
         List<TEntity> GetList();
         Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
         List<TEntity> GetList(string orderby);

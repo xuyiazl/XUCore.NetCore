@@ -15,96 +15,96 @@ namespace XUCore.NetCore.Data.DbService
     /// <typeparam name="TEntity"></typeparam>
     public abstract class DbServiceBaseProvider<TEntity> where TEntity : class, new()
     {
-        public IBaseRepository<TEntity> readRepository { get; set; }
+        public IBaseRepository<TEntity> dbRead { get; set; }
 
-        public IBaseRepository<TEntity> writeRepository { get; set; }
+        public IBaseRepository<TEntity> dbWrite { get; set; }
 
         protected DbServiceBaseProvider(IBaseRepository<TEntity> readRepository, IBaseRepository<TEntity> writeRepository)
         {
-            this.readRepository = readRepository;
-            this.writeRepository = writeRepository;
+            this.dbRead = readRepository;
+            this.dbWrite = writeRepository;
         }
 
         #region 抽象对象来实现IDbServiceBase中的方法，提供重写操作
 
         public int SaveChanges()
         {
-            return writeRepository.SaveChanges();
+            return dbWrite.SaveChanges();
         }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return await writeRepository.SaveChangesAsync(cancellationToken);
+            return await dbWrite.SaveChangesAsync(cancellationToken);
         }
         public virtual int Insert(TEntity entity, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.Insert(entity, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.Insert(entity, isSaveChange);
             return -1;
         }
         public virtual async Task<int> InsertAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.InsertAsync(entity, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.InsertAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         public virtual int BatchInsert(TEntity[] entities, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchInsert(entities, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.BatchInsert(entities, isSaveChange);
             return -1;
         }
         public virtual async Task<int> BatchInsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchInsertAsync(entities, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchInsertAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
         public virtual int Update(TEntity entity, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.Update(entity, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.Update(entity, isSaveChange);
             return -1;
         }
         public virtual async Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.UpdateAsync(entity, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.UpdateAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         public virtual int BatchUpdate(TEntity[] entities, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchUpdate(entities, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.BatchUpdate(entities, isSaveChange);
             return -1;
         }
         public virtual async Task<int> BatchUpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchUpdateAsync(entities, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchUpdateAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
         public virtual int Delete(TEntity entity, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.Delete(entity, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.Delete(entity, isSaveChange);
             return -1;
         }
         public virtual async Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.DeleteAsync(entity, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.DeleteAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         public virtual int BatchDelete(TEntity[] entities, bool isSaveChange = true)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchDelete(entities, isSaveChange);
+            if (dbWrite != null)
+                return dbWrite.BatchDelete(entities, isSaveChange);
             return -1;
         }
         public virtual async Task<int> BatchDeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchDeleteAsync(entities, isSaveChange, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchDeleteAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
 
@@ -112,134 +112,146 @@ namespace XUCore.NetCore.Data.DbService
 
         public TEntity GetById(object id)
         {
-            if (readRepository != null)
-                return readRepository.GetById(id);
+            if (dbRead != null)
+                return dbRead.GetById(id);
             return default;
         }
         public async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetByIdAsync(id, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetByIdAsync(id, cancellationToken);
+            return default;
+        }
+        public TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
+        {
+            if (dbRead != null)
+                return dbRead.GetSingle(expression, orderby);
+            return default;
+        }
+        public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
+        {
+            if (dbRead != null)
+                return await dbRead.GetSingleAsync(expression, orderby);
             return default;
         }
         public virtual List<TEntity> GetList()
         {
-            if (readRepository != null)
-                return readRepository.GetList();
+            if (dbRead != null)
+                return dbRead.GetList();
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(cancellationToken);
             return default;
         }
         public virtual List<TEntity> GetList(string orderby)
         {
-            if (readRepository != null)
-                return readRepository.GetList(orderby);
+            if (dbRead != null)
+                return dbRead.GetList(orderby);
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(orderby, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(orderby, cancellationToken);
             return default;
         }
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector)
         {
-            if (readRepository != null)
-                return readRepository.GetList(selector);
+            if (dbRead != null)
+                return dbRead.GetList(selector);
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(selector, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(selector, cancellationToken);
             return default;
         }
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby)
         {
-            if (readRepository != null)
-                return readRepository.GetList(selector, orderby);
+            if (dbRead != null)
+                return dbRead.GetList(selector, orderby);
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(selector, orderby, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(selector, orderby, cancellationToken);
             return default;
         }
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20)
         {
-            if (readRepository != null)
-                return readRepository.GetList(selector, skip, limit);
+            if (dbRead != null)
+                return dbRead.GetList(selector, skip, limit);
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(selector, skip, limit, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(selector, skip, limit, cancellationToken);
             return default;
         }
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
         {
-            if (readRepository != null)
-                return readRepository.GetList(selector, orderby, skip, limit);
+            if (dbRead != null)
+                return dbRead.GetList(selector, orderby, skip, limit);
             return default;
         }
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetListAsync(selector, orderby, skip, limit, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetListAsync(selector, orderby, skip, limit, cancellationToken);
             return default;
         }
         public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
         {
-            if (readRepository != null)
-                return readRepository.GetPagedSkipList(selector, orderby, skip, limit);
+            if (dbRead != null)
+                return dbRead.GetPagedSkipList(selector, orderby, skip, limit);
             return default;
         }
         public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetPagedSkipListAsync(selector, orderby, skip, limit, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetPagedSkipListAsync(selector, orderby, skip, limit, cancellationToken);
             return default;
         }
         public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20)
         {
-            if (readRepository != null)
-                return readRepository.GetPagedList(selector, orderby, pageNumber, pageSize);
+            if (dbRead != null)
+                return dbRead.GetPagedList(selector, orderby, pageNumber, pageSize);
             return default;
         }
         public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
             return default;
         }
         public virtual bool Any(Expression<Func<TEntity, bool>> selector)
         {
-            if (readRepository != null)
-                return readRepository.Any(selector);
+            if (dbRead != null)
+                return dbRead.Any(selector);
             return default;
         }
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.AnyAsync(selector, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.AnyAsync(selector, cancellationToken);
             return default;
         }
         public virtual int GetCount(Expression<Func<TEntity, bool>> selector)
         {
-            if (readRepository != null)
-                return readRepository.GetCount(selector);
+            if (dbRead != null)
+                return dbRead.GetCount(selector);
             return default;
         }
         public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (readRepository != null)
-                return await readRepository.GetCountAsync(selector, cancellationToken);
+            if (dbRead != null)
+                return await dbRead.GetCountAsync(selector, cancellationToken);
             return default;
         }
 
@@ -249,43 +261,43 @@ namespace XUCore.NetCore.Data.DbService
 
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchUpdate(selector, updateValues, updateColumns);
+            if (dbWrite != null)
+                return dbWrite.BatchUpdate(selector, updateValues, updateColumns);
             return -1;
         }
 
         public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchUpdateAsync(selector, updateValues, updateColumns, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchUpdateAsync(selector, updateValues, updateColumns, cancellationToken);
             return -1;
         }
 
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchUpdate(selector, Update);
+            if (dbWrite != null)
+                return dbWrite.BatchUpdate(selector, Update);
             return -1;
         }
 
         public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchUpdateAsync(selector, Update, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchUpdateAsync(selector, Update, cancellationToken);
             return -1;
         }
 
         public virtual int BatchDelete(Expression<Func<TEntity, bool>> selector)
         {
-            if (writeRepository != null)
-                return writeRepository.BatchDelete(selector);
+            if (dbWrite != null)
+                return dbWrite.BatchDelete(selector);
             return -1;
         }
 
         public virtual async Task<int> BatchDeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (writeRepository != null)
-                return await writeRepository.BatchDeleteAsync(selector, cancellationToken);
+            if (dbWrite != null)
+                return await dbWrite.BatchDeleteAsync(selector, cancellationToken);
             return -1;
         }
 
