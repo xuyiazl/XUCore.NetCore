@@ -214,7 +214,7 @@ namespace XUCore.NetCore.Data.DbService
         }
         public async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            return await this.Entities.FindAsync(id, cancellationToken);
+            return await this.Entities.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
         }
         public TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
         {
