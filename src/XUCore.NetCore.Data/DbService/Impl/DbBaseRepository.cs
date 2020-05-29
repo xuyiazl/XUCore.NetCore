@@ -258,23 +258,23 @@ namespace XUCore.NetCore.Data.DbService
         {
             return await Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
         }
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit)
         {
             return Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
         {
             return await Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
         }
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
         {
             return Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
         {
             return await Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
         }
-        public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
+        public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
         {
             var totalRecords = GetCount(selector);
 
@@ -282,7 +282,7 @@ namespace XUCore.NetCore.Data.DbService
 
             return new PagedSkipModel<TEntity>(list, totalRecords, skip, limit);
         }
-        public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
         {
             var totalRecords = await GetCountAsync(selector, cancellationToken);
 
@@ -290,7 +290,7 @@ namespace XUCore.NetCore.Data.DbService
 
             return new PagedSkipModel<TEntity>(list, totalRecords, skip, limit);
         }
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20)
+        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize)
         {
             var totalRecords = GetCount(selector);
 
@@ -298,7 +298,7 @@ namespace XUCore.NetCore.Data.DbService
 
             return new PagedModel<TEntity>(list, totalRecords, pageNumber, pageSize);
         }
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
         {
             var totalRecords = await GetCountAsync(selector, cancellationToken);
 

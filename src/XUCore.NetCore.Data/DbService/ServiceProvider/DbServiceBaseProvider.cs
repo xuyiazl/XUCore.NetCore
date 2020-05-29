@@ -184,49 +184,49 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
                 return await dbRead.GetListAsync(selector, orderby, cancellationToken);
             return default;
         }
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit)
         {
             if (dbRead != null)
                 return dbRead.GetList(selector, skip, limit);
             return default;
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetListAsync(selector, skip, limit, cancellationToken);
             return default;
         }
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
         {
             if (dbRead != null)
                 return dbRead.GetList(selector, orderby, skip, limit);
             return default;
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetListAsync(selector, orderby, skip, limit, cancellationToken);
             return default;
         }
-        public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20)
+        public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
         {
             if (dbRead != null)
                 return dbRead.GetPagedSkipList(selector, orderby, skip, limit);
             return default;
         }
-        public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip = 0, int limit = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetPagedSkipListAsync(selector, orderby, skip, limit, cancellationToken);
             return default;
         }
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20)
+        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize)
         {
             if (dbRead != null)
                 return dbRead.GetPagedList(selector, orderby, pageNumber, pageSize);
             return default;
         }
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber = 1, int pageSize = 20, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
