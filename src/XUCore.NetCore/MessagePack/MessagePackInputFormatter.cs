@@ -50,7 +50,7 @@ namespace XUCore.NetCore.MessagePack
                 request.Body.Seek(0L, SeekOrigin.Begin);
             }
 
-            if (request.ContentType.ToLower() == "application/json")
+            if (request.ContentType.ToLower().StartsWith("application/json"))
             {
                 var bytes = request.Body.ReadAllBytes();
 
