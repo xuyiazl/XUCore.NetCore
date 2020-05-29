@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XUCore.WebTests.Data.Repository.ReadRepository
 {
-    public class ReadRepository<T> : MySqlRepository<T>, IReadRepository<T> where T : class, new()
+    public class ReadRepository<TEntity> : MsSqlRepository<TEntity>, IReadRepository<TEntity> where TEntity : class, new()
     {
         public ReadRepository(IReadEntityContext context) : base(context)
         {

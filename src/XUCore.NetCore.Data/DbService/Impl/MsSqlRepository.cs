@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Data.Common;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -12,32 +13,32 @@ namespace XUCore.NetCore.Data.DbService
     /// <summary>
     /// sql server的仓库
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class MsSqlRepository<T> : DbBaseRepository<T> where T : class, new()
+    /// <typeparam name="TEntity"></typeparam>
+    public class MsSqlRepository<TEntity> : DbBaseRepository<TEntity>, IMsSqlRepository<TEntity> where TEntity : class, new()
     {
         public MsSqlRepository(IBaseContext context) : base(context) { }
 
         #region mssql专有的ado执行
-        public int ExecuteSql(string sql, params SqlParameter[] parameters)
+        public override int ExecuteSql(string sql, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             var db = this._context as DbContext;
             return db.Database.ExecuteSqlRaw(sql, parameters);
         }
 
-        public TEntity Select<TEntity>(string sql, CommandType type, params SqlParameter[] parameters) where TEntity : class, new()
+        public override T Select<T>(string sql, CommandType type, params DbParameter[] parameters)
         {
-            var res = SelectList<TEntity>(sql, type, parameters);
+            var res = SelectList<T>(sql, type, parameters);
 
             return res.Count > 0 ? res[0] : null;
         }
 
-        public IList<TEntity> SelectList<TEntity>(string sql, CommandType type, params SqlParameter[] parameters) where TEntity : class, new()
+        public override IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters)
         {
-            return SelectList(sql, type, parameters).ToList<TEntity>();
+            return SelectList(sql, type, parameters).ToList<T>();
         }
 
-        public DataTable SelectList(string sql, CommandType type, params SqlParameter[] parameters)
+        public override DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -65,7 +66,7 @@ namespace XUCore.NetCore.Data.DbService
 
         }
 
-        public DataSet SelectDataSet(string sql, CommandType type, params SqlParameter[] parameters)
+        public override DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -92,7 +93,7 @@ namespace XUCore.NetCore.Data.DbService
             }
         }
 
-        public int ExecuteAdoNet(string sql, CommandType type, params SqlParameter[] parameters)
+        public override int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters)
         {
             try
             {

@@ -35,7 +35,7 @@ namespace XUCore.WebTests
 
             services.AddDbContext<WriteEntityContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("XUCore_WriteConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(Configuration.GetConnectionString("XUCore_WriteConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
             services.AddScoped(typeof(IWriteEntityContext), typeof(WriteEntityContext));
@@ -46,7 +46,7 @@ namespace XUCore.WebTests
 
             services.AddDbContext<ReadEntityContext>(options =>
             {
-                options.UseMySql(Configuration.GetConnectionString("XUCore_ReadConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(Configuration.GetConnectionString("XUCore_ReadConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IReadEntityContext), typeof(ReadEntityContext));

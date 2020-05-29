@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data.Common;
+using System.Data;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -73,5 +75,55 @@ namespace XUCore.NetCore.Data.DbService
 
         #endregion
 
+        #region [ AdoNet ]
+        /// <summary>
+        /// 通过EF执行原生SQL 返回影响行数
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        int ExecuteSql(string sql, params DbParameter[] parameters);
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果集合(DataTable)
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters);
+        /// <summary>
+        /// 通过ADO.NET执行SQL返回数据集(DataSet);
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters);
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters);
+        #endregion
     }
 }

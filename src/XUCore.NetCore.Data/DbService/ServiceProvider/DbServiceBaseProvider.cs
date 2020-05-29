@@ -5,15 +5,17 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data.Common;
+using System.Data;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data.DbService.ServiceProvider
 {
 
     /// <summary>
     /// 数据库领域操作的基础对象
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class DbServiceBaseProvider<TEntity> where TEntity : class, new()
+    public abstract class DbServiceBaseProvider<TEntity> : IDbServiceBase<TEntity> where TEntity : class, new()
     {
         public IBaseRepository<TEntity> dbRead { get; set; }
 
@@ -301,6 +303,88 @@ namespace XUCore.NetCore.Data.DbService
             return -1;
         }
 
+        #endregion
+
+
+        #region [ AdoNet ]
+        /// <summary>
+        /// 通过EF执行原生SQL 返回影响行数
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual int ExecuteSql(string sql, params DbParameter[] parameters)
+        {
+            if (dbWrite != null)
+                return dbWrite.ExecuteSql(sql, parameters);
+            return -1;
+        }
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new()
+        {
+            if (dbRead != null)
+                return dbRead.Select<T>(sql, type, parameters);
+            return default;
+        }
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new()
+        {
+            if (dbRead != null)
+                return dbRead.SelectList<T>(sql, type, parameters);
+            return default;
+        }
+        /// <summary>
+        /// 通过ADO.NET执行SQL 返回查询结果集合(DataTable)
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters)
+        {
+            if (dbRead != null)
+                return dbRead.SelectList(sql, type, parameters);
+            return null;
+        }
+        /// <summary>
+        /// 通过ADO.NET执行SQL返回数据集(DataSet);
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters)
+        {
+            if (dbRead != null)
+                return dbRead.SelectDataSet(sql, type, parameters);
+            return null;
+        }
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        public virtual int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters)
+        {
+            if (dbWrite != null)
+                return dbWrite.ExecuteAdoNet(sql, type, parameters);
+            return -1;
+        }
         #endregion
 
         #region 实现Dispose的方法

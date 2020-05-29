@@ -23,6 +23,9 @@ using MessagePack;
 using System;
 using XUCore.NetCore;
 using XUCore.WebTests.Data.Entity;
+using System.Data;
+using MySql.Data.MySqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace XUCore.WebTests.Controllers
 {
@@ -83,6 +86,7 @@ namespace XUCore.WebTests.Controllers
                 };
                 list.Add(user);
             }
+            var res4 = _dbAdminUsersServiceProvider.SelectList<AdminUsers>("select * from AdminUsers", CommandType.Text, new SqlParameter("name", "1"));
             var res0 = _dbAdminUsersServiceProvider.BatchInsert(list.ToArray());
             var res3 = _dbAdminUsersServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
 

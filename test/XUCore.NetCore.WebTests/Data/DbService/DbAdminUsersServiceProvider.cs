@@ -9,6 +9,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.Common;
+using XUCore.NetCore.Data.DbService.ServiceProvider;
 
 namespace XUCore.WebTests.Data.DbService
 {

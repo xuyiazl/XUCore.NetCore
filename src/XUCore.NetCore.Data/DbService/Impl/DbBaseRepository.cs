@@ -9,6 +9,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data.Common;
+using System.Data;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -17,7 +19,7 @@ namespace XUCore.NetCore.Data.DbService
     /// 数据库的基础仓储库
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class DbBaseRepository<TEntity> where TEntity : class, new()
+    public abstract class DbBaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         protected string _connectionString { get; set; } = "";
         protected readonly IBaseContext _context;
@@ -366,6 +368,22 @@ namespace XUCore.NetCore.Data.DbService
         {
             return await Entities.Where(selector).BatchDeleteAsync(cancellationToken);
         }
+
+        #endregion
+
+        #region adonet
+
+        public abstract int ExecuteSql(string sql, params DbParameter[] parameters);
+
+        public abstract T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+
+        public abstract IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+
+        public abstract DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters);
+
+        public abstract DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters);
+
+        public abstract int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters);
 
         #endregion
     }

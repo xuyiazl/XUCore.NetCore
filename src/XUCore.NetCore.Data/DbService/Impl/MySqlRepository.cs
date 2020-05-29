@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using XUCore.Extensions.Datas;
@@ -10,30 +11,30 @@ using XUCore.Extensions.Datas;
 namespace XUCore.NetCore.Data.DbService
 {
 
-    public class MySqlRepository<T> : DbBaseRepository<T> where T : class, new()
+    public class MySqlRepository<TEntity> : DbBaseRepository<TEntity>, IMySqlRepository<TEntity> where TEntity : class, new()
     {
         public MySqlRepository(IBaseContext context) : base(context) { }
 
-        public int ExecuteSql(string sql, params MySqlParameter[] parameters)
+        public override int ExecuteSql(string sql, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new MySqlParameter[0] { } : parameters;
             var db = this._context as DbContext;
             return db.Database.ExecuteSqlRaw(sql, parameters);
         }
 
-        public TEntity Select<TEntity>(string sql, CommandType type, params MySqlParameter[] parameters) where TEntity : class, new()
+        public override T Select<T>(string sql, CommandType type, params DbParameter[] parameters)
         {
-            var res = SelectList<TEntity>(sql, type, parameters);
+            var res = SelectList<T>(sql, type, parameters);
 
             return res.Count > 0 ? res[0] : null;
         }
 
-        public IList<TEntity> SelectList<TEntity>(string sql, CommandType type, params MySqlParameter[] parameters) where TEntity : class, new()
+        public override IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters)
         {
-            return SelectList(sql, type, parameters).ToList<TEntity>();
+            return SelectList(sql, type, parameters).ToList<T>();
         }
 
-        public DataTable SelectList(string sql, CommandType type, params MySqlParameter[] parameters)
+        public override DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new MySqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -61,7 +62,7 @@ namespace XUCore.NetCore.Data.DbService
 
         }
 
-        public DataSet SelectDataSet(string sql, CommandType type, params MySqlParameter[] parameters)
+        public override DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters)
         {
             parameters = parameters == null ? new MySqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -88,7 +89,7 @@ namespace XUCore.NetCore.Data.DbService
             }
         }
 
-        public int ExecuteAdoNet(string sql, CommandType type, params MySqlParameter[] parameters)
+        public override int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters)
         {
             try
             {

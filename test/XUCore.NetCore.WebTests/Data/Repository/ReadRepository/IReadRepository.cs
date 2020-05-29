@@ -10,7 +10,7 @@ namespace XUCore.WebTests.Data.Repository.ReadRepository
     /// 读取仓库
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IReadRepository<T> : IMySqlRepository<T> where T : class, new()
+    public interface IReadRepository<T> : IMsSqlRepository<T> where T : class, new()
     {
 
     }

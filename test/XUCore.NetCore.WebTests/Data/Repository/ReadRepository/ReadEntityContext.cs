@@ -10,7 +10,7 @@ namespace XUCore.WebTests.Data.Repository.ReadRepository
 {
     public class ReadEntityContext : BaseRepositoryFactory, IReadEntityContext
     {
-        public ReadEntityContext(DbContextOptions<ReadEntityContext> options) : base(options, "mysql", $"XUCore.WebTests.Data.Mapping")
+        public ReadEntityContext(DbContextOptions<ReadEntityContext> options) : base(options, "sqlserver", $"XUCore.WebTests.Data.Mapping")
         {
 
         }

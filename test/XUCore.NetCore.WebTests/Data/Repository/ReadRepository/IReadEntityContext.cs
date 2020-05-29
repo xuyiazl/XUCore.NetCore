@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.WebTests.Data.Repository.ReadRepository
 {
-    public interface IWriteEntityContext : IDbContext
+    public interface IReadEntityContext : IDbContext
     {
+
     }
 }

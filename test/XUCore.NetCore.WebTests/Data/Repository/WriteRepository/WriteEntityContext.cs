@@ -10,7 +10,7 @@ namespace XUCore.WebTests.Data.Repository.WriteRepository
 {
     public class WriteEntityContext : BaseRepositoryFactory, IWriteEntityContext
     {
-        public WriteEntityContext(DbContextOptions<WriteEntityContext> options) : base(options, "mysql", $"XUCore.WebTests.Data.Mapping")
+        public WriteEntityContext(DbContextOptions<WriteEntityContext> options) : base(options, "sqlserver", $"XUCore.WebTests.Data.Mapping")
         {
 
         }

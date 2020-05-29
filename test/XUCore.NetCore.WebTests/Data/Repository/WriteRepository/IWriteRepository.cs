@@ -10,7 +10,7 @@ namespace XUCore.WebTests.Data.Repository.WriteRepository
     /// 写入仓库
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IWriteRepository<T> : IMySqlRepository<T> where T : class, new()
+    public interface IWriteRepository<T> : IMsSqlRepository<T> where T : class, new()
     {
 
     }
