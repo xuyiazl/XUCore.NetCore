@@ -15301,46 +15301,6 @@
             是否能下一页
             </summary>
         </member>
-        <member name="T:XUCore.Paging.PagedSkipList`1">
-            <summary>
-            分页列表
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:XUCore.Paging.PagedSkipList`1.Empty">
-            <summary>
-            初始化空对象
-            </summary>
-        </member>
-        <member name="P:XUCore.Paging.PagedSkipList`1.Limit">
-            <summary>
-            获取记录数
-            </summary>
-        </member>
-        <member name="P:XUCore.Paging.PagedSkipList`1.Offset">
-            <summary>
-            偏移量
-            </summary>
-        </member>
-        <member name="P:XUCore.Paging.PagedSkipList`1.TotalRecords">
-            <summary>
-            总记录数
-            </summary>
-        </member>
-        <member name="M:XUCore.Paging.PagedSkipList`1.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:XUCore.Paging.PagedSkipList`1.#ctor(System.Collections.Generic.IList{`0},System.Int32,System.Int32,System.Int32)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="items"></param>
-            <param name="totalRecords"></param>
-            <param name="limit"></param>
-            <param name="offset"></param>
-        </member>
         <member name="T:XUCore.Paging.PageHtml">
             <summary>
             page分页html

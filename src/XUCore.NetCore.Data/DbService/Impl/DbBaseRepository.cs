@@ -29,14 +29,36 @@ namespace XUCore.NetCore.Data.DbService
             _connectionString = context.ConnectionStrings;
             _context = context;
         }
-        public int SaveChanges()
+
+        private DbSet<TEntity> Entities
+        {
+            get
+            {
+                if (_entities == null)
+                {
+                    _entities = _context.Set<TEntity>();
+                }
+
+                return _entities;
+            }
+        }
+
+        //同步操作
+
+        /// <summary>
+        /// 同步提交
+        /// </summary>
+        /// <returns></returns>
+        public virtual int SaveChanges()
         {
             return _context.SaveChanges();
         }
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            return await _context.SaveChangesAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
         public virtual int Insert(TEntity entity, bool isSaveChange = true)
         {
             if (entity == null)
@@ -50,19 +72,12 @@ namespace XUCore.NetCore.Data.DbService
                 return SaveChanges();
             return 0;
         }
-        public virtual async Task<int> InsertAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentException($"{typeof(TEntity)} is Null");
-            }
-
-            await Entities.AddAsync(entity);
-
-            if (isSaveChange)
-                return await SaveChangesAsync(cancellationToken);
-            return 0;
-        }
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
         public virtual int BatchInsert(TEntity[] entities, bool isSaveChange = true)
         {
             if (entities == null)
@@ -85,6 +100,120 @@ namespace XUCore.NetCore.Data.DbService
                 return SaveChanges();
             return 0;
         }
+        /// <summary>
+        /// 更新一条数据（全量更新）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
+        public virtual int Update(TEntity entity, bool isSaveChange = true)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Entities.Update(entity);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
+        }
+        /// <summary>
+        /// 批量更新数据（全量更新）
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
+        public virtual int BatchUpdate(TEntity[] entities, bool isSaveChange = true)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Entities.UpdateRange(entities);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
+        }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
+        public virtual int Delete(TEntity entity, bool isSaveChange = true)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Entities.Remove(entity);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
+        }
+        /// <summary>
+        /// 批量删除数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <returns></returns>
+        public virtual int BatchDelete(TEntity[] entities, bool isSaveChange = true)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Entities.RemoveRange(entities);
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
+        }
+
+        //异步操作
+
+        /// <summary>
+        /// 异步提交
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await _context.SaveChangesAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 异步插入一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> InsertAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            await Entities.AddAsync(entity);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
+        }
+        /// <summary>
+        /// 批量写入数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> BatchInsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
@@ -107,19 +236,13 @@ namespace XUCore.NetCore.Data.DbService
                 return await SaveChangesAsync(cancellationToken);
             return 0;
         }
-        public virtual int Update(TEntity entity, bool isSaveChange = true)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentException($"{typeof(TEntity)} is Null");
-            }
-
-            Entities.Update(entity);
-
-            if (isSaveChange)
-                return SaveChanges();
-            return 0;
-        }
+        /// <summary>
+        /// 更新一条数据（全量更新）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entity == null)
@@ -133,19 +256,13 @@ namespace XUCore.NetCore.Data.DbService
                 return await SaveChangesAsync(cancellationToken);
             return 0;
         }
-        public virtual int BatchUpdate(TEntity[] entities, bool isSaveChange = true)
-        {
-            if (entities == null)
-            {
-                throw new ArgumentException($"{typeof(TEntity)} is Null");
-            }
-
-            Entities.UpdateRange(entities);
-
-            if (isSaveChange)
-                return SaveChanges();
-            return 0;
-        }
+        /// <summary>
+        /// 批量更新数据（全量更新）
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> BatchUpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
@@ -159,19 +276,13 @@ namespace XUCore.NetCore.Data.DbService
                 return await SaveChangesAsync(cancellationToken);
             return 0;
         }
-        public virtual int Delete(TEntity entity, bool isSaveChange = true)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentException($"{typeof(TEntity)} is Null");
-            }
-
-            Entities.Remove(entity);
-
-            if (isSaveChange)
-                return SaveChanges();
-            return 0;
-        }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entity == null)
@@ -185,18 +296,13 @@ namespace XUCore.NetCore.Data.DbService
                 return await SaveChangesAsync(cancellationToken);
             return 0;
         }
-        public virtual int BatchDelete(TEntity[] entities, bool isSaveChange = true)
-        {
-            if (entities == null)
-            {
-                throw new ArgumentException($"{typeof(TEntity)} is Null");
-            }
-
-            Entities.RemoveRange(entities);
-            if (isSaveChange)
-                return SaveChanges();
-            return 0;
-        }
+        /// <summary>
+        /// 批量删除数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="isSaveChange">是否提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> BatchDeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
@@ -210,86 +316,94 @@ namespace XUCore.NetCore.Data.DbService
             return 0;
         }
 
-        public TEntity GetById(object id)
+        //同步查询
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual TEntity GetById(object id)
         {
             return this.Entities.Find(id);
         }
-        public async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
-        {
-            return await this.Entities.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
-        }
-        public TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <returns></returns>
+        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
         {
             return Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefault();
         }
-        public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
-        {
-            return await Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefaultAsync();
-        }
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <returns></returns>
         public virtual List<TEntity> GetList()
         {
             return Entities.AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
-        {
-            return await Entities.AsNoTracking().ToListAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <returns></returns>
         public virtual List<TEntity> GetList(string orderby)
         {
             return Entities.OrderByBatch(orderby).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default)
-        {
-            return await Entities.OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector)
         {
             return Entities.Where(selector).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).AsNoTracking().ToListAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby)
         {
             return Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="skip">起始位置</param>
+        /// <param name="limit">记录数</param>
+        /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit)
         {
             return Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
-        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置</param>
+        /// <param name="limit">记录数</param>
+        /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
         {
             return Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToList();
         }
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
-        }
-        public virtual PagedSkipModel<TEntity> GetPagedSkipList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
-        {
-            var totalRecords = GetCount(selector);
-
-            var list = GetList(selector, orderby, skip, limit);
-
-            return new PagedSkipModel<TEntity>(list, totalRecords, skip, limit);
-        }
-        public virtual async Task<PagedSkipModel<TEntity>> GetPagedSkipListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            var totalRecords = await GetCountAsync(selector, cancellationToken);
-
-            var list = await GetListAsync(selector, orderby, skip, limit, cancellationToken);
-
-            return new PagedSkipModel<TEntity>(list, totalRecords, skip, limit);
-        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <returns></returns>
         public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize)
         {
             var totalRecords = GetCount(selector);
@@ -298,6 +412,122 @@ namespace XUCore.NetCore.Data.DbService
 
             return new PagedModel<TEntity>(list, totalRecords, pageNumber, pageSize);
         }
+        /// <summary>
+        /// Any数据检测
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual bool Any(Expression<Func<TEntity, bool>> selector)
+        {
+            return Entities.Where(selector).Any();
+        }
+        /// <summary>
+        /// 获取记录数
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public virtual int GetCount(Expression<Func<TEntity, bool>> selector)
+        {
+            return Entities.AsNoTracking().Count(selector);
+        }
+
+        //异步查询
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
+        {
+            return await this.Entities.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
+        }
+        /// <summary>
+        /// 查询一条数据
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="orderby"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
+        {
+            return await Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefaultAsync();
+        }
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
+        {
+            return await Entities.AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default)
+        {
+            return await Entities.OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="skip">起始位置</param>
+        /// <param name="limit">记录数</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置</param>
+        /// <param name="limit">记录数</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
         {
             var totalRecords = await GetCountAsync(selector, cancellationToken);
@@ -306,64 +536,93 @@ namespace XUCore.NetCore.Data.DbService
 
             return new PagedModel<TEntity>(list, totalRecords, pageNumber, pageSize);
         }
-        public virtual bool Any(Expression<Func<TEntity, bool>> selector)
-        {
-            return Entities.Where(selector).Any();
-        }
+        /// <summary>
+        /// Any数据检测
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
             return await Entities.Where(selector).AnyAsync(cancellationToken);
         }
-        public virtual int GetCount(Expression<Func<TEntity, bool>> selector)
-        {
-            return Entities.AsNoTracking().Count(selector);
-        }
+        /// <summary>
+        /// 获取记录数
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
             return Entities.AsNoTracking().CountAsync(selector, cancellationToken);
         }
-        private DbSet<TEntity> Entities
-        {
-            get
-            {
-                if (_entities == null)
-                {
-                    _entities = _context.Set<TEntity>();
-                }
-
-                return _entities;
-            }
-        }
-
 
         #region 增加bulkextensions拓展
 
+        //同步操作
+
+        /// <summary>
+        /// 根据条件批量更新（部分字段）
+        /// </summary>
+        /// <param name="selector">查询条件</param>
+        /// <param name="updateValues">更新的新数据数据</param>
+        /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+        /// <returns></returns>
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
             return Entities.Where(selector).BatchUpdate(updateValues, updateColumns);
         }
-
-        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
-        }
-
-
+        /// <summary>
+        /// 根据条件批量更新（部分字段）
+        /// </summary>
+        /// <param name="selector">查询条件</param>
+        /// <param name="Update">更新的新数据数据</param>
+        /// <returns></returns>
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
             return Entities.Where(selector).BatchUpdate(Update);
         }
-
-        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).BatchUpdateAsync(Update, cancellationToken);
-        }
-
+        /// <summary>
+        /// 根据条件批量删除
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public virtual int BatchDelete(Expression<Func<TEntity, bool>> selector)
         {
             return Entities.Where(selector).BatchDelete();
         }
 
+        //异步操作
+
+        /// <summary>
+        /// 根据条件批量更新（部分字段）
+        /// </summary>
+        /// <param name="selector">查询条件</param>
+        /// <param name="updateValues">更新的新数据数据</param>
+        /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
+        }
+        /// <summary>
+        /// 根据条件批量更新（部分字段）
+        /// </summary>
+        /// <param name="selector">查询条件</param>
+        /// <param name="Update">更新的新数据数据</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
+        {
+            return await Entities.Where(selector).BatchUpdateAsync(Update, cancellationToken);
+        }
+        /// <summary>
+        /// 根据条件批量删除
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> BatchDeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
             return await Entities.Where(selector).BatchDeleteAsync(cancellationToken);
@@ -373,16 +632,54 @@ namespace XUCore.NetCore.Data.DbService
 
         #region adonet
 
+        /// <summary>
+        /// 通过EF执行原生SQL 返回影响行数
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public abstract int ExecuteSql(string sql, params DbParameter[] parameters);
-
+        /// <summary>
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public abstract T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
-
+        /// <summary>
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public abstract IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
-
+        /// <summary>
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns>返回DataTable</returns>
         public abstract DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters);
-
+        /// <summary>
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns>返回DataSet</returns>
         public abstract DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters);
-
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public abstract int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters);
 
         #endregion
