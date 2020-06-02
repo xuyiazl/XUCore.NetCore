@@ -218,81 +218,24 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <summary>
         /// 根据条件获取一条数据
         /// </summary>
-        /// <param name="expression"></param>
+        /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
+        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
             if (dbRead != null)
-                return dbRead.GetSingle(expression, orderby);
+                return dbRead.GetSingle(selector, orderby);
             return default;
         }
         /// <summary>
         /// 获取所有数据
         /// </summary>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList()
-        {
-            if (dbRead != null)
-                return dbRead.GetList();
-            return default;
-        }
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(string orderby)
-        {
-            if (dbRead != null)
-                return dbRead.GetList(orderby);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector)
-        {
-            if (dbRead != null)
-                return dbRead.GetList(selector);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby)
-        {
-            if (dbRead != null)
-                return dbRead.GetList(selector, orderby);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit)
-        {
-            if (dbRead != null)
-                return dbRead.GetList(selector, skip, limit);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
         {
             if (dbRead != null)
                 return dbRead.GetList(selector, orderby, skip, limit);
@@ -306,7 +249,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize)
+        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
         {
             if (dbRead != null)
                 return dbRead.GetPagedList(selector, orderby, pageNumber, pageSize);
@@ -317,7 +260,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual bool Any(Expression<Func<TEntity, bool>> selector)
+        public virtual bool Any(Expression<Func<TEntity, bool>> selector = null)
         {
             if (dbRead != null)
                 return dbRead.Any(selector);
@@ -328,7 +271,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual int GetCount(Expression<Func<TEntity, bool>> selector)
+        public virtual int GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
             if (dbRead != null)
                 return dbRead.GetCount(selector);
@@ -352,88 +295,26 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <summary>
         /// 查询一条数据
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="orderby"></param>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
-                return await dbRead.GetSingleAsync(expression, orderby);
+                return await dbRead.GetSingleAsync(selector, orderby, cancellationToken);
             return default;
         }
         /// <summary>
         /// 获取所有数据
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
-        {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(cancellationToken);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default)
-        {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(orderby, cancellationToken);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
-        {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(selector, cancellationToken);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default)
-        {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(selector, orderby, cancellationToken);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(selector, skip, limit, cancellationToken);
-            return default;
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetListAsync(selector, orderby, skip, limit, cancellationToken);
@@ -448,7 +329,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
@@ -460,7 +341,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.AnyAsync(selector, cancellationToken);
@@ -472,7 +353,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
             if (dbRead != null)
                 return await dbRead.GetCountAsync(selector, cancellationToken);

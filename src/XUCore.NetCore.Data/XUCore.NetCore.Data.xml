@@ -165,45 +165,8 @@
             <summary>
             根据条件获取一条数据
             </summary>
-            <param name="expression"></param>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList">
-            <summary>
-            获取所有数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList(System.String)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
-            <summary>
-            获取数据
-            </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -212,8 +175,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -250,52 +213,10 @@
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
-            查询一条数据
-            </summary>
-            <param name="expression"></param>
-            <param name="orderby"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetListAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
+            根据条件获取一条数据
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -305,8 +226,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -638,45 +559,8 @@
             <summary>
             根据条件获取一条数据
             </summary>
-            <param name="expression"></param>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList">
-            <summary>
-            获取所有数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList(System.String)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
-            <summary>
-            获取数据
-            </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -685,8 +569,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -723,52 +607,10 @@
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
-            查询一条数据
-            </summary>
-            <param name="expression"></param>
-            <param name="orderby"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetListAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
+            根据条件获取一条数据
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -778,8 +620,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1064,55 +906,18 @@
             <summary>
             根据条件获取一条数据
             </summary>
-            <param name="expression"></param>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList">
-            <summary>
-            获取所有数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList(System.String)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
-            <summary>
-            获取数据
-            </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
-            获取数据
+            获取所有数据
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -1151,61 +956,19 @@
             <summary>
             查询一条数据
             </summary>
-            <param name="expression"></param>
-            <param name="orderby"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            获取数据
+            获取所有数据
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1473,45 +1236,8 @@
             <summary>
             根据条件获取一条数据
             </summary>
-            <param name="expression"></param>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList">
-            <summary>
-            获取所有数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList(System.String)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
-            <summary>
-            获取数据
-            </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -1520,8 +1246,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
@@ -1558,52 +1284,10 @@
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
-            查询一条数据
-            </summary>
-            <param name="expression"></param>
-            <param name="orderby"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            获取所有数据
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetListAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
+            根据条件获取一条数据
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            获取数据
-            </summary>
-            <param name="selector"></param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1613,8 +1297,8 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="skip">起始位置</param>
-            <param name="limit">记录数</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

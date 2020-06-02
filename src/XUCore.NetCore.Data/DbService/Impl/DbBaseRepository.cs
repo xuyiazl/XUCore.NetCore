@@ -330,71 +330,46 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 根据条件获取一条数据
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby)
-        {
-            return Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefault();
-        }
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList()
-        {
-            return Entities.AsNoTracking().ToList();
-        }
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(string orderby)
-        {
-            return Entities.OrderByBatch(orderby).AsNoTracking().ToList();
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
         /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector)
+        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
-            return Entities.Where(selector).AsNoTracking().ToList();
+            var query = Entities.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return query.AsNoTracking().FirstOrDefault();
         }
         /// <summary>
         /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
         {
-            return Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToList();
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit)
-        {
-            return Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToList();
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit)
-        {
-            return Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToList();
+            var query = Entities.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return query.AsNoTracking().ToList();
         }
         /// <summary>
         /// 获取分页数据
@@ -404,7 +379,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize)
+        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
         {
             var totalRecords = GetCount(selector);
 
@@ -417,17 +392,23 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual bool Any(Expression<Func<TEntity, bool>> selector)
+        public virtual bool Any(Expression<Func<TEntity, bool>> selector = null)
         {
-            return Entities.Where(selector).Any();
+            if (selector == null)
+                return Entities.AsNoTracking().Any();
+
+            return Entities.AsNoTracking().Any(selector);
         }
         /// <summary>
         /// 获取记录数
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual int GetCount(Expression<Func<TEntity, bool>> selector)
+        public virtual int GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
+            if (selector == null)
+                return Entities.AsNoTracking().Count();
+
             return Entities.AsNoTracking().Count(selector);
         }
 
@@ -443,81 +424,52 @@ namespace XUCore.NetCore.Data.DbService
         {
             return await this.Entities.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
         }
+
         /// <summary>
-        /// 查询一条数据
+        /// 根据条件获取一条数据
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="orderby"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default)
-        {
-            return await Entities.AsNoTracking().Where(expression).OrderByBatch(orderby).FirstOrDefaultAsync();
-        }
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
-        {
-            return await Entities.AsNoTracking().ToListAsync(cancellationToken);
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
+        /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
-            return await Entities.OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).AsNoTracking().ToListAsync(cancellationToken);
+            var query = Entities.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
         /// <summary>
         /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
         {
-            return await Entities.Where(selector).OrderByBatch(orderby).AsNoTracking().ToListAsync(cancellationToken);
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
-        }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default)
-        {
-            return await Entities.Where(selector).OrderByBatch(orderby).Skip(skip).Take(limit).AsNoTracking().ToListAsync(cancellationToken);
+            var query = Entities.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return await query.AsNoTracking().ToListAsync(cancellationToken);
         }
         /// <summary>
         /// 获取分页数据
@@ -528,7 +480,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
             var totalRecords = await GetCountAsync(selector, cancellationToken);
 
@@ -542,9 +494,12 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            return await Entities.Where(selector).AnyAsync(cancellationToken);
+            if (selector == null)
+                return await Entities.AsNoTracking().AnyAsync(cancellationToken);
+
+            return await Entities.AnyAsync(selector, cancellationToken);
         }
         /// <summary>
         /// 获取记录数
@@ -552,9 +507,12 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            return Entities.AsNoTracking().CountAsync(selector, cancellationToken);
+            if (selector == null)
+                return await Entities.AsNoTracking().CountAsync(cancellationToken);
+
+            return await Entities.AsNoTracking().CountAsync(selector, cancellationToken);
         }
 
         #region 增加bulkextensions拓展

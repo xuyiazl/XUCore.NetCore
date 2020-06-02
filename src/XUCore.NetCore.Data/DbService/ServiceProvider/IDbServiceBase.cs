@@ -135,51 +135,19 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <summary>
         /// 根据条件获取一条数据
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        TEntity GetSingle(Expression<Func<TEntity, bool>> expression, string orderby);
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <returns></returns>
-        List<TEntity> GetList();
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        List<TEntity> GetList(string orderby);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
         /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector);
+        TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "");
         /// <summary>
         /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, int skip, int limit);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit);
+        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0);
         /// <summary>
         /// 获取分页数据
         /// </summary>
@@ -188,19 +156,19 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize);
+        PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10);
         /// <summary>
         /// Any数据检测
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        bool Any(Expression<Func<TEntity, bool>> selector);
+        bool Any(Expression<Func<TEntity, bool>> selector = null);
         /// <summary>
         /// 获取记录数
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        int GetCount(Expression<Func<TEntity, bool>> selector);
+        int GetCount(Expression<Func<TEntity, bool>> selector = null);
 
         //异步查询
 
@@ -212,60 +180,23 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default);
         /// <summary>
-        /// 查询一条数据
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="orderby"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> expression, string orderby, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取所有数据
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(string orderby, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取数据
+        /// 根据条件获取一条数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, int skip, int limit, CancellationToken cancellationToken = default);
+        Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置</param>
-        /// <param name="limit">记录数</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int skip, int limit, CancellationToken cancellationToken = default);
+        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取分页数据
         /// </summary>
@@ -275,21 +206,21 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector, string orderby, int pageNumber, int pageSize, CancellationToken cancellationToken = default);
+        Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default);
         /// <summary>
         /// Any数据检测
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
+        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取记录数
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
+        Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default);
 
         #region 增加bulkextensions拓展
 
