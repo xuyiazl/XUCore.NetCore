@@ -32,6 +32,16 @@ namespace XUCore.NetCore.Redis
             return services;
         }
         /// <summary>
+        /// Redis注入原生态序列化组件不改变任何结构类型
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        public static IServiceCollection AddRedisValueRedisSerializer(this IServiceCollection services)
+        {
+            services.AddSingleton<IRedisSerializer, RedisValueSerializer>();
+
+            return services;
+        }
+        /// <summary>
         /// Redis注入Json序列化组件
         /// </summary>
         /// <param name="services">服务集合</param>

@@ -43,14 +43,13 @@ namespace XUCore.NetCore.Redis
             get; set;
         }
 
-        public ConnectionMultiplexer Multiplexer
+        public Lazy<ConnectionMultiplexer> Multiplexer
         {
             get
             {
-                return Connection.Value;
+                return Connection;
             }
         }
-
         public StackExchangeConnectionSettings()
         {
             try

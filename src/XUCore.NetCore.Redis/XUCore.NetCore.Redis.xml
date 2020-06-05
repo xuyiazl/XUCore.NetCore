@@ -92,6 +92,12 @@
             <param name="services">服务集合</param>
             <param name="redisSerializer">序列化</param>
         </member>
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddRedisValueRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Redis注入原生态序列化组件不改变任何结构类型
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
         <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddJsonRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Redis注入Json序列化组件

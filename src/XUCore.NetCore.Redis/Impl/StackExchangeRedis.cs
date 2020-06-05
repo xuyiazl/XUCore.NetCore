@@ -91,7 +91,7 @@ namespace XUCore.NetCore.Redis
             {
                 try
                 {
-                    var db = connect.Multiplexer.GetDatabase();
+                    var db = connect.Multiplexer.Value.GetDatabase();
                     return callback.Invoke(db);
                 }
                 catch (Exception ex)
@@ -110,7 +110,7 @@ namespace XUCore.NetCore.Redis
             {
                 try
                 {
-                    var db = connect.Multiplexer.GetDatabase();
+                    var db = connect.Multiplexer.Value.GetDatabase();
                     callback.Invoke(db);
                 }
                 catch (Exception ex)
@@ -126,13 +126,10 @@ namespace XUCore.NetCore.Redis
             {
                 case ConnectTypeEnum.Read:
                     return GetReadConnection(connectionName);
-                    break;
                 case ConnectTypeEnum.Write:
                     return GetWriteConnection(connectionName);
-                    break;
                 default:
                     return GetWriteConnection(connectionName);
-                    break;
             }
         }
 
@@ -143,28 +140,28 @@ namespace XUCore.NetCore.Redis
         {
             var config = GetConnection(connectTypeEnum, connectionName);
 
-            return config.Multiplexer.GetDatabase();
+            return config.Multiplexer.Value.GetDatabase();
         }
 
         public ISubscriber QuerySubscriber(ConnectTypeEnum connectTypeEnum, string connectionName = null)
         {
             var config = GetConnection(connectTypeEnum, connectionName);
 
-            return config.Multiplexer.GetSubscriber();
+            return config.Multiplexer.Value.GetSubscriber();
         }
 
         public ServerCounters QueryServerCounters(ConnectTypeEnum connectTypeEnum, string connectionName = null)
         {
             var config = GetConnection(connectTypeEnum, connectionName);
 
-            return config.Multiplexer.GetCounters();
+            return config.Multiplexer.Value.GetCounters();
         }
 
         public ConnectionMultiplexer QueryMultiplexer(ConnectTypeEnum connectTypeEnum, string connectionName = null)
         {
             var config = GetConnection(connectTypeEnum, connectionName);
 
-            return config.Multiplexer;
+            return config.Multiplexer.Value;
         }
     }
 }
