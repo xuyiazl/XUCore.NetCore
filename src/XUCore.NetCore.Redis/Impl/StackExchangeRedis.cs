@@ -35,7 +35,7 @@ namespace XUCore.NetCore.Redis
         /// <summary>
         /// 延迟加载配置
         /// </summary>
-        protected static List<StackExchangeConnectionSettings> connMultiplexer;
+        protected static Lazy<List<StackExchangeConnectionSettings>> connMultiplexer;
 
         private void ThrowExceptions(StackExchangeConnectionSettings config, Exception ex)
         {
@@ -49,11 +49,11 @@ namespace XUCore.NetCore.Redis
             {
                 if (string.IsNullOrEmpty(connectionName))
                 {
-                    return connMultiplexer.Where(a => a.ConnectType == ConnectTypeEnum.Write || a.ConnectType == ConnectTypeEnum.ReadAndWrite).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Write || a.ConnectType == ConnectTypeEnum.ReadAndWrite).FirstOrDefault();
                 }
                 else
                 {
-                    return connMultiplexer.Where(a => (a.ConnectType == ConnectTypeEnum.Write || a.ConnectType == ConnectTypeEnum.ReadAndWrite) && a.ConnectionName == connectionName).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => (a.ConnectType == ConnectTypeEnum.Write || a.ConnectType == ConnectTypeEnum.ReadAndWrite) && a.ConnectionName == connectionName).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -69,11 +69,11 @@ namespace XUCore.NetCore.Redis
             {
                 if (string.IsNullOrEmpty(connectionName))
                 {
-                    return connMultiplexer.Where(a => a.ConnectType == ConnectTypeEnum.Read).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Read).FirstOrDefault();
                 }
                 else
                 {
-                    return connMultiplexer.Where(a => a.ConnectType == ConnectTypeEnum.Read && a.ConnectionName == connectionName).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Read && a.ConnectionName == connectionName).FirstOrDefault();
                 }
             }
             catch (Exception ex)

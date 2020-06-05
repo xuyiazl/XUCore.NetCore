@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XUCore.Configs;
 
 namespace XUCore.NetCore.Redis
 {
@@ -12,13 +13,14 @@ namespace XUCore.NetCore.Redis
     {
         public StackExchangeRedisProvider(IConfiguration configuration, IRedisSerializer redisSerializer) : base(configuration, redisSerializer)
         {
-            // 读取配置文件中的Redis字符串信息
-            if (connMultiplexer == null)
+            if (connMultiplexer == null || !connMultiplexer.IsValueCreated)
             {
-                var config = new List<StackExchangeConnectionSettings>();
-                configuration.GetSection("StackExchangeConnectionSettings").Bind(config);
+                connMultiplexer = new Lazy<List<StackExchangeConnectionSettings>>(() =>
+                {
+                    var config = configuration.GetSection<List<StackExchangeConnectionSettings>>("StackExchangeConnectionSettings");
 
-                connMultiplexer = config;
+                    return config;
+                });
             }
         }
     }
