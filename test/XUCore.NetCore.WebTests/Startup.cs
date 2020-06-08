@@ -61,7 +61,7 @@ namespace XUCore.WebTests
                .WithScopedLifetime()
            );
 
-            services.AddHttpMessageService();
+            services.AddHttpService();
 
             services.AddRedisService().AddJsonRedisSerializer();
 

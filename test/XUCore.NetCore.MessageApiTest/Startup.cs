@@ -66,8 +66,8 @@ namespace XUCore.NetCore.MessageApiTest
                 };
             });
 
-            services.AddHttpMessageService();
-            services.AddHttpMessageService("msgpack", "http://localhost:5000");
+            services.AddHttpService();
+            services.AddHttpService("msgpack", "http://localhost:5000");
 
 
             services.AddSwaggerGen(c =>

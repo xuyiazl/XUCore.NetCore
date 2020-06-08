@@ -86,7 +86,7 @@ namespace XUCore.NetCore.Extensions
         /// <param name="httpClientLeftTime"></param>
         /// <param name="serviceLifetime"></param>
         /// <returns></returns>
-        public static IServiceCollection AddHttpMessageService(this IServiceCollection services,
+        public static IServiceCollection AddHttpService(this IServiceCollection services,
             string clientName,
             string baseAddress,
             Func<HttpMessageHandler> messageHandler = null,
@@ -99,7 +99,7 @@ namespace XUCore.NetCore.Extensions
                 c.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
             };
 
-            services.AddHttpMessageService(clientName, client, messageHandler, httpClientLeftTime, serviceLifetime);
+            services.AddHttpService(clientName, client, messageHandler, httpClientLeftTime, serviceLifetime);
 
             return services;
         }
@@ -113,7 +113,7 @@ namespace XUCore.NetCore.Extensions
         /// <param name="messageHandler"></param>
         /// <param name="httpClientLeftTime"></param>
         /// <param name="serviceLifetime"></param>
-        public static IServiceCollection AddHttpMessageService(this IServiceCollection services,
+        public static IServiceCollection AddHttpService(this IServiceCollection services,
             string clientName = "apiClient",
             Action<HttpClient> client = null,
             Func<HttpMessageHandler> messageHandler = null,
@@ -151,7 +151,7 @@ namespace XUCore.NetCore.Extensions
             if (httpClientLeftTime != null)
                 httpClientBuilder.SetHandlerLifetime(httpClientLeftTime.Value);
 
-            services.AddHttpMessageServiceLeftTime(serviceLifetime);
+            services.AddHttpServiceLeftTime(serviceLifetime);
 
             return services;
         }
@@ -162,7 +162,7 @@ namespace XUCore.NetCore.Extensions
         /// <param name="services"></param>
         /// <param name="serviceLifetime"></param>
         /// <returns></returns>
-        private static IServiceCollection AddHttpMessageServiceLeftTime(this IServiceCollection services,
+        private static IServiceCollection AddHttpServiceLeftTime(this IServiceCollection services,
            ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
         {
             switch (serviceLifetime)

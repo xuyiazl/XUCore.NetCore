@@ -144,7 +144,7 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
             <summary>
             注册 HttpFactory Service
             </summary>
@@ -156,7 +156,7 @@
             <param name="serviceLifetime"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
             <summary>
             注册 HTTPFactory Srevice
             </summary>
@@ -167,7 +167,7 @@
             <param name="httpClientLeftTime"></param>
             <param name="serviceLifetime"></param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpMessageServiceLeftTime(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpServiceLeftTime(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
             <summary>
             注册 HTTPFactory Srevice
             </summary>
