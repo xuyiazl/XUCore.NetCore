@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

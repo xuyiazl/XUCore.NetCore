@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.NetCore.Redis.RedisCommand;
 
 namespace XUCore.NetCore.Redis

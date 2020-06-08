@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.Webs;
 using System;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.NetCore;
 using XUCore.NetCore.HttpFactory;
 using XUCore.Webs;

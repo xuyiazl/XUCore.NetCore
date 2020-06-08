@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using XUCore.NetCore.Redis;
-using XUCore.Json;
+using XUCore.Serializer;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;

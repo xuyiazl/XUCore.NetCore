@@ -1,5 +1,5 @@
 ﻿using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.Webs.Clients.Internal;
 using XUCore.Webs.Clients.Parameters;
 using System;

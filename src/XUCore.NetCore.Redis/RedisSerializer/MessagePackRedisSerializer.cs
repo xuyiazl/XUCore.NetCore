@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.Helpers;
 using StackExchange.Redis;
 using System;

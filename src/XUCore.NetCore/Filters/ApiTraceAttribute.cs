@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.IO;
-using XUCore.Json;
+using XUCore.Serializer;
 using System;
 using System.Threading.Tasks;
 

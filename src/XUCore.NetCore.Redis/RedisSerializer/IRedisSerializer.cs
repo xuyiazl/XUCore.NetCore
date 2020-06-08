@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;

@@ -8,7 +8,7 @@ using XUCore.Helpers;
 using XUCore.Tests;
 using XUCore.IdGenerators.Core;
 using XUCore.IO;
-using XUCore.Json;
+using XUCore.Serializer;
 using Xunit;
 using Xunit.Abstractions;
 

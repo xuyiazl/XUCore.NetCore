@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using XUCore.NetCore.Redis;
 using XUCore.WebTests.Data.DbService;
 using XUCore.Paging;
-using XUCore.Json;
+using XUCore.Serializer;
 using MessagePack;
 using System;
 using XUCore.NetCore;

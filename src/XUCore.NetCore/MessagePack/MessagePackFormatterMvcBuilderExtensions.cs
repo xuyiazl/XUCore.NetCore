@@ -2,7 +2,7 @@
 using System;
 using Microsoft.Net.Http.Headers;
 using MessagePack.Resolvers;
-using XUCore.Json;
+using XUCore.Serializer;
 
 namespace XUCore.NetCore.MessagePack
 {

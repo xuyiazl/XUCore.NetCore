@@ -1,6 +1,6 @@
 ﻿using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.Parameters.Formats;
 using System;
 using System.Collections.Generic;

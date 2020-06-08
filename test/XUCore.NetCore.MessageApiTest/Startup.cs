@@ -14,7 +14,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.HttpFactory;
 using XUCore.NetCore.MessagePack;

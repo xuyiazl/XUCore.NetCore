@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using XUCore.Json;
+using XUCore.Serializer;
 
 namespace XUCore.Extensions.Http
 {

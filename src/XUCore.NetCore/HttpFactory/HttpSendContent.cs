@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using XUCore.Extensions;
-using XUCore.Json;
+using XUCore.Serializer;
 
 namespace XUCore.NetCore.HttpFactory
 {
