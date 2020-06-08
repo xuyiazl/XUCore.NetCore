@@ -393,7 +393,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``1(System.String,System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``1(System.String,System.String,System.Func{System.Threading.Tasks.Task{``0}},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
             </summary>
@@ -408,7 +408,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``2(System.String,System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IHashRedisCommandAsync.HashGetOrInsertAsync``2(System.String,System.String,System.Func{``0,System.Threading.Tasks.Task{``1}},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
             </summary>
@@ -1425,7 +1425,7 @@
             <param name="connectionName">连接名称</param>
             <param name="serializer"></param>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``1(System.String,System.Func{``0},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``1(System.String,System.Func{System.Threading.Tasks.Task{``0}},System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取string的value值，如果不存在则写入
             </summary>
@@ -1439,7 +1439,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``2(System.String,System.Func{``0,``1},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.IStringRedisCommandAsync.StringGetOrInsertAsync``2(System.String,System.Func{``0,System.Threading.Tasks.Task{``1}},``0,System.Int32,System.String,System.String,System.Boolean,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取string的value值，如果不存在则写入
             </summary>

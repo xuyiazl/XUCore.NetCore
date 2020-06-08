@@ -13,17 +13,17 @@ namespace XUCore.NetCore.Redis
 {
     public abstract partial class StackExchangeRedis : IStringRedisCommandAsync
     {
-        public async Task<TResult> StringGetOrInsertAsync<TResult>(string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
+        public async Task<TResult> StringGetOrInsertAsync<TResult>(string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             if (!isCache)
-                return fetcher.Invoke();
+                return await fetcher.Invoke();
 
             if (!await KeyExistsAsync(key, connectionRead))
             {
-                var source = fetcher.Invoke();
+                var source = await fetcher.Invoke();
                 if (source != null)
                     await StringSetAsync(key, source, seconds, connectionWrite, serializer);
                 return source;
@@ -34,20 +34,20 @@ namespace XUCore.NetCore.Redis
             }
         }
 
-        public async Task<TResult> StringGetOrInsertAsync<T, TResult>(string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
+        public async Task<TResult> StringGetOrInsertAsync<T, TResult>(string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             if (!isCache)
-                return fetcher.Invoke(t);
+                return await fetcher.Invoke(t);
 
             if (!await KeyExistsAsync(key, connectionRead))
             {
                 var source = fetcher.Invoke(t);
                 if (source != null)
                     await StringSetAsync(key, source, seconds, connectionWrite, serializer);
-                return source;
+                return await source;
             }
             else
             {

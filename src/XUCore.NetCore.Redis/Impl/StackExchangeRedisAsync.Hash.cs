@@ -49,17 +49,17 @@ namespace XUCore.NetCore.Redis
              });
         }
 
-        public async Task<TResult> HashGetOrInsertAsync<TResult>(string hashId, string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
+        public async Task<TResult> HashGetOrInsertAsync<TResult>(string hashId, string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             if (!isCache)
-                return fetcher.Invoke();
+                return await fetcher.Invoke();
 
             if (!await HashExistsAsync(hashId, key, connectionRead))
             {
-                var source = fetcher.Invoke();
+                var source = await fetcher.Invoke();
                 if (source != null)
                 {
                     if (seconds > 0)
@@ -85,13 +85,13 @@ namespace XUCore.NetCore.Redis
             }
         }
 
-        public async Task<TResult> HashGetOrInsertAsync<T, TResult>(string hashId, string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
+        public async Task<TResult> HashGetOrInsertAsync<T, TResult>(string hashId, string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             if (!isCache)
-                return fetcher.Invoke(t);
+                return await fetcher.Invoke(t);
 
             if (!await HashExistsAsync(hashId, key, connectionRead))
             {
@@ -112,7 +112,7 @@ namespace XUCore.NetCore.Redis
                         await HashSetAsync(hashId, key, source, connectionWrite, serializer);
                     }
                 }
-                return source;
+                return await source;
             }
             else
             {

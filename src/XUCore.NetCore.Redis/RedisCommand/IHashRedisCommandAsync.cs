@@ -45,7 +45,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        Task<TResult> HashGetOrInsertAsync<TResult>(string hashKey, string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
+        Task<TResult> HashGetOrInsertAsync<TResult>(string hashKey, string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
         /// <summary>
         /// 获得Hash键值对值（可以理解为获得某一行中的某一列数据），当数据为空 则重新写入redis数据
         /// </summary>
@@ -61,7 +61,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        Task<TResult> HashGetOrInsertAsync<T, TResult>(string hashKey, string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
+        Task<TResult> HashGetOrInsertAsync<T, TResult>(string hashKey, string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
         /// <summary>
         /// 获得Hash键值对值（可以理解为获得某一行中的某一列数据）
         /// </summary>

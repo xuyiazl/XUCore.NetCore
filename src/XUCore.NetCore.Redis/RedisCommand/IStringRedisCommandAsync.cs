@@ -32,7 +32,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        Task<TResult> StringGetOrInsertAsync<TResult>(string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
+        Task<TResult> StringGetOrInsertAsync<TResult>(string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
         /// <summary>
         /// 获取string的value值，如果不存在则写入
         /// </summary>
@@ -47,7 +47,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="isCache">是否缓存，默认true，如果设置为false则不走缓存直接走fetcher</param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        Task<TResult> StringGetOrInsertAsync<T, TResult>(string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
+        Task<TResult> StringGetOrInsertAsync<T, TResult>(string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null, bool isCache = true, IRedisSerializer serializer = null);
         /// <summary>
         /// 原子性自增列
         /// </summary>
