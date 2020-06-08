@@ -10,35 +10,10 @@ using System.Threading.Tasks;
 
 namespace XUCore.NetCore.HttpFactory
 {
-    public static class HttpContentMessage
-    {
-        public static HttpContent CreateJsonContent<TModel>(TModel model, Encoding encoding = null)
-            => Create(model, encoding, HttpMediaType.Json);
-
-        public static HttpContent CreateMessagePackContent<TModel>(TModel model, Encoding encoding = null)
-            => Create(model, encoding, HttpMediaType.MessagePack);
-
-        public static HttpContent Create<TModel>(TModel model, Encoding encoding = null, HttpMediaType mediaType = HttpMediaType.Json)
-        {
-            HttpContent content;
-
-            switch (mediaType)
-            {
-                case HttpMediaType.MessagePack:
-                    content = new ByteArrayContent(model.ToMsgPackBytes());
-                    break;
-                default:
-                    content = new StringContent(model.ToJson(), encoding ?? Encoding.UTF8);
-                    break;
-            }
-
-            content.Headers.ContentType = new MediaTypeHeaderValue(mediaType.Description());
-
-            return content;
-        }
-    }
-
-    public static class HttpContentExtensions
+    /// <summary>
+    /// 请求成功后返回的数据读取操作
+    /// </summary>
+    public static class HttpReceiveContent
     {
         public static async Task<TModel> ReadAsJsonAsync<TModel>(this HttpContent httpContent)
         {

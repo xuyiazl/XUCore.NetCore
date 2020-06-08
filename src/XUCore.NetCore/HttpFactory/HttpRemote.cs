@@ -11,9 +11,8 @@ namespace XUCore.NetCore.HttpFactory
     public static class HttpRemote
     {
         /// <summary>
-        /// 获取HttpService
+        /// 获取HttpMessageService
         /// </summary>
-        [Obsolete("已弃用该方法，请使用 MessageService")]
         public static IHttpService Service
         {
             get
@@ -21,23 +20,7 @@ namespace XUCore.NetCore.HttpFactory
                 var httpService = Web.GetService<IHttpService>();
 
                 if (httpService == null)
-                    throw new ArgumentNullException($"请注入{nameof(IHttpService)}服务，services.AddHttpService<HttpService>(clientname, [servser])。");
-
-                return httpService;
-            }
-        }
-
-        /// <summary>
-        /// 获取HttpMessageService
-        /// </summary>
-        public static IHttpMessageService MessageService
-        {
-            get
-            {
-                var httpService = Web.GetService<IHttpMessageService>();
-
-                if (httpService == null)
-                    throw new ArgumentNullException($"请注入{nameof(IHttpMessageService)}服务，services.HttpMessageService(clientname, [servser])。");
+                    throw new ArgumentNullException($"请注入{nameof(IHttpService)}服务，services.HttpService(clientname, [servser])。");
 
                 return httpService;
             }

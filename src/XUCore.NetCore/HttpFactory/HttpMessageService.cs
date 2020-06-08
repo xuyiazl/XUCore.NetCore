@@ -16,7 +16,7 @@ namespace XUCore.NetCore.HttpFactory
     /// <summary>
     /// HttpRequestMessage服务类
     /// </summary>
-    public class HttpMessageService : IHttpMessageService
+    public class HttpMessageService : IHttpService
     {
         public IHttpClientFactory HttpClientFactory { get; set; }
 

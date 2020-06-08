@@ -21,7 +21,7 @@ namespace XUCore.NetCore.HttpFactory
 
         public static async Task<HttpResponseMessage> PostAsync<TModel>(this HttpClient httpClient, UrlArguments urlArguments, TModel model, CancellationToken cancellationToken = default)
         {
-            var content = HttpContentMessage.CreateJsonContent(model, Encoding.UTF8);
+            var content = HttpSendContent.JsonContent(model, Encoding.UTF8);
 
             return await httpClient.PostAsync(urlArguments, content, cancellationToken);
         }
@@ -35,7 +35,7 @@ namespace XUCore.NetCore.HttpFactory
 
         public static async Task<HttpResponseMessage> PutAsync<TModel>(this HttpClient httpClient, UrlArguments urlArguments, TModel model, CancellationToken cancellationToken = default)
         {
-            var content = HttpContentMessage.CreateJsonContent(model, Encoding.UTF8);
+            var content = HttpSendContent.JsonContent(model, Encoding.UTF8);
 
             return await httpClient.PutAsync(urlArguments, content, cancellationToken);
         }
@@ -49,7 +49,7 @@ namespace XUCore.NetCore.HttpFactory
 
         public static async Task<HttpResponseMessage> PatchAsync<TModel>(this HttpClient httpClient, UrlArguments urlArguments, TModel model, CancellationToken cancellationToken = default)
         {
-            var content = HttpContentMessage.CreateJsonContent(model, Encoding.UTF8);
+            var content = HttpSendContent.JsonContent(model, Encoding.UTF8);
 
             return await httpClient.PatchAsync(urlArguments, content, cancellationToken);
         }

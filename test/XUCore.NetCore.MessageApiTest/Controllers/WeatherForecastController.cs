@@ -30,7 +30,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             var url = UrlArguments.Create("msgpack", "api/WeatherForecast/GetWeather");
 
-            var res = await HttpRemote.MessageService.GetAsync<Result<List<WeatherForecast>>>(url,
+            var res = await HttpRemote.Service.GetAsync<Result<List<WeatherForecast>>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
             return Success("0000001", "查询成功", res.data);
@@ -63,7 +63,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
                 TemperatureC = 33
             };
 
-            var res = await HttpRemote.MessageService.PostAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
+            var res = await HttpRemote.Service.PostAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
             return Success("0000001", "POST成功", res.data);
@@ -89,7 +89,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
                 TemperatureC = 33
             };
 
-            var res = await HttpRemote.MessageService.PutAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
+            var res = await HttpRemote.Service.PutAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
             return Success("0000001", "POST成功", res.data);
@@ -115,7 +115,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
                 TemperatureC = 33
             };
 
-            var res = await HttpRemote.MessageService.PatchAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
+            var res = await HttpRemote.Service.PatchAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
             return Success("0000001", "PATCH成功", res.data);
@@ -134,7 +134,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             var url = UrlArguments.Create("msgpack", "api/WeatherForecast/DeleteWeather");
 
-            var res = await HttpRemote.MessageService.DeleteAsync<Result<WeatherForecast>>(url,
+            var res = await HttpRemote.Service.DeleteAsync<Result<WeatherForecast>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
             return Success("0000001", "POST成功", res.data);

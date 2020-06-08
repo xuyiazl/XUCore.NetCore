@@ -42,8 +42,7 @@ namespace XUCore.WebTests.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHttpService _httpService;
-        private readonly IHttpMessageService _httpMessage;
+        private readonly IHttpService _httpMessage;
 
         private readonly IRedisService _redisService;
         private readonly IDbAdminUsersServiceProvider _dbAdminUsersServiceProvider;
@@ -53,10 +52,9 @@ namespace XUCore.WebTests.Controllers
         private IFileUploadService _fileUploadService;
 
 
-        public HomeController(ILogger<HomeController> logger, IHttpMessageService httpMessage, IDbAdminUsersServiceProvider dbAdminUsersServiceProvider, IHttpService httpService, IFileUploadService fileUploadService, IRedisService redisService)
+        public HomeController(ILogger<HomeController> logger, IHttpService httpMessage, IDbAdminUsersServiceProvider dbAdminUsersServiceProvider, IFileUploadService fileUploadService, IRedisService redisService)
         {
             _logger = logger;
-            _httpService = httpService;
             _httpMessage = httpMessage;
             _fileUploadService = fileUploadService;
             _redisService = redisService;
@@ -105,22 +103,20 @@ namespace XUCore.WebTests.Controllers
 
             var m = await resData.Content.ReadAsAsync<User>(HttpMediaType.MessagePack);
 
-
-
             var url = UrlArguments.Create("msgpack", "api/messagepack/get");
 
-            var res = await _httpService.GetAsync<User>(url, cancellationToken);
+            var res = await url.GetAsync<User>();
 
             var postUrl = UrlArguments.Create("msgpack", "api/messagepack/add");
 
-            var res1 = await _httpService.PostAsync<User, User>(postUrl, res, cancellationToken);
+            var res1 = await url.PostAsync<User, User>(res);
 
             var url1 = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
                         .Add("aid", 1539)
                         .Add("commentId", 0)
                         .Add("pageSize", 10000);
 
-            var res2 = await _httpService.GetAsync<ReturnModel>(url1, cancellationToken);
+            var res2 = await url.GetAsync<ReturnModel>();
 
             return View(res2);
         }
@@ -147,7 +143,7 @@ namespace XUCore.WebTests.Controllers
                  .Add("commentId", 0)
                  .Add("pageSize", 10000);
 
-            var res = await _httpService.GetAsync<ReturnModel>(url);
+            var res = await url.GetAsync<ReturnModel>();
 
             return View(res);
         }
