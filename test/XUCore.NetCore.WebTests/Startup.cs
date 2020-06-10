@@ -31,27 +31,8 @@ namespace XUCore.WebTests
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region 注入只写操作 Write
-
-            services.AddDbContext<WriteEntityContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("XUCore_WriteConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            });
-            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
-            services.AddScoped(typeof(IWriteEntityContext), typeof(WriteEntityContext));
-
-            #endregion
-
-            #region  注入只读操作 Read
-
-            services.AddDbContext<ReadEntityContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("XUCore_ReadConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            });
-            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
-            services.AddScoped(typeof(IReadEntityContext), typeof(ReadEntityContext));
-
-            #endregion
+            services.AddWriteDbContext(Configuration);
+            services.AddReadDbContext(Configuration);
 
             //DI 注入db持久层业务逻辑
             services.Scan(scan =>

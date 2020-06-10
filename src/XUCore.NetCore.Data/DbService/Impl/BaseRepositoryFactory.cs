@@ -25,13 +25,13 @@ namespace XUCore.NetCore.Data.DbService
                         if (extensions.GetType().FullName.Equals("Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal.MySqlOptionsExtension"))
                             this.ConnectionStrings = (extensions as MySqlOptionsExtension).ConnectionString;
                         break;
+                    case "mssql":
                     case "sqlserver":
                         if (extensions.GetType().FullName.Equals("Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal.SqlServerOptionsExtension"))
                             this.ConnectionStrings = (extensions as SqlServerOptionsExtension).ConnectionString;
                         break;
                     default:
                         throw new Exception("暂时只支持mysql、sqlserver。");
-                        break;
                 }
             }
             this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
