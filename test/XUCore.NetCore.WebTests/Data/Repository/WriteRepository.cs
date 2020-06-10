@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace XUCore.WebTests.Data.Repository
 {
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         public static IServiceCollection AddWriteDbContext(this IServiceCollection services, IConfiguration configuration)
         {

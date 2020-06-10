@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace XUCore.WebTests.Data.Repository
 {
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         public static IServiceCollection AddReadDbContext(this IServiceCollection services, IConfiguration configuration)
         {
