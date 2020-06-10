@@ -8,7 +8,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
-namespace XUCore.WebTests.Data.Repository.ReadRepository
+namespace XUCore.WebTests.Data.Repository
 {
     public static class ServiceCollectionExtensions
     {

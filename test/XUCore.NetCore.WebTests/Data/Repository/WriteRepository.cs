@@ -10,7 +10,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
-namespace XUCore.WebTests.Data.Repository.WriteRepository
+namespace XUCore.WebTests.Data.Repository
 {
     public static class ServiceCollectionExtensions
     {
