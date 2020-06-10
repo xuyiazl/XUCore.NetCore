@@ -1,8 +1,7 @@
 ﻿using XUCore.NetCore.Data.DbService;
 using XUCore.Paging;
 using XUCore.WebTests.Data.Entity;
-using XUCore.WebTests.Data.Repository.ReadRepository;
-using XUCore.WebTests.Data.Repository.WriteRepository;
+using XUCore.WebTests.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

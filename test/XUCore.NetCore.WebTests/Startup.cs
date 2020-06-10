@@ -13,8 +13,7 @@ using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
 using XUCore.NetCore.Data.DbService;
 using XUCore.WebTests.Data.DbService;
-using XUCore.WebTests.Data.Repository.ReadRepository;
-using XUCore.WebTests.Data.Repository.WriteRepository;
+using XUCore.WebTests.Data.Repository;
 using System;
 
 namespace XUCore.WebTests
