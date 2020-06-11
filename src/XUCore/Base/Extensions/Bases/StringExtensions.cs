@@ -518,21 +518,6 @@ namespace XUCore.Extensions
 
         #endregion Ensure(确保字符串包含指定字符串)
 
-        #region ExtractNumber(提取字符串中所有数字)
-
-        /// <summary>
-        /// 提取指定字符串中所有数字
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <returns></returns>
-        public static string ExtractNumber(this string value)
-        {
-            return
-                value.Where(Char.IsDigit).Aggregate(new StringBuilder(value.Length), (sb, c) => sb.Append(c)).ToString();
-        }
-
-        #endregion ExtractNumber(提取字符串中所有数字)
-
         #region ConcatWith(连接字符串)
 
         /// <summary>
