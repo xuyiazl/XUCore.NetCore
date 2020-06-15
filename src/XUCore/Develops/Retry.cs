@@ -1,91 +1,150 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace XUCore.Develops
 {
     /// <summary>
     /// 异常重试类
-    ///
-    /// Retry.Task(RetryMode.Sync,
-    ///      RetryAdapter.Create().MaxRuns(5).Waits(TimeSpan.FromMilliseconds(100)),
-    ///      (ndx) =>
+    /// <code>
+    /// Retry.Run(
+    ///     RetryAdapter.Create().Runs(5).Wait(500),
+    ///     model,
+    ///      (model,ndx) =>
     ///      {
     ///            throw new Exception("reconnect number ");
     ///      },
     ///      (ndx, error) =>
     ///      {
     ///            Console.WriteLine(error.Message + ndx);
-    ///            return false;
     ///      });
+    /// </code>
     /// </summary>
     public static class Retry
     {
         /// <summary>
-        /// 任务
+        /// 重试运行
         /// </summary>
-        /// <param name="mode">枚举 同步、异步</param>
-        /// <param name="callback">任务委托</param>
-        /// <param name="errorCallback">异常信息委托</param>
-        public static void Run(RetryMode mode, Action<int> callback,
-            Func<int, Exception, bool> errorCallback = null)
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="retryAdapter">任务适配器</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        public static void Run<TModel>(TModel model,
+            RetryAdapter retryAdapter,
+            Action<TModel, int> execHandler, Action<int, Exception> errorHandler = null)
         {
-            Run(mode, RetryAdapter.Create().MaxRuns(3), callback, errorCallback);
+            int current = 1;
+            while (current <= retryAdapter.MaxRun)
+            {
+                try
+                {
+                    execHandler.Invoke(model, current);
+                }
+                catch (Exception ex)
+                {
+                    if (errorHandler != null)
+                        errorHandler.Invoke(current, ex);
+                }
+                if (current <= retryAdapter.MaxRun)
+                    System.Threading.Thread.Sleep(retryAdapter.WaitTime);
+                current++;
+            }
         }
-
         /// <summary>
-        /// 任务
+        /// 重试运行
         /// </summary>
-        /// <param name="mode">枚举 同步、异步</param>
-        /// <param name="trigger">任务适配器 <see cref="RetryAdapter"/></param>
-        /// <param name="callback">任务委托</param>
-        /// <param name="errorCallback">异常信息委托</param>
-        public static void Run(RetryMode mode, RetryAdapter trigger, Action<int> callback,
-            Func<int, Exception, bool> errorCallback = null)
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="retryAdapter">任务适配器</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static TResult Run<TModel, TResult>(TModel model,
+            RetryAdapter retryAdapter,
+             Func<TModel, int, TResult> execHandler, Action<int, Exception> errorHandler = null)
         {
-            switch (mode)
+            int current = 1;
+            while (current <= retryAdapter.MaxRun)
             {
-                case RetryMode.Async:
-                    AsyncExecute(() => { Run(RetryMode.Sync, trigger, callback, errorCallback); });
-                    break;
+                try
+                {
+                    return execHandler.Invoke(model, current);
+                }
+                catch (Exception ex)
+                {
+                    if (errorHandler != null)
+                        errorHandler.Invoke(current, ex);
+                }
+                if (current <= retryAdapter.MaxRun)
+                    System.Threading.Thread.Sleep(retryAdapter.WaitTime);
+                current++;
+            }
 
-                default:
-                    int current = 1;
-                    while (current <= trigger.MaxRun)
-                    {
-                        if (ActionExecute(current, callback, errorCallback))
-                            break;
-                        else
-                        {
-                            if (current <= trigger.MaxRun)
-                                System.Threading.Thread.Sleep(trigger.Wait);
-                            current++;
-                        }
-                    }
-                    break;
+            return default;
+        }
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="retryAdapter">任务适配器</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static async Task RunAsync<TModel>(TModel model,
+            RetryAdapter retryAdapter,
+             Func<TModel, int, Task> execHandler, Action<int, Exception> errorHandler = null)
+        {
+            int current = 1;
+            while (current <= retryAdapter.MaxRun)
+            {
+                try
+                {
+                    await execHandler.Invoke(model, current);
+                }
+                catch (Exception ex)
+                {
+                    if (errorHandler != null)
+                        errorHandler.Invoke(current, ex);
+                }
+                if (current <= retryAdapter.MaxRun)
+                    System.Threading.Thread.Sleep(retryAdapter.WaitTime);
+                current++;
             }
         }
-
-        private static bool ActionExecute(int number, Action<int> callback,
-            Func<int, Exception, bool> errorCallback)
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="retryAdapter">任务适配器</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static async Task<TResult> RunAsync<TModel, TResult>(TModel model,
+            RetryAdapter retryAdapter,
+            Func<TModel, int, Task<TResult>> execHandler, Action<int, Exception> errorHandler = null)
         {
-            try
+            int current = 1;
+            while (current <= retryAdapter.MaxRun)
             {
-                callback.Invoke(number);
-                return true;
+                try
+                {
+                    return await execHandler.Invoke(model, current);
+                }
+                catch (Exception ex)
+                {
+                    if (errorHandler != null)
+                        errorHandler.Invoke(current, ex);
+                }
+                if (current <= retryAdapter.MaxRun)
+                    System.Threading.Thread.Sleep(retryAdapter.WaitTime);
+                current++;
             }
-            catch (Exception ex)
-            {
-                if (errorCallback != null)
-                    return errorCallback.Invoke(number, ex);
-                return false;
-            }
-        }
 
-        private static void AsyncExecute(Action action)
-        {
-            action.BeginInvoke(mCallback =>
-            {
-                action.EndInvoke(mCallback);
-            }, null);
+            return default;
         }
     }
 
@@ -94,36 +153,40 @@ namespace XUCore.Develops
     /// </summary>
     public class RetryAdapter : ICloneable
     {
-        internal int MaxRun = 0;
-        internal TimeSpan Wait = TimeSpan.FromMilliseconds(500);
+        internal int MaxRun = 3;
+        internal TimeSpan WaitTime = TimeSpan.FromMilliseconds(500);
 
         public static RetryAdapter Create()
         {
             return new RetryAdapter();
         }
-
         /// <summary>
-        /// 最大执行次数
+        /// 最大执行次数（执行成功后截止运行）
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public RetryAdapter MaxRuns(int number)
+        public RetryAdapter Runs(int number)
         {
             if (number <= 0) number = 1;
             MaxRun = number;
             return this;
         }
-
+        /// <summary>
+        /// 重试休眠时间
+        /// </summary>
+        /// <param name="milliseconds">毫秒</param>
+        /// <returns></returns>
+        public RetryAdapter Wait(int milliseconds) => Wait(TimeSpan.FromMilliseconds(milliseconds));
         /// <summary>
         /// 重试休眠时间
         /// </summary>
         /// <param name="timeSpan"></param>
         /// <returns></returns>
-        public RetryAdapter Waits(TimeSpan timeSpan)
+        public RetryAdapter Wait(TimeSpan timeSpan)
         {
             if (timeSpan == TimeSpan.MinValue || timeSpan == TimeSpan.MaxValue)
                 timeSpan = TimeSpan.FromMilliseconds(500);
-            Wait = timeSpan;
+            WaitTime = timeSpan;
             return this;
         }
 
@@ -133,16 +196,4 @@ namespace XUCore.Develops
         }
     }
 
-    public enum RetryMode
-    {
-        /// <summary>
-        /// 同步
-        /// </summary>
-        Sync,
-
-        /// <summary>
-        /// 异步
-        /// </summary>
-        Async
-    }
 }
