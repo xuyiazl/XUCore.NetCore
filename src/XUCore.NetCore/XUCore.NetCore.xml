@@ -116,6 +116,15 @@
             <param name="hostBuilder">Web主机生成器</param>
             <param name="headerKey">请求头键名</param>
         </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddFlowMonitoring(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,System.Int32,System.Action{System.Decimal})">
+            <summary>
+            数据流量控制
+            </summary>
+            <param name="services">服务集合</param>
+            <param name="interval">默认1秒刷新一次</param>
+            <param name="size">每秒限制的数据大小，单位kb</param>
+            <param name="monitoring">监控</param>
+        </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)">
             <summary>
             绑定本地缓存管理

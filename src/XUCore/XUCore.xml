@@ -1357,13 +1357,6 @@
             <param name="suffix">后缀</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.StringExtensions.ExtractNumber(System.String)">
-            <summary>
-            提取指定字符串中所有数字
-            </summary>
-            <param name="value">值</param>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.Extensions.StringExtensions.ConcatWith(System.String,System.String[])">
             <summary>
             连接两个字符串
@@ -13956,68 +13949,227 @@
             <param name="lpKernelTime">内核时间</param>
             <param name="lpUserTime">使用时间</param>
         </member>
+        <member name="T:XUCore.Develops.FlowMonitoring">
+            <summary>
+            数据流量控制
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.FlowMonitoring.Interval">
+            <summary>
+            触发周期
+            <remarks>默认1000毫秒一次</remarks>
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.FlowMonitoring.Size">
+            <summary>
+            每秒写入大小
+            <remarks>单位KB</remarks>
+            </summary>
+        </member>
+        <member name="M:XUCore.Develops.FlowMonitoring.Monitoring(System.Action{System.Decimal})">
+            <summary>
+            监控每秒数据流量
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:XUCore.Develops.FlowMonitoring.Control(System.Data.DataTable,System.Action{System.Data.DataRow[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <param name="dataTable"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:XUCore.Develops.FlowMonitoring.Control``1(System.Collections.Generic.IList{``0},System.Action{``0[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:XUCore.Develops.FlowMonitoring.Control``1(``0[],System.Action{``0[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="T:XUCore.Develops.IFlowMonitoring">
+            <summary>
+            数据流量控制
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.IFlowMonitoring.Interval">
+            <summary>
+            触发周期
+            <remarks>默认1000毫秒一次</remarks>
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.IFlowMonitoring.Size">
+            <summary>
+            每秒写入大小
+            <remarks>单位KB</remarks>
+            </summary>
+        </member>
+        <member name="M:XUCore.Develops.IFlowMonitoring.Control(System.Data.DataTable,System.Action{System.Data.DataRow[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <param name="dataTable"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:XUCore.Develops.IFlowMonitoring.Control``1(System.Collections.Generic.IList{``0},System.Action{``0[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:XUCore.Develops.IFlowMonitoring.Control``1(``0[],System.Action{``0[]})">
+            <summary>
+            数据流量控制
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:XUCore.Develops.IFlowMonitoring.Monitoring(System.Action{System.Decimal})">
+            <summary>
+            监控每秒数据流量
+            </summary>
+            <param name="action"></param>
+        </member>
         <member name="T:XUCore.Develops.Retry">
-             <summary>
-             异常重试类
-            
-             Retry.Task(RetryMode.Sync,
-                  RetryAdapter.Create().MaxRuns(5).Waits(TimeSpan.FromMilliseconds(100)),
-                  (ndx) =>
-                  {
-                        throw new Exception("reconnect number ");
-                  },
-                  (ndx, error) =>
-                  {
-                        Console.WriteLine(error.Message + ndx);
-                        return false;
-                  });
-             </summary>
-        </member>
-        <member name="M:XUCore.Develops.Retry.Run(XUCore.Develops.RetryMode,System.Action{System.Int32},System.Func{System.Int32,System.Exception,System.Boolean})">
             <summary>
-            任务
+            异常重试类
+            <code>
+            Retry.Run(
+                RetryAdapter.Create().Runs(5).Wait(500),
+                model,
+                 (model,ndx) =>
+                 {
+                       throw new Exception("reconnect number ");
+                 },
+                 (ndx, error) =>
+                 {
+                       Console.WriteLine(error.Message + ndx);
+                 });
+            </code>
             </summary>
-            <param name="mode">枚举 同步、异步</param>
-            <param name="callback">任务委托</param>
-            <param name="errorCallback">异常信息委托</param>
         </member>
-        <member name="M:XUCore.Develops.Retry.Run(XUCore.Develops.RetryMode,XUCore.Develops.RetryAdapter,System.Action{System.Int32},System.Func{System.Int32,System.Exception,System.Boolean})">
+        <member name="M:XUCore.Develops.Retry.Run``1(``0,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
             <summary>
-            任务
+            重试运行
             </summary>
-            <param name="mode">枚举 同步、异步</param>
-            <param name="trigger">任务适配器 <see cref="T:XUCore.Develops.RetryAdapter"/></param>
-            <param name="callback">任务委托</param>
-            <param name="errorCallback">异常信息委托</param>
+            <typeparam name="TModel"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+        </member>
+        <member name="M:XUCore.Develops.Retry.Run``1(``0,XUCore.Develops.RetryAdapter,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="retryAdapter">任务适配器</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+        </member>
+        <member name="M:XUCore.Develops.Retry.Run``2(``0,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.Retry.Run``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="retryAdapter">任务适配器</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.Retry.RunAsync``1(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.Retry.RunAsync``1(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="retryAdapter">任务适配器</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.Retry.RunAsync``2(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.Retry.RunAsync``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
+            <summary>
+            重试运行
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="model">传入的数据</param>
+            <param name="retryAdapter">任务适配器</param>
+            <param name="execHandler">执行任务</param>
+            <param name="errorHandler">异常处理</param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Develops.RetryAdapter">
             <summary>
             任务适配器
             </summary>
         </member>
-        <member name="M:XUCore.Develops.RetryAdapter.MaxRuns(System.Int32)">
+        <member name="M:XUCore.Develops.RetryAdapter.Runs(System.Int32)">
             <summary>
-            最大执行次数
+            最大执行次数（执行成功后截止运行）
             </summary>
             <param name="number"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.RetryAdapter.Waits(System.TimeSpan)">
+        <member name="M:XUCore.Develops.RetryAdapter.Wait(System.Int32)">
+            <summary>
+            重试休眠时间
+            </summary>
+            <param name="milliseconds">毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Develops.RetryAdapter.Wait(System.TimeSpan)">
             <summary>
             重试休眠时间
             </summary>
             <param name="timeSpan"></param>
             <returns></returns>
-        </member>
-        <member name="F:XUCore.Develops.RetryMode.Sync">
-            <summary>
-            同步
-            </summary>
-        </member>
-        <member name="F:XUCore.Develops.RetryMode.Async">
-            <summary>
-            异步
-            </summary>
         </member>
         <member name="T:XUCore.Develops.UnitTester">
             <summary>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using XUCore.Collection;
+using XUCore.Helpers;
 
 namespace XUCore.Develops
 {
@@ -26,6 +28,16 @@ namespace XUCore.Develops
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="model">传入的数据</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        public static void Run<TModel>(TModel model,
+            Action<TModel, int> execHandler, Action<int, Exception> errorHandler = null)
+            => Run<TModel>(model, RetryAdapter.Create(), execHandler, errorHandler);
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="model">传入的数据</param>
         /// <param name="retryAdapter">任务适配器</param>
         /// <param name="execHandler">执行任务</param>
         /// <param name="errorHandler">异常处理</param>
@@ -45,11 +57,23 @@ namespace XUCore.Develops
                     if (errorHandler != null)
                         errorHandler.Invoke(current, ex);
                 }
-                if (current <= retryAdapter.MaxRun)
+                if (current < retryAdapter.MaxRun)
                     System.Threading.Thread.Sleep(retryAdapter.WaitTime);
                 current++;
             }
         }
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static TResult Run<TModel, TResult>(TModel model,
+             Func<TModel, int, TResult> execHandler, Action<int, Exception> errorHandler = null)
+            => Run<TModel, TResult>(model, RetryAdapter.Create(), execHandler, errorHandler);
         /// <summary>
         /// 重试运行
         /// </summary>
@@ -76,13 +100,24 @@ namespace XUCore.Develops
                     if (errorHandler != null)
                         errorHandler.Invoke(current, ex);
                 }
-                if (current <= retryAdapter.MaxRun)
+                if (current < retryAdapter.MaxRun)
                     System.Threading.Thread.Sleep(retryAdapter.WaitTime);
                 current++;
             }
 
             return default;
         }
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static async Task RunAsync<TModel>(TModel model,
+             Func<TModel, int, Task> execHandler, Action<int, Exception> errorHandler = null)
+            => await RunAsync<TModel>(model, RetryAdapter.Create(), execHandler, errorHandler);
         /// <summary>
         /// 重试运行
         /// </summary>
@@ -108,11 +143,23 @@ namespace XUCore.Develops
                     if (errorHandler != null)
                         errorHandler.Invoke(current, ex);
                 }
-                if (current <= retryAdapter.MaxRun)
+                if (current < retryAdapter.MaxRun)
                     System.Threading.Thread.Sleep(retryAdapter.WaitTime);
                 current++;
             }
         }
+        /// <summary>
+        /// 重试运行
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="model">传入的数据</param>
+        /// <param name="execHandler">执行任务</param>
+        /// <param name="errorHandler">异常处理</param>
+        /// <returns></returns>
+        public static async Task<TResult> RunAsync<TModel, TResult>(TModel model,
+            Func<TModel, int, Task<TResult>> execHandler, Action<int, Exception> errorHandler = null)
+            => await RunAsync<TModel, TResult>(model, RetryAdapter.Create(), execHandler, errorHandler);
         /// <summary>
         /// 重试运行
         /// </summary>
@@ -139,7 +186,7 @@ namespace XUCore.Develops
                     if (errorHandler != null)
                         errorHandler.Invoke(current, ex);
                 }
-                if (current <= retryAdapter.MaxRun)
+                if (current < retryAdapter.MaxRun)
                     System.Threading.Thread.Sleep(retryAdapter.WaitTime);
                 current++;
             }

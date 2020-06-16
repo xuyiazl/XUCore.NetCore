@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using XUCore.Develops;
 
 namespace XUCore.NetCore.Extensions
 {
@@ -21,6 +22,25 @@ namespace XUCore.NetCore.Extensions
     /// </summary>
     public static partial class Extensions
     {
+        /// <summary>
+        /// 数据流量控制
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        /// <param name="interval">默认1秒刷新一次</param>
+        /// <param name="size">每秒限制的数据大小，单位kb</param>
+        /// <param name="monitoring">监控</param>
+        public static void AddFlowMonitoring(this IServiceCollection services, int interval = 1000, int size = 128, Action<decimal> monitoring = null)
+        {
+            services.AddSingleton<IFlowMonitoring>(o =>
+            {
+                var flow = new FlowMonitoring(interval);
+                if (monitoring != null)
+                    flow.Monitoring(monitoring);
+                flow.Size = size;
+                return flow;
+            });
+        }
+
         /// <summary>
         /// 绑定本地缓存管理
         /// </summary>
