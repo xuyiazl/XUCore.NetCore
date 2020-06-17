@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace XUCore.NetCore.Extensions
 {
@@ -49,5 +56,65 @@ namespace XUCore.NetCore.Extensions
 
             return builder.ToString();
         }
+        /// <summary>
+        /// 转换成Html
+        /// </summary>
+        /// <param name="pageModel"></param>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        //public static async Task<string> ToHtml(this PageModel pageModel, string pageName)
+        //{
+        //    var actionContext = new ActionContext(
+        //        pageModel.HttpContext,
+        //        pageModel.RouteData,
+        //        pageModel.PageContext.ActionDescriptor
+        //    );
+
+        //    using (var sw = new StringWriter())
+        //    {
+        //        IRazorViewEngine _razorViewEngine = pageModel.HttpContext.RequestServices.GetService(typeof(IRazorViewEngine)) as IRazorViewEngine;
+        //        IRazorPageActivator _activator = pageModel.HttpContext.RequestServices.GetService(typeof(IRazorPageActivator)) as IRazorPageActivator;
+
+        //        var result = _razorViewEngine.FindPage(actionContext, pageName);
+
+        //        if (result.Page == null)
+        //        {
+        //            throw new ArgumentNullException($"The page {pageName} cannot be found.");
+        //        }
+
+        //        var page = result.Page;
+
+        //        var view = new RazorView(_razorViewEngine,
+        //            _activator,
+        //            new List<IRazorPage>(),
+        //            page,
+        //            HtmlEncoder.Default,
+        //            new DiagnosticListener("ViewRenderService"));
+
+
+        //        var viewContext = new ViewContext(
+        //            actionContext,
+        //            view,
+        //            pageModel.ViewData,
+        //            pageModel.TempData,
+        //            sw,
+        //            new HtmlHelperOptions()
+        //        );
+
+
+        //        var pageNormal = ((Page)result.Page);
+
+        //        pageNormal.PageContext = pageModel.PageContext;
+
+        //        pageNormal.ViewContext = viewContext;
+
+
+        //        _activator.Activate(pageNormal, viewContext);
+
+        //        await page.ExecuteAsync();
+
+        //        return sw.ToString();
+        //    }
+        //}
     }
 }

@@ -1,7 +1,7 @@
 ﻿@page "{id?}"
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "首页啊";
 }
 
 <div class="text-center">
@@ -34,6 +34,7 @@
     </p>
     <p><a asp-page="create">添加</a></p>
 </div>
+@await Html.PartialAsync("mytest")
 @section Scripts{
     <script type="text/javascript">
         $(function () {
@@ -48,4 +49,7 @@
 
         })
     </script>
+}
+@section Styles{
+    111
 }

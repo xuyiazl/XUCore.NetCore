@@ -2746,6 +2746,9 @@
             系统扩展 - 格式化扩展
             </summary>
             <summary>
+            系统扩展 - Lambda表达式扩展
+            </summary>
+            <summary>
             系统扩展 - 锁定扩展
             </summary>
             <summary>
@@ -3231,6 +3234,228 @@
             <param name="message">消息标题</param>
             <param name="isHideStackTrace">是否隐藏异常规模信息</param>
         </member>
+        <member name="M:XUCore.Extensions.Extensions.Property(System.Linq.Expressions.Expression,System.String)">
+            <summary>
+            创建属性表达式
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="propertyName">属性名，支持多级属性名，与句点分隔，范例：Customer.Name</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Property(System.Linq.Expressions.Expression,System.Reflection.MemberInfo)">
+            <summary>
+            创建属性表达式
+            </summary>
+            <param name="expression">表达式</param>
+            <param name="member">属性</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.And(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            与操作表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            与操作表达式
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            或操作表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            或操作表达式
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Value``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取Lambda表达式的值
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="expression">表达式</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Equal(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Equal(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.NotEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建不等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.NotEqual(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建不等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Greater(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建大于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Greater(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建大于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.GreaterEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建大于等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.GreaterEqual(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建大于等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Less(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建小于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Less(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建小于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.LessEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            创建小于等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="right">右操作数</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.LessEqual(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建小于等于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.StartsWith(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            创建大于运算表达式
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.EndsWith(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            尾匹配
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Contains(System.Linq.Expressions.Expression,System.Object)">
+            <summary>
+            模糊匹配
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Operation(System.Linq.Expressions.Expression,XUCore.Operator,System.Object)">
+            <summary>
+            操作
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="operator">运算符</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Operation(System.Linq.Expressions.Expression,XUCore.Operator,System.Linq.Expressions.Expression)">
+            <summary>
+            操作
+            </summary>
+            <param name="left">左操作数</param>
+            <param name="operator">运算符</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Call(System.Linq.Expressions.Expression,System.String,System.Linq.Expressions.Expression[])">
+            <summary>
+            创建调用方法表达式
+            </summary>
+            <param name="instance">调用的实例</param>
+            <param name="methodName">方法名</param>
+            <param name="values">参数值列表</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Call(System.Linq.Expressions.Expression,System.String,System.Object[])">
+            <summary>
+            创建调用方法表达式
+            </summary>
+            <param name="instance">调用的实例</param>
+            <param name="methodName">方法名</param>
+            <param name="values">参数值列表</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Call(System.Linq.Expressions.Expression,System.String,System.Type[],System.Object[])">
+            <summary>
+            创建调用方法表达式
+            </summary>
+            <param name="instance">调用的实例</param>
+            <param name="methodName">方法名</param>
+            <param name="paramTypes">参数类型列表</param>
+            <param name="values">参数值列表</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.Compose``1(System.Linq.Expressions.Expression{``0},System.Linq.Expressions.Expression{``0},System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression})">
+            <summary>
+            组合表达式
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="first">左操作数</param>
+            <param name="second">右操作数</param>
+            <param name="merge">合并操作</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.ToLambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])">
+            <summary>
+            创建Lambda表达式
+            </summary>
+            <typeparam name="TDelegate">委托类型</typeparam>
+            <param name="body">表达式</param>
+            <param name="parameters">参数列表</param>
+        </member>
+        <member name="M:XUCore.Extensions.Extensions.ToPredicate``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])">
+            <summary>
+            创建谓词表达式
+            </summary>
+            <typeparam name="T">委托类型</typeparam>
+            <param name="body">表达式</param>
+            <param name="parameters">参数列表</param>
+        </member>
         <member name="M:XUCore.Extensions.Extensions.Locking(System.Object,System.Action)">
             <summary>
             锁定给定对象标识，执行委托
@@ -3664,233 +3889,6 @@
             判断 decimal 是否为0或百分数
             </summary>
             <param name="value">数据</param>
-        </member>
-        <member name="T:XUCore.Extensions.BingExtensions">
-            <summary>
-            系统扩展 - Lambda表达式扩展
-            </summary>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Property(System.Linq.Expressions.Expression,System.String)">
-            <summary>
-            创建属性表达式
-            </summary>
-            <param name="expression">表达式</param>
-            <param name="propertyName">属性名，支持多级属性名，与句点分隔，范例：Customer.Name</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Property(System.Linq.Expressions.Expression,System.Reflection.MemberInfo)">
-            <summary>
-            创建属性表达式
-            </summary>
-            <param name="expression">表达式</param>
-            <param name="member">属性</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.And(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            与操作表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
-            <summary>
-            与操作表达式
-            </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            或操作表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
-            <summary>
-            或操作表达式
-            </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Value``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
-            <summary>
-            获取Lambda表达式的值
-            </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="expression">表达式</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Equal(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Equal(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.NotEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建不等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.NotEqual(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建不等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Greater(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建大于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Greater(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建大于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.GreaterEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建大于等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.GreaterEqual(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建大于等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Less(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建小于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Less(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建小于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.LessEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
-            <summary>
-            创建小于等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="right">右操作数</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.LessEqual(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建小于等于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.StartsWith(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            创建大于运算表达式
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.EndsWith(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            尾匹配
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Contains(System.Linq.Expressions.Expression,System.Object)">
-            <summary>
-            模糊匹配
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Operation(System.Linq.Expressions.Expression,XUCore.Operator,System.Object)">
-            <summary>
-            操作
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="operator">运算符</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Operation(System.Linq.Expressions.Expression,XUCore.Operator,System.Linq.Expressions.Expression)">
-            <summary>
-            操作
-            </summary>
-            <param name="left">左操作数</param>
-            <param name="operator">运算符</param>
-            <param name="value">值</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Call(System.Linq.Expressions.Expression,System.String,System.Linq.Expressions.Expression[])">
-            <summary>
-            创建调用方法表达式
-            </summary>
-            <param name="instance">调用的实例</param>
-            <param name="methodName">方法名</param>
-            <param name="values">参数值列表</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Call(System.Linq.Expressions.Expression,System.String,System.Object[])">
-            <summary>
-            创建调用方法表达式
-            </summary>
-            <param name="instance">调用的实例</param>
-            <param name="methodName">方法名</param>
-            <param name="values">参数值列表</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Call(System.Linq.Expressions.Expression,System.String,System.Type[],System.Object[])">
-            <summary>
-            创建调用方法表达式
-            </summary>
-            <param name="instance">调用的实例</param>
-            <param name="methodName">方法名</param>
-            <param name="paramTypes">参数类型列表</param>
-            <param name="values">参数值列表</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.Compose``1(System.Linq.Expressions.Expression{``0},System.Linq.Expressions.Expression{``0},System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression})">
-            <summary>
-            组合表达式
-            </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="first">左操作数</param>
-            <param name="second">右操作数</param>
-            <param name="merge">合并操作</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.ToLambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])">
-            <summary>
-            创建Lambda表达式
-            </summary>
-            <typeparam name="TDelegate">委托类型</typeparam>
-            <param name="body">表达式</param>
-            <param name="parameters">参数列表</param>
-        </member>
-        <member name="M:XUCore.Extensions.BingExtensions.ToPredicate``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])">
-            <summary>
-            创建谓词表达式
-            </summary>
-            <typeparam name="T">委托类型</typeparam>
-            <param name="body">表达式</param>
-            <param name="parameters">参数列表</param>
         </member>
         <member name="T:XUCore.Extensions.Datas.DataTableExtensions">
             <summary>

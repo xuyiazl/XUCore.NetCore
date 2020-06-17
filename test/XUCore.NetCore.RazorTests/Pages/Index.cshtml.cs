@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using XUCore.NetCore.RazorTests;
 
 namespace XUCore.RazorTests.Pages
 {
+    [PageHtmlStatic(MinInterval = 0, Template = "/static/{page}.html")]
     public class IndexModel : PageModel
     {
         private readonly TestDBContext _dbContext;

@@ -41,7 +41,7 @@ namespace XUCore.WebTests
                .WithScopedLifetime()
            );
 
-            services.AddHttpService();
+            services.AddHttpService("test", "http://120.25.195.4:31924");
 
             services.AddRedisService().AddJsonRedisSerializer();
 

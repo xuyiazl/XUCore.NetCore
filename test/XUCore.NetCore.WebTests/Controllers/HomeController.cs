@@ -61,80 +61,80 @@ namespace XUCore.WebTests.Controllers
             _dbAdminUsersServiceProvider = dbAdminUsersServiceProvider;
         }
 
-        public async Task<IActionResult> Index(CancellationToken cancellationToken)
-        {
-            var list = new List<AdminUsers>();
-            for (var ndx = 0; ndx < 10; ndx++)
-            {
-                var user = new AdminUsers
-                {
-                    Company = "test",
-                    CreatedTime = DateTime.Now,
-                    Location = "test",
-                    LoginCount = 0,
-                    LoginLastIp = "127.0.0.1",
-                    LoginLastTime = DateTime.Now,
-                    Mobile = "17710146178",
-                    Name = $"徐毅{ndx}",
-                    Password = "123456",
-                    Picture = $"徐毅{ndx}",
-                    Position = $"徐毅{ ndx }",
-                    Status = true,
-                    UserName = "xuyi"
-                };
-                list.Add(user);
-            }
-            var res4 = _dbAdminUsersServiceProvider.SelectList<AdminUsers>("select * from AdminUsers", CommandType.Text, new SqlParameter("name", "1"));
-            var res0 = _dbAdminUsersServiceProvider.BatchInsert(list.ToArray());
-            var res3 = _dbAdminUsersServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
-
-            //var re2 = await _dbAdminUsersServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
-            var re1 = await _dbAdminUsersServiceProvider.BatchDeleteAsync(c => c.Id > 22);
-
-
-            var ur2 = UrlArguments.Create("api/messagepack/add");
-
-            var resData = await _httpMessage.CreateClient("msgtest").SetHeaderAccept(HttpMediaType.MessagePack).PostAsync<User>(ur2, null, cancellationToken);
-
-            if (resData.IsSuccessStatusCode)
-            {
-
-            }
-
-            var m = await resData.Content.ReadAsAsync<User>(HttpMediaType.MessagePack);
-
-            var url = UrlArguments.Create("msgpack", "api/messagepack/get");
-
-            var res = await url.GetAsync<User>();
-
-            var postUrl = UrlArguments.Create("msgpack", "api/messagepack/add");
-
-            var res1 = await url.PostAsync<User, User>(res);
-
-            var url1 = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
-                        .Add("aid", 1539)
-                        .Add("commentId", 0)
-                        .Add("pageSize", 10000);
-
-            var res2 = await url.GetAsync<ReturnModel>();
-
-            return View(res2);
-        }
-
-        //[NoCache]
-        //[Route("{id}")]
-        //[RazorHtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
-        //public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
+        //public async Task<IActionResult> Index(CancellationToken cancellationToken)
         //{
-        //var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
-        //     .Add("aid", 1539)
-        //     .Add("commentId", 0)
-        //     .Add("pageSize", 10000);
+        //    var list = new List<AdminUsers>();
+        //    for (var ndx = 0; ndx < 10; ndx++)
+        //    {
+        //        var user = new AdminUsers
+        //        {
+        //            Company = "test",
+        //            CreatedTime = DateTime.Now,
+        //            Location = "test",
+        //            LoginCount = 0,
+        //            LoginLastIp = "127.0.0.1",
+        //            LoginLastTime = DateTime.Now,
+        //            Mobile = "17710146178",
+        //            Name = $"徐毅{ndx}",
+        //            Password = "123456",
+        //            Picture = $"徐毅{ndx}",
+        //            Position = $"徐毅{ ndx }",
+        //            Status = true,
+        //            UserName = "xuyi"
+        //        };
+        //        list.Add(user);
+        //    }
+        //    var res4 = _dbAdminUsersServiceProvider.SelectList<AdminUsers>("select * from AdminUsers", CommandType.Text, new SqlParameter("name", "1"));
+        //    var res0 = _dbAdminUsersServiceProvider.BatchInsert(list.ToArray());
+        //    var res3 = _dbAdminUsersServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
 
-        //var res = await _httpService.GetAsync<ReturnModel>(url, cancellationToken);
+        //    //var re2 = await _dbAdminUsersServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
+        //    var re1 = await _dbAdminUsersServiceProvider.BatchDeleteAsync(c => c.Id > 22);
 
-        //    return View(res);
+
+        //    var ur2 = UrlArguments.Create("api/messagepack/add");
+
+        //    var resData = await _httpMessage.CreateClient("msgtest").SetHeaderAccept(HttpMediaType.MessagePack).PostAsync<User>(ur2, null, cancellationToken);
+
+        //    if (resData.IsSuccessStatusCode)
+        //    {
+
+        //    }
+
+        //    var m = await resData.Content.ReadAsAsync<User>(HttpMediaType.MessagePack);
+
+        //    var url = UrlArguments.Create("msgpack", "api/messagepack/get");
+
+        //    var res = await url.GetAsync<User>();
+
+        //    var postUrl = UrlArguments.Create("msgpack", "api/messagepack/add");
+
+        //    var res1 = await url.PostAsync<User, User>(res);
+
+        //    var url1 = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
+        //                .Add("aid", 1539)
+        //                .Add("commentId", 0)
+        //                .Add("pageSize", 10000);
+
+        //    var res2 = await url.GetAsync<ReturnModel>();
+
+        //    return View(res2);
         //}
+
+        [NoCache]
+        [Route("{id}")]
+        [RazorHtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
+        public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
+        {
+            var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
+                 .Add("aid", 1539)
+                 .Add("commentId", 0)
+                 .Add("pageSize", 10000);
+
+            var res = await url.GetAsync<ReturnModel>();
+
+            return View(res);
+        }
 
         public async Task<IActionResult> IndexView()
         {

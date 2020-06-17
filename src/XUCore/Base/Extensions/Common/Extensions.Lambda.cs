@@ -11,7 +11,7 @@ namespace XUCore.Extensions
     /// <summary>
     /// 系统扩展 - Lambda表达式扩展
     /// </summary>
-    public static partial class BingExtensions
+    public static partial class Extensions
     {
         #region Property(属性表达式)
 
