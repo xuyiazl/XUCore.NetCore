@@ -123,7 +123,7 @@ namespace XUCore.WebTests.Controllers
 
         [NoCache]
         [Route("{id}")]
-        [RazorHtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
+        [PageHtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")

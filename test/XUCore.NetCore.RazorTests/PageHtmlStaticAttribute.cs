@@ -24,7 +24,7 @@ namespace XUCore.NetCore.RazorTests
     /// Razor生成Html静态文件（保存目录为wwwroot）
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public class PageHtmlStaticAttribute : ActionFilterAttribute
+    public class PageHtmlStaticAttribute11 : ActionFilterAttribute
     {
         /// <summary>
         /// 路径模板，范例：static/{area}/{controller}/{action}.component.html
@@ -93,7 +93,7 @@ namespace XUCore.NetCore.RazorTests
         {
             if (pageResult == null) return;
 
-            var _logger = Web.GetService<ILogger<PageHtmlStaticAttribute>>();
+            var _logger = Web.GetService<ILogger<PageHtmlStaticAttribute11>>();
             try
             {
                 var routeData = context.HttpContext.GetRouteData();

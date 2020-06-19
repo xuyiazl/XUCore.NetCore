@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using XUCore.NetCore.Razors;
 using XUCore.NetCore.RazorTests;
 
 namespace XUCore.RazorTests.Pages
