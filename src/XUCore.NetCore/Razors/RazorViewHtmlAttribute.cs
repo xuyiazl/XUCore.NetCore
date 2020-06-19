@@ -15,7 +15,7 @@ namespace XUCore.NetCore.Razors
     /// Razor生成Html静态文件（保存目录为wwwroot）
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public class RazorHtmlStaticAttribute : ActionFilterAttribute
+    public class RazorViewHtmlAttribute : ActionFilterAttribute
     {
         /// <summary>
         /// 路径模板，范例：static/{area}/{controller}/{action}.component.html
@@ -82,7 +82,7 @@ namespace XUCore.NetCore.Razors
         /// <param name="viewResult"></param>
         protected void WriteHtml(ResultExecutedContext context, ViewResult viewResult)
         {
-            var _logger = Web.GetService<ILogger<RazorHtmlStaticAttribute>>();
+            var _logger = Web.GetService<ILogger<RazorViewHtmlAttribute>>();
             try
             {
                 var html = viewResult?.ToHtml(context.HttpContext, IsPartialView);

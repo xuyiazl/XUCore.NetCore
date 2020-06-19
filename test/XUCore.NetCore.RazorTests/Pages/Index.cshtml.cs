@@ -17,7 +17,7 @@ using XUCore.NetCore.RazorTests;
 
 namespace XUCore.RazorTests.Pages
 {
-    [PageHtmlStatic(MinInterval = 0, Template = "/static/{page}.html")]
+    [HtmlStatic(MinInterval = 0, Template = "/static/{page}.html")]
     public class IndexModel : PageModel
     {
         private readonly TestDBContext _dbContext;
