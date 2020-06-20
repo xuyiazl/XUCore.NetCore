@@ -58,7 +58,7 @@ namespace XUCore.NetCore.Razors
         /// <summary>
         /// 根据条件判断是否允许生成HTML
         /// </summary>
-        /// <param name="routes"></param>
+        /// <param name="context"></param>
         /// <returns></returns>
         protected bool IsBuildHtml(ResultExecutedContext context)
         {
