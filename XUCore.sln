@@ -37,11 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.RazorTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.WebTests", "test\XUCore.NetCore.WebTests\XUCore.NetCore.WebTests.csproj", "{7D5924A1-A8D5-4CDC-ABCA-9F4E3B8D452F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.Sample", "test\XUCore.NetCore.Sample\XUCore.NetCore.Sample.csproj", "{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8DFC589-0B10-4CF2-B7B2-688A1236D2D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.Sample", "XUCore.NetCore.Sample\XUCore.NetCore.Sample.csproj", "{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

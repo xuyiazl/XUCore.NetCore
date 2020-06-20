@@ -920,6 +920,99 @@
               查找类似 请不要重复提交 的本地化字符串。
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.Razors.HtmlStaticAttribute">
+            <summary>
+            Razor生成Html静态文件（保存目录为wwwroot）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.HtmlStaticAttribute.Template">
+            <summary>
+            路径模板，范例：static/{area}/{controller}/{action}.component.html
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.HtmlStaticAttribute.MinInterval">
+            <summary>
+            生成的最小间隔，单位（秒），比如设置5分钟，那么5分钟之内不会再生成
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
+            <summary>
+            结果执行之前 before
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
+            <summary>
+            根据路由参数进行模板替换
+            </summary>
+            <param name="context"></param>
+            <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.IsBuildHtml(System.String)">
+            <summary>
+            根据条件判断是否允许生成HTML
+            </summary>
+            <param name="relativePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.WriteHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,System.IO.Stream)">
+            <summary>
+            写HTML
+            </summary>
+            <param name="context"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Razors.RazorViewHtmlAttribute">
+            <summary>
+            Razor生成Html静态文件（保存目录为wwwroot）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorViewHtmlAttribute.Template">
+            <summary>
+            路径模板，范例：static/{area}/{controller}/{action}.component.html
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorViewHtmlAttribute.MinInterval">
+            <summary>
+            生成的最小间隔，单位（秒），比如设置5分钟，那么5分钟之内不会再生成
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Razors.RazorViewHtmlAttribute.IsPartialView">
+            <summary>
+            是否部分视图，默认：false
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorViewHtmlAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
+            <summary>
+            结果执行之前 before
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorViewHtmlAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            结果执行之后 after
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorViewHtmlAttribute.IsBuildHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
+            <summary>
+            根据条件判断是否允许生成HTML
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Razors.RazorViewHtmlAttribute.WriteHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext,Microsoft.AspNetCore.Mvc.ViewResult)">
+            <summary>
+            写HTML
+            </summary>
+            <param name="context"></param>
+            <param name="viewResult"></param>
+        </member>
         <member name="T:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator">
             <summary>
             Razor静态Html生成器
@@ -996,51 +1089,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:XUCore.NetCore.Razors.PageHtmlStaticAttribute">
-            <summary>
-            Razor生成Html静态文件（保存目录为wwwroot）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Razors.PageHtmlStaticAttribute.Template">
-            <summary>
-            路径模板，范例：static/{area}/{controller}/{action}.component.html
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Razors.PageHtmlStaticAttribute.MinInterval">
-            <summary>
-            生成的最小间隔，单位（秒），比如设置5分钟，那么5分钟之内不会再生成
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.PageHtmlStaticAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
-            <summary>
-            结果执行之前 before
-            </summary>
-            <param name="context"></param>
-            <param name="next"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.PageHtmlStaticAttribute.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
-            <summary>
-            根据路由参数进行模板替换
-            </summary>
-            <param name="context"></param>
-            <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.PageHtmlStaticAttribute.IsBuildHtml(System.String)">
-            <summary>
-            根据条件判断是否允许生成HTML
-            </summary>
-            <param name="relativePath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.PageHtmlStaticAttribute.WriteHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,System.IO.Stream)">
-            <summary>
-            写HTML
-            </summary>
-            <param name="context"></param>
-            <param name="stream"></param>
-        </member>
         <member name="T:XUCore.NetCore.Razors.RazorHtmlAttribute">
             <summary>
             Razor生成Html静态文件
@@ -1065,54 +1113,6 @@
             <summary>
             是否部分视图，默认：false
             </summary>
-        </member>
-        <member name="T:XUCore.NetCore.Razors.RazorHtmlStaticAttribute">
-            <summary>
-            Razor生成Html静态文件（保存目录为wwwroot）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.Template">
-            <summary>
-            路径模板，范例：static/{area}/{controller}/{action}.component.html
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.MinInterval">
-            <summary>
-            生成的最小间隔，单位（秒），比如设置5分钟，那么5分钟之内不会再生成
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.IsPartialView">
-            <summary>
-            是否部分视图，默认：false
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)">
-            <summary>
-            结果执行之前 before
-            </summary>
-            <param name="context"></param>
-            <param name="next"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
-            <summary>
-            结果执行之后 after
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.IsBuildHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)">
-            <summary>
-            根据条件判断是否允许生成HTML
-            </summary>
-            <param name="routes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Razors.RazorHtmlStaticAttribute.WriteHtml(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext,Microsoft.AspNetCore.Mvc.ViewResult)">
-            <summary>
-            写HTML
-            </summary>
-            <param name="context"></param>
-            <param name="viewResult"></param>
         </member>
         <member name="T:XUCore.NetCore.Razors.RouteAnalyzer">
             <summary>

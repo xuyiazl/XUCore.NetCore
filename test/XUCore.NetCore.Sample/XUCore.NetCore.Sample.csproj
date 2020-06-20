@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
-    <ProjectReference Include="..\src\XUCore\XUCore.csproj" />
+    <ProjectReference Include="..\..\src\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
+    <ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
