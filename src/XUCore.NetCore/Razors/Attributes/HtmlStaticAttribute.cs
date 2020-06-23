@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.IO;
+using XUCore.NetCore.Extensions;
 
 namespace XUCore.NetCore.Razors
 {
@@ -37,7 +38,7 @@ namespace XUCore.NetCore.Razors
         /// <returns></returns>
         public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
         {
-            if ((context.Result is PageResult || context.Result is ViewResult) && IsBuildHtml(RouteReplace(context, Template)))
+            if ((context.Result is PageResult || context.Result is ViewResult) && IsBuildHtml(context.RouteReplace(Template)))
             {
                 var response = context.HttpContext.Response;
                 if (!response.Body.CanRead || !response.Body.CanSeek)
@@ -75,22 +76,6 @@ namespace XUCore.NetCore.Razors
                 await base.OnResultExecutionAsync(context, next);
             }
         }
-
-        /// <summary>
-        /// 根据路由参数进行模板替换
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
-        /// <returns></returns>
-        public static string RouteReplace(ActionContext context, string template)
-        {
-            var path = template;
-
-            foreach (var route in context.RouteData.Values)
-                path = path.Replace("{" + route.Key + "}", route.Value.SafeString());
-
-            return path.ToLower();
-        }
         /// <summary>
         /// 根据条件判断是否允许生成HTML
         /// </summary>
@@ -126,7 +111,7 @@ namespace XUCore.NetCore.Razors
             var _logger = Web.GetService<ILogger<HtmlStaticAttribute>>();
             try
             {
-                var path = Common.GetWebRootPath(RouteReplace(context, Template));
+                var path = Common.GetWebRootPath(context.RouteReplace(Template));
 
                 FileHelper.Create(path, responseContent);
             }

@@ -23,6 +23,8 @@ using System.Dynamic;
 using XUCore.Timing;
 using MessagePack.Resolvers;
 using MessagePack.Formatters;
+using XUCore.Webs;
+using System.Net.Http;
 
 namespace XUCore.ConsoleTests
 {
@@ -55,11 +57,12 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
+
             {
-                Parallel.For(0, 100,  ndx =>
-                {
-                    Console.WriteLine(RandomName.GetFullName());
-                });
+                Parallel.For(0, 100, ndx =>
+               {
+                   Console.WriteLine(RandomName.GetFullName());
+               });
             }
 
             Console.ReadLine();
@@ -101,7 +104,7 @@ namespace XUCore.ConsoleTests
                 //dict.Add("Name", "张三");
 
 
-                
+
 
 
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);

@@ -943,14 +943,6 @@
             <param name="next"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
-            <summary>
-            根据路由参数进行模板替换
-            </summary>
-            <param name="context"></param>
-            <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.NetCore.Razors.HtmlStaticAttribute.IsBuildHtml(System.String)">
             <summary>
             根据条件判断是否允许生成HTML
