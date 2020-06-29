@@ -30,7 +30,7 @@ namespace XUCore.NetCore.Data.DbService
             _context = context;
         }
 
-        private DbSet<TEntity> Entities
+        public DbSet<TEntity> Entities
         {
             get
             {

@@ -59,6 +59,7 @@ namespace XUCore.WebTests.Controllers
             _fileUploadService = fileUploadService;
             _redisService = redisService;
             _dbAdminUsersServiceProvider = dbAdminUsersServiceProvider;
+
         }
 
         //public async Task<IActionResult> Index(CancellationToken cancellationToken)

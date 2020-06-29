@@ -19,7 +19,7 @@ namespace XUCore.WebTests.Data.DbService
         public DbAdminUsersServiceProvider(IReadRepository<AdminUsers> readRepository, IWriteRepository<AdminUsers> writeRepository)
             : base(readRepository, writeRepository)
         {
-
+            
         }
 
     }
