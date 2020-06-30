@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
-using XUCore.NetCore.Data.DbService;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal;
 using System;
 using System.Collections.Generic;

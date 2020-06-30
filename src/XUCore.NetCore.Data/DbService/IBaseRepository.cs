@@ -39,7 +39,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int BatchInsert(TEntity[] entities, bool isSaveChange = true);
+        int Insert(TEntity[] entities, bool isSaveChange = true);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
@@ -53,7 +53,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int BatchUpdate(TEntity[] entities, bool isSaveChange = true);
+        int Update(TEntity[] entities, bool isSaveChange = true);
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -67,7 +67,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int BatchDelete(TEntity[] entities, bool isSaveChange = true);
+        int Delete(TEntity[] entities, bool isSaveChange = true);
 
         //异步操作
 
@@ -92,7 +92,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchInsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> InsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
@@ -108,7 +108,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchUpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> UpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -124,7 +124,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchDeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> DeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
 
         //同步查询
 
@@ -170,7 +170,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        int GetCount(Expression<Func<TEntity, bool>> selector = null);
+        long GetCount(Expression<Func<TEntity, bool>> selector = null);
 
         //异步查询
 
@@ -222,7 +222,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default);
+        Task<long> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default);
 
         #region 增加bulkextensions拓展
 

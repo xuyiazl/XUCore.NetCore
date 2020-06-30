@@ -78,7 +78,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int BatchInsert(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Insert(TEntity[] entities, bool isSaveChange = true)
         {
             if (entities == null)
             {
@@ -125,7 +125,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int BatchUpdate(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Update(TEntity[] entities, bool isSaveChange = true)
         {
             if (entities == null)
             {
@@ -163,7 +163,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int BatchDelete(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Delete(TEntity[] entities, bool isSaveChange = true)
         {
             if (entities == null)
             {
@@ -214,7 +214,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchInsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> InsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {
@@ -263,7 +263,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchUpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> UpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {
@@ -303,7 +303,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchDeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> DeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {
@@ -404,7 +404,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual int GetCount(Expression<Func<TEntity, bool>> selector = null)
+        public virtual long GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
             if (selector == null)
                 return Entities.AsNoTracking().Count();
@@ -507,7 +507,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
+        public virtual async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
             if (selector == null)
                 return await Entities.AsNoTracking().CountAsync(cancellationToken);

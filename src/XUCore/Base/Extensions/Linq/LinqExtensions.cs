@@ -11,7 +11,7 @@ namespace XUCore.Extensions
         private static PropertyInfo GetPropertyInfo(Type objType, string name)
         {
             var properties = objType.GetProperties();
-            var matchedProperty = properties.FirstOrDefault(p => p.Name == name);
+            var matchedProperty = properties.FirstOrDefault(p => p.Name.ToLower() == name.ToLower());
             if (matchedProperty == null)
             {
                 throw new ArgumentException("name");
