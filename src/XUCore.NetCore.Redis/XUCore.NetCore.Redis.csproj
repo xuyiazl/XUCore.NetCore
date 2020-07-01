@@ -9,9 +9,9 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Redis</Description>
+		<Description>.NET Core Redis Redis封装服务</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<PackageId>XUCore.NetCore.Redis</PackageId>
 		<Product>XUCore.NetCore.Redis</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

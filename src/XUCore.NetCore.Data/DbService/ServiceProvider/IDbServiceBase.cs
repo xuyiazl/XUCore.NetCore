@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace XUCore.NetCore.Data.DbService.ServiceProvider
 {
@@ -17,6 +18,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
     /// <typeparam name="TEntity"></typeparam>
     public interface IDbServiceBase<TEntity> : IDisposable where TEntity : class, new()
     {
+        DbSet<TEntity> Entity { get; }
+
         //同步操作
 
         /// <summary>

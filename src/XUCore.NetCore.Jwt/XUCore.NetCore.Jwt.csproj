@@ -9,9 +9,9 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common</Description>
+		<Description>.NET Core Common Jwt公用库</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<PackageId>XUCore.NetCore.Jwt</PackageId>
 		<Product>XUCore.NetCore.Jwt</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

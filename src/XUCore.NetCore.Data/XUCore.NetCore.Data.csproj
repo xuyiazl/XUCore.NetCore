@@ -8,9 +8,9 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common</Description>
+		<Description>.NET Core Common 数据库帮助类</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<PackageId>XUCore.NetCore.Data</PackageId>
 		<Product>XUCore.NetCore.Data</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

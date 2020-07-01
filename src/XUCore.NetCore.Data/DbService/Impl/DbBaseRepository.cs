@@ -23,23 +23,23 @@ namespace XUCore.NetCore.Data.DbService
     {
         protected string _connectionString { get; set; } = "";
         protected readonly IBaseContext _context;
-        protected DbSet<TEntity> _entities { get; set; }
+        protected DbSet<TEntity> _entity { get; set; }
         public DbBaseRepository(IBaseContext context)
         {
             _connectionString = context.ConnectionStrings;
             _context = context;
         }
 
-        public DbSet<TEntity> Entities
+        public DbSet<TEntity> Entity
         {
             get
             {
-                if (_entities == null)
+                if (_entity == null)
                 {
-                    _entities = _context.Set<TEntity>();
+                    _entity = _context.Set<TEntity>();
                 }
 
-                return _entities;
+                return _entity;
             }
         }
 
@@ -66,7 +66,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.Add(entity);
+            Entity.Add(entity);
 
             if (isSaveChange)
                 return SaveChanges();
@@ -89,12 +89,12 @@ namespace XUCore.NetCore.Data.DbService
             //var changeRecord = 0;
             //foreach (var item in entities)
             //{
-            //    var entry = Entities.Add(item);
+            //    var entry = Entity.Add(item);
             //    entry.State = EntityState.Added;
             //    changeRecord += _context.SaveChanges();
             //}
 
-            Entities.AddRange(entities);
+            Entity.AddRange(entities);
 
             if (isSaveChange)
                 return SaveChanges();
@@ -113,7 +113,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.Update(entity);
+            Entity.Update(entity);
 
             if (isSaveChange)
                 return SaveChanges();
@@ -132,7 +132,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.UpdateRange(entities);
+            Entity.UpdateRange(entities);
 
             if (isSaveChange)
                 return SaveChanges();
@@ -151,7 +151,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.Remove(entity);
+            Entity.Remove(entity);
 
             if (isSaveChange)
                 return SaveChanges();
@@ -170,7 +170,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.RemoveRange(entities);
+            Entity.RemoveRange(entities);
             if (isSaveChange)
                 return SaveChanges();
             return 0;
@@ -201,7 +201,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            await Entities.AddAsync(entity);
+            await Entity.AddAsync(entity);
 
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
@@ -225,12 +225,12 @@ namespace XUCore.NetCore.Data.DbService
             //var changeRecord = 0;
             //foreach (var item in entities)
             //{
-            //    var entry = Entities.Add(item);
+            //    var entry = Entity.Add(item);
             //    entry.State = EntityState.Added;
             //    changeRecord += _context.SaveChanges();
             //}
 
-            await Entities.AddRangeAsync(entities);
+            await Entity.AddRangeAsync(entities);
 
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
@@ -250,7 +250,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.Update(entity);
+            Entity.Update(entity);
 
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
@@ -270,7 +270,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.UpdateRange(entities);
+            Entity.UpdateRange(entities);
 
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
@@ -290,7 +290,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.Remove(entity);
+            Entity.Remove(entity);
 
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
@@ -310,7 +310,7 @@ namespace XUCore.NetCore.Data.DbService
                 throw new ArgumentException($"{typeof(TEntity)} is Null");
             }
 
-            Entities.RemoveRange(entities);
+            Entity.RemoveRange(entities);
             if (isSaveChange)
                 return await SaveChangesAsync(cancellationToken);
             return 0;
@@ -325,7 +325,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual TEntity GetById(object id)
         {
-            return this.Entities.Find(id);
+            return this.Entity.Find(id);
         }
         /// <summary>
         /// 根据条件获取一条数据
@@ -335,7 +335,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
-            var query = Entities.AsQueryable();
+            var query = Entity.AsQueryable();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -355,7 +355,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
         {
-            var query = Entities.AsQueryable();
+            var query = Entity.AsQueryable();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -395,9 +395,9 @@ namespace XUCore.NetCore.Data.DbService
         public virtual bool Any(Expression<Func<TEntity, bool>> selector = null)
         {
             if (selector == null)
-                return Entities.AsNoTracking().Any();
+                return Entity.AsNoTracking().Any();
 
-            return Entities.AsNoTracking().Any(selector);
+            return Entity.AsNoTracking().Any(selector);
         }
         /// <summary>
         /// 获取记录数
@@ -407,9 +407,9 @@ namespace XUCore.NetCore.Data.DbService
         public virtual long GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
             if (selector == null)
-                return Entities.AsNoTracking().Count();
+                return Entity.AsNoTracking().Count();
 
-            return Entities.AsNoTracking().Count(selector);
+            return Entity.AsNoTracking().Count(selector);
         }
 
         //异步查询
@@ -422,7 +422,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            return await this.Entities.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
+            return await this.Entity.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
-            var query = Entities.AsQueryable();
+            var query = Entity.AsQueryable();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -455,7 +455,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
         {
-            var query = Entities.AsQueryable();
+            var query = Entity.AsQueryable();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -497,9 +497,9 @@ namespace XUCore.NetCore.Data.DbService
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
             if (selector == null)
-                return await Entities.AsNoTracking().AnyAsync(cancellationToken);
+                return await Entity.AsNoTracking().AnyAsync(cancellationToken);
 
-            return await Entities.AnyAsync(selector, cancellationToken);
+            return await Entity.AnyAsync(selector, cancellationToken);
         }
         /// <summary>
         /// 获取记录数
@@ -510,9 +510,9 @@ namespace XUCore.NetCore.Data.DbService
         public virtual async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
             if (selector == null)
-                return await Entities.AsNoTracking().CountAsync(cancellationToken);
+                return await Entity.AsNoTracking().CountAsync(cancellationToken);
 
-            return await Entities.AsNoTracking().CountAsync(selector, cancellationToken);
+            return await Entity.AsNoTracking().CountAsync(selector, cancellationToken);
         }
 
         #region 增加bulkextensions拓展
@@ -528,7 +528,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
-            return Entities.Where(selector).BatchUpdate(updateValues, updateColumns);
+            return Entity.Where(selector).BatchUpdate(updateValues, updateColumns);
         }
         /// <summary>
         /// 根据条件批量更新（部分字段）
@@ -538,7 +538,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
-            return Entities.Where(selector).BatchUpdate(Update);
+            return Entity.Where(selector).BatchUpdate(Update);
         }
         /// <summary>
         /// 根据条件批量删除
@@ -547,7 +547,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual int BatchDelete(Expression<Func<TEntity, bool>> selector)
         {
-            return Entities.Where(selector).BatchDelete();
+            return Entity.Where(selector).BatchDelete();
         }
 
         //异步操作
@@ -562,7 +562,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
         {
-            return await Entities.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
+            return await Entity.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
         }
         /// <summary>
         /// 根据条件批量更新（部分字段）
@@ -573,7 +573,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
-            return await Entities.Where(selector).BatchUpdateAsync(Update, cancellationToken);
+            return await Entity.Where(selector).BatchUpdateAsync(Update, cancellationToken);
         }
         /// <summary>
         /// 根据条件批量删除
@@ -583,7 +583,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public virtual async Task<int> BatchDeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            return await Entities.Where(selector).BatchDeleteAsync(cancellationToken);
+            return await Entity.Where(selector).BatchDeleteAsync(cancellationToken);
         }
 
         #endregion
@@ -616,12 +616,12 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public abstract IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
         /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataEntity)
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="type"></param>
         /// <param name="parameters"></param>
-        /// <returns>返回DataTable</returns>
+        /// <returns>返回DataEntity</returns>
         public abstract DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters);
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);

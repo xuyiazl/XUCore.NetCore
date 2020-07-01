@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace XUCore.NetCore.Data.DbService.ServiceProvider
 {
@@ -20,6 +21,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         public IBaseRepository<TEntity> dbRead { get; set; }
 
         public IBaseRepository<TEntity> dbWrite { get; set; }
+
+        public DbSet<TEntity> Entity { get { return dbRead.Entity; } }
 
         protected DbServiceBaseProvider(IBaseRepository<TEntity> readRepository, IBaseRepository<TEntity> writeRepository)
         {

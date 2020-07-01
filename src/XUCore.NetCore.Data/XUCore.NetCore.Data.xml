@@ -739,12 +739,12 @@
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
+            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataEntity)
             </summary>
             <param name="sql"></param>
             <param name="type"></param>
             <param name="parameters"></param>
-            <returns>返回DataTable</returns>
+            <returns>返回DataEntity</returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
