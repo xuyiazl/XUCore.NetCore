@@ -427,6 +427,12 @@
             </summary>
             <param name="insertDefault"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbService.BaseRepositoryFactory.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            EF依赖mappingPath，将当前项目文件夹的Entity的映射文件执行注入操作
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbService.DbBaseRepository`1">
             <summary>
             数据库的基础仓储库

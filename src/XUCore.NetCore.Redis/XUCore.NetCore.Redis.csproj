@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Redis</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<PackageId>XUCore.NetCore.Redis</PackageId>
 		<Product>XUCore.NetCore.Redis</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
