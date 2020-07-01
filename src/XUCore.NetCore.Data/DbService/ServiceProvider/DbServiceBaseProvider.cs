@@ -455,7 +455,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual int ExecuteSql(string sql, params DbParameter[] parameters)
+        public virtual int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
             if (dbWrite != null)
                 return dbWrite.ExecuteSql(sql, parameters);
@@ -469,7 +469,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new()
+        public virtual T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
         {
             if (dbRead != null)
                 return dbRead.Select<T>(sql, type, parameters);
@@ -483,7 +483,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new()
+        public virtual IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
         {
             if (dbRead != null)
                 return dbRead.SelectList<T>(sql, type, parameters);
@@ -496,7 +496,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters)
+        public virtual DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters)
         {
             if (dbRead != null)
                 return dbRead.SelectList(sql, type, parameters);
@@ -509,7 +509,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters)
+        public virtual DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters)
         {
             if (dbRead != null)
                 return dbRead.SelectDataSet(sql, type, parameters);
@@ -521,7 +521,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="sql"></param>
         /// <param name="type"></param>
         /// <param name="parameters"></param>
-        public virtual int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters)
+        public virtual int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
         {
             if (dbWrite != null)
                 return dbWrite.ExecuteAdoNet(sql, type, parameters);

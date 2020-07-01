@@ -309,7 +309,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.ExecuteSql(System.String,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
             <summary>
             通过EF执行原生SQL 返回影响行数
             </summary>
@@ -317,7 +317,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
             </summary>
@@ -327,7 +327,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
             </summary>
@@ -337,7 +337,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
             </summary>
@@ -346,7 +346,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
             </summary>
@@ -355,7 +355,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过原生执行ADONET查询操作
             </summary>
@@ -703,7 +703,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.ExecuteSql(System.String,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
             <summary>
             通过EF执行原生SQL 返回影响行数
             </summary>
@@ -711,7 +711,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
             </summary>
@@ -721,7 +721,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
             </summary>
@@ -731,7 +731,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
             </summary>
@@ -740,7 +740,7 @@
             <param name="parameters"></param>
             <returns>返回DataTable</returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
             </summary>
@@ -749,7 +749,7 @@
             <param name="parameters"></param>
             <returns>返回DataSet</returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过原生执行ADONET查询操作
             </summary>
@@ -1050,7 +1050,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.ExecuteSql(System.String,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
             <summary>
             通过EF执行原生SQL 返回影响行数
             </summary>
@@ -1058,7 +1058,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Select``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
             </summary>
@@ -1068,7 +1068,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectList``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
             </summary>
@@ -1078,7 +1078,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectList(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
             </summary>
@@ -1087,7 +1087,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
             </summary>
@@ -1096,7 +1096,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过原生执行ADONET查询操作
             </summary>
@@ -1380,7 +1380,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.ExecuteSql(System.String,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
             <summary>
             通过EF执行原生SQL 返回影响行数
             </summary>
@@ -1388,7 +1388,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Select``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
             </summary>
@@ -1398,7 +1398,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectList``1(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
             </summary>
@@ -1408,7 +1408,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectList(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
             </summary>
@@ -1417,7 +1417,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
             </summary>
@@ -1426,7 +1426,7 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.Common.DbParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
             <summary>
             通过原生执行ADONET查询操作
             </summary>

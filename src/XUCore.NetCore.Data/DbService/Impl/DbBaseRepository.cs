@@ -596,7 +596,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public abstract int ExecuteSql(string sql, params DbParameter[] parameters);
+        public abstract int ExecuteSql(string sql, params IDataParameter[] parameters);
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
         /// </summary>
@@ -605,7 +605,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public abstract T Select<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+        public abstract T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
         /// </summary>
@@ -614,7 +614,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public abstract IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters) where T : class, new();
+        public abstract IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
         /// </summary>
@@ -622,7 +622,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns>返回DataTable</returns>
-        public abstract DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters);
+        public abstract DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters);
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
         /// </summary>
@@ -630,7 +630,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns>返回DataSet</returns>
-        public abstract DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters);
+        public abstract DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters);
         /// <summary>
         /// 通过原生执行ADONET查询操作
         /// </summary>
@@ -638,7 +638,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public abstract int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters);
+        public abstract int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
 
         #endregion
     }

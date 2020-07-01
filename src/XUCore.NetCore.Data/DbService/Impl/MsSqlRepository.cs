@@ -19,26 +19,26 @@ namespace XUCore.NetCore.Data.DbService
         public MsSqlRepository(IBaseContext context) : base(context) { }
 
         #region mssql专有的ado执行
-        public override int ExecuteSql(string sql, params DbParameter[] parameters)
+        public override int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             var db = this._context as DbContext;
             return db.Database.ExecuteSqlRaw(sql, parameters);
         }
 
-        public override T Select<T>(string sql, CommandType type, params DbParameter[] parameters)
+        public override T Select<T>(string sql, CommandType type, params IDataParameter[] parameters)
         {
             var res = SelectList<T>(sql, type, parameters);
 
             return res.Count > 0 ? res[0] : null;
         }
 
-        public override IList<T> SelectList<T>(string sql, CommandType type, params DbParameter[] parameters)
+        public override IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters)
         {
             return SelectList(sql, type, parameters).ToList<T>();
         }
 
-        public override DataTable SelectList(string sql, CommandType type, params DbParameter[] parameters)
+        public override DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -66,7 +66,7 @@ namespace XUCore.NetCore.Data.DbService
 
         }
 
-        public override DataSet SelectDataSet(string sql, CommandType type, params DbParameter[] parameters)
+        public override DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
             DataSet ds = new DataSet();
@@ -93,7 +93,7 @@ namespace XUCore.NetCore.Data.DbService
             }
         }
 
-        public override int ExecuteAdoNet(string sql, CommandType type, params DbParameter[] parameters)
+        public override int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
         {
             try
             {
