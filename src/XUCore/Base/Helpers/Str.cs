@@ -622,19 +622,6 @@ namespace XUCore.Helpers
 
         #endregion ToCamelCase(将字符串转换为骆驼策略)
 
-        #region GenerateNonceStr(生成随机字符串)
-
-        /// <summary>
-        /// 生成随机字符串
-        /// </summary>
-        /// <returns></returns>
-        public static string GenerateNonceStr()
-        {
-            return Guid.NewGuid().ToString("N");
-        }
-
-        #endregion GenerateNonceStr(生成随机字符串)
-
         #region SplitWordGroup(分隔词组)
 
         /// <summary>
@@ -866,16 +853,51 @@ namespace XUCore.Helpers
 
         #endregion GetImgUrl(获取HTML内容中的所有Img url)
 
-        #region GetNoceStr(获取指定位数的随机数字符串)
+        #region GetNoncestrByGuid(生成随机字符串)
+
+        /// <summary>
+        /// 生成随机字符串
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNoncestrByGuid()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
+
+        #endregion GetNoncestrByGuid(生成随机字符串)
+
+        #region GetNonceStr(获取指定位数的随机数字符串)
 
         /// <summary>
         /// 获取指定位数的随机数字符串
         /// </summary>
         /// <param name="length">生成长度</param>
+        /// <param name="isUpperCase">是否包含大写字母</param>
+        /// <param name="isLowerCase">是否包含小写字母</param>
+        /// <param name="isNumbers">是否包含数字</param>
+        /// <param name="isCharacter">是否包含字符</param>
         /// <returns></returns>
-        public static string GetNoceStr(int length)
+        public static string GetNoncestr(int length, bool isUpperCase = true, bool isLowerCase = true, bool isNumbers = true, bool isCharacter = true)
         {
-            string str = "0123456789";
+            string str = "";
+            if (isUpperCase)
+                str += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (isLowerCase)
+                str += "abcdefghijklmnopqrstuvwxyz";
+            if (isNumbers)
+                str += "0123456789";
+            if (isCharacter)
+                str += "!@#$%^&*";
+            return GetRandomStr(str, length);
+        }
+        /// <summary>
+        /// 获取随机字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string GetRandomStr(string str, int length)
+        {
             Random r = new Random();
             string result = string.Empty;
 
@@ -891,19 +913,20 @@ namespace XUCore.Helpers
 
         #endregion GetNoceStr(获取指定位数的随机数字符串)
 
-        #region CreateOrderNumber(创建指定日期的订单号码（yyyyMMddHHmmssfff +4 位随机数）)
+        #region CreateOrderNumber(创建指定日期的订单号码（yyyyMMddHHmmssfff + 4 位随机数）)
 
         /// <summary>
         /// 创建指定日期的订单号码（yyyyMMddHHmmssfff +4 位随机数）
         /// </summary>
         /// <param name="name">指定订单前缀</param>
+        /// <param name="randomLength">随机数长度</param>
         /// <returns></returns>
-        public static string CreateOrderNumber(string name)
+        public static string CreateOrderNumber(string name, int randomLength = 4)
         {
-            return string.Format("{0}{1}{2}", name, DateTime.Now.ToString("yyyyMMddHHmmssfff"), GetNoceStr(4));
+            return string.Format("{0}{1}{2}", name, DateTime.Now.ToString("yyyyMMddHHmmssfff"), GetNoncestr(randomLength, false, false, true, false));
         }
 
-        #endregion CreateOrderNumber(创建指定日期的订单号码（yyyyMMddHHmmssfff +4 位随机数）)
+        #endregion CreateOrderNumber(创建指定日期的订单号码（yyyyMMddHHmmssfff + 4 位随机数）)
     }
 
     /// <summary>
