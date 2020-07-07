@@ -869,7 +869,7 @@ namespace XUCore.Helpers
         #region GetNonceStr(获取指定位数的随机数字符串)
 
         /// <summary>
-        /// 获取指定位数的随机数字符串
+        /// 生成随机字符串
         /// </summary>
         /// <param name="length">生成长度</param>
         /// <param name="isUpperCase">是否包含大写字母</param>
@@ -923,7 +923,7 @@ namespace XUCore.Helpers
         /// <returns></returns>
         public static string CreateOrderNumber(string name, int randomLength = 4)
         {
-            return string.Format("{0}{1}{2}", name, DateTime.Now.ToString("yyyyMMddHHmmssfff"), GetNoncestr(randomLength, false, false, true, false));
+            return string.Format("{0}{1}{2}", name, DateTime.Now.ToString("yyyyMMddHHmmssfff"), GetNonceStr(randomLength, false, false, true, false));
         }
 
         #endregion CreateOrderNumber(创建指定日期的订单号码（yyyyMMddHHmmssfff + 4 位随机数）)

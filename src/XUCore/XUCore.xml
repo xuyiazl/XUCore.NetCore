@@ -8029,12 +8029,6 @@
             <param name="str">字符串</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Helpers.Str.GenerateNonceStr">
-            <summary>
-            生成随机字符串
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.Helpers.Str.SplitWordGroup(System.String,System.Char)">
             <summary>
             分隔词组
@@ -8100,18 +8094,37 @@
             <param name="keyname">关键属性名</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Helpers.Str.GetNoceStr(System.Int32)">
+        <member name="M:XUCore.Helpers.Str.GetNonceStrByGuid">
             <summary>
-            获取指定位数的随机数字符串
+            生成随机字符串
             </summary>
-            <param name="length">生成长度</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Helpers.Str.CreateOrderNumber(System.String)">
+        <member name="M:XUCore.Helpers.Str.GetNonceStr(System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            生成随机字符串
+            </summary>
+            <param name="length">生成长度</param>
+            <param name="isUpperCase">是否包含大写字母</param>
+            <param name="isLowerCase">是否包含小写字母</param>
+            <param name="isNumbers">是否包含数字</param>
+            <param name="isCharacter">是否包含字符</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Str.GetRandomStr(System.String,System.Int32)">
+            <summary>
+            获取随机字符串
+            </summary>
+            <param name="str"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Str.CreateOrderNumber(System.String,System.Int32)">
             <summary>
             创建指定日期的订单号码（yyyyMMddHHmmssfff +4 位随机数）
             </summary>
             <param name="name">指定订单前缀</param>
+            <param name="randomLength">随机数长度</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Helpers.StringCase">
