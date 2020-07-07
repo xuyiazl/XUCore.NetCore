@@ -877,7 +877,7 @@ namespace XUCore.Helpers
         /// <param name="isNumbers">是否包含数字</param>
         /// <param name="isCharacter">是否包含字符</param>
         /// <returns></returns>
-        public static string GetNoncestr(int length, bool isUpperCase = true, bool isLowerCase = true, bool isNumbers = true, bool isCharacter = true)
+        public static string GetNonceStr(int length, bool isUpperCase = true, bool isLowerCase = true, bool isNumbers = true, bool isCharacter = true)
         {
             string str = "";
             if (isUpperCase)
