@@ -859,7 +859,7 @@ namespace XUCore.Helpers
         /// 生成随机字符串
         /// </summary>
         /// <returns></returns>
-        public static string GetNoncestrByGuid()
+        public static string GetNonceStrByGuid()
         {
             return Guid.NewGuid().ToString("N");
         }
