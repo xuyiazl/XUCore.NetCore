@@ -26,6 +26,8 @@ using XUCore.WebTests.Data.Entity;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Microsoft.Data.SqlClient;
+using XUCore.WebTests.Data.Repository;
+using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.WebTests.Controllers
 {
@@ -46,20 +48,34 @@ namespace XUCore.WebTests.Controllers
 
         private readonly IRedisService _redisService;
         private readonly IDbAdminUsersServiceProvider _dbAdminUsersServiceProvider;
+        private readonly IServiceProvider _serviceProvider;
         /// <summary>
         /// 文件上传服务
         /// </summary>
         private IFileUploadService _fileUploadService;
 
 
-        public HomeController(ILogger<HomeController> logger, IHttpService httpMessage, IDbAdminUsersServiceProvider dbAdminUsersServiceProvider, IFileUploadService fileUploadService, IRedisService redisService)
+        public HomeController(ILogger<HomeController> logger, INigelDbRepository<AdminUsers> nigelDb,
+            IServiceProvider serviceProvider,
+            IHttpService httpMessage, IDbAdminUsersServiceProvider dbAdminUsersServiceProvider, IFileUploadService fileUploadService, IRedisService redisService)
         {
             _logger = logger;
             _httpMessage = httpMessage;
             _fileUploadService = fileUploadService;
             _redisService = redisService;
             _dbAdminUsersServiceProvider = dbAdminUsersServiceProvider;
+            _serviceProvider = serviceProvider;
 
+            var res = GetRepository<AdminUsers>("nigeldb", typeof(INigelDbRepository<AdminUsers>));
+
+        }
+
+        public IBaseRepository<TEntity> GetRepository<TEntity>(string dbName, Type type)
+             where TEntity : class, new()
+        {
+            var res = (IBaseRepository<TEntity>)_serviceProvider.GetService(type);
+
+            return res;
         }
 
         //public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -123,7 +139,7 @@ namespace XUCore.WebTests.Controllers
         //}
 
         [NoCache]
-        [Route("{id}")]
+        [Route("{id?}")]
         [HtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {

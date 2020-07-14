@@ -32,6 +32,7 @@ namespace XUCore.WebTests
         {
             services.AddWriteDbContext(Configuration);
             services.AddReadDbContext(Configuration);
+            services.AddNigelDbContext(Configuration);
 
             //DI 注入db持久层业务逻辑
             services.Scan(scan =>
