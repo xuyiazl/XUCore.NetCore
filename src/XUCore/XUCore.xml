@@ -14052,11 +14052,11 @@
             </summary>
             <param name="action"></param>
         </member>
-        <member name="T:XUCore.Develops.Retry">
+        <member name="T:XUCore.Develops.RetryOnFailure">
             <summary>
             异常重试类
             <code>
-            Retry.Run(
+            RetryOnFailure.Run(
                 RetryAdapter.Create().Runs(5).Wait(500),
                 model,
                  (model,ndx) =>
@@ -14070,7 +14070,7 @@
             </code>
             </summary>
         </member>
-        <member name="M:XUCore.Develops.Retry.Run``1(``0,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.Run``1(``0,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14079,7 +14079,7 @@
             <param name="execHandler">执行任务</param>
             <param name="errorHandler">异常处理</param>
         </member>
-        <member name="M:XUCore.Develops.Retry.Run``1(``0,XUCore.Develops.RetryAdapter,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.Run``1(``0,XUCore.Develops.RetryAdapter,System.Action{``0,System.Int32},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14089,7 +14089,7 @@
             <param name="execHandler">执行任务</param>
             <param name="errorHandler">异常处理</param>
         </member>
-        <member name="M:XUCore.Develops.Retry.Run``2(``0,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.Run``2(``0,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14100,7 +14100,7 @@
             <param name="errorHandler">异常处理</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.Retry.Run``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.Run``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,``1},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14112,7 +14112,7 @@
             <param name="errorHandler">异常处理</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.Retry.RunAsync``1(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.RunAsync``1(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14122,7 +14122,7 @@
             <param name="errorHandler">异常处理</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.Retry.RunAsync``1(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.RunAsync``1(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14133,7 +14133,7 @@
             <param name="errorHandler">异常处理</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.Retry.RunAsync``2(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.RunAsync``2(``0,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>
@@ -14144,7 +14144,7 @@
             <param name="errorHandler">异常处理</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Develops.Retry.RunAsync``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
+        <member name="M:XUCore.Develops.RetryOnFailure.RunAsync``2(``0,XUCore.Develops.RetryAdapter,System.Func{``0,System.Int32,System.Threading.Tasks.Task{``1}},System.Action{System.Int32,System.Exception})">
             <summary>
             重试运行
             </summary>

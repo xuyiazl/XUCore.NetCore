@@ -11,7 +11,7 @@ namespace XUCore.NetCore.Sample
         {
             var model = 1;
 
-            Retry.Run(model,
+            RetryOnFailure.Run(model,
                 (data, ndx) =>
                 {
                     throw new Exception($"第{ndx}次失败异常测试");
@@ -21,7 +21,7 @@ namespace XUCore.NetCore.Sample
                     Console.WriteLine(error.Message);
                 });
 
-            Retry.Run(model,
+            RetryOnFailure.Run(model,
                 RetryAdapter.Create().Runs(5).Wait(1000),
                 (data, ndx) =>
                 {

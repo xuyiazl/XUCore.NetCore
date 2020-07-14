@@ -8,7 +8,7 @@ namespace XUCore.Develops
     /// <summary>
     /// 异常重试类
     /// <code>
-    /// Retry.Run(
+    /// RetryOnFailure.Run(
     ///     RetryAdapter.Create().Runs(5).Wait(500),
     ///     model,
     ///      (model,ndx) =>
@@ -21,7 +21,7 @@ namespace XUCore.Develops
     ///      });
     /// </code>
     /// </summary>
-    public static class Retry
+    public static class RetryOnFailure
     {
         /// <summary>
         /// 重试运行
