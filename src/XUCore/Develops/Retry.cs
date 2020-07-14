@@ -51,6 +51,7 @@ namespace XUCore.Develops
                 try
                 {
                     execHandler.Invoke(model, current);
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -137,6 +138,7 @@ namespace XUCore.Develops
                 try
                 {
                     await execHandler.Invoke(model, current);
+                    break;
                 }
                 catch (Exception ex)
                 {
