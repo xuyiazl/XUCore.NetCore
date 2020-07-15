@@ -1,14 +1,12 @@
-﻿using XUCore.NetCore.Data.DbService;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
+using System.Text;
+using XUCore.NetCore.Data.DbService;
 
-namespace XUCore.WebTests.Data.Repository
+namespace XUCore.NetCore.DataTest.DbRepository
 {
     public static partial class ServiceCollectionExtensions
     {
@@ -16,7 +14,14 @@ namespace XUCore.WebTests.Data.Repository
         {
             services.AddDbContext<NigelDbEntityContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("XUCore_ReadConnection")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(
+                    connectionString: configuration.GetConnectionString("NigelDB_Connection"),
+                    sqlServerOptionsAction: options =>
+                        {
+                            options.EnableRetryOnFailure();
+                        }
+                    )
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
@@ -38,7 +43,8 @@ namespace XUCore.WebTests.Data.Repository
 
     public class NigelDbEntityContext : BaseRepositoryFactory, INigelDbEntityContext
     {
-        public NigelDbEntityContext(DbContextOptions<NigelDbEntityContext> options) : base(typeof(NigelDbEntityContext), options, "sqlserver", $"XUCore.WebTests.Data.Mapping")
+        public NigelDbEntityContext(DbContextOptions<NigelDbEntityContext> options)
+            : base(typeof(NigelDbEntityContext), options, "sqlserver", $"XUCore.NetCore.DataTest.Mapping")
         {
 
         }

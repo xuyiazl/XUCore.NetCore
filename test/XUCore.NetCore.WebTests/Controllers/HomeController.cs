@@ -16,18 +16,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore.Redis;
-using XUCore.WebTests.Data.DbService;
-using XUCore.Paging;
-using XUCore.Serializer;
 using MessagePack;
 using System;
-using XUCore.NetCore;
-using XUCore.WebTests.Data.Entity;
-using System.Data;
-using MySql.Data.MySqlClient;
-using Microsoft.Data.SqlClient;
-using XUCore.WebTests.Data.Repository;
-using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.WebTests.Controllers
 {
@@ -47,7 +37,6 @@ namespace XUCore.WebTests.Controllers
         private readonly IHttpService _httpMessage;
 
         private readonly IRedisService _redisService;
-        private readonly IDbAdminUsersServiceProvider _dbAdminUsersServiceProvider;
         private readonly IServiceProvider _serviceProvider;
         /// <summary>
         /// 文件上传服务
@@ -55,59 +44,20 @@ namespace XUCore.WebTests.Controllers
         private IFileUploadService _fileUploadService;
 
 
-        public HomeController(ILogger<HomeController> logger, INigelDbRepository<AdminUsers> nigelDb,
+        public HomeController(ILogger<HomeController> logger,
             IServiceProvider serviceProvider,
-            IHttpService httpMessage, IDbAdminUsersServiceProvider dbAdminUsersServiceProvider, IFileUploadService fileUploadService, IRedisService redisService)
+            IHttpService httpMessage, IFileUploadService fileUploadService, IRedisService redisService)
         {
             _logger = logger;
             _httpMessage = httpMessage;
             _fileUploadService = fileUploadService;
             _redisService = redisService;
-            _dbAdminUsersServiceProvider = dbAdminUsersServiceProvider;
             _serviceProvider = serviceProvider;
 
-            var res = GetRepository<AdminUsers>("nigeldb", typeof(INigelDbRepository<AdminUsers>));
-
-        }
-
-        public IBaseRepository<TEntity> GetRepository<TEntity>(string dbName, Type type)
-             where TEntity : class, new()
-        {
-            var res = (IBaseRepository<TEntity>)_serviceProvider.GetService(type);
-
-            return res;
         }
 
         //public async Task<IActionResult> Index(CancellationToken cancellationToken)
         //{
-        //    var list = new List<AdminUsers>();
-        //    for (var ndx = 0; ndx < 10; ndx++)
-        //    {
-        //        var user = new AdminUsers
-        //        {
-        //            Company = "test",
-        //            CreatedTime = DateTime.Now,
-        //            Location = "test",
-        //            LoginCount = 0,
-        //            LoginLastIp = "127.0.0.1",
-        //            LoginLastTime = DateTime.Now,
-        //            Mobile = "17710146178",
-        //            Name = $"徐毅{ndx}",
-        //            Password = "123456",
-        //            Picture = $"徐毅{ndx}",
-        //            Position = $"徐毅{ ndx }",
-        //            Status = true,
-        //            UserName = "xuyi"
-        //        };
-        //        list.Add(user);
-        //    }
-        //    var res4 = _dbAdminUsersServiceProvider.SelectList<AdminUsers>("select * from AdminUsers", CommandType.Text, new SqlParameter("name", "1"));
-        //    var res0 = _dbAdminUsersServiceProvider.BatchInsert(list.ToArray());
-        //    var res3 = _dbAdminUsersServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
-
-        //    //var re2 = await _dbAdminUsersServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsers() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
-        //    var re1 = await _dbAdminUsersServiceProvider.BatchDeleteAsync(c => c.Id > 22);
-
 
         //    var ur2 = UrlArguments.Create("api/messagepack/add");
 

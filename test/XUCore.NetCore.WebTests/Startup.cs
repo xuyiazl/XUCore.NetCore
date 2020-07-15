@@ -12,8 +12,6 @@ using XUCore.NetCore.HttpFactory;
 using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
 using XUCore.NetCore.Data.DbService;
-using XUCore.WebTests.Data.DbService;
-using XUCore.WebTests.Data.Repository;
 using System;
 
 namespace XUCore.WebTests
@@ -30,18 +28,6 @@ namespace XUCore.WebTests
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWriteDbContext(Configuration);
-            services.AddReadDbContext(Configuration);
-            services.AddNigelDbContext(Configuration);
-
-            //DI 注入db持久层业务逻辑
-            services.Scan(scan =>
-               scan.FromAssemblyOf<IDbDependencyService>()
-               .AddClasses(impl => impl.AssignableTo(typeof(IDbDependencyService)))
-               .AsImplementedInterfaces()
-               .WithScopedLifetime()
-           );
-
             services.AddHttpService("test", "http://120.25.195.4:31924");
 
             services.AddRedisService().AddJsonRedisSerializer();

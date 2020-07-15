@@ -37,11 +37,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.RazorTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.WebTests", "test\XUCore.NetCore.WebTests\XUCore.NetCore.WebTests.csproj", "{7D5924A1-A8D5-4CDC-ABCA-9F4E3B8D452F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.Sample", "test\XUCore.NetCore.Sample\XUCore.NetCore.Sample.csproj", "{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.Sample", "test\XUCore.NetCore.Sample\XUCore.NetCore.Sample.csproj", "{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8DFC589-0B10-4CF2-B7B2-688A1236D2D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.DataTest", "test\XUCore.NetCore.DataTest\XUCore.NetCore.DataTest.csproj", "{006ED0C4-71A2-47DE-8057-256DCF73F280}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006ED0C4-71A2-47DE-8057-256DCF73F280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006ED0C4-71A2-47DE-8057-256DCF73F280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006ED0C4-71A2-47DE-8057-256DCF73F280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006ED0C4-71A2-47DE-8057-256DCF73F280}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{93D93C0B-64EC-4FE8-918E-A2A0DF0F1D8E} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
 		{7D5924A1-A8D5-4CDC-ABCA-9F4E3B8D452F} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
 		{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
+		{006ED0C4-71A2-47DE-8057-256DCF73F280} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C60367-AD3A-442A-A79A-F9D652E5089F}
