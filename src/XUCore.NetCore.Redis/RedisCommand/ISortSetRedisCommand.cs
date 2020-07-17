@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackExchange.Redis;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,13 +75,14 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="key"></param>
         /// <param name="start"></param>
         /// <param name="stop"></param>
+        /// <param name="exclude"></param>
         /// <param name="orderby">0：Ascending，1：Descending</param>
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <param name="connectionName"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        IList<T> SortedRangeByScore<T>(string key, double start, double stop, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null);
+        IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null);
         /// <summary>
         /// 获取有序集合
         /// </summary>

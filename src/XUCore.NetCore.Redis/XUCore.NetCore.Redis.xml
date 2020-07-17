@@ -1189,13 +1189,14 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有续集和的值
             </summary>
             <param name="key"></param>
             <param name="start"></param>
             <param name="stop"></param>
+            <param name="exclude"></param>
             <param name="orderby">0：Ascending，1：Descending</param>
             <param name="skip"></param>
             <param name="take"></param>
@@ -1297,13 +1298,14 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeByScoreAsync``1(System.String,System.Double,System.Double,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeByScoreAsync``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有续集和的值
             </summary>
             <param name="key"></param>
             <param name="start"></param>
             <param name="stop"></param>
+            <param name="exclude"></param>
             <param name="orderby">0：Ascending，1：Descending</param>
             <param name="skip"></param>
             <param name="take"></param>

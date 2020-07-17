@@ -95,7 +95,7 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public IList<T> SortedRangeByScore<T>(string key, double start, double stop, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
+        public IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
@@ -103,7 +103,7 @@ namespace XUCore.NetCore.Redis
             {
                 Order o = orderby == 1 ? Order.Descending : Order.Ascending;
 
-                var resultEntry = db.SortedSetRangeByScore(key, start, stop, order: o, skip: skip, take: take);
+                var resultEntry = db.SortedSetRangeByScore(key, start, stop, exclude: exclude, order: o, skip: skip, take: take);
 
                 if (serializer != null)
                     return serializer.Deserialize<T>(resultEntry);
