@@ -2,15 +2,15 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Description>
-			NetCore项目中间件
+			NetCore 项目中间件
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common 项目中间件</Description>
+		<Description>.NET Core 项目中间件</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<PackageId>XUCore.NetCore</PackageId>
 		<Product>XUCore.NetCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

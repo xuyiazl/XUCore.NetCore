@@ -2,15 +2,15 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Description>
-			数据库帮助类，MYSQL和MSSQL自由切换
+			数据库仓储，MYSQL和MSSQL自由切换
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common 数据库帮助类</Description>
+		<Description>.NET Core Data 数据库仓储</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<PackageId>XUCore.NetCore.Data</PackageId>
 		<Product>XUCore.NetCore.Data</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

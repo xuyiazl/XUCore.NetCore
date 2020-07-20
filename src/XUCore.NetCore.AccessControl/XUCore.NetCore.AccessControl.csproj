@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Description>
-			NetCore资源访问控制
+			NetCore AccessControl 资源访问控制
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core AccessControl 资源访问控制</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<PackageId>XUCore.NetCore.AccessControl</PackageId>
 		<Product>XUCore.NetCore.AccessControl</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

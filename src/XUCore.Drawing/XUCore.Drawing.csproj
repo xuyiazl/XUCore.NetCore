@@ -9,9 +9,9 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common 绘图帮助类库</Description>
+		<Description>.NET Core Drawing 绘图帮助类库</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<PackageId>XUCore.Drawing</PackageId>
 		<Product>XUCore.Drawing</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
