@@ -46,18 +46,15 @@ namespace XUCore.NetCore.Extensions
         /// </summary>
         /// <remarks>引入 ICacheManager 使用</remarks>
         /// <param name="services">服务集合</param>
-        /// <param name="memoryCacheOptions"></param>
-        public static void AddCacheManager(this IServiceCollection services, MemoryCacheOptions memoryCacheOptions = null)
+        /// <param name="options"></param>
+        public static void AddCacheManager(this IServiceCollection services, Action<MemoryCacheOptions> options = null)
         {
-            //services.AddSingleton<IMemoryCache, MemoryCache>();
+            if (options != null)
+                services.Configure(options);
 
-            if (memoryCacheOptions == null)
-                memoryCacheOptions = new MemoryCacheOptions() { };
+            services.AddSingleton<IMemoryCache, MemoryCache>();
 
-            services.AddSingleton<ICacheManager>(o =>
-            {
-                return new CacheManager(memoryCacheOptions);
-            });
+            services.TryAddSingleton<ICacheManager, CacheManager>();
         }
 
 

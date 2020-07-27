@@ -16,9 +16,9 @@ namespace XUCore.Cache
         /// MemoryCache缓存接口
         /// </summary>
         protected IMemoryCache _cache;
-        public CacheManager(MemoryCacheOptions options)
+        public CacheManager(IMemoryCache memoryCache)
         {
-            _cache = new MemoryCache(options);
+            _cache = memoryCache;
         }
 
         /// <summary>

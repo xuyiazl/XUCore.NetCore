@@ -125,13 +125,13 @@
             <param name="size">每秒限制的数据大小，单位kb</param>
             <param name="monitoring">监控</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})">
             <summary>
             绑定本地缓存管理
             </summary>
             <remarks>引入 ICacheManager 使用</remarks>
             <param name="services">服务集合</param>
-            <param name="memoryCacheOptions"></param>
+            <param name="options"></param>
         </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.AddUploadService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
