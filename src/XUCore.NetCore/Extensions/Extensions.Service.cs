@@ -49,10 +49,10 @@ namespace XUCore.NetCore.Extensions
         /// <param name="options"></param>
         public static void AddCacheManager(this IServiceCollection services, Action<MemoryCacheOptions> options = null)
         {
-            if (options != null)
-                services.Configure(options);
-
-            services.TryAddSingleton<IMemoryCache, MemoryCache>();
+            if (options == null)
+                services.AddMemoryCache();
+            else
+                services.AddMemoryCache(options);
 
             services.TryAddSingleton<ICacheManager, CacheManager>();
         }
