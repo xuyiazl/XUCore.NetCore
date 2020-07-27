@@ -52,7 +52,7 @@ namespace XUCore.NetCore.Extensions
             if (options != null)
                 services.Configure(options);
 
-            services.AddSingleton<IMemoryCache, MemoryCache>();
+            services.TryAddSingleton<IMemoryCache, MemoryCache>();
 
             services.TryAddSingleton<ICacheManager, CacheManager>();
         }
