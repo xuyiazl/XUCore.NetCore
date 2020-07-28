@@ -85,7 +85,7 @@ namespace XUCore.NetCore.Extensions
         /// <returns></returns>
         public static IServiceCollection AddRazorHtml(this IServiceCollection services)
         {
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddScoped<IRouteAnalyzer, RouteAnalyzer>();
             services.AddScoped<IRazorHtmlGenerator, DefaultRazorHtmlGenerator>();
             return services;
@@ -100,15 +100,13 @@ namespace XUCore.NetCore.Extensions
         /// <param name="clientName"></param>
         /// <param name="baseAddress"></param>
         /// <param name="messageHandler"></param>
-        /// <param name="httpClientLeftTime"></param>
-        /// <param name="serviceLifetime"></param>
+        /// <param name="clientBuilder"></param>
         /// <returns></returns>
         public static IServiceCollection AddHttpService(this IServiceCollection services,
             string clientName,
             string baseAddress,
             Func<HttpMessageHandler> messageHandler = null,
-            TimeSpan? httpClientLeftTime = null,
-            ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
+            Action<IHttpClientBuilder> clientBuilder = null)
         {
             Action<HttpClient> client = c =>
             {
@@ -116,7 +114,7 @@ namespace XUCore.NetCore.Extensions
                 c.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
             };
 
-            services.AddHttpService(clientName, client, messageHandler, httpClientLeftTime, serviceLifetime);
+            services.AddHttpService(clientName, client, messageHandler, clientBuilder);
 
             return services;
         }
@@ -128,18 +126,14 @@ namespace XUCore.NetCore.Extensions
         /// <param name="clientName"></param>
         /// <param name="client"></param>
         /// <param name="messageHandler"></param>
-        /// <param name="httpClientLeftTime"></param>
-        /// <param name="serviceLifetime"></param>
+        /// <param name="clientBuilder"></param>
         public static IServiceCollection AddHttpService(this IServiceCollection services,
             string clientName = "apiClient",
             Action<HttpClient> client = null,
             Func<HttpMessageHandler> messageHandler = null,
-            TimeSpan? httpClientLeftTime = null,
-            ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
+            Action<IHttpClientBuilder> clientBuilder = null)
         {
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            services.AddPolicyRegistry();
+            services.AddHttpContextAccessor();
 
             if (client == null)
                 client = c =>
@@ -165,37 +159,10 @@ namespace XUCore.NetCore.Extensions
                     return handler;
                 });
 
-            if (httpClientLeftTime != null)
-                httpClientBuilder.SetHandlerLifetime(httpClientLeftTime.Value);
+            if (clientBuilder != null)
+                clientBuilder.Invoke(httpClientBuilder);
 
-            services.AddHttpServiceLeftTime(serviceLifetime);
-
-            return services;
-        }
-
-        /// <summary>
-        /// 注册 HTTPFactory Srevice
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="serviceLifetime"></param>
-        /// <returns></returns>
-        private static IServiceCollection AddHttpServiceLeftTime(this IServiceCollection services,
-           ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
-        {
-            switch (serviceLifetime)
-            {
-                case ServiceLifetime.Scoped:
-                    services.TryAddScoped<IHttpService, HttpMessageService>();
-                    break;
-
-                case ServiceLifetime.Transient:
-                    services.TryAddTransient<IHttpService, HttpMessageService>();
-                    break;
-
-                case ServiceLifetime.Singleton:
-                    services.TryAddSingleton<IHttpService, HttpMessageService>();
-                    break;
-            }
+            services.TryAddSingleton<IHttpService, HttpService>();
 
             return services;
         }

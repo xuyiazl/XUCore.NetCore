@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Webs.Clients;
 
 namespace XUCore.NetCore.HttpFactory
 {

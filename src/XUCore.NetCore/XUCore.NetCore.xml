@@ -153,7 +153,7 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
             <summary>
             注册 HttpFactory Service
             </summary>
@@ -161,11 +161,10 @@
             <param name="clientName"></param>
             <param name="baseAddress"></param>
             <param name="messageHandler"></param>
-            <param name="httpClientLeftTime"></param>
-            <param name="serviceLifetime"></param>
+            <param name="clientBuilder"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Nullable{System.TimeSpan},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
             <summary>
             注册 HTTPFactory Srevice
             </summary>
@@ -173,16 +172,7 @@
             <param name="clientName"></param>
             <param name="client"></param>
             <param name="messageHandler"></param>
-            <param name="httpClientLeftTime"></param>
-            <param name="serviceLifetime"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpServiceLeftTime(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-            注册 HTTPFactory Srevice
-            </summary>
-            <param name="services"></param>
-            <param name="serviceLifetime"></param>
-            <returns></returns>
+            <param name="clientBuilder"></param>
         </member>
         <member name="T:XUCore.NetCore.Extensions.ViewResultExtensions">
             <summary>
@@ -354,11 +344,6 @@
             返回的数据类型为MessagePack-Jackson
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.HttpFactory.HttpMessageService">
-            <summary>
-            HttpRequestMessage服务类
-            </summary>
-        </member>
         <member name="T:XUCore.NetCore.HttpFactory.HttpReceiveContent">
             <summary>
             请求成功后返回的数据读取操作
@@ -377,6 +362,11 @@
         <member name="T:XUCore.NetCore.HttpFactory.HttpSendContent">
             <summary>
             请求发送的数据操作
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.HttpFactory.HttpService">
+            <summary>
+            HttpRequestMessage服务类
             </summary>
         </member>
         <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
