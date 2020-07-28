@@ -10,7 +10,7 @@ using XUCore.Webs;
 
 namespace XUCore.NetCore.HttpFactory
 {
-    public static class UrlArgumentExtensions
+    public static partial class UrlArgumentExtensions
     {
         /// <summary>
         /// 异步GET请求

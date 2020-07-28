@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace XUCore.NetCore.HttpFactory
 {
-    public static class IHttpServiceExtensions
+    public static partial class IHttpServiceExtensions
     {
         /// <summary>
         /// 异步GET请求
@@ -26,43 +26,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> GetAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.GetAsync(urlArguments, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.GetAsync<TResult>(urlArguments, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步POST请求
@@ -80,43 +50,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> PostAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PostAsync(urlArguments, model, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.PostAsync<TModel, TResult>(urlArguments, model, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步POST请求
@@ -133,43 +73,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> PostAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PostAsync(urlArguments, content, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.PostAsync<TResult>(urlArguments, content, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步Put请求
@@ -187,43 +97,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> PutAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PutAsync(urlArguments, model, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.PutAsync<TModel, TResult>(urlArguments, model, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步Put请求
@@ -239,43 +119,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="cancellationToken"></param>
         public static async Task<TResult> PutAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PutAsync(urlArguments, content, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+             => await httpMessageService.PutAsync<TResult>(urlArguments, content, new HttpOptions<TResult>
+             {
+                 MediaType = mediaType,
+                 SerializerOptions = options,
+                 ClientHandler = clientHandler,
+                 ErrorHandler = errorHandler
+             }, cancellationToken);
 
         /// <summary>
         /// 异步Patch请求
@@ -293,43 +143,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> PatchAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PatchAsync(urlArguments, model, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.PatchAsync<TModel, TResult>(urlArguments, model, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步Patch请求
@@ -345,43 +165,13 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="cancellationToken"></param>
         public static async Task<TResult> PatchAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.PatchAsync(urlArguments, content, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.PatchAsync<TResult>(urlArguments, content, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
 
         /// <summary>
         /// 异步DELETE请求
@@ -397,42 +187,12 @@ namespace XUCore.NetCore.HttpFactory
         /// <returns></returns>
         public static async Task<TResult> DeleteAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments,
             HttpMediaType mediaType = HttpMediaType.Json, MessagePackSerializerOptions options = null, Action<HttpClient> clientHandler = null, Func<HttpResponseMessage, Task<TResult>> errorHandler = null, CancellationToken cancellationToken = default)
-        {
-            options = options ?? MessagePackSerializerResolver.DateTimeOptions;
-
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
-                .SetHeaderAccept(mediaType);
-
-            if (clientHandler != null)
-                clientHandler.Invoke(client);
-
-            var responseMessage = await client.DeleteAsync(urlArguments, cancellationToken);
-
-            //if (!responseMessage.IsSuccessStatusCode)
-            //{
-            //    if (errorHandler == null)
-            //    {
-            //        var errorMessage = await responseMessage.Content.ReadAsAsync<ReturnModel<string>>(mediaType, options);
-
-            //        return new TResult
-            //        {
-            //            code = errorMessage.code,
-            //            message = errorMessage.message,
-            //            subCode = errorMessage.subCode,
-            //            requestTime = errorMessage.requestTime,
-            //            bodyMessage = default
-            //        };
-            //    }
-            //    else
-            //    {
-            //        return await errorHandler.Invoke(responseMessage);
-            //    }
-            //}
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return errorHandler == null ? default : await errorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(mediaType, options);
-        }
+            => await httpMessageService.DeleteAsync<TResult>(urlArguments, new HttpOptions<TResult>
+            {
+                MediaType = mediaType,
+                SerializerOptions = options,
+                ClientHandler = clientHandler,
+                ErrorHandler = errorHandler
+            }, cancellationToken);
     }
 }
