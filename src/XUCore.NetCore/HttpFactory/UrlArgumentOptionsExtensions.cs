@@ -20,7 +20,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> GetAsync<TResult>(this UrlArguments urlArguments, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> GetAsync<TResult>(this UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.GetAsync<TResult>(urlArguments, options, cancellationToken);
         /// <summary>
         /// 异步POST请求
@@ -32,7 +32,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PostAsync<TModel, TResult>(urlArguments, model, options, cancellationToken);
         /// <summary>
         /// 异步POST请求
@@ -43,7 +43,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TResult>(this UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TResult>(this UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PostAsync<TResult>(urlArguments, content, options, cancellationToken);
         /// <summary>
         /// 异步Put请求
@@ -55,7 +55,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PutAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PutAsync<TModel, TResult>(urlArguments, model, options, cancellationToken);
         /// <summary>
         /// 异步Put请求
@@ -65,7 +65,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PutAsync<TResult>(this UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TResult>(this UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PutAsync<TResult>(urlArguments, content, options, cancellationToken);
         /// <summary>
         /// 异步Patch请求
@@ -77,7 +77,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PatchAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TModel, TResult>(this UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PatchAsync<TModel, TResult>(urlArguments, model, options, cancellationToken);
         /// <summary>
         /// 异步Patch请求
@@ -87,7 +87,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PatchAsync<TResult>(this UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TResult>(this UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.PatchAsync<TResult>(urlArguments, content, options, cancellationToken);
         /// <summary>
         /// 异步DELETE请求
@@ -97,7 +97,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> DeleteAsync<TResult>(this UrlArguments urlArguments, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> DeleteAsync<TResult>(this UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         => await HttpRemote.Service.DeleteAsync<TResult>(urlArguments, options, cancellationToken);
     }
 }

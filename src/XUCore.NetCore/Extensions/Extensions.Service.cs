@@ -162,6 +162,7 @@ namespace XUCore.NetCore.Extensions
             if (clientBuilder != null)
                 clientBuilder.Invoke(httpClientBuilder);
 
+            //services.TryAddScoped(typeof(IHttpOptions<>), typeof(HttpOptions<>));
             services.TryAddSingleton<IHttpService, HttpService>();
 
             return services;

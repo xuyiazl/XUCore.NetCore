@@ -1,4 +1,4 @@
-﻿using MessagePack;
+﻿    using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,7 +12,7 @@ namespace XUCore.NetCore.HttpFactory
     /// 请求配置
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    public class HttpOptions<TResult>
+    public class HttpOptions<TResult> : IHttpOptions<TResult>
     {
         /// <summary>
         /// 默认配置

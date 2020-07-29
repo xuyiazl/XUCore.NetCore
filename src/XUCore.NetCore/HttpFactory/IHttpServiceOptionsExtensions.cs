@@ -21,7 +21,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> GetAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> GetAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -50,7 +50,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -78,7 +78,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -107,7 +107,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PutAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -134,7 +134,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PutAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -163,7 +163,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PatchAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -190,7 +190,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PatchAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
@@ -217,7 +217,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> DeleteAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> DeleteAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
