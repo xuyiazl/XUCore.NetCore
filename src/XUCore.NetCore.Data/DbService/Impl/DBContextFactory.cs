@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,5 +32,32 @@ namespace XUCore.NetCore.Data.DbService
         {
             return await base.SaveChangesAsync(cancellationToken);
         }
+
+        public virtual IDbContextTransaction BeginTransaction()
+        {
+            return base.Database.BeginTransaction();
+        }
+
+        public virtual async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+        {
+            return await base.Database.BeginTransactionAsync(cancellationToken);
+        }
+
+        public virtual void CommitTransaction()
+        {
+            base.Database.CommitTransaction();
+        }
+
+        public virtual void RollbackTransaction()
+        {
+            base.Database.RollbackTransaction();
+        }
+
+        public virtual bool CanConnect()
+        {
+            return base.Database.CanConnect();
+        }
+
+        public virtual IDbContextTransaction CurrentTransaction => base.Database.CurrentTransaction;
     }
 }

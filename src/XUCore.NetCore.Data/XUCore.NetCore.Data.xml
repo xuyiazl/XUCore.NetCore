@@ -27,17 +27,104 @@
             Used for Sqlite, Truncate table 
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.SaveChangesAsync(System.Threading.CancellationToken)">
+        <member name="P:XUCore.NetCore.Data.DbService.IBaseContext.ConnectionStrings">
             <summary>
-            执行异步存储操作
+            连接字符串
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.Set``1">
+            <summary>
+            dbset
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.SaveChanges">
+            <summary>
+            保存
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步保存
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.BeginTransaction">
+            <summary>
+            事务开始
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步事务开始
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.CommitTransaction">
+            <summary>
+            提交事务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.RollbackTransaction">
+            <summary>
+            事务回滚
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseContext.CanConnect">
+            <summary>
+            是否连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.IBaseContext.CurrentTransaction">
+            <summary>
+            当前事务
+            </summary>
         </member>
         <member name="T:XUCore.NetCore.Data.DbService.IBaseRepository`1">
             <summary>
             通用仓储库的方法定义
             </summary>
             <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BeginTransaction">
+            <summary>
+            事务开始
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步事务开始
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.CommitTransaction">
+            <summary>
+            提交事务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.RollbackTransaction">
+            <summary>
+            事务回滚
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.CanConnect">
+            <summary>
+            是否连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.IBaseRepository`1.CurrentTransaction">
+            <summary>
+            当前事务
+            </summary>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.SaveChanges">
             <summary>
@@ -438,6 +525,40 @@
             数据库的基础仓储库
             </summary>
             <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BeginTransaction">
+            <summary>
+            事务开始
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步事务开始
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.CommitTransaction">
+            <summary>
+            提交事务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.RollbackTransaction">
+            <summary>
+            事务回滚
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.CanConnect">
+            <summary>
+            是否连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.DbBaseRepository`1.CurrentTransaction">
+            <summary>
+            当前事务
+            </summary>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.SaveChanges">
             <summary>

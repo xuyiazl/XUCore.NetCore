@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -19,6 +20,38 @@ namespace XUCore.NetCore.Data.DbService
     public interface IBaseRepository<TEntity> where TEntity : class, new()
     {
         DbSet<TEntity> Entity { get; }
+
+        //事务
+
+        /// <summary>
+        /// 事务开始
+        /// </summary>
+        /// <returns></returns>
+        IDbContextTransaction BeginTransaction();
+        /// <summary>
+        /// 异步事务开始
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 提交事务
+        /// </summary>
+        void CommitTransaction();
+        /// <summary>
+        /// 事务回滚
+        /// </summary>
+        void RollbackTransaction();
+        /// <summary>
+        /// 是否连接
+        /// </summary>
+        /// <returns></returns>
+        bool CanConnect();
+        /// <summary>
+        /// 当前事务
+        /// </summary>
+        IDbContextTransaction CurrentTransaction { get; }
+
         //同步操作
 
         /// <summary>

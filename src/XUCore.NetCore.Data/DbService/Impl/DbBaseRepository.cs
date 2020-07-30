@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -42,6 +43,52 @@ namespace XUCore.NetCore.Data.DbService
                 return _entity;
             }
         }
+
+        //事务
+
+        /// <summary>
+        /// 事务开始
+        /// </summary>
+        /// <returns></returns>
+        public virtual IDbContextTransaction BeginTransaction()
+        {
+            return _context.BeginTransaction();
+        }
+        /// <summary>
+        /// 异步事务开始
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.BeginTransactionAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 提交事务
+        /// </summary>
+        public virtual void CommitTransaction()
+        {
+            _context.CommitTransaction();
+        }
+        /// <summary>
+        /// 事务回滚
+        /// </summary>
+        public virtual void RollbackTransaction()
+        {
+            _context.RollbackTransaction();
+        }
+        /// <summary>
+        /// 是否连接
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool CanConnect()
+        {
+            return _context.CanConnect();
+        }
+        /// <summary>
+        /// 当前事务
+        /// </summary>
+        public virtual IDbContextTransaction CurrentTransaction => _context.CurrentTransaction;
 
         //同步操作
 
