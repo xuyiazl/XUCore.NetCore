@@ -82,7 +82,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="connectionName"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null);
+        IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null);
         /// <summary>
         /// 获取有序集合
         /// </summary>
@@ -94,7 +94,7 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="connectionName"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        Dictionary<T, double> SortedRange<T>(string key, long start, long stop, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null);
+        Dictionary<T, double> SortedRange<T>(string key, long start, long stop, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null);
         /// <summary>
         /// 返回有序集合中指定成员的索引
         /// </summary>
@@ -105,6 +105,6 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="connectionName"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        long? SortedZrank<T>(string key, T value, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null);
+        long? SortedZrank<T>(string key, T value, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null);
     }
 }

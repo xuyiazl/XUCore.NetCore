@@ -1189,7 +1189,7 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,StackExchange.Redis.Order,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有续集和的值
             </summary>
@@ -1204,7 +1204,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRange``1(System.String,System.Int64,System.Int64,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRange``1(System.String,System.Int64,System.Int64,StackExchange.Redis.Order,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有序集合
             </summary>
@@ -1217,7 +1217,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedZrank``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedZrank``1(System.String,``0,StackExchange.Redis.Order,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             返回有序集合中指定成员的索引
             </summary>
@@ -1298,7 +1298,7 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeByScoreAsync``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.Int32,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeByScoreAsync``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,StackExchange.Redis.Order,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有续集和的值
             </summary>
@@ -1313,7 +1313,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeAsync``1(System.String,System.Int64,System.Int64,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRangeAsync``1(System.String,System.Int64,System.Int64,StackExchange.Redis.Order,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有序集合
             </summary>
@@ -1326,7 +1326,7 @@
             <param name="serializer"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedZrankAsync``1(System.String,``0,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedZrankAsync``1(System.String,``0,StackExchange.Redis.Order,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             返回有序集合中指定成员的索引
             </summary>

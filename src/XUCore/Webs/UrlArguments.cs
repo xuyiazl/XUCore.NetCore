@@ -20,11 +20,32 @@
     public class UrlArguments
     {
         private IDictionary<string, object>
-                Args = new SortedDictionary<string, object>();
+                _parameters = new SortedDictionary<string, object>();
 
         private string _host;
         public string ClientName { get; set; }
         public string Url { get; private set; }
+
+        /// <summary>
+        /// 参数列表
+        /// </summary>
+        public IDictionary<string, object> Parameters
+        {
+            get
+            {
+                return _parameters;
+            }
+        }
+        /// <summary>
+        /// 参数字符串
+        /// </summary>
+        public string ParameterString
+        {
+            get
+            {
+                return _parameters.Select(m => m.Key + "=" + m.Value).DefaultIfEmpty().Aggregate((m, n) => m + "&" + n);
+            }
+        }
 
         public UrlArguments()
         {
@@ -178,13 +199,13 @@
         /// <returns></returns>
         public UrlArguments Add(string key, object value)
         {
-            if (!Args.ContainsKey(key))
+            if (!_parameters.ContainsKey(key))
             {
-                Args.Add(key, value);
+                _parameters.Add(key, value);
             }
             else
             {
-                Args[key] = value;
+                _parameters[key] = value;
             }
 
             return this;
@@ -203,13 +224,13 @@
                 return this;
             }
 
-            if (!Args.ContainsKey(key))
+            if (!_parameters.ContainsKey(key))
             {
-                Args.Add(key, value);
+                _parameters.Add(key, value);
             }
             else
             {
-                Args[key] = value;
+                _parameters[key] = value;
             }
 
             return this;
@@ -221,11 +242,11 @@
         /// <returns></returns>
         public UrlArguments Remove(string key)
         {
-            if (Args != null)
+            if (_parameters != null)
             {
-                if (Args.ContainsKey(key))
+                if (_parameters.ContainsKey(key))
                 {
-                    Args.Remove(key);
+                    _parameters.Remove(key);
                 }
             }
 
@@ -237,7 +258,7 @@
         /// <returns></returns>
         public UrlArguments Clear()
         {
-            Args.Clear();
+            _parameters.Clear();
             _host = string.Empty;
             return this;
         }
@@ -250,7 +271,7 @@
             StringBuilder url = new StringBuilder();
             url.Append(_host);
 
-            if (Args.Count == 0)
+            if (_parameters.Count == 0)
             {
                 Url = url.ToString();
                 return this;
@@ -260,7 +281,7 @@
                 url.Append("?");
             }
 
-            url.Append(Args.Select(m => m.Key + "=" + m.Value).DefaultIfEmpty().Aggregate((m, n) => m + "&" + n));
+            url.Append(ParameterString);
 
             Url = url.ToString();
             return this;

@@ -17837,6 +17837,16 @@
             Url构造器
             </summary>
         </member>
+        <member name="P:XUCore.Webs.UrlArguments.Parameters">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:XUCore.Webs.UrlArguments.ParameterString">
+            <summary>
+            参数字符串
+            </summary>
+        </member>
         <member name="M:XUCore.Webs.UrlArguments.#ctor(System.String)">
             <summary>
             构造函数

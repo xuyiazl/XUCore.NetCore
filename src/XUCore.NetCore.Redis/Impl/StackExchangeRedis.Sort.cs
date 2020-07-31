@@ -95,15 +95,13 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
+        public IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
-
-                var resultEntry = db.SortedSetRangeByScore(key, start, stop, exclude: exclude, order: o, skip: skip, take: take);
+                var resultEntry = db.SortedSetRangeByScore(key, start, stop, exclude: exclude, order: orderby, skip: skip, take: take);
 
                 if (serializer != null)
                     return serializer.Deserialize<T>(resultEntry);
@@ -111,15 +109,13 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public Dictionary<T, double> SortedRange<T>(string key, long start, long stop, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null)
+        public Dictionary<T, double> SortedRange<T>(string key, long start, long stop, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
-
-                var resultEntry = db.SortedSetRangeByRankWithScores(key, start, stop, order: o);
+                var resultEntry = db.SortedSetRangeByRankWithScores(key, start, stop, order: orderby);
 
                 if (serializer != null)
                     return resultEntry.ToDictionary(t => serializer.Deserialize<T>(t.Element), t => t.Score);
@@ -127,17 +123,15 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public long? SortedZrank<T>(string key, T value, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null)
+        public long? SortedZrank<T>(string key, T value, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
-
                 if (serializer != null)
-                    return db.SortedSetRank(key, serializer.Serializer(value), o);
-                return db.SortedSetRank(key, redisSerializer.Serializer(value), o);
+                    return db.SortedSetRank(key, serializer.Serializer(value), orderby);
+                return db.SortedSetRank(key, redisSerializer.Serializer(value), orderby);
             });
         }
     }

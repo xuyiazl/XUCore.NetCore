@@ -97,15 +97,13 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public async Task<IList<T>> SortedRangeByScoreAsync<T>(string key, double start, double stop, Exclude exclude = Exclude.None, int orderby = 0, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
+        public async Task<IList<T>> SortedRangeByScoreAsync<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
-
-                var resultEntry = await db.SortedSetRangeByScoreAsync(key, start, stop, exclude: exclude, order: o, skip: skip, take: take);
+                var resultEntry = await db.SortedSetRangeByScoreAsync(key, start, stop, exclude: exclude, order: orderby, skip: skip, take: take);
 
                 if (serializer != null)
                     return serializer.Deserialize<T>(resultEntry);
@@ -113,30 +111,28 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public async Task<Dictionary<T, double>> SortedRangeAsync<T>(string key, long start, long stop, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null)
+        public async Task<Dictionary<T, double>> SortedRangeAsync<T>(string key, long start, long stop, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
-                var resultEntry = await db.SortedSetRangeByRankWithScoresAsync(key, start, stop, order: o);
+                var resultEntry = await db.SortedSetRangeByRankWithScoresAsync(key, start, stop, order: orderby);
                 if (serializer != null)
                     return resultEntry.ToDictionary(t => serializer.Deserialize<T>(t.Element), t => t.Score);
                 return resultEntry.ToDictionary(t => redisSerializer.Deserialize<T>(t.Element), t => t.Score);
             });
         }
 
-        public async Task<long?> SortedZrankAsync<T>(string key, T value, int orderby = 0, string connectionName = null, IRedisSerializer serializer = null)
+        public async Task<long?> SortedZrankAsync<T>(string key, T value, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
-                Order o = orderby == 1 ? Order.Descending : Order.Ascending;
                 if (serializer != null)
-                    return await db.SortedSetRankAsync(key, serializer.Serializer(value), o);
-                return await db.SortedSetRankAsync(key, redisSerializer.Serializer(value), o);
+                    return await db.SortedSetRankAsync(key, serializer.Serializer(value), orderby);
+                return await db.SortedSetRankAsync(key, redisSerializer.Serializer(value), orderby);
             });
         }
     }
