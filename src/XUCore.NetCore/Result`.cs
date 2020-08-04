@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace XUCore.NetCore
 {
@@ -15,6 +16,48 @@ namespace XUCore.NetCore
     [MessagePackObject]
     public class Result<T>
     {
+        /// <summary>
+        /// 返回结构体
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <param name="data"></param>
+        public Result(StateCode code, string message, T data = default) : this(code.Value(), "", message, data)
+        {
+        }
+        /// <summary>
+        /// 返回结构体
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="subCode"></param>
+        /// <param name="message"></param>
+        /// <param name="data"></param>
+        public Result(StateCode code, string subCode, string message, T data = default) : this(code.Value(), subCode, message, data)
+        {
+        }
+        /// <summary>
+        /// 返回结构体
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <param name="data"></param>
+        public Result(int code, string message, T data = default) : this(code, "", message, data)
+        {
+        }
+        /// <summary>
+        /// 返回结构体
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="subCode"></param>
+        /// <param name="message"></param>
+        /// <param name="data"></param>
+        public Result(int code, string subCode, string message, T data = default)
+        {
+            this.code = code;
+            this.subCode = subCode;
+            this.message = message;
+            this.data = data;
+        }
         /// <summary>
         /// 状态码
         /// </summary>
