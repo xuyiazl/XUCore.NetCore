@@ -31,7 +31,7 @@ namespace XUCore.NetCore.Filters
                 //_logger.LogInformation("Request was cancelled");
                 context.ExceptionHandled = true;
                 //context.Result = new Result(StateCode.Fail, "", R.CanceledMessage);
-                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = R.CanceledMessage, data = "", elapsedTime = -1 })
+                context.Result = new ObjectResult(new Result<string>(StateCode.Fail, R.CanceledMessage))
                 {
                     StatusCode = (int)HttpStatusCode.BadRequest
                 };
@@ -40,7 +40,7 @@ namespace XUCore.NetCore.Filters
             {
                 //context.Result = new Result(StateCode.Fail, "", context.Exception.Message);
 
-                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = context.Exception.Message, data = "", elapsedTime = -1 })
+                context.Result = new ObjectResult(new Result<string>(StateCode.Fail, context.Exception.Message))
                 {
                     StatusCode = (int)HttpStatusCode.Unauthorized
                 };
@@ -66,7 +66,7 @@ namespace XUCore.NetCore.Filters
 
                 //context.Result = new Result(StateCode.Fail, "", R.SystemError);
 
-                context.Result = new ObjectResult(new Result<string>() { code = -1, subCode = "", message = context.Exception.Message, data = "", elapsedTime = -1 })
+                context.Result = new ObjectResult(new Result<string>(StateCode.Fail, context.Exception.Message))
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };

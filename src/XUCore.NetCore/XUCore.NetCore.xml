@@ -1478,6 +1478,40 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="M:XUCore.NetCore.Result`1.#ctor(XUCore.NetCore.StateCode,System.String,`0)">
+            <summary>
+            返回结构体
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Result`1.#ctor(XUCore.NetCore.StateCode,System.String,System.String,`0)">
+            <summary>
+            返回结构体
+            </summary>
+            <param name="code"></param>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Result`1.#ctor(System.Int32,System.String,`0)">
+            <summary>
+            返回结构体
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Result`1.#ctor(System.Int32,System.String,System.String,`0)">
+            <summary>
+            返回结构体
+            </summary>
+            <param name="code"></param>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+        </member>
         <member name="P:XUCore.NetCore.Result`1.code">
             <summary>
             状态码

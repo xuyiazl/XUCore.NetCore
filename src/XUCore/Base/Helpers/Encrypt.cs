@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
+using XUCore.Serializer;
 
 namespace XUCore.Helpers
 {
@@ -374,6 +376,235 @@ namespace XUCore.Helpers
         }
 
         #endregion AES加密
+
+        #region AES加密（兼容多语言的解密加密，微软自带的补位不友好）
+
+        /// <summary>
+        /// Aes加密（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="appSecret"></param>
+        /// <param name="appId"></param>
+        /// <returns></returns>
+        public static string AesEncrypt<T>(T input, string appSecret, string appId)
+        {
+            if (input == null) return string.Empty;
+
+            var json = input.ToJson(camelCase: true);
+
+            return Encrypt.AesEncrypt(json, appSecret, appId);
+        }
+        /// <summary>
+        /// Aes解密（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="appSecret"></param>
+        /// <param name="appId"></param>
+        /// <returns></returns>
+        public static T AesDecrypt<T>(string input, string appSecret, ref string appId)
+        {
+            if (string.IsNullOrEmpty(input)) return default;
+
+            var val = Encrypt.AesDecrypt(input, appSecret, ref appId);
+
+            return val.ToObject<T>();
+        }
+        /// <summary>
+        /// Aes解密方法（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+        /// </summary>
+        /// <param name="input">密文</param>
+        /// <param name="appSecret"></param>
+        /// <param name="appid"></param>
+        /// <returns></returns>
+        public static string AesDecrypt(string input, string appSecret, ref string appid)
+        {
+            //byte[] Key = Convert.FromBase64String(appSecret);
+            byte[] Key = Encoding.UTF8.GetBytes(appSecret);
+            //iv向量 从密钥获取16位
+            byte[] Iv = new byte[16];
+            Array.Copy(Key, Iv, 16);
+            //解密字符串
+            byte[] btmpMsg = AesDecrypt(input, Iv, Key);
+
+            //消息体结构：  int[4](内容长度) + byte[](内容) + byte[](appid)
+
+            //获取解密后的消息头长度=====》网关为C#开发，请注意大小端的问题
+            int len = BitConverter.ToInt32(btmpMsg, 0);
+            var msgLen = 4;
+            //定义消息
+            byte[] bMsg = new byte[len];
+            //定义消息中appid长度
+            byte[] bAppid = new byte[btmpMsg.Length - msgLen - len];
+            //获取消息内容====需要去掉消息头从4位开始
+            Array.Copy(btmpMsg, msgLen, bMsg, 0, len);
+            //获取appid=====去掉消息头的4位，以及消息整体长度，剩下的就是appid长度
+            Array.Copy(btmpMsg, msgLen + len, bAppid, 0, btmpMsg.Length - msgLen - len);
+            //消息内容
+            string oriMsg = Encoding.UTF8.GetString(bMsg);
+            //appid内容
+            appid = Encoding.UTF8.GetString(bAppid);
+
+            return oriMsg;
+        }
+        /// <summary>
+        /// Aes解密方法（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="Iv"></param>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        private static byte[] AesDecrypt(string input, byte[] Iv, byte[] Key)
+        {
+            RijndaelManaged aes = new RijndaelManaged();
+            aes.KeySize = 256;
+            aes.BlockSize = 128;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.None;
+            aes.Key = Key;
+            aes.IV = Iv;
+            var decrypt = aes.CreateDecryptor(aes.Key, aes.IV);
+            byte[] xBuff = null;
+            using (var ms = new MemoryStream())
+            {
+                using (var cs = new CryptoStream(ms, decrypt, CryptoStreamMode.Write))
+                {
+                    byte[] baseStr = Convert.FromBase64String(input);
+
+                    byte[] msg = new byte[baseStr.Length + 32 - baseStr.Length % 32];
+                    Array.Copy(baseStr, msg, baseStr.Length);
+
+                    cs.Write(baseStr, 0, baseStr.Length);
+                }
+                xBuff = decode2(ms.ToArray());
+            }
+            return xBuff;
+        }
+
+        private static byte[] decode2(byte[] decrypted)
+        {
+            int pad = (int)decrypted[decrypted.Length - 1];
+            if (pad < 1 || pad > 32)
+                pad = 0;
+            byte[] res = new byte[decrypted.Length - pad];
+            Array.Copy(decrypted, 0, res, 0, decrypted.Length - pad);
+            return res;
+        }
+
+        /// <summary>
+        /// Aes加密方法（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="appSecret"></param>
+        /// <param name="appid"></param>
+        /// <returns></returns>
+        public static string AesEncrypt(string input, string appSecret, string appid)
+        {
+            //byte[] Key = Convert.FromBase64String(appSecret);
+            byte[] Key = Encoding.UTF8.GetBytes(appSecret);
+            //iv向量 从密钥获取16位
+            byte[] Iv = new byte[16];
+            Array.Copy(Key, Iv, 16);
+            //消息体
+            byte[] btmpMsg = Encoding.UTF8.GetBytes(input);
+            //消息长度
+            byte[] bMsgLen = BitConverter.GetBytes(btmpMsg.Length);
+            //appid
+            byte[] bAppid = Encoding.UTF8.GetBytes(appid);
+            //新的消息（消息长度+内容长度+appid长度）
+            byte[] bMsg = new byte[bMsgLen.Length + btmpMsg.Length + bAppid.Length];
+
+            //消息体结构：  int[4](内容长度) + byte[](内容) + byte[](appid)
+
+            //头部消息。记录消息长度
+            Array.Copy(bMsgLen, 0, bMsg, 0, bMsgLen.Length);
+            //追加消息内容
+            Array.Copy(btmpMsg, 0, bMsg, bMsgLen.Length, btmpMsg.Length);
+            //追加appid在尾部
+            Array.Copy(bAppid, 0, bMsg, bMsgLen.Length + btmpMsg.Length, bAppid.Length);
+            //加密并补位
+            return AesEncrypt(bMsg, Iv, Key);
+        }
+
+        /// <summary>
+        /// Aes加密方法（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="Iv"></param>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        private static string AesEncrypt(byte[] input, byte[] Iv, byte[] Key)
+        {
+            var aes = new RijndaelManaged();
+            //秘钥的大小，以位为单位
+            aes.KeySize = 256;
+            //支持的块大小
+            aes.BlockSize = 128;
+            //填充模式
+            //aes.Padding = PaddingMode.PKCS7;
+            aes.Padding = PaddingMode.None;
+            aes.Mode = CipherMode.CBC;
+            aes.Key = Key;
+            aes.IV = Iv;
+            var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
+            byte[] xBuff = null;
+
+            #region 自己进行PKCS7补位，用系统自己带的不行
+
+            byte[] msg = new byte[input.Length + 32 - input.Length % 32];
+            Array.Copy(input, msg, input.Length);
+            byte[] pad = KCS7Encoder(input.Length);
+            Array.Copy(pad, 0, msg, input.Length, pad.Length);
+
+            #endregion
+
+            using (var ms = new MemoryStream())
+            {
+                using (var cs = new CryptoStream(ms, encrypt, CryptoStreamMode.Write))
+                {
+                    cs.Write(msg, 0, msg.Length);
+                }
+                xBuff = ms.ToArray();
+            }
+
+            return Convert.ToBase64String(xBuff);
+        }
+        /// <summary>
+        /// KCS7补位
+        /// </summary>
+        /// <param name="text_length"></param>
+        /// <returns></returns>
+        private static byte[] KCS7Encoder(int text_length)
+        {
+            int block_size = 32;
+            // 计算需要填充的位数
+            int amount_to_pad = block_size - (text_length % block_size);
+            if (amount_to_pad == 0)
+            {
+                amount_to_pad = block_size;
+            }
+            // 获得补位所用的字符
+            char pad_chr = chr(amount_to_pad);
+            string tmp = "";
+            for (int index = 0; index < amount_to_pad; index++)
+            {
+                tmp += pad_chr;
+            }
+            return Encoding.UTF8.GetBytes(tmp);
+        }
+        /// <summary>
+        /// 将数字转化成ASCII码对应的字符，用于对明文进行补码
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        private static char chr(int a)
+        {
+            byte target = (byte)(a & 0xFF);
+            return (char)target;
+        }
+
+        #endregion
 
         #region RSA签名
 

@@ -6325,6 +6325,76 @@
             <param name="encoding">字符编码</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesEncrypt``1(``0,System.String,System.String)">
+            <summary>
+            Aes加密（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input"></param>
+            <param name="appSecret"></param>
+            <param name="appId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesDecrypt``1(System.String,System.String,System.String@)">
+            <summary>
+            Aes解密（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="input"></param>
+            <param name="appSecret"></param>
+            <param name="appId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesDecrypt(System.String,System.String,System.String@)">
+            <summary>
+            Aes解密方法（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+            </summary>
+            <param name="input">密文</param>
+            <param name="appSecret"></param>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesDecrypt(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Aes解密方法（AES/CBC/PKCS7=>None）（兼容多语言的解密，微软自带的补位不友好）
+            </summary>
+            <param name="input"></param>
+            <param name="Iv"></param>
+            <param name="Key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesEncrypt(System.String,System.String,System.String)">
+            <summary>
+            Aes加密方法（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+            </summary>
+            <param name="input"></param>
+            <param name="appSecret"></param>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.AesEncrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Aes加密方法（AES/CBC/PKCS7=>None）（兼容多语言的加密，微软自带的补位不友好）
+            </summary>
+            <param name="input"></param>
+            <param name="Iv"></param>
+            <param name="Key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.KCS7Encoder(System.Int32)">
+            <summary>
+            KCS7补位
+            </summary>
+            <param name="text_length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Encrypt.chr(System.Int32)">
+            <summary>
+            将数字转化成ASCII码对应的字符，用于对明文进行补码
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Helpers.Encrypt.RsaSign(System.String,System.String)">
             <summary>
             RSA签名，采用 SHA1 算法
@@ -7772,6 +7842,34 @@
             </summary>
             <typeparam name="T">实体类型</typeparam>
             <param name="fileName">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Helpers.SignParameters">
+            <summary>
+            签名工具类
+            </summary>
+        </member>
+        <member name="M:XUCore.Helpers.SignParameters.Add(System.String,System.String)">
+            <summary>
+            设置参数值
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:XUCore.Helpers.SignParameters.CreateSign(System.String,System.String)">
+            <summary>
+            获取 Sign 签名
+            </summary>
+            <param name="key">key 秘钥的字符名称 就是叫 key</param>
+            <param name="value">秘钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.SignParameters.CreateToken(System.String,System.String)">
+            <summary>
+            构造验证字符串
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Helpers.Singleton">

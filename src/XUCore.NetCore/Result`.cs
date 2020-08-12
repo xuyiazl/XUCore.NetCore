@@ -58,6 +58,10 @@ namespace XUCore.NetCore
             this.message = message;
             this.data = data;
         }
+        public Result()
+        {
+
+        }
         /// <summary>
         /// 状态码
         /// </summary>
