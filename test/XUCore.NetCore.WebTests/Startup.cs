@@ -13,6 +13,7 @@ using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
 using XUCore.NetCore.Data.DbService;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace XUCore.WebTests
 {
@@ -34,6 +35,8 @@ namespace XUCore.WebTests
 
             //×¢²árazor¾²Ì¬HTMLÉú³ÉÆ÷
             services.AddRazorHtml();
+
+            services.AddMvcAction();
 
             services.AddControllersWithViews(options =>
             {

@@ -188,6 +188,14 @@
             <param name="IsPartialView">是否部分视图，默认：false</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.NetCore.Extensions.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,System.String)">
+            <summary>
+            转换成Html
+            </summary>
+            <param name="pageModel"></param>
+            <param name="pageName"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeAttribute">
             <summary>
             API查询时间
@@ -1780,6 +1788,13 @@
             <summary>
             裁剪缩略图尺寸 item = 300x400
             </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperViewExtensions.AddMvcAction(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册Mvc Html.Action操作
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

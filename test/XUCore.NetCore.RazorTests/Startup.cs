@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,8 @@ namespace XUCore.RazorTests
         {
             //封装使用mssql数据库
             services.AddDbContext<TestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection"))).AddEntityFrameworkSqlServer();
+
+            services.AddMvcAction();
 
             services.AddRazorPages(options =>
             {

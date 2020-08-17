@@ -88,9 +88,9 @@ namespace XUCore.WebTests.Controllers
         //    return View(res2);
         //}
 
-        [NoCache]
+        //[NoCache]
         [Route("{id?}")]
-        [HtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
+        //[HtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
