@@ -95,6 +95,14 @@ namespace XUCore.NetCore.Redis
             });
         }
 
+        public long SortedRemoveRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, string connectionName = null)
+        {
+            return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
+            {
+                return db.SortedSetRemoveRangeByScore(key, start, stop, exclude: exclude);
+            });
+        }
+
         public IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);

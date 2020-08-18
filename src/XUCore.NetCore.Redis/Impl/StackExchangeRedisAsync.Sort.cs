@@ -97,6 +97,14 @@ namespace XUCore.NetCore.Redis
             });
         }
 
+        public async Task<long> SortedRemoveRangeByScoreAsync<T>(string key, double start, double stop, Exclude exclude = Exclude.None, string connectionName = null)
+        {
+            return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
+            {
+                return await db.SortedSetRemoveRangeByScoreAsync(key, start, stop, exclude: exclude);
+            });
+        }
+
         public async Task<IList<T>> SortedRangeByScoreAsync<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
             RedisThrow.NullSerializer(redisSerializer, serializer);

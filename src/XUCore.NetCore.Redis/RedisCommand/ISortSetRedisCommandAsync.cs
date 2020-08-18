@@ -70,6 +70,17 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <returns></returns>
         Task<long> SortedRemoveAsync(string key, long start, long stop, string connectionName = null);
         /// <summary>
+        /// 删除有序集合(删除在键处存储的分数在最小和最大之间的排序集合中的所有元素(默认包含)。)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="stop"></param>
+        /// <param name="exclude"></param>
+        /// <param name="connectionName"></param>
+        /// <returns></returns>
+        Task<long> SortedRemoveRangeByScoreAsync<T>(string key, double start, double stop, Exclude exclude = Exclude.None, string connectionName = null);
+        /// <summary>
         /// 获取有续集和的值
         /// </summary>
         /// <param name="key"></param>

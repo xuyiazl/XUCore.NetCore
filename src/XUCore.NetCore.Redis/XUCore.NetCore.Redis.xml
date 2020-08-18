@@ -1189,6 +1189,18 @@
             <param name="connectionName"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRemoveRangeByScore``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.String)">
+            <summary>
+            删除有序集合(删除在键处存储的分数在最小和最大之间的排序集合中的所有元素(默认包含)。)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="exclude"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommand.SortedRangeByScore``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,StackExchange.Redis.Order,System.Int32,System.Int32,System.String,XUCore.NetCore.Redis.IRedisSerializer)">
             <summary>
             获取有续集和的值
@@ -1295,6 +1307,18 @@
             <param name="key"></param>
             <param name="start"></param>
             <param name="stop"></param>
+            <param name="connectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Redis.RedisCommand.ISortSetRedisCommandAsync.SortedRemoveRangeByScoreAsync``1(System.String,System.Double,System.Double,StackExchange.Redis.Exclude,System.String)">
+            <summary>
+            删除有序集合(删除在键处存储的分数在最小和最大之间的排序集合中的所有元素(默认包含)。)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="exclude"></param>
             <param name="connectionName"></param>
             <returns></returns>
         </member>
