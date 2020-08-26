@@ -31,6 +31,8 @@ namespace XUCore.NetCore.Data.DbService
             _context = context;
         }
 
+        public DbContext DbContext { get { return _context as DbContext; } }
+
         public DbSet<TEntity> Entity
         {
             get

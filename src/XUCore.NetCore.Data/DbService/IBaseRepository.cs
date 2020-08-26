@@ -19,6 +19,7 @@ namespace XUCore.NetCore.Data.DbService
     /// <typeparam name="TEntity"></typeparam>
     public interface IBaseRepository<TEntity> where TEntity : class, new()
     {
+        DbContext DbContext { get; }
         DbSet<TEntity> Entity { get; }
 
         //事务
