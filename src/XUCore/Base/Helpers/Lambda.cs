@@ -890,5 +890,38 @@ namespace XUCore.Helpers
         }
 
         #endregion ParsePredicate(解析为谓词表达式)
+
+        #region [GetKeyValue(根据表达式获取Key-value)]
+        /// <summary>
+        /// 获取模型的key-value
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static Dictionary<string, object> GetKeyValue<TModel>(this Expression<Func<TModel, TModel>> model)
+        {
+            var fieldList = new Dictionary<string, object>();
+
+            var param = model.Body as MemberInitExpression;
+            foreach (var item in param.Bindings)
+            {
+                object propertyValue;
+                var memberAssignment = item as MemberAssignment;
+                if (memberAssignment.Expression.NodeType == ExpressionType.Constant)
+                {
+                    propertyValue = (memberAssignment.Expression as ConstantExpression).Value;
+                }
+                else
+                {
+                    propertyValue = Expression.Lambda(memberAssignment.Expression, null).Compile().DynamicInvoke();
+                }
+
+                fieldList.Add(item.Member.Name, propertyValue);
+            }
+
+            return fieldList;
+        }
+
+        #endregion
     }
 }

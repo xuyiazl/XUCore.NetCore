@@ -48,15 +48,16 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="json">Json字符串</param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static T ToObject<T>(string json)
+        public static T ToObject<T>(string json, JsonSerializerSettings options = null)
         {
             if (string.IsNullOrWhiteSpace(json))
             {
                 return default(T);
             }
 
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, options);
         }
 
         /// <summary>
@@ -74,10 +75,11 @@ namespace XUCore.Serializer
         /// 将Json字符串转换为对象
         /// </summary>
         /// <param name="json">Json字符串</param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static object ToObject(string json)
+        public static object ToObject(string json, JsonSerializerSettings options = null)
         {
-            return JsonConvert.DeserializeObject(json);
+            return JsonConvert.DeserializeObject(json, options);
         }
 
         #endregion ToObject(将Json字符串转换为对象)
@@ -182,8 +184,9 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="fileName">文件名，绝对路径</param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static T DeserializeFromFile<T>(string fileName)
+        public static T DeserializeFromFile<T>(string fileName, JsonSerializerSettings options = null)
         {
             try
             {
@@ -191,7 +194,7 @@ namespace XUCore.Serializer
                 {
                     using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
                     {
-                        return ToObject<T>(sr.ReadToEnd());
+                        return ToObject<T>(sr.ReadToEnd(), options);
                     }
                 }
             }
@@ -271,10 +274,11 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static IList<T> ToObjectNotNullOrEmpty<T>(IList<string> list)
+        public static IList<T> ToObjectNotNullOrEmpty<T>(IList<string> list, JsonSerializerSettings options = null)
         {
-            return ToJsonNotNullOrEmpty(list).ToObject<List<T>>();
+            return ToJsonNotNullOrEmpty(list).ToObject<List<T>>(options);
         }
 
         /// <summary>
@@ -295,10 +299,11 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static IList<T> ToJson<T>(IList<string> list)
+        public static IList<T> ToJson<T>(IList<string> list, JsonSerializerSettings options = null)
         {
-            return ToJson(list).ToObject<List<T>>();
+            return ToJson(list).ToObject<List<T>>(options);
         }
 
         /// <summary>

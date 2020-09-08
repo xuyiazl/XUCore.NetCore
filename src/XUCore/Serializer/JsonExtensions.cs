@@ -16,20 +16,22 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="json">Json字符串</param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static T ToObject<T>(this string json)
+        public static T ToObject<T>(this string json, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToObject<T>(json);
+            return JsonHelper.ToObject<T>(json, options);
         }
 
         /// <summary>
         /// 将Json字符串转换为独享
         /// </summary>
         /// <param name="json">Json字符串</param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static object ToObject(this string json)
+        public static object ToObject(this string json, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToObject(json);
+            return JsonHelper.ToObject(json, options);
         }
 
         #endregion ToObject(将Json字符串转换为对象)
@@ -105,10 +107,11 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static IList<T> ToObjectNotNullOrEmpty<T>(this IList<string> list)
+        public static IList<T> ToObjectNotNullOrEmpty<T>(this IList<string> list, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToObjectNotNullOrEmpty<T>(list);
+            return JsonHelper.ToObjectNotNullOrEmpty<T>(list, options);
         }
 
         /// <summary>
@@ -126,20 +129,22 @@ namespace XUCore.Serializer
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static IList<T> ToJson<T>(this IList<string> list)
+        public static IList<T> ToJson<T>(this IList<string> list, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToJson<T>(list);
+            return JsonHelper.ToJson<T>(list, options);
         }
 
         /// <summary>
         /// json列表 转换为 json字符串
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static string ToJson(this IList<string> list)
+        public static string ToJson(this IList<string> list, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToJson(list);
+            return JsonHelper.ToJson(list, options);
         }
 
         #endregion ToJson and ToObject (将Json字符串集合转换成Json对象集合)
