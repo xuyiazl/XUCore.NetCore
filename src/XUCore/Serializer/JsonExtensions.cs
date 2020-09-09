@@ -140,11 +140,10 @@ namespace XUCore.Serializer
         /// json列表 转换为 json字符串
         /// </summary>
         /// <param name="list"></param>
-        /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static string ToJson(this IList<string> list, JsonSerializerSettings options = null)
+        public static string ToJson(this IList<string> list)
         {
-            return JsonHelper.ToJson(list, options);
+            return JsonHelper.ToJson(list);
         }
 
         #endregion ToJson and ToObject (将Json字符串集合转换成Json对象集合)
