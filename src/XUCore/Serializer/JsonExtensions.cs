@@ -131,9 +131,9 @@ namespace XUCore.Serializer
         /// <param name="list"></param>
         /// <param name="options">json配置</param>
         /// <returns></returns>
-        public static IList<T> ToJson<T>(this IList<string> list, JsonSerializerSettings options = null)
+        public static IList<T> ToObject<T>(this IList<string> list, JsonSerializerSettings options = null)
         {
-            return JsonHelper.ToJson<T>(list, options);
+            return JsonHelper.ToObject<T>(list, options);
         }
 
         /// <summary>

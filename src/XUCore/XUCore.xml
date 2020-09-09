@@ -7371,6 +7371,14 @@
             <param name="operator">运算符</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Helpers.Lambda.GetKeyValue``1(System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            获取模型的key-value
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Helpers.RandomName">
             <summary>
             随机获取姓名操作
@@ -15119,6 +15127,32 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.Paging.PagedTools">
+            <summary>
+            分页工具（用于数据同步等操作）
+            </summary>
+        </member>
+        <member name="M:XUCore.Paging.PagedTools.Page``1(System.Int32,System.Func{System.Int64},System.Func{System.Int32,System.Int32,System.Collections.Generic.IList{``0}},System.Action{System.Collections.Generic.IList{``0}})">
+            <summary>
+            根据页码获取分页数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pageSize"></param>
+            <param name="totalFunc"></param>
+            <param name="dataFunc"></param>
+            <param name="dataAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Paging.PagedTools.Offset``1(System.Int32,System.Func{System.Int32,System.Int32,System.Collections.Generic.IList{``0}},System.Action{System.Collections.Generic.IList{``0}})">
+            <summary>
+            偏移获取数据分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="limit"></param>
+            <param name="dataFunc"></param>
+            <param name="dataAction"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Paging.PageHtml">
             <summary>
             page分页html
@@ -15930,19 +15964,21 @@
             Json辅助扩展操作
             </summary>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToObject``1(System.String)">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToObject``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             将Json字符串转换为对象
             </summary>
             <typeparam name="T">实体类型</typeparam>
             <param name="json">Json字符串</param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToObject(System.String)">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToObject(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             将Json字符串转换为独享
             </summary>
             <param name="json">Json字符串</param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonExtensions.ToJson(System.Object)">
@@ -15983,12 +16019,13 @@
             </summary>
             <param name="json">json字符串</param>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToObjectNotNullOrEmpty``1(System.Collections.Generic.IList{System.String})">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToObjectNotNullOrEmpty``1(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             json列表转换为对象集合(去除空记录)
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list"></param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonExtensions.ToJsonNotNullOrEmpty(System.Collections.Generic.IList{System.String})">
@@ -15998,19 +16035,21 @@
             <param name="list"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToJson``1(System.Collections.Generic.IList{System.String})">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToObject``1(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             json列表转换为对象集合
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list"></param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToJson(System.Collections.Generic.IList{System.String})">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToJson(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             json列表 转换为 json字符串
             </summary>
             <param name="list"></param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Serializer.JsonHelper">
@@ -16025,12 +16064,13 @@
             <param name="json">json</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonHelper.ToObject``1(System.String)">
+        <member name="M:XUCore.Serializer.JsonHelper.ToObject``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             将Json字符串转换为对象
             </summary>
             <typeparam name="T">实体类型</typeparam>
             <param name="json">Json字符串</param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonHelper.ToObject(System.String,System.Type)">
@@ -16041,11 +16081,12 @@
             <param name="type">实体类型</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonHelper.ToObject(System.String)">
+        <member name="M:XUCore.Serializer.JsonHelper.ToObject(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             将Json字符串转换为对象
             </summary>
             <param name="json">Json字符串</param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonHelper.ToJson(System.Object)">
@@ -16080,12 +16121,13 @@
             <param name="fileName">文件名，绝对路径</param>
             <param name="obj">对象</param>
         </member>
-        <member name="M:XUCore.Serializer.JsonHelper.DeserializeFromFile``1(System.String)">
+        <member name="M:XUCore.Serializer.JsonHelper.DeserializeFromFile``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             从Json文件反序列成对象
             </summary>
             <typeparam name="T">对象类型</typeparam>
             <param name="fileName">文件名，绝对路径</param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonHelper.ToJsonByForm(System.String)">
@@ -16108,12 +16150,13 @@
             </summary>
             <param name="json">json字符串</param>
         </member>
-        <member name="M:XUCore.Serializer.JsonHelper.ToObjectNotNullOrEmpty``1(System.Collections.Generic.IList{System.String})">
+        <member name="M:XUCore.Serializer.JsonHelper.ToObjectNotNullOrEmpty``1(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             json列表转换为对象集合(去除空记录)
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list"></param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonHelper.ToJsonNotNullOrEmpty(System.Collections.Generic.IList{System.String})">
@@ -16123,12 +16166,13 @@
             <param name="list"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonHelper.ToJson``1(System.Collections.Generic.IList{System.String})">
+        <member name="M:XUCore.Serializer.JsonHelper.ToObject``1(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             json列表转换为对象集合
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list"></param>
+            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Serializer.JsonHelper.ToJson(System.Collections.Generic.IList{System.String})">
