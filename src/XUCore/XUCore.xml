@@ -16044,12 +16044,11 @@
             <param name="options">json配置</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Serializer.JsonExtensions.ToJson(System.Collections.Generic.IList{System.String},Newtonsoft.Json.JsonSerializerSettings)">
+        <member name="M:XUCore.Serializer.JsonExtensions.ToJson(System.Collections.Generic.IList{System.String})">
             <summary>
             json列表 转换为 json字符串
             </summary>
             <param name="list"></param>
-            <param name="options">json配置</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Serializer.JsonHelper">
