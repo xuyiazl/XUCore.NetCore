@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using XUCore.Helpers;
 using XUCore.Serializer;
 
@@ -334,7 +336,25 @@ namespace XUCore
         {
             return this.ToJson();
         }
-
+        /// <summary>
+        /// 将对象转换为Json字符串
+        /// </summary>
+        /// <param name="isConvertToSingleQuotes">是否将双引号转换成单引号</param>
+        /// <param name="camelCase">是否驼峰式命名</param>
+        /// <param name="indented">是否缩进</param>
+        public string ToString(bool isConvertToSingleQuotes = false, bool camelCase = false,
+            bool indented = false)
+        {
+            return this.ToJson(isConvertToSingleQuotes, camelCase, indented);
+        }
+        /// <summary>
+        /// 将对象转换为Json字符串
+        /// </summary>
+        /// <param name="settings">json配置</param>
+        public string ToString(JsonSerializerSettings settings)
+        {
+            return this.ToJson(settings);
+        }
 
         private void EnsureKeyOrdering()
         {
