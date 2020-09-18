@@ -332,5 +332,108 @@ namespace XUCore.Extensions
         }
 
         #endregion EqualsTo(判断两个字典中的元素是否相等)
+        #region KV结构数据类型映射成数据模型对象
+
+        /// <summary>
+        /// 主要运用于orm框架中查询数据对象，灵活处理按需映射为主。
+        /// 亦可用于完整的KV结构转换为数据对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sourceDict"></param>
+        /// <returns></returns>
+        public static T ToModel<T>(this IDictionary<string, object> sourceDict) where T : class, new()
+        {
+            //获得反射查找公共属性
+            T t = new T();
+            var modelProperties = t.GetType().GetProperties();
+
+            foreach (var property in modelProperties)
+            {
+                try
+                {
+                    var dict = sourceDict.FirstOrDefault(t => t.Key.Equals(property.Name));
+                    //空对象继续
+                    if (string.IsNullOrEmpty(dict.Value?.ToString()))
+                        continue;
+                    if (property.PropertyType.IsEnum)
+                    {
+                        //枚举转换
+                        property.SetValue(t, Enum.Parse(property.PropertyType, dict.Value.ToString()));
+                    }
+                    else if (property.PropertyType.IsValueType)
+                    {
+                        //值类型转换
+                        switch (property.PropertyType.Name.ToLower())
+                        {
+                            //guid特殊处理
+                            case "guid":
+                                property.SetValue(t, Guid.Parse(dict.Value?.ToString()));
+                                break;
+                            default:
+                                property.SetValue(t, Convert.ChangeType(dict.Value, property.PropertyType));
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        //引用类型
+                        property.SetValue(t, dict.Value);
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"{DateTime.Now}, {t.GetType().Name} PropertyName={property.Name} PropertyType= {property.PropertyType.Name}, Type={property.GetType().DeclaringType} Convert Error, Exception:{ex.Message}");
+                }
+            }
+            return t;
+        }
+
+        /// <summary>
+        /// 交换模型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <param name="call"></param>
+        /// <returns></returns>
+        public static TModel ChangeModel<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, TKey key, Func<TKey, TValue, TModel> call)
+        {
+            if (source == null || source.Count == 0)
+                return default;
+
+            if (source.ContainsKey(key))
+                return call.Invoke(key, source[key]);
+
+            return default;
+        }
+
+        /// <summary>
+        /// 交换模型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="keys"></param>
+        /// <param name="call"></param>
+        /// <returns></returns>
+        public static IList<TModel> ChangeModel<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, IList<TKey> keys, Func<TKey, TValue, TModel> call)
+        {
+            var items = new List<TModel>();
+
+            if (source == null || source.Count == 0)
+                return null;
+
+            if (keys == null || keys.Count == 0)
+                return items;
+
+            keys.ForEach(key =>
+            {
+                if (source.ContainsKey(key))
+                    items.Add(call.Invoke(key, source[key]));
+            });
+
+            return items;
+        }
+
+        #endregion
     }
 }
