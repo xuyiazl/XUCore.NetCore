@@ -332,6 +332,7 @@ namespace XUCore.Extensions
         }
 
         #endregion EqualsTo(判断两个字典中的元素是否相等)
+
         #region KV结构数据类型映射成数据模型对象
 
         /// <summary>
@@ -397,7 +398,7 @@ namespace XUCore.Extensions
         /// <param name="key"></param>
         /// <param name="call"></param>
         /// <returns></returns>
-        public static TModel ChangeModel<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, TKey key, Func<TKey, TValue, TModel> call)
+        public static TModel ExChange<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, TKey key, Func<TKey, TValue, TModel> call)
         {
             if (source == null || source.Count == 0)
                 return default;
@@ -415,7 +416,7 @@ namespace XUCore.Extensions
         /// <param name="keys"></param>
         /// <param name="call"></param>
         /// <returns></returns>
-        public static IList<TModel> ChangeModel<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, IList<TKey> keys, Func<TKey, TValue, TModel> call)
+        public static IList<TModel> ExChange<TKey, TValue, TModel>(this IDictionary<TKey, TValue> source, IList<TKey> keys, Func<TKey, TValue, TModel> call)
         {
             var items = new List<TModel>();
 
@@ -429,6 +430,47 @@ namespace XUCore.Extensions
             {
                 if (source.ContainsKey(key))
                     items.Add(call.Invoke(key, source[key]));
+            });
+
+            return items;
+        }
+        /// <summary>
+        /// 交换模型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static KeyValue<TKey, TValue> ExChange<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key)
+        {
+            if (source == null || source.Count == 0)
+                return default;
+
+            if (source.ContainsKey(key))
+                return new KeyValue<TKey, TValue>(key, source[key]);
+
+            return default;
+        }
+
+        /// <summary>
+        /// 交换模型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public static IList<KeyValue<TKey, TValue>> ExChange<TKey, TValue>(this IDictionary<TKey, TValue> source, IList<TKey> keys)
+        {
+            var items = new List<KeyValue<TKey, TValue>>();
+
+            if (source == null || source.Count == 0)
+                return null;
+
+            if (keys == null || keys.Count == 0)
+                return items;
+
+            keys.ForEach(key =>
+            {
+                if (source.ContainsKey(key))
+                    items.Add(new KeyValue<TKey, TValue>(key, source[key]));
             });
 
             return items;

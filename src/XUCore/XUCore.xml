@@ -2470,6 +2470,49 @@
             <param name="targetDict">目标字典</param>
             <exception cref="T:System.ArgumentNullException">源字典对象为空、目标字典对象为空</exception>
         </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ToModel``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            主要运用于orm框架中查询数据对象，灵活处理按需映射为主。
+            亦可用于完整的KV结构转换为数据对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sourceDict"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``3(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1,``2})">
+            <summary>
+            交换模型
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <param name="call"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``3(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0},System.Func{``0,``1,``2})">
+            <summary>
+            交换模型
+            </summary>
+            <param name="source"></param>
+            <param name="keys"></param>
+            <param name="call"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            交换模型
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0})">
+            <summary>
+            交换模型
+            </summary>
+            <param name="source"></param>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Extensions.EnumerableExtensions">
             <summary>
             可枚举类型<see cref="T:System.Collections.Generic.IEnumerable`1"/> 扩展
@@ -9548,6 +9591,69 @@
             将对象转换为Json字符串
             </summary>
             <param name="settings">json配置</param>
+        </member>
+        <member name="T:XUCore.KeyValue">
+            <summary>
+            key - value
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue.#ctor">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue"/>类型的实例
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue.#ctor(System.Int32,System.String)">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue"/>类型的实例
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:XUCore.KeyValue`1">
+            <summary>
+            key - value
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue`1.#ctor">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue"/>类型的实例
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue`1.#ctor(System.Int32,`0)">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue`1"/>类型的实例
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:XUCore.KeyValue`2">
+            <summary>
+            key - value
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:XUCore.KeyValue`2.Key">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="P:XUCore.KeyValue`2.Value">
+            <summary>
+            value
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue`2.#ctor">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue`2"/>类型的实例
+            </summary>
+        </member>
+        <member name="M:XUCore.KeyValue`2.#ctor(`0,`1)">
+            <summary>
+            初始化一个<see cref="T:XUCore.KeyValue`2"/>类型的实例
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
         </member>
         <member name="T:XUCore.NameValue">
             <summary>
