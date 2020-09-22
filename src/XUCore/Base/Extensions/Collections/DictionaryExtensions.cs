@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using XUCore.Helpers;
 
 // ReSharper disable once CheckNamespace
 namespace XUCore.Extensions
@@ -359,7 +360,7 @@ namespace XUCore.Extensions
                     if (property.PropertyType.IsEnum)
                     {
                         //枚举转换
-                        property.SetValue(t, Enum.Parse(property.PropertyType, dict.Value.ToString()));
+                        property.SetValue(t, System.Enum.Parse(property.PropertyType, dict.Value.ToString()));
                     }
                     else if (property.PropertyType.IsValueType)
                     {
@@ -408,7 +409,6 @@ namespace XUCore.Extensions
 
             return default;
         }
-
         /// <summary>
         /// 交换模型
         /// </summary>
@@ -450,7 +450,24 @@ namespace XUCore.Extensions
 
             return default;
         }
+        /// <summary>
+        /// 交换模型
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <param name="split">拆分字符串，默认英文逗号</param>
+        /// <returns></returns>
+        public static IList<KeyValue<TKey, TValue>> ExChange<TKey, TValue>(this IDictionary<TKey, TValue> source, string key, string split = ",")
+        {
+            var strKeys = key.Split(split, true);
 
+            if (strKeys == null || strKeys.Length == 0)
+                return new List<KeyValue<TKey, TValue>>();
+
+            var keys = Array.ConvertAll(strKeys, input => Conv.To<TKey>(input));
+
+            return ExChange<TKey, TValue>(source, keys);
+        }
         /// <summary>
         /// 交换模型
         /// </summary>
@@ -475,6 +492,7 @@ namespace XUCore.Extensions
 
             return items;
         }
+
 
         #endregion
     }

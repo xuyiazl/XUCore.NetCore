@@ -2479,7 +2479,7 @@
             <param name="sourceDict"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``3(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1,``2})">
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ExChange``3(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1,``2})">
             <summary>
             交换模型
             </summary>
@@ -2488,7 +2488,7 @@
             <param name="call"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``3(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0},System.Func{``0,``1,``2})">
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ExChange``3(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0},System.Func{``0,``1,``2})">
             <summary>
             交换模型
             </summary>
@@ -2497,7 +2497,7 @@
             <param name="call"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ExChange``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
             <summary>
             交换模型
             </summary>
@@ -2505,7 +2505,16 @@
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.DictionaryExtensions.ChangeModel``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0})">
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ExChange``2(System.Collections.Generic.IDictionary{``0,``1},System.String,System.String)">
+            <summary>
+            交换模型
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <param name="split">拆分字符串，默认英文逗号</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ExChange``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IList{``0})">
             <summary>
             交换模型
             </summary>
