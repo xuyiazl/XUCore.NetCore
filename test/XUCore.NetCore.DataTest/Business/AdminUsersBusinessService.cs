@@ -51,13 +51,13 @@ namespace XUCore.NetCore.DataTest.Business
                 list.Add(user);
             }
 
-            var res1 = await adminUsersDbServiceProvider.InsertAsync(list.ToArray());
+            var res1 = await adminUsersDbServiceProvider.AddAsync(list.ToArray());
 
-            var res2 = adminUsersDbServiceProvider.BatchUpdate(c => c.Id > 22, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
+            var res2 = adminUsersDbServiceProvider.Update(c => c.Id > 22, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
 
-            var res3 = await adminUsersDbServiceProvider.BatchUpdateAsync(c => c.Id > 22, c => new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
+            var res3 = await adminUsersDbServiceProvider.UpdateAsync(c => c.Id > 22, c => new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
 
-            var res4 = await adminUsersDbServiceProvider.BatchDeleteAsync(c => c.Id > 22);
+            var res4 = await adminUsersDbServiceProvider.DeleteAsync(c => c.Id > 22);
 
         }
     }

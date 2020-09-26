@@ -66,14 +66,14 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entity"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Insert(TEntity entity, bool isSaveChange = true);
+        int Add(TEntity entity, bool isSaveChange = true);
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Insert(TEntity[] entities, bool isSaveChange = true);
+        int Add(IEnumerable<TEntity> entities, bool isSaveChange = true);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
@@ -87,7 +87,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Update(TEntity[] entities, bool isSaveChange = true);
+        int Update(IEnumerable<TEntity> entities, bool isSaveChange = true);
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -101,7 +101,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Delete(TEntity[] entities, bool isSaveChange = true);
+        int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true);
 
         //异步操作
 
@@ -118,7 +118,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> InsertAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 批量写入数据
         /// </summary>
@@ -126,7 +126,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> InsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
@@ -142,7 +142,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> UpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -158,7 +158,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> DeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
 
         //同步查询
 
@@ -269,20 +269,20 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="updateValues">更新的新数据数据</param>
         /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
         /// <returns></returns>
-        int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null);
+        int Update(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null);
         /// <summary>
         /// 根据条件批量更新（部分字段）
         /// </summary>
         /// <param name="selector">查询条件</param>
         /// <param name="Update">更新的新数据数据</param>
         /// <returns></returns>
-        int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update);
+        int Update(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update);
         /// <summary>
         /// 根据条件批量删除
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        int BatchDelete(Expression<Func<TEntity, bool>> selector);
+        int Delete(Expression<Func<TEntity, bool>> selector);
 
         //异步操作
 
@@ -294,7 +294,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default);
+        Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 根据条件批量更新（部分字段）
         /// </summary>
@@ -302,14 +302,14 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="Update">更新的新数据数据</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default);
+        Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default);
         /// <summary>
         /// 根据条件批量删除
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BatchDeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
+        Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
 
         #endregion
 

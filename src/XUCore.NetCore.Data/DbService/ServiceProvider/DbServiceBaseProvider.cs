@@ -48,10 +48,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entity"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Insert(TEntity entity, bool isSaveChange = true)
+        public virtual int Add(TEntity entity, bool isSaveChange = true)
         {
             if (dbWrite != null)
-                return dbWrite.Insert(entity, isSaveChange);
+                return dbWrite.Add(entity, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -60,10 +60,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Insert(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Add(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
             if (dbWrite != null)
-                return dbWrite.Insert(entities, isSaveChange);
+                return dbWrite.Add(entities, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Update(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Update(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
             if (dbWrite != null)
                 return dbWrite.Update(entities, isSaveChange);
@@ -108,7 +108,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entities"></param>
         /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Delete(TEntity[] entities, bool isSaveChange = true)
+        public virtual int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
             if (dbWrite != null)
                 return dbWrite.Delete(entities, isSaveChange);
@@ -133,10 +133,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> InsertAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
-                return await dbWrite.InsertAsync(entity, isSaveChange, cancellationToken);
+                return await dbWrite.AddAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -146,10 +146,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> InsertAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
-                return await dbWrite.InsertAsync(entities, isSaveChange, cancellationToken);
+                return await dbWrite.AddAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -172,7 +172,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> UpdateAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
                 return await dbWrite.UpdateAsync(entities, isSaveChange, cancellationToken);
@@ -198,7 +198,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> DeleteAsync(TEntity[] entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
                 return await dbWrite.DeleteAsync(entities, isSaveChange, cancellationToken);
@@ -376,10 +376,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="updateValues">更新的新数据数据</param>
         /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
         /// <returns></returns>
-        public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
+        public virtual int Update(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
             if (dbWrite != null)
-                return dbWrite.BatchUpdate(selector, updateValues, updateColumns);
+                return dbWrite.Update(selector, updateValues, updateColumns);
             return -1;
         }
         /// <summary>
@@ -388,10 +388,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="selector">查询条件</param>
         /// <param name="Update">更新的新数据数据</param>
         /// <returns></returns>
-        public virtual int BatchUpdate(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
+        public virtual int Update(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
             if (dbWrite != null)
-                return dbWrite.BatchUpdate(selector, Update);
+                return dbWrite.Update(selector, Update);
             return -1;
         }
         /// <summary>
@@ -399,10 +399,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual int BatchDelete(Expression<Func<TEntity, bool>> selector)
+        public virtual int Delete(Expression<Func<TEntity, bool>> selector)
         {
             if (dbWrite != null)
-                return dbWrite.BatchDelete(selector);
+                return dbWrite.Delete(selector);
             return -1;
         }
 
@@ -416,10 +416,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
+        public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
-                return await dbWrite.BatchUpdateAsync(selector, updateValues, updateColumns, cancellationToken);
+                return await dbWrite.UpdateAsync(selector, updateValues, updateColumns, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -429,10 +429,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="Update">更新的新数据数据</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchUpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
+        public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
-                return await dbWrite.BatchUpdateAsync(selector, Update, cancellationToken);
+                return await dbWrite.UpdateAsync(selector, Update, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -441,10 +441,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> BatchDeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
+        public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
             if (dbWrite != null)
-                return await dbWrite.BatchDeleteAsync(selector, cancellationToken);
+                return await dbWrite.DeleteAsync(selector, cancellationToken);
             return -1;
         }
 

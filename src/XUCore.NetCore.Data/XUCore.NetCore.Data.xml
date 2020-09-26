@@ -132,7 +132,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Insert(`0,System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
@@ -140,7 +140,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Insert(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -156,7 +156,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Update(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -172,7 +172,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Delete(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -187,7 +187,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.InsertAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
@@ -196,7 +196,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.InsertAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -214,7 +214,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.UpdateAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -232,7 +232,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.DeleteAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量删除数据
             </summary>
@@ -345,7 +345,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -354,7 +354,7 @@
             <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -362,14 +362,14 @@
             <param name="Update">更新的新数据数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             根据条件批量删除
             </summary>
             <param name="selector"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -379,7 +379,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -388,7 +388,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.BatchDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量删除
             </summary>
@@ -486,12 +486,12 @@
             需要排除的字段
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertDefault">
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.AddDefault">
             <summary>
             仅在添加时设置指定字段默认值
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertOrUpdates">
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.AddOrUpdates">
             <summary>
             仅在添加或者修改时设置默认值
             </summary>
@@ -512,7 +512,7 @@
             <summary>
             在ef添加记录的时候默认值添加，即不赋值
             </summary>
-            <param name="insertDefault"></param>
+            <param name="AddDefault"></param>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.BaseRepositoryFactory.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
@@ -566,7 +566,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Insert(`0,System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
@@ -574,7 +574,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Insert(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -590,7 +590,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Update(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -606,7 +606,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Delete(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -621,7 +621,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.InsertAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
@@ -630,7 +630,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.InsertAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -648,7 +648,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.UpdateAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -666,7 +666,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.DeleteAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量删除数据
             </summary>
@@ -779,7 +779,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -788,7 +788,7 @@
             <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -796,14 +796,14 @@
             <param name="Update">更新的新数据数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             根据条件批量删除
             </summary>
             <param name="selector"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -813,7 +813,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -822,7 +822,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.BatchDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量删除
             </summary>
@@ -913,7 +913,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Insert(`0,System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
@@ -921,7 +921,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Insert(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -937,7 +937,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Update(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -953,7 +953,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Delete(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -968,7 +968,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.InsertAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
@@ -977,7 +977,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.InsertAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -995,7 +995,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.UpdateAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1013,7 +1013,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.DeleteAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量删除数据
             </summary>
@@ -1126,7 +1126,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1135,7 +1135,7 @@
             <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1143,14 +1143,14 @@
             <param name="Update">更新的新数据数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             根据条件批量删除
             </summary>
             <param name="selector"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1160,7 +1160,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1169,7 +1169,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.BatchDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbServiceBaseProvider`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量删除
             </summary>
@@ -1243,7 +1243,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Insert(`0,System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
@@ -1251,7 +1251,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Insert(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -1267,7 +1267,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Update(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1283,7 +1283,7 @@
             <param name="isSaveChange">是否提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Delete(`0[],System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -1298,7 +1298,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.InsertAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
@@ -1307,7 +1307,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.InsertAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -1325,7 +1325,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.UpdateAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1343,7 +1343,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.DeleteAsync(`0[],System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量删除数据
             </summary>
@@ -1456,7 +1456,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1465,7 +1465,7 @@
             <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1473,14 +1473,14 @@
             <param name="Update">更新的新数据数据</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             根据条件批量删除
             </summary>
             <param name="selector"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1490,7 +1490,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchUpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量更新（部分字段）
             </summary>
@@ -1499,7 +1499,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.BatchDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbServiceBase`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             根据条件批量删除
             </summary>
