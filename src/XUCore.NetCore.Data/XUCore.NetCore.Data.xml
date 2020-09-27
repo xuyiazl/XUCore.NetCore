@@ -486,12 +486,12 @@
             需要排除的字段
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.AddDefault">
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertDefault">
             <summary>
             仅在添加时设置指定字段默认值
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.AddOrUpdates">
+        <member name="P:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.insertOrUpdates">
             <summary>
             仅在添加或者修改时设置默认值
             </summary>
@@ -512,7 +512,7 @@
             <summary>
             在ef添加记录的时候默认值添加，即不赋值
             </summary>
-            <param name="AddDefault"></param>
+            <param name="insertDefault"></param>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.BaseRepositoryFactory.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

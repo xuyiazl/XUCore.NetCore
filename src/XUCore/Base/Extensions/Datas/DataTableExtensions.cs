@@ -22,7 +22,7 @@ namespace XUCore.Extensions.Datas
                 throw new ArgumentNullException(nameof(dataTable), @"数据表不可为空！");
 
             var columnNames = dataTable.Columns.Cast<DataColumn>()
-                .Select(c => c.ColumnName)
+                .Select(c => c.ColumnName.ToLower())
                 .ToList();
 
             var properties = typeof(T).GetProperties();
@@ -31,13 +31,20 @@ namespace XUCore.Extensions.Datas
             {
                 T objT = new T();
 
-                foreach (var pro in properties)
+                foreach (var property in properties)
                 {
-                    if (columnNames.Contains(pro.Name))
+                    if (columnNames.Contains(property.Name.ToLower()))
                     {
-                        if (!pro.CanWrite) continue;
-                        var value = row[pro.Name] == DBNull.Value ? null : row[pro.Name];
-                        pro.SetValue(objT, Convert.ChangeType(value, pro.PropertyType), null);
+                        if (!property.CanWrite) continue;
+                        //var value = row[property.Name] == DBNull.Value ? null : row[property.Name];
+                        //pro.SetValue(objT, value, null);
+
+                        var setter = property.GetSetMethod(true);
+                        if (setter != null)
+                        {
+                            var value = row[property.Name] == DBNull.Value ? null : row[property.Name];
+                            setter.Invoke(objT, new[] { value });
+                        }
                     }
                 }
 
@@ -45,11 +52,23 @@ namespace XUCore.Extensions.Datas
 
             }).ToList();
         }
-        ///// <summary>
-        ///// DataTable转换为泛型集合
-        ///// </summary>
-        ///// <typeparam name="T">类型</typeparam>
-        ///// <param name="dataTable">数据表</param>
+
+        public static object HackType(object value, Type conversionType)
+        {
+            if (conversionType.IsGenericType && conversionType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+            {
+                if (value == null)
+                    return null;
+                System.ComponentModel.NullableConverter nullableConverter = new System.ComponentModel.NullableConverter(conversionType);
+                conversionType = nullableConverter.UnderlyingType;
+            }
+            if (typeof(System.Enum).IsAssignableFrom(conversionType))
+            {
+                return Enum.Parse(conversionType, value.ToString());
+            }
+            return Convert.ChangeType(value, conversionType);
+        }
+
         //public static IList<T> ToList<T>(this DataTable dataTable)
         //{
         //    if (dataTable == null)
