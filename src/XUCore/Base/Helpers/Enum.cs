@@ -205,6 +205,20 @@ namespace XUCore.Helpers
         #region GetDictionary(获取枚举字典)
 
         /// <summary>
+        /// 获取枚举字典，并排除指定key
+        /// </summary>
+        /// <typeparam name="TEnum">枚举类型</typeparam>
+        public static IDictionary<int, string> GetDictionary<TEnum>(params int[] excludeKey) where TEnum : struct
+        {
+            var dic = GetDictionary<TEnum>();
+
+            if (excludeKey != null && excludeKey.Length > 0)
+                excludeKey.ForEach(key => dic.Remove(key));
+
+            return dic;
+        }
+
+        /// <summary>
         /// 获取枚举字典
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
