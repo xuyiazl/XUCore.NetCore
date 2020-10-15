@@ -52,6 +52,31 @@ namespace XUCore.Extensions
 
         #endregion ToMap(模型转换)
 
+        #region Merge(列表合并)
+
+        /// <summary>
+        /// 列表合并
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> Merge<T>(this IEnumerable<T> enumerable, IEnumerable<T> collection)
+        {
+            if (enumerable == null)
+                throw new ArgumentNullException(nameof(enumerable), $@"源{typeof(T).Name}集合对象不可为空！");
+
+            if (collection == null)
+                return enumerable;
+
+            var list = enumerable.ToList();
+
+            list.AddRange(collection);
+
+            return list;
+        }
+        #endregion
+
         #region ForEach(对指定集合中的每个元素执行指定操作)
 
         /// <summary>
