@@ -281,6 +281,21 @@ namespace XUCore.Timing
 
         #endregion
 
+        #region LastDays(过去N天时间范围)
+
+        /// <summary>
+        /// 获取 相对于当前时间过去30天的时间范围
+        /// </summary>
+        /// <param name="days">天数</param>
+        /// <returns></returns>
+        public static DateTimeRange LastDays(int days)
+        {
+            var now = Now;
+            return new DateTimeRange(now.AddDays(-days), now);
+        }
+
+        #endregion LastDays(过去N天时间范围)
+
         #region Last7DaysExceptToday(截止昨天最近7天时间范围)
 
         /// <summary>
@@ -312,6 +327,21 @@ namespace XUCore.Timing
         }
 
         #endregion
+
+        #region LastDaysExceptToday(截止昨天最近N天时间范围)
+
+        /// <summary>
+        /// 获取 截止到昨天的最近N天的天数范围
+        /// </summary>
+        /// <param name="days">天数</param>
+        /// <returns></returns>
+        public static DateTimeRange LastDaysExceptToday(int days)
+        {
+            var now = Now;
+            return new DateTimeRange(now.Date.AddDays(-days), now.Date.AddMilliseconds(-1));
+        }
+
+        #endregion LastDaysExceptToday(截止昨天最近N天时间范围)
 
         #region 构造函数
 
