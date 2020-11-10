@@ -43,7 +43,7 @@ namespace XUCore.NetCore.MessagePack
 
             foreach (var extension in messagePackFormatterOptions.SupportedExtensions)
             {
-                foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+                foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)
                 {
                     builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat(extension, new MediaTypeHeaderValue(contentType)));
                 }
@@ -81,7 +81,7 @@ namespace XUCore.NetCore.MessagePack
 
             foreach (var extension in messagePackFormatterOptions.SupportedExtensions)
             {
-                foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+                foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)
                 {
                     builder.AddFormatterMappings(m => m.SetMediaTypeMappingForFormat(extension, new MediaTypeHeaderValue(contentType)));
                 }

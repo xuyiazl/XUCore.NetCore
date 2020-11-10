@@ -23,7 +23,7 @@ namespace XUCore.NetCore.MessagePack
         public MessagePackInputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
         {
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
-            foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+            foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)
             {
                 SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
             }

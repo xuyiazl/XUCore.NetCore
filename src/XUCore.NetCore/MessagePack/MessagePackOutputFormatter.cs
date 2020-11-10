@@ -21,7 +21,7 @@ namespace XUCore.NetCore.MessagePack
         public MessagePackOutputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
         {
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
-            foreach (var contentType in messagePackFormatterOptions.SupportedContentTypes)
+            foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)
             {
                 SupportedMediaTypes.Add(new MediaTypeHeaderValue(contentType));
             }
@@ -32,38 +32,19 @@ namespace XUCore.NetCore.MessagePack
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            switch (context.ContentType.SafeString().ToLower())
+            var contentType = context.ContentType.SafeString().ToLower();
+
+            if (_options.SupportedResponseFormatters.ContainsKey(contentType))
             {
-                case "application/json":
-                    {
-                        var res = JsonConvert.SerializeObject(context.Object, _options.JsonSerializerSettings);
+                await _options.SupportedResponseFormatters[contentType].WriteAsync(context, _options);
+            }
+            else
+            {
+                context.HttpContext.Response.ContentType = "application/octet-stream";
 
-                        var bytes = Encoding.UTF8.GetBytes(res);
-
-                        context.HttpContext.Response.ContentType = "application/json";
-
-                        await context.HttpContext.Response.Body.WriteAsync(bytes, 0, bytes.Length);
-                    }
-                    break;
-                case "application/x-msgpack-jackson":
-                    {
-                        var res = MessagePackSerializer.SerializeToJson(context.Object, _options.Options);
-
-                        var bytes = Encoding.UTF8.GetBytes(res);
-
-                        context.HttpContext.Response.ContentType = "application/json";
-
-                        await context.HttpContext.Response.Body.WriteAsync(bytes, 0, bytes.Length);
-                    }
-                    break;
-                default:
-                    {
-                        context.HttpContext.Response.ContentType = "application/octet-stream";
-
-                        await MessagePackSerializer.SerializeAsync(context.ObjectType, context.HttpContext.Response.Body, context.Object, _options.Options);
-                    }
-                    break;
+                await MessagePackSerializer.SerializeAsync(context.ObjectType, context.HttpContext.Response.Body, context.Object, _options.Options);
             }
         }
     }
+
 }

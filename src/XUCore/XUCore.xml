@@ -2547,6 +2547,15 @@
             <param name="converter">转换表达式</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Extensions.EnumerableExtensions.Merge``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            列表合并
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable"></param>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Extensions.EnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
             对指定集合中的每个元素执行指定操作
@@ -6820,6 +6829,12 @@
             <param name="type">枚举类型</param>
             <param name="result">集合</param>
             <param name="field">字段</param>
+        </member>
+        <member name="M:XUCore.Helpers.Enum.GetDictionary``1(System.Int32[])">
+            <summary>
+            获取枚举字典，并排除指定key
+            </summary>
+            <typeparam name="TEnum">枚举类型</typeparam>
         </member>
         <member name="M:XUCore.Helpers.Enum.GetDictionary``1">
             <summary>
@@ -17078,6 +17093,13 @@
             获取 相对于当前时间过去30天的时间范围
             </summary>
         </member>
+        <member name="M:XUCore.Timing.DateTimeRange.LastDays(System.Int32)">
+            <summary>
+            获取 相对于当前时间过去30天的时间范围
+            </summary>
+            <param name="days">天数</param>
+            <returns></returns>
+        </member>
         <member name="P:XUCore.Timing.DateTimeRange.Last7DaysExceptToday">
             <summary>
             获取 截止到昨天的最近7天的天数范围
@@ -17087,6 +17109,13 @@
             <summary>
             获取 截止到昨天的最近30天的天数范围
             </summary>
+        </member>
+        <member name="M:XUCore.Timing.DateTimeRange.LastDaysExceptToday(System.Int32)">
+            <summary>
+            获取 截止到昨天的最近N天的天数范围
+            </summary>
+            <param name="days">天数</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.Timing.DateTimeRange.#ctor">
             <summary>
