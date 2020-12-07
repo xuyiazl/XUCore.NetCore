@@ -846,6 +846,21 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.JsonSettings">
+            <summary>
+            JSON序列化统一配置
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.JsonSettings.Utc_CamelCase">
+            <summary>
+            UTC + 小驼峰
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.JsonSettings.Local_CamelCase">
+            <summary>
+            序列化默认配置（随时可以统一修改）
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.Middlewares.AdminSafeListMiddleware">
             <summary>
             安全管理列表中间件

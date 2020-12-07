@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Polly.Timeout;
+using System.Net;
 
 namespace XUCore.NetCore.HttpFactory
 {
@@ -30,13 +32,31 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
+            try
+            {
+                var responseMessage = await client.GetAsync(urlArguments, cancellationToken);
 
-            var responseMessage = await client.GetAsync(urlArguments, cancellationToken);
-
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -60,12 +80,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PostAsync(urlArguments, model, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PostAsync(urlArguments, model, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -88,12 +127,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PostAsync(urlArguments, content, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PostAsync(urlArguments, content, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -117,12 +175,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PutAsync(urlArguments, model, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PutAsync(urlArguments, model, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -144,12 +221,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PutAsync(urlArguments, content, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PutAsync(urlArguments, content, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -173,12 +269,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PatchAsync(urlArguments, model, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PatchAsync(urlArguments, model, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -200,12 +315,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.PatchAsync(urlArguments, content, cancellationToken);
+            try
+            {
+                var responseMessage = await client.PatchAsync(urlArguments, content, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
 
         /// <summary>
@@ -227,12 +361,31 @@ namespace XUCore.NetCore.HttpFactory
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
 
-            var responseMessage = await client.DeleteAsync(urlArguments, cancellationToken);
+            try
+            {
+                var responseMessage = await client.DeleteAsync(urlArguments, cancellationToken);
 
-            if (!responseMessage.IsSuccessStatusCode)
-                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
-            else
-                return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                if (!responseMessage.IsSuccessStatusCode)
+                    return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                else
+                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+            }
+            catch (TimeoutRejectedException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.RequestTimeout,
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                });
+            }
         }
     }
 }

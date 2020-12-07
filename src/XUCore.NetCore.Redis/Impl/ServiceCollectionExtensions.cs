@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,9 +46,10 @@ namespace XUCore.NetCore.Redis
         /// Redis注入Json序列化组件
         /// </summary>
         /// <param name="services">服务集合</param>
-        public static IServiceCollection AddJsonRedisSerializer(this IServiceCollection services)
+        /// <param name="serializerSettings">JSON序列化配置</param>
+        public static IServiceCollection AddJsonRedisSerializer(this IServiceCollection services, JsonSerializerSettings serializerSettings = null)
         {
-            services.AddSingleton<IRedisSerializer, JsonRedisSerializer>();
+            services.AddSingleton<IRedisSerializer>(new JsonRedisSerializer(serializerSettings));
 
             return services;
         }

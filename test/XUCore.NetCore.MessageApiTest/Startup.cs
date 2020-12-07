@@ -40,13 +40,7 @@ namespace XUCore.NetCore.MessageApiTest
             //注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
             .AddMessagePackFormatters(options =>
             {
-                options.JsonSerializerSettings = new JsonSerializerSettings()
-                {
-                    //统一设置JSON格式输出为utc
-                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                    //统一设置JSON为小驼峰格式
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                options.JsonSerializerSettings = JsonSettings.Local_CamelCase;
                 //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
                 //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
                 options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;

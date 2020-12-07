@@ -11,11 +11,19 @@ namespace XUCore.NetCore.Redis
 {
     public class JsonRedisSerializer : IRedisSerializer
     {
-        private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings serializerSettings;
+
+        public JsonRedisSerializer(JsonSerializerSettings serializerSettings = null)
         {
-            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-            ContractResolver = new DefaultContractResolver()
-        };
+            if (serializerSettings == null)
+                this.serializerSettings = new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Local,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+            else
+                this.serializerSettings = serializerSettings;
+        }
 
         public virtual RedisValue Serializer<T>(T value)
         {

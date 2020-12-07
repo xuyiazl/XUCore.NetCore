@@ -98,11 +98,12 @@
             </summary>
             <param name="services">服务集合</param>
         </member>
-        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddJsonRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddJsonRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection,Newtonsoft.Json.JsonSerializerSettings)">
             <summary>
             Redis注入Json序列化组件
             </summary>
             <param name="services">服务集合</param>
+            <param name="serializerSettings">JSON序列化配置</param>
         </member>
         <member name="M:XUCore.NetCore.Redis.ServiceCollectionExtensions.AddMessagePackRedisSerializer(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>

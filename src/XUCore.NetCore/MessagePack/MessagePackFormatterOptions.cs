@@ -13,8 +13,8 @@ namespace XUCore.NetCore.MessagePack
     {
         public JsonSerializerSettings JsonSerializerSettings { get; set; } = new JsonSerializerSettings()
         {
-            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-            ContractResolver = new DefaultContractResolver()
+            DateTimeZoneHandling = DateTimeZoneHandling.Local,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
         public IFormatterResolver FormatterResolver { get; set; } = ContractlessStandardResolver.Instance;
