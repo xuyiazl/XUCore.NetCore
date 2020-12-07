@@ -332,6 +332,31 @@
             重写OnResultExecuting()方法，取消页面缓存
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.GlobalSettings">
+            <summary>
+            全局统一序列化配置
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.GlobalSettings.Json_Utc_CamelCase">
+            <summary>
+            JSON序列化配置（UTC + 小驼峰）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.GlobalSettings.Json_Utc_Default">
+            <summary>
+            JSON序列化配置（UTC + 大驼峰）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.GlobalSettings.Json_Local_CamelCase">
+            <summary>
+            JSON序列化配置（Local + 小驼峰）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.GlobalSettings.Json_Local_Default">
+            <summary>
+            JSON序列化配置（Local + 大驼峰）
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.HttpFactory.HttpMediaType">
             <summary>
             数据MediaType类型
@@ -845,21 +870,6 @@
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
-        </member>
-        <member name="T:XUCore.NetCore.JsonSettings">
-            <summary>
-            JSON序列化统一配置
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.JsonSettings.Utc_CamelCase">
-            <summary>
-            UTC + 小驼峰
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.JsonSettings.Local_CamelCase">
-            <summary>
-            序列化默认配置（随时可以统一修改）
-            </summary>
         </member>
         <member name="T:XUCore.NetCore.Middlewares.AdminSafeListMiddleware">
             <summary>
