@@ -14432,6 +14432,78 @@
             <param name="timeSpan"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Develops.ShellProgressBar.IProgressBar.WriteLine(System.String)">
+            <summary>
+            This writes a new line above the progress bar to <see cref="P:System.Console.Out"/>.
+            Use <see cref="P:XUCore.Develops.ShellProgressBar.IProgressBar.Message"/> to update the message inside the progress bar
+            </summary>
+        </member>
+        <member name="M:XUCore.Develops.ShellProgressBar.IProgressBar.WriteErrorLine(System.String)">
+            <summary> This writes a new line above the progress bar to <see cref="P:System.Console.Error"/></summary>
+        </member>
+        <member name="T:XUCore.Develops.ShellProgressBar.ProgressBarOptions">
+            <summary>
+            Control the behaviour of your progressbar
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ForegroundColor">
+            <summary> The foreground color of the progress bar, message and time</summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ForegroundColorDone">
+            <summary> The foreground color the progressbar has reached a 100 percent</summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.BackgroundColor">
+            <summary> The background color of the remainder of the progressbar</summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ProgressCharacter">
+            <summary> The character to use to draw the progressbar</summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.BackgroundCharacter">
+            <summary>
+            The character to use for the background of the progress defaults to <see cref="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ProgressCharacter"/>
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.DisplayTimeInRealTime">
+            <summary>
+            When true will redraw the progressbar using a timer, otherwise only update when
+            <see cref="M:XUCore.Develops.ShellProgressBar.ProgressBarBase.Tick(System.String)"/> is called.
+            Defaults to true
+             </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.CollapseWhenFinished">
+            <summary>
+            Collapse the progressbar when done, very useful for child progressbars
+            Defaults to true
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ProgressBarOnBottom">
+            <summary>
+            By default the text and time information is displayed at the bottom and the progress bar at the top.
+            This setting swaps their position
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.ShowEstimatedDuration">
+            <summary>
+            Whether to show the estimated time. It can be set when
+            <see cref="M:XUCore.Develops.ShellProgressBar.ProgressBarBase.Tick(System.String)"/> is called or the property
+            <see cref="P:XUCore.Develops.ShellProgressBar.ProgressBarBase.EstimatedDuration"/> is set.
+            </summary>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.EnableTaskBarProgress">
+            <summary>
+            Use Windows' task bar to display progress.
+            </summary>
+            <remarks>
+            This feature is available on the Windows platform.
+            </remarks>
+        </member>
+        <member name="P:XUCore.Develops.ShellProgressBar.ProgressBarOptions.WriteQueuedMessage">
+            <summary>
+            Take ownership of writing a message that is intended to be displayed above the progressbar.
+            The delegate is expected to return the number of messages written to the console as a result of the string argument.
+            <para>Use case: pretty print or change the console colors, the progressbar will reset back</para>
+            </summary>
+        </member>
         <member name="T:XUCore.Develops.UnitTester">
             <summary>
             单元测试辅助操作
