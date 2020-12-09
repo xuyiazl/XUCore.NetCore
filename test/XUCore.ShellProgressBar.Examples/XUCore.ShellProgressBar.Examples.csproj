@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\XUCore\XUCore.csproj" />
+    <ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
   </ItemGroup>
 
 </Project>
