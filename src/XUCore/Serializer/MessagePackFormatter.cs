@@ -12,7 +12,7 @@ namespace XUCore.Serializer
 {
     public static class MessagePackSerializerResolver
     {
-        private static IFormatterResolver DateTimeFormatter
+        public static IFormatterResolver DateTimeFormatter
         {
             get
             {
@@ -31,7 +31,7 @@ namespace XUCore.Serializer
 
         }
 
-        private static IFormatterResolver UnixDateTimeFormatter
+        public static IFormatterResolver UnixDateTimeFormatter
         {
             get
             {
@@ -51,7 +51,7 @@ namespace XUCore.Serializer
         }
 
 
-        private static IFormatterResolver LocalDateTimeFormatter
+        public static IFormatterResolver LocalDateTimeFormatter
         {
             get
             {
