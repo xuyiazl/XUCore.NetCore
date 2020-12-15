@@ -32,6 +32,8 @@ namespace XUCore.NetCore.HttpFactory
 
         public static async Task<TModel> ReadAsAsync<TModel>(this HttpContent httpContent, HttpMediaType mediaType, MessagePackSerializerOptions options = null)
         {
+            options = options ?? MessagePackSerializerResolver.UnixDateTimeOptions;
+
             switch (mediaType)
             {
                 case HttpMediaType.MessagePack:

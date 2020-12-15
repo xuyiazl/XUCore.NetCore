@@ -31,7 +31,7 @@ namespace XUCore.NetCore.HttpFactory
         /// <summary>
         /// 序列化方式<see cref="MessagePackSerializerResolver"/>，如果是JSON不需要设置
         /// </summary>
-        public MessagePackSerializerOptions SerializerOptions { get; set; } = MessagePackSerializerResolver.DateTimeOptions;
+        public MessagePackSerializerOptions SerializerOptions { get; set; } = MessagePackSerializerResolver.UnixDateTimeOptions;
         /// <summary>
         /// <see cref="HttpClient"/>回调，可以添加需要的Header等
         /// </summary>
