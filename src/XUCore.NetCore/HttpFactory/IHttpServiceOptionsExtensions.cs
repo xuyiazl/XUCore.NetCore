@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Polly.Timeout;
 using System.Net;
+using System.Diagnostics;
 
 namespace XUCore.NetCore.HttpFactory
 {
@@ -34,12 +35,28 @@ namespace XUCore.NetCore.HttpFactory
                 options.ClientHandler.Invoke(client);
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.GetAsync(urlArguments, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -79,15 +96,29 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PostAsync(urlArguments, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -126,15 +157,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PostAsync(urlArguments, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -174,15 +220,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PutAsync(urlArguments, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -220,15 +281,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PutAsync(urlArguments, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -268,15 +344,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PatchAsync(urlArguments, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -314,15 +405,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.PatchAsync(urlArguments, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {
@@ -360,15 +466,30 @@ namespace XUCore.NetCore.HttpFactory
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
-
             try
             {
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 var responseMessage = await client.DeleteAsync(urlArguments, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
+                {
+                    watch.Stop();
+
                     return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(responseMessage);
+                }
                 else
-                    return await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+                {
+                    var result = await responseMessage.Content.ReadAsAsync<TResult>(options.MediaType, options.SerializerOptions);
+
+                    watch.Stop();
+
+                    if (options.ElapsedTimeHandler != null)
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+
+                    return result;
+                }
             }
             catch (TimeoutRejectedException ex)
             {

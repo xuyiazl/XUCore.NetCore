@@ -25,6 +25,10 @@ namespace XUCore.NetCore.HttpFactory
             }
         }
         /// <summary>
+        /// 请求时间记录事件
+        /// </summary>
+        public Action<string, TimeSpan> ElapsedTimeHandler { get; set; } = null;
+        /// <summary>
         /// 请求返回的数据类型<see cref="HttpMediaType"/>
         /// </summary>
         public HttpMediaType MediaType { get; set; } = HttpMediaType.Json;

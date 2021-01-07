@@ -15,6 +15,10 @@ namespace XUCore.NetCore.HttpFactory
     public interface IHttpOptions<TResult>
     {
         /// <summary>
+        /// 请求时间记录事件
+        /// </summary>
+        Action<string, TimeSpan> ElapsedTimeHandler { get; set; }
+        /// <summary>
         /// <see cref="HttpClient"/>回调，可以添加需要的Header等
         /// </summary>
         Action<HttpClient> ClientHandler { get; set; }
