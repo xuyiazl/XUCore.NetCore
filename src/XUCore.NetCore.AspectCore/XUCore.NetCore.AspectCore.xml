@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.AspectCore</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.Prefix">
+            <summary>
+            缓存前缀
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.Key">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.ParamterKey">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.CacheSeconds">
+            <summary>
+            缓存时间（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsTigger">
+            <summary>
+            是否开启后台触发同步缓存
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsOpen">
+            <summary>
+            是否开启缓存
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册缓存拦截服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheService(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Hosting.IHostApplicationLifetime)">
+            <summary>
+            启用缓存拦截服务
+            </summary>
+            <param name="app"></param>
+            <param name="lifetime"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            启用拦截器，使用 ===》aspect ServiceContextProviderFactory
+            </summary>
+            <param name="hostBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.ICacheService">
+            <summary>
+            缓存服务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Get(System.String,System.Type)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key"></param>
+            <param name="returnType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Set(System.String,System.Object)">
+            <summary>
+            写入缓存
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Set(System.String,System.TimeSpan,System.Object)">
+            <summary>
+            写入缓存
+            </summary>
+            <param name="key"></param>
+            <param name="expirationTime"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory">
+            <summary>
+            JobFactory ：实现在Timer触发的时候注入生成对应的Job组件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.serviceProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            
+            </summary>
+            <param name="serviceProvider"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.NewJob(Quartz.Spi.TriggerFiredBundle,Quartz.IScheduler)">
+            <summary>
+            Called by the scheduler at the time of the trigger firing, in order to produce a Quartz.IJob instance on which to call Execute.
+            </summary>
+            <param name="bundle"></param>
+            <param name="scheduler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.ReturnJob(Quartz.IJob)">
+            <summary>
+            Allows the job factory to destroy/cleanup the job if needed.
+            </summary>
+            <param name="job"></param>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzRefreshJob">
+            <summary>
+            刷新任务
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzService">
+            <summary>
+            Quartz.Net启动后注册job和trigger
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Quartz.Net启动后注册job和trigger
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.Start">
+            <summary>
+            启动服务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.Stop">
+            <summary>
+            停止服务
+            </summary>
+        </member>
+    </members>
+</doc>

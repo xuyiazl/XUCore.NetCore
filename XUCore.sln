@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.DataTest", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.ShellProgressBar.Examples", "test\XUCore.ShellProgressBar.Examples\XUCore.ShellProgressBar.Examples.csproj", "{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.AspectCore", "XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj", "{92D77168-4A64-4367-936E-9AD50514B971}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.AspectCore", "src\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj", "{92D77168-4A64-4367-936E-9AD50514B971}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
