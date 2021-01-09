@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.DataTest", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.ShellProgressBar.Examples", "test\XUCore.ShellProgressBar.Examples\XUCore.ShellProgressBar.Examples.csproj", "{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.NetCore.AspectCore", "XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj", "{92D77168-4A64-4367-936E-9AD50514B971}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D77168-4A64-4367-936E-9AD50514B971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D77168-4A64-4367-936E-9AD50514B971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D77168-4A64-4367-936E-9AD50514B971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D77168-4A64-4367-936E-9AD50514B971}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +152,7 @@ Global
 		{364C3A28-B5EE-4DDA-A66D-BC1D7B5E4A66} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
 		{006ED0C4-71A2-47DE-8057-256DCF73F280} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
 		{BD2C0F1C-1599-4312-8CAD-6BD4F5A1AEBC} = {4F3EE3C6-B8CF-471F-BD73-E8C83C00D557}
+		{92D77168-4A64-4367-936E-9AD50514B971} = {B9D8B0C9-3B02-4385-B04F-8B1CCEE4A1BF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C60367-AD3A-442A-A79A-F9D652E5089F}
