@@ -380,16 +380,16 @@ namespace XUCore.Extensions
             value = Regex.Replace(value, @"&(copy|#169);", "\xa9", RegexOptions.IgnoreCase);
             value = Regex.Replace(value, @"&#(\d+);", "", RegexOptions.IgnoreCase);
 
-            value = value.HtmlEncode();
+            //value = value.HtmlEncode();
 
-            value = value.Replace("\"", "\\\"");
-            value = value.Replace("\\", "\\\\");
-            value = value.Replace("/", "\\/");
-            value = value.Replace("\b", "\\b");
-            value = value.Replace("\f", "\\f");
-            value = value.Replace("\n", "\\n");
-            value = value.Replace("\r", "\\r");
-            value = value.Replace("\t", "\\t");
+            //value = value.Replace("\"", "\\\"");
+            //value = value.Replace("\\", "\\\\");
+            //value = value.Replace("/", "\\/");
+            //value = value.Replace("\b", "\\b");
+            //value = value.Replace("\f", "\\f");
+            //value = value.Replace("\n", "\\n");
+            //value = value.Replace("\r", "\\r");
+            //value = value.Replace("\t", "\\t");
             return value;
         }
 
