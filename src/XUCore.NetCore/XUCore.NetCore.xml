@@ -36,6 +36,33 @@
             WebApi的区域控制器基类
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.CronCommon.SecondInterval(System.Int32)">
+            <summary>
+            秒级间隔
+            </summary>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.CronCommon.MinuteInterval(System.Int32)">
+            <summary>
+            分钟级间隔
+            </summary>
+            <param name="interval"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.CronCommon.HourInterval(System.Int32)">
+            <summary>
+            小时级间隔
+            </summary>
+            <param name="interval"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.TimeUtility.TimeToQuartzCron(System.DateTime)">
+            <summary>
+            时间格式转换成Quartz任务调度器Cron表达式
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Extensions.ActionContextExtensions">
             <summary>
             操作上下文(<see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>) 扩展
