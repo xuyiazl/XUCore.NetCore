@@ -8,7 +8,7 @@ namespace XUCore.NetCore.EasyQuartz
     public interface IJobManager
     {
 
-        Task AddJobAsync(Type jobType, string cron, string id = "");
+        Task AddJobAsync(Type jobType, string cron, string id = "", IDictionary<string, object> map = null);
         Task RemoveJobAsync(Type jobType, string id = "");
         Task PauseJob(Type jobType, string id = "");
         Task OperateJob(Type jobType, OperateEnum operate, string id = "");

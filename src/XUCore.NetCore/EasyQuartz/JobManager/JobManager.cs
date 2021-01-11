@@ -22,7 +22,7 @@ namespace XUCore.NetCore.EasyQuartz
             _jobFactory = jobFactory;
         }
 
-        public async Task AddJobAsync(Type jobType, string cron, string id = "")
+        public async Task AddJobAsync(Type jobType, string cron, string id = "", IDictionary<string, object> map = null)
         {
             var name = jobType.FullName + id;
 
@@ -45,6 +45,10 @@ namespace XUCore.NetCore.EasyQuartz
                 .WithCronSchedule(cron)
                 .WithDescription(jobType.Name)
                 .Build();
+
+            if (map != null)
+                foreach (var item in map)
+                    job.JobDataMap.Add(item);
 
             await scheduler.ScheduleJob(job, trigger);
             await scheduler.Start();
