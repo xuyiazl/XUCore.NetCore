@@ -22,26 +22,28 @@ namespace XUCore.NetCore.EasyQuartz
             _jobFactory = jobFactory;
         }
 
-        public async Task AddJobAsync(Type jobType, string cron, string id = "", IDictionary<string, object> map = null)
+        public async Task AddJobAsync(Type jobType, string cron, string id, IDictionary<string, object> map = null)
         {
-            var name = jobType.FullName + id;
+            var group = $"{jobType.FullName}.Group";
+
+            var name = id;
 
             var scheduler = await _schedulerFactory.GetScheduler();
             scheduler.JobFactory = _jobFactory;
 
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals($"{name}Group"));
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
             if (jobKeys.Count > 0)
                 if (jobKeys.Any(x => x.Name == name))
                     return;
 
-            var job = JobBuilder.Create(jobType).WithIdentity(name, $"{name}Group")
+            var job = JobBuilder.Create(jobType).WithIdentity(name, group)
                 .WithDescription(jobType.Name)
-                .UsingJobData("Id", id)
+                .UsingJobData("JobId", id)
                 .Build();
 
             var trigger = TriggerBuilder
                 .Create()
-                .WithIdentity($"{name}.trigger", $"{name}Group")
+                .WithIdentity($"{name}.trigger", group)
                 .WithCronSchedule(cron)
                 .WithDescription(jobType.Name)
                 .Build();
@@ -54,27 +56,47 @@ namespace XUCore.NetCore.EasyQuartz
             await scheduler.Start();
         }
 
-        public async Task RemoveJobAsync(Type jobType, string id = "")
+        public async Task<bool> ExistJobAsync(Type jobType, string id)
         {
-            var name = jobType.FullName + id;
+            var group = $"{jobType.FullName}.Group";
+
+            var name = id;
+
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals($"{name}Group"));
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            return jobKeys.Any(x => x.Name == name);
+        }
+
+        public async Task RemoveJobAsync(Type jobType, string id)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            var name = id;
+
+            var scheduler = await _schedulerFactory.GetScheduler();
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
             await scheduler.DeleteJobs(jobKeys.Where(x => x.Name == name).ToList());
         }
 
-        public async Task PauseJob(Type jobType, string id = "")
+        public async Task PauseJob(Type jobType, string id)
         {
-            var name = jobType.FullName + id;
+            var group = $"{jobType.FullName}.Group";
+
+            var name = id;
+
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals($"{name}Group"));
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
             await scheduler.PauseJob(jobKeys.First(x => x.Name == name));
         }
 
-        public async Task OperateJob(Type jobType, OperateEnum operate, string id = "")
+        public async Task OperateJob(Type jobType, OperateEnum operate, string id)
         {
-            var name = jobType.FullName + id;
+            var group = $"{jobType.FullName}.Group";
+
+            var name = id;
+
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals($"{name}Group"));
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
             var key = jobKeys.FirstOrDefault(x => x.Name == name);
 
             if (key == null) return;
