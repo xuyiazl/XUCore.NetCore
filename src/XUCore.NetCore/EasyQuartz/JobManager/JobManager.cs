@@ -31,10 +31,14 @@ namespace XUCore.NetCore.EasyQuartz
             var scheduler = await _schedulerFactory.GetScheduler();
             scheduler.JobFactory = _jobFactory;
 
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
-            if (jobKeys.Count > 0)
-                if (jobKeys.Any(x => x.Name == name))
-                    return;
+            //var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            //if (jobKeys.Count > 0)
+            //    if (jobKeys.Any(x => x.Name == name))
+            //        return;
+
+            var exist = await scheduler.CheckExists(new JobKey(name, group));
+
+            if (exist) return;
 
             var job = JobBuilder.Create(jobType).WithIdentity(name, group)
                 .WithDescription(jobType.Name)
@@ -56,6 +60,17 @@ namespace XUCore.NetCore.EasyQuartz
             await scheduler.Start();
         }
 
+        public async Task<List<JobKey>> GetJobsAsync(Type jobType)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            var scheduler = await _schedulerFactory.GetScheduler();
+
+            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+
+            return jobKeys.ToList();
+        }
+
         public async Task<bool> ExistJobAsync(Type jobType, string id)
         {
             var group = $"{jobType.FullName}.Group";
@@ -63,19 +78,25 @@ namespace XUCore.NetCore.EasyQuartz
             var name = id;
 
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
-            return jobKeys.Any(x => x.Name == name);
+            var exist = await scheduler.CheckExists(new JobKey(name, group));
+
+            return exist;
+
+            //var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            //return jobKeys.Any(x => x.Name == name);
         }
 
-        public async Task RemoveJobAsync(Type jobType, string id)
+        public async Task<bool> RemoveJobAsync(Type jobType, string id)
         {
             var group = $"{jobType.FullName}.Group";
 
             var name = id;
 
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
-            await scheduler.DeleteJobs(jobKeys.Where(x => x.Name == name).ToList());
+            //var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            //await scheduler.DeleteJobs(jobKeys.Where(x => x.Name == name).ToList());
+
+            return await scheduler.DeleteJob(new JobKey(name, group));
         }
 
         public async Task PauseJob(Type jobType, string id)
@@ -85,8 +106,10 @@ namespace XUCore.NetCore.EasyQuartz
             var name = id;
 
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
-            await scheduler.PauseJob(jobKeys.First(x => x.Name == name));
+            //var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            //await scheduler.PauseJob(jobKeys.First(x => x.Name == name));
+
+            await scheduler.PauseJob(new JobKey(name, group));
         }
 
         public async Task OperateJob(Type jobType, OperateEnum operate, string id)
@@ -96,20 +119,21 @@ namespace XUCore.NetCore.EasyQuartz
             var name = id;
 
             var scheduler = await _schedulerFactory.GetScheduler();
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
-            var key = jobKeys.FirstOrDefault(x => x.Name == name);
+            //var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            //var key = jobKeys.FirstOrDefault(x => x.Name == name);
 
-            if (key == null) return;
+            //if (key == null) return;
+
             switch (operate)
             {
                 case OperateEnum.Delete:
-                    await scheduler.DeleteJob(key);
+                    await scheduler.DeleteJob(new JobKey(name, group));
                     break;
                 case OperateEnum.Pause:
-                    await scheduler.PauseJob(key);
+                    await scheduler.PauseJob(new JobKey(name, group));
                     break;
                 case OperateEnum.Resume:
-                    await scheduler.ResumeJob(key);
+                    await scheduler.ResumeJob(new JobKey(name, group));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operate), operate, null);
