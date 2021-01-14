@@ -22,6 +22,14 @@ namespace XUCore.NetCore.EasyQuartz
             _jobFactory = jobFactory;
         }
 
+        public IScheduler Scheduler
+        {
+            get
+            {
+                return _schedulerFactory.GetScheduler().GetAwaiter().GetResult();
+            }
+        }
+
         public async Task AddJobAsync<TJob>(string cron, string name, IDictionary<string, object> map = null) where TJob : IJob
             => await AddJobAsync(typeof(TJob), cron, name, map);
 
@@ -29,7 +37,7 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
+            var scheduler = Scheduler;
             scheduler.JobFactory = _jobFactory;
 
             var exist = await scheduler.CheckExists(new JobKey(name, group));
@@ -63,9 +71,7 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
-
-            var jobKeys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+            var jobKeys = await Scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
 
             return jobKeys.ToList();
         }
@@ -77,10 +83,21 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
-            var exist = await scheduler.CheckExists(new JobKey(name, group));
+            var exist = await Scheduler.CheckExists(new JobKey(name, group));
 
             return exist;
+        }
+
+        public async Task<bool> RemoveAllJobAsync<TJob>() where TJob : IJob
+            => await RemoveAllJobAsync(typeof(TJob));
+
+        public async Task<bool> RemoveAllJobAsync(Type jobType)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            var jobKeys = await Scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(group));
+
+            return await Scheduler.DeleteJobs(jobKeys);
         }
 
         public async Task<bool> RemoveJobAsync<TJob>(string name) where TJob : IJob
@@ -90,9 +107,7 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
-
-            return await scheduler.DeleteJob(new JobKey(name, group));
+            return await Scheduler.DeleteJob(new JobKey(name, group));
         }
 
         public async Task PauseJob<TJob>(string name) where TJob : IJob
@@ -102,9 +117,42 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
+            await Scheduler.PauseJob(new JobKey(name, group));
+        }
 
-            await scheduler.PauseJob(new JobKey(name, group));
+        public async Task PauseJobs<TJob>() where TJob : IJob
+            => await PauseJobs(typeof(TJob));
+
+        public async Task PauseJobs(Type jobType)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            await Scheduler.PauseJobs(GroupMatcher<JobKey>.GroupEquals(group));
+        }
+
+        public async Task ResumeJob<TJob>(string name) where TJob : IJob
+            => await ResumeJob(typeof(TJob), name);
+
+        public async Task ResumeJob(Type jobType, string name)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            await Scheduler.ResumeJob(new JobKey(name, group));
+        }
+
+        public async Task ResumeJobs<TJob>() where TJob : IJob
+            => await ResumeJobs(typeof(TJob));
+
+        public async Task ResumeJobs(Type jobType)
+        {
+            var group = $"{jobType.FullName}.Group";
+
+            await Scheduler.ResumeJobs(GroupMatcher<JobKey>.GroupEquals(group));
+        }
+
+        public async Task Clear()
+        {
+            await Scheduler.Clear();
         }
 
         public async Task OperateJob<TJob>(OperateEnum operate, string name) where TJob : IJob
@@ -114,18 +162,16 @@ namespace XUCore.NetCore.EasyQuartz
         {
             var group = $"{jobType.FullName}.Group";
 
-            var scheduler = await _schedulerFactory.GetScheduler();
-
             switch (operate)
             {
                 case OperateEnum.Delete:
-                    await scheduler.DeleteJob(new JobKey(name, group));
+                    await Scheduler.DeleteJob(new JobKey(name, group));
                     break;
                 case OperateEnum.Pause:
-                    await scheduler.PauseJob(new JobKey(name, group));
+                    await Scheduler.PauseJob(new JobKey(name, group));
                     break;
                 case OperateEnum.Resume:
-                    await scheduler.ResumeJob(new JobKey(name, group));
+                    await Scheduler.ResumeJob(new JobKey(name, group));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operate), operate, null);
