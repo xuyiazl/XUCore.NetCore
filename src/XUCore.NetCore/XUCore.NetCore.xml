@@ -57,6 +57,356 @@
             <param name="interval"></param>
             <returns></returns>
         </member>
+        <member name="P:XUCore.NetCore.EasyQuartz.IJobManager.Scheduler">
+            <summary>
+            Quartz Scheduler.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.AddAsync``1(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            增加任务
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="cron">表达式</param>
+            <param name="name">任务名（唯一id）</param>
+            <param name="map">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.AddAsync(System.Type,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            增加任务
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="cron">表达式</param>
+            <param name="name">任务名（唯一id）</param>
+            <param name="map">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.GetJobKeysAsync``1">
+            <summary>
+            获取所有的key
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.GetJobKeysAsync(System.Type)">
+            <summary>
+            获取所有的key
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.ExistAsync``1(System.String)">
+            <summary>
+            检测当是否存在
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.ExistAsync(System.Type,System.String)">
+            <summary>
+            检测当是否存在
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.RemoveAllAsync``1">
+            <summary>
+            删除
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.RemoveAllAsync(System.Type)">
+            <summary>
+            删除
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.RemoveAsync``1(System.String)">
+            <summary>
+            删除
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.RemoveAsync(System.Type,System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Pause``1(System.String)">
+            <summary>
+            暂停
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Pause(System.Type,System.String)">
+            <summary>
+            暂停
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Pause``1">
+            <summary>
+            暂停
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Pause(System.Type)">
+            <summary>
+            暂停
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Resume``1(System.String)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Resume(System.Type,System.String)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Resume``1">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Resume(System.Type)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Clear">
+            <summary>
+            清除所有任务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Operate``1(XUCore.NetCore.EasyQuartz.OperateEnum,System.String)">
+            <summary>
+            操作任务
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="operate">操作类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.IJobManager.Operate(System.Type,XUCore.NetCore.EasyQuartz.OperateEnum,System.String)">
+            <summary>
+            操作任务
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="operate">操作类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.EasyQuartz.JobManager">
+            <summary>
+            Job管理
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.#ctor(Quartz.ISchedulerFactory,Quartz.Spi.IJobFactory)">
+            <summary>
+            Job管理
+            </summary>
+            <param name="schedulerFactory"></param>
+            <param name="jobFactory"></param>
+        </member>
+        <member name="P:XUCore.NetCore.EasyQuartz.JobManager.Scheduler">
+            <summary>
+            Quartz Scheduler.
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.AddAsync``1(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            增加任务
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="cron">表达式</param>
+            <param name="name">任务名（唯一id）</param>
+            <param name="map">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.AddAsync(System.Type,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            增加任务
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="cron">表达式</param>
+            <param name="name">任务名（唯一id）</param>
+            <param name="map">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.GetJobKeysAsync``1">
+            <summary>
+            获取所有的key
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.GetJobKeysAsync(System.Type)">
+            <summary>
+            获取所有的key
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.ExistAsync``1(System.String)">
+            <summary>
+            检测当是否存在
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.ExistAsync(System.Type,System.String)">
+            <summary>
+            检测当是否存在
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.RemoveAllAsync``1">
+            <summary>
+            删除
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.RemoveAllAsync(System.Type)">
+            <summary>
+            删除
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.RemoveAsync``1(System.String)">
+            <summary>
+            删除
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.RemoveAsync(System.Type,System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Pause``1(System.String)">
+            <summary>
+            暂停
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Pause(System.Type,System.String)">
+            <summary>
+            暂停
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Pause``1">
+            <summary>
+            暂停
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Pause(System.Type)">
+            <summary>
+            暂停
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Resume``1(System.String)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Resume(System.Type,System.String)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Resume``1">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Resume(System.Type)">
+            <summary>
+            （中断后）重新开始
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Clear">
+            <summary>
+            清除所有任务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Operate``1(XUCore.NetCore.EasyQuartz.OperateEnum,System.String)">
+            <summary>
+            操作任务
+            </summary>
+            <typeparam name="TJob">实现<see cref="T:Quartz.IJob"/>任务</typeparam>
+            <param name="operate">操作类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.EasyQuartz.JobManager.Operate(System.Type,XUCore.NetCore.EasyQuartz.OperateEnum,System.String)">
+            <summary>
+            操作任务
+            </summary>
+            <param name="jobType">IJob任务类型</param>
+            <param name="operate">操作类型</param>
+            <param name="name">任务名（唯一id）</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.EasyQuartz.TimeUtility.TimeToQuartzCron(System.DateTime)">
             <summary>
             时间格式转换成Quartz任务调度器Cron表达式

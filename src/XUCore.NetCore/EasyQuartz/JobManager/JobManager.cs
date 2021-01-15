@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 
 namespace XUCore.NetCore.EasyQuartz
 {
+    /// <summary>
+    /// Job管理
+    /// </summary>
     public class JobManager : IJobManager
     {
         private readonly IJobFactory _jobFactory;
         private readonly ISchedulerFactory _schedulerFactory;
-
+        /// <summary>
+        /// Job管理
+        /// </summary>
+        /// <param name="schedulerFactory"></param>
+        /// <param name="jobFactory"></param>
         public JobManager(
             ISchedulerFactory schedulerFactory,
             IJobFactory jobFactory)
@@ -21,7 +28,9 @@ namespace XUCore.NetCore.EasyQuartz
             _schedulerFactory = schedulerFactory;
             _jobFactory = jobFactory;
         }
-
+        /// <summary>
+        /// Quartz Scheduler.
+        /// </summary>
         public IScheduler Scheduler
         {
             get
@@ -29,11 +38,25 @@ namespace XUCore.NetCore.EasyQuartz
                 return _schedulerFactory.GetScheduler().GetAwaiter().GetResult();
             }
         }
-
-        public async Task AddJobAsync<TJob>(string cron, string name, IDictionary<string, object> map = null) where TJob : IJob
-            => await AddJobAsync(typeof(TJob), cron, name, map);
-
-        public async Task AddJobAsync(Type jobType, string cron, string name, IDictionary<string, object> map = null)
+        /// <summary>
+        /// 增加任务
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="cron">表达式</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <param name="map">参数</param>
+        /// <returns></returns>
+        public async Task AddAsync<TJob>(string cron, string name, IDictionary<string, object> map = null) where TJob : IJob
+            => await AddAsync(typeof(TJob), cron, name, map);
+        /// <summary>
+        /// 增加任务
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="cron">表达式</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <param name="map">参数</param>
+        /// <returns></returns>
+        public async Task AddAsync(Type jobType, string cron, string name, IDictionary<string, object> map = null)
         {
             var group = $"{jobType.FullName}.Group";
 
@@ -63,11 +86,19 @@ namespace XUCore.NetCore.EasyQuartz
             await scheduler.ScheduleJob(job, trigger);
             await scheduler.Start();
         }
-
-        public async Task<List<JobKey>> GetJobsAsync<TJob>() where TJob : IJob
-            => await GetJobsAsync(typeof(TJob));
-
-        public async Task<List<JobKey>> GetJobsAsync(Type jobType)
+        /// <summary>
+        /// 获取所有的key
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <returns></returns>
+        public async Task<List<JobKey>> GetJobKeysAsync<TJob>() where TJob : IJob
+            => await GetJobKeysAsync(typeof(TJob));
+        /// <summary>
+        /// 获取所有的key
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <returns></returns>
+        public async Task<List<JobKey>> GetJobKeysAsync(Type jobType)
         {
             var group = $"{jobType.FullName}.Group";
 
@@ -75,11 +106,21 @@ namespace XUCore.NetCore.EasyQuartz
 
             return jobKeys.ToList();
         }
-
-        public async Task<bool> ExistJobAsync<TJob>(string name) where TJob : IJob
-            => await ExistJobAsync(typeof(TJob), name);
-
-        public async Task<bool> ExistJobAsync(Type jobType, string name)
+        /// <summary>
+        /// 检测当是否存在
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<bool> ExistAsync<TJob>(string name) where TJob : IJob
+            => await ExistAsync(typeof(TJob), name);
+        /// <summary>
+        /// 检测当是否存在
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task<bool> ExistAsync(Type jobType, string name)
         {
             var group = $"{jobType.FullName}.Group";
 
@@ -87,11 +128,19 @@ namespace XUCore.NetCore.EasyQuartz
 
             return exist;
         }
-
-        public async Task<bool> RemoveAllJobAsync<TJob>() where TJob : IJob
-            => await RemoveAllJobAsync(typeof(TJob));
-
-        public async Task<bool> RemoveAllJobAsync(Type jobType)
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <returns></returns>
+        public async Task<bool> RemoveAllAsync<TJob>() where TJob : IJob
+            => await RemoveAllAsync(typeof(TJob));
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <returns></returns>
+        public async Task<bool> RemoveAllAsync(Type jobType)
         {
             var group = $"{jobType.FullName}.Group";
 
@@ -99,66 +148,127 @@ namespace XUCore.NetCore.EasyQuartz
 
             return await Scheduler.DeleteJobs(jobKeys);
         }
-
-        public async Task<bool> RemoveJobAsync<TJob>(string name) where TJob : IJob
-            => await RemoveJobAsync(typeof(TJob), name);
-
-        public async Task<bool> RemoveJobAsync(Type jobType, string name)
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task<bool> RemoveAsync<TJob>(string name) where TJob : IJob
+            => await RemoveAsync(typeof(TJob), name);
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task<bool> RemoveAsync(Type jobType, string name)
         {
             var group = $"{jobType.FullName}.Group";
 
             return await Scheduler.DeleteJob(new JobKey(name, group));
         }
-
-        public async Task PauseJob<TJob>(string name) where TJob : IJob
-            => await PauseJob(typeof(TJob), name);
-
-        public async Task PauseJob(Type jobType, string name)
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task Pause<TJob>(string name) where TJob : IJob
+            => await Pause(typeof(TJob), name);
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task Pause(Type jobType, string name)
         {
             var group = $"{jobType.FullName}.Group";
 
             await Scheduler.PauseJob(new JobKey(name, group));
         }
-
-        public async Task PauseJobs<TJob>() where TJob : IJob
-            => await PauseJobs(typeof(TJob));
-
-        public async Task PauseJobs(Type jobType)
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <returns></returns>
+        public async Task Pause<TJob>() where TJob : IJob
+            => await Pause(typeof(TJob));
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <returns></returns>
+        public async Task Pause(Type jobType)
         {
             var group = $"{jobType.FullName}.Group";
 
             await Scheduler.PauseJobs(GroupMatcher<JobKey>.GroupEquals(group));
         }
-
-        public async Task ResumeJob<TJob>(string name) where TJob : IJob
-            => await ResumeJob(typeof(TJob), name);
-
-        public async Task ResumeJob(Type jobType, string name)
+        /// <summary>
+        /// （中断后）重新开始
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task Resume<TJob>(string name) where TJob : IJob
+            => await Resume(typeof(TJob), name);
+        /// <summary>
+        /// （中断后）重新开始
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task Resume(Type jobType, string name)
         {
             var group = $"{jobType.FullName}.Group";
 
             await Scheduler.ResumeJob(new JobKey(name, group));
         }
-
-        public async Task ResumeJobs<TJob>() where TJob : IJob
-            => await ResumeJobs(typeof(TJob));
-
-        public async Task ResumeJobs(Type jobType)
+        /// <summary>
+        /// （中断后）重新开始
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <returns></returns>
+        public async Task Resume<TJob>() where TJob : IJob
+            => await Resume(typeof(TJob));
+        /// <summary>
+        /// （中断后）重新开始
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <returns></returns>
+        public async Task Resume(Type jobType)
         {
             var group = $"{jobType.FullName}.Group";
 
             await Scheduler.ResumeJobs(GroupMatcher<JobKey>.GroupEquals(group));
         }
-
+        /// <summary>
+        /// 清除所有任务
+        /// </summary>
+        /// <returns></returns>
         public async Task Clear()
         {
             await Scheduler.Clear();
         }
-
-        public async Task OperateJob<TJob>(OperateEnum operate, string name) where TJob : IJob
-            => await OperateJob(typeof(TJob), operate, name);
-
-        public async Task OperateJob(Type jobType, OperateEnum operate, string name)
+        /// <summary>
+        /// 操作任务
+        /// </summary>
+        /// <typeparam name="TJob">实现<see cref="IJob"/>任务</typeparam>
+        /// <param name="operate">操作类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task Operate<TJob>(OperateEnum operate, string name) where TJob : IJob
+            => await Operate(typeof(TJob), operate, name);
+        /// <summary>
+        /// 操作任务
+        /// </summary>
+        /// <param name="jobType">IJob任务类型</param>
+        /// <param name="operate">操作类型</param>
+        /// <param name="name">任务名（唯一id）</param>
+        /// <returns></returns>
+        public async Task Operate(Type jobType, OperateEnum operate, string name)
         {
             var group = $"{jobType.FullName}.Group";
 
