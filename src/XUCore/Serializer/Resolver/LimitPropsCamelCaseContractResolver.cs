@@ -57,39 +57,29 @@ namespace XUCore.Serializer
             this.PropsRename = propsRename;
         }
 
-
         protected override string ResolvePropertyName(string propertyName)
         {
-            string newPropertyName = string.Empty;
-            if (PropsRename != null && PropsRename.TryGetValue(propertyName.ToLower(), out newPropertyName))
-            {
+            if (PropsRename == null || PropsRename.Count == 0)
+                return base.ResolvePropertyName(propertyName.ToCamelCase());
+
+            if (PropsRename.TryGetValue(propertyName.ToLower(), out string newPropertyName))
                 return newPropertyName;
-            }
             else
-            {
-                //没有找到就用原来的
-                return base.ResolvePropertyName(propertyName);
-            }
+                return base.ResolvePropertyName(propertyName.ToCamelCase());
         }
 
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             IList<JsonProperty> list = base.CreateProperties(type, memberSerialization);
 
-            if (Props == null) return list;
+            if (Props == null || Props.Length == 0) return list;
 
-            //只保留清单有列出的属性
             return list.Where(p =>
             {
                 if (LimitMode == LimitPropsMode.Contains)
-                {
-                    //匹配的时候为了不区分大小写
-                    return Props.FirstOrDefault(a => a.ToLower() == p.PropertyName.ToLower()) != null;
-                }
+                    return Props.Any(a => a.ToLower() == p.PropertyName.ToLower());
                 else
-                {
-                    return Props.FirstOrDefault(a => a.ToLower() == p.PropertyName.ToLower()) == null;
-                }
+                    return !Props.Any(a => a.ToLower() == p.PropertyName.ToLower());
             }).ToList();
         }
 
