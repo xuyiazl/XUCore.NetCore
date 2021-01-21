@@ -7,7 +7,7 @@ namespace XUCore.NetCore.MessageApiTest
     public class WeatherForecast
     {
         [Key(0)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [Key(1)]
         public int TemperatureC { get; set; }

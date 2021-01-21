@@ -17,6 +17,8 @@ namespace XUCore.NetCore.MessagePack
     {
         public async Task WriteAsync(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
         {
+            MessagePackUtils.FormatterJsonOptions(context, options);
+
             var res = JsonConvert.SerializeObject(context.Object, options.JsonSerializerSettings);
 
             var bytes = Encoding.UTF8.GetBytes(res);

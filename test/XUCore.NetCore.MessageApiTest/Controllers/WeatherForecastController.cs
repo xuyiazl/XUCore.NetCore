@@ -24,6 +24,49 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             _logger = logger;
         }
+        [HttpGet]
+        public Result<IList<WeatherForecast>> Get()
+        {
+            var rng = new Random();
+
+            var list = new Result<IList<WeatherForecast>>
+            {
+                code = 0,
+                elapsedTime = 12,
+                subCode = "0000001",
+                message = "成功啦",
+                data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                })
+            .ToList()
+            };
+
+            //var reProps = new Dictionary<string, string> { { "code", "_code" },
+            //        { "subCode", "_subCode" },
+            //        { "bodyMessage", "data" },
+            //        { "TemperatureC", "c" },
+            //        { "Summary", "s" } };
+
+            //var props = new string[] { "code", "subCode", "bodyMessage", "date", "TemperatureC", "Summary" };
+
+            //var jsonSerializerSettings = new JsonSerializerSettings()
+            //{
+            //    DateTimeZoneHandling = DateTimeZoneHandling.Local,
+            //    ContractResolver = new LimitPropsCamelCaseContractResolver(props, LimitPropsMode.Contains)
+            //};
+
+            //jsonSerializerSettings.Converters.Add(new DateTimeToUnixConverter());
+            //jsonSerializerSettings.Converters.Add(new DateTimeNullToUnixConverter());
+
+            //var json = list.ToJson(jsonSerializerSettings);
+
+            //var rrr = json.ToObject<ReturnModel<IList<WeatherForecast>>>(jsonSerializerSettings);
+
+            return list;
+        }
 
         [HttpGet]
         public async Task<Result<List<WeatherForecast>>> GetDemo()

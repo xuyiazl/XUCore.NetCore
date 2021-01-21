@@ -14,17 +14,17 @@ namespace XUCore.Timing
         /// <summary>
         /// 1970年1月1日
         /// </summary>
-        internal static readonly DateTime Date1970 = new DateTime(1970, 1, 1);
+        internal static readonly DateTime Date1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
         /// 最小日期
         /// </summary>
-        internal static readonly DateTime MinDate = new DateTime(1900, 1, 1);
+        internal static readonly DateTime MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
         /// 最大日期
         /// </summary>
-        internal static readonly DateTime MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+        internal static readonly DateTime MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeKind.Utc);
 
         /// <summary>
         /// 初始化js日期时间戳
