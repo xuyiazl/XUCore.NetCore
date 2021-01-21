@@ -22,7 +22,8 @@ namespace XUCore.NetCore.MessagePack
                 // 忽略指定字段 ignore
                 var limitMode = headers["limit-mode"].SafeString().ToLower();
                 // column1=col1,column2=col2
-                var rename = headers["limit-field-rename"].SafeString().ToLower().ToMap(',', '=', true, true);
+                var rename = headers["limit-field-rename"].SafeString().ToMap(',', '=', true, false, true);
+
                 var dateFormat = headers["limit-date-format"].SafeString();
                 var dateUnix = headers["limit-date-unix"].SafeString().ToLower();
 

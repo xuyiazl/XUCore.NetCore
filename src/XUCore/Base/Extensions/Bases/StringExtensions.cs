@@ -311,10 +311,11 @@ namespace XUCore.Extensions
         /// <param name="keyValuePairDelimiter">KeyValePair分隔符<see cref=","/></param>
         /// <param name="keyValueDelimeter">KeyValue分隔符<see cref="="/></param>
         /// <param name="makeKeysCaseSensitive">是否转换为小写副本</param>
+        /// <param name="makeValueCaseSensitive">是否转换为小写副本</param>
         /// <param name="trimValues">是否去除空格</param>
         /// <returns></returns>
         public static IDictionary<string, string> ToMap(this string delimitedText, char keyValuePairDelimiter,
-            char keyValueDelimeter, bool makeKeysCaseSensitive, bool trimValues)
+            char keyValueDelimeter, bool makeKeysCaseSensitive, bool makeValueCaseSensitive, bool trimValues)
         {
             IDictionary<string, string> map = new Dictionary<string, string>();
             string[] tokens = delimitedText.Split(keyValuePairDelimiter);
@@ -337,6 +338,9 @@ namespace XUCore.Extensions
                 if (makeKeysCaseSensitive)
                 {
                     key = key.ToLower();
+                }
+                if (makeValueCaseSensitive)
+                {
                     value = value.ToLower();
                 }
                 if (trimValues)

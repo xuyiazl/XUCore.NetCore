@@ -1278,7 +1278,7 @@
             <param name="removeEmptyEntries">是否移除数据中元素为空字符串的项</param>
             <returns>分割后的数据</returns>
         </member>
-        <member name="M:XUCore.Extensions.StringExtensions.ToMap(System.String,System.Char,System.Char,System.Boolean,System.Boolean)">
+        <member name="M:XUCore.Extensions.StringExtensions.ToMap(System.String,System.Char,System.Char,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             字符串转字典
             <example>Split id=1,name=zhangsan to "id":"1","name":"zhangsan"</example>
@@ -1287,6 +1287,7 @@
             <param name="keyValuePairDelimiter">KeyValePair分隔符<see cref="!:,"/></param>
             <param name="keyValueDelimeter">KeyValue分隔符<see cref="!:="/></param>
             <param name="makeKeysCaseSensitive">是否转换为小写副本</param>
+            <param name="makeValueCaseSensitive">是否转换为小写副本</param>
             <param name="trimValues">是否去除空格</param>
             <returns></returns>
         </member>

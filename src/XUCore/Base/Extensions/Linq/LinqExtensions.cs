@@ -38,7 +38,7 @@ namespace XUCore.Extensions
         public static IEnumerable<T> OrderByBatch<T>(this IEnumerable<T> query, string orderby)
         {
             var index = 0;
-            var a = orderby.ToMap(',', ' ', true, true);
+            var a = orderby.ToMap(',', ' ', false, false, true);
             foreach (var item in a)
             {
                 var m = index++ > 0 ? "ThenBy" : "OrderBy";
@@ -72,7 +72,7 @@ namespace XUCore.Extensions
         public static IQueryable<T> OrderByBatch<T>(this IQueryable<T> query, string orderby)
         {
             var index = 0;
-            var a = orderby.ToMap(',', ' ', false, true);
+            var a = orderby.ToMap(',', ' ', false, false, true);
             foreach (var item in a)
             {
                 var m = index++ > 0 ? "ThenBy" : "OrderBy";
