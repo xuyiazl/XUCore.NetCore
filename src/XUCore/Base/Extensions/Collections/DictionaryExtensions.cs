@@ -192,6 +192,28 @@ namespace XUCore.Extensions
 
         #endregion ToQueryString(将字典转换成查询字符串)
 
+        #region ToMapString(将字典转换成字符串)
+        /// <summary>
+        /// 将字典转换成字符串
+        /// </summary>
+        /// <param name="keyValuePairs"></param>
+        /// <param name="keyValuePairDelimiter"></param>
+        /// <param name="keyValueDelimeter"></param>
+        /// <returns></returns>
+        public static string ToMapString<TKey, TValue>(this IDictionary<TKey, TValue> keyValuePairs, char keyValuePairDelimiter, char keyValueDelimeter)
+        {
+            var list = new List<string>();
+
+            foreach (var item in keyValuePairs)
+            {
+                list.Add($"{item.Key}{keyValueDelimeter}{item.Value}");
+            }
+
+            return list.Join(keyValuePairDelimiter);
+        }
+
+        #endregion ToQueryString(将字典转换成查询字符串)
+
         #region GetKey(根据Value反向查找Key)
 
         /// <summary>
