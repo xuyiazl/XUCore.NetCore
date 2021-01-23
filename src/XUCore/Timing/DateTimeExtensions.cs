@@ -350,10 +350,14 @@ namespace XUCore.Timing
         /// 将时间转换为时间戳
         /// </summary>
         /// <param name="time">时间</param>
+        /// <param name="isContainMillisecond">是否包含毫秒</param>
         /// <returns></returns>
-        public static int ToTimeStamp(this DateTime time)
+        public static long ToTimeStamp(this DateTime time, bool isContainMillisecond = true)
         {
-            return (int)(time.ToUniversalTime().Ticks / 10000000 - 62135596800);
+            if (isContainMillisecond)
+                return new DateTimeOffset(time).ToUnixTimeMilliseconds();
+            else
+                return new DateTimeOffset(time).ToUnixTimeSeconds();
         }
 
         #endregion

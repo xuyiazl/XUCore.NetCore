@@ -723,13 +723,6 @@
             <param name="ticks">long</param>
             <returns>刻度间隔</returns>
         </member>
-        <member name="M:XUCore.Extensions.LongExtensions.ToDateTime(System.Int64)">
-            <summary>
-            将给定 Unix 时间戳 转换为 DateTime 时间。
-            </summary>
-            <param name="unixTimeStamp">Unix 时间戳。</param>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.Extensions.LongExtensions.ToDateTime(System.Int64,System.DateTimeKind)">
             <summary>
             将给定 Unix 时间戳 转换为 DateTime 时间。
@@ -2419,6 +2412,15 @@
             <typeparam name="TKey">键类型</typeparam>
             <typeparam name="TValue">值类型</typeparam>
             <param name="dictionary">字典</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.ToMapString``2(System.Collections.Generic.IDictionary{``0,``1},System.Char,System.Char)">
+            <summary>
+            将字典转换成字符串
+            </summary>
+            <param name="keyValuePairs"></param>
+            <param name="keyValuePairDelimiter"></param>
+            <param name="keyValueDelimeter"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Extensions.DictionaryExtensions.GetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
@@ -16871,11 +16873,12 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Timing.DateTimeExtensions.ToTimeStamp(System.DateTime)">
+        <member name="M:XUCore.Timing.DateTimeExtensions.ToTimeStamp(System.DateTime,System.Boolean)">
             <summary>
             将时间转换为时间戳
             </summary>
             <param name="time">时间</param>
+            <param name="isContainMillisecond">是否包含毫秒</param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Timing.DateTimeExtensions.CsharpTime2JavascriptTime(System.DateTime)">
