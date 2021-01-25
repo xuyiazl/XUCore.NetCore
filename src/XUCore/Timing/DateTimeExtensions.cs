@@ -1,6 +1,7 @@
 ﻿using XUCore.Extensions;
 using System;
 using System.Linq;
+using XUCore.Helpers;
 
 namespace XUCore.Timing
 {
@@ -352,13 +353,7 @@ namespace XUCore.Timing
         /// <param name="time">时间</param>
         /// <param name="isContainMillisecond">是否包含毫秒</param>
         /// <returns></returns>
-        public static long ToTimeStamp(this DateTime time, bool isContainMillisecond = true)
-        {
-            if (isContainMillisecond)
-                return new DateTimeOffset(time).ToUnixTimeMilliseconds();
-            else
-                return new DateTimeOffset(time).ToUnixTimeSeconds();
-        }
+        public static long ToTimeStamp(this DateTime time, bool isContainMillisecond = true) => UnixTime.ToTimestamp(time, isContainMillisecond);
 
         #endregion
 

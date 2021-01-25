@@ -1,4 +1,5 @@
 ﻿using System;
+using XUCore.Helpers;
 
 // ReSharper disable once CheckNamespace
 namespace XUCore.Extensions
@@ -266,17 +267,7 @@ namespace XUCore.Extensions
         /// <param name="unixTimeStamp">Unix 时间戳。</param>
         /// <param name="dateTimeKind">Utc or Local</param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this long unixTimeStamp, DateTimeKind dateTimeKind = DateTimeKind.Local)
-        {
-            if (unixTimeStamp.ToString().Length == 10)
-                return dateTimeKind == DateTimeKind.Local ?
-                    DateTimeOffset.FromUnixTimeSeconds(unixTimeStamp).LocalDateTime :
-                    DateTimeOffset.FromUnixTimeSeconds(unixTimeStamp).UtcDateTime;
-            else
-                return dateTimeKind == DateTimeKind.Local ?
-                    DateTimeOffset.FromUnixTimeMilliseconds(unixTimeStamp).LocalDateTime :
-                    DateTimeOffset.FromUnixTimeMilliseconds(unixTimeStamp).UtcDateTime;
-        }
+        public static DateTime ToDateTime(this long unixTimeStamp, DateTimeKind dateTimeKind = DateTimeKind.Local) => UnixTime.ToDateTime(unixTimeStamp, dateTimeKind);
 
         #endregion ToDateTime(将给定Unix时间戳转换为DateTime时间)
     }

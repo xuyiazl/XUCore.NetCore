@@ -8519,11 +8519,12 @@
             <param name="isContainMillisecond">是否包含毫秒</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Helpers.UnixTime.ToDateTime(System.Int64)">
+        <member name="M:XUCore.Helpers.UnixTime.ToDateTime(System.Int64,System.DateTimeKind)">
             <summary>
-            转换为DateTime对象
+            将给定 Unix 时间戳 转换为 DateTime 时间。
             </summary>
-            <param name="timestamp">时间戳</param>
+            <param name="unixTimeStamp">Unix 时间戳。</param>
+            <param name="dateTimeKind">Utc or Local</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Helpers.Url">
