@@ -49,30 +49,12 @@ namespace XUCore.Helpers
         /// 获取Unix时间戳
         /// </summary>
         /// <param name="time">时间</param>
-        public static long GetUnixTimestamp(DateTime time)
-        {
-            var start = TimeZoneInfo.ConvertTime(DateTimeExtensions.Date1970, TimeZoneInfo.Local);
-            var ticks = (time - start.Add(new TimeSpan(8, 0, 0))).Ticks;
-            return Conv.ToLong(ticks / TimeSpan.TicksPerSecond);
-        }
+        public static long GetUnixTimestamp(DateTime time) => UnixTime.ToTimestamp(time);
 
         /// <summary>
         /// 从Unix时间戳获取时间
         /// </summary>
         /// <param name="timestamp">Unix时间戳</param>
-        public static DateTime GetTimeFromUnixTimestamp(long timestamp)
-        {
-            var start = TimeZoneInfo.ConvertTime(DateTimeExtensions.Date1970, TimeZoneInfo.Local);
-            var span = new TimeSpan(long.Parse(timestamp + "0000000"));
-            return start.Add(span).Add(new TimeSpan(8, 0, 0));
-        }
-
-        ///// <summary>
-        ///// 格式化时间间隔
-        ///// </summary>
-        ///// <param name="span">时间间隔</param>
-        //public static string Format(TimeSpan span)
-        //{
-        //}
+        public static DateTime GetTimeFromUnixTimestamp(long timestamp) => UnixTime.ToDateTime(timestamp, DateTimeKind.Local);
     }
 }

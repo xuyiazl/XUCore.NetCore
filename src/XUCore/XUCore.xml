@@ -16882,28 +16882,6 @@
             <param name="isContainMillisecond">是否包含毫秒</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Timing.DateTimeExtensions.CsharpTime2JavascriptTime(System.DateTime)">
-            <summary>
-            将C#时间转换为Javascript时间
-            </summary>
-            <param name="dateTime">时间</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Timing.DateTimeExtensions.PhpTime2CsharpTime(System.DateTime,System.Int64)">
-            <summary>
-            将PHP时间转换为C#时间
-            </summary>
-            <param name="dateTime">时间</param>
-            <param name="time">PHP的时间</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Timing.DateTimeExtensions.CsharpTime2PhpTime(System.DateTime)">
-            <summary>
-            将C#时间转换为PHP时间
-            </summary>
-            <param name="dateTime">时间</param>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.Timing.DateTimeExtensions.AddWeeks(System.DateTime,System.Int32)">
             <summary>
             添加星期
