@@ -462,6 +462,12 @@
             服务扩展
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.UseSign``1(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册签名中间件
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.UseErrorLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             注册错误日志中间件
@@ -492,6 +498,14 @@
             </summary>
             <param name="hostBuilder">Web主机生成器</param>
             <param name="headerKey">请求头键名</param>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddSign(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            注册签名
+            </summary>
+            <param name="services"></param>
+            <param name="section"></param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.AddFlowMonitoring(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,System.Int32,System.Action{System.Decimal})">
             <summary>
@@ -1961,6 +1975,91 @@
             <summary>
             数据
             </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Sign.SignMiddleware._next">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Sign.SignMiddleware._options">
+            <summary>
+            真实IP选项
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{XUCore.NetCore.Sign.SignOptions})">
+            <summary>
+            初始化一个<see cref="T:XUCore.NetCore.Middlewares.RealIpMiddleware"/>类型的实例
+            </summary>
+            <param name="next">方法</param>
+            <param name="options">真实IP选项</param>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignMiddleware.GetAppSecret(System.String)">
+            <summary>
+            获取appSecret密钥
+            </summary>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignMiddleware.ReplayAttack(System.String,System.String,System.String)">
+            <summary>
+            重放攻击
+            </summary>
+            <param name="appid"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Sign.SignOptions.Prefix">
+            <summary>
+            header 前缀
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Sign.SignOptions.TimeOut">
+            <summary>
+            超时时间（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Sign.SignOptions.IsOpen">
+            <summary>
+            是否开启验证
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Sign.SignParameters">
+            <summary>
+            签名工具类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignParameters.Add(System.String,System.String)">
+            <summary>
+            设置参数值
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignParameters.CreateSign(System.String,System.String)">
+            <summary>
+            获取 Sign 签名
+            </summary>
+            <param name="key">key 秘钥的字符名称 就是叫 key</param>
+            <param name="value">秘钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignParameters.VaildSign(System.String,System.String,System.String)">
+            <summary>
+            验证签名
+            </summary>
+            <param name="key">key 秘钥的字符名称 就是叫 key</param>
+            <param name="value">秘钥</param>
+            <param name="signature">客户端传递的签名</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Sign.SignParameters.JoinParams(System.String,System.String)">
+            <summary>
+            构造验证字符串
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.NetCore.StateCode">
             <summary>

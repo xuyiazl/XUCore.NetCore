@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XUCore.Helpers;
 using XUCore.Serializer;
 
-namespace XUCore.Helpers
+namespace XUCore.NetCore.Sign
 {
     /// <summary>
     /// 签名工具类
@@ -44,9 +45,24 @@ namespace XUCore.Helpers
         /// <returns></returns>
         public string CreateSign(string key, string value)
         {
-            var val = CreateToken(key, value);
+            var val = JoinParams(key, value);
 
-            return Encrypt.Md5By32(val).ToLower();
+            var md5 = Encrypt.Md5By32(val).ToLower();
+
+            return Encrypt.Sha256(md5 + value).ToLower();
+        }
+        /// <summary>
+        /// 验证签名
+        /// </summary>
+        /// <param name="key">key 秘钥的字符名称 就是叫 key</param>
+        /// <param name="value">秘钥</param>
+        /// <param name="signature">客户端传递的签名</param>
+        /// <returns></returns>
+        public bool VaildSign(string key, string value, string signature)
+        {
+            var sign = this.CreateSign(key, value);
+
+            return signature.Equals(sign);
         }
 
         /// <summary>
@@ -55,7 +71,7 @@ namespace XUCore.Helpers
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        private string CreateToken(string key, string value)
+        private string JoinParams(string key, string value)
         {
             var sb = new StringBuilder();
 

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using XUCore.NetCore.Middlewares;
 using XUCore.Helpers;
 using System;
+using XUCore.NetCore.Sign;
 
 namespace XUCore.NetCore.Extensions
 {
@@ -13,6 +14,15 @@ namespace XUCore.NetCore.Extensions
     /// </summary>
     public static partial class Extensions
     {
+        /// <summary>
+        /// 注册签名中间件
+        /// </summary>
+        /// <param name="builder">应用程序生成器</param>
+        public static IApplicationBuilder UseSign<TMiddleware>(this IApplicationBuilder builder)
+            where TMiddleware : SignMiddleware
+        {
+            return builder.UseMiddleware<TMiddleware>();
+        }
         /// <summary>
         /// 注册错误日志中间件
         /// </summary>

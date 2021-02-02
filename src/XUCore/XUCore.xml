@@ -7930,34 +7930,6 @@
             <param name="fileName">文件路径</param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Helpers.SignParameters">
-            <summary>
-            签名工具类
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.SignParameters.Add(System.String,System.String)">
-            <summary>
-            设置参数值
-            </summary>
-            <param name="name"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:XUCore.Helpers.SignParameters.CreateSign(System.String,System.String)">
-            <summary>
-            获取 Sign 签名
-            </summary>
-            <param name="key">key 秘钥的字符名称 就是叫 key</param>
-            <param name="value">秘钥</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Helpers.SignParameters.CreateToken(System.String,System.String)">
-            <summary>
-            构造验证字符串
-            </summary>
-            <param name="key"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.Helpers.Singleton">
             <summary>
             单例操作。提供一个字典容器，按类型装载所有<see cref="T:XUCore.Helpers.Singleton"/>的单例实例
