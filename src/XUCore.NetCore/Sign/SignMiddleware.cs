@@ -21,7 +21,7 @@ namespace XUCore.NetCore.Sign
         private readonly RequestDelegate _next;
 
         /// <summary>
-        /// 真实IP选项
+        /// 签名选项
         /// </summary>
         private readonly SignOptions _options;
 
