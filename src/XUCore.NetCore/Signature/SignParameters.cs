@@ -5,7 +5,7 @@ using System.Text;
 using XUCore.Helpers;
 using XUCore.Serializer;
 
-namespace XUCore.NetCore.Sign
+namespace XUCore.NetCore.Signature
 {
     /// <summary>
     /// 签名工具类

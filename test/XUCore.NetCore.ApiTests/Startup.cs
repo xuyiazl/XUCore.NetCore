@@ -12,7 +12,7 @@ using XUCore.NetCore.Extensions;
 using XUCore.NetCore.Jwt;
 using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.MessagePack;
-using XUCore.NetCore.Sign;
+using XUCore.NetCore.Signature;
 using XUCore.Configs;
 using XUCore.NetCore.ApiTests;
 
@@ -34,7 +34,7 @@ namespace XUCore.ApiTests
 
             var appSection = Configuration.GetSection("JwtOptions");
 
-            services.AddSign();
+            services.AddHttpSignService();
 
             var jwtSettings = appSection.Get<JwtOptions>();
             services.AddJwtOptions(options => appSection.Bind(options));
@@ -80,7 +80,7 @@ namespace XUCore.ApiTests
             //启用静态请求上下文
             app.UseStaticHttpContext();
 
-            app.UseSign<SignDemo>();
+            //app.UseSign<SignDemo>();
 
             app.UseRouting();
 

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using XUCore.Develops;
-using XUCore.NetCore.Sign;
+using XUCore.NetCore.Signature;
 using XUCore.Configs;
 
 namespace XUCore.NetCore.Extensions
@@ -24,20 +24,6 @@ namespace XUCore.NetCore.Extensions
     /// </summary>
     public static partial class Extensions
     {
-        /// <summary>
-        /// 注册签名
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="section"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddSign(this IServiceCollection services, string section = "SignOptions")
-        {
-            var configuration = services.BuildServiceProvider().GetService<IConfiguration>();
-
-            services.BindSection<SignOptions>(configuration, section);
-
-            return services;
-        }
         /// <summary>
         /// 数据流量控制
         /// </summary>

@@ -462,12 +462,6 @@
             服务扩展
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseSign``1(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary>
-            注册签名中间件
-            </summary>
-            <param name="builder">应用程序生成器</param>
-        </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.UseErrorLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             注册错误日志中间件
@@ -498,14 +492,6 @@
             </summary>
             <param name="hostBuilder">Web主机生成器</param>
             <param name="headerKey">请求头键名</param>
-        </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddSign(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            注册签名
-            </summary>
-            <param name="services"></param>
-            <param name="section"></param>
-            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.AddFlowMonitoring(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,System.Int32,System.Action{System.Decimal})">
             <summary>
@@ -1976,67 +1962,193 @@
             数据
             </summary>
         </member>
-        <member name="F:XUCore.NetCore.Sign.SignMiddleware._next">
+        <member name="T:XUCore.NetCore.Signature.HttpSignAttribute">
+            <summary>
+            http签名验证
+            <para>签名算法：</para>
+            <para>1、拼接appid，timestamp，noncestr字符串，并按照字符进行ASCII排序，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}</para>
+            <para>2、将appSecret追加到拼接串后面，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret}</para>
+            <para>3、将期字符串MD5 32位 加密，然后全部小写 ToLower</para>
+            <para>4、然后进行 Sha256(md5+appSecret).ToLower() 加密后，得到签名</para>
+            <para>公式：Sha256(md5(appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret})+{appSecret})</para>
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignAttribute.#ctor">
+            <summary>
+            http签名验证
+            <para>签名算法：</para>
+            <para>1、拼接appid，timestamp，noncestr字符串，并按照字符进行ASCII排序，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}</para>
+            <para>2、将appSecret追加到拼接串后面，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret}</para>
+            <para>3、将期字符串MD5 32位 加密，然后全部小写 ToLower</para>
+            <para>4、然后进行 Sha256(md5+appSecret).ToLower() 加密后，得到签名</para>
+            <para>公式：Sha256(md5(appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret})+{appSecret})</para>
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Signature.HttpSignAttribute.Prefix">
+            <summary>
+            header前缀，默认x-client-
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Signature.HttpSignAttribute.Timeout">
+            <summary>
+            超时设置（秒），默认60秒
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignAttribute.GetAppSecretAsync(System.IServiceProvider,System.String)">
+            <summary>
+            获取appSecret密钥
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignAttribute.PreventReplayAttackAsync(System.IServiceProvider,System.String,System.String,System.String)">
+            <summary>
+            防止重放攻击
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="appid"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignAttribute.CreateSignAsync(System.IServiceProvider,System.String,System.String,System.String,System.String)">
+            <summary>
+            创建签名
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="appid"></param>
+            <param name="appSecret"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignAttribute.Result(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,XUCore.NetCore.Signature.HttpSignSubCode)">
+            <summary>
+            输出信息
+            </summary>
+            <param name="context"></param>
+            <param name="subCode"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignExtensions.AddHttpSignService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            注册签名服务，<see cref="T:XUCore.NetCore.Signature.HttpSignOptions"/>
+            </summary>
+            <param name="services"></param>
+            <param name="section"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignExtensions.UseHttpSign``1(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册签名中间件，<see cref="T:XUCore.NetCore.Signature.HttpSignMiddleware"/>
+            </summary>
+            <param name="builder">应用程序生成器</param>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignExtensions.SetSignature(System.Net.Http.HttpClient,System.String,System.String,System.String)">
+            <summary>
+            写入签名
+            </summary>
+            <param name="client"></param>
+            <param name="appId">应用id</param>
+            <param name="appSecret">密钥</param>
+            <param name="prefix">header 前缀</param>
+        </member>
+        <member name="T:XUCore.NetCore.Signature.HttpSignMiddleware">
+            <summary>
+            http签名中间件
+            <para>签名算法：</para>
+            <para>1、拼接appid，timestamp，noncestr字符串，并按照字符进行ASCII排序，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}</para>
+            <para>2、将appSecret追加到拼接串后面，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret}</para>
+            <para>3、将期字符串MD5 32位 加密，然后全部小写 ToLower</para>
+            <para>4、然后进行 Sha256(md5+appSecret).ToLower() 加密后，得到签名</para>
+            <para>公式：Sha256(md5(appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret})+{appSecret})</para>
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Signature.HttpSignMiddleware._next">
             <summary>
             方法
             </summary>
         </member>
-        <member name="F:XUCore.NetCore.Sign.SignMiddleware._options">
+        <member name="F:XUCore.NetCore.Signature.HttpSignMiddleware._options">
             <summary>
-            真实IP选项
+            签名选项
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{XUCore.NetCore.Sign.SignOptions})">
+        <member name="M:XUCore.NetCore.Signature.HttpSignMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{XUCore.NetCore.Signature.HttpSignOptions})">
             <summary>
-            初始化一个<see cref="T:XUCore.NetCore.Middlewares.RealIpMiddleware"/>类型的实例
+            初始化一个<see cref="T:XUCore.NetCore.Signature.HttpSignMiddleware"/>类型的实例
+            <para>签名算法：</para>
+            <para>1、拼接appid，timestamp，noncestr字符串，并按照字符进行ASCII排序，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}</para>
+            <para>2、将appSecret追加到拼接串后面，得到字符串：appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret}</para>
+            <para>3、将期字符串MD5 32位 加密，然后全部小写 ToLower</para>
+            <para>4、然后进行 Sha256(md5+appSecret).ToLower() 加密后，得到签名</para>
+            <para>公式：Sha256(md5(appid={appid}&amp;timestamp={10位时间戳}&amp;noncestr={16位随机字符串}&amp;key={appSecret})+{appSecret})</para>
             </summary>
             <param name="next">方法</param>
             <param name="options">真实IP选项</param>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignMiddleware.GetAppSecret(System.String)">
+        <member name="M:XUCore.NetCore.Signature.HttpSignMiddleware.GetAppSecretAsync(System.String)">
             <summary>
             获取appSecret密钥
             </summary>
             <param name="appid"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignMiddleware.ReplayAttack(System.String,System.String,System.String)">
+        <member name="M:XUCore.NetCore.Signature.HttpSignMiddleware.PreventReplayAttackAsync(System.String,System.String,System.String)">
             <summary>
-            重放攻击
+            防止重放攻击
             </summary>
             <param name="appid"></param>
             <param name="timestamp"></param>
             <param name="noncestr"></param>
             <returns></returns>
         </member>
-        <member name="P:XUCore.NetCore.Sign.SignOptions.Prefix">
+        <member name="M:XUCore.NetCore.Signature.HttpSignMiddleware.CreateSignAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            创建签名
+            </summary>
+            <param name="appid"></param>
+            <param name="appSecret"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Signature.HttpSignMiddleware.WriteAsync(Microsoft.AspNetCore.Http.HttpContext,XUCore.NetCore.Signature.HttpSignSubCode)">
+            <summary>
+            输出信息
+            </summary>
+            <param name="context"></param>
+            <param name="subCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.Signature.HttpSignOptions.Prefix">
             <summary>
             header 前缀
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Sign.SignOptions.TimeOut">
+        <member name="P:XUCore.NetCore.Signature.HttpSignOptions.TimeOut">
             <summary>
             超时时间（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Sign.SignOptions.IsOpen">
+        <member name="P:XUCore.NetCore.Signature.HttpSignOptions.IsOpen">
             <summary>
             是否开启验证
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Sign.SignParameters">
+        <member name="T:XUCore.NetCore.Signature.SignParameters">
             <summary>
             签名工具类
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignParameters.Add(System.String,System.String)">
+        <member name="M:XUCore.NetCore.Signature.SignParameters.Add(System.String,System.String)">
             <summary>
             设置参数值
             </summary>
             <param name="name"></param>
             <param name="value"></param>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignParameters.CreateSign(System.String,System.String)">
+        <member name="M:XUCore.NetCore.Signature.SignParameters.CreateSign(System.String,System.String)">
             <summary>
             获取 Sign 签名
             </summary>
@@ -2044,7 +2156,7 @@
             <param name="value">秘钥</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignParameters.VaildSign(System.String,System.String,System.String)">
+        <member name="M:XUCore.NetCore.Signature.SignParameters.VaildSign(System.String,System.String,System.String)">
             <summary>
             验证签名
             </summary>
@@ -2053,7 +2165,7 @@
             <param name="signature">客户端传递的签名</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Sign.SignParameters.JoinParams(System.String,System.String)">
+        <member name="M:XUCore.NetCore.Signature.SignParameters.JoinParams(System.String,System.String)">
             <summary>
             构造验证字符串
             </summary>

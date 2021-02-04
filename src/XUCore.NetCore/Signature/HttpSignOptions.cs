@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUCore.NetCore.Sign
+namespace XUCore.NetCore.Signature
 {
-    public class SignOptions
+    public class HttpSignOptions
     {
         /// <summary>
         /// header 前缀

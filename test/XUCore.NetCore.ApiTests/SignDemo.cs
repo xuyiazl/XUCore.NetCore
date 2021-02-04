@@ -4,26 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using XUCore.NetCore.Sign;
+using XUCore.NetCore.Signature;
 
 namespace XUCore.NetCore.ApiTests
 {
-    public class SignDemo : SignMiddleware
+    public class SignDemo : HttpSignMiddleware
     {
-        public SignDemo(RequestDelegate next, IOptions<SignOptions> options)
+        public SignDemo(RequestDelegate next, IOptions<HttpSignOptions> options)
             : base(next, options)
         {
 
         }
 
-        public override string GetAppSecret(string appid)
+        public override Task<string> GetAppSecretAsync(string appid)
         {
-            return "appsecret";
-        }
+            appid = "web1ed21e4udroo37fmj";
 
-        public override bool ReplayAttack(string appid, string timestamp, string noncestr)
+            return Task.FromResult("CdzL5v9s6cmYOqeYW2ZicfdTaT3LdXhJ");
+        }
+    }
+
+    public class SignActionAttribute : HttpSignAttribute
+    {
+        public override Task<string> GetAppSecretAsync(IServiceProvider serviceProvider, string appid)
         {
-            return true;
+            appid = "web1ed21e4udroo37fmj";
+
+            return Task.FromResult("CdzL5v9s6cmYOqeYW2ZicfdTaT3LdXhJ");
         }
     }
 }

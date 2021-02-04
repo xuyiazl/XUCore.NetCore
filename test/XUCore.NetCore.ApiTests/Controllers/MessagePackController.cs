@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using XUCore.NetCore;
+using XUCore.NetCore.ApiTests;
 using XUCore.NetCore.MessagePack;
+using XUCore.NetCore.Signature;
 
 namespace XUCore.ApiTests.Controllers
 {
@@ -14,6 +16,7 @@ namespace XUCore.ApiTests.Controllers
     [MessagePackResponseContentType]
     public class MessagePackController : ControllerBase
     {
+        [SignAction]
         public User Get()
         {
             return new User { Id = 1, Name = "test", CreateTime = DateTime.Now };
