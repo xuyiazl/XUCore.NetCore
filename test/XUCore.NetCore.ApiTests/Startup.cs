@@ -102,7 +102,7 @@ namespace XUCore.ApiTests
             //启用静态请求上下文
             app.UseStaticHttpContext();
 
-            //app.UseSign<SignDemo>();
+            //app.UseHttpSign<SignDemo>();
 
             app.UseRouting();
 
