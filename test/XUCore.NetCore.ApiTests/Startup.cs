@@ -15,6 +15,8 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Signature;
 using XUCore.Configs;
 using XUCore.NetCore.ApiTests;
+using Microsoft.OpenApi.Models;
+using System.IO;
 
 namespace XUCore.ApiTests
 {
@@ -63,6 +65,26 @@ namespace XUCore.ApiTests
                     options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+
+
+            //注册Swagger生成器，定义一个和多个Swagger 文档
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("test", new OpenApiInfo
+                {
+                    Version = "v1.0.0",
+                    Title = $"test",
+                    Description = "test"
+                });
+
+                options.SetHttpSignHeaders(services);
+
+                // 为 Swagger JSON and UI设置xml文档注释路径
+                var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+                //获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
+                options.IncludeXmlComments(Path.Combine(basePath, "XUCore.NetCore.ApiTests.xml"));
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +109,14 @@ namespace XUCore.ApiTests
             app.UseAuthorization();
 
             app.UseAuthentication();
+
+            //启用中间件服务生成Swagger作为JSON终结点
+            app.UseSwagger();
+            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/test/swagger.json", "test API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

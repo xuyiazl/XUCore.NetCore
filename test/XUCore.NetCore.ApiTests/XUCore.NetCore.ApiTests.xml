@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.ApiTests</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.ApiTests.ReturnModel">
+            <summary>
+            返回数据结构
+            </summary>
+        </member>
+        <member name="M:XUCore.ApiTests.ReturnModel.#ctor">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:XUCore.ApiTests.ReturnModel.#ctor(System.Boolean)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:XUCore.ApiTests.ReturnModel.#ctor(System.String)">
+             <summary>
+            
+             </summary>
+             <param name="msg"></param>
+        </member>
+        <member name="M:XUCore.ApiTests.ReturnModel.#ctor(System.String,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="msg"></param>
+             <param name="bodyMsg"></param>
+        </member>
+        <member name="P:XUCore.ApiTests.ReturnModel.code">
+            <summary>
+            请求状态码：0 成功，-1 失败
+            </summary>
+        </member>
+        <member name="P:XUCore.ApiTests.ReturnModel.subCode">
+            <summary>
+            业务状态码
+            </summary>
+        </member>
+        <member name="P:XUCore.ApiTests.ReturnModel.requestLine">
+            <summary>
+            执行时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.ApiTests.ReturnModel.message">
+            <summary>
+            提示消息
+            </summary>
+        </member>
+        <member name="P:XUCore.ApiTests.ReturnModel.bodyMessage">
+            <summary>
+            json数据
+            </summary>
+        </member>
+    </members>
+</doc>

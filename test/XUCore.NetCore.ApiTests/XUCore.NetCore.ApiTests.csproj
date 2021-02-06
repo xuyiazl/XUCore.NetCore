@@ -4,6 +4,10 @@
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>XUCore.NetCore.ApiTests.xml</DocumentationFile>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Compile Remove="logs\**" />
 		<Content Remove="logs\**" />
@@ -21,6 +25,12 @@
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Jwt\XUCore.NetCore.Jwt.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="XUCore.NetCore.ApiTests.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 

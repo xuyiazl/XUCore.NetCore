@@ -17,6 +17,7 @@ namespace XUCore.ApiTests.Controllers
     public class MessagePackController : ControllerBase
     {
         [SignAction]
+        [HttpGet]
         public User Get()
         {
             return new User { Id = 1, Name = "test", CreateTime = DateTime.Now };
