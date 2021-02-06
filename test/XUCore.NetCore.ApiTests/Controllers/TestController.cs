@@ -16,7 +16,7 @@ namespace XUCore.ApiTests.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return Success("000", null);
+            return Success("000", "成功","哈哈");
         }
 
         [Route("error")]

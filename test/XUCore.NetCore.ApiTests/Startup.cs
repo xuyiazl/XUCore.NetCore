@@ -17,6 +17,8 @@ using XUCore.Configs;
 using XUCore.NetCore.ApiTests;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using XUCore.Serializer;
+using XUCore.NetCore.Swagger;
 
 namespace XUCore.ApiTests
 {
@@ -52,19 +54,29 @@ namespace XUCore.ApiTests
              });
 
             services.AddControllers()
-                .AddMessagePackFormatters()
-                .AddNewtonsoftJson(options =>
+                .AddMessagePackFormatters(options =>
                 {
-                    //需要引入nuget
-                    //<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
-                    //EF Core中默认为驼峰样式序列化处理key
-                    //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    //使用默认方式，不更改元数据的key的大小写
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();//new DefaultContractResolver();
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-                    options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                    options.JsonSerializerSettings.ContractResolver = new LimitPropsCamelCaseContractResolver();
+
+                    //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
+                    //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
+                    options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
+                    options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+
                 });
+                //.AddNewtonsoftJson(options =>
+                //{
+                //    //需要引入nuget
+                //    //<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
+                //    //EF Core中默认为驼峰样式序列化处理key
+                //    //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                //    //使用默认方式，不更改元数据的key的大小写
+                //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();//new DefaultContractResolver();
+                //    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                //    options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //});
 
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
@@ -77,12 +89,16 @@ namespace XUCore.ApiTests
                     Description = "test"
                 });
 
-                options.SetHttpSignHeaders(services);
+                options.SwaggerHttpSignDoc(services);
+                options.SwaggerFiledDoc();
 
                 // 为 Swagger JSON and UI设置xml文档注释路径
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+                var apiXml = Path.Combine(basePath, "XUCore.NetCore.ApiTests.xml");
                 //获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
-                options.IncludeXmlComments(Path.Combine(basePath, "XUCore.NetCore.ApiTests.xml"));
+                options.IncludeXmlComments(apiXml);
+
+                options.SwaggerControllerDescriptions(apiXml);
 
             });
         }
@@ -102,7 +118,7 @@ namespace XUCore.ApiTests
             //启用静态请求上下文
             app.UseStaticHttpContext();
 
-            //app.UseHttpSign<SignDemo>();
+            //app.UseHttpSign<SignMiddlewareDemo>();
 
             app.UseRouting();
 
@@ -116,6 +132,8 @@ namespace XUCore.ApiTests
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint($"/swagger/test/swagger.json", "test API");
+
+                c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
             });
 
             app.UseEndpoints(endpoints =>

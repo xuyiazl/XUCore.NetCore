@@ -4,6 +4,11 @@
         <name>XUCore.NetCore.ApiTests</name>
     </assembly>
     <members>
+        <member name="T:XUCore.ApiTests.Controllers.MessagePackController">
+            <summary>
+            XML注释
+            </summary>
+        </member>
         <member name="T:XUCore.ApiTests.ReturnModel">
             <summary>
             返回数据结构
@@ -56,14 +61,6 @@
             <summary>
             json数据
             </summary>
-        </member>
-        <member name="M:XUCore.NetCore.ApiTests.SwaggerEx.SetHttpSignHeaders(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            添加swagger 签名header
-            </summary>
-            <param name="options"></param>
-            <param name="services"></param>
-            <param name="prefix"></param>
         </member>
     </members>
 </doc>

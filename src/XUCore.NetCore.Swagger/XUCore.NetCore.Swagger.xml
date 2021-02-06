@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.Swagger</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.Swagger.ControllerDescriptions">
+            <summary>
+            加入controller层描述
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Swagger.ControllerDescriptions.MemberXPath">
+            <summary>
+            匹配visual 生成的xml文件
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Swagger.ControllerDescriptions.SummaryTag">
+            <summary>
+            提取xml的标记点
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Swagger.ControllerDescriptions._xmlNavigator">
+            <summary>
+            xml导航器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.ControllerDescriptions.#ctor(System.String)">
+            <summary>
+            加入controller层描述
+            </summary>
+            <param name="apixmlpath"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Swagger.FieldResponseAttribute">
+            <summary>
+            指定字段输出
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Swagger.HiddenApiAttribute">
+            <summary>
+            隐藏swagger接口特性标识
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Swagger.HiddenApiFilter">
+            <summary>
+            自定义Swagger隐藏过滤器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.HiddenApiFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SwaggerHttpSignDoc(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加签名header
+            </summary>
+            <param name="options"></param>
+            <param name="services"></param>
+            <param name="prefix"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SwaggerFiledDoc(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            添加指定输出
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SwaggerControllerDescriptions(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,System.String)">
+            <summary>
+            添加Controller的日志描述
+            </summary>
+            <param name="options"></param>
+            <param name="apiXml"></param>
+        </member>
+    </members>
+</doc>

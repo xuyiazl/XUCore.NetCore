@@ -4,33 +4,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using XUCore.NetCore;
 using XUCore.NetCore.ApiTests;
+using XUCore.NetCore.Controllers;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Signature;
+using XUCore.NetCore.Swagger;
 
 namespace XUCore.ApiTests.Controllers
 {
-    [Route("api/[controller]/[Action]")]
-    [ApiController]
+    /// <summary>
+    /// XML注释
+    /// </summary>
     [MessagePackResponseContentType]
-    public class MessagePackController : ControllerBase
+    public class MessagePackController : ApiControllerBase
     {
-        [SignAction]
-        [HttpGet]
-        public User Get()
+        public MessagePackController(ILogger<MessagePackController> logger)
+            : base(logger)
         {
-            return new User { Id = 1, Name = "test", CreateTime = DateTime.Now };
+
+        }
+
+        //[HttpSignApi]
+        [FieldResponse]
+        [HttpGet]
+        public Result<User> Get()
+        {
+            return new Result<User>(0, "成功", new User { Id = 1, Name = "test", CreateTime = DateTime.Now });
         }
 
 
         [HttpPost]
-        public User Add([FromBody] User user)
+        public Result<User> Add([FromBody] User user)
         {
             user.Name = "哈哈";
             user.CreateTime = DateTime.Now;
 
-            return user;
+            return new Result<User>(0, "成功", user);
         }
     }
 }

@@ -27,12 +27,24 @@ namespace XUCore.NetCore.Filters
             base.OnActionExecuted(actionExecutedContext);
             stopwatch.Stop();
 
-            if (actionExecutedContext.Result is Result)
+            var reType = actionExecutedContext.Result.GetType();
+
+            if (reType == typeof(Result))
+            {
+                var res = (Result)actionExecutedContext.Result;
+                if (res != null)
+                {
+                    res.Value?.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+
+                    actionExecutedContext.Result = res;
+                }
+            }
+            else if (reType == typeof(ObjectResult))
             {
                 var res = (ObjectResult)actionExecutedContext.Result;
                 if (res != null)
                 {
-                    res.Value.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+                    res.Value?.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
 
                     actionExecutedContext.Result = res;
                 }
