@@ -167,6 +167,8 @@ namespace XUCore.NetCore.Extensions
             //services.TryAddScoped(typeof(IHttpOptions<>), typeof(HttpOptions<>));
             services.TryAddSingleton<IHttpService, HttpService>();
 
+            HttpRemote.ServiceProvider = services.BuildServiceProvider();
+
             return services;
         }
 
