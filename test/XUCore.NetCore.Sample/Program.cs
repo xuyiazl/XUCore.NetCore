@@ -60,6 +60,14 @@ namespace XUCore.NetCore.Sample
             //services.AddLogging();
             services.AddHttpService("server", "https://testmsrightsapi.tostar.top");
 
+            //DI扫描器 注入http请求策略操作
+            services.Scan(scan =>
+                scan.FromAssemblyOf<IHttpSignPolicy>()
+                .AddClasses(impl => impl.AssignableTo(typeof(IHttpSignPolicy)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime()
+            );
+
             services.AddHostedService<MyTestService>();
         }
     }

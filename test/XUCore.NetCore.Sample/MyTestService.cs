@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +12,67 @@ using XUCore.NetCore.HttpFactory;
 using XUCore.Webs;
 using XUCore.Extensions;
 using XUCore.Serializer;
+using System.Text.RegularExpressions;
 
 namespace XUCore.NetCore.Sample
 {
     public class MyTestService : IHostedService
     {
+        private readonly IServiceProvider serviceProvider;
         private readonly ILogger logger;
-        private readonly IConfiguration configuration;
-        private readonly IHttpService httpService;
-        public MyTestService(ILogger<MyTestService> logger, IConfiguration configuration, IHttpService httpService)
+        public MyTestService(ILogger<MyTestService> logger, IServiceProvider serviceProvider)
         {
+            this.serviceProvider = serviceProvider;
             this.logger = logger;
-            this.configuration = configuration;
-            this.httpService = httpService;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            var url = UrlArguments.Create("server", "api/Answer/GetByEnt").Add("themeId", 200004);
+            {
+                var url =
+                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                        .Add("themeId", 200004);
 
-            var res = await url.GetAsync<ReturnModel<Answer>>(
-                       clientHandler: client =>
-                       {
-                           client.SetHeader("limit-mode", "contain");
-                           client.SetHeader("limit-field", "code,subCode,message,bodyMessage,title,content,ip,location,fromUser,userId,nickName,createTime");
-                           client.SetHeader("limit-field-rename", "themeTitle=title");
-                           //client.SetHeader("limit-date-format", "yyyy-MM-dd'T'HH:mm:ss'Z'");
-                           client.SetHeader("limit-date-unix", "true");
-                       }
-                        , cancellationToken: cancellationToken);
+                var responseMessage = await HttpRemote.Service.CreateClient("test")
+                    .SetHeaderAccept(HttpMediaType.Json)
+                    .PostAsync(url, new List<string>() { "0001" });
 
+                if (!responseMessage.IsSuccessStatusCode)
+                {
+                    Console.WriteLine(responseMessage.StatusCode);
+                }
+                else
+                {
+                    var content = await responseMessage.Content.ReadAsMessagePackAsync<ReturnModel<Answer>>();
+
+                    Console.WriteLine(content);
+                }
+            }
+            {
+                var httpOptions = serviceProvider.GetService<IReturnHttpOptions<ReturnModel<Answer>>>();
+
+                var res = await
+                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                        .Add("themeId", 200004)
+                        .GetAsync(httpOptions, cancellationToken: cancellationToken);
+            }
+            {
+                var httpOptions = serviceProvider.GetService<IReturnHttpOptions<ReturnModel<Answer>>>();
+
+                httpOptions.ClientHandler = client =>
+                {
+                    client.SetHeader("limit-mode", "contain");
+                    client.SetHeader("limit-field", "code,subCode,message,bodyMessage,title,content,ip,location,fromUser,userId,nickName,createTime");
+                    client.SetHeader("limit-field-rename", "themeTitle=title");
+                    //client.SetHeader("limit-date-format", "yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    //client.SetHeader("limit-date-unix", "true");
+                };
+
+                var res = await
+                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                        .Add("themeId", 200004)
+                        .GetAsync(httpOptions, cancellationToken: cancellationToken);
+            }
             await Task.CompletedTask;
         }
 
@@ -57,7 +89,7 @@ namespace XUCore.NetCore.Sample
         public FromUser FromUser { get; set; }
         public string IP { get; set; }
         public string Location { get; set; }
-        public long CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
         public override string ToString()
         {
             return this.ToJson(indented: true);
