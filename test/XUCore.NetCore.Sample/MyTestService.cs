@@ -33,7 +33,7 @@ namespace XUCore.NetCore.Sample
                     UrlArguments.Create("server", "api/Answer/GetByEnt")
                         .Add("themeId", 200004);
 
-                var responseMessage = await HttpRemote.Service.CreateClient("test")
+                var responseMessage = await HttpRemote.Service.CreateClient("server")
                     .SetHeaderAccept(HttpMediaType.Json)
                     .PostAsync(url, new List<string>() { "0001" });
 
