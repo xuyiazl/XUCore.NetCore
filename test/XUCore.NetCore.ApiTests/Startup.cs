@@ -65,18 +65,18 @@ namespace XUCore.ApiTests
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
                 });
-                //.AddNewtonsoftJson(options =>
-                //{
-                //    //需要引入nuget
-                //    //<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
-                //    //EF Core中默认为驼峰样式序列化处理key
-                //    //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                //    //使用默认方式，不更改元数据的key的大小写
-                //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();//new DefaultContractResolver();
-                //    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
-                //    options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //});
+            //.AddNewtonsoftJson(options =>
+            //{
+            //    //需要引入nuget
+            //    //<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
+            //    //EF Core中默认为驼峰样式序列化处理key
+            //    //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //    //使用默认方式，不更改元数据的key的大小写
+            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();//new DefaultContractResolver();
+            //    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            //    options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //});
 
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
@@ -90,7 +90,7 @@ namespace XUCore.ApiTests
                 });
 
                 options.SwaggerHttpSignDoc(services);
-                options.SwaggerFiledDoc();
+                //options.SwaggerFiledDoc();
 
                 // 为 Swagger JSON and UI设置xml文档注释路径
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
@@ -139,8 +139,8 @@ namespace XUCore.ApiTests
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
-                   name: "areas", "areas",
-                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "areas", "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
         }

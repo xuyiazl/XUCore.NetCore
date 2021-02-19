@@ -62,5 +62,39 @@
             json数据
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.ApiTests.SignMiddlewareDemo.GetAppSecretAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.SignMiddlewareDemo.PreventReplayAttackAsync(System.String,System.String,System.String)">
+            <summary>
+            重放处理
+            </summary>
+            <param name="appid"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.HttpSignApiAttribute.GetAppSecretAsync(System.IServiceProvider,System.String)">
+            <summary>
+            获取密钥
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="appid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.HttpSignApiAttribute.PreventReplayAttackAsync(System.IServiceProvider,System.String,System.String,System.String)">
+            <summary>
+            重放处理
+            </summary>
+            <param name="serviceProvider"></param>
+            <param name="appid"></param>
+            <param name="timestamp"></param>
+            <param name="noncestr"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

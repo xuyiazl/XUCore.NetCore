@@ -55,7 +55,7 @@ namespace XUCore.NetCore.Signature
         {
             var path = context.Request.Path.Value;
 
-            if (!_options.IsOpen && path.IndexOf("/swagger") > -1)
+            if (!_options.IsOpen || path.IndexOf("/swagger") > -1)
             {
                 await _next.Invoke(context);
                 return;
