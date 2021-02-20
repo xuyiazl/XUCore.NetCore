@@ -127,7 +127,22 @@ namespace XUCore.ApiTests
             app.UseAuthentication();
 
             //启用中间件服务生成Swagger作为JSON终结点
-            app.UseSwagger();
+            app.UseSwagger(options =>
+            {
+                //如果使用了 大于 5.6.3 版本，新功能Servers和反向代理的支持问题，
+                //issues https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1953
+
+                //由于使用了反向代理需要运维支持转发X-Forwarded-* headers的一些工作，所以太麻烦。故干脆清理掉算了。等官方直接解决了该问题再使用
+
+                options.PreSerializeFilters.Add((swaggerDoc, _) =>
+                {
+                    swaggerDoc.Servers.Clear();
+                });
+                //options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                //{
+                //    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host}" } };
+                //});
+            });
             //启用中间件服务对swagger-ui，指定Swagger JSON终结点
             app.UseSwaggerUI(c =>
             {
