@@ -36,10 +36,9 @@ namespace XUCore.Cache
         /// <summary>
         /// 取得缓存数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T Get<T>(string key) where T : class
+        public T Get<T>(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
@@ -55,7 +54,7 @@ namespace XUCore.Cache
         /// </summary>
         /// <param name="key">缓存Key</param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(string key) where T : class
+        public async Task<T> GetAsync<T>(string key)
         {
             return await Task.Run(() => Get<T>(key));
         }
@@ -107,7 +106,7 @@ namespace XUCore.Cache
         /// <param name="key">缓存Key</param>
         /// <param name="factory"></param>
         /// <returns></returns>
-        public T GetOrCreate<T>(string key, Func<ICacheEntry, T> factory) where T : class
+        public T GetOrCreate<T>(string key, Func<ICacheEntry, T> factory)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
@@ -118,11 +117,10 @@ namespace XUCore.Cache
         /// <summary>
         /// 获取缓存
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="factory"></param>
         /// <returns></returns>
-        public Task<T> GetOrCreateAsync<T>(string key, Func<ICacheEntry, Task<T>> factory) where T : class
+        public Task<T> GetOrCreateAsync<T>(string key, Func<ICacheEntry, Task<T>> factory)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));

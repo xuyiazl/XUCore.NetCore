@@ -25,17 +25,16 @@ namespace XUCore.Cache
         /// <summary>
         /// 取得缓存数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        T Get<T>(string key) where T : class;
+        T Get<T>(string key);
 
         /// <summary>
         /// 获取缓存（异步方式）
         /// </summary>
         /// <param name="key">缓存Key</param>
         /// <returns></returns>
-        Task<T> GetAsync<T>(string key) where T : class;
+        Task<T> GetAsync<T>(string key);
 
         /// <summary>
         /// 获取缓存
@@ -64,16 +63,15 @@ namespace XUCore.Cache
         /// <param name="key">缓存Key</param>
         /// <param name="factory"></param>
         /// <returns></returns>
-        T GetOrCreate<T>(string key, Func<ICacheEntry, T> factory) where T : class;
+        T GetOrCreate<T>(string key, Func<ICacheEntry, T> factory);
 
         /// <summary>
         /// 获取缓存
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="factory"></param>
         /// <returns></returns>
-        Task<T> GetOrCreateAsync<T>(string key, Func<ICacheEntry, Task<T>> factory) where T : class;
+        Task<T> GetOrCreateAsync<T>(string key, Func<ICacheEntry, Task<T>> factory);
 
         /// <summary>
         /// 设置缓存

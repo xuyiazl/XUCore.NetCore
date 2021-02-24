@@ -57,6 +57,10 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
+            var now = DateTime.Now;
+
+            var ss = now.SetDate(2022).SetTime(23, 59, 59);
+
 
             {
                 Parallel.For(0, 100, ndx =>
