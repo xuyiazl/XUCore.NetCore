@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace XUCore.NetCore.Data.DbService.ServiceProvider
 {
@@ -18,7 +20,18 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
     /// <typeparam name="TEntity"></typeparam>
     public interface IDbServiceBase<TEntity> : IDisposable where TEntity : class, new()
     {
-        DbSet<TEntity> Entity { get; }
+        /// <summary>
+        /// 只读对象
+        /// </summary>
+        IBaseRepository<TEntity> Read { get; }
+        /// <summary>
+        /// 只写对象
+        /// </summary>
+        IBaseRepository<TEntity> Write { get; }
+        /// <summary>
+        /// 当前DbSet对象
+        /// </summary>
+        DbSet<TEntity> Table { get; }
 
         //同步操作
 

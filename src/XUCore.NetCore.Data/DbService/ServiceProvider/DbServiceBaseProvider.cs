@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace XUCore.NetCore.Data.DbService.ServiceProvider
 {
@@ -18,16 +20,23 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
     /// <typeparam name="TEntity"></typeparam>
     public abstract class DbServiceBaseProvider<TEntity> : IDbServiceBase<TEntity> where TEntity : class, new()
     {
-        public IBaseRepository<TEntity> dbRead { get; set; }
-
-        public IBaseRepository<TEntity> dbWrite { get; set; }
-
-        public DbSet<TEntity> Entity { get { return dbRead.Entity; } }
+        /// <summary>
+        /// 只读对象
+        /// </summary>
+        public IBaseRepository<TEntity> Read { get; }
+        /// <summary>
+        /// 只写对象
+        /// </summary>
+        public IBaseRepository<TEntity> Write { get; }
+        /// <summary>
+        /// 当前DbSet对象
+        /// </summary>
+        public DbSet<TEntity> Table => Read.Table;
 
         protected DbServiceBaseProvider(IBaseRepository<TEntity> readRepository, IBaseRepository<TEntity> writeRepository)
         {
-            this.dbRead = readRepository;
-            this.dbWrite = writeRepository;
+            this.Read = readRepository;
+            this.Write = writeRepository;
         }
 
         #region 抽象对象来实现IDbServiceBase中的方法，提供重写操作
@@ -40,7 +49,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int SaveChanges()
         {
-            return dbWrite.SaveChanges();
+            return Write.SaveChanges();
         }
         /// <summary>
         /// 插入一条数据
@@ -50,8 +59,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Add(TEntity entity, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Add(entity, isSaveChange);
+            if (Write != null)
+                return Write.Add(entity, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -62,8 +71,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Add(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Add(entities, isSaveChange);
+            if (Write != null)
+                return Write.Add(entities, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -74,8 +83,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(TEntity entity, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Update(entity, isSaveChange);
+            if (Write != null)
+                return Write.Update(entity, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -86,8 +95,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Update(entities, isSaveChange);
+            if (Write != null)
+                return Write.Update(entities, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -98,8 +107,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(TEntity entity, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Delete(entity, isSaveChange);
+            if (Write != null)
+                return Write.Delete(entity, isSaveChange);
             return -1;
         }
         /// <summary>
@@ -110,8 +119,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (dbWrite != null)
-                return dbWrite.Delete(entities, isSaveChange);
+            if (Write != null)
+                return Write.Delete(entities, isSaveChange);
             return -1;
         }
 
@@ -124,7 +133,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return await dbWrite.SaveChangesAsync(cancellationToken);
+            return await Write.SaveChangesAsync(cancellationToken);
         }
         /// <summary>
         /// 异步插入一条数据
@@ -135,8 +144,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.AddAsync(entity, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.AddAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -148,8 +157,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.AddAsync(entities, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.AddAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -161,8 +170,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.UpdateAsync(entity, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.UpdateAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -174,8 +183,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.UpdateAsync(entities, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.UpdateAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -187,8 +196,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.DeleteAsync(entity, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.DeleteAsync(entity, isSaveChange, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -200,8 +209,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.DeleteAsync(entities, isSaveChange, cancellationToken);
+            if (Write != null)
+                return await Write.DeleteAsync(entities, isSaveChange, cancellationToken);
             return -1;
         }
 
@@ -214,8 +223,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual TEntity GetById(object id)
         {
-            if (dbRead != null)
-                return dbRead.GetById(id);
+            if (Read != null)
+                return Read.GetById(id);
             return default;
         }
         /// <summary>
@@ -226,8 +235,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
-            if (dbRead != null)
-                return dbRead.GetSingle(selector, orderby);
+            if (Read != null)
+                return Read.GetSingle(selector, orderby);
             return default;
         }
         /// <summary>
@@ -240,8 +249,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
         {
-            if (dbRead != null)
-                return dbRead.GetList(selector, orderby, skip, limit);
+            if (Read != null)
+                return Read.GetList(selector, orderby, skip, limit);
             return default;
         }
         /// <summary>
@@ -254,8 +263,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
         {
-            if (dbRead != null)
-                return dbRead.GetPagedList(selector, orderby, pageNumber, pageSize);
+            if (Read != null)
+                return Read.GetPagedList(selector, orderby, pageNumber, pageSize);
             return default;
         }
         /// <summary>
@@ -265,8 +274,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual bool Any(Expression<Func<TEntity, bool>> selector = null)
         {
-            if (dbRead != null)
-                return dbRead.Any(selector);
+            if (Read != null)
+                return Read.Any(selector);
             return default;
         }
         /// <summary>
@@ -276,8 +285,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual long GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
-            if (dbRead != null)
-                return dbRead.GetCount(selector);
+            if (Read != null)
+                return Read.GetCount(selector);
             return default;
         }
 
@@ -291,8 +300,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.GetByIdAsync(id, cancellationToken);
+            if (Read != null)
+                return await Read.GetByIdAsync(id, cancellationToken);
             return default;
         }
         /// <summary>
@@ -304,8 +313,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.GetSingleAsync(selector, orderby, cancellationToken);
+            if (Read != null)
+                return await Read.GetSingleAsync(selector, orderby, cancellationToken);
             return default;
         }
         /// <summary>
@@ -319,8 +328,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.GetListAsync(selector, orderby, skip, limit, cancellationToken);
+            if (Read != null)
+                return await Read.GetListAsync(selector, orderby, skip, limit, cancellationToken);
             return default;
         }
         /// <summary>
@@ -334,8 +343,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
+            if (Read != null)
+                return await Read.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
             return default;
         }
         /// <summary>
@@ -346,8 +355,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.AnyAsync(selector, cancellationToken);
+            if (Read != null)
+                return await Read.AnyAsync(selector, cancellationToken);
             return default;
         }
         /// <summary>
@@ -358,8 +367,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            if (dbRead != null)
-                return await dbRead.GetCountAsync(selector, cancellationToken);
+            if (Read != null)
+                return await Read.GetCountAsync(selector, cancellationToken);
             return default;
         }
 
@@ -378,8 +387,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
-            if (dbWrite != null)
-                return dbWrite.Update(selector, updateValues, updateColumns);
+            if (Write != null)
+                return Write.Update(selector, updateValues, updateColumns);
             return -1;
         }
         /// <summary>
@@ -390,8 +399,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
-            if (dbWrite != null)
-                return dbWrite.Update(selector, Update);
+            if (Write != null)
+                return Write.Update(selector, Update);
             return -1;
         }
         /// <summary>
@@ -401,8 +410,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(Expression<Func<TEntity, bool>> selector)
         {
-            if (dbWrite != null)
-                return dbWrite.Delete(selector);
+            if (Write != null)
+                return Write.Delete(selector);
             return -1;
         }
 
@@ -418,8 +427,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.UpdateAsync(selector, updateValues, updateColumns, cancellationToken);
+            if (Write != null)
+                return await Write.UpdateAsync(selector, updateValues, updateColumns, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -431,8 +440,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.UpdateAsync(selector, Update, cancellationToken);
+            if (Write != null)
+                return await Write.UpdateAsync(selector, Update, cancellationToken);
             return -1;
         }
         /// <summary>
@@ -443,8 +452,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (dbWrite != null)
-                return await dbWrite.DeleteAsync(selector, cancellationToken);
+            if (Write != null)
+                return await Write.DeleteAsync(selector, cancellationToken);
             return -1;
         }
 
@@ -460,8 +469,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
-            if (dbWrite != null)
-                return dbWrite.ExecuteSql(sql, parameters);
+            if (Write != null)
+                return Write.ExecuteSql(sql, parameters);
             return -1;
         }
         /// <summary>
@@ -474,8 +483,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
         {
-            if (dbRead != null)
-                return dbRead.Select<T>(sql, type, parameters);
+            if (Read != null)
+                return Read.Select<T>(sql, type, parameters);
             return default;
         }
         /// <summary>
@@ -488,8 +497,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
         {
-            if (dbRead != null)
-                return dbRead.SelectList<T>(sql, type, parameters);
+            if (Read != null)
+                return Read.SelectList<T>(sql, type, parameters);
             return default;
         }
         /// <summary>
@@ -501,8 +510,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters)
         {
-            if (dbRead != null)
-                return dbRead.SelectList(sql, type, parameters);
+            if (Read != null)
+                return Read.SelectList(sql, type, parameters);
             return null;
         }
         /// <summary>
@@ -514,8 +523,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters)
         {
-            if (dbRead != null)
-                return dbRead.SelectDataSet(sql, type, parameters);
+            if (Read != null)
+                return Read.SelectDataSet(sql, type, parameters);
             return null;
         }
         /// <summary>
@@ -526,8 +535,8 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="parameters"></param>
         public virtual int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
         {
-            if (dbWrite != null)
-                return dbWrite.ExecuteAdoNet(sql, type, parameters);
+            if (Write != null)
+                return Write.ExecuteAdoNet(sql, type, parameters);
             return -1;
         }
         #endregion

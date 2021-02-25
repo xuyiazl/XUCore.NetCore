@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,23 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// database
+        /// </summary>
+        /// <returns></returns>
+        DatabaseFacade Database { get; }
+        /// <summary>
+        /// <para>获取或设置一个值，该值指示是否创建事务由<see cref="DbContext"/>自动。</para>
+        /// <para><see cref="Microsoft.EntityFrameworkCore.DbContext.SaveChanges()"/>如果没有调用'BeginTransaction'或'UseTransaction'方法的。将此值设置为false也会禁用<see cref="IExecutionStrategy"/></para>
+        /// <para>对于<see cref="Microsoft.EntityFrameworkCore.DbContext.SaveChanges()"/>默认值为true，这意味着<see cref="Microsoft.EntityFrameworkCore.DbContext.SaveChanges()"/>将始终使用事务在保存更改。</para>
+        /// <para>将此值设置为false应该非常小心，因为数据库如果<see cref="Microsoft.EntityFrameworkCore.DbContext.SaveChanges()"/>失败，可能会处于损坏状态。</para>
+        /// </summary>
+        bool AutoTransactionsEnabled { get; set; }
+        /// <summary>
+        /// 创建执行策略
+        /// </summary>
+        /// <returns></returns>
+        IExecutionStrategy CreateExecutionStrategy();
         /// <summary>
         /// 事务开始
         /// </summary>

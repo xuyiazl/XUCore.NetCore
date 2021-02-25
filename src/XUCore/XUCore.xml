@@ -13280,7 +13280,6 @@
             <summary>
             取得缓存数据
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="key"></param>
             <returns></returns>
         </member>
@@ -13324,7 +13323,6 @@
             <summary>
             获取缓存
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="key"></param>
             <param name="factory"></param>
             <returns></returns>
@@ -13462,7 +13460,6 @@
             <summary>
             取得缓存数据
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="key"></param>
             <returns></returns>
         </member>
@@ -13506,7 +13503,6 @@
             <summary>
             获取缓存
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="key"></param>
             <param name="factory"></param>
             <returns></returns>

@@ -19,6 +19,8 @@ namespace XUCore.NetCore.DataTest.DbRepository
                     sqlServerOptionsAction: options =>
                         {
                             options.EnableRetryOnFailure();
+                            //options.ExecutionStrategy(c => new MySqlRetryingExecutionStrategy(c.CurrentContext.Context));
+                            //options.ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c.CurrentContext.Context));
                         }
                     )
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
