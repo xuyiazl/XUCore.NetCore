@@ -339,6 +339,14 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="dbTransaction"></param>
+        /// <param name="parameters"></param>
+        int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters);
 
         #endregion
     }

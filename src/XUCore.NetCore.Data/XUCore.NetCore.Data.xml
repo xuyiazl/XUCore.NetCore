@@ -446,6 +446,15 @@
             <param name="type"></param>
             <param name="parameters"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDbTransaction,System.Data.IDataParameter[])">
+            <summary>
+            通过原生执行ADONET查询操作
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="dbTransaction"></param>
+            <param name="parameters"></param>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbService.IDbContext">
             <summary>
             多数据库操作继承该接口
@@ -854,6 +863,16 @@
             </summary>
             <param name="sql"></param>
             <param name="type"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbBaseRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDbTransaction,System.Data.IDataParameter[])">
+            <summary>
+            通过原生执行ADONET查询操作
+            </summary>
+            <param name="sql"></param>
+            <param name="type"></param>
+            <param name="dbTransaction"></param>
             <param name="parameters"></param>
             <returns></returns>
         </member>

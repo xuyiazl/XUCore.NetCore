@@ -94,6 +94,8 @@ namespace XUCore.NetCore.Data.DbService
         }
 
         public override int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
+            => ExecuteAdoNet(sql, type, null, parameters);
+        public override int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters)
         {
             try
             {
@@ -101,13 +103,15 @@ namespace XUCore.NetCore.Data.DbService
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand();
+                    if (dbTransaction != null)
+                        cmd.Transaction = dbTransaction as SqlTransaction;
                     cmd.Connection = conn;
                     cmd.CommandText = sql;
                     cmd.CommandType = type;
                     foreach (SqlParameter p in parameters)
                     {
                         cmd.Parameters.Add(p);
-                    }
+                    }                    
                     return cmd.ExecuteNonQuery();
                 }
             }

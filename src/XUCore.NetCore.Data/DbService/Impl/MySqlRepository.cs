@@ -90,6 +90,8 @@ namespace XUCore.NetCore.Data.DbService
         }
 
         public override int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
+            => ExecuteAdoNet(sql, type, null, parameters);
+        public override int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters)
         {
             try
             {
@@ -97,6 +99,8 @@ namespace XUCore.NetCore.Data.DbService
                 {
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand();
+                    if (dbTransaction != null)
+                        cmd.Transaction = dbTransaction as MySqlTransaction;
                     cmd.Connection = conn;
                     cmd.CommandText = sql;
                     cmd.CommandType = type;
