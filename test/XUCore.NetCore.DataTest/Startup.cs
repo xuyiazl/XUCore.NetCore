@@ -16,10 +16,10 @@ namespace XUCore.NetCore.DataTest
         {
             services.AddLogging();
 
-            services.AddNigelDbContext(hostContext.Configuration);
+            services.AddNigelDbContext();
 
-            services.AddReadDbContext(hostContext.Configuration);
-            services.AddWriteDbContext(hostContext.Configuration);
+            services.AddReadDbContext();
+            services.AddWriteDbContext();
 
             services.Scan(scan =>
                 scan.FromAssemblyOf<IDbServiceProvider>()

@@ -11,12 +11,14 @@ namespace XUCore.NetCore.DataTest.DbRepository
 {
     public static partial class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddWriteDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddWriteDbContext(this IServiceCollection services)
         {
+            var config = services.BuildServiceProvider().GetService<IConfiguration>();
+
             services.AddDbContext<NigelDbWriteEntityContext>(options =>
             {
                 options.UseSqlServer(
-                    connectionString: configuration.GetConnectionString("NigelDB_WriteConnection"),
+                    connectionString: config.GetConnectionString("NigelDB_WriteConnection"),
                     sqlServerOptionsAction: options =>
                         {
                             options.EnableRetryOnFailure();
@@ -33,29 +35,17 @@ namespace XUCore.NetCore.DataTest.DbRepository
         }
     }
 
-    public interface INigelDbWriteEntityContext : IDbContext
-    {
-    }
 
-    public interface INigelDbWriteRepository<T> : IMsSqlRepository<T> where T : class, new()
-    {
-
-    }
-
+    public interface INigelDbWriteRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelDbWriteEntityContext : BaseRepositoryFactory, INigelDbWriteEntityContext
     {
-        public NigelDbWriteEntityContext(DbContextOptions<NigelDbWriteEntityContext> options) 
-            : base(typeof(NigelDbWriteEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping")
-        {
-
-        }
+        public NigelDbWriteEntityContext(DbContextOptions<NigelDbWriteEntityContext> options)
+            : base(typeof(NigelDbWriteEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
-    public class NigelDbWriteRepository<T> : MsSqlRepository<T>, INigelDbWriteRepository<T> where T : class, new()
+    public interface INigelDbWriteEntityContext : IDbContext { }
+    public class NigelDbWriteRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbWriteRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbWriteRepository(INigelDbWriteEntityContext context) : base(context)
-        {
-
-        }
+        public NigelDbWriteRepository(INigelDbWriteEntityContext context) : base(context) { }
     }
 }

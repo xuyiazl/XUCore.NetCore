@@ -11,12 +11,14 @@ namespace XUCore.NetCore.DataTest.DbRepository
 {
     public static partial class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddReadDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddReadDbContext(this IServiceCollection services)
         {
+            var config = services.BuildServiceProvider().GetService<IConfiguration>();
+
             services.AddDbContext<NigelDbReadEntityContext>(options =>
             {
                 options.UseSqlServer(
-                    connectionString: configuration.GetConnectionString("NigelDB_ReadConnection"),
+                    connectionString: config.GetConnectionString("NigelDB_ReadConnection"),
                     sqlServerOptionsAction: options =>
                         {
                             options.EnableRetryOnFailure();
@@ -34,30 +36,17 @@ namespace XUCore.NetCore.DataTest.DbRepository
         }
     }
 
-    public interface INigelDbReadEntityContext : IDbContext
-    {
 
-    }
-
-    public interface INigelDbReadRepository<T> : IMsSqlRepository<T> where T : class, new()
-    {
-
-    }
-
+    public interface INigelDbReadEntityContext : IDbContext { }
     public class NigelDbReadEntityContext : BaseRepositoryFactory, INigelDbReadEntityContext
     {
-        public NigelDbReadEntityContext(DbContextOptions<NigelDbReadEntityContext> options) 
-            : base(typeof(NigelDbReadEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping")
-        {
-
-        }
+        public NigelDbReadEntityContext(DbContextOptions<NigelDbReadEntityContext> options)
+            : base(typeof(NigelDbReadEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
+    public interface INigelDbReadRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelDbReadRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbReadRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbReadRepository(INigelDbReadEntityContext context) : base(context)
-        {
-
-        }
+        public NigelDbReadRepository(INigelDbReadEntityContext context) : base(context) { }
     }
 }

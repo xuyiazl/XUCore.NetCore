@@ -14,19 +14,21 @@ namespace XUCore.NetCore.DataTest.DbRepository
     public static partial class ServiceCollectionExtensions
     {
         public static readonly ILoggerFactory MyLoggerFactory
-= LoggerFactory.Create(builder =>
-{
+            = LoggerFactory.Create(builder =>
+            {
 #if DEBUG
-    builder.AddConsole();
+                builder.AddConsole();
 #endif
-});
+            });
 
-        public static IServiceCollection AddNigelDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddNigelDbContext(this IServiceCollection services)
         {
+            var config = services.BuildServiceProvider().GetService<IConfiguration>();
+
             services.AddDbContext<NigelDbEntityContext>(options =>
             {
                 options.UseSqlServer(
-                    connectionString: configuration.GetConnectionString("NigelDB_Connection"),
+                    connectionString: config.GetConnectionString("NigelDB_Connection"),
                     sqlServerOptionsAction: options =>
                         {
                             options.EnableRetryOnFailure();
@@ -46,30 +48,16 @@ namespace XUCore.NetCore.DataTest.DbRepository
         }
     }
 
-    public interface INigelDbEntityContext : IDbContext
-    {
-
-    }
-
-    public interface INigelDbRepository<T> : IMsSqlRepository<T> where T : class, new()
-    {
-
-    }
-
+    public interface INigelDbEntityContext : IDbContext { }
     public class NigelDbEntityContext : BaseRepositoryFactory, INigelDbEntityContext
     {
         public NigelDbEntityContext(DbContextOptions<NigelDbEntityContext> options)
-            : base(typeof(NigelDbEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping")
-        {
-
-        }
+            : base(typeof(NigelDbEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
+    public interface INigelDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbRepository(INigelDbEntityContext context) : base(context)
-        {
-
-        }
+        public NigelDbRepository(INigelDbEntityContext context) : base(context) { }
     }
 }

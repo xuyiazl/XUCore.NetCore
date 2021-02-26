@@ -30,6 +30,9 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestAsync()
         {
+            {
+                var list = db.GetList(c => c.Id > 10);
+            }
             //
             //
             //  https://www.cnblogs.com/yaopengfei/p/11387935.html 具体参照
