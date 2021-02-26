@@ -33,7 +33,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 当前上下文
         /// </summary>
-        public IDbContext DbContext => _context as IDbContext;
+        public IDbContext DbContext => _context.As<IDbContext>();
         /// <summary>
         /// 当前DbSet对象
         /// </summary>

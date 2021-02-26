@@ -18,16 +18,16 @@ namespace XUCore.NetCore.DataTest.DbService
     }
 
 
-    //public class AdminUsersDbServiceProvider1 : NigelDbRepository<AdminUsersEntity>, IAdminUsersDbServiceProvider1
+    //public class AdminUsersDbServiceProvider : NigelDbRepository<AdminUsersEntity>, IAdminUsersDbServiceProvider
     //{
-    //    public AdminUsersDbServiceProvider1(INigelDbEntityContext context)
+    //    public AdminUsersDbServiceProvider(INigelDbEntityContext context)
     //        : base(context)
     //    {
-            
+
     //    }
     //}
 
-    //public interface IAdminUsersDbServiceProvider1 : INigelDbRepository<AdminUsersEntity>, IDbServiceProvider
+    //public interface IAdminUsersDbServiceProvider : INigelDbRepository<AdminUsersEntity>, IDbServiceProvider
     //{
 
     //}
