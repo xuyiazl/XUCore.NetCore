@@ -81,5 +81,74 @@ namespace XUCore.NetCore.Data.BulkExtensions
         private static readonly BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
         private static object Private(this object obj, string privateField) => obj?.GetType().GetField(privateField, bindingFlags)?.GetValue(obj);
         private static T Private<T>(this object obj, string privateField) => (T)obj?.GetType().GetField(privateField, bindingFlags)?.GetValue(obj);
+
+        public static string ToQuerySql<TEntity>(this IQueryable<TEntity> query, DbServer dbType) where TEntity : class
+        {
+            var (sql, paramters) = query.ToParametrizedSql(dbType);
+
+            foreach (var parm in paramters)
+            {
+                var placeHolder = parm.ParameterName;
+                var actualValue = GetActualValue(parm.Value);
+                sql = sql.Replace(placeHolder, actualValue);
+            }
+
+            return sql;
+        }
+
+        private static string GetActualValue(object value)
+        {
+            var type = value.GetType();
+
+            if (type.IsNumeric())
+                return value.ToString();
+
+            if (type == typeof(DateTime) || type == typeof(DateTimeOffset))
+            {
+                switch (type.Name)
+                {
+                    case nameof(DateTime):
+                        return $"'{(DateTime)value:u}'";
+
+                    case nameof(DateTimeOffset):
+                        return $"'{(DateTimeOffset)value:u}'";
+                }
+            }
+
+            return $"'{value}'";
+        }
+
+        private static bool IsNullable(this Type type)
+        {
+            return
+                type != null &&
+                type.IsGenericType &&
+                type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
+
+        private static bool IsNumeric(this Type type)
+        {
+            if (IsNullable(type))
+                type = Nullable.GetUnderlyingType(type);
+
+            if (type == null || type.IsEnum)
+                return false;
+
+            return Type.GetTypeCode(type) switch
+            {
+                TypeCode.Byte => true,
+                TypeCode.Decimal => true,
+                TypeCode.Double => true,
+                TypeCode.Int16 => true,
+                TypeCode.Int32 => true,
+                TypeCode.Int64 => true,
+                TypeCode.SByte => true,
+                TypeCode.Single => true,
+                TypeCode.UInt16 => true,
+                TypeCode.UInt32 => true,
+                TypeCode.UInt64 => true,
+                _ => false
+            };
+        }
     }
 }

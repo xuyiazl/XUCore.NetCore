@@ -54,13 +54,15 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 设置自增属性
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
         /// <param name="Identity"></param>
         protected void SetIndentity(Expression<Func<T, object>> Identity)
         {
             this.Identity = Identity;
         }
-
+        /// <summary>
+        /// ef设置不自增
+        /// </summary>
+        /// <param name="NoIdentity"></param>
         protected void SetNoIndentity(Expression<Func<T, object>> NoIdentity)
         {
             this.NoIdentity = NoIdentity;
@@ -80,7 +82,10 @@ namespace XUCore.NetCore.Data.DbService
         {
             this.insertDefault = insertDefault;
         }
-
+        /// <summary>
+        /// 仅在添加或者修改时设置默认值
+        /// </summary>
+        /// <param name="insertOrUpdates"></param>
         protected void SetValueInsertOrUpdate(params Expression<Func<T, object>>[] insertOrUpdates)
         {
             this.insertOrUpdates = insertOrUpdates;

@@ -505,8 +505,13 @@
             <summary>
             设置自增属性
             </summary>
-            <typeparam name="TValue"></typeparam>
             <param name="Identity"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetNoIndentity(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            ef设置不自增
+            </summary>
+            <param name="NoIdentity"></param>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetIgnore(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
              <summary>
@@ -518,6 +523,12 @@
             在ef添加记录的时候默认值添加，即不赋值
             </summary>
             <param name="insertDefault"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.AbstractEntityTypeConfiguration`1.SetValueInsertOrUpdate(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            仅在添加或者修改时设置默认值
+            </summary>
+            <param name="insertOrUpdates"></param>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.BaseRepositoryFactory.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

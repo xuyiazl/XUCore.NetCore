@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using XUCore.NetCore.Data.BulkExtensions;
 
 namespace XUCore.NetCore.Data.DbService
 {
     public abstract class BaseRepositoryFactory : DBContextFactory
     {
         private readonly Assembly assembly;
-        protected BaseRepositoryFactory(Type type, DbContextOptions options, string dbType, string mappingPath) : base(options, mappingPath)
+        protected BaseRepositoryFactory(Type type, DbContextOptions options, DbServer dbServer, string mappingPath) 
+            : base(options, mappingPath)
         {
             this.assembly = type.Assembly;
 
@@ -21,14 +23,13 @@ namespace XUCore.NetCore.Data.DbService
                 //MYSQL ==>>>>>  Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal.MySqlOptionsExtension
                 //MSSQL ==>>>>>  Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal.SqlServerOptionsExtension
 
-                switch (dbType.ToLower())
+                switch (dbServer)
                 {
-                    case "mysql":
+                    case DbServer.MySql:
                         if (extensions.GetType().FullName.Equals("Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal.MySqlOptionsExtension"))
                             this.ConnectionStrings = (extensions as MySqlOptionsExtension).ConnectionString;
                         break;
-                    case "mssql":
-                    case "sqlserver":
+                    case DbServer.SqlServer:
                         if (extensions.GetType().FullName.Equals("Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal.SqlServerOptionsExtension"))
                             this.ConnectionStrings = (extensions as SqlServerOptionsExtension).ConnectionString;
                         break;
@@ -51,8 +52,8 @@ namespace XUCore.NetCore.Data.DbService
             //扫描指定文件夹的
             var typesToRegister = assembly.GetTypes()
            .Where(type => !string.IsNullOrEmpty(type.Namespace))
-           .Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(AbstractEntityTypeConfiguration<>));
-            typesToRegister = typesToRegister.Where(a => a.Namespace.Contains(mappingPath));
+           .Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(AbstractEntityTypeConfiguration<>))
+           .Where(type => type.Namespace.Contains(mappingPath));
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);

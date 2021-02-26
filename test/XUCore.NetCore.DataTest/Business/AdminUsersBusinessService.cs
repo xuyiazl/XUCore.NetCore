@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Transactions;
+using System.Linq.Expressions;
+using XUCore.Extensions;
 
 namespace XUCore.NetCore.DataTest.Business
 {

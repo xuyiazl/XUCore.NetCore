@@ -3320,35 +3320,39 @@
             <param name="expression">表达式</param>
             <param name="member">属性</param>
         </member>
-        <member name="M:XUCore.Extensions.Extensions.And(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+        <member name="M:XUCore.Extensions.Extensions.And(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Boolean)">
             <summary>
             与操作表达式
             </summary>
             <param name="left">左操作数</param>
             <param name="right">右操作数</param>
+            <param name="condition">第三方条件</param>
         </member>
-        <member name="M:XUCore.Extensions.Extensions.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+        <member name="M:XUCore.Extensions.Extensions.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean)">
             <summary>
             与操作表达式
             </summary>
             <typeparam name="T">对象类型</typeparam>
             <param name="left">左操作数</param>
             <param name="right">右操作数</param>
+            <param name="condition">第三方条件</param>
         </member>
-        <member name="M:XUCore.Extensions.Extensions.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+        <member name="M:XUCore.Extensions.Extensions.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Boolean)">
             <summary>
             或操作表达式
             </summary>
             <param name="left">左操作数</param>
             <param name="right">右操作数</param>
+            <param name="condition">第三方条件</param>
         </member>
-        <member name="M:XUCore.Extensions.Extensions.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+        <member name="M:XUCore.Extensions.Extensions.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean)">
             <summary>
             或操作表达式
             </summary>
             <typeparam name="T">对象类型</typeparam>
             <param name="left">左操作数</param>
             <param name="right">右操作数</param>
+            <param name="condition">第三方条件</param>
         </member>
         <member name="M:XUCore.Extensions.Extensions.Value``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>

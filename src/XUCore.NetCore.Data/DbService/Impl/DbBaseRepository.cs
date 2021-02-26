@@ -38,6 +38,7 @@ namespace XUCore.NetCore.Data.DbService
         /// 当前DbSet对象
         /// </summary>
         public DbSet<TEntity> Table => _context.Set<TEntity>();
+
         //同步操作
 
         /// <summary>

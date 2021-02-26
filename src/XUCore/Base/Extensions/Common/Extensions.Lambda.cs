@@ -54,8 +54,11 @@ namespace XUCore.Extensions
         /// </summary>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
-        public static Expression And(this Expression left, Expression right)
+        /// <param name="condition">第三方条件</param>
+        public static Expression And(this Expression left, Expression right, bool condition = true)
         {
+            if (!condition) return left;
+
             if (left == null)
                 return right;
             if (right == null)
@@ -69,9 +72,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
+        /// <param name="condition">第三方条件</param>
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left,
-            Expression<Func<T, bool>> right)
+            Expression<Func<T, bool>> right, bool condition = true)
         {
+            if (!condition) return left;
+
             if (left == null)
                 return right;
             if (right == null)
@@ -88,8 +94,11 @@ namespace XUCore.Extensions
         /// </summary>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
-        public static Expression Or(this Expression left, Expression right)
+        /// <param name="condition">第三方条件</param>
+        public static Expression Or(this Expression left, Expression right, bool condition = true)
         {
+            if (!condition) return left;
+
             if (left == null)
                 return right;
             if (right == null)
@@ -103,9 +112,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
+        /// <param name="condition">第三方条件</param>
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> left,
-            Expression<Func<T, bool>> right)
+            Expression<Func<T, bool>> right, bool condition = true)
         {
+            if (!condition) return left;
+
             if (left == null)
                 return right;
             if (right == null)

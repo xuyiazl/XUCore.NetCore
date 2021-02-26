@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.NetCore.DataTest.DbRepository
@@ -46,7 +47,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
     public class NigelDbEntityContext : BaseRepositoryFactory, INigelDbEntityContext
     {
         public NigelDbEntityContext(DbContextOptions<NigelDbEntityContext> options)
-            : base(typeof(NigelDbEntityContext), options, "sqlserver", $"XUCore.NetCore.DataTest.Mapping")
+            : base(typeof(NigelDbEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping")
         {
 
         }

@@ -10,6 +10,7 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Linq;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -28,7 +29,6 @@ namespace XUCore.NetCore.Data.DbService
         /// 当前DbSet对象
         /// </summary>
         DbSet<TEntity> Table { get; }
-
         //同步操作
 
         /// <summary>
