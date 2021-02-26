@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,14 @@ namespace XUCore.NetCore.DataTest.DbRepository
 {
     public static partial class ServiceCollectionExtensions
     {
+        public static readonly ILoggerFactory MyLoggerFactory
+= LoggerFactory.Create(builder =>
+{
+#if DEBUG
+    builder.AddConsole();
+#endif
+});
+
         public static IServiceCollection AddNigelDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NigelDbEntityContext>(options =>
@@ -25,6 +35,8 @@ namespace XUCore.NetCore.DataTest.DbRepository
                         }
                     )
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+                options.UseLoggerFactory(MyLoggerFactory);
             });
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
