@@ -38,7 +38,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
                     )
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
-                options.UseLoggerFactory(MyLoggerFactory);
+                //options.UseLoggerFactory(MyLoggerFactory);
             });
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));

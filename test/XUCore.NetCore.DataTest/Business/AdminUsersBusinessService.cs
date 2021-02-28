@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using XUCore.NetCore.DataTest.DbRepository;
-using XUCore.NetCore.DataTest.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using XUCore.NetCore.DataTest.DbService;
-using System.Data;
-using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
-using System.Linq.Expressions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.DataTest.DbRepository;
+using XUCore.NetCore.DataTest.DbService;
+using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.Business
 {
@@ -31,7 +28,19 @@ namespace XUCore.NetCore.DataTest.Business
         public async Task TestAsync()
         {
             {
-                var list = db.GetList(c => c.Id > 10);
+                nigelDb.DbContext.CreateTransactionScope(
+                    run: (tran) =>
+                    {
+                        db.Delete(c => true);
+
+                        nigelDb.Add(BuildRecords(10));
+
+                        db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                    },
+                    error: (tran, error) =>
+                    {
+
+                    });
             }
             //
             //
@@ -67,9 +76,7 @@ namespace XUCore.NetCore.DataTest.Business
                     {
                         nigelDb.Delete(c => true);
 
-                        var list = BuildRecords(10);
-
-                        nigelDb.Add(list);
+                        nigelDb.Add(BuildRecords(10));
                         //当更新的时候 Loaction超过长度出现异常，进入事务回滚
                         nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 
@@ -91,9 +98,7 @@ namespace XUCore.NetCore.DataTest.Business
                     {
                         db.Delete(c => true);
 
-                        var list = BuildRecords(10);
-
-                        db.Add(list);
+                        db.Add(BuildRecords(10));
 
                         db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 
@@ -106,6 +111,80 @@ namespace XUCore.NetCore.DataTest.Business
                 }
             }
             {
+                nigelDb.DbContext.CreateTransaction(
+                    (tran) =>
+                    {
+                        nigelDb.Delete(c => true);
+
+                        nigelDb.Add(BuildRecords(10));
+
+                        nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                    },
+                    (tran, error) =>
+                    {
+                        Console.WriteLine(error.FormatMessage());
+                    });
+            }
+            {
+                var res = nigelDb.DbContext.CreateTransaction(
+                    (tran) =>
+                    {
+                        nigelDb.Delete(c => true);
+
+                        nigelDb.Add(BuildRecords(10));
+
+                        nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+
+                        return true;
+                    },
+                    (tran, error) =>
+                    {
+                        Console.WriteLine(error.FormatMessage());
+
+                        return false;
+                    });
+            }
+            {
+                await nigelDb.DbContext.CreateTransactionAsync(
+                    async (tran, cancel) =>
+                    {
+                        await nigelDb.DeleteAsync(c => true);
+
+                        await nigelDb.AddAsync(BuildRecords(10));
+
+                        await nigelDb.UpdateAsync(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                    },
+                    async (tran, error, cancel) =>
+                    {
+                        await Task.CompletedTask;
+
+                        Console.WriteLine(error.FormatMessage());
+                    },
+                    CancellationToken.None);
+            }
+            {
+                var res = await nigelDb.DbContext.CreateTransactionAsync(
+                    async (tran, cancel) =>
+                    {
+                        await nigelDb.DeleteAsync(c => true);
+
+                        await nigelDb.AddAsync(BuildRecords(10));
+
+                        await nigelDb.UpdateAsync(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+
+                        return true;
+                    },
+                    async (tran, error, cancel) =>
+                    {
+                        await Task.CompletedTask;
+
+                        Console.WriteLine(error.FormatMessage());
+
+                        return false;
+                    },
+                    CancellationToken.None);
+            }
+            {
                 var strategy = nigelDb.DbContext.CreateExecutionStrategy();
 
                 strategy.Execute(() =>
@@ -116,9 +195,7 @@ namespace XUCore.NetCore.DataTest.Business
                         {
                             nigelDb.Delete(c => true);
 
-                            var list = BuildRecords(10);
-
-                            nigelDb.Add(list);
+                            nigelDb.Add(BuildRecords(10));
 
                             nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 
@@ -142,9 +219,7 @@ namespace XUCore.NetCore.DataTest.Business
                         {
                             db.Delete(c => true);
 
-                            var list = BuildRecords(10);
-
-                            db.Add(list);
+                            db.Add(BuildRecords(10));
 
                             db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 
@@ -176,15 +251,45 @@ namespace XUCore.NetCore.DataTest.Business
                          ③多线程带锁的情况，同一条业务线前半部分必须先SaveChanges，才能保证数据准确性(测试简单版本，实际的业务场景待补充！！！)
              */
             {
+                nigelDb.DbContext.CreateTransactionScope(
+                    run: (tran) =>
+                    {
+                        db.Delete(c => true);
+
+                        nigelDb.Add(BuildRecords(10));
+
+                        db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                    },
+                    error: (tran, error) =>
+                    {
+
+                    });
+            }
+            {
+               var res = nigelDb.DbContext.CreateTransactionScope(
+                    run: (tran) =>
+                    {
+                        db.Delete(c => true);
+
+                        nigelDb.Add(BuildRecords(10));
+
+                        db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+
+                        return true;
+                    },
+                    error: (tran, error) =>
+                    {
+                        return false;
+                    });
+            }
+            {
                 using (var tran = new TransactionScope())
                 {
                     try
                     {
                         db.Delete(c => true);
 
-                        var list = BuildRecords(10);
-
-                        nigelDb.Add(list);
+                        nigelDb.Add(BuildRecords(10));
 
                         db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 

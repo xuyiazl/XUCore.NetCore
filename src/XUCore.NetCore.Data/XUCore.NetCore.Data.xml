@@ -1601,5 +1601,62 @@
             <param name="type"></param>
             <param name="parameters"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransaction(XUCore.NetCore.Data.DbService.IDbContext,System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction},System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception})">
+            <summary>
+            创建事务
+            </summary>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransactionAsync(XUCore.NetCore.Data.DbService.IDbContext,System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            创建事务
+            </summary>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransaction``1(XUCore.NetCore.Data.DbService.IDbContext,System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,``0},System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception,``0})">
+            <summary>
+            创建事务
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransactionAsync``1(XUCore.NetCore.Data.DbService.IDbContext,System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},System.Func{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception,System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+            <summary>
+            创建事务
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransactionScope(XUCore.NetCore.Data.DbService.IDbContext,System.Action{System.Transactions.TransactionScope},System.Action{System.Transactions.TransactionScope,System.Exception})">
+            <summary>
+            创建事务（适用于多数据库连接的情况）
+            </summary>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransactionScope``1(XUCore.NetCore.Data.DbService.IDbContext,System.Func{System.Transactions.TransactionScope,``0},System.Func{System.Transactions.TransactionScope,System.Exception,``0})">
+            <summary>
+            创建事务（适用于多数据库连接的情况）
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="dbContext"></param>
+            <param name="run">执行内容</param>
+            <param name="error">异常消息</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
