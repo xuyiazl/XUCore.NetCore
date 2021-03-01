@@ -23,7 +23,10 @@ namespace XUCore.NetCore.Mongo
         /// <summary>
         /// 获得数据Collection内容
         /// </summary>
-        IMongoCollection<TModel> Table { get;}
+        IMongoCollection<TModel> Table { get; }
+
+        #region [ 新增 ]
+
         /// <summary>
         /// 添加
         /// </summary>
@@ -45,7 +48,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="models">对象信息</param>
         /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
         /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
-        void AddMany(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null);
+        void Add(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null);
         /// <summary>
         /// 异步批量添加
         /// </summary>
@@ -53,7 +56,12 @@ namespace XUCore.NetCore.Mongo
         /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
         /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         /// <param name="cancellationToken"></param>
-        Task<int> AddManyAsync(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
+        Task AddAsync(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
+
+        #endregion
+
+        #region [ 更新 ]
+
         /// <summary>
         /// 同步更新
         /// </summary>
@@ -98,7 +106,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="models">对象信息</param>
         /// <param name="where">设置一个更新条件，默认：匹配BsonId；</param>
         /// <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
-        bool UpdateMany(IEnumerable<TModel> models, Expression<Func<TModel, bool>> where = null, bool isUpsert = true);
+        bool Update(IEnumerable<TModel> models, Expression<Func<TModel, bool>> where = null, bool isUpsert = true);
         /// <summary>
         /// 异步批量更新
         /// </summary>
@@ -106,7 +114,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="where">设置一个更新条件，默认：匹配BsonId；</param>
         /// <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
         /// <param name="cancellationToken"></param>
-        Task<BulkWriteResult<TModel>> UpdateManyAsync(IEnumerable<TModel> models, Expression<Func<TModel, bool>> where = null, bool isUpsert = true, CancellationToken cancellationToken = default);
+        Task<BulkWriteResult<TModel>> UpdateAsync(IEnumerable<TModel> models, Expression<Func<TModel, bool>> where = null, bool isUpsert = true, CancellationToken cancellationToken = default);
         /// <summary>
         /// 同步修改（部分字段）
         /// </summary>
@@ -114,7 +122,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="field">指定字段</param>
         /// <param name="value">更新值</param>
         /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
-        bool UpdateFiled(Expression<Func<TModel, bool>> where, string field, string value, bool? bypassDocumentValidation = null);
+        bool Update(Expression<Func<TModel, bool>> where, string field, string value, bool? bypassDocumentValidation = null);
         /// <summary>
         /// 异步修改（部分字段）
         /// </summary>
@@ -123,7 +131,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="value">更新值</param>
         /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         /// <param name="cancellationToken"></param>
-        Task<UpdateResult> UpdateFiledAsync(Expression<Func<TModel, bool>> where, string field, string value, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
+        Task<UpdateResult> UpdateAsync(Expression<Func<TModel, bool>> where, string field, string value, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 批量修改（部分字段）
         /// </summary>
@@ -138,6 +146,11 @@ namespace XUCore.NetCore.Mongo
         /// <param name="cancellationToken"></param>
         /// </summary>
         Task<UpdateResult> UpdateAsync(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TModel>> update, CancellationToken cancellationToken = default);
+
+        #endregion
+
+        #region [ 大批量操作 ]
+
         /// <summary>
         /// 大批量写入
         /// </summary>
@@ -151,53 +164,63 @@ namespace XUCore.NetCore.Mongo
         /// <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
         /// <param name="cancellationToken"></param>
         Task<BulkWriteResult<TModel>> BulkWriteAsync(IEnumerable<WriteModel<TModel>> models, bool isUpsert = true, CancellationToken cancellationToken = default);
+
+        #endregion
+
+        #region [ 删除 ]
+
         /// <summary>
         /// 删除指定单一记录
         /// </summary>
         /// <remarks>默认按当前对象主键ID删除</remarks>
         /// <param name="t">删除对象</param>
-        bool Delete(TModel t);
+        bool DeleteOne(TModel t);
         /// <summary>
         /// 按条件，删除
         /// </summary>
         /// <param name="where">条件</param>
-        TModel Delete(Expression<Func<TModel, bool>> where);
+        TModel FindOneAndDelete(Expression<Func<TModel, bool>> where);
         /// <summary>
         /// 按条件，异步删除
+        /// </summary>
+        /// <param name="where">条件</param>
+        /// <param name="cancellationToken"></param>
+        Task<DeleteResult> DeleteOneAsync(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 按条件，异步删除
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <param name="cancellationToken"></param>
+        Task<DeleteResult> DeleteOneAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 按条件，批量删除
+        /// </summary>
+        /// <param name="where">条件</param>
+        /// <param name="cancellationToken"></param>
+        bool Delete(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 按条件，批量删除
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <param name="cancellationToken"></param>
+        bool Delete(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 按条件，异步批量删除
         /// </summary>
         /// <param name="where">条件</param>
         /// <param name="cancellationToken"></param>
         Task<DeleteResult> DeleteAsync(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
         /// <summary>
-        /// 按条件，异步删除
+        /// 按条件，异步批量删除
         /// </summary>
         /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
         /// <param name="cancellationToken"></param>
         Task<DeleteResult> DeleteAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 按条件，批量删除
-        /// </summary>
-        /// <param name="where">条件</param>
-        /// <param name="cancellationToken"></param>
-        bool DeleteMany(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 按条件，批量删除
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <param name="cancellationToken"></param>
-        bool DeleteMany(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 按条件，异步批量删除
-        /// </summary>
-        /// <param name="where">条件</param>
-        /// <param name="cancellationToken"></param>
-        Task<DeleteResult> DeleteManyAsync(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 按条件，异步批量删除
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <param name="cancellationToken"></param>
-        Task<DeleteResult> DeleteManyAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
+
+        #endregion
+
+        #region [ 查询 ]
+
         /// <summary>
         /// 获取指定Linq条件总记录数
         /// </summary>
@@ -225,18 +248,6 @@ namespace XUCore.NetCore.Mongo
         /// <returns></returns>
         Task<long> GetCountAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
         /// <summary>
-        /// 获取当前所有集合
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        IList<TModel> GetList(CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 异步获取当前所有集合
-        /// </summary>
-        /// <returns>返回异步结果</returns>
-        /// <param name="cancellationToken"></param>
-        Task<List<TModel>> GetListAsync(CancellationToken cancellationToken = default);
-        /// <summary>
         /// 获取指定主键id记录
         /// </summary>
         /// <param name="id">主键ID</param>
@@ -249,6 +260,77 @@ namespace XUCore.NetCore.Mongo
         /// <param name="cancellationToken"></param>
         /// <returns>返回异步结果</returns>
         Task<TModel> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 获得指定Linq条件内的单条数据
+        /// </summary>
+        /// <param name="where">linq表达式</param>
+        /// <returns></returns>
+        TModel GetSingle(Expression<Func<TModel, bool>> where);
+        /// <summary>
+        /// 获得指定Filter内的单条数据
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <returns></returns>
+        TModel GetSingle(FilterDefinition<TModel> filter);
+        /// <summary>
+        /// 异步获得指定Linq条件内的单条数据
+        /// </summary>
+        /// <param name="where">筛选条件</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>返回异步结果</returns>
+        Task<TModel> GetSingleAsync(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 异步获得指定Filter内的单条数据
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>返回异步结果</returns>
+        Task<TModel> GetSingleAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 获取当前所有集合
+        /// </summary>
+        /// <returns></returns>
+        IList<TModel> GetList();
+        /// <summary>
+        /// 异步获取当前所有集合
+        /// </summary>
+        /// <returns>返回异步结果</returns>
+        /// <param name="cancellationToken"></param>
+        Task<IList<TModel>> GetListAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 获得指定Linq条件内的多条数据
+        /// </summary>
+        /// <param name="where">linq表达式</param>
+        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+        /// <param name="limit">指定条数</param>
+        /// <returns></returns>
+        List<TModel> GetList(Expression<Func<TModel, bool>> where, string orderby = "", int? limit = null);
+        /// <summary>
+        /// 获得指定Filter内的多条数据
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+        /// <param name="limit">指定条数</param>
+        /// <returns></returns>
+        List<TModel> GetList(FilterDefinition<TModel> filter, string orderby = "", int? limit = null);
+        /// <summary>
+        /// 异步获得指定Linq条件内的多条数据
+        /// </summary>
+        /// <param name="where">筛选条件</param>
+        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+        /// <param name="limit">指定条数</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>返回异步结果</returns>
+        Task<List<TModel>> GetListAsync(Expression<Func<TModel, bool>> where, string orderby = "", int? limit = null, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 异步获得指定Filter内的多条数据
+        /// </summary>
+        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
+        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+        /// <param name="limit">指定条数</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>返回异步结果</returns>
+        Task<List<TModel>> GetListAsync(FilterDefinition<TModel> filter, string orderby = "", int? limit = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 分页获取数据
         /// </summary>
@@ -287,65 +369,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<PagedModel<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获得指定Linq条件内的多条数据
-        /// </summary>
-        /// <param name="where">linq表达式</param>
-        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="limit">指定条数</param>
-        /// <returns></returns>
-        List<TModel> GetList(Expression<Func<TModel, bool>> where, string orderby = "", int? limit = null);
-        /// <summary>
-        /// 获得指定Filter内的多条数据
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="limit">指定条数</param>
-        /// <returns></returns>
-        List<TModel> GetList(FilterDefinition<TModel> filter, string orderby = "", int? limit = null);
-        /// <summary>
-        /// 异步获得指定Linq条件内的多条数据
-        /// </summary>
-        /// <param name="where">筛选条件</param>
-        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="limit">指定条数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>返回异步结果</returns>
-        Task<List<TModel>> GetListAsync(Expression<Func<TModel, bool>> where, string orderby = "", int? limit = null, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 异步获得指定Filter内的多条数据
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="limit">指定条数</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>返回异步结果</returns>
-        Task<List<TModel>> GetListAsync(FilterDefinition<TModel> filter, string orderby = "", int? limit = null, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获得指定Linq条件内的单条数据
-        /// </summary>
-        /// <param name="where">linq表达式</param>
-        /// <returns></returns>
-        TModel GetSingle(Expression<Func<TModel, bool>> where);
-        /// <summary>
-        /// 获得指定Filter内的单条数据
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <returns></returns>
-        TModel GetSingle(FilterDefinition<TModel> filter);
-        /// <summary>
-        /// 异步获得指定Linq条件内的单条数据
-        /// </summary>
-        /// <param name="where">筛选条件</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>返回异步结果</returns>
-        Task<TModel> GetSingleAsync(Expression<Func<TModel, bool>> where, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 异步获得指定Filter内的单条数据
-        /// </summary>
-        /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>返回异步结果</returns>
-        Task<TModel> GetSingleAsync(FilterDefinition<TModel> filter, CancellationToken cancellationToken = default);
+
+        #endregion
     }
 }

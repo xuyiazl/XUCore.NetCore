@@ -40,31 +40,56 @@
             <summary>
             添加
             </summary>
+            <param name="model"></param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.AddAsync(`0,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步添加
             </summary>
+            <param name="model"></param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.AddMany(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             同步批量添加
             </summary>
+            <param name="models"></param>
+            <param name="isOrdered">是否按顺序写入</param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.AddManyAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步批量添加
             </summary>
+            <param name="models"></param>
+            <param name="isOrdered">是否按顺序写入</param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Update(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             同步更新
             </summary>
+            <param name="model"></param>
+            <param name="where">条件</param>
+            <param name="isUpsert">不存在时插入该文档</param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Update(`0,MongoDB.Driver.FilterDefinition{`0},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             同步更新
             </summary>
+            <param name="model"></param>
+            <param name="filter">条件</param>
+            <param name="isUpsert">不存在时插入该文档</param>
+            <param name="bypassDocumentValidation">是否绕过文档验证</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateAsync(`0,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
@@ -76,22 +101,22 @@
             异步更新
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateMany(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
             <summary>
             批量更新
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateManyAsync(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步批量更新
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateFiled(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean})">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean})">
             <summary>
             同步修改（部分字段）
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateFiledAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步修改（部分字段）
             </summary>
@@ -116,42 +141,42 @@
             异步大批量写入
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Delete(`0)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteOne(`0)">
             <summary>
             删除指定单一记录
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.FindOneAndDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             按条件，删除
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            按条件，异步删除
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteOneAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+            <summary>
+            按条件，异步删除
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            按条件，批量删除
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.Delete(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+            <summary>
+            按条件，批量删除
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            按条件，异步删除
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
-            <summary>
-            按条件，异步删除
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            按条件，批量删除
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteMany(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
-            <summary>
-            按条件，批量删除
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             按条件，异步批量删除
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteManyAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
             <summary>
             按条件，异步批量删除
             </summary>
@@ -183,18 +208,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetList(System.Threading.CancellationToken)">
-            <summary>
-            获取当前所有集合
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            异步获取当前所有集合
-            </summary>
-            <returns>返回异步结果</returns>
-        </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetById(System.Object)">
             <summary>
             获取指定主键id记录
@@ -206,25 +219,37 @@
             异步获取指定主键id记录
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
-            分页获取数据
+            获得指定Linq条件内的单条数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedList(MongoDB.Driver.FilterDefinition{`0},System.String,System.Int32,System.Int32)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingle(MongoDB.Driver.FilterDefinition{`0})">
             <summary>
-            分页获取数据
+            获得指定Filter内的单条数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
-            异步分页获取数据
+            异步获得指定Linq条件内的单条数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedListAsync(MongoDB.Driver.FilterDefinition{`0},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingleAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
             <summary>
-            异步分页获取数据
+            异步获得指定Filter内的单条数据
             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetList">
+            <summary>
+            获取当前所有集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步获取当前所有集合
+            </summary>
+            <returns>返回异步结果</returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Nullable{System.Int32})">
             <summary>
@@ -246,24 +271,24 @@
             异步获得指定Filter内的多条数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
-            获得指定Linq条件内的单条数据
+            分页获取数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingle(MongoDB.Driver.FilterDefinition{`0})">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedList(MongoDB.Driver.FilterDefinition{`0},System.String,System.Int32,System.Int32)">
             <summary>
-            获得指定Filter内的单条数据
+            分页获取数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            异步获得指定Linq条件内的单条数据
+            异步分页获取数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetSingleAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.GetPagedListAsync(MongoDB.Driver.FilterDefinition{`0},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            异步获得指定Filter内的单条数据
+            异步分页获取数据
             </summary>
         </member>
         <member name="T:XUCore.NetCore.Mongo.ModelPropertyAttribute">
@@ -330,7 +355,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.AddMany(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             同步批量添加
             </summary>
@@ -338,7 +363,7 @@
             <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
             <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.AddManyAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步批量添加
             </summary>
@@ -389,7 +414,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateMany(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean)">
             <summary>
             批量更新
             </summary>
@@ -397,7 +422,7 @@
             <param name="where">设置一个更新条件，默认：匹配BsonId；</param>
             <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateManyAsync(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步批量更新
             </summary>
@@ -406,7 +431,7 @@
             <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateFiled(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean})">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean})">
             <summary>
             同步修改（部分字段）
             </summary>
@@ -415,7 +440,7 @@
             <param name="value">更新值</param>
             <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateFiledAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.UpdateAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步修改（部分字段）
             </summary>
@@ -456,55 +481,55 @@
             <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Delete(`0)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteOne(`0)">
             <summary>
             删除指定单一记录
             </summary>
             <remarks>默认按当前对象主键ID删除</remarks>
             <param name="t">删除对象</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.FindOneAndDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
             <summary>
             按条件，删除
             </summary>
             <param name="where">条件</param>
         </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteOneAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            按条件，异步删除
+            </summary>
+            <param name="where">条件</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteOneAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+            <summary>
+            按条件，异步删除
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            按条件，批量删除
+            </summary>
+            <param name="where">条件</param>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.Delete(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+            <summary>
+            按条件，批量删除
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <param name="cancellationToken"></param>
+        </member>
         <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            按条件，异步删除
-            </summary>
-            <param name="where">条件</param>
-            <param name="cancellationToken"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
-            <summary>
-            按条件，异步删除
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <param name="cancellationToken"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteMany(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            按条件，批量删除
-            </summary>
-            <param name="where">条件</param>
-            <param name="cancellationToken"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteMany(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
-            <summary>
-            按条件，批量删除
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <param name="cancellationToken"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteManyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             按条件，异步批量删除
             </summary>
             <param name="where">条件</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteManyAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
             <summary>
             按条件，异步批量删除
             </summary>
@@ -541,20 +566,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList(System.Threading.CancellationToken)">
-            <summary>
-            获取当前所有集合
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
-            <summary>
-            异步获取当前所有集合
-            </summary>
-            <returns>返回异步结果</returns>
-            <param name="cancellationToken"></param>
-        </member>
         <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetById(System.Object)">
             <summary>
             获取指定主键id记录
@@ -567,6 +578,87 @@
             异步获取指定主键id记录
             </summary>
             <param name="id">主键ID</param>
+            <param name="cancellationToken"></param>
+            <returns>返回异步结果</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            获得指定Linq条件内的单条数据
+            </summary>
+            <param name="where">linq表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingle(MongoDB.Driver.FilterDefinition{`0})">
+            <summary>
+            获得指定Filter内的单条数据
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            异步获得指定Linq条件内的单条数据
+            </summary>
+            <param name="where">筛选条件</param>
+            <param name="cancellationToken"></param>
+            <returns>返回异步结果</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingleAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
+            <summary>
+            异步获得指定Filter内的单条数据
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <param name="cancellationToken"></param>
+            <returns>返回异步结果</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList">
+            <summary>
+            获取当前所有集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(System.Threading.CancellationToken)">
+            <summary>
+            异步获取当前所有集合
+            </summary>
+            <returns>返回异步结果</returns>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Nullable{System.Int32})">
+            <summary>
+            获得指定Linq条件内的多条数据
+            </summary>
+            <param name="where">linq表达式</param>
+            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+            <param name="limit">指定条数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList(MongoDB.Driver.FilterDefinition{`0},System.String,System.Nullable{System.Int32})">
+            <summary>
+            获得指定Filter内的多条数据
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+            <param name="limit">指定条数</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            异步获得指定Linq条件内的多条数据
+            </summary>
+            <param name="where">筛选条件</param>
+            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+            <param name="limit">指定条数</param>
+            <param name="cancellationToken"></param>
+            <returns>返回异步结果</returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(MongoDB.Driver.FilterDefinition{`0},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            异步获得指定Filter内的多条数据
+            </summary>
+            <param name="filter">基础过滤器，请使用Builders构建条件</param>
+            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
+            <param name="limit">指定条数</param>
             <param name="cancellationToken"></param>
             <returns>返回异步结果</returns>
         </member>
@@ -612,75 +704,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Nullable{System.Int32})">
-            <summary>
-            获得指定Linq条件内的多条数据
-            </summary>
-            <param name="where">linq表达式</param>
-            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="limit">指定条数</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetList(MongoDB.Driver.FilterDefinition{`0},System.String,System.Nullable{System.Int32})">
-            <summary>
-            获得指定Filter内的多条数据
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="limit">指定条数</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            异步获得指定Linq条件内的多条数据
-            </summary>
-            <param name="where">筛选条件</param>
-            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="limit">指定条数</param>
-            <param name="cancellationToken"></param>
-            <returns>返回异步结果</returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetListAsync(MongoDB.Driver.FilterDefinition{`0},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            异步获得指定Filter内的多条数据
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="limit">指定条数</param>
-            <param name="cancellationToken"></param>
-            <returns>返回异步结果</returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
-            <summary>
-            获得指定Linq条件内的单条数据
-            </summary>
-            <param name="where">linq表达式</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingle(MongoDB.Driver.FilterDefinition{`0})">
-            <summary>
-            获得指定Filter内的单条数据
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            异步获得指定Linq条件内的单条数据
-            </summary>
-            <param name="where">筛选条件</param>
-            <param name="cancellationToken"></param>
-            <returns>返回异步结果</returns>
-        </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.GetSingleAsync(MongoDB.Driver.FilterDefinition{`0},System.Threading.CancellationToken)">
-            <summary>
-            异步获得指定Filter内的单条数据
-            </summary>
-            <param name="filter">基础过滤器，请使用Builders构建条件</param>
-            <param name="cancellationToken"></param>
-            <returns>返回异步结果</returns>
-        </member>
-        <member name="T:XUCore.NetCore.Mongo.IMongoService`1">
+        <member name="T:XUCore.NetCore.Mongo.IMongoServiceProvider`1">
             <summary>
             定义Mongo的连接服务
             </summary>

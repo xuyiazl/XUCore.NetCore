@@ -6,21 +6,19 @@ using XUCore.Configs;
 
 namespace XUCore.NetCore.Mongo
 {
-    public class MongoServiceProvider<TMongoModel> : AbstractMongoBaseRepository<TMongoModel>, IMongoService<TMongoModel> where TMongoModel : MongoBaseModel
+    public class MongoServiceProvider<TMongoModel> : AbstractMongoBaseRepository<TMongoModel>, IMongoServiceProvider<TMongoModel> where TMongoModel : MongoBaseModel
     {
-        public MongoServiceProvider(
-            IConfiguration configuration) : base()
+        public MongoServiceProvider(IConfiguration configuration) : base()
         {
-            #region 读取配置文件中的mongodb配置信息
             if (Connection == null || !Connection.IsValueCreated)
             {
+                var ss = configuration.GetSection<List<MongoConnection>>("MongoConnectionStrings");
                 Connection = new Lazy<List<MongoConnection>>(() =>
                 {
                     return configuration.GetSection<List<MongoConnection>>("MongoConnectionStrings");
                 });
 
             }
-            #endregion
         }
     }
 }
