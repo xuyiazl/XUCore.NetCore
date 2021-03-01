@@ -622,8 +622,6 @@ namespace XUCore.NetCore.Mongo
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
             var listTable = Table;
-            if (listTable == null)
-                throw new MongoException($"{typeof(TModel)} is Null");
 
             var total = listTable.CountDocuments(selector, null);
 
@@ -638,12 +636,10 @@ namespace XUCore.NetCore.Mongo
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
             var listTable = Table;
-            if (listTable == null)
-                throw new MongoException($"{typeof(TModel)} is Null");
 
             var total = listTable.CountDocuments(filter, null);
-
             var pageList = listTable.Find(filter)?.Sort(orderby.OrderByBatch<TModel>()).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
+
             return new PagedModel<TModel>(pageList, total, pageIndex, pageSize);
         }
         /// <summary>
@@ -654,11 +650,9 @@ namespace XUCore.NetCore.Mongo
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
             var listTable = Table;
-            if (listTable == null)
-                throw new MongoException($"{typeof(TModel)} is Null");
 
             var total = await listTable.CountDocumentsAsync(selector, null, cancellationToken);
-            var list = await Table.FindAsync(selector, new FindOptions<TModel, TModel>()
+            var list = await listTable.FindAsync(selector, new FindOptions<TModel, TModel>()
             {
                 Skip = (pageIndex - 1) * pageSize,
                 Limit = pageSize,
@@ -675,11 +669,9 @@ namespace XUCore.NetCore.Mongo
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
             var listTable = Table;
-            if (listTable == null)
-                throw new MongoException($"{typeof(TModel)} is Null");
 
             var total = await listTable.CountDocumentsAsync(filter, null, cancellationToken);
-            var list = await Table.FindAsync(filter, new FindOptions<TModel, TModel>()
+            var list = await listTable.FindAsync(filter, new FindOptions<TModel, TModel>()
             {
                 Skip = (pageIndex - 1) * pageSize,
                 Limit = pageSize,

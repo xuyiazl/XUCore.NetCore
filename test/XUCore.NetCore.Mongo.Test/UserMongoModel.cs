@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XUCore.NetCore.Mongo.Test
 {
-    [ModelProperty(ConnectionName = "mst_rights", TableName = "z_user_demo")]
+    [ModelProperty(ConnectionName = "testdb", TableName = "z_user_demo")]
     public class UserMongoModel : MongoBaseModel
     {
         public long AutoId { get; set; }

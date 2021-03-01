@@ -62,122 +62,122 @@ namespace XUCore.NetCore.Mongo.Test
             //    };
             //    await mongoServiceProvider.AddAsync(model, cancellationToken: cancellationToken);
             //}
+            //{
+            //    //批量写入测试
+
+            //    100.Times(num =>
+            //    {
+            //        var models = new List<UserMongoModel>();
+
+            //        10000.Times(c =>
+            //        {
+            //            models.Add(new UserMongoModel
+            //            {
+            //                AutoId = Id.NewLong(),
+            //                Name = $"王五{c + 1}",
+            //                Age = 22,
+            //                Birthday = DateTime.Parse("2000-01-30"),
+            //                Works = new List<WorkModel> {
+            //                new WorkModel{ Year = 2021, CompanyName = "腾讯" },
+            //            }
+            //            });
+            //        });
+
+            //        var watch = Stopwatch.StartNew();
+
+            //        var res = mongoServiceProvider.BulkAdd(models);
+
+            //        watch.Stop();
+
+            //        Console.WriteLine(watch.Elapsed);
+            //    });
+            //}
             {
-                //批量写入测试
-
-                100.Times(num =>
-                {
-                    var models = new List<UserMongoModel>();
-
-                    10000.Times(c =>
-                    {
-                        models.Add(new UserMongoModel
-                        {
-                            AutoId = Id.NewLong(),
-                            Name = $"王五{c + 1}",
-                            Age = 22,
-                            Birthday = DateTime.Parse("2000-01-30"),
-                            Works = new List<WorkModel> {
-                            new WorkModel{ Year = 2021, CompanyName = "腾讯" },
-                        }
-                        });
-                    });
-
-                    var watch = Stopwatch.StartNew();
-
-                    var res = mongoServiceProvider.BulkAdd(models);
-
-                    watch.Stop();
-
-                    Console.WriteLine(watch.Elapsed);
-                });
+                //查询所有记录
+                var allList = mongoServiceProvider.GetList(where: c => true, limit: 10);
             }
-            //{
-            //    //查询所有记录
-            //    var allList = await mongoServiceProvider.GetListAsync(cancellationToken);
-            //}
-            //{
-            //    //根据条件查询记录
-            //    var builders = Builders<UserMongoModel>.Filter;
-            //    var filters = new List<FilterDefinition<UserMongoModel>>();
-            //    Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 25;
-            //    //如果没有对子集的in查询，那么不需要拼接builders
-            //    filters.Add(builders.Where(selector));
-            //    //子集列表做in查询
-            //    filters.Add(builders.ElemMatch(c => c.Works, Builders<WorkModel>.Filter.Where(c => c.Year == 2000)));
-            //    var allFilters = builders.And(filters);
-            //    var list = await mongoServiceProvider.GetListAsync(allFilters);
-            //}
-            //{
-            //    //查询分页
-            //    Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 20;
+            {
+                //根据条件查询记录
+                var builders = Builders<UserMongoModel>.Filter;
+                var filters = new List<FilterDefinition<UserMongoModel>>();
+                Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 25;
+                //如果没有对子集的in查询，那么不需要拼接builders
+                filters.Add(builders.Where(selector));
+                //子集列表做in查询
+                filters.Add(builders.ElemMatch(c => c.Works, Builders<WorkModel>.Filter.Where(c => c.Year == 2000)));
+                var allFilters = builders.And(filters);
+                var list = await mongoServiceProvider.GetListAsync(allFilters);
+            }
+            {
+                //查询分页
+                Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 20;
 
-            //    var pageModel = await mongoServiceProvider.GetPagedListAsync(selector, "AutoId desc", 1, 1, cancellationToken);
-            //}
-            //{
-            //    //统计 aggregate
-            //    //求记录数
-            //    var stages = new List<BsonDocument> {
-            //        {
-            //            new BsonDocument {
-            //                { "$match", new BsonDocument {
-            //                    { "Age",new BsonDocument {
-            //                        { "$gte" , 25 }
-            //                    }}
-            //                }}
-            //            }
-            //        },
-            //        {
-            //            new BsonDocument {
-            //                { "$count", "total"}
-            //            }
-            //        }
-            //    };
+                var pageModel = await mongoServiceProvider.GetPagedListAsync(selector, "AutoId desc", 1, 1, cancellationToken);
+            }
+            {
+                //统计 aggregate
+                //求记录数
+                var stages = new List<BsonDocument> {
+                    {
+                        new BsonDocument {
+                            { "$match", new BsonDocument {
+                                { "Age",new BsonDocument {
+                                    { "$gte" , 25 }
+                                }}
+                            }}
+                        }
+                    },
+                    {
+                        new BsonDocument {
+                            { "$count", "total"}
+                        }
+                    }
+                };
 
-            //    var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+                var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
 
-            //    var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
+                var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
 
-            //    if (obj != null && obj.Contains("total"))
-            //    {
-            //        var total = obj["total"].ToInt64();
-            //    }
-            //}
-            //{
-            //    //统计  aggregate
-            //    //不需要分组，直接求年龄总和
-            //    var stages = new List<BsonDocument> {
-            //        {
-            //            new BsonDocument {
-            //                { "$match", new BsonDocument {
-            //                    { "Age",new BsonDocument {
-            //                        { "$gte" , 20 }
-            //                    }}
-            //                }}
-            //            }
-            //        },
-            //        {
-            //            new BsonDocument {
-            //                { "$group", new BsonDocument {
-            //                    { "_id" , 1 },
-            //                    { "total" , new BsonDocument {
-            //                        { "$sum" , "$Age" }
-            //                    }}
-            //                }}
-            //            }
-            //        }
-            //    };
+                if (obj != null && obj.Contains("total"))
+                {
+                    var total = obj["total"].ToInt64();
+                }
+            }
+            {
+                //统计  aggregate
+                //不需要分组，直接求年龄总和
+                var stages = new List<BsonDocument> {
+                    {
+                        new BsonDocument {
+                            { "$match", new BsonDocument {
+                                { "Age",new BsonDocument {
+                                    { "$gte" , 20 }
+                                }}
+                            }}
+                        }
+                    },
+                    {
+                        new BsonDocument {
+                            { "$group", new BsonDocument {
+                                { "_id" , 1 },
+                                { "total" , new BsonDocument {
+                                    { "$sum" , "$Age" }
+                                }}
+                            }}
+                        }
+                    }
+                };
 
-            //    var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+                var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
 
-            //    var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
+                var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
 
-            //    if (obj != null && obj.Contains("total"))
-            //    {
-            //        var total = obj["total"].ToInt64();
-            //    }
+                if (obj != null && obj.Contains("total"))
+                {
+                    var total = obj["total"].ToInt64();
+                }
 
-            //}
+            }
             //{
             //    //统计  aggregate
             //    //根据UserId去重后统计用户总数
