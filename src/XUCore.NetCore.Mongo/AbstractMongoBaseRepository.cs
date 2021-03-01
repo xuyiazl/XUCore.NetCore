@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using XUCore.Extensions;
 using XUCore.Paging;
 
 namespace XUCore.NetCore.Mongo
@@ -346,22 +347,70 @@ namespace XUCore.NetCore.Mongo
         /// <summary>
         /// 大批量写入
         /// </summary>
-        public virtual bool BulkWrite(IEnumerable<WriteModel<TModel>> models, bool isUpsert = true)
+        public virtual BulkWriteResult<TModel> BulkAdd(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null)
         {
             if (models != null && models.Any())
-                return Table.BulkWrite(models, new BulkWriteOptions { IsOrdered = false }).IsAcknowledged;
+            {
+                var writes = models.ToMap(c => new InsertOneModel<TModel>(c));
+
+                return Table.BulkWrite(writes, new BulkWriteOptions
+                {
+                    IsOrdered = isOrdered,
+                    BypassDocumentValidation = bypassDocumentValidation
+                });
+            }
             else
-                return false;
+                return null;
         }
         /// <summary>
         /// 异步大批量写入
         /// </summary>
-        public virtual async Task<BulkWriteResult<TModel>> BulkWriteAsync(IEnumerable<WriteModel<TModel>> models, bool isUpsert = true, CancellationToken cancellationToken = default)
+        public virtual async Task<BulkWriteResult<TModel>> BulkAddAsync(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default)
         {
             if (models != null && models.Any())
-                return await Table.BulkWriteAsync(models, new BulkWriteOptions { IsOrdered = false }, cancellationToken);
+            {
+                var writes = models.ToMap(c => new InsertOneModel<TModel>(c));
+
+                return await Table.BulkWriteAsync(writes, new BulkWriteOptions
+                {
+                    IsOrdered = isOrdered,
+                    BypassDocumentValidation = bypassDocumentValidation
+                }, cancellationToken);
+            }
             else
-                return await Task.FromResult<BulkWriteResult<TModel>>(null);
+                return null;
+        }
+        /// <summary>
+        /// 大批量操作
+        /// </summary>
+        public virtual BulkWriteResult<TModel> BulkWrite(IEnumerable<WriteModel<TModel>> models, bool isOrdered = true, bool? bypassDocumentValidation = null)
+        {
+            if (models != null && models.Any())
+            {
+                return Table.BulkWrite(models, new BulkWriteOptions
+                {
+                    IsOrdered = isOrdered,
+                    BypassDocumentValidation = bypassDocumentValidation
+                });
+            }
+            else
+                return null;
+        }
+        /// <summary>
+        /// 异步大批量操作
+        /// </summary>
+        public virtual async Task<BulkWriteResult<TModel>> BulkWriteAsync(IEnumerable<WriteModel<TModel>> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default)
+        {
+            if (models != null && models.Any())
+            {
+                return await Table.BulkWriteAsync(models, new BulkWriteOptions
+                {
+                    IsOrdered = isOrdered,
+                    BypassDocumentValidation = bypassDocumentValidation
+                }, cancellationToken);
+            }
+            else
+                return null;
         }
 
         #endregion

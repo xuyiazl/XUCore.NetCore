@@ -131,14 +131,24 @@
             异步批量修改（部分字段）
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkWrite(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkAdd(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             大批量写入
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkWriteAsync(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkAddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步大批量写入
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkWrite(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Nullable{System.Boolean})">
+            <summary>
+            大批量操作
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.BulkWriteAsync(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            异步大批量操作
             </summary>
         </member>
         <member name="M:XUCore.NetCore.Mongo.AbstractMongoBaseRepository`1.DeleteOne(`0)">
@@ -466,20 +476,41 @@
             <param name="cancellationToken"></param>
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkWrite(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkAdd(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean})">
             <summary>
             大批量写入
             </summary>
             <param name="models">对象信息</param>
-            <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
+            <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+            <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         </member>
-        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkWriteAsync(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkAddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             异步大批量写入
             </summary>
             <param name="models">对象信息</param>
-            <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
+            <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+            <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
             <param name="cancellationToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkWrite(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Nullable{System.Boolean})">
+            <summary>
+            大批量操作
+            </summary>
+            <param name="models">对象信息</param>
+            <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+            <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.BulkWriteAsync(System.Collections.Generic.IEnumerable{MongoDB.Driver.WriteModel{`0}},System.Boolean,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            异步大批量操作
+            </summary>
+            <param name="models">对象信息</param>
+            <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+            <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Mongo.IMongoBaseRepository`1.DeleteOne(`0)">
             <summary>

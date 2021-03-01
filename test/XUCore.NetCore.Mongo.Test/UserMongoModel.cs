@@ -4,10 +4,10 @@ using System.Text;
 
 namespace XUCore.NetCore.Mongo.Test
 {
-    [ModelProperty(ConnectionName = "testdb", TableName = "user_demo")]
+    [ModelProperty(ConnectionName = "mst_rights", TableName = "z_user_demo")]
     public class UserMongoModel : MongoBaseModel
     {
-        public int AutoId { get; set; }
+        public long AutoId { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public DateTime Birthday { get; set; }

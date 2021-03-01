@@ -5,10 +5,14 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Develops;
+using XUCore.Extensions;
+using XUCore.Helpers;
 
 namespace XUCore.NetCore.Mongo.Test
 {
@@ -58,6 +62,36 @@ namespace XUCore.NetCore.Mongo.Test
             //    };
             //    await mongoServiceProvider.AddAsync(model, cancellationToken: cancellationToken);
             //}
+            {
+                //批量写入测试
+
+                100.Times(num =>
+                {
+                    var models = new List<UserMongoModel>();
+
+                    10000.Times(c =>
+                    {
+                        models.Add(new UserMongoModel
+                        {
+                            AutoId = Id.NewLong(),
+                            Name = $"王五{c + 1}",
+                            Age = 22,
+                            Birthday = DateTime.Parse("2000-01-30"),
+                            Works = new List<WorkModel> {
+                            new WorkModel{ Year = 2021, CompanyName = "腾讯" },
+                        }
+                        });
+                    });
+
+                    var watch = Stopwatch.StartNew();
+
+                    var res = mongoServiceProvider.BulkAdd(models);
+
+                    watch.Stop();
+
+                    Console.WriteLine(watch.Elapsed);
+                });
+            }
             //{
             //    //查询所有记录
             //    var allList = await mongoServiceProvider.GetListAsync(cancellationToken);

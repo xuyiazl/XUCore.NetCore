@@ -155,16 +155,34 @@ namespace XUCore.NetCore.Mongo
         /// 大批量写入
         /// </summary>
         /// <param name="models">对象信息</param>
-        /// <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
-        bool BulkWrite(IEnumerable<WriteModel<TModel>> models, bool isUpsert = true);
+        /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+        /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
+        BulkWriteResult<TModel> BulkAdd(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null);
         /// <summary>
         /// 异步大批量写入
         /// </summary>
         /// <param name="models">对象信息</param>
-        /// <param name="isUpsert">获取或设置一个值，该值指示如果不存在，是否插入</param>
+        /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+        /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
         /// <param name="cancellationToken"></param>
-        Task<BulkWriteResult<TModel>> BulkWriteAsync(IEnumerable<WriteModel<TModel>> models, bool isUpsert = true, CancellationToken cancellationToken = default);
-
+        Task<BulkWriteResult<TModel>> BulkAddAsync(IEnumerable<TModel> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 大批量操作
+        /// </summary>
+        /// <param name="models">对象信息</param>
+        /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+        /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
+        /// <returns></returns>
+        BulkWriteResult<TModel> BulkWrite(IEnumerable<WriteModel<TModel>> models, bool isOrdered = true, bool? bypassDocumentValidation = null);
+        /// <summary>
+        /// 异步大批量操作
+        /// </summary>
+        /// <param name="models">对象信息</param>
+        /// <param name="isOrdered">获取或设置一个值，该值指示请求是否按顺序添加。</param>
+        /// <param name="bypassDocumentValidation">获取或设置一个值，该值指示是否绕过文档验证。</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<BulkWriteResult<TModel>> BulkWriteAsync(IEnumerable<WriteModel<TModel>> models, bool isOrdered = true, bool? bypassDocumentValidation = null, CancellationToken cancellationToken = default);
         #endregion
 
         #region [ 删除 ]
