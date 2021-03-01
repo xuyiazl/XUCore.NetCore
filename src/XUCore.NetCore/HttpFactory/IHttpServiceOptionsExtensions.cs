@@ -20,15 +20,15 @@ namespace XUCore.NetCore.HttpFactory
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> GetAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> GetAsync<TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -38,7 +38,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.GetAsync(urlArguments, cancellationToken);
+                var responseMessage = await client.GetAsync(urlBuilder, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -53,7 +53,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -63,7 +63,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -71,7 +71,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -82,16 +82,16 @@ namespace XUCore.NetCore.HttpFactory
         /// <typeparam name="TModel">提交类型</typeparam>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="model">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TModel, TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -101,7 +101,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PostAsync(urlArguments, model, cancellationToken);
+                var responseMessage = await client.PostAsync(urlBuilder, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -115,7 +115,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -125,7 +125,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -133,7 +133,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -143,16 +143,16 @@ namespace XUCore.NetCore.HttpFactory
         /// </summary>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PostAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PostAsync<TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -162,7 +162,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PostAsync(urlArguments, content, cancellationToken);
+                var responseMessage = await client.PostAsync(urlBuilder, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -177,7 +177,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -187,7 +187,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -195,7 +195,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -206,16 +206,16 @@ namespace XUCore.NetCore.HttpFactory
         /// <typeparam name="TModel">提交类型</typeparam>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="model">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PutAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TModel, TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -225,7 +225,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PutAsync(urlArguments, model, cancellationToken);
+                var responseMessage = await client.PutAsync(urlBuilder, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -240,7 +240,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -250,7 +250,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -258,7 +258,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -268,15 +268,15 @@ namespace XUCore.NetCore.HttpFactory
         /// </summary>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PutAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PutAsync<TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -286,7 +286,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PutAsync(urlArguments, content, cancellationToken);
+                var responseMessage = await client.PutAsync(urlBuilder, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -301,7 +301,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -311,7 +311,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -319,7 +319,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -330,16 +330,16 @@ namespace XUCore.NetCore.HttpFactory
         /// <typeparam name="TModel">提交类型</typeparam>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="model">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> PatchAsync<TModel, TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TModel, TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, TModel model, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -349,7 +349,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PatchAsync(urlArguments, model, cancellationToken);
+                var responseMessage = await client.PatchAsync(urlBuilder, model, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -364,7 +364,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -374,7 +374,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -382,7 +382,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -392,15 +392,15 @@ namespace XUCore.NetCore.HttpFactory
         /// </summary>
         /// <typeparam name="TResult">返回类型</typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="content">提交的模型数据</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
-        public static async Task<TResult> PatchAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> PatchAsync<TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, HttpContent content, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -410,7 +410,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.PatchAsync(urlArguments, content, cancellationToken);
+                var responseMessage = await client.PatchAsync(urlBuilder, content, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -425,7 +425,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -435,7 +435,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -443,7 +443,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }
@@ -453,15 +453,15 @@ namespace XUCore.NetCore.HttpFactory
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="httpMessageService"><see cref="IHttpService"/>操作服务</param>
-        /// <param name="urlArguments"><see cref="UrlArguments"/>Url构造器</param>
+        /// <param name="urlBuilder"><see cref="UrlBuilder"/>Url构造器</param>
         /// <param name="options">请求配置</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> DeleteAsync<TResult>(this IHttpService httpMessageService, UrlArguments urlArguments, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
+        public static async Task<TResult> DeleteAsync<TResult>(this IHttpService httpMessageService, UrlBuilder urlBuilder, IHttpOptions<TResult> options, CancellationToken cancellationToken = default)
         {
             options ??= HttpOptions<TResult>.Default;
 
-            var client = httpMessageService.CreateClient(urlArguments.ClientName)
+            var client = httpMessageService.CreateClient(urlBuilder.ClientName)
                 .SetHeaderAccept(options.MediaType);
 
             if (options.ClientHandler != null)
@@ -471,7 +471,7 @@ namespace XUCore.NetCore.HttpFactory
                 Stopwatch watch = new Stopwatch();
                 watch.Start();
 
-                var responseMessage = await client.DeleteAsync(urlArguments, cancellationToken);
+                var responseMessage = await client.DeleteAsync(urlBuilder, cancellationToken);
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -486,7 +486,7 @@ namespace XUCore.NetCore.HttpFactory
                     watch.Stop();
 
                     if (options.ElapsedTimeHandler != null)
-                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlArguments}", watch.Elapsed);
+                        options.ElapsedTimeHandler.Invoke($"{client.BaseAddress}{urlBuilder}", watch.Elapsed);
 
                     return result;
                 }
@@ -496,7 +496,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.RequestTimeout,
-                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求超时：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
             catch (HttpRequestException ex)
@@ -504,7 +504,7 @@ namespace XUCore.NetCore.HttpFactory
                 return options.ErrorHandler == null ? default : await options.ErrorHandler.Invoke(new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlArguments}，{ex.Message}")
+                    Content = new StringContent($"Http请求失败：{client.BaseAddress}{urlBuilder}，{ex.Message}")
                 });
             }
         }

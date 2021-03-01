@@ -71,7 +71,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpGet]
         public async Task<Result<List<WeatherForecast>>> GetDemo()
         {
-            var url = UrlArguments.Create("msgpack", "api/WeatherForecast/GetWeather");
+            var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/GetWeather");
 
             var res = await HttpRemote.Service.GetAsync<Result<List<WeatherForecast>>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
@@ -97,7 +97,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpGet]
         public async Task<Result<WeatherForecast>> PostDemo()
         {
-            var url = UrlArguments.Create("msgpack", "api/WeatherForecast/PostWeather");
+            var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PostWeather");
 
             WeatherForecast weather = new WeatherForecast
             {
@@ -123,7 +123,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpGet]
         public async Task<Result<WeatherForecast>> PutDemo()
         {
-            var url = UrlArguments.Create("msgpack", "api/WeatherForecast/PutWeather");
+            var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PutWeather");
 
             WeatherForecast weather = new WeatherForecast
             {
@@ -149,7 +149,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpGet]
         public async Task<Result<WeatherForecast>> PatchDemo()
         {
-            var url = UrlArguments.Create("msgpack", "api/WeatherForecast/PatchWeather");
+            var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PatchWeather");
 
             WeatherForecast weather = new WeatherForecast
             {
@@ -175,7 +175,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpGet]
         public async Task<Result<WeatherForecast>> DeleteDemo()
         {
-            var url = UrlArguments.Create("msgpack", "api/WeatherForecast/DeleteWeather");
+            var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/DeleteWeather");
 
             var res = await HttpRemote.Service.DeleteAsync<Result<WeatherForecast>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);

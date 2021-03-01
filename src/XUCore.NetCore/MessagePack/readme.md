@@ -105,7 +105,7 @@ public class User
 
 ```csharp
 
-var url = UrlArguments.Create("/api/Auth/GetRoles");
+var url = urlBuilder.Create("/api/Auth/GetRoles");
 
 var responseMessage = await _httpService.CreateClient("test") //从工厂里拿取指定的client
     .SetHeaderAccept(HttpMediaType.MessagePack) //告诉client需要拿取什么样的数据格式  json or messagepack
@@ -127,7 +127,7 @@ else
 
 //或者
 
-var url = UrlArguments.Create(ApiClient.ApiLive, $"/api/UserVirtual/GetRandomUser")
+var url = urlBuilder.Create(ApiClient.ApiLive, $"/api/UserVirtual/GetRandomUser")
     .Add("aid", aid);
 
 //指定服务器返回数据类型
@@ -151,7 +151,7 @@ var mediaType = HttpMediaType.MessagePack;
 
 var serializerOptions = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-var url = UrlArguments.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
+var url = urlBuilder.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
     .Add("id", id);
 
 var res = await HttpRemote.MessageService.GetAsync<ESMemberOrderModel>(url, mediaType, serializerOptions);

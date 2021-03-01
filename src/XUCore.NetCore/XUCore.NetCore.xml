@@ -846,13 +846,13 @@
             序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步GET请求
             </summary>
             <typeparam name="TResult"></typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
             <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
@@ -860,14 +860,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -876,13 +876,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -891,14 +891,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -907,13 +907,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -921,14 +921,14 @@
             <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -937,13 +937,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -951,13 +951,13 @@
             <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.DeleteAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.DeleteAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步DELETE请求
             </summary>
             <typeparam name="TResult"></typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
             <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
@@ -965,107 +965,107 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.GetAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步GET请求
             </summary>
             <typeparam name="TResult"></typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PostAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PutAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``2(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.PatchAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.DeleteAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.IHttpServiceExtensions.DeleteAsync``1(XUCore.NetCore.HttpFactory.IHttpService,XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步DELETE请求
             </summary>
             <typeparam name="TResult"></typeparam>
             <param name="httpMessageService"><see cref="T:XUCore.NetCore.HttpFactory.IHttpService"/>操作服务</param>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.GetAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.GetAsync``1(XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步GET请求
             </summary>
             <typeparam name="TResult"></typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
             <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
@@ -1073,13 +1073,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PostAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PostAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1088,12 +1088,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PostAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PostAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1102,13 +1102,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PutAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PutAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1117,12 +1117,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PutAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PutAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1130,13 +1130,13 @@
             <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PatchAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PatchAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``1}},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1145,12 +1145,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PatchAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PatchAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
@@ -1158,12 +1158,12 @@
             <param name="errorHandler"><see cref="T:System.Net.Http.HttpResponseMessage"/>请求异常处理，默认情况返回错误的Return模型</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.DeleteAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.DeleteAsync``1(XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.HttpMediaType,MessagePack.MessagePackSerializerOptions,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpResponseMessage,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
             <summary>
             异步DELETE请求
             </summary>
             <typeparam name="TResult"></typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="mediaType">请求返回的数据类型<see cref="T:XUCore.NetCore.HttpFactory.HttpMediaType"/></param>
             <param name="options">序列化方式<see cref="T:XUCore.Serializer.MessagePackSerializerResolver"/>，如果是JSON不需要设置</param>
             <param name="clientHandler"><see cref="T:System.Net.Http.HttpClient"/>回调，可以添加需要的Header等</param>
@@ -1171,89 +1171,89 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.GetAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.GetAsync``1(XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步GET请求
             </summary>
             <typeparam name="TResult"></typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PostAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PostAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PostAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PostAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步POST请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PutAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PutAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PutAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PutAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步Put请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PatchAsync``2(XUCore.Webs.UrlArguments,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PatchAsync``2(XUCore.Webs.UrlBuilder,``0,XUCore.NetCore.HttpFactory.IHttpOptions{``1},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TModel">提交类型</typeparam>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="model">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.PatchAsync``1(XUCore.Webs.UrlArguments,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.PatchAsync``1(XUCore.Webs.UrlBuilder,System.Net.Http.HttpContent,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步Patch请求
             </summary>
             <typeparam name="TResult">返回类型</typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="content">提交的模型数据</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:XUCore.NetCore.HttpFactory.UrlArgumentExtensions.DeleteAsync``1(XUCore.Webs.UrlArguments,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.HttpFactory.UrlBuilderExtensions.DeleteAsync``1(XUCore.Webs.UrlBuilder,XUCore.NetCore.HttpFactory.IHttpOptions{``0},System.Threading.CancellationToken)">
             <summary>
             异步DELETE请求
             </summary>
             <typeparam name="TResult"></typeparam>
-            <param name="urlArguments"><see cref="T:XUCore.Webs.UrlArguments"/>Url构造器</param>
+            <param name="urlBuilder"><see cref="T:XUCore.Webs.UrlBuilder"/>Url构造器</param>
             <param name="options">请求配置</param>
             <param name="cancellationToken"></param>
             <returns></returns>

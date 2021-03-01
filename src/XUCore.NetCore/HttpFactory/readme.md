@@ -12,7 +12,7 @@ services.AddHttpMessageService("test", "http://localhost:5000");
 
 ```csharp
 
-var url = UrlArguments.Create("/api/Auth/GetRoles");
+var url = urlBuilder.Create("/api/Auth/GetRoles");
 
 var responseMessage = await HttpRemote.MessageService.CreateClient("test") //从工厂里拿取指定的client
     .SetHeaderAccept(HttpMediaType.MessagePack) //告诉client需要拿取什么样的数据格式  json or messagepack
@@ -44,7 +44,7 @@ else
 
 public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken cancellationToken)
 {
-    var url = UrlArguments.Create($"/api/MemberOrder/Add");
+    var url = urlBuilder.Create($"/api/MemberOrder/Add");
 
     //指定服务器返回数据类型
     var mediaType = HttpMediaType.Json;
@@ -80,7 +80,7 @@ public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken
 
 ```csharp
 {
-    var url = UrlArguments.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
+    var url = urlBuilder.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
         .Add("id", id);
 
     var res = await HttpRemote.Service.GetAsync<ReturnModel>(url, cancellationToken);
@@ -98,7 +98,7 @@ public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken
 
 ```csharp
 {
-    var url = UrlArguments.Create($"/api/MemberOrder/QuerySingle")
+    var url = urlBuilder.Create($"/api/MemberOrder/QuerySingle")
         .Add("id", id);
 
     var responseMessage = await HttpRemote.MessageService.CreateClient(ApiClient.ApiMaster)
@@ -122,7 +122,7 @@ public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken
 
     var serializerOptions = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-    var url = UrlArguments.Create($"/api/MemberOrder/QuerySingle")
+    var url = urlBuilder.Create($"/api/MemberOrder/QuerySingle")
         .Add("id", id);
 
     var responseMessage = await HttpRemote.MessageService.CreateClient(ApiClient.ApiMaster)
@@ -172,7 +172,7 @@ public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken
 
     var serializerOptions = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-    var url = UrlArguments.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
+    var url = urlBuilder.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
         .Add("id", id);
 
     var res = await HttpRemote.MessageService.GetAsync<ESMemberOrderModel>(url, mediaType, serializerOptions,
@@ -220,7 +220,7 @@ public async Task<bool> AddAsync(MemberOrderSubmitModel model, CancellationToken
 
     var serializerOptions = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-    var url = UrlArguments.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
+    var url = urlBuilder.Create(ApiClient.ApiMaster, $"/api/MemberOrder/QuerySingle")
         .Add("id", id);
 
     var res = await HttpRemote.MessageService.GetAsync<ESMemberOrderModel>(url, mediaType, serializerOptions);

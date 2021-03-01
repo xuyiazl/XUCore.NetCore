@@ -30,7 +30,7 @@ namespace XUCore.NetCore.Sample
         {
             {
                 var url =
-                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                    UrlBuilder.Create("server", "api/Answer/GetByEnt")
                         .Add("themeId", 200004);
 
                 var responseMessage = await HttpRemote.Service.CreateClient("server")
@@ -52,7 +52,7 @@ namespace XUCore.NetCore.Sample
                 var httpOptions = serviceProvider.GetService<IReturnHttpOptions<ReturnModel<Answer>>>();
 
                 var res = await
-                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                    UrlBuilder.Create("server", "api/Answer/GetByEnt")
                         .Add("themeId", 200004)
                         .GetAsync(httpOptions, cancellationToken: cancellationToken);
             }
@@ -69,7 +69,7 @@ namespace XUCore.NetCore.Sample
                 };
 
                 var res = await
-                    UrlArguments.Create("server", "api/Answer/GetByEnt")
+                    UrlBuilder.Create("server", "api/Answer/GetByEnt")
                         .Add("themeId", 200004)
                         .GetAsync(httpOptions, cancellationToken: cancellationToken);
             }

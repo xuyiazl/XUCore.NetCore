@@ -59,7 +59,7 @@ namespace XUCore.WebTests.Controllers
         //public async Task<IActionResult> Index(CancellationToken cancellationToken)
         //{
 
-        //    var ur2 = UrlArguments.Create("api/messagepack/add");
+        //    var ur2 = urlBuilder.Create("api/messagepack/add");
 
         //    var resData = await _httpMessage.CreateClient("msgtest").SetHeaderAccept(HttpMediaType.MessagePack).PostAsync<User>(ur2, null, cancellationToken);
 
@@ -70,15 +70,15 @@ namespace XUCore.WebTests.Controllers
 
         //    var m = await resData.Content.ReadAsAsync<User>(HttpMediaType.MessagePack);
 
-        //    var url = UrlArguments.Create("msgpack", "api/messagepack/get");
+        //    var url = urlBuilder.Create("msgpack", "api/messagepack/get");
 
         //    var res = await url.GetAsync<User>();
 
-        //    var postUrl = UrlArguments.Create("msgpack", "api/messagepack/add");
+        //    var postUrl = urlBuilder.Create("msgpack", "api/messagepack/add");
 
         //    var res1 = await url.PostAsync<User, User>(res);
 
-        //    var url1 = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
+        //    var url1 = urlBuilder.Create("test", $"/api/CommentsLive/GetPaged")
         //                .Add("aid", 1539)
         //                .Add("commentId", 0)
         //                .Add("pageSize", 10000);
@@ -93,7 +93,7 @@ namespace XUCore.WebTests.Controllers
         //[HtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
-            var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
+            var url = UrlBuilder.Create("test", $"/api/CommentsLive/GetPaged")
                  .Add("aid", 1539)
                  .Add("commentId", 0)
                  .Add("pageSize", 10000);
@@ -105,7 +105,7 @@ namespace XUCore.WebTests.Controllers
 
         public async Task<IActionResult> IndexView()
         {
-            var url = UrlArguments.Create("test", $"/api/CommentsLive/GetPaged")
+            var url = UrlBuilder.Create("test", $"/api/CommentsLive/GetPaged")
                  .Add("aid", 1539)
                  .Add("commentId", 0)
                  .Add("pageSize", 10000);

@@ -15445,7 +15445,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15454,7 +15454,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15464,7 +15464,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15475,7 +15475,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15487,7 +15487,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15496,7 +15496,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15506,7 +15506,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15518,7 +15518,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlArguments})">
+        <member name="M:XUCore.Paging.PageHtml.Build(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -18209,42 +18209,42 @@
             <param name="cookieName"></param>
             <param name="cookieDomain"></param>
         </member>
-        <member name="T:XUCore.Webs.UrlArguments">
+        <member name="T:XUCore.Webs.UrlBuilder">
             <summary>
             Url构造器
             </summary>
         </member>
-        <member name="P:XUCore.Webs.UrlArguments.Parameters">
+        <member name="P:XUCore.Webs.UrlBuilder.Parameters">
             <summary>
             参数列表
             </summary>
         </member>
-        <member name="P:XUCore.Webs.UrlArguments.ParameterString">
+        <member name="P:XUCore.Webs.UrlBuilder.ParameterString">
             <summary>
             参数字符串
             </summary>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.#ctor(System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="requestUrl">请求url</param>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.#ctor(System.String,System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.#ctor(System.String,System.String)">
             <summary>
             构造函数
             </summary>
             <param name="clientName">请求名</param>
             <param name="requestUrl">请求地址</param>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.#ctor(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
+        <member name="M:XUCore.Webs.UrlBuilder.#ctor(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
             <summary>
             构造函数
             </summary>
             <param name="requestUrl">请求地址</param>
             <param name="keyValues">请求参数</param>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.#ctor(System.String,System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
+        <member name="M:XUCore.Webs.UrlBuilder.#ctor(System.String,System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
             <summary>
             构造函数
             </summary>
@@ -18252,20 +18252,20 @@
             <param name="requestUrl">请求参数</param>
             <param name="keyValues">请求参数</param>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create">
+        <member name="M:XUCore.Webs.UrlBuilder.Create">
             <summary>
             创建一个新的构造器
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.Create(System.String)">
             <summary>
             创建一个新的构造器
             </summary>
             <param name="requestUrl"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String,System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.Create(System.String,System.String)">
             <summary>
             创建一个新的构造器
             </summary>
@@ -18273,58 +18273,21 @@
             <param name="requestUrl"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
-            <summary>
-            创建一个新的构造器
-            </summary>
-            <param name="requestUrl"></param>
-            <param name="keyValues"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String,System.String,System.Collections.Generic.KeyValuePair{System.String,System.Object}[])">
-            <summary>
-            创建一个新的构造器
-            </summary>
-            <param name="clientName"></param>
-            <param name="requestUrl"></param>
-            <param name="keyValues"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String,System.String,System.String)">
-            <summary>
-            创建一个新的构造器
-            </summary>
-            <param name="clientName"></param>
-            <param name="requestUrl"></param>
-            <param name="method"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.UrlArguments.Create(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            创建一个新的构造器
-            </summary>
-            <param name="clientName"></param>
-            <param name="host"></param>
-            <param name="area"></param>
-            <param name="controller"></param>
-            <param name="method"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.UrlArguments.SetClientName(System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.SetClientName(System.String)">
             <summary>
             写入请求名
             </summary>
             <param name="clientName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.SetHost(System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.SetHost(System.String)">
             <summary>
             写入Host
             </summary>
             <param name="host"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Add(System.String,System.Object)">
+        <member name="M:XUCore.Webs.UrlBuilder.Add(System.String,System.Object)">
             <summary>
             添加参数
             </summary>
@@ -18332,7 +18295,7 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Add(System.String,System.Object,System.Func{System.Boolean})">
+        <member name="M:XUCore.Webs.UrlBuilder.Add(System.String,System.Object,System.Func{System.Boolean})">
             <summary>
             添加参数
             </summary>
@@ -18341,26 +18304,26 @@
             <param name="filter"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Remove(System.String)">
+        <member name="M:XUCore.Webs.UrlBuilder.Remove(System.String)">
             <summary>
             删除参数
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Clear">
+        <member name="M:XUCore.Webs.UrlBuilder.Clear">
             <summary>
             清空Url
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.Complete">
+        <member name="M:XUCore.Webs.UrlBuilder.Complete">
             <summary>
             完成构造，生成最终请求Url
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlArguments.ToString">
+        <member name="M:XUCore.Webs.UrlBuilder.ToString">
             <summary>
             ToString
             </summary>

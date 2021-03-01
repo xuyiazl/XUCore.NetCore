@@ -17,7 +17,7 @@
     /// <summary>
     /// Url构造器
     /// </summary>
-    public class UrlArguments
+    public class UrlBuilder
     {
         private IDictionary<string, object>
                 _parameters = new SortedDictionary<string, object>();
@@ -47,14 +47,14 @@
             }
         }
 
-        public UrlArguments()
+        public UrlBuilder()
         {
         }
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="requestUrl">请求url</param>
-        public UrlArguments(string requestUrl)
+        public UrlBuilder(string requestUrl)
         {
             _host = requestUrl;
         }
@@ -63,7 +63,7 @@
         /// </summary>
         /// <param name="clientName">请求名</param>
         /// <param name="requestUrl">请求地址</param>
-        public UrlArguments(string clientName, string requestUrl)
+        public UrlBuilder(string clientName, string requestUrl)
         {
             _host = requestUrl;
             ClientName = clientName;
@@ -73,7 +73,7 @@
         /// </summary>
         /// <param name="requestUrl">请求地址</param>
         /// <param name="keyValues">请求参数</param>
-        public UrlArguments(string requestUrl, params KeyValuePair<string, object>[] keyValues)
+        public UrlBuilder(string requestUrl, params KeyValuePair<string, object>[] keyValues)
         {
             _host = requestUrl;
             foreach (var item in keyValues)
@@ -87,7 +87,7 @@
         /// <param name="clientName">请求名</param>
         /// <param name="requestUrl">请求参数</param>
         /// <param name="keyValues">请求参数</param>
-        public UrlArguments(string clientName, string requestUrl, params KeyValuePair<string, object>[] keyValues)
+        public UrlBuilder(string clientName, string requestUrl, params KeyValuePair<string, object>[] keyValues)
         {
             _host = requestUrl;
             ClientName = clientName;
@@ -100,83 +100,26 @@
         /// 创建一个新的构造器
         /// </summary>
         /// <returns></returns>
-        public static UrlArguments Create() => new UrlArguments();
+        public static UrlBuilder Create() => new UrlBuilder();
         /// <summary>
         /// 创建一个新的构造器
         /// </summary>
         /// <param name="requestUrl"></param>
         /// <returns></returns>
-        public static UrlArguments Create(string requestUrl) => Create(string.Empty, requestUrl);
+        public static UrlBuilder Create(string requestUrl) => Create(string.Empty, requestUrl);
         /// <summary>
         /// 创建一个新的构造器
         /// </summary>
         /// <param name="clientName"></param>
         /// <param name="requestUrl"></param>
         /// <returns></returns>
-        public static UrlArguments Create(string clientName, string requestUrl) => new UrlArguments(clientName, requestUrl);
-        /// <summary>
-        /// 创建一个新的构造器
-        /// </summary>
-        /// <param name="requestUrl"></param>
-        /// <param name="keyValues"></param>
-        /// <returns></returns>
-        public static UrlArguments Create(string requestUrl, params KeyValuePair<string, object>[] keyValues) => Create(string.Empty, requestUrl, keyValues);
-        /// <summary>
-        /// 创建一个新的构造器
-        /// </summary>
-        /// <param name="clientName"></param>
-        /// <param name="requestUrl"></param>
-        /// <param name="keyValues"></param>
-        /// <returns></returns>
-        public static UrlArguments Create(string clientName, string requestUrl, params KeyValuePair<string, object>[] keyValues) => new UrlArguments(clientName, requestUrl, keyValues);
-        /// <summary>
-        /// 创建一个新的构造器
-        /// </summary>
-        /// <param name="clientName"></param>
-        /// <param name="requestUrl"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
-        public static UrlArguments Create(string clientName, string requestUrl, string method) => new UrlArguments(clientName, $"{requestUrl}/{method}");
-        /// <summary>
-        /// 创建一个新的构造器
-        /// </summary>
-        /// <param name="clientName"></param>
-        /// <param name="host"></param>
-        /// <param name="area"></param>
-        /// <param name="controller"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
-        public static UrlArguments Create(string clientName, string host, string area = "api", string controller = null, string method = null)
-        {
-            if (!string.IsNullOrEmpty(method))
-            {
-                if (!string.IsNullOrEmpty(area))
-                {
-                    return new UrlArguments(clientName, $"{host}/{area}/{controller}/{method}");
-                }
-                else
-                {
-                    return new UrlArguments(clientName, $"{host}/{controller}/{method}");
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(area))
-                {
-                    return new UrlArguments(clientName, $"{host}/{area}/{controller}");
-                }
-                else
-                {
-                    return new UrlArguments(clientName, $"{host}/{controller}");
-                }
-            }
-        }
+        public static UrlBuilder Create(string clientName, string requestUrl) => new UrlBuilder(clientName, requestUrl);
         /// <summary>
         /// 写入请求名
         /// </summary>
         /// <param name="clientName"></param>
         /// <returns></returns>
-        public UrlArguments SetClientName(string clientName)
+        public UrlBuilder SetClientName(string clientName)
         {
             ClientName = clientName;
             return this;
@@ -186,7 +129,7 @@
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        public UrlArguments SetHost(string host)
+        public UrlBuilder SetHost(string host)
         {
             _host = host;
             return this;
@@ -197,7 +140,7 @@
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public UrlArguments Add(string key, object value)
+        public UrlBuilder Add(string key, object value)
         {
             if (!_parameters.ContainsKey(key))
             {
@@ -217,7 +160,7 @@
         /// <param name="value"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public UrlArguments Add(string key, object value, Func<bool> filter)
+        public UrlBuilder Add(string key, object value, Func<bool> filter)
         {
             if (!filter())
             {
@@ -240,7 +183,7 @@
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public UrlArguments Remove(string key)
+        public UrlBuilder Remove(string key)
         {
             if (_parameters != null)
             {
@@ -256,7 +199,7 @@
         /// 清空Url
         /// </summary>
         /// <returns></returns>
-        public UrlArguments Clear()
+        public UrlBuilder Clear()
         {
             _parameters.Clear();
             _host = string.Empty;
@@ -266,7 +209,7 @@
         /// 完成构造，生成最终请求Url
         /// </summary>
         /// <returns></returns>
-        public UrlArguments Complete()
+        public UrlBuilder Complete()
         {
             StringBuilder url = new StringBuilder();
             url.Append(_host);
