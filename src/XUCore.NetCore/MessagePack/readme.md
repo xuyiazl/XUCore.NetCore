@@ -199,7 +199,7 @@ else
 当然我们需要引用：
 
 ```csharp
-<PackageReference Include="Bailun.NetCore.Common" Version="1.1.0" />
+<PackageReference Include="Bailun.NetCore.Common" Version="1.1.1" />
 ```
 
 然后需要在注册`MessagePack`的时候配置`ContractResolver`即可`LimitPropsCamelCaseContractResolver`
