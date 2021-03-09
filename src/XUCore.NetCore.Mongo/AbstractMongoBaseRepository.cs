@@ -617,7 +617,7 @@ namespace XUCore.NetCore.Mongo
         /// <summary>
         /// 分页获取数据
         /// </summary>
-        public virtual PagedModel<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize)
+        public virtual PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize)
         {
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
@@ -626,12 +626,12 @@ namespace XUCore.NetCore.Mongo
             var total = listTable.CountDocuments(selector, null);
 
             var pageList = listTable.Find(selector)?.Sort(orderby.OrderByBatch<TModel>()).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
-            return new PagedModel<TModel>(pageList, total, pageIndex, pageSize);
+            return new PagedList<TModel>(pageList, total, pageIndex, pageSize);
         }
         /// <summary>
         /// 分页获取数据
         /// </summary>
-        public virtual PagedModel<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize)
+        public virtual PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize)
         {
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
@@ -640,12 +640,12 @@ namespace XUCore.NetCore.Mongo
             var total = listTable.CountDocuments(filter, null);
             var pageList = listTable.Find(filter)?.Sort(orderby.OrderByBatch<TModel>()).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
 
-            return new PagedModel<TModel>(pageList, total, pageIndex, pageSize);
+            return new PagedList<TModel>(pageList, total, pageIndex, pageSize);
         }
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
-        public virtual async Task<PagedModel<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
@@ -659,12 +659,12 @@ namespace XUCore.NetCore.Mongo
                 Sort = orderby.OrderByBatch<TModel>()
             }, cancellationToken);
 
-            return new PagedModel<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
+            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
         }
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
-        public virtual async Task<PagedModel<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
         {
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
 
@@ -678,7 +678,7 @@ namespace XUCore.NetCore.Mongo
                 Sort = orderby.OrderByBatch<TModel>()
             }, cancellationToken);
 
-            return new PagedModel<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
+            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
         }
         #endregion
     }

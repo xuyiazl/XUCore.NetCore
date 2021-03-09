@@ -19,8 +19,8 @@ namespace XUCore.NetCore.Mongo.Test
     public class MainService : IHostedService
     {
         private readonly ILogger logger;
-        private readonly IMongoServiceProvider<UserMongoModel> mongoServiceProvider;
-        public MainService(ILogger<MainService> logger, IMongoServiceProvider<UserMongoModel> mongoServiceProvider)
+        private readonly IMongoService<UserMongoModel> mongoServiceProvider;
+        public MainService(ILogger<MainService> logger, IMongoService<UserMongoModel> mongoServiceProvider)
         {
             this.logger = logger;
             this.mongoServiceProvider = mongoServiceProvider;

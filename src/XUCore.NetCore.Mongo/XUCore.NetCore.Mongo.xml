@@ -735,7 +735,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.NetCore.Mongo.IMongoServiceProvider`1">
+        <member name="T:XUCore.NetCore.Mongo.IMongoService`1">
             <summary>
             定义Mongo的连接服务
             </summary>

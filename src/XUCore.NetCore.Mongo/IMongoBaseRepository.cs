@@ -357,7 +357,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="pageIndex">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <returns></returns>
-        PagedModel<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize);
+        PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize);
         /// <summary>
         /// 分页获取数据
         /// </summary>
@@ -366,7 +366,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="pageIndex">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <returns></returns>
-        PagedModel<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize);
+        PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize);
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
@@ -376,7 +376,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="pageSize">页尺码</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedModel<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
+        Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
@@ -386,7 +386,7 @@ namespace XUCore.NetCore.Mongo
         /// <param name="pageSize">页尺码</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedModel<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
+        Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
 
         #endregion
     }

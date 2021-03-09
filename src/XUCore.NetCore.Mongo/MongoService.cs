@@ -6,9 +6,9 @@ using XUCore.Configs;
 
 namespace XUCore.NetCore.Mongo
 {
-    public class MongoServiceProvider<TMongoModel> : AbstractMongoBaseRepository<TMongoModel>, IMongoServiceProvider<TMongoModel> where TMongoModel : MongoBaseModel
+    public class MongoService<TMongoModel> : AbstractMongoBaseRepository<TMongoModel>, IMongoService<TMongoModel> where TMongoModel : MongoBaseModel
     {
-        public MongoServiceProvider(IConfiguration configuration) : base()
+        public MongoService(IConfiguration configuration) : base()
         {
             if (Connection == null || !Connection.IsValueCreated)
             {
