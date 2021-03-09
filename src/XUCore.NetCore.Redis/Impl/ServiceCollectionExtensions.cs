@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace XUCore.NetCore.Redis
         /// <param name="services">服务集合</param>
         public static IServiceCollection AddRedisService(this IServiceCollection services)
         {
-            services.AddSingleton<IRedisService, RedisServiceProvider>();
+            services.TryAddSingleton<IRedisService, RedisServiceProvider>();
 
             return services;
         }
@@ -28,7 +29,7 @@ namespace XUCore.NetCore.Redis
         /// <param name="redisSerializer">序列化</param>
         public static IServiceCollection AddRedisSerializer(this IServiceCollection services, IRedisSerializer redisSerializer)
         {
-            services.AddSingleton<IRedisSerializer>(redisSerializer);
+            services.TryAddSingleton<IRedisSerializer>(redisSerializer);
 
             return services;
         }
@@ -38,7 +39,7 @@ namespace XUCore.NetCore.Redis
         /// <param name="services">服务集合</param>
         public static IServiceCollection AddRedisValueRedisSerializer(this IServiceCollection services)
         {
-            services.AddSingleton<IRedisSerializer, RedisValueSerializer>();
+            services.TryAddSingleton<IRedisSerializer, RedisValueSerializer>();
 
             return services;
         }
@@ -49,7 +50,7 @@ namespace XUCore.NetCore.Redis
         /// <param name="serializerSettings">JSON序列化配置</param>
         public static IServiceCollection AddJsonRedisSerializer(this IServiceCollection services, JsonSerializerSettings serializerSettings = null)
         {
-            services.AddSingleton<IRedisSerializer>(new JsonRedisSerializer(serializerSettings));
+            services.TryAddSingleton<IRedisSerializer>(new JsonRedisSerializer(serializerSettings));
 
             return services;
         }
@@ -59,7 +60,7 @@ namespace XUCore.NetCore.Redis
         /// <param name="services">服务集合</param>
         public static IServiceCollection AddMessagePackRedisSerializer(this IServiceCollection services)
         {
-            services.AddSingleton<IRedisSerializer, MessagePackRedisSerializer>();
+            services.TryAddSingleton<IRedisSerializer, MessagePackRedisSerializer>();
 
             return services;
         }

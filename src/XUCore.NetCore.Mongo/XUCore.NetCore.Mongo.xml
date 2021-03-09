@@ -770,5 +770,16 @@
             mongo的异常对象
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.Mongo.ServiceCollectionExtensions">
+            <summary>
+            服务扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Mongo.ServiceCollectionExtensions.AddMongoService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Mongo注入
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
     </members>
 </doc>
