@@ -17,6 +17,7 @@ namespace XUCore.NetCore.DataTest
             services.AddLogging();
 
             services.AddNigelDbContext();
+            services.AddNigelCopyDbContext();
 
             services.AddReadDbContext();
             services.AddWriteDbContext();

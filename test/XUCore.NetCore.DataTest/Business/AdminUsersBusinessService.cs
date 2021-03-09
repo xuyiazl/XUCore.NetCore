@@ -19,25 +19,30 @@ namespace XUCore.NetCore.DataTest.Business
     {
         private readonly IAdminUsersDbServiceProvider db;
         private readonly INigelDbRepository<AdminUsersEntity> nigelDb;
+        private readonly INigelCopyDbRepository<AdminUsersEntity> nigelCopyDb;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
         {
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
             this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUsersEntity>>();
+            this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
         }
 
         public async Task TestAsync()
         {
             {
-                db.Write.DbContext.CreateTransactionScope(
+                //此例子证明 多数据库的分布式事务在Core 3.1以及以下版本是不支持的，官方表示在Net5中支持分布式事务
+                //see https://github.com/dotnet/runtime/issues/715
+                nigelDb.DbContext.CreateTransactionScope(
                     run: (tran) =>
                     {
-                        db.Delete(c => true);
+                        nigelDb.Delete(c => true);
+                        nigelCopyDb.Delete(c => true);
 
                         nigelDb.Add(BuildRecords(10));
 
-                        db.Add(BuildRecords(10));
+                        nigelCopyDb.Add(BuildRecords(10));
 
-                        nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                        //nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
                     },
                     error: (tran, error) =>
                     {
