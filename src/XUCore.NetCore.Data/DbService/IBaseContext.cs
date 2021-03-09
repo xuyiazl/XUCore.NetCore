@@ -62,6 +62,19 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
         /// <summary>
+        /// 设置DbTransaction用于在db上的数据库操作。
+        /// </summary>
+        /// <param name="contextTransaction"></param>
+        /// <returns></returns>
+        IDbContextTransaction UseTransaction(IDbContextTransaction contextTransaction);
+        /// <summary>
+        /// 设置DbTransaction用于在db上的数据库操作。
+        /// </summary>
+        /// <param name="contextTransaction"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IDbContextTransaction> UseTransactionAsync(IDbContextTransaction contextTransaction, CancellationToken cancellationToken = default);
+        /// <summary>
         /// 提交事务
         /// </summary>
         void CommitTransaction();

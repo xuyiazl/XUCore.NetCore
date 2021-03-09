@@ -163,21 +163,61 @@ namespace XUCore.NetCore.Data.DbService
             Action<TransactionScope> run,
             Action<TransactionScope, Exception> error)
         {
-            using (var tran = new TransactionScope())
+            var strategy = dbContext.CreateExecutionStrategy();
+
+            strategy.Execute(() =>
             {
-                try
+                using (var tran = new TransactionScope())
                 {
-                    run.Invoke(tran);
+                    try
+                    {
+                        run.Invoke(tran);
 
-                    tran.Complete();
-                }
-                catch (Exception ex)
-                {
-                    error.Invoke(tran, ex);
+                        tran.Complete();
+                    }
+                    catch (Exception ex)
+                    {
+                        error.Invoke(tran, ex);
 
-                    Transaction.Current.Rollback();
+                        Transaction.Current.Rollback();
+                    }
                 }
             }
+            );
+        }
+        /// <summary>
+        /// 创建事务（适用于多数据库连接的情况）
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="run">执行内容</param>
+        /// <param name="error">异常消息</param>
+        /// <param name="cancellationToken"></param>
+        public static async Task CreateTransactionScopeAsync(this IDbContext dbContext,
+            Func<TransactionScope, CancellationToken, Task> run,
+            Func<TransactionScope, Exception, CancellationToken, Task> error,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var strategy = dbContext.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(async (_cancel) =>
+            {
+                using (var tran = new TransactionScope())
+                {
+                    try
+                    {
+                        await run.Invoke(tran, _cancel);
+
+                        tran.Complete();
+                    }
+                    catch (Exception ex)
+                    {
+                        await error.Invoke(tran, ex, _cancel);
+
+                        Transaction.Current.Rollback();
+                    }
+                }
+            },
+            cancellationToken);
         }
         /// <summary>
         /// 创建事务（适用于多数据库连接的情况）
@@ -191,25 +231,70 @@ namespace XUCore.NetCore.Data.DbService
             Func<TransactionScope, TResult> run,
             Func<TransactionScope, Exception, TResult> error)
         {
-            var tResult = default(TResult);
+            var strategy = dbContext.CreateExecutionStrategy();
 
-            using (var tran = new TransactionScope())
+            return strategy.Execute(() =>
             {
-                try
+                var tResult = default(TResult);
+
+                using (var tran = new TransactionScope())
                 {
-                    tResult = run.Invoke(tran);
+                    try
+                    {
+                        tResult = run.Invoke(tran);
 
-                    tran.Complete();
+                        tran.Complete();
+                    }
+                    catch (Exception ex)
+                    {
+                        tResult = error.Invoke(tran, ex);
+
+                        Transaction.Current.Rollback();
+                    }
                 }
-                catch (Exception ex)
+
+                return tResult;
+            });
+        }
+        /// <summary>
+        /// 创建事务（适用于多数据库连接的情况）
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="dbContext"></param>
+        /// <param name="run">执行内容</param>
+        /// <param name="error">异常消息</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public static async Task<TResult> CreateTransactionScope<TResult>(this IDbContext dbContext,
+            Func<TransactionScope, CancellationToken, Task<TResult>> run,
+            Func<TransactionScope, Exception, CancellationToken, Task<TResult>> error,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var strategy = dbContext.CreateExecutionStrategy();
+
+            return await strategy.ExecuteAsync(async (_cancel) =>
+            {
+                var tResult = default(TResult);
+
+                using (var tran = new TransactionScope())
                 {
-                    tResult = error.Invoke(tran, ex);
+                    try
+                    {
+                        tResult = await run.Invoke(tran, _cancel);
 
-                    Transaction.Current.Rollback();
+                        tran.Complete();
+                    }
+                    catch (Exception ex)
+                    {
+                        tResult = await error.Invoke(tran, ex, _cancel);
+
+                        Transaction.Current.Rollback();
+                    }
                 }
-            }
 
-            return tResult;
+                return tResult;
+            },
+            cancellationToken);
         }
     }
 }

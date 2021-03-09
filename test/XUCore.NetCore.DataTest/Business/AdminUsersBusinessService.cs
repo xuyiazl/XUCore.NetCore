@@ -28,14 +28,16 @@ namespace XUCore.NetCore.DataTest.Business
         public async Task TestAsync()
         {
             {
-                nigelDb.DbContext.CreateTransactionScope(
+                db.Write.DbContext.CreateTransactionScope(
                     run: (tran) =>
                     {
                         db.Delete(c => true);
 
                         nigelDb.Add(BuildRecords(10));
 
-                        db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                        db.Add(BuildRecords(10));
+
+                        nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
                     },
                     error: (tran, error) =>
                     {
@@ -266,21 +268,21 @@ namespace XUCore.NetCore.DataTest.Business
                     });
             }
             {
-               var res = nigelDb.DbContext.CreateTransactionScope(
-                    run: (tran) =>
-                    {
-                        db.Delete(c => true);
+                var res = nigelDb.DbContext.CreateTransactionScope(
+                     run: (tran) =>
+                     {
+                         db.Delete(c => true);
 
-                        nigelDb.Add(BuildRecords(10));
+                         nigelDb.Add(BuildRecords(10));
 
-                        db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
+                         db.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
 
-                        return true;
-                    },
-                    error: (tran, error) =>
-                    {
-                        return false;
-                    });
+                         return true;
+                     },
+                     error: (tran, error) =>
+                     {
+                         return false;
+                     });
             }
             {
                 using (var tran = new TransactionScope())

@@ -71,6 +71,16 @@ namespace XUCore.NetCore.Data.DbService
             return await base.Database.BeginTransactionAsync(cancellationToken);
         }
 
+        public virtual IDbContextTransaction UseTransaction(IDbContextTransaction contextTransaction)
+        {
+            return base.Database.UseTransaction(contextTransaction.GetDbTransaction());
+        }
+
+        public virtual async Task<IDbContextTransaction> UseTransactionAsync(IDbContextTransaction contextTransaction, CancellationToken cancellationToken = default)
+        {
+            return await base.Database.UseTransactionAsync(contextTransaction.GetDbTransaction(), cancellationToken);
+        }
+
         public virtual void CommitTransaction()
         {
             base.Database.CommitTransaction();
