@@ -375,13 +375,13 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
+        public virtual PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
         {
             var totalRecords = GetCount(selector);
 
             var list = GetList(selector, orderby, (pageNumber - 1) * pageSize, pageSize);
 
-            return new PagedModel<TEntity>(list, totalRecords, pageNumber, pageSize);
+            return new PagedList<TEntity>(list, totalRecords, pageNumber, pageSize);
         }
         /// <summary>
         /// Any数据检测
@@ -476,13 +476,13 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
             var totalRecords = await GetCountAsync(selector, cancellationToken);
 
             var list = await GetListAsync(selector, orderby, (pageNumber - 1) * pageSize, pageSize, cancellationToken);
 
-            return new PagedModel<TEntity>(list, totalRecords, pageNumber, pageSize);
+            return new PagedList<TEntity>(list, totalRecords, pageNumber, pageSize);
         }
         /// <summary>
         /// Any数据检测

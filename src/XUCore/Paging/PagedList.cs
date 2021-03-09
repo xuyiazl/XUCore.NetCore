@@ -24,12 +24,12 @@
         /// <summary>
         /// 初始化空对象
         /// </summary>
-        public readonly static PagedList<T> Empty = new PagedList<T>(default(List<T>), 0, 1, 1);
+        public readonly static PagedList<T> Empty = new PagedList<T>(new List<T>(), 0, 1, 1);
 
         /// <summary>
-        /// 页码
+        /// 当前页码
         /// </summary>
-        public int PageNumber { get; set; }
+        public int CurrentPage { get; set; }
 
         /// <summary>
         /// 分页大小
@@ -44,28 +44,26 @@
         /// <summary>
         /// 总记录数
         /// </summary>
-        public int TotalRecords { get; set; }
+        public long TotalCount { get; set; }
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public PagedList()
-        {
-        }
+        public PagedList() { }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="items">数据</param>
-        /// <param name="totalRecords">总记录数</param>
-        /// <param name="pageNumber">页码</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <param name="currentPage">当前页码</param>
         /// <param name="pageSize">分页大小</param>
-        public PagedList(IList<T> items, int totalRecords, int pageNumber, int pageSize)
+        public PagedList(IList<T> items, long totalCount, int currentPage, int pageSize)
         {
-            PageNumber = pageNumber;
+            CurrentPage = currentPage;
             PageSize = pageSize;
-            TotalRecords = totalRecords;
-            TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+            TotalCount = totalCount;
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             if (items != null && items.Count > 0)
             {
@@ -76,24 +74,16 @@
         /// <summary>
         /// 是否能上一页
         /// </summary>
-        public bool HasPreviousPage
-        {
-            get
-            {
-                return (PageNumber > 1);
-            }
-        }
+        public bool HasPreviousPage => (CurrentPage > 1);
 
         /// <summary>
         /// 是否能下一页
         /// </summary>
-        public bool HasNextPage
-        {
-            get
-            {
-                return (PageNumber < TotalPages);
-            }
-        }
+        public bool HasNextPage => (CurrentPage < TotalPages);
 
+        /// <summary>
+        /// PagedModel模型转换（方便对外输出分页模型）
+        /// </summary>
+        public PagedModel<T> Model => new PagedModel<T>(this, TotalCount, CurrentPage, PageSize);
     }
 }

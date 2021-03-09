@@ -13,10 +13,10 @@ namespace XUCore.Paging
         public readonly static PagedModel<T> Empty = new PagedModel<T>(default(List<T>), 0, 1, 1);
 
         /// <summary>
-        /// 页码
+        /// 当前页码
         /// </summary>
         [Key(0)]
-        public int PageNumber { get; set; }
+        public int CurrentPage { get; set; }
 
         /// <summary>
         /// 分页大小
@@ -34,7 +34,7 @@ namespace XUCore.Paging
         /// 总记录数
         /// </summary>
         [Key(3)]
-        public long TotalRecords { get; set; }
+        public long TotalCount { get; set; }
 
         /// <summary>
         /// 数据项
@@ -43,7 +43,7 @@ namespace XUCore.Paging
         public IList<T> Items { get; set; }
 
         /// <summary>
-        /// 附加信息（避免要返回多个模型数据的时候额外再项目中定义型模型）
+        /// 附加信息（避免要返回多个模型数据的时候额外在项目中定义型模型）
         /// </summary>
         [Key(5)]
         public object ExtraInfo { get; set; }
@@ -52,43 +52,29 @@ namespace XUCore.Paging
         /// 是否能上一页
         /// </summary>
         [Key(6)]
-        public bool HasPreviousPage
-        {
-            get
-            {
-                return (PageNumber > 1);
-            }
-        }
+        public bool HasPreviousPage => (CurrentPage > 1);
 
         /// <summary>
         /// 是否能下一页
         /// </summary>
         [Key(7)]
-        public bool HasNextPage
-        {
-            get
-            {
-                return (PageNumber < TotalPages);
-            }
-        }
+        public bool HasNextPage => (CurrentPage < TotalPages);
 
-        public PagedModel()
-        {
-        }
+        public PagedModel() { }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="items">数据</param>
-        /// <param name="totalRecords">总记录数</param>
-        /// <param name="pageNumber">页码</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <param name="currentPage">当前页码</param>
         /// <param name="pageSize">分页大小</param>
-        public PagedModel(IList<T> items, long totalRecords, int pageNumber, int pageSize)
+        public PagedModel(IList<T> items, long totalCount, int currentPage, int pageSize)
         {
-            PageNumber = pageNumber;
+            CurrentPage = currentPage;
             PageSize = pageSize;
-            TotalRecords = totalRecords;
-            TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+            TotalCount = totalCount;
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             if (items != null && items.Count > 0)
                 Items = items;
@@ -105,8 +91,7 @@ namespace XUCore.Paging
         /// <returns></returns>
         public static PagedModel<T> EmptyModel(long totalRecords, int pageIndex, int pageSize)
         {
-            return new PagedModel<T>(default(List<T>), totalRecords, pageIndex, pageSize);
+            return new PagedModel<T>(new List<T>(), totalRecords, pageIndex, pageSize);
         }
-
     }
 }

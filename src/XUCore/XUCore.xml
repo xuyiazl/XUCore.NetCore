@@ -15220,9 +15220,9 @@
             初始化空对象
             </summary>
         </member>
-        <member name="P:XUCore.Paging.PagedList`1.PageNumber">
+        <member name="P:XUCore.Paging.PagedList`1.CurrentPage">
             <summary>
-            页码
+            当前页码
             </summary>
         </member>
         <member name="P:XUCore.Paging.PagedList`1.PageSize">
@@ -15235,7 +15235,7 @@
             总页数
             </summary>
         </member>
-        <member name="P:XUCore.Paging.PagedList`1.TotalRecords">
+        <member name="P:XUCore.Paging.PagedList`1.TotalCount">
             <summary>
             总记录数
             </summary>
@@ -15245,13 +15245,13 @@
             构造函数
             </summary>
         </member>
-        <member name="M:XUCore.Paging.PagedList`1.#ctor(System.Collections.Generic.IList{`0},System.Int32,System.Int32,System.Int32)">
+        <member name="M:XUCore.Paging.PagedList`1.#ctor(System.Collections.Generic.IList{`0},System.Int64,System.Int32,System.Int32)">
             <summary>
             构造函数
             </summary>
             <param name="items">数据</param>
-            <param name="totalRecords">总记录数</param>
-            <param name="pageNumber">页码</param>
+            <param name="totalCount">总记录数</param>
+            <param name="currentPage">当前页码</param>
             <param name="pageSize">分页大小</param>
         </member>
         <member name="P:XUCore.Paging.PagedList`1.HasPreviousPage">
@@ -15264,14 +15264,19 @@
             是否能下一页
             </summary>
         </member>
+        <member name="P:XUCore.Paging.PagedList`1.Model">
+            <summary>
+            PagedModel模型转换（方便对外输出分页模型）
+            </summary>
+        </member>
         <member name="F:XUCore.Paging.PagedModel`1.Empty">
             <summary>
             初始化空对象
             </summary>
         </member>
-        <member name="P:XUCore.Paging.PagedModel`1.PageNumber">
+        <member name="P:XUCore.Paging.PagedModel`1.CurrentPage">
             <summary>
-            页码
+            当前页码
             </summary>
         </member>
         <member name="P:XUCore.Paging.PagedModel`1.PageSize">
@@ -15284,7 +15289,7 @@
             总页数
             </summary>
         </member>
-        <member name="P:XUCore.Paging.PagedModel`1.TotalRecords">
+        <member name="P:XUCore.Paging.PagedModel`1.TotalCount">
             <summary>
             总记录数
             </summary>
@@ -15296,7 +15301,7 @@
         </member>
         <member name="P:XUCore.Paging.PagedModel`1.ExtraInfo">
             <summary>
-            附加信息（避免要返回多个模型数据的时候额外再项目中定义型模型）
+            附加信息（避免要返回多个模型数据的时候额外在项目中定义型模型）
             </summary>
         </member>
         <member name="P:XUCore.Paging.PagedModel`1.HasPreviousPage">
@@ -15314,8 +15319,8 @@
             构造函数
             </summary>
             <param name="items">数据</param>
-            <param name="totalRecords">总记录数</param>
-            <param name="pageNumber">页码</param>
+            <param name="totalCount">总记录数</param>
+            <param name="currentPage">当前页码</param>
             <param name="pageSize">分页大小</param>
         </member>
         <member name="M:XUCore.Paging.PagedModel`1.EmptyModel(System.Int64,System.Int32,System.Int32)">
@@ -15404,7 +15409,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="urlBuilder">url规则</param>
             <returns></returns>
@@ -15413,7 +15418,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="showFirstAndLastPage">是否显示第一页和最后一页</param>
             <param name="urlBuilder">url规则</param>
@@ -15423,7 +15428,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="numberPagesToDisplay">显示几页</param>
             <param name="showFirstAndLastPage">是否显示第一页和最后一页</param>
@@ -15435,7 +15440,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="numberPagesToDisplay">显示几页</param>
             <param name="cssClassForCurrentPage">显示当前页的css（current）</param>
@@ -15491,7 +15496,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="urlBuilder">url规则</param>
             <returns></returns>
@@ -15500,7 +15505,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="showFirstAndLastPage">是否显示第一页和最后一页</param>
             <param name="urlBuilder">url规则</param>
@@ -15510,7 +15515,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="numberPagesToDisplay">显示几页</param>
             <param name="showFirstAndLastPage">是否显示第一页和最后一页</param>
@@ -15522,7 +15527,7 @@
             <summary>
             web 分页HTML
             </summary>
-            <param name="pageNumber">当前页码</param>
+            <param name="currentPage">当前页码</param>
             <param name="totalPages">总页数</param>
             <param name="numberPagesToDisplay">显示几页</param>
             <param name="cssClassForCurrentPage">显示当前页的css（current）</param>

@@ -261,7 +261,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedModel<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
+        public virtual PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
         {
             if (Read != null)
                 return Read.GetPagedList(selector, orderby, pageNumber, pageSize);
@@ -341,7 +341,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedModel<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
             if (Read != null)
                 return await Read.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
