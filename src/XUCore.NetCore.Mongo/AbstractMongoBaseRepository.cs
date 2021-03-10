@@ -617,68 +617,68 @@ namespace XUCore.NetCore.Mongo
         /// <summary>
         /// 分页获取数据
         /// </summary>
-        public virtual PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize)
+        public virtual PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int currentPage, int pageSize)
         {
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            currentPage = currentPage < 1 ? 1 : currentPage;
 
             var listTable = Table;
 
             var total = listTable.CountDocuments(selector, null);
 
-            var pageList = listTable.Find(selector)?.Sort(orderby.OrderByBatch<TModel>()).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
-            return new PagedList<TModel>(pageList, total, pageIndex, pageSize);
+            var pageList = listTable.Find(selector)?.Sort(orderby.OrderByBatch<TModel>()).Skip((currentPage - 1) * pageSize).Limit(pageSize).ToList();
+            return new PagedList<TModel>(pageList, total, currentPage, pageSize);
         }
         /// <summary>
         /// 分页获取数据
         /// </summary>
-        public virtual PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize)
+        public virtual PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int currentPage, int pageSize)
         {
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            currentPage = currentPage < 1 ? 1 : currentPage;
 
             var listTable = Table;
 
             var total = listTable.CountDocuments(filter, null);
-            var pageList = listTable.Find(filter)?.Sort(orderby.OrderByBatch<TModel>()).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
+            var pageList = listTable.Find(filter)?.Sort(orderby.OrderByBatch<TModel>()).Skip((currentPage - 1) * pageSize).Limit(pageSize).ToList();
 
-            return new PagedList<TModel>(pageList, total, pageIndex, pageSize);
+            return new PagedList<TModel>(pageList, total, currentPage, pageSize);
         }
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
-        public virtual async Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int currentPage, int pageSize, CancellationToken cancellationToken = default)
         {
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            currentPage = currentPage < 1 ? 1 : currentPage;
 
             var listTable = Table;
 
             var total = await listTable.CountDocumentsAsync(selector, null, cancellationToken);
             var list = await listTable.FindAsync(selector, new FindOptions<TModel, TModel>()
             {
-                Skip = (pageIndex - 1) * pageSize,
+                Skip = (currentPage - 1) * pageSize,
                 Limit = pageSize,
                 Sort = orderby.OrderByBatch<TModel>()
             }, cancellationToken);
 
-            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
+            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, currentPage, pageSize);
         }
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
-        public virtual async Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int currentPage, int pageSize, CancellationToken cancellationToken = default)
         {
-            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            currentPage = currentPage < 1 ? 1 : currentPage;
 
             var listTable = Table;
 
             var total = await listTable.CountDocumentsAsync(filter, null, cancellationToken);
             var list = await listTable.FindAsync(filter, new FindOptions<TModel, TModel>()
             {
-                Skip = (pageIndex - 1) * pageSize,
+                Skip = (currentPage - 1) * pageSize,
                 Limit = pageSize,
                 Sort = orderby.OrderByBatch<TModel>()
             }, cancellationToken);
 
-            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, pageIndex, pageSize);
+            return new PagedList<TModel>(list?.ToList(cancellationToken: cancellationToken), total, currentPage, pageSize);
         }
         #endregion
     }

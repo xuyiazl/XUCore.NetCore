@@ -15274,6 +15274,15 @@
             初始化空对象
             </summary>
         </member>
+        <member name="M:XUCore.Paging.PagedModel`1.EmptyModel(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            创建一个空模型
+            </summary>
+            <param name="totalCount"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
         <member name="P:XUCore.Paging.PagedModel`1.CurrentPage">
             <summary>
             当前页码
@@ -15322,15 +15331,6 @@
             <param name="totalCount">总记录数</param>
             <param name="currentPage">当前页码</param>
             <param name="pageSize">分页大小</param>
-        </member>
-        <member name="M:XUCore.Paging.PagedModel`1.EmptyModel(System.Int64,System.Int32,System.Int32)">
-            <summary>
-            创建一个空模型
-            </summary>
-            <param name="totalRecords"></param>
-            <param name="pageIndex"></param>
-            <param name="pageSize"></param>
-            <returns></returns>
         </member>
         <member name="T:XUCore.Paging.PagedTools">
             <summary>
@@ -15386,7 +15386,7 @@
             page分页html
             </summary>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Func{System.Int32,System.String})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Func{System.Int32,System.String})">
             <summary>
             web 分页HTML
             </summary>
@@ -15395,7 +15395,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Boolean,System.Func{System.Int32,System.String})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Boolean,System.Func{System.Int32,System.String})">
             <summary>
             web 分页HTML
             </summary>
@@ -15405,7 +15405,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,System.Func{System.Int32,System.String})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Int32,System.Boolean,System.Func{System.Int32,System.String})">
             <summary>
             web 分页HTML
             </summary>
@@ -15416,7 +15416,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,System.String})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,System.String})">
             <summary>
             web 分页HTML
             </summary>
@@ -15473,7 +15473,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15482,7 +15482,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15492,7 +15492,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Int32,System.Boolean,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>
@@ -15503,7 +15503,7 @@
             <param name="urlBuilder">url规则</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedModel{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
+        <member name="M:XUCore.Paging.PageHtml.BuildPageHtml``1(XUCore.Paging.PagedList{``0},System.Int32,System.Boolean,XUCore.Paging.PagerLanguage,System.Func{System.Int32,XUCore.Webs.UrlBuilder})">
             <summary>
             web 分页HTML
             </summary>

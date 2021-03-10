@@ -10,8 +10,15 @@ namespace XUCore.Paging
         /// <summary>
         /// 初始化空对象
         /// </summary>
-        public readonly static PagedModel<T> Empty = new PagedModel<T>(default(List<T>), 0, 1, 1);
-
+        public readonly static PagedModel<T> Empty = new PagedModel<T>(new List<T>(), 0, 1, 1);
+        /// <summary>
+        /// 创建一个空模型
+        /// </summary>
+        /// <param name="totalCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static PagedModel<T> EmptyModel(long totalCount, int pageIndex, int pageSize) => new PagedModel<T>(new List<T>(), totalCount, pageIndex, pageSize);
         /// <summary>
         /// 当前页码
         /// </summary>
@@ -80,18 +87,6 @@ namespace XUCore.Paging
                 Items = items;
             else
                 Items = new List<T>();
-        }
-
-        /// <summary>
-        /// 创建一个空模型
-        /// </summary>
-        /// <param name="totalRecords"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public static PagedModel<T> EmptyModel(long totalRecords, int pageIndex, int pageSize)
-        {
-            return new PagedModel<T>(new List<T>(), totalRecords, pageIndex, pageSize);
         }
     }
 }

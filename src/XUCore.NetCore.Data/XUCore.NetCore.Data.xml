@@ -283,7 +283,7 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="pageNumber">页码（最小为1）</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <returns></returns>
         </member>
@@ -335,7 +335,7 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="pageNumber">页码（最小为1）</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -713,7 +713,7 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="pageNumber">页码（最小为1）</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <returns></returns>
         </member>
@@ -765,7 +765,7 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="pageNumber">页码（最小为1）</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <param name="cancellationToken"></param>
             <returns></returns>

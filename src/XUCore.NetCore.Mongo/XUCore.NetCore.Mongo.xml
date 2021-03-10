@@ -699,7 +699,7 @@
             </summary>
             <param name="selector">linq表达式</param>
             <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="pageIndex">当前页</param>
+            <param name="currentPage">当前页</param>
             <param name="pageSize">页尺码</param>
             <returns></returns>
         </member>
@@ -709,7 +709,7 @@
             </summary>
             <param name="filter">基础过滤器，请使用Builders构建条件</param>
             <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="pageIndex">当前页</param>
+            <param name="currentPage">当前页</param>
             <param name="pageSize">页尺码</param>
             <returns></returns>
         </member>
@@ -719,7 +719,7 @@
             </summary>
             <param name="selector">linq表达式</param>
             <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="pageIndex">当前页</param>
+            <param name="currentPage">当前页</param>
             <param name="pageSize">页尺码</param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -730,7 +730,7 @@
             </summary>
             <param name="filter">基础过滤器，请使用Builders构建条件</param>
             <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-            <param name="pageIndex">当前页</param>
+            <param name="currentPage">当前页</param>
             <param name="pageSize">页尺码</param>
             <param name="cancellationToken"></param>
             <returns></returns>

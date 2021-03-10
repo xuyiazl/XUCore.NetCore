@@ -53,21 +53,21 @@ namespace XUCore.Extensions.Datas
             }).ToList();
         }
 
-        public static object HackType(object value, Type conversionType)
-        {
-            if (conversionType.IsGenericType && conversionType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
-            {
-                if (value == null)
-                    return null;
-                System.ComponentModel.NullableConverter nullableConverter = new System.ComponentModel.NullableConverter(conversionType);
-                conversionType = nullableConverter.UnderlyingType;
-            }
-            if (typeof(System.Enum).IsAssignableFrom(conversionType))
-            {
-                return Enum.Parse(conversionType, value.ToString());
-            }
-            return Convert.ChangeType(value, conversionType);
-        }
+        //public static object HackType(object value, Type conversionType)
+        //{
+        //    if (conversionType.IsGenericType && conversionType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+        //    {
+        //        if (value == null)
+        //            return null;
+        //        System.ComponentModel.NullableConverter nullableConverter = new System.ComponentModel.NullableConverter(conversionType);
+        //        conversionType = nullableConverter.UnderlyingType;
+        //    }
+        //    if (typeof(System.Enum).IsAssignableFrom(conversionType))
+        //    {
+        //        return Enum.Parse(conversionType, value.ToString());
+        //    }
+        //    return Convert.ChangeType(value, conversionType);
+        //}
 
         //public static IList<T> ToList<T>(this DataTable dataTable)
         //{

@@ -354,39 +354,39 @@ namespace XUCore.NetCore.Mongo
         /// </summary>
         /// <param name="selector">linq表达式</param>
         /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="pageIndex">当前页</param>
+        /// <param name="currentPage">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <returns></returns>
-        PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize);
+        PagedList<TModel> GetPagedList(Expression<Func<TModel, bool>> selector, string orderby, int currentPage, int pageSize);
         /// <summary>
         /// 分页获取数据
         /// </summary>
         /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
         /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="pageIndex">当前页</param>
+        /// <param name="currentPage">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <returns></returns>
-        PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize);
+        PagedList<TModel> GetPagedList(FilterDefinition<TModel> filter, string orderby, int currentPage, int pageSize);
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
         /// <param name="selector">linq表达式</param>
         /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="pageIndex">当前页</param>
+        /// <param name="currentPage">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
+        Task<PagedList<TModel>> GetPagedListAsync(Expression<Func<TModel, bool>> selector, string orderby, int currentPage, int pageSize, CancellationToken cancellationToken = default);
         /// <summary>
         /// 异步分页获取数据
         /// </summary>
         /// <param name="filter">基础过滤器，请使用Builders构建条件</param>
         /// <param name="orderby">多个OrderBy用逗号隔开，exp:"name asc,createtime desc"</param>
-        /// <param name="pageIndex">当前页</param>
+        /// <param name="currentPage">当前页</param>
         /// <param name="pageSize">页尺码</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int pageIndex, int pageSize, CancellationToken cancellationToken = default);
+        Task<PagedList<TModel>> GetPagedListAsync(FilterDefinition<TModel> filter, string orderby, int currentPage, int pageSize, CancellationToken cancellationToken = default);
 
         #endregion
     }

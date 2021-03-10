@@ -165,10 +165,10 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10);
+        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10);
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -214,11 +214,11 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default);
+        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default);
         /// <summary>
         /// Any数据检测
         /// </summary>
