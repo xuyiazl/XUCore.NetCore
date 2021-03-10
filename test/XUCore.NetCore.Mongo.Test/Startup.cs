@@ -13,7 +13,7 @@ namespace XUCore.NetCore.Mongo.Test
         {
             services.AddLogging();
 
-            services.AddSingleton(typeof(IMongoService<>), typeof(MongoService<>));
+            services.AddMongoService();
 
             services.AddHostedService<MainService>();
         }

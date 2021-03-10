@@ -15342,10 +15342,22 @@
             根据页码获取分页数据
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="pageSize"></param>
-            <param name="totalFunc"></param>
-            <param name="dataFunc"></param>
-            <param name="dataAction"></param>
+            <param name="size"></param>
+            <param name="total"></param>
+            <param name="data"></param>
+            <param name="process"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Paging.PagedTools.PageAsync``1(System.Int32,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Int64}},System.Func{System.Int32,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IList{``0}}},System.Func{System.Collections.Generic.IList{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            根据页码获取分页数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="size"></param>
+            <param name="total"></param>
+            <param name="data"></param>
+            <param name="process"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Paging.PagedTools.Offset``1(System.Int32,System.Func{System.Int32,System.Int32,System.Collections.Generic.IList{``0}},System.Action{System.Collections.Generic.IList{``0}})">
@@ -15354,8 +15366,19 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="limit"></param>
-            <param name="dataFunc"></param>
-            <param name="dataAction"></param>
+            <param name="data"></param>
+            <param name="process"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Paging.PagedTools.OffsetAsync``1(System.Int32,System.Func{System.Int32,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IList{``0}}},System.Func{System.Collections.Generic.IList{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            偏移获取数据分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="limit"></param>
+            <param name="data"></param>
+            <param name="process"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Paging.PageHtml">
