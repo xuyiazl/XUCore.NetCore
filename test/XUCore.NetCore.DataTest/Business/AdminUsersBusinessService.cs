@@ -37,7 +37,7 @@ namespace XUCore.NetCore.DataTest.Business
                     {
                         nigelDb.Delete(c => true);
                         nigelCopyDb.Delete(c => true);
-
+                        
                         nigelDb.Add(BuildRecords(10));
 
                         nigelCopyDb.Add(BuildRecords(10));

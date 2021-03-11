@@ -645,6 +645,10 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         public abstract int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters);
 
+        public abstract IDataParameter GetParameter(string paramterName, object value);
+
+        public abstract IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters);
+
         #endregion
     }
 }

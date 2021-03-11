@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
+using XUCore.Extensions;
 using XUCore.Extensions.Datas;
 
 namespace XUCore.NetCore.Data.DbService
@@ -118,5 +119,10 @@ namespace XUCore.NetCore.Data.DbService
 
         }
 
+        public override IDataParameter GetParameter(string paramterName, object value)
+            => new MySqlParameter(paramterName, value);
+
+        public override IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters)
+            => paramters?.ToMap(c => new MySqlParameter(c.paramterName, c.value)).ToArray();
     }
 }

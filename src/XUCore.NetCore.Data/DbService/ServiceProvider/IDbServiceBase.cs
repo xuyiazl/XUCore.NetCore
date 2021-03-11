@@ -344,6 +344,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="parameters"></param>
         int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
 
+        IDataParameter GetParameter(string paramterName, object value);
+
+        IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters);
+
         #endregion
     }
 }

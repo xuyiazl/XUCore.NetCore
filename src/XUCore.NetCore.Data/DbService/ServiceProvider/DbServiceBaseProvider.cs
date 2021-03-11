@@ -539,6 +539,13 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
                 return Write.ExecuteAdoNet(sql, type, parameters);
             return -1;
         }
+
+        public virtual IDataParameter GetParameter(string paramterName, object value)
+            => Write.GetParameter(paramterName, value);
+
+        public virtual IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters)
+            => Write.GetParameters(paramters);
+
         #endregion
 
         #region 实现Dispose的方法

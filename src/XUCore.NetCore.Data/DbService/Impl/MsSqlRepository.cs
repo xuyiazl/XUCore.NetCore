@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Data.Common;
+using XUCore.Extensions;
+using System.Linq;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -18,7 +20,6 @@ namespace XUCore.NetCore.Data.DbService
     {
         public MsSqlRepository(IBaseContext context) : base(context) { }
 
-        #region mssql专有的ado执行
         public override int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
@@ -111,7 +112,7 @@ namespace XUCore.NetCore.Data.DbService
                     foreach (SqlParameter p in parameters)
                     {
                         cmd.Parameters.Add(p);
-                    }                    
+                    }
                     return cmd.ExecuteNonQuery();
                 }
             }
@@ -121,6 +122,10 @@ namespace XUCore.NetCore.Data.DbService
             }
         }
 
-        #endregion
+        public override IDataParameter GetParameter(string paramterName, object value)
+            => new SqlParameter(paramterName, value);
+
+        public override IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters)
+            => paramters?.ToMap(c => new SqlParameter(c.paramterName, c.value)).ToArray();
     }
 }
