@@ -15,7 +15,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
         {
             var config = services.BuildServiceProvider().GetService<IConfiguration>();
 
-            services.AddDbContext<NigelDbReadEntityContext>(options =>
+            services.AddDbContext<NigelReadDbContext>(options =>
             {
                 options.UseSqlServer(
                     connectionString: config.GetConnectionString("NigelDB_ReadConnection"),
@@ -29,24 +29,24 @@ namespace XUCore.NetCore.DataTest.DbRepository
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
-            services.AddScoped(typeof(INigelDbReadRepository<>), typeof(NigelDbReadRepository<>));
-            services.AddScoped(typeof(INigelDbReadEntityContext), typeof(NigelDbReadEntityContext));
+            services.AddScoped(typeof(INigelReadDbRepository<>), typeof(NigelReadDbRepository<>));
+            services.AddScoped(typeof(INigelReadDbContext), typeof(NigelReadDbContext));
 
             return services;
         }
     }
 
 
-    public interface INigelDbReadEntityContext : IDbContext { }
-    public class NigelDbReadEntityContext : BaseRepositoryFactory, INigelDbReadEntityContext
+    public interface INigelReadDbContext : IDbContext { }
+    public class NigelReadDbContext : BaseRepositoryFactory, INigelReadDbContext
     {
-        public NigelDbReadEntityContext(DbContextOptions<NigelDbReadEntityContext> options)
-            : base(typeof(NigelDbReadEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
+        public NigelReadDbContext(DbContextOptions<NigelReadDbContext> options)
+            : base(typeof(NigelReadDbContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
-    public interface INigelDbReadRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelDbReadRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbReadRepository<TEntity> where TEntity : class, new()
+    public interface INigelReadDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
+    public class NigelReadDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelReadDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbReadRepository(INigelDbReadEntityContext context) : base(context) { }
+        public NigelReadDbRepository(INigelReadDbContext context) : base(context) { }
     }
 }

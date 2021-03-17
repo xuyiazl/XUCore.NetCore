@@ -18,12 +18,12 @@ namespace XUCore.NetCore.DataTest.Business
     public class AdminUsersBusinessService : IAdminUsersBusinessService
     {
         private readonly IAdminUsersDbServiceProvider db;
-        private readonly INigelDbRepository<AdminUsersEntity> nigelDb;
+        private readonly INigelReadDbRepository<AdminUsersEntity> nigelDb;
         private readonly INigelCopyDbRepository<AdminUsersEntity> nigelCopyDb;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
         {
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
-            this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUsersEntity>>();
+            this.nigelDb = serviceProvider.GetService<INigelReadDbRepository<AdminUsersEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
         }
 

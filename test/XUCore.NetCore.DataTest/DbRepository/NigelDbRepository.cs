@@ -25,7 +25,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
         {
             var config = services.BuildServiceProvider().GetService<IConfiguration>();
 
-            services.AddDbContext<NigelDbEntityContext>(options =>
+            services.AddDbContext<NigelDbContext>(options =>
             {
                 options.UseSqlServer(
                     connectionString: config.GetConnectionString("NigelDB_Connection"),
@@ -42,22 +42,22 @@ namespace XUCore.NetCore.DataTest.DbRepository
             });
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
-            services.AddScoped(typeof(INigelDbEntityContext), typeof(NigelDbEntityContext));
+            services.AddScoped(typeof(INigelDbContext), typeof(NigelDbContext));
 
             return services;
         }
     }
 
-    public interface INigelDbEntityContext : IDbContext { }
-    public class NigelDbEntityContext : BaseRepositoryFactory, INigelDbEntityContext
+    public interface INigelDbContext : IDbContext { }
+    public class NigelDbContext : BaseRepositoryFactory, INigelDbContext
     {
-        public NigelDbEntityContext(DbContextOptions<NigelDbEntityContext> options)
-            : base(typeof(NigelDbEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
+        public NigelDbContext(DbContextOptions<NigelDbContext> options)
+            : base(typeof(NigelDbContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
     public interface INigelDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbRepository(INigelDbEntityContext context) : base(context) { }
+        public NigelDbRepository(INigelDbContext context) : base(context) { }
     }
 }

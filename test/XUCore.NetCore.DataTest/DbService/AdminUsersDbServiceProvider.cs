@@ -10,7 +10,7 @@ namespace XUCore.NetCore.DataTest.DbService
 
     public class AdminUsersDbServiceProvider : DbServiceBaseProvider<AdminUsersEntity>, IAdminUsersDbServiceProvider
     {
-        public AdminUsersDbServiceProvider(INigelDbReadRepository<AdminUsersEntity> readRepository, INigelDbWriteRepository<AdminUsersEntity> writeRepository)
+        public AdminUsersDbServiceProvider(INigelReadDbRepository<AdminUsersEntity> readRepository, INigelWriteDbRepository<AdminUsersEntity> writeRepository)
             : base(readRepository, writeRepository)
         {
 

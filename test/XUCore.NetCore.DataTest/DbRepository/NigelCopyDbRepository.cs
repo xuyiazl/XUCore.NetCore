@@ -17,7 +17,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
         {
             var config = services.BuildServiceProvider().GetService<IConfiguration>();
 
-            services.AddDbContext<NigelCopyDbEntityContext>(options =>
+            services.AddDbContext<NigelCopyDbContext>(options =>
             {
                 options.UseSqlServer(
                     connectionString: config.GetConnectionString("NigelCopyDB_Connection"),
@@ -34,22 +34,22 @@ namespace XUCore.NetCore.DataTest.DbRepository
             });
 
             services.AddScoped(typeof(INigelCopyDbRepository<>), typeof(NigelCopyDbRepository<>));
-            services.AddScoped(typeof(INigelCopyDbEntityContext), typeof(NigelCopyDbEntityContext));
+            services.AddScoped(typeof(INigelCopyDbContext), typeof(NigelCopyDbContext));
 
             return services;
         }
     }
 
-    public interface INigelCopyDbEntityContext : IDbContext { }
-    public class NigelCopyDbEntityContext : BaseRepositoryFactory, INigelCopyDbEntityContext
+    public interface INigelCopyDbContext : IDbContext { }
+    public class NigelCopyDbContext : BaseRepositoryFactory, INigelCopyDbContext
     {
-        public NigelCopyDbEntityContext(DbContextOptions<NigelCopyDbEntityContext> options)
-            : base(typeof(NigelCopyDbEntityContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
+        public NigelCopyDbContext(DbContextOptions<NigelCopyDbContext> options)
+            : base(typeof(NigelCopyDbContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
     }
 
     public interface INigelCopyDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelCopyDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelCopyDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelCopyDbRepository(INigelCopyDbEntityContext context) : base(context) { }
+        public NigelCopyDbRepository(INigelCopyDbContext context) : base(context) { }
     }
 }
