@@ -6,7 +6,7 @@ using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.DbService
 {
-    public interface IAdminUsersDbServiceProvider : IDbServiceBase<AdminUsersEntity>, IDbServiceProvider
+    public interface IAdminUsersDbServiceProvider : IDbService<AdminUsersEntity>, IDbServiceProvider
     {
 
     }

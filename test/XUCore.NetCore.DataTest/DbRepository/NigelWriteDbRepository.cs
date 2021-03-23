@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
-using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.NetCore.DataTest.DbRepository
@@ -37,10 +37,9 @@ namespace XUCore.NetCore.DataTest.DbRepository
 
 
     public interface INigelWriteDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelWriteDbContext : BaseRepositoryFactory, INigelWriteDbContext
+    public class NigelWriteDbContext : DBContextFactory, INigelWriteDbContext
     {
-        public NigelWriteDbContext(DbContextOptions<NigelWriteDbContext> options)
-            : base(typeof(NigelWriteDbContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
+        public NigelWriteDbContext(DbContextOptions<NigelWriteDbContext> options): base(options) { }
     }
 
     public interface INigelWriteDbContext : IDbContext { }

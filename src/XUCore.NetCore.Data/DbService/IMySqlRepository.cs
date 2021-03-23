@@ -7,7 +7,7 @@ using System.Text;
 namespace XUCore.NetCore.Data.DbService
 {
 
-    public interface IMySqlRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
+    public interface IMySqlRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new()
     {
 
     }

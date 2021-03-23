@@ -36,11 +36,11 @@ namespace XUCore.NetCore.DataTest.Business
                     run: (tran) =>
                     {
                         nigelDb.Delete(c => true);
-                        nigelCopyDb.Delete(c => true);
+                        //nigelCopyDb.Delete(c => true);
                         
                         nigelDb.Add(BuildRecords(10));
 
-                        nigelCopyDb.Add(BuildRecords(10));
+                        //nigelCopyDb.Add(BuildRecords(10));
 
                         //nigelDb.Update(c => c.Id > 5, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监吹牛逼总监", Company = "大牛逼公司" });
                     },

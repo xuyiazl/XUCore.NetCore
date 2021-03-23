@@ -12,9 +12,9 @@ using XUCore.Extensions.Datas;
 namespace XUCore.NetCore.Data.DbService
 {
 
-    public class MySqlRepository<TEntity> : DbBaseRepository<TEntity>, IMySqlRepository<TEntity> where TEntity : class, new()
+    public class MySqlRepository<TEntity> : DbRepository<TEntity>, IMySqlRepository<TEntity> where TEntity : class, new()
     {
-        public MySqlRepository(IBaseContext context) : base(context) { }
+        public MySqlRepository(IDbContext context) : base(context) { }
 
         public override int ExecuteSql(string sql, params IDataParameter[] parameters)
         {

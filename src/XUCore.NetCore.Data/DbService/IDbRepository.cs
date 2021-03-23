@@ -8,31 +8,27 @@ using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Linq;
 
-namespace XUCore.NetCore.Data.DbService.ServiceProvider
+namespace XUCore.NetCore.Data.DbService
 {
 
     /// <summary>
-    /// 数据领域层接口
+    /// 通用仓储库的方法定义
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IDbServiceBase<TEntity> : IDisposable where TEntity : class, new()
+    public interface IDbRepository<TEntity> where TEntity : class, new()
     {
         /// <summary>
-        /// 只读对象
+        /// 当前上下文
         /// </summary>
-        IBaseRepository<TEntity> Read { get; }
-        /// <summary>
-        /// 只写对象
-        /// </summary>
-        IBaseRepository<TEntity> Write { get; }
+        IDbContext DbContext { get; }
         /// <summary>
         /// 当前DbSet对象
         /// </summary>
         DbSet<TEntity> Table { get; }
-
         //同步操作
 
         /// <summary>
@@ -169,10 +165,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10);
+        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10);
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -218,11 +214,11 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default);
+        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default);
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -343,6 +339,14 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="dbTransaction"></param>
+        /// <param name="parameters"></param>
+        int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters);
 
         IDataParameter GetParameter(string paramterName, object value);
 

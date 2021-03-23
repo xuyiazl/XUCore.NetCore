@@ -1,45 +1,43 @@
-﻿using XUCore.Paging;
+﻿using Microsoft.EntityFrameworkCore;
+using XUCore.NetCore.Data.BulkExtensions;
+using XUCore.Extensions;
+using XUCore.Paging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace XUCore.NetCore.Data.DbService.ServiceProvider
+namespace XUCore.NetCore.Data.DbService
 {
 
     /// <summary>
-    /// 数据库领域操作的基础对象
+    /// 数据库的基础仓储库
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class DbServiceBaseProvider<TEntity> : IDbServiceBase<TEntity> where TEntity : class, new()
+    public abstract class DbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new()
     {
+        protected string _connectionString { get; set; } = "";
+        protected readonly IDbContext _context;
+        public DbRepository(IDbContext context)
+        {
+            _connectionString = context.ConnectionStrings;
+            _context = context;
+        }
         /// <summary>
-        /// 只读对象
+        /// 当前上下文
         /// </summary>
-        public IBaseRepository<TEntity> Read { get; }
-        /// <summary>
-        /// 只写对象
-        /// </summary>
-        public IBaseRepository<TEntity> Write { get; }
+        public IDbContext DbContext => _context;
         /// <summary>
         /// 当前DbSet对象
         /// </summary>
-        public DbSet<TEntity> Table => Read.Table;
-
-        protected DbServiceBaseProvider(IBaseRepository<TEntity> readRepository, IBaseRepository<TEntity> writeRepository)
-        {
-            this.Read = readRepository;
-            this.Write = writeRepository;
-        }
-
-        #region 抽象对象来实现IDbServiceBase中的方法，提供重写操作
+        public DbSet<TEntity> Table => _context.Set<TEntity>();
 
         //同步操作
 
@@ -49,7 +47,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int SaveChanges()
         {
-            return Write.SaveChanges();
+            return _context.SaveChanges();
         }
         /// <summary>
         /// 插入一条数据
@@ -59,9 +57,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Add(TEntity entity, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Add(entity, isSaveChange);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.Add(entity);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
         /// <summary>
         /// 批量插入数据
@@ -71,9 +76,25 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Add(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Add(entities, isSaveChange);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            //自增ID操作会出现问题，暂时无法解决自增操作的方式，只能使用笨办法，通过多次连接数据库的方式执行
+            //var changeRecord = 0;
+            //foreach (var item in entities)
+            //{
+            //    var entry = Table.Add(item);
+            //    entry.State = EntityState.Added;
+            //    changeRecord += _context.SaveChanges();
+            //}
+
+            Table.AddRange(entities);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
         /// <summary>
         /// 更新一条数据（全量更新）
@@ -83,9 +104,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(TEntity entity, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Update(entity, isSaveChange);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.Update(entity);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
         /// <summary>
         /// 批量更新数据（全量更新）
@@ -95,9 +123,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Update(entities, isSaveChange);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.UpdateRange(entities);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
         /// <summary>
         /// 删除一条数据
@@ -107,9 +142,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(TEntity entity, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Delete(entity, isSaveChange);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.Remove(entity);
+
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
         /// <summary>
         /// 批量删除数据
@@ -119,9 +161,15 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true)
         {
-            if (Write != null)
-                return Write.Delete(entities, isSaveChange);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.RemoveRange(entities);
+            if (isSaveChange)
+                return SaveChanges();
+            return 0;
         }
 
         //异步操作
@@ -133,7 +181,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return await Write.SaveChangesAsync(cancellationToken);
+            return await _context.SaveChangesAsync(cancellationToken);
         }
         /// <summary>
         /// 异步插入一条数据
@@ -144,9 +192,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.AddAsync(entity, isSaveChange, cancellationToken);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            await Table.AddAsync(entity);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 批量写入数据
@@ -157,9 +212,25 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.AddAsync(entities, isSaveChange, cancellationToken);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            //自增ID操作会出现问题，暂时无法解决自增操作的方式，只能使用笨办法，通过多次连接数据库的方式执行
+            //var changeRecord = 0;
+            //foreach (var item in entities)
+            //{
+            //    var entry = Table.Add(item);
+            //    entry.State = EntityState.Added;
+            //    changeRecord += _context.SaveChanges();
+            //}
+
+            await Table.AddRangeAsync(entities);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 更新一条数据（全量更新）
@@ -170,9 +241,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.UpdateAsync(entity, isSaveChange, cancellationToken);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.Update(entity);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 批量更新数据（全量更新）
@@ -183,9 +261,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.UpdateAsync(entities, isSaveChange, cancellationToken);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.UpdateRange(entities);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 删除一条数据
@@ -196,9 +281,16 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.DeleteAsync(entity, isSaveChange, cancellationToken);
-            return -1;
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.Remove(entity);
+
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 批量删除数据
@@ -209,9 +301,15 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.DeleteAsync(entities, isSaveChange, cancellationToken);
-            return -1;
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            Table.RemoveRange(entities);
+            if (isSaveChange)
+                return await SaveChangesAsync(cancellationToken);
+            return 0;
         }
 
         //同步查询
@@ -223,9 +321,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual TEntity GetById(object id)
         {
-            if (Read != null)
-                return Read.GetById(id);
-            return default;
+            return this.Table.Find(id);
         }
         /// <summary>
         /// 根据条件获取一条数据
@@ -235,12 +331,18 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
-            if (Read != null)
-                return Read.GetSingle(selector, orderby);
-            return default;
+            var query = Table.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return query.AsNoTracking().FirstOrDefault();
         }
         /// <summary>
-        /// 获取所有数据
+        /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
@@ -249,23 +351,37 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
         {
-            if (Read != null)
-                return Read.GetList(selector, orderby, skip, limit);
-            return default;
+            var query = Table.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return query.AsNoTracking().ToList();
         }
         /// <summary>
         /// 获取分页数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10)
+        public virtual PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10)
         {
-            if (Read != null)
-                return Read.GetPagedList(selector, orderby, pageNumber, pageSize);
-            return default;
+            var totalCount = GetCount(selector);
+
+            var list = GetList(selector, orderby, (currentPage - 1) * pageSize, pageSize);
+
+            return new PagedList<TEntity>(list, totalCount, currentPage, pageSize);
         }
         /// <summary>
         /// Any数据检测
@@ -274,9 +390,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual bool Any(Expression<Func<TEntity, bool>> selector = null)
         {
-            if (Read != null)
-                return Read.Any(selector);
-            return default;
+            if (selector == null)
+                return Table.AsNoTracking().Any();
+
+            return Table.AsNoTracking().Any(selector);
         }
         /// <summary>
         /// 获取记录数
@@ -285,9 +402,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual long GetCount(Expression<Func<TEntity, bool>> selector = null)
         {
-            if (Read != null)
-                return Read.GetCount(selector);
-            return default;
+            if (selector == null)
+                return Table.AsNoTracking().Count();
+
+            return Table.AsNoTracking().Count(selector);
         }
 
         //异步查询
@@ -300,12 +418,11 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<TEntity> GetByIdAsync(object id, CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.GetByIdAsync(id, cancellationToken);
-            return default;
+            return await this.Table.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
         }
+
         /// <summary>
-        /// 查询一条数据
+        /// 根据条件获取一条数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
@@ -313,12 +430,18 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.GetSingleAsync(selector, orderby, cancellationToken);
-            return default;
+            var query = Table.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
         /// <summary>
-        /// 获取所有数据
+        /// 获取数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
@@ -328,24 +451,38 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.GetListAsync(selector, orderby, skip, limit, cancellationToken);
-            return default;
+            var query = Table.AsQueryable();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return await query.AsNoTracking().ToListAsync(cancellationToken);
         }
         /// <summary>
         /// 获取分页数据
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="pageNumber">页码（最小为1）</param>
+        /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+        public virtual async Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.GetPagedListAsync(selector, orderby, pageNumber, pageSize, cancellationToken);
-            return default;
+            var totalCount = await GetCountAsync(selector, cancellationToken);
+
+            var list = await GetListAsync(selector, orderby, (currentPage - 1) * pageSize, pageSize, cancellationToken);
+
+            return new PagedList<TEntity>(list, totalCount, currentPage, pageSize);
         }
         /// <summary>
         /// Any数据检测
@@ -355,9 +492,10 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.AnyAsync(selector, cancellationToken);
-            return default;
+            if (selector == null)
+                return await Table.AsNoTracking().AnyAsync(cancellationToken);
+
+            return await Table.AnyAsync(selector, cancellationToken);
         }
         /// <summary>
         /// 获取记录数
@@ -367,12 +505,11 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default)
         {
-            if (Read != null)
-                return await Read.GetCountAsync(selector, cancellationToken);
-            return default;
-        }
+            if (selector == null)
+                return await Table.AsNoTracking().CountAsync(cancellationToken);
 
-        #endregion
+            return await Table.AsNoTracking().CountAsync(selector, cancellationToken);
+        }
 
         #region 增加bulkextensions拓展
 
@@ -387,9 +524,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null)
         {
-            if (Write != null)
-                return Write.Update(selector, updateValues, updateColumns);
-            return -1;
+            return Table.Where(selector).BatchUpdate(updateValues, updateColumns);
         }
         /// <summary>
         /// 根据条件批量更新（部分字段）
@@ -399,9 +534,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Update(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update)
         {
-            if (Write != null)
-                return Write.Update(selector, Update);
-            return -1;
+            return Table.Where(selector).BatchUpdate(Update);
         }
         /// <summary>
         /// 根据条件批量删除
@@ -410,9 +543,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual int Delete(Expression<Func<TEntity, bool>> selector)
         {
-            if (Write != null)
-                return Write.Delete(selector);
-            return -1;
+            return Table.Where(selector).BatchDelete();
         }
 
         //异步操作
@@ -427,9 +558,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, TEntity updateValues, List<string> updateColumns = null, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.UpdateAsync(selector, updateValues, updateColumns, cancellationToken);
-            return -1;
+            return await Table.Where(selector).BatchUpdateAsync(updateValues, updateColumns, cancellationToken);
         }
         /// <summary>
         /// 根据条件批量更新（部分字段）
@@ -440,9 +569,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.UpdateAsync(selector, Update, cancellationToken);
-            return -1;
+            return await Table.Where(selector).BatchUpdateAsync(Update, cancellationToken);
         }
         /// <summary>
         /// 根据条件批量删除
@@ -452,27 +579,20 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                return await Write.DeleteAsync(selector, cancellationToken);
-            return -1;
+            return await Table.Where(selector).BatchDeleteAsync(cancellationToken);
         }
 
         #endregion
 
+        #region adonet
 
-        #region [ AdoNet ]
         /// <summary>
         /// 通过EF执行原生SQL 返回影响行数
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual int ExecuteSql(string sql, params IDataParameter[] parameters)
-        {
-            if (Write != null)
-                return Write.ExecuteSql(sql, parameters);
-            return -1;
-        }
+        public abstract int ExecuteSql(string sql, params IDataParameter[] parameters);
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
         /// </summary>
@@ -481,12 +601,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
-        {
-            if (Read != null)
-                return Read.Select<T>(sql, type, parameters);
-            return default;
-        }
+        public abstract T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
         /// </summary>
@@ -495,93 +610,44 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="type"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public virtual IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
-        {
-            if (Read != null)
-                return Read.SelectList<T>(sql, type, parameters);
-            return default;
-        }
+        public abstract IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
         /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
+        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataEntity)
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="type"></param>
         /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Read != null)
-                return Read.SelectList(sql, type, parameters);
-            return null;
-        }
+        /// <returns>返回DataEntity</returns>
+        public abstract DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters);
         /// <summary>
         /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="type"></param>
         /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Read != null)
-                return Read.SelectDataSet(sql, type, parameters);
-            return null;
-        }
+        /// <returns>返回DataSet</returns>
+        public abstract DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters);
         /// <summary>
         /// 通过原生执行ADONET查询操作
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="type"></param>
         /// <param name="parameters"></param>
-        public virtual int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Write != null)
-                return Write.ExecuteAdoNet(sql, type, parameters);
-            return -1;
-        }
+        /// <returns></returns>
+        public abstract int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
+        /// <summary>
+        /// 通过原生执行ADONET查询操作
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="type"></param>
+        /// <param name="dbTransaction"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public abstract int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters);
 
-        public virtual IDataParameter GetParameter(string paramterName, object value)
-            => Write.GetParameter(paramterName, value);
+        public abstract IDataParameter GetParameter(string paramterName, object value);
 
-        public virtual IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters)
-            => Write.GetParameters(paramters);
-
-        #endregion
-
-        #region 实现Dispose的方法
-
-        private bool disposedValue = false; // 要检测冗余调用
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: 释放托管状态(托管对象)。
-                }
-
-                // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
-                // TODO: 将大型字段设置为 null。
-
-                disposedValue = true;
-            }
-        }
-
-        // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
-        // ~ServiceBaseProvider() {
-        //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-        //   Dispose(false);
-        // }
-
-        // 添加此代码以正确实现可处置模式。
-        public void Dispose()
-        {
-            // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            Dispose(true);
-            // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
-            // GC.SuppressFinalize(this);
-        }
+        public abstract IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters);
 
         #endregion
     }

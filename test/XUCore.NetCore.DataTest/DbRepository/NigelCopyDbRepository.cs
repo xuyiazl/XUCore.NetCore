@@ -5,8 +5,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
-using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.NetCore.DataTest.DbRepository
@@ -41,10 +41,9 @@ namespace XUCore.NetCore.DataTest.DbRepository
     }
 
     public interface INigelCopyDbContext : IDbContext { }
-    public class NigelCopyDbContext : BaseRepositoryFactory, INigelCopyDbContext
+    public class NigelCopyDbContext : DBContextFactory, INigelCopyDbContext
     {
-        public NigelCopyDbContext(DbContextOptions<NigelCopyDbContext> options)
-            : base(typeof(NigelCopyDbContext), options, DbServer.SqlServer, $"XUCore.NetCore.DataTest.Mapping") { }
+        public NigelCopyDbContext(DbContextOptions<NigelCopyDbContext> options) : base(options) { }
     }
 
     public interface INigelCopyDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }

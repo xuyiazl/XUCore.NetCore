@@ -11,7 +11,7 @@ namespace XUCore.NetCore.Data.DbService
     /// net core 跟 netFramework下面的EF统一配置字段不一致
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractEntityTypeConfiguration<T> : IEntityTypeConfiguration<T> where T : class, new()
+    public abstract class EntityTypeConfiguration<T> : IEntityTypeConfiguration<T> where T : class, new()
     {
         /// <summary>
         /// 表名
@@ -43,10 +43,10 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         private Expression<Func<T, object>>[] insertOrUpdates { get; set; }
 
-        public AbstractEntityTypeConfiguration() { }
+        public EntityTypeConfiguration() { }
 
 
-        public AbstractEntityTypeConfiguration(string tableName, Expression<Func<T, object>> primaryKey)
+        public EntityTypeConfiguration(string tableName, Expression<Func<T, object>> primaryKey)
         {
             this.tableName = tableName;
             this.primaryKey = primaryKey;

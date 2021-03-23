@@ -6,7 +6,7 @@ using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.Mapping
 {
-    public class AdminUsersMap : AbstractEntityTypeConfiguration<AdminUsersEntity>
+    public class AdminUsersMap : EntityTypeConfiguration<AdminUsersEntity>
     {
         public AdminUsersMap() : base("AdminUsers", t => t.Id)
         {

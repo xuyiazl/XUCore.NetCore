@@ -16,9 +16,9 @@ namespace XUCore.NetCore.Data.DbService
     /// sql server的仓库
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class MsSqlRepository<TEntity> : DbBaseRepository<TEntity>, IMsSqlRepository<TEntity> where TEntity : class, new()
+    public class MsSqlRepository<TEntity> : DbRepository<TEntity>, IMsSqlRepository<TEntity> where TEntity : class, new()
     {
-        public MsSqlRepository(IBaseContext context) : base(context) { }
+        public MsSqlRepository(IDbContext context) : base(context) { }
 
         public override int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
