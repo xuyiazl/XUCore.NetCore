@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Spi;
 using System;
@@ -11,15 +12,18 @@ namespace XUCore.NetCore.EasyQuartz
 {
     public class QuartzHostedService : IHostedService
     {
+        private readonly ILogger<QuartzHostedService> _logger;
         private readonly ISchedulerFactory _schedulerFactory;
         private readonly IEnumerable<JobSchedule> _jobSchedules;
         private readonly IJobFactory _jobFactory;
 
         public QuartzHostedService(
+            ILogger<QuartzHostedService> logger,
             ISchedulerFactory schedulerFactory,
             IEnumerable<JobSchedule> jobSchedules,
             IJobFactory jobFactory)
         {
+            _logger = logger;
             _schedulerFactory = schedulerFactory;
             _jobSchedules = jobSchedules;
             _jobFactory = jobFactory;
@@ -29,7 +33,7 @@ namespace XUCore.NetCore.EasyQuartz
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            System.Console.WriteLine("QuartzHostedService Run");
+            _logger.LogInformation("QuartzHostedService is Running ...");
             Scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
             Scheduler.JobFactory = _jobFactory;
             foreach (var jobSchedule in _jobSchedules)
