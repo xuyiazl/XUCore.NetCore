@@ -63,7 +63,7 @@ namespace XUCore.NetCore
                 return new JsonSerializerSettings()
                 {
                     DateTimeZoneHandling = DateTimeZoneHandling.Local,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    ContractResolver = new DefaultContractResolver()
                 };
             }
         }

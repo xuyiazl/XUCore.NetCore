@@ -52,20 +52,13 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 需要检索的程序集
         /// </summary>
-        public virtual Assembly[] Assemblies
-        {
-            get
-            {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(assembly =>
-                        !assembly.FullName.StartsWith("System") &&
-                        !assembly.FullName.StartsWith("Microsoft") &&
-                        !assembly.FullName.StartsWith("netstandard") &&
-                        !assembly.FullName.StartsWith("Pomelo")
-                    ).ToArray();
-
-                return assemblies;
-            }
-        }
+        public virtual Assembly[] Assemblies =>
+            AppDomain.CurrentDomain.GetAssemblies().Where(assembly =>
+                !assembly.FullName.StartsWith("System") &&
+                !assembly.FullName.StartsWith("Microsoft") &&
+                !assembly.FullName.StartsWith("netstandard") &&
+                !assembly.FullName.StartsWith("Pomelo")
+            ).ToArray();
 
         /// <summary>
         /// EF依赖mappingPath，将当前项目文件夹的Entity的映射文件执行注入操作
