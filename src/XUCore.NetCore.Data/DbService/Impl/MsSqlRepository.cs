@@ -23,8 +23,7 @@ namespace XUCore.NetCore.Data.DbService
         public override int ExecuteSql(string sql, params IDataParameter[] parameters)
         {
             parameters = parameters == null ? new SqlParameter[0] { } : parameters;
-            var db = this._context as DbContext;
-            return db.Database.ExecuteSqlRaw(sql, parameters);
+            return this._context.Database.ExecuteSqlRaw(sql, parameters);
         }
 
         public override T Select<T>(string sql, CommandType type, params IDataParameter[] parameters)
@@ -55,8 +54,8 @@ namespace XUCore.NetCore.Data.DbService
                     {
                         cmd.Parameters.Add(p);
                     }
-                    SqlDataAdapter dp = new SqlDataAdapter(cmd);
-                    dp.Fill(ds);
+                    using (SqlDataAdapter dp = new SqlDataAdapter(cmd))
+                        dp.Fill(ds);
                 }
                 return ds.Tables[0];
             }
@@ -83,8 +82,8 @@ namespace XUCore.NetCore.Data.DbService
                     {
                         cmd.Parameters.Add(p);
                     }
-                    SqlDataAdapter dp = new SqlDataAdapter(cmd);
-                    dp.Fill(ds);
+                    using (SqlDataAdapter dp = new SqlDataAdapter(cmd))
+                        dp.Fill(ds);
                 }
                 return ds;
             }
