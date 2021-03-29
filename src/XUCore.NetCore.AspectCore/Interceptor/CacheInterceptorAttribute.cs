@@ -35,7 +35,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// </summary>
         public int CacheSeconds { get; set; } = 0;
         /// <summary>
-        /// 是否开启后台触发同步缓存
+        /// 是否开启后台触发同步缓存（注意：由于资源被回收或者被释放的问题，使用同步必须是单例模式）
         /// </summary>
         public bool IsTigger { get; set; } = false;
         /// <summary>
@@ -62,7 +62,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
                 Type returnType = context.GetReturnType();
 
-                string key = GetParamterKey(context.Parameters);
+                string key = Utils.GetParamterKey(Prefix, Key, ParamterKey, context.Parameters);
 
                 var result = cacheService.Get(key, returnType);
 
@@ -122,40 +122,6 @@ namespace XUCore.NetCore.AspectCore.Interceptor
                 if (value != null)
                     cacheService.Set(key, TimeSpan.FromSeconds(CacheSeconds), value);
             }
-        }
-
-
-        private string GetParamterKey(object[] paramters)
-        {
-            string key = $"{Prefix}{Key}";
-
-            if (!string.IsNullOrEmpty(ParamterKey) && paramters != null)
-            {
-                var paramList = new List<string>();
-
-                foreach (var param in paramters)
-                {
-                    if (param == null)
-                        paramList.Add(param.SafeString());
-                    else if (param.GetType() == typeof(CancellationToken))
-                        continue;
-                    else if (param.GetType() == typeof(int[]))
-                        paramList.Add(((int[])param).Join(","));
-                    else if (param.GetType() == typeof(long[]))
-                        paramList.Add(((long[])param).Join(","));
-                    else if (param.GetType() == typeof(short[]))
-                        paramList.Add(((short[])param).Join(","));
-                    else if (param.GetType() == typeof(string[]))
-                        paramList.Add(((string[])param).Join(","));
-                    else
-                        paramList.Add(param.SafeString());
-                }
-
-                if (paramList.Count > 0)
-                    key += $"_{string.Format(ParamterKey, paramList.ToArray())}";
-            }
-
-            return key;
         }
 
     }

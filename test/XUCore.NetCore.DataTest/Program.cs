@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
+using XUCore.NetCore.AspectCore.Interceptor;
 
 namespace XUCore.NetCore.DataTest
 {
@@ -49,6 +50,7 @@ namespace XUCore.NetCore.DataTest
                     if (hostContext.HostingEnvironment.IsEnvironment("dev") || hostContext.HostingEnvironment.IsEnvironment("test"))
                         configLogging.AddDebug();
                 })
+                .UseCacheHostBuilder()
                 .UseConsoleLifetime();
     }
 }

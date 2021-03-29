@@ -31,7 +31,7 @@
         </member>
         <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsTigger">
             <summary>
-            是否开启后台触发同步缓存
+            是否开启后台触发同步缓存（注意：由于资源被回收或者被释放的问题，使用同步必须是单例模式）
             </summary>
         </member>
         <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsOpen">
@@ -44,18 +44,42 @@
             缓存拦截器
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute">
+            <summary>
+            缓存拦截器（删除缓存）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.Prefix">
+            <summary>
+            缓存前缀
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.Key">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.ParamterKey">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序，（不支持模型）
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册缓存拦截服务
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheService(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Hosting.IHostApplicationLifetime)">
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             启用缓存拦截服务
             </summary>
             <param name="app"></param>
-            <param name="lifetime"></param>
         </member>
         <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
             <summary>
@@ -91,6 +115,12 @@
             <param name="key"></param>
             <param name="expirationTime"></param>
             <param name="value"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Remove(System.String)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key"></param>
         </member>
         <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory">
             <summary>

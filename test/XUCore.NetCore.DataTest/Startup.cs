@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XUCore.NetCore.AspectCore.Interceptor;
 using XUCore.NetCore.DataTest.Business;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.DbService;
@@ -35,6 +36,9 @@ namespace XUCore.NetCore.DataTest
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             );
+
+            //注册缓存服务，暂时只提供内存缓存，后面会增加Redis，需要视情况而定
+            services.AddCacheService<MemoryCacheService>();
 
             services.AddHostedService<MainService>();
         }

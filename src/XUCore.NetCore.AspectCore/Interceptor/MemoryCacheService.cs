@@ -27,5 +27,10 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         {
             memoryCache.Set(key, value, DateTimeOffset.Now.AddSeconds(expirationTime.TotalSeconds));
         }
+
+        public void Remove(string key)
+        {
+            memoryCache.Remove(key);
+        }
     }
 }

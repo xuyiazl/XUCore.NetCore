@@ -61,5 +61,10 @@ namespace XUCore.NetCore.AspectCore.Interceptor
                 logger.LogError($"写入 {key} 缓存失败，{ex.FormatMessage()}");
             }
         }
+
+        public void Remove(string key)
+        {
+            redisService.KeyDelete(key, connectionName: "cache-write");
+        }
     }
 }

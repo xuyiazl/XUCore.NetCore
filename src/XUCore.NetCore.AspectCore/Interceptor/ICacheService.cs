@@ -27,5 +27,10 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// <param name="expirationTime"></param>
         /// <param name="value"></param>
         void Set(string key, TimeSpan expirationTime, object value);
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="key"></param>
+        void Remove(string key);
     }
 }

@@ -9,7 +9,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
                //......其他代码省略
                //注入缓存任务，这里的作用是让其AOP起作用
-                .UseCacheTaskHostBuilder();
+                .UseCacheHostBuilder();
 
 ```
 
@@ -25,10 +25,10 @@ public void ConfigureServices(IServiceCollection services)
 
 ```csharp
 
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     //*******启用缓存服务*******
-    app.UseCacheService(lifetime);
+    app.UseCacheService();
 }
 
 ```

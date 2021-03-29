@@ -32,10 +32,10 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// 启用缓存拦截服务
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="lifetime"></param>
-        public static IApplicationBuilder UseCacheService(this IApplicationBuilder app, IHostApplicationLifetime lifetime)
+        public static IApplicationBuilder UseCacheService(this IApplicationBuilder app)
         {
             var quartz = app.ApplicationServices.GetRequiredService<QuartzService>();
+            var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
             lifetime.ApplicationStarted.Register(quartz.Start);
             lifetime.ApplicationStopped.Register(quartz.Stop);
 
