@@ -88,7 +88,7 @@ namespace XUCore.NetCore.Mongo
             var a = orderby.ToMap(',', ' ', false, false, true);
             foreach (var item in a)
             {
-                if (item.Value.ToLower().Equals("desc"))
+                if (item.Value.Equals("desc", StringComparison.OrdinalIgnoreCase))
                     sort = sort != null ? sort.Descending(item.Key) : builderSort.Descending(item.Key);
                 else
                     sort = sort != null ? sort.Ascending(item.Key) : builderSort.Ascending(item.Key);

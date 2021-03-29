@@ -42,7 +42,7 @@ namespace XUCore.Extensions
             foreach (var item in a)
             {
                 var m = index++ > 0 ? "ThenBy" : "OrderBy";
-                if (item.Value.Equals("desc"))
+                if (item.Value.Equals("desc", StringComparison.OrdinalIgnoreCase))
                 {
                     m += "Descending";
                     orderby = item.Key;
@@ -76,7 +76,7 @@ namespace XUCore.Extensions
             foreach (var item in a)
             {
                 var m = index++ > 0 ? "ThenBy" : "OrderBy";
-                if (item.Value.Equals("desc"))
+                if (item.Value.Equals("desc", StringComparison.OrdinalIgnoreCase))
                 {
                     m += "Descending";
                     orderby = item.Key;
