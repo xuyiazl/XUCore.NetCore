@@ -14,7 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using XUCore.NetCore.AspectCore.Interceptor;
 using XUCore.NetCore.Extensions;
+using XUCore.NetCore.RazorTests;
 
 namespace XUCore.RazorTests
 {
@@ -31,9 +33,13 @@ namespace XUCore.RazorTests
         public void ConfigureServices(IServiceCollection services)
         {
             //封装使用mssql数据库
-            services.AddDbContext<TestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection"))).AddEntityFrameworkSqlServer();
+            services.AddDbContext<TestDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddMvcAction();
+
+            services.AddCacheService<MemoryCacheService>();
+
+            services.AddScoped<ICacheTest, CacheTest>();
 
             services.AddRazorPages(options =>
             {

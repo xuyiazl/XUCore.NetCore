@@ -21,9 +21,11 @@ namespace XUCore.RazorTests.Pages
     public class IndexModel : PageModel
     {
         private readonly TestDBContext _dbContext;
-        public IndexModel(TestDBContext context)
+        private readonly ICacheTest cacheTest;
+        public IndexModel(TestDBContext context, ICacheTest cacheTest)
         {
             _dbContext = context;
+            this.cacheTest = cacheTest;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -33,6 +35,7 @@ namespace XUCore.RazorTests.Pages
 
         public async Task OnGetAsync()
         {
+            cacheTest.GetPermission();
             Customers = await _dbContext.Customer.ToListAsync();
         }
 
