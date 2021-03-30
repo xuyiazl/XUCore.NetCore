@@ -8,7 +8,7 @@ namespace XUCore.NetCore.RazorTests
 {
     public class CacheTest: ICacheTest
     {
-        [CacheInterceptor(Key = "test", CacheSeconds = CacheTime.Day1)]
+        [CacheTigger(Key = "test", Seconds = CacheTime.Day1)]
         public string GetPermission()
         {
             return "test";

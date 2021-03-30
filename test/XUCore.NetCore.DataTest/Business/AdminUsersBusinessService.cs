@@ -34,7 +34,7 @@ namespace XUCore.NetCore.DataTest.Business
             await Task.CompletedTask;
         }
 
-        [CacheInterceptor(Key = "Cache_Test", CacheSeconds = CacheTime.Min5)]
+        [CacheMethod(Key = "Cache_Test", Seconds = CacheTime.Second3)]
         public async Task<AdminUsersEntity> TestCacheAdd()
         {
             return BuildRecords(1)[0];

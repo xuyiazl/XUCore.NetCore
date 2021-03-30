@@ -4,42 +4,37 @@
         <name>XUCore.NetCore.AspectCore</name>
     </assembly>
     <members>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute">
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.Prefix">
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Prefix">
             <summary>
             缓存前缀
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Key">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.ParamterKey">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.CacheSeconds">
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Seconds">
             <summary>
             缓存时间（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsTigger">
-            <summary>
-            是否开启后台触发同步缓存（注意：由于资源被回收或者被释放的问题，使用同步必须是单例模式）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.IsOpen">
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.IsOpen">
             <summary>
             是否开启缓存
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheInterceptorAttribute.#ctor">
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.#ctor">
             <summary>
             缓存拦截器
             </summary>
@@ -76,10 +71,11 @@
             <param name="services"></param>
         </member>
         <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary>
-            启用缓存拦截服务
-            </summary>
-            <param name="app"></param>
+            
+             <summary>
+             启用缓存拦截服务
+             </summary>
+             <param name="app"></param>
         </member>
         <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
             <summary>
@@ -87,6 +83,41 @@
             </summary>
             <param name="hostBuilder"></param>
             <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Prefix">
+            <summary>
+            缓存前缀
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Key">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.ParamterKey">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Seconds">
+            <summary>
+            刷新时间（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.IsOpen">
+            <summary>
+            是否开启缓存
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
         </member>
         <member name="T:XUCore.NetCore.AspectCore.Interceptor.ICacheService">
             <summary>

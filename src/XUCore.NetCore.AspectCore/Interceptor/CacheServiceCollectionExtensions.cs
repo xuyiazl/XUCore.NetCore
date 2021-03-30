@@ -28,6 +28,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
             return services;
         }
+        ///
         /// <summary>
         /// 启用缓存拦截服务
         /// </summary>

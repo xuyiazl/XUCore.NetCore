@@ -28,6 +28,7 @@ public void ConfigureServices(IServiceCollection services)
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     //*******启用缓存服务*******
+    //此方法适合web和api
     app.UseCacheService();
 }
 
@@ -42,7 +43,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 ```csharp
 
-[CacheInterceptor(Key = "AdsService_GetAdsByPositionIdsList", ParamterKey = "{0}", CacheSeconds = CacheTime.Min5)]
+[CacheMethod(Key = "AdsService_GetAdsByPositionIdsList", ParamterKey = "{0}", Seconds = CacheTime.Min5)]
 public async Task<List<AdsAdsInationOutPutModel>> GetAdsByPositionIdsList(int[] ids, CancellationToken cancellationToken)
 {
     //....
@@ -56,7 +57,7 @@ public async Task<List<AdsAdsInationOutPutModel>> GetAdsByPositionIdsList(int[] 
 
 ```csharp
 
-[CacheInterceptor(IsTigger = true, Key = "ReputationService_GetMonthRank", ParamterKey = "{0}_{1}_{2}_{3}", CacheSeconds = CacheTime.Min2)]
+[CacheTigger(Key = "ReputationService_GetMonthRank", ParamterKey = "{0}_{1}_{2}_{3}", Seconds = CacheTime.Min2)]
 
 ```
 

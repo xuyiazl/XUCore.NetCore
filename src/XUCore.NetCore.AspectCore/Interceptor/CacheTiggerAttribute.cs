@@ -1,14 +1,8 @@
 ﻿using AspectCore.DynamicProxy;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Collections.Concurrent;
-using System.Reflection;
+using System;
+using System.Threading.Tasks;
 using XUCore.Extensions;
 
 namespace XUCore.NetCore.AspectCore.Interceptor
@@ -16,7 +10,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
     /// <summary>
     /// 缓存拦截器
     /// </summary>
-    public class CacheInterceptorAttribute : AbstractInterceptorAttribute
+    public class CacheTiggerAttribute : AbstractInterceptorAttribute
     {
         /// <summary>
         /// 缓存前缀
@@ -31,13 +25,9 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// </summary>
         public string ParamterKey { get; set; }
         /// <summary>
-        /// 缓存时间（秒）
+        /// 刷新时间（秒）
         /// </summary>
-        public int CacheSeconds { get; set; } = 0;
-        /// <summary>
-        /// 是否开启后台触发同步缓存（注意：由于资源被回收或者被释放的问题，使用同步必须是单例模式）
-        /// </summary>
-        public bool IsTigger { get; set; } = false;
+        public int Seconds { get; set; } = 60;
         /// <summary>
         /// 是否开启缓存
         /// </summary>
@@ -45,11 +35,11 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// <summary>
         /// 缓存拦截器
         /// </summary>
-        public CacheInterceptorAttribute() { }
+        public CacheTiggerAttribute() { }
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
-            if (!IsOpen || CacheSeconds <= 0)
+            if (!IsOpen)
             {
                 await next(context);
 
@@ -77,7 +67,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
             }
             catch (Exception ex)
             {
-                var logger = context.ServiceProvider.GetService<ILogger<CacheInterceptorAttribute>>();
+                var logger = context.ServiceProvider.GetService<ILogger<CacheTiggerAttribute>>();
 
                 logger.LogError($"CacheInterceptor：Key：{Key}，ParamterKey：{ParamterKey} {ex.FormatMessage()}");
 
@@ -87,41 +77,29 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
         private async Task Next(AspectContext context, AspectDelegate next, ICacheService cacheService, string key)
         {
-            if (IsTigger)
-            {
-                var scheduler = context.ServiceProvider.GetService<QuartzService>();
+            var scheduler = context.ServiceProvider.GetService<QuartzService>();
 
-                if (!scheduler.CacheContainer.ContainsKey(key))
+            if (!scheduler.CacheContainer.ContainsKey(key))
+            {
+                scheduler.CacheContainer.TryAdd(key, async () =>
                 {
-                    scheduler.CacheContainer.TryAdd(key, () =>
-                    {
-                        next(context).Wait();
+                    await next(context);
 
-                        var value = context.GetReturnValue().Result;
+                    var value = await context.GetReturnValue();
 
-                        if (value != null)
-                            cacheService.Set(key, value);
-                    });
+                    if (value != null)
+                        cacheService.Set(key, value);
+                });
 
-                    scheduler.JoinJobAsync(key, TimeSpan.FromSeconds(CacheSeconds)).Wait();
-                }
-
-                await next(context);
-
-                var value = await context.GetReturnValue();
-
-                if (value != null)
-                    cacheService.Set(key, value);
+                scheduler.JoinJobAsync(key, TimeSpan.FromSeconds(Seconds)).Wait();
             }
-            else
-            {
-                await next(context);
 
-                var value = await context.GetReturnValue();
+            await next(context);
 
-                if (value != null)
-                    cacheService.Set(key, TimeSpan.FromSeconds(CacheSeconds), value);
-            }
+            var value = await context.GetReturnValue();
+
+            if (value != null)
+                cacheService.Set(key, value);
         }
 
     }

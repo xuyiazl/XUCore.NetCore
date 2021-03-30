@@ -1,15 +1,6 @@
 ﻿using AspectCore.DynamicProxy;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading;
-using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Collections.Concurrent;
-using System.Reflection;
-using XUCore.Extensions;
+using System.Threading.Tasks;
 
 namespace XUCore.NetCore.AspectCore.Interceptor
 {
@@ -45,7 +36,5 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
             cacheService.Remove(key);
         }
-
-
     }
 }

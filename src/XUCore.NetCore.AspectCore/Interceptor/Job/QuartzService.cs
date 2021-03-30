@@ -4,6 +4,7 @@ using Quartz.Impl;
 using Quartz.Spi;
 using System;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace XUCore.NetCore.AspectCore.Interceptor
 {
@@ -15,7 +16,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         private IScheduler _scheduler;
         private readonly ILogger _logger;
         private readonly IJobFactory jobfactory;
-        public readonly ConcurrentDictionary<string, Action> CacheContainer;
+        public readonly ConcurrentDictionary<string, Func<Task>> CacheContainer;
         /// <summary>
         /// Quartz.Net启动后注册job和trigger
         /// </summary>
@@ -23,7 +24,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// <param name="loggerFactory"></param>
         public QuartzService(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         {
-            this.CacheContainer = new ConcurrentDictionary<string, Action>();
+            this.CacheContainer = new ConcurrentDictionary<string, Func<Task>>();
 
             _logger = loggerFactory.CreateLogger<QuartzService>();
 
