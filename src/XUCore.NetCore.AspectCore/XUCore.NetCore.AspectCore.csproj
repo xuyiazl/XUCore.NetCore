@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<Description>
 			基于 AspectCore 的拦截器扩展插件
 		</Description>
@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core AspectCore 拦截器扩展插件</Description>
 		<Copyright>Copyright © XUCore 2021</Copyright>
-		<Version>1.1.5</Version>
+		<Version>5.0.0</Version>
 		<PackageId>XUCore.NetCore.AspectCore</PackageId>
 		<Product>XUCore.NetCore.AspectCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -30,12 +30,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspectCore.Core" Version="2.1.0" />
-		<PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.1.0" />
-		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.1.0" />
+		<PackageReference Include="AspectCore.Core" Version="2.2.0" />
+		<PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.2.0" />
+		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.4" />
-		<PackageReference Include="Quartz" Version="3.2.3" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+		<PackageReference Include="Quartz" Version="3.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>

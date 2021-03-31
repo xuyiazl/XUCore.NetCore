@@ -1,47 +1,39 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<Description>
-			Jwt公用库，一般情况下使用微软自带的jwt
+			NetCore DynamicWebApi 动态API（来自Panda），勿随意使用该组件，源码请转至 Panda.DynamicWebApi
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Jwt公用库</Description>
+		<Description>.NET Core 动态API</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
 		<Version>5.0.0</Version>
-		<PackageId>XUCore.NetCore.Jwt</PackageId>
-		<Product>XUCore.NetCore.Jwt</Product>
+		<PackageId>XUCore.NetCore.DynamicWebApi</PackageId>
+		<Product>XUCore.NetCore.DynamicWebApi</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
 		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.Jwt.xml</DocumentationFile>
+		<DocumentationFile>XUCore.NetCore.DynamicWebApi.xml</DocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<OutputPath>..\..\release\</OutputPath>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.Jwt.xml</DocumentationFile>
+		<DocumentationFile>XUCore.NetCore.DynamicWebApi.xml</DocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-		<ProjectReference Include="..\XUCore.NetCore\XUCore.NetCore.csproj" />
-		<ProjectReference Include="..\XUCore\XUCore.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="XUCore.NetCore.Jwt.xml">
+		<None Update="XUCore.NetCore.DynamicWebApi.xml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

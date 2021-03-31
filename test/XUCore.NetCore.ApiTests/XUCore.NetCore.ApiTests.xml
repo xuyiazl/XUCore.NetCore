@@ -62,6 +62,43 @@
             json数据
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Get(System.Int32)">
+            <summary>
+            Get An Apple.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.GetAllAsync">
+            <summary>
+            Get  All Apple Async.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Get">
+            <summary>
+            Get All Apple.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.GetBigApple">
+            <summary>
+            Get All Apple.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Update(XUCore.NetCore.ApiTests.Dtos.UpdateAppleDto)">
+            <summary>
+            Update Apple
+            </summary>
+            <param name="dto"></param>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Delete(System.Int32)">
+            <summary>
+            Delete Apple
+            </summary>
+            <param name="id">Apple Id</param>
+        </member>
         <member name="M:XUCore.NetCore.ApiTests.SignMiddlewareDemo.GetAppSecretAsync(System.String)">
             <summary>
             

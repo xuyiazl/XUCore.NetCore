@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<Description>
 			XUCore基础类库
 		</Description>
@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Common 基础库</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.1.5</Version>
+		<Version>5.0.0</Version>
 		<PackageId>XUCore</PackageId>
 		<Product>XUCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -30,23 +30,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MessagePack" Version="2.1.115" />
+		<PackageReference Include="MessagePack" Version="2.2.85" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.4" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.4" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-		<PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-		<PackageReference Include="System.Drawing.Common" Version="4.7.0" />
-		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-		<PackageReference Include="AspectCore.Extensions.Reflection" Version="2.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+		<PackageReference Include="AspectCore.Extensions.Reflection" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
 	</ItemGroup>
 

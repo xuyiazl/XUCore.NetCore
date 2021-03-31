@@ -1,15 +1,10 @@
-﻿using MessagePack;
-using XUCore.Serializer;
-using XUCore.Webs;
-using System;
-using System.Collections.Generic;
+﻿using Polly.Timeout;
+using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Polly.Timeout;
-using System.Net;
-using System.Diagnostics;
+using XUCore.Webs;
 
 namespace XUCore.NetCore.HttpFactory
 {

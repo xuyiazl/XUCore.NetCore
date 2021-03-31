@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<Description>
 			数据库仓储，MYSQL和MSSQL自由切换
 		</Description>
@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Data 数据库仓储</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>1.1.5</Version>
+		<Version>5.0.0</Version>
 		<PackageId>XUCore.NetCore.Data</PackageId>
 		<Product>XUCore.NetCore.Data</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -27,23 +27,13 @@
 		<DocumentationFile>XUCore.NetCore.Data.xml</DocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Collection\**" />
-	  <Compile Remove="DbRepositories\**" />
-	  <EmbeddedResource Remove="Collection\**" />
-	  <EmbeddedResource Remove="DbRepositories\**" />
-	  <None Remove="Collection\**" />
-	  <None Remove="DbRepositories\**" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="FastMember" Version="1.5.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.4" />
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>
