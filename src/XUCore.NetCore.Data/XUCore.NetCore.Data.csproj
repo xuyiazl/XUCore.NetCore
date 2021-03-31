@@ -33,7 +33,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
 	</ItemGroup>
 
 	<ItemGroup>
