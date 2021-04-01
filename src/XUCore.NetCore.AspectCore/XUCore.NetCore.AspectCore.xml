@@ -4,127 +4,133 @@
         <name>XUCore.NetCore.AspectCore</name>
     </assembly>
     <members>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Prefix">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Prefix">
             <summary>
             缓存前缀
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Key">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.ParamterKey">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.Seconds">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Seconds">
             <summary>
             缓存时间（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.IsOpen">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.IsOpen">
             <summary>
             是否开启缓存
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheMethodAttribute.#ctor">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.#ctor">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute">
             <summary>
             缓存拦截器（删除缓存）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.Prefix">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Prefix">
             <summary>
             缓存前缀
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Key">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.ParamterKey">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序，（不支持模型）
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheRemoveAttribute.#ctor">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.#ctor">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册缓存拦截服务
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            
-             <summary>
-             启用缓存拦截服务
-             </summary>
-             <param name="app"></param>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.UseCacheTiggerService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            启用缓存拦截服务
+            </summary>
+            <param name="app"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheServiceCollectionExtensions.UseCacheHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddInterceptor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册拦截器
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.UseInterceptorHostBuilder(Microsoft.Extensions.Hosting.IHostBuilder)">
             <summary>
             启用拦截器，使用 ===》aspect ServiceContextProviderFactory
             </summary>
             <param name="hostBuilder"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Prefix">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Prefix">
             <summary>
             缓存前缀
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Key">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.ParamterKey">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.Seconds">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Seconds">
             <summary>
             刷新时间（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.IsOpen">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.IsOpen">
             <summary>
             是否开启缓存
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.CacheTiggerAttribute.#ctor">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.#ctor">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.ICacheService">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.ICacheService">
             <summary>
             缓存服务
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Get(System.String,System.Type)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Get(System.String,System.Type)">
             <summary>
             获取缓存
             </summary>
@@ -132,14 +138,14 @@
             <param name="returnType"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Set(System.String,System.Object)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.Object)">
             <summary>
             写入缓存
             </summary>
             <param name="key"></param>
             <param name="value"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Set(System.String,System.TimeSpan,System.Object)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.TimeSpan,System.Object)">
             <summary>
             写入缓存
             </summary>
@@ -147,29 +153,29 @@
             <param name="expirationTime"></param>
             <param name="value"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.ICacheService.Remove(System.String)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Remove(System.String)">
             <summary>
             删除缓存
             </summary>
             <param name="key"></param>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory">
             <summary>
             JobFactory ：实现在Timer触发的时候注入生成对应的Job组件
             </summary>
         </member>
-        <member name="F:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.serviceProvider">
+        <member name="F:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory.serviceProvider">
             <summary>
             
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.#ctor(System.IServiceProvider)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory.#ctor(System.IServiceProvider)">
             <summary>
             
             </summary>
             <param name="serviceProvider"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.NewJob(Quartz.Spi.TriggerFiredBundle,Quartz.IScheduler)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory.NewJob(Quartz.Spi.TriggerFiredBundle,Quartz.IScheduler)">
             <summary>
             Called by the scheduler at the time of the trigger firing, in order to produce a Quartz.IJob instance on which to call Execute.
             </summary>
@@ -177,37 +183,62 @@
             <param name="scheduler"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzJobFactory.ReturnJob(Quartz.IJob)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory.ReturnJob(Quartz.IJob)">
             <summary>
             Allows the job factory to destroy/cleanup the job if needed.
             </summary>
             <param name="job"></param>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzRefreshJob">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.QuartzRefreshJob">
             <summary>
             刷新任务
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Interceptor.QuartzService">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.QuartzService">
             <summary>
             Quartz.Net启动后注册job和trigger
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzService.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Quartz.Net启动后注册job和trigger
             </summary>
             <param name="serviceProvider"></param>
             <param name="loggerFactory"></param>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.Start">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzService.Start">
             <summary>
             启动服务
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Interceptor.QuartzService.Stop">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzService.Stop">
             <summary>
             停止服务
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.IgnoreAttribute">
+            <summary>
+            忽略拦截器基类
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.InterceptorBase">
+            <summary>
+            拦截器基类
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.NotEmptyAttribute">
+            <summary>
+            验证参数不可为空
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.NotNullAttribute">
+            <summary>
+            验证参数不可为null
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.ParameterInterceptorBase">
+            <summary>
+            参数缓存拦截基类
             </summary>
         </member>
     </members>

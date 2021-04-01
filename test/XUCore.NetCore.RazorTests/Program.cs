@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using XUCore.NetCore.AspectCore.Interceptor;
+using XUCore.NetCore.AspectCore.Cache;
 
 namespace XUCore.RazorTests
 {
@@ -23,6 +23,6 @@ namespace XUCore.RazorTests
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-            .UseCacheHostBuilder();
+            .UseInterceptorHostBuilder();
     }
 }

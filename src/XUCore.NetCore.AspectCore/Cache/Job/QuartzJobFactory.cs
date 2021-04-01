@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// JobFactory ：实现在Timer触发的时候注入生成对应的Job组件

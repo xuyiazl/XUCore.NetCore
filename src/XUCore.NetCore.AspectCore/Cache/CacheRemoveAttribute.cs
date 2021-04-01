@@ -2,12 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// 缓存拦截器（删除缓存）
     /// </summary>
-    public class CacheRemoveAttribute : AbstractInterceptorAttribute
+    public class CacheRemoveAttribute : InterceptorBase
     {
         /// <summary>
         /// 缓存前缀

@@ -6,7 +6,7 @@ using System.IO;
 using XUCore.Extensions;
 using XUCore.NetCore.Redis;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     public class RedisCacheService : ICacheService
     {
@@ -25,6 +25,9 @@ namespace XUCore.NetCore.AspectCore.Interceptor
             {
                 var json = redisService.StringGet<string>(key, connectionName: "cache-read", serializer: RedisSerializerOptions.RedisValue);
 
+                if (json.IsEmpty())
+                    return null;
+
                 return JsonConvert.DeserializeObject(json, returnType);
             }
             catch (Exception ex)
@@ -38,6 +41,9 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         {
             try
             {
+                if (value.IsNull())
+                    return;
+
                 var json = JsonConvert.SerializeObject(value);
 
                 redisService.StringSet(key, json, connectionName: "cache-write", serializer: RedisSerializerOptions.RedisValue);
@@ -52,6 +58,9 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         {
             try
             {
+                if (value.IsNull())
+                    return;
+
                 var json = JsonConvert.SerializeObject(value);
 
                 redisService.StringSet(key, json, (int)expirationTime.TotalSeconds, connectionName: "cache-write", serializer: RedisSerializerOptions.RedisValue);
@@ -63,7 +72,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         }
 
         public void Remove(string key)
-        {
+        {            
             redisService.KeyDelete(key, connectionName: "cache-write");
         }
     }

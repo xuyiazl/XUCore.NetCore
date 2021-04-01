@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using XUCore.Extensions;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     public class MemoryCacheService : ICacheService
     {
@@ -20,11 +21,17 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
         public void Set(string key, object value)
         {
+            if (value.IsNull())
+                return;
+
             memoryCache.Set(key, value);
         }
 
         public void Set(string key, TimeSpan expirationTime, object value)
         {
+            if (value.IsNull())
+                return;
+
             memoryCache.Set(key, value, DateTimeOffset.Now.AddSeconds(expirationTime.TotalSeconds));
         }
 

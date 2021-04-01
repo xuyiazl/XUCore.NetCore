@@ -6,7 +6,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// Quartz.Net启动后注册job和trigger

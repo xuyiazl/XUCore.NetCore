@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// 缓存服务

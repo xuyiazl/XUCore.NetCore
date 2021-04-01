@@ -5,12 +5,12 @@ using System;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// 缓存拦截器
     /// </summary>
-    public class CacheTiggerAttribute : AbstractInterceptorAttribute
+    public class CacheMethodAttribute : InterceptorBase
     {
         /// <summary>
         /// 缓存前缀
@@ -25,7 +25,7 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// </summary>
         public string ParamterKey { get; set; }
         /// <summary>
-        /// 刷新时间（秒）
+        /// 缓存时间（秒）
         /// </summary>
         public int Seconds { get; set; } = 60;
         /// <summary>
@@ -35,11 +35,11 @@ namespace XUCore.NetCore.AspectCore.Interceptor
         /// <summary>
         /// 缓存拦截器
         /// </summary>
-        public CacheTiggerAttribute() { }
+        public CacheMethodAttribute() { }
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
-            if (!IsOpen)
+            if (!IsOpen || Seconds <= 0)
             {
                 await next(context);
 
@@ -58,7 +58,12 @@ namespace XUCore.NetCore.AspectCore.Interceptor
 
                 if (result == null)
                 {
-                    await Next(context, next, cacheService, key);
+                    await next(context);
+
+                    var value = await context.GetReturnValue();
+
+                    if (value != null)
+                        cacheService.Set(key, TimeSpan.FromSeconds(Seconds), value);
                 }
                 else
                 {
@@ -69,38 +74,10 @@ namespace XUCore.NetCore.AspectCore.Interceptor
             {
                 var logger = context.ServiceProvider.GetService<ILogger<CacheTiggerAttribute>>();
 
-                logger.LogError($"CacheInterceptor：Key：{Key}，ParamterKey：{ParamterKey} {ex.FormatMessage()}");
+                logger.LogError($"CacheMethod：Key：{Key}，ParamterKey：{ParamterKey} {ex.FormatMessage()}");
 
                 await next(context);
             }
         }
-
-        private async Task Next(AspectContext context, AspectDelegate next, ICacheService cacheService, string key)
-        {
-            var scheduler = context.ServiceProvider.GetService<QuartzService>();
-
-            if (!scheduler.CacheContainer.ContainsKey(key))
-            {
-                scheduler.CacheContainer.TryAdd(key, async () =>
-                {
-                    await next(context);
-
-                    var value = await context.GetReturnValue();
-
-                    if (value != null)
-                        cacheService.Set(key, value);
-                });
-
-                scheduler.JoinJobAsync(key, TimeSpan.FromSeconds(Seconds)).Wait();
-            }
-
-            await next(context);
-
-            var value = await context.GetReturnValue();
-
-            if (value != null)
-                cacheService.Set(key, value);
-        }
-
     }
 }

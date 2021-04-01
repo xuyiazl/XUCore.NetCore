@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using XUCore.NetCore.AspectCore.Interceptor;
+using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.RazorTests;
 

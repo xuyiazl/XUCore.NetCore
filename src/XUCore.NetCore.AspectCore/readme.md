@@ -9,7 +9,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
                //......其他代码省略
                //注入缓存任务，这里的作用是让其AOP起作用
-                .UseCacheHostBuilder();
+                .UseInterceptorHostBuilder();
 
 ```
 
@@ -28,8 +28,8 @@ public void ConfigureServices(IServiceCollection services)
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     //*******启用缓存服务*******
-    //此方法适合web和api
-    app.UseCacheService();
+    //此方法适合web和api（CacheTigger），如果仅仅是主动缓存，那么不需要此处代码
+    app.UseCacheTiggerService();
 }
 
 ```

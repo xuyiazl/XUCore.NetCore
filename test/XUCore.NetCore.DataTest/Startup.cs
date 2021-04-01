@@ -1,13 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using XUCore.NetCore.AspectCore.Interceptor;
+using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DataTest.Business;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.DbService;
+using XUCore.NetCore.Redis;
 
 namespace XUCore.NetCore.DataTest
 {
@@ -37,8 +39,12 @@ namespace XUCore.NetCore.DataTest
                 .WithScopedLifetime()
             );
 
+            //添加redis插件，支持拦截器缓存
+            services.AddRedisService().AddJsonRedisSerializer();
+
             //注册缓存服务，暂时只提供内存缓存，后面会增加Redis，需要视情况而定
-            services.AddCacheService<MemoryCacheService>();
+            //services.AddCacheService<MemoryCacheService>();
+            services.AddCacheService<RedisCacheService>();
 
             services.AddHostedService<MainService>();
         }

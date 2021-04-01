@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore.Interceptor;
+using XUCore.NetCore.AspectCore;
+using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Data.DbService;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.DbService;
@@ -15,7 +16,6 @@ using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.Business
 {
-
     public class AdminUsersBusinessService : IAdminUsersBusinessService
     {
         private readonly IAdminUsersDbServiceProvider db;
@@ -28,13 +28,19 @@ namespace XUCore.NetCore.DataTest.Business
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
         }
 
+        [TestMethod]
+        public async Task TestAspectCore()
+        {
+            await Task.CompletedTask;
+        }
+
         [CacheRemove(Key = "Cache_Test")]
         public async Task TestCacheRemove()
         {
             await Task.CompletedTask;
         }
 
-        [CacheMethod(Key = "Cache_Test", Seconds = CacheTime.Second3)]
+        [CacheMethod(Key = "Cache_Test", Seconds = CacheTime.Min1)]
         public async Task<AdminUsersEntity> TestCacheAdd()
         {
             return BuildRecords(1)[0];

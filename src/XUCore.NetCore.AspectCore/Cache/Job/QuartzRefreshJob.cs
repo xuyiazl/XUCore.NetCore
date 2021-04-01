@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
     /// 刷新任务

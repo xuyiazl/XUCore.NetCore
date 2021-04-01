@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.AspectCore.Interceptor
+namespace XUCore.NetCore.AspectCore.Cache
 {
     internal static class Utils
     {
