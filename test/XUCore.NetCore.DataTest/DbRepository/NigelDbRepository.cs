@@ -63,15 +63,22 @@ namespace XUCore.NetCore.DataTest.DbRepository
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
             services.AddScoped(typeof(INigelDbContext), typeof(NigelDbContext));
+            services.AddScoped(typeof(INigelUnitOfWork), typeof(NigelUnitOfWork));
 
             return services;
         }
     }
 
+    public interface INigelUnitOfWork : IUnitOfWork { }
+    public class NigelUnitOfWork : UnitOfWork, INigelUnitOfWork
+    {
+        public NigelUnitOfWork(INigelDbContext dbContext) : base(dbContext) { }
+    }
+
     public interface INigelDbContext : IDbContext { }
     public class NigelDbContext : DBContextFactory, INigelDbContext
     {
-        public NigelDbContext(DbContextOptions<NigelDbContext> options): base(options) { }
+        public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options) { }
     }
 
     public interface INigelDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }

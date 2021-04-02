@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -21,11 +22,13 @@ namespace XUCore.NetCore.DataTest.Business
         private readonly IAdminUsersDbServiceProvider db;
         private readonly INigelReadDbRepository<AdminUsersEntity> nigelDb;
         private readonly INigelCopyDbRepository<AdminUsersEntity> nigelCopyDb;
+        private readonly INigelUnitOfWork unitOfWork;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
         {
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
             this.nigelDb = serviceProvider.GetService<INigelReadDbRepository<AdminUsersEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
+            this.unitOfWork = serviceProvider.GetService<INigelUnitOfWork>();
         }
 
         [TestMethod]
@@ -43,6 +46,8 @@ namespace XUCore.NetCore.DataTest.Business
         [CacheMethod(Key = "Cache_Test", Seconds = CacheTime.Min1)]
         public async Task<AdminUsersEntity> TestCacheAdd()
         {
+            var list = unitOfWork.GetList<AdminUsersEntity>(c => true);
+
             return BuildRecords(1)[0];
         }
 
