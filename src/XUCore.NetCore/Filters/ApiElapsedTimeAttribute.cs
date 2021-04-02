@@ -27,7 +27,7 @@ namespace XUCore.NetCore.Filters
             base.OnActionExecuted(actionExecutedContext);
             stopwatch.Stop();
 
-            var reType = actionExecutedContext.Result.GetType();
+            var reType = actionExecutedContext.Result?.GetType();
 
             if (reType == typeof(Result))
             {

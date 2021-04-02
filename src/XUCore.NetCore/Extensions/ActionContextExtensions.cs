@@ -34,14 +34,40 @@ namespace XUCore.NetCore.Extensions
         /// </summary>
         /// <param name="context">操作上下文</param>
         /// <returns></returns>
-        public static string GetControllerName(this ActionContext context) => context.RouteData.Values["controller"].ToString();
+        public static string GetControllerName(this ActionContext context)
+        {
+            string controller = null;
+            if (context.RouteData.Values.TryGetValue("controller", out object value))
+            {
+                controller = value.SafeString();
+                if (controller.IsEmpty())
+                {
+                    controller = null;
+                }
+            }
+
+            return controller;
+        }
 
         /// <summary>
         /// 获取Action名称
         /// </summary>
         /// <param name="context">操作上下文</param>
         /// <returns></returns>
-        public static string GetActionName(this ActionContext context) => context.RouteData.Values["action"].ToString();
+        public static string GetActionName(this ActionContext context)
+        {
+            string action = null;
+            if (context.RouteData.Values.TryGetValue("action", out object value))
+            {
+                action = value.SafeString();
+                if (action.IsEmpty())
+                {
+                    action = null;
+                }
+            }
+
+            return action;
+        }
 
         /// <summary>
         /// 获取所有路由信息

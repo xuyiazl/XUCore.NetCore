@@ -7,6 +7,7 @@ using XUCore.Helpers;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Linq;
 
 namespace XUCore.NetCore.Filters
 {
@@ -51,14 +52,14 @@ namespace XUCore.NetCore.Filters
 
                 if (logger.IsEnabled(LogLevel.Error))
                 {
-                    var areaName = context.GetAreaName();
-                    var controllerName = context.GetControllerName();
-                    var actionName = context.GetActionName();
+                    //var areaName = context.GetAreaName();
+                    //var controllerName = context.GetControllerName();
+                    var routes = context.GetRouteValues().Select(c => $"{c.Key}={c.Value}").Join("，");
 
                     var str = new Str();
                     str.AppendLine("WebApi全局异常");
-                    str.AppendLine($"路由位置：{areaName}{controllerName}/{actionName}");
-                    str.AppendLine($"IP：{context.HttpContext.Connection.RemoteIpAddress.ToString()}");
+                    str.AppendLine($"路由信息：{routes}");
+                    str.AppendLine($"IP：{context.HttpContext.Connection.RemoteIpAddress}");
                     str.AppendLine($"请求方法：{context.HttpContext.Request.Method}");
                     str.AppendLine($"请求地址：{context.HttpContext.Request.Scheme}://{context.HttpContext.Request.Host}{context.HttpContext.Request.Path}{context.HttpContext.Request.QueryString}");
                     logger.LogError(context.Exception.FormatMessage(str.ToString()));
