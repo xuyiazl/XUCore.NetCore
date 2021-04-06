@@ -73,7 +73,7 @@ namespace XUCore.NetCore.AspectCore.Cache
             }
             catch (Exception ex)
             {
-                var logger = context.ServiceProvider.GetService<ILogger<CacheTiggerAttribute>>();
+                var logger = context.ServiceProvider.GetService<ILogger<CacheMethodAttribute>>();
 
                 logger.LogError($"CacheMethod：Key：{Key}，ParamterKey：{ParamterKey} {ex.FormatMessage()}");
 

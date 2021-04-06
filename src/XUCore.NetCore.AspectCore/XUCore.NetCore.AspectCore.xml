@@ -219,6 +219,58 @@
             停止服务
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.HashKey">
+            <summary>
+            HashKey
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.Key">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
+            支持属性参数的替换，{Id}-{Name} 等于 1-test
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.Seconds">
+            <summary>
+            缓存时间（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.IsOpen">
+            <summary>
+            是否开启缓存
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute">
+            <summary>
+            缓存拦截器（删除缓存）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.HashKey">
+            <summary>
+            HashKey
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.Key">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
+            支持属性参数的替换，{Id}-{Name} 等于 1-test
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.AspectCore.IgnoreAttribute">
             <summary>
             忽略拦截器基类

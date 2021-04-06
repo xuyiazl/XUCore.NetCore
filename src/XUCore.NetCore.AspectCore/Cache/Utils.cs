@@ -57,7 +57,9 @@ namespace XUCore.NetCore.AspectCore.Cache
                 }
 
                 if (paramList.Count > 0)
-                    key += $"_{string.Format(ParamterKey, paramList.ToArray())}";
+                    key += $"{string.Format(ParamterKey, paramList.ToArray())}";
+                else
+                    key += ParamterKey;
             }
 
             return key;

@@ -23,7 +23,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         {
             try
             {
-                var json = redisService.StringGet<string>(key, connectionName: "cache-read", serializer: RedisSerializerOptions.RedisValue);
+                var json = redisService.StringGet<string>(key, connectionName: RedisConnection.CacheRead, serializer: RedisSerializerOptions.RedisValue);
 
                 if (json.IsEmpty())
                     return null;
@@ -46,7 +46,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 var json = JsonConvert.SerializeObject(value);
 
-                redisService.StringSet(key, json, connectionName: "cache-write", serializer: RedisSerializerOptions.RedisValue);
+                redisService.StringSet(key, json, connectionName: RedisConnection.CacheWrite, serializer: RedisSerializerOptions.RedisValue);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 var json = JsonConvert.SerializeObject(value);
 
-                redisService.StringSet(key, json, (int)expirationTime.TotalSeconds, connectionName: "cache-write", serializer: RedisSerializerOptions.RedisValue);
+                redisService.StringSet(key, json, (int)expirationTime.TotalSeconds, connectionName: RedisConnection.CacheWrite, serializer: RedisSerializerOptions.RedisValue);
             }
             catch (Exception ex)
             {

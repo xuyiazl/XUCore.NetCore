@@ -43,12 +43,18 @@ namespace XUCore.NetCore.DataTest.Business
             await Task.CompletedTask;
         }
 
-        [CacheMethod(Key = "Cache_Test", Seconds = CacheTime.Min1)]
-        public async Task<AdminUsersEntity> TestCacheAdd()
+        [RedisCacheRemove(HashKey = "mytest", Key = "{0}")]
+        public async Task TestCacheRemove(int id)
         {
-            var list = unitOfWork.GetList<AdminUsersEntity>(c => true);
+            await Task.CompletedTask;
+        }
 
-            return BuildRecords(1)[0];
+        [RedisCacheMethod(HashKey = "mytest", Key = "{Id}", Seconds = CacheTime.Min1)]
+        public async Task<AdminUsersEntity> TestCacheAdd(AdminUsersEntity entity)
+        {
+            //var list = unitOfWork.GetList<AdminUsersEntity>(c => true);
+
+            return entity;
         }
 
         public async Task TestAsync()

@@ -44,7 +44,8 @@ namespace XUCore.NetCore.DataTest
 
             //注册缓存服务，暂时只提供内存缓存，后面会增加Redis，需要视情况而定
             //services.AddCacheService<MemoryCacheService>();
-            services.AddCacheService<RedisCacheService>();
+            //services.AddCacheService<RedisCacheService>();
+            services.AddInterceptor();
 
             services.AddHostedService<MainService>();
         }

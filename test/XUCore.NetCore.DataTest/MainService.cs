@@ -22,20 +22,46 @@ namespace XUCore.NetCore.DataTest
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await adminUsersBusinessService.TestCacheRemove(1111, new Entities.AdminUsersEntity
+            //await adminUsersBusinessService.TestCacheRemove(1111, new Entities.AdminUsersEntity
+            //{
+            //    Id = 1,
+            //    Name = "name",
+            //    UserName = "username"
+            //},
+            //null);
+
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
             {
                 Id = 1,
                 Name = "name",
                 UserName = "username"
-            },
-            null);
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
-            await adminUsersBusinessService.TestCacheAdd();
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
+            {
+                Id = 2,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
+            {
+                Id = 3,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
+            {
+                Id = 2,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
+            {
+                Id = 3,
+                Name = "name",
+                UserName = "username"
+            });
+
+            await adminUsersBusinessService.TestCacheRemove(1);
 
             //await adminUsersBusinessService.TestAsync();
         }
