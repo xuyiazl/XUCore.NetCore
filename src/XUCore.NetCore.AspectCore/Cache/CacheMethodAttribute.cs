@@ -21,7 +21,8 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// </summary>
         public string Key { get; set; }
         /// <summary>
-        /// 缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
+        /// 缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
+        /// 支持属性参数的替换，{Id}-{Name} 等于 1-test
         /// </summary>
         public string ParamterKey { get; set; }
         /// <summary>

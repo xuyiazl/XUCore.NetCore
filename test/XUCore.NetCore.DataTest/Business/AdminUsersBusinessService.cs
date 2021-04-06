@@ -37,8 +37,8 @@ namespace XUCore.NetCore.DataTest.Business
             await Task.CompletedTask;
         }
 
-        [CacheRemove(Key = "Cache_Test")]
-        public async Task TestCacheRemove()
+        [CacheRemove(Key = "Cache_Test", ParamterKey = "{Id}_{Name}_{UserName}_{0}")]
+        public async Task TestCacheRemove(int id, AdminUsersEntity entity, AdminUsersEntity o)
         {
             await Task.CompletedTask;
         }

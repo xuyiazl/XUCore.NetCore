@@ -11,7 +11,7 @@ namespace XUCore.NetCore.DataTest.Business
     {
         Task TestAspectCore();
 
-        Task TestCacheRemove();
+        Task TestCacheRemove(int id,AdminUsersEntity entity, AdminUsersEntity o);
 
         Task<AdminUsersEntity> TestCacheAdd();
 

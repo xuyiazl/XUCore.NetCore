@@ -22,7 +22,13 @@ namespace XUCore.NetCore.DataTest
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await adminUsersBusinessService.TestCacheAdd();
+            await adminUsersBusinessService.TestCacheRemove(1111, new Entities.AdminUsersEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            },
+            null);
             await adminUsersBusinessService.TestCacheAdd();
             await adminUsersBusinessService.TestCacheAdd();
             await adminUsersBusinessService.TestCacheAdd();
