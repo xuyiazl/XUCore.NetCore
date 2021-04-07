@@ -16,13 +16,21 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// 注册缓存拦截服务
         /// </summary>
         /// <param name="services"></param>
-        public static IServiceCollection AddCacheService<TCacheServiceImpl>(this IServiceCollection services)
+        public static IServiceCollection AddCacheService<TCacheServiceImpl>(this IServiceCollection services, Action<CacheOptions> options = null)
             where TCacheServiceImpl : class, ICacheService
         {
             services.AddMemoryCache();
             services.TryAddSingleton<ICacheService, TCacheServiceImpl>();
             services.TryAddTransient<QuartzRefreshJob>();
             services.TryAddSingleton<QuartzService>();
+
+            options ??= new Action<CacheOptions>((option) =>
+            {
+                option.RedisRead = "cache-read";
+                option.RedisWrite = "cache-write";
+            });
+
+            services.Configure<CacheOptions>(options);
 
             services.AddInterceptor();
 

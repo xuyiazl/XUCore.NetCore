@@ -1,5 +1,6 @@
 ﻿using AspectCore.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using XUCore.NetCore.Redis;
 
@@ -29,10 +30,11 @@ namespace XUCore.NetCore.AspectCore.Cache
             await next(context);
 
             var redis = context.ServiceProvider.GetService<IRedisService>();
+            var option = context.ServiceProvider.GetService<IOptions<CacheOptions>>();
 
             string key = Utils.GetParamterKey("", "", Key, context.Parameters);
 
-            redis.HashDelete(HashKey, key, RedisConnection.CacheWrite);
+            redis.HashDelete(HashKey, key, option.Value.RedisWrite);
         }
     }
 }

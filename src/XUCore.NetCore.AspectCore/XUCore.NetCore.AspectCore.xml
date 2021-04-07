@@ -40,6 +40,16 @@
             缓存拦截器
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheOptions.RedisRead">
+            <summary>
+            只读链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheOptions.RedisWrite">
+            <summary>
+            只写链接地址
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute">
             <summary>
             缓存拦截器（删除缓存）
@@ -66,7 +76,7 @@
             缓存拦截器
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.NetCore.AspectCore.Cache.CacheOptions})">
             <summary>
             注册缓存拦截服务
             </summary>

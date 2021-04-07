@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -12,18 +13,20 @@ namespace XUCore.NetCore.AspectCore.Cache
     {
         private readonly IRedisService redisService;
         private readonly ILogger<RedisCacheService> logger;
+        private readonly IOptions<CacheOptions> option;
 
         public RedisCacheService(ILogger<RedisCacheService> logger, IServiceProvider serviceProvider)
         {
             this.logger = logger;
             this.redisService = serviceProvider.GetService<IRedisService>();
+            this.option = serviceProvider.GetService<IOptions<CacheOptions>>();
         }
 
         public object Get(string key, Type returnType)
         {
             try
             {
-                var json = redisService.StringGet<string>(key, connectionName: RedisConnection.CacheRead, serializer: RedisSerializerOptions.RedisValue);
+                var json = redisService.StringGet<string>(key, connectionName: option.Value.RedisRead, serializer: RedisSerializerOptions.RedisValue);
 
                 if (json.IsEmpty())
                     return null;
@@ -46,7 +49,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 var json = JsonConvert.SerializeObject(value);
 
-                redisService.StringSet(key, json, connectionName: RedisConnection.CacheWrite, serializer: RedisSerializerOptions.RedisValue);
+                redisService.StringSet(key, json, connectionName: option.Value.RedisWrite, serializer: RedisSerializerOptions.RedisValue);
             }
             catch (Exception ex)
             {
@@ -63,7 +66,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 var json = JsonConvert.SerializeObject(value);
 
-                redisService.StringSet(key, json, (int)expirationTime.TotalSeconds, connectionName: RedisConnection.CacheWrite, serializer: RedisSerializerOptions.RedisValue);
+                redisService.StringSet(key, json, (int)expirationTime.TotalSeconds, connectionName: option.Value.RedisWrite, serializer: RedisSerializerOptions.RedisValue);
             }
             catch (Exception ex)
             {
@@ -72,7 +75,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         }
 
         public void Remove(string key)
-        {            
+        {
             redisService.KeyDelete(key, connectionName: "cache-write");
         }
     }

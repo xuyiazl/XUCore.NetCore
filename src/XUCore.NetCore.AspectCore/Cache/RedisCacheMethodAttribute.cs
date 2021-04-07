@@ -1,6 +1,7 @@
 ﻿using AspectCore.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -48,12 +49,13 @@ namespace XUCore.NetCore.AspectCore.Cache
             try
             {
                 var redis = context.ServiceProvider.GetService<IRedisService>();
+                var option = context.ServiceProvider.GetService<IOptions<CacheOptions>>();
 
                 Type returnType = context.GetReturnType();
 
                 string key = Utils.GetParamterKey("", "", Key, context.Parameters);
 
-                var result = redis.HashGet<string>(HashKey, key, RedisConnection.CacheRead, RedisSerializerOptions.RedisValue);
+                var result = redis.HashGet<string>(HashKey, key, option.Value.RedisRead, RedisSerializerOptions.RedisValue);
 
                 if (result.IsEmpty())
                 {
@@ -67,15 +69,15 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                         if (Seconds > 0)
                         {
-                            bool exists = redis.KeyExists(HashKey, RedisConnection.CacheRead);
+                            bool exists = redis.KeyExists(HashKey, option.Value.RedisRead);
 
-                            redis.HashSet(HashKey, key, json, RedisConnection.CacheWrite, RedisSerializerOptions.RedisValue);
+                            redis.HashSet(HashKey, key, json, option.Value.RedisWrite, RedisSerializerOptions.RedisValue);
 
                             if (!exists)
-                                redis.KeyExpire(HashKey, Seconds, RedisConnection.CacheWrite);
+                                redis.KeyExpire(HashKey, Seconds, option.Value.RedisWrite);
                         }
                         else
-                            redis.HashSet(HashKey, key, json, RedisConnection.CacheWrite, RedisSerializerOptions.RedisValue);
+                            redis.HashSet(HashKey, key, json, option.Value.RedisWrite, RedisSerializerOptions.RedisValue);
                     }
                 }
                 else
