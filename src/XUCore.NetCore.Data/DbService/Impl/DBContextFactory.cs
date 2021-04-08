@@ -47,7 +47,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 连接字符串
         /// </summary>
-        public string ConnectionStrings { get; set; }
+        public override string ConnectionStrings { get; set; }
 
         /// <summary>
         /// 需要检索的程序集

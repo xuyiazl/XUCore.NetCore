@@ -5,8 +5,12 @@ using XUCore.Serializer;
 
 namespace XUCore.NetCore.DataTest.Entities
 {
-    public class AdminUsersEntity
+    public class AdminUserEntity
     {
+        public AdminUserEntity()
+        {
+            AdminUserAddress = new HashSet<AdminUserAddressEntity>();
+        }
         public long Id { get; set; }
         public string UserName { get; set; }
         public string Mobile { get; set; }
@@ -21,6 +25,7 @@ namespace XUCore.NetCore.DataTest.Entities
         public string LoginLastIp { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool Status { get; set; }
+        public ICollection<AdminUserAddressEntity> AdminUserAddress { get; private set; }
 
         public override string ToString()
         {

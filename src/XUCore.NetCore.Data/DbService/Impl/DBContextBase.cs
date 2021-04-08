@@ -13,7 +13,7 @@ namespace XUCore.NetCore.Data.DbService
     /// <summary>
     /// 基于db上下文拓展工厂，用于拓展XUCore.NetCore.Data.BulkExtensions的GitHub开源项目
     /// </summary>
-    public abstract class DBContextBase : DbContext
+    public abstract class DBContextBase : DbContext, IDbContext
     {
         protected DBContextBase(DbContextOptions options) : base(options) { }
 
@@ -39,12 +39,15 @@ namespace XUCore.NetCore.Data.DbService
                 base.Database.AutoTransactionsEnabled = value;
             }
         }
-        public virtual int SaveChanges()
+
+        public virtual string ConnectionStrings { get; set; }
+
+        public virtual int Commit()
         {
             return base.SaveChanges();
         }
 
-        public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<int> CommitAsync(CancellationToken cancellationToken = default)
         {
             return await base.SaveChangesAsync(cancellationToken);
         }
@@ -89,6 +92,8 @@ namespace XUCore.NetCore.Data.DbService
             return base.Database.CanConnect();
         }
 
+
         public virtual IDbContextTransaction CurrentTransaction => base.Database.CurrentTransaction;
+
     }
 }

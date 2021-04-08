@@ -8,9 +8,9 @@ using XUCore.NetCore.DataTest.Entities;
 namespace XUCore.NetCore.DataTest.DbService
 {
 
-    public class AdminUsersDbServiceProvider : DbService<AdminUsersEntity>, IAdminUsersDbServiceProvider
+    public class AdminUsersDbServiceProvider : DbService<AdminUserEntity>, IAdminUsersDbServiceProvider
     {
-        public AdminUsersDbServiceProvider(INigelReadDbRepository<AdminUsersEntity> readRepository, INigelWriteDbRepository<AdminUsersEntity> writeRepository)
+        public AdminUsersDbServiceProvider(INigelReadDbRepository<AdminUserEntity> readRepository, INigelWriteDbRepository<AdminUserEntity> writeRepository)
             : base(readRepository, writeRepository)
         {
 

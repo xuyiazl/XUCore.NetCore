@@ -12,10 +12,10 @@ namespace XUCore.NetCore.DataTest.Business
         Task TestDbAsync();
         Task TestAspectCore();
 
-        Task TestCacheRemove(int id, AdminUsersEntity entity, AdminUsersEntity o);
+        Task TestCacheRemove(int id, AdminUserEntity entity, AdminUserEntity o);
         Task TestCacheRemove(int id);
 
-        Task<AdminUsersEntity> TestCacheAdd(AdminUsersEntity entity);
+        Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity);
 
         Task TestAsync();
     }
