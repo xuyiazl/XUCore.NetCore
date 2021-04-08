@@ -9,6 +9,7 @@ namespace XUCore.NetCore.DataTest.Business
 {
     public interface IAdminUsersBusinessService : IServiceDependency
     {
+        Task TestDbAsync();
         Task TestAspectCore();
 
         Task TestCacheRemove(int id, AdminUsersEntity entity, AdminUsersEntity o);

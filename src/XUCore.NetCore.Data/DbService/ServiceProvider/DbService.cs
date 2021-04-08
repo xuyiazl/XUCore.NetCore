@@ -53,60 +53,54 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Add(TEntity entity)
+        public virtual int Add(TEntity entity)
         {
-            if (Write != null)
-                Write.Add(entity);
+            return Write.Add(entity);
         }
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Add(IEnumerable<TEntity> entities)
+        public virtual int Add(IEnumerable<TEntity> entities)
         {
-            if (Write != null)
-                Write.Add(entities);
+            return Write.Add(entities);
         }
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Update(TEntity entity)
+        public virtual int Update(TEntity entity)
         {
-            if (Write != null)
-                Write.Update(entity);
+            return Write.Update(entity);
         }
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Update(IEnumerable<TEntity> entities)
+        public virtual int Update(IEnumerable<TEntity> entities)
         {
-            if (Write != null)
-                Write.Update(entities);
+            return Write.Update(entities);
         }
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Delete(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
-            if (Write != null)
-                Write.Delete(entity);
+            return Write.Delete(entity);
         }
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Delete(IEnumerable<TEntity> entities)
+        public virtual int Delete(IEnumerable<TEntity> entities)
         {
-            if (Write != null)
-                Write.Delete(entities);
+            return Write.Delete(entities);
         }
 
         //异步操作
@@ -117,10 +111,9 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                await Write.AddAsync(entity, cancellationToken);
+            return await Write.AddAsync(entity, cancellationToken);
         }
         /// <summary>
         /// 批量写入数据
@@ -128,10 +121,9 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entities"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
-            if (Write != null)
-                await Write.AddAsync(entities, cancellationToken);
+            return await Write.AddAsync(entities, cancellationToken);
         }
 
         //同步查询

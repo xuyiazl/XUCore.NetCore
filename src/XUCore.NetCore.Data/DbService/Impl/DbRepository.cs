@@ -46,6 +46,10 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         public IUnitOfWork UnitOfWork => _unitOfWork;
         /// <summary>
+        /// 是否自动提交
+        /// </summary>
+        public bool IsAutoCommit { get; set; } = true;
+        /// <summary>
         /// 当前DbSet对象
         /// </summary>
         public DbSet<TEntity> Table => _context.Set<TEntity>();
@@ -64,7 +68,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Add(TEntity entity)
+        public virtual int Add(TEntity entity)
         {
             if (entity == null)
             {
@@ -72,13 +76,17 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.Add(entity);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Add(IEnumerable<TEntity> entities)
+        public virtual int Add(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -86,13 +94,17 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.AddRange(entities);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Update(TEntity entity)
+        public virtual int Update(TEntity entity)
         {
             if (entity == null)
             {
@@ -100,13 +112,17 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.Update(entity);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Update(IEnumerable<TEntity> entities)
+        public virtual int Update(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -114,13 +130,17 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.UpdateRange(entities);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual void Delete(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
             if (entity == null)
             {
@@ -128,13 +148,17 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.Remove(entity);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual void Delete(IEnumerable<TEntity> entities)
+        public virtual int Delete(IEnumerable<TEntity> entities)
         {
             if (entities == null)
             {
@@ -142,6 +166,10 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             Table.RemoveRange(entities);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
 
         //异步操作
@@ -152,7 +180,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity == null)
             {
@@ -160,6 +188,10 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             await Table.AddAsync(entity, cancellationToken);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
         /// <summary>
         /// 批量写入数据
@@ -167,7 +199,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {
@@ -175,6 +207,10 @@ namespace XUCore.NetCore.Data.DbService
             }
 
             await Table.AddRangeAsync(entities, cancellationToken);
+
+            if (IsAutoCommit) return _unitOfWork.Commit();
+
+            return 0;
         }
 
         //同步查询

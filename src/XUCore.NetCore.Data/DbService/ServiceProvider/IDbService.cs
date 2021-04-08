@@ -45,37 +45,37 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        void Add(TEntity entity);
+        int Add(TEntity entity);
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        void Add(IEnumerable<TEntity> entities);
+        int Add(IEnumerable<TEntity> entities);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        void Update(TEntity entity);
+        int Update(TEntity entity);
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        void Update(IEnumerable<TEntity> entities);
+        int Update(IEnumerable<TEntity> entities);
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        void Delete(TEntity entity);
+        int Delete(TEntity entity);
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        void Delete(IEnumerable<TEntity> entities);
+        int Delete(IEnumerable<TEntity> entities);
 
         //异步操作
 
@@ -85,14 +85,14 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
+        Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         /// <summary>
         /// 批量写入数据
         /// </summary>
         /// <param name="entities"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+        Task<int> AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
         //同步查询
 

@@ -29,13 +29,18 @@ namespace XUCore.NetCore.DataTest.Business
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
         }
 
+        public async Task TestDbAsync()
+        {
+            var entity = BuildRecords(1);
+            
+            //db.Write.IsAutoCommit = false;
+
+            nigelDb.Add(entity);
+        }
+
         [TestMethod]
         public async Task TestAspectCore()
         {
-            nigelDb.Add(new AdminUsersEntity());
-
-            nigelDb.UnitOfWork.Commit();
-
             await Task.CompletedTask;
         }
 

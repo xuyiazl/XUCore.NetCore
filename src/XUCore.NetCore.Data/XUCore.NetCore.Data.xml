@@ -154,6 +154,11 @@
             <typeparam name="TDbContext"></typeparam>
             <returns></returns>
         </member>
+        <member name="P:XUCore.NetCore.Data.DbService.IDbRepository`1.IsAutoCommit">
+            <summary>
+            是否自动提交
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.Add(`0)">
             <summary>
             插入一条数据
@@ -479,6 +484,11 @@
         <member name="P:XUCore.NetCore.Data.DbService.DbRepository`1.UnitOfWork">
             <summary>
             工作单元
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.DbRepository`1.IsAutoCommit">
+            <summary>
+            是否自动提交
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Data.DbService.DbRepository`1.Table">
