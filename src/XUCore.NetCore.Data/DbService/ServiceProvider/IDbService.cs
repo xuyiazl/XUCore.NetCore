@@ -33,112 +33,66 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         DbSet<TEntity> Table { get; }
 
+        /// <summary>
+        /// 工作单元
+        /// </summary>
+        IUnitOfWork UnitOfWork { get; }
+
         //同步操作
 
-        /// <summary>
-        /// 同步提交
-        /// </summary>
-        /// <returns></returns>
-        int SaveChanges();
         /// <summary>
         /// 插入一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Add(TEntity entity, bool isSaveChange = true);
+        void Add(TEntity entity);
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Add(IEnumerable<TEntity> entities, bool isSaveChange = true);
+        void Add(IEnumerable<TEntity> entities);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Update(TEntity entity, bool isSaveChange = true);
+        void Update(TEntity entity);
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Update(IEnumerable<TEntity> entities, bool isSaveChange = true);
+        void Update(IEnumerable<TEntity> entities);
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Delete(TEntity entity, bool isSaveChange = true);
+        void Delete(TEntity entity);
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true);
+        void Delete(IEnumerable<TEntity> entities);
 
         //异步操作
 
         /// <summary>
-        /// 异步提交
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-        /// <summary>
         /// 异步插入一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         /// <summary>
         /// 批量写入数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 更新一条数据（全量更新）
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 批量更新数据（全量更新）
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 批量删除数据
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default);
+        Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
         //同步查询
 

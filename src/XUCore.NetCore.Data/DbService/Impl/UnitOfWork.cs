@@ -1,36 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace XUCore.NetCore.Data.DbService
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly IDbContext dbContext;
         public UnitOfWork(IDbContext context)
         {
-            this.DbContext = context;
+            this.dbContext = context;
         }
-
-        public IDbContext DbContext { get; private set; }
 
         public int Commit()
         {
-            return DbContext.SaveChanges();
+            return dbContext.SaveChanges();
         }
 
         public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
         {
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            return await dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public DbSet<T> Set<T>() where T : class
-        {
-            return DbContext.Set<T>();
-        }
 
         #region IDisposable Support
 

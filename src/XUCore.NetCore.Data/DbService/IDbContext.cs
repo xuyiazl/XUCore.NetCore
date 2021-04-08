@@ -25,17 +25,6 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         /// <summary>
-        /// 保存
-        /// </summary>
-        /// <returns></returns>
-        int SaveChanges();
-        /// <summary>
-        /// 异步保存
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-        /// <summary>
         /// database
         /// </summary>
         /// <returns></returns>
@@ -47,6 +36,17 @@ namespace XUCore.NetCore.Data.DbService
         /// <para>将此值设置为false应该非常小心，因为数据库如果<see cref="Microsoft.EntityFrameworkCore.DbContext.SaveChanges()"/>失败，可能会处于损坏状态。</para>
         /// </summary>
         bool AutoTransactionsEnabled { get; set; }
+        /// <summary>
+        /// 提交
+        /// </summary>
+        /// <returns></returns>
+        int SaveChanges();
+        /// <summary>
+        /// 异步提交
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         /// <summary>
         /// 创建执行策略
         /// </summary>

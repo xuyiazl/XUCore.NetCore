@@ -20,20 +20,22 @@ namespace XUCore.NetCore.DataTest.Business
     public class AdminUsersBusinessService : IAdminUsersBusinessService
     {
         private readonly IAdminUsersDbServiceProvider db;
-        private readonly INigelReadDbRepository<AdminUsersEntity> nigelDb;
+        private readonly INigelDbRepository<AdminUsersEntity> nigelDb;
         private readonly INigelCopyDbRepository<AdminUsersEntity> nigelCopyDb;
-        private readonly INigelUnitOfWork unitOfWork;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
         {
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
-            this.nigelDb = serviceProvider.GetService<INigelReadDbRepository<AdminUsersEntity>>();
+            this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUsersEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUsersEntity>>();
-            this.unitOfWork = serviceProvider.GetService<INigelUnitOfWork>();
         }
 
         [TestMethod]
         public async Task TestAspectCore()
         {
+            nigelDb.Add(new AdminUsersEntity());
+
+            nigelDb.UnitOfWork.Commit();
+
             await Task.CompletedTask;
         }
 
@@ -345,7 +347,9 @@ namespace XUCore.NetCore.DataTest.Business
 
                 var list = BuildRecords(10);
 
-                var res1 = await db.AddAsync(list.ToArray());
+                await db.AddAsync(list.ToArray());
+
+                db.UnitOfWork.Commit();
 
                 var res2 = db.Update(c => c.Id > 22, new AdminUsersEntity() { Name = "哈德斯", Location = "吹牛逼总监", Company = "大牛逼公司" });
 

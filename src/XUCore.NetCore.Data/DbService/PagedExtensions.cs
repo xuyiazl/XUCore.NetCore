@@ -38,6 +38,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="query">查询条件</param>
         /// <param name="pageNumber">页码</param>
         /// <param name="pageSize">分页大小</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public static async Task<PagedList<T>> CreatePagedListAsync<T>(this IQueryable<T> query, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
         {

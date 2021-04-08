@@ -10,10 +10,6 @@ namespace XUCore.NetCore.Data.DbService
 {
     public interface IUnitOfWork : IDisposable
     {
-        IDbContext DbContext { get; }
-
-        DbSet<T> Set<T>() where T : class;
-
         int Commit();
 
         Task<int> CommitAsync(CancellationToken cancellationToken = default);

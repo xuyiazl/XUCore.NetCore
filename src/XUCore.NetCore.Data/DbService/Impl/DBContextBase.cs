@@ -39,11 +39,6 @@ namespace XUCore.NetCore.Data.DbService
                 base.Database.AutoTransactionsEnabled = value;
             }
         }
-        public virtual IExecutionStrategy CreateExecutionStrategy()
-        {
-            return base.Database.CreateExecutionStrategy();
-        }
-
         public virtual int SaveChanges()
         {
             return base.SaveChanges();
@@ -52,6 +47,11 @@ namespace XUCore.NetCore.Data.DbService
         public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        public virtual IExecutionStrategy CreateExecutionStrategy()
+        {
+            return base.Database.CreateExecutionStrategy();
         }
 
         public virtual IDbContextTransaction BeginTransaction()

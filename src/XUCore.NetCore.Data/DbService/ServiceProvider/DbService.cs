@@ -33,6 +33,11 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         public DbSet<TEntity> Table => Read.Table;
 
+        /// <summary>
+        /// 工作单元
+        /// </summary>
+        public IUnitOfWork UnitOfWork => Write.UnitOfWork;
+
         protected DbService(IDbRepository<TEntity> readRepository, IDbRepository<TEntity> writeRepository)
         {
             this.Read = readRepository;
@@ -44,174 +49,89 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         //同步操作
 
         /// <summary>
-        /// 同步提交
-        /// </summary>
-        /// <returns></returns>
-        public virtual int SaveChanges()
-        {
-            return Write.SaveChanges();
-        }
-        /// <summary>
         /// 插入一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Add(TEntity entity, bool isSaveChange = true)
+        public virtual void Add(TEntity entity)
         {
             if (Write != null)
-                return Write.Add(entity, isSaveChange);
-            return -1;
+                Write.Add(entity);
         }
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Add(IEnumerable<TEntity> entities, bool isSaveChange = true)
+        public virtual void Add(IEnumerable<TEntity> entities)
         {
             if (Write != null)
-                return Write.Add(entities, isSaveChange);
-            return -1;
+                Write.Add(entities);
         }
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Update(TEntity entity, bool isSaveChange = true)
+        public virtual void Update(TEntity entity)
         {
             if (Write != null)
-                return Write.Update(entity, isSaveChange);
-            return -1;
+                Write.Update(entity);
         }
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Update(IEnumerable<TEntity> entities, bool isSaveChange = true)
+        public virtual void Update(IEnumerable<TEntity> entities)
         {
             if (Write != null)
-                return Write.Update(entities, isSaveChange);
-            return -1;
+                Write.Update(entities);
         }
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Delete(TEntity entity, bool isSaveChange = true)
+        public virtual void Delete(TEntity entity)
         {
             if (Write != null)
-                return Write.Delete(entity, isSaveChange);
-            return -1;
+                Write.Delete(entity);
         }
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <returns></returns>
-        public virtual int Delete(IEnumerable<TEntity> entities, bool isSaveChange = true)
+        public virtual void Delete(IEnumerable<TEntity> entities)
         {
             if (Write != null)
-                return Write.Delete(entities, isSaveChange);
-            return -1;
+                Write.Delete(entities);
         }
 
         //异步操作
 
         /// <summary>
-        /// 异步提交
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            return await Write.SaveChangesAsync(cancellationToken);
-        }
-        /// <summary>
         /// 异步插入一条数据
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (Write != null)
-                return await Write.AddAsync(entity, isSaveChange, cancellationToken);
-            return -1;
+                await Write.AddAsync(entity, cancellationToken);
         }
         /// <summary>
         /// 批量写入数据
         /// </summary>
         /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
+        public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
         {
             if (Write != null)
-                return await Write.AddAsync(entities, isSaveChange, cancellationToken);
-            return -1;
-        }
-        /// <summary>
-        /// 更新一条数据（全量更新）
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<int> UpdateAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
-        {
-            if (Write != null)
-                return await Write.UpdateAsync(entity, isSaveChange, cancellationToken);
-            return -1;
-        }
-        /// <summary>
-        /// 批量更新数据（全量更新）
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
-        {
-            if (Write != null)
-                return await Write.UpdateAsync(entities, isSaveChange, cancellationToken);
-            return -1;
-        }
-        /// <summary>
-        /// 删除一条数据
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<int> DeleteAsync(TEntity entity, bool isSaveChange = true, CancellationToken cancellationToken = default)
-        {
-            if (Write != null)
-                return await Write.DeleteAsync(entity, isSaveChange, cancellationToken);
-            return -1;
-        }
-        /// <summary>
-        /// 批量删除数据
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="isSaveChange">是否提交</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool isSaveChange = true, CancellationToken cancellationToken = default)
-        {
-            if (Write != null)
-                return await Write.DeleteAsync(entities, isSaveChange, cancellationToken);
-            return -1;
+                await Write.AddAsync(entities, cancellationToken);
         }
 
         //同步查询
