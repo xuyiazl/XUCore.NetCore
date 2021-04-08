@@ -65,7 +65,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
             services.AddScoped(typeof(INigelDbContext), typeof(NigelDbContext));
 
-            services.AddScoped(typeof(INigelRepository), typeof(NigelRepository));
+            services.AddScoped(typeof(INigelDbRepository), typeof(NigelDbRepository));
 
             return services;
         }
@@ -90,9 +90,9 @@ namespace XUCore.NetCore.DataTest.DbRepository
         public NigelDbRepository(INigelDbContext context) : base(context) { }
     }
 
-    public interface INigelRepository : IRepository<INigelDbContext> { }
-    public class NigelRepository : Repository<INigelDbContext>, INigelRepository
+    public interface INigelDbRepository : IRepository<INigelDbContext> { }
+    public class NigelDbRepository : Repository<INigelDbContext>, INigelDbRepository
     {
-        public NigelRepository(INigelDbContext context) : base(context) { }
+        public NigelDbRepository(INigelDbContext context) : base(context) { }
     }
 }
