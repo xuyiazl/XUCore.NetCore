@@ -36,7 +36,7 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestDbAsync()
         {
-            rep.IsAutoCommit = false;
+            //rep.IsAutoCommit = false;
 
             var list = rep.Context.User.Include(c => c.AdminUserAddress).ToList();
 
@@ -68,7 +68,9 @@ namespace XUCore.NetCore.DataTest.Business
 
             rep.Add(entity);
 
-            var res = rep.UnitOfWork.Commit();
+            //var res = rep.UnitOfWork.Commit();
+
+            var ss = rep.Context.User.Include(c => c.AdminUserAddress.Take(2)).FirstOrDefault(c => c.Id == entity.Id);
         }
 
         [TestMethod]
