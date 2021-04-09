@@ -29,7 +29,6 @@ namespace XUCore.NetCore.DataTest.DbRepository
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             services.AddScoped(typeof(INigelWriteDbRepository<>), typeof(WriteNigelDbRepository<>));
-            services.AddScoped(typeof(INigelWriteDbContext), typeof(NigelWriteDbContext));
 
             return services;
         }
@@ -37,14 +36,13 @@ namespace XUCore.NetCore.DataTest.DbRepository
 
 
     public interface INigelWriteDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelWriteDbContext : DBContextFactory, INigelWriteDbContext
+    public class NigelWriteDbContext : DBContextFactory
     {
         public NigelWriteDbContext(DbContextOptions<NigelWriteDbContext> options): base(options) { }
     }
 
-    public interface INigelWriteDbContext : IDbContext { }
     public class WriteNigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelWriteDbRepository<TEntity> where TEntity : class, new()
     {
-        public WriteNigelDbRepository(INigelWriteDbContext context) : base(context) { }
+        public WriteNigelDbRepository(NigelWriteDbContext context) : base(context) { }
     }
 }

@@ -22,7 +22,6 @@ namespace XUCore.NetCore.DataTest.Business
     {
         private readonly IAdminUsersDbServiceProvider db;
         private readonly INigelDbRepository<AdminUserEntity> nigelDb;
-        private readonly INigelDbContext context;
         private readonly INigelCopyDbRepository<AdminUserEntity> nigelCopyDb;
         private readonly INigelDbRepository rep;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
@@ -30,7 +29,6 @@ namespace XUCore.NetCore.DataTest.Business
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
             this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUserEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUserEntity>>();
-            this.context = serviceProvider.GetService<INigelDbContext>();
             this.rep = serviceProvider.GetService<INigelDbRepository>();
         }
 

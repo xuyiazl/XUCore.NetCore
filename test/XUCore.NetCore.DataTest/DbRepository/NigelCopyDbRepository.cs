@@ -34,14 +34,12 @@ namespace XUCore.NetCore.DataTest.DbRepository
             });
 
             services.AddScoped(typeof(INigelCopyDbRepository<>), typeof(NigelCopyDbRepository<>));
-            services.AddScoped(typeof(INigelCopyDbContext), typeof(NigelCopyDbContext));
 
             return services;
         }
     }
 
-    public interface INigelCopyDbContext : IDbContext { }
-    public class NigelCopyDbContext : DBContextFactory, INigelCopyDbContext
+    public class NigelCopyDbContext : DBContextFactory
     {
         public NigelCopyDbContext(DbContextOptions<NigelCopyDbContext> options) : base(options) { }
     }
@@ -49,6 +47,6 @@ namespace XUCore.NetCore.DataTest.DbRepository
     public interface INigelCopyDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelCopyDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelCopyDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelCopyDbRepository(INigelCopyDbContext context) : base(context) { }
+        public NigelCopyDbRepository(NigelCopyDbContext context) : base(context) { }
     }
 }

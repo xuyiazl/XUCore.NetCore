@@ -30,14 +30,12 @@ namespace XUCore.NetCore.DataTest.DbRepository
             });
 
             services.AddScoped(typeof(INigelReadDbRepository<>), typeof(NigelReadDbRepository<>));
-            services.AddScoped(typeof(INigelReadDbContext), typeof(NigelReadDbContext));
 
             return services;
         }
     }
 
-    public interface INigelReadDbContext : IDbContext { }
-    public class NigelReadDbContext : DBContextFactory, INigelReadDbContext
+    public class NigelReadDbContext : DBContextFactory
     {
         public NigelReadDbContext(DbContextOptions<NigelReadDbContext> options) : base(options) { }
     }
@@ -45,6 +43,6 @@ namespace XUCore.NetCore.DataTest.DbRepository
     public interface INigelReadDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelReadDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelReadDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelReadDbRepository(INigelReadDbContext context) : base(context) { }
+        public NigelReadDbRepository(NigelReadDbContext context) : base(context) { }
     }
 }
