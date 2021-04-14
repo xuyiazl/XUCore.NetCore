@@ -34,9 +34,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="orderby"></param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IEnumerable<T> OrderByBatch<T>(this IEnumerable<T> query, string orderby)
+        public static IEnumerable<T> OrderByBatch<T>(this IEnumerable<T> query, string orderby, bool condition = true)
         {
+            if (!condition) return query;
+
             var index = 0;
             var a = orderby.ToMap(',', ' ', false, false, true);
             foreach (var item in a)
@@ -68,9 +71,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="orderby">exp:"name asc,createtime desc"</param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IQueryable<T> OrderByBatch<T>(this IQueryable<T> query, string orderby)
+        public static IQueryable<T> OrderByBatch<T>(this IQueryable<T> query, string orderby, bool condition = true)
         {
+            if (!condition) return query;
+
             var index = 0;
             var a = orderby.ToMap(',', ' ', false, false, true);
             foreach (var item in a)
@@ -102,9 +108,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="name"></param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, string name)
+        public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, string name, bool condition = true)
         {
+            if (!condition) return query;
+
             var propInfo = GetPropertyInfo(typeof(T), name);
             var expr = GetOrderExpression(typeof(T), propInfo);
 
@@ -119,9 +128,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="name"></param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IQueryable<T> ThenBy<T>(this IQueryable<T> query, string name)
+        public static IQueryable<T> ThenBy<T>(this IQueryable<T> query, string name, bool condition = true)
         {
+            if (!condition) return query;
+
             var propInfo = GetPropertyInfo(typeof(T), name);
             var expr = GetOrderExpression(typeof(T), propInfo);
 
@@ -136,9 +148,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="name"></param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IQueryable<T> OrderByDescending<T>(this IQueryable<T> query, string name)
+        public static IQueryable<T> OrderByDescending<T>(this IQueryable<T> query, string name, bool condition = true)
         {
+            if (!condition) return query;
+
             var propInfo = GetPropertyInfo(typeof(T), name);
             var expr = GetOrderExpression(typeof(T), propInfo);
             var metMethods = typeof(Queryable).GetMethods();
@@ -153,9 +168,12 @@ namespace XUCore.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="name"></param>
+        /// <param name="condition">三方条件，true则排序有效</param>
         /// <returns></returns>
-        public static IQueryable<T> ThenByDescending<T>(this IQueryable<T> query, string name)
+        public static IQueryable<T> ThenByDescending<T>(this IQueryable<T> query, string name, bool condition = true)
         {
+            if (!condition) return query;
+
             var propInfo = GetPropertyInfo(typeof(T), name);
             var expr = GetOrderExpression(typeof(T), propInfo);
             var metMethods = typeof(Queryable).GetMethods();
