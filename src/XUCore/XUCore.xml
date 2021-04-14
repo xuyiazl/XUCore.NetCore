@@ -4492,64 +4492,80 @@
             <param name="expression">表达式</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.OrderByBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.OrderByBatch``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Boolean)">
             <summary>
             多个OrderBy用逗号隔开,属性前面带-号表示反序排序，exp:"name,-createtime"
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="orderby"></param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.OrderByBatch``1(System.Linq.IQueryable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.OrderByBatch``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
             <summary>
             多个OrderBy用逗号隔开，exp:"name asc,createtime desc"
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="orderby">exp:"name asc,createtime desc"</param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
             <summary>
             正序排序单个
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="name"></param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.ThenBy``1(System.Linq.IQueryable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.ThenBy``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
             <summary>
             正序排序单个（非首个）
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="name"></param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.OrderByDescending``1(System.Linq.IQueryable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.OrderByDescending``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
             <summary>
             反序排序单个
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="name"></param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Extensions.LinqExtensions.ThenByDescending``1(System.Linq.IQueryable{``0},System.String)">
+        <member name="M:XUCore.Extensions.LinqExtensions.ThenByDescending``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
             <summary>
             反序排序单个（非首个）
             </summary>
             <typeparam name="T"></typeparam>
             <param name="query"></param>
             <param name="name"></param>
+            <param name="condition">三方条件，true则排序有效</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Extensions.QueryableExtensions">
             <summary>
             <see cref="T:System.Linq.IQueryable`1"/> 扩展
             </summary>
+        </member>
+        <member name="M:XUCore.Extensions.QueryableExtensions.Take``1(System.Linq.IQueryable{``0},System.Int32,System.Boolean)">
+            <summary>
+            Take扩展，增加三方条件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="count"></param>
+            <param name="condition">三方条件，true则排序有效</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.Extensions.QueryableExtensions.WhereIf``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean)">
             <summary>
@@ -4578,6 +4594,27 @@
             <param name="queryable">数据源</param>
             <param name="skipCount">跳过的行数</param>
             <param name="pageSize">每页记录数</param>
+        </member>
+        <member name="M:XUCore.Extensions.QueryableExtensions.ToPagedList``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.QueryableExtensions.ToPagedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Extensions.AssemblyExtensions">
             <summary>

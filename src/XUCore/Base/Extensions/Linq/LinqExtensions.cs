@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
+using XUCore.Paging;
 
 namespace XUCore.Extensions
 {
@@ -27,20 +31,7 @@ namespace XUCore.Extensions
             var expr = Expression.Lambda(propAccess, paramExpr);
             return expr;
         }
-        /// <summary>
-        /// Take扩展，增加三方条件
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="query"></param>
-        /// <param name="count"></param>
-        /// <param name="condition">三方条件，true则排序有效</param>
-        /// <returns></returns>
-        public static IQueryable<T> Take<T>(this IQueryable<T> query, int count, bool condition)
-        {
-            if (!condition) return query;
 
-            return query.Take(count);
-        }
         /// <summary>
         /// 多个OrderBy用逗号隔开,属性前面带-号表示反序排序，exp:"name,-createtime"
         /// </summary>

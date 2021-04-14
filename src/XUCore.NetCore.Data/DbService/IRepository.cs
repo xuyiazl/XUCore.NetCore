@@ -89,103 +89,103 @@ namespace XUCore.NetCore.Data.DbService
         /// <returns></returns>
         Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : class, new();
 
-        //同步查询
+        ////同步查询
 
-        /// <summary>
-        /// 根据主键获取一条数据
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        TEntity GetById<TEntity>(object id) where TEntity : class, new();
-        /// <summary>
-        /// 根据条件获取一条数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <returns></returns>
-        TEntity GetSingle<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class, new();
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
-        /// <param name="limit">记录数（默认为0，不设置）</param>
-        /// <returns></returns>
-        List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0) where TEntity : class, new();
-        /// <summary>
-        /// 获取分页数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="currentPage">页码（最小为1）</param>
-        /// <param name="pageSize">分页大小</param>
-        /// <returns></returns>
-        PagedList<TEntity> GetPagedList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10) where TEntity : class, new();
-        /// <summary>
-        /// Any数据检测
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <returns></returns>
-        bool Any<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new();
-        /// <summary>
-        /// 获取记录数
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <returns></returns>
-        long GetCount<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new();
+        ///// <summary>
+        ///// 根据主键获取一条数据
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //TEntity GetById<TEntity>(object id) where TEntity : class, new();
+        ///// <summary>
+        ///// 根据条件获取一条数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <returns></returns>
+        //TEntity GetSingle<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class, new();
+        ///// <summary>
+        ///// 获取数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        ///// <param name="limit">记录数（默认为0，不设置）</param>
+        ///// <returns></returns>
+        //List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0) where TEntity : class, new();
+        ///// <summary>
+        ///// 获取分页数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <param name="currentPage">页码（最小为1）</param>
+        ///// <param name="pageSize">分页大小</param>
+        ///// <returns></returns>
+        //PagedList<TEntity> GetPagedList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10) where TEntity : class, new();
+        ///// <summary>
+        ///// Any数据检测
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <returns></returns>
+        //bool Any<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new();
+        ///// <summary>
+        ///// 获取记录数
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <returns></returns>
+        //long GetCount<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new();
 
-        //异步查询
+        ////异步查询
 
-        /// <summary>
-        /// 根据主键获取一条数据
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<TEntity> GetByIdAsync<TEntity>(object id, CancellationToken cancellationToken = default) where TEntity : class, new();
-        /// <summary>
-        /// 根据条件获取一条数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<TEntity> GetSingleAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class, new();
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
-        /// <param name="limit">记录数（默认为0，不设置）</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default) where TEntity : class, new();
-        /// <summary>
-        /// 获取分页数据
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="currentPage">页码（最小为1）</param>
-        /// <param name="pageSize">分页大小</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<PagedList<TEntity>> GetPagedListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TEntity : class, new();
-        /// <summary>
-        /// Any数据检测
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new();
-        /// <summary>
-        /// 获取记录数
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<long> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// 根据主键获取一条数据
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<TEntity> GetByIdAsync<TEntity>(object id, CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// 根据条件获取一条数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<TEntity> GetSingleAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// 获取数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        ///// <param name="limit">记录数（默认为0，不设置）</param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<List<TEntity>> GetListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// 获取分页数据
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        ///// <param name="currentPage">页码（最小为1）</param>
+        ///// <param name="pageSize">分页大小</param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<PagedList<TEntity>> GetPagedListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// Any数据检测
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new();
+        ///// <summary>
+        ///// 获取记录数
+        ///// </summary>
+        ///// <param name="selector"></param>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //Task<long> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new();
 
         #region 增加bulkextensions拓展
 
