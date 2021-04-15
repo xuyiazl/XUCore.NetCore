@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
@@ -19,11 +20,13 @@ namespace XUCore.NetCore.Mongo.Test
     public class MainService : IHostedService
     {
         private readonly ILogger logger;
-        private readonly IMongoService<UserMongoModel> mongoServiceProvider;
-        public MainService(ILogger<MainService> logger, IMongoService<UserMongoModel> mongoServiceProvider)
+        private readonly IMongoRepository<UserMongoEntity> mongoServiceProvider;
+        private readonly IMongoRepository rep;
+        public MainService(ILogger<MainService> logger, IMongoRepository<UserMongoEntity> mongoServiceProvider, IMongoRepository rep)
         {
             this.logger = logger;
             this.mongoServiceProvider = mongoServiceProvider;
+            this.rep = rep;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -47,72 +50,81 @@ namespace XUCore.NetCore.Mongo.Test
 
                 */
             }
-            //{
-            //    //添加
-            //    var works = new List<WorkModel> {
-            //        new WorkModel{ Year = 2021, CompanyName = "腾讯" },
-            //    };
-            //    var model = new UserMongoModel
-            //    {
-            //        AutoId = 2,
-            //        Name = "王五",
-            //        Age = 22,
-            //        Birthday = DateTime.Parse("2000-01-30"),
-            //        Works = works
-            //    };
-            //    await mongoServiceProvider.AddAsync(model, cancellationToken: cancellationToken);
-            //}
-            //{
-            //    //批量写入测试
+            {
 
-            //    100.Times(num =>
-            //    {
-            //        var models = new List<UserMongoModel>();
+                await rep.DeleteAsync<UserMongoEntity>(c => c.AutoId > 0);
 
-            //        10000.Times(c =>
-            //        {
-            //            models.Add(new UserMongoModel
-            //            {
-            //                AutoId = Id.NewLong(),
-            //                Name = $"王五{c + 1}",
-            //                Age = 22,
-            //                Birthday = DateTime.Parse("2000-01-30"),
-            //                Works = new List<WorkModel> {
-            //                new WorkModel{ Year = 2021, CompanyName = "腾讯" },
-            //            }
-            //            });
-            //        });
+                //添加
+                var works = new List<WorkModel> {
+                    new WorkModel{ Year = 2021, CompanyName = "腾讯" },
+                };
+                var model = new UserMongoEntity
+                {
+                    AutoId = 2,
+                    Name = "王五",
+                    Age = 22,
+                    Birthday = DateTime.Parse("2000-01-30"),
+                    Works = works
+                };
+                await rep.AddAsync(model, cancellationToken: cancellationToken);
+            }
+            {
+                //批量写入测试
 
-            //        var watch = Stopwatch.StartNew();
+                10.Times(num =>
+                {
+                    var models = new List<UserMongoEntity>();
 
-            //        var res = mongoServiceProvider.BulkAdd(models);
+                    10000.Times(c =>
+                    {
+                        models.Add(new UserMongoEntity
+                        {
+                            AutoId = Id.NewLong(),
+                            Name = $"王五{c + 1}",
+                            Age = new Random().Next(18, 30),
+                            Birthday = DateTime.Parse("2000-01-30"),
+                            Works = new List<WorkModel> {
+                            new WorkModel{ Year = 2021, CompanyName = "腾讯" },
+                        }
+                        });
+                    });
 
-            //        watch.Stop();
+                    var watch = Stopwatch.StartNew();
 
-            //        Console.WriteLine(watch.Elapsed);
-            //    });
-            //}
+                    var res = rep.BulkAdd(models);
+
+                    watch.Stop();
+
+                    Console.WriteLine(watch.Elapsed);
+                });
+            }
             {
                 //查询所有记录
-                var allList = mongoServiceProvider.GetList(where: c => true, limit: 10);
+                var allList = rep.GetList<UserMongoEntity>(where: c => true, limit: 10);
             }
             {
                 //根据条件查询记录
-                var builders = Builders<UserMongoModel>.Filter;
-                var filters = new List<FilterDefinition<UserMongoModel>>();
-                Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 25;
+                var builders = Builders<UserMongoEntity>.Filter;
+
+                var filters = new List<FilterDefinition<UserMongoEntity>>();
+
+                Expression<Func<UserMongoEntity, bool>> selector = c => c.Age > 25;
+
                 //如果没有对子集的in查询，那么不需要拼接builders
                 filters.Add(builders.Where(selector));
+
                 //子集列表做in查询
                 filters.Add(builders.ElemMatch(c => c.Works, Builders<WorkModel>.Filter.Where(c => c.Year == 2000)));
+
                 var allFilters = builders.And(filters);
-                var list = await mongoServiceProvider.GetListAsync(allFilters);
+
+                var list = await rep.GetListAsync(allFilters);
             }
             {
                 //查询分页
-                Expression<Func<UserMongoModel, bool>> selector = c => c.Age > 20;
+                Expression<Func<UserMongoEntity, bool>> selector = c => c.Age > 20;
 
-                var pageModel = await mongoServiceProvider.GetPagedListAsync(selector, "AutoId desc", 1, 1, cancellationToken);
+                var pageModel = await rep.GetPagedListAsync(selector, "AutoId desc", 1, 1, cancellationToken);
             }
             {
                 //统计 aggregate
@@ -122,7 +134,7 @@ namespace XUCore.NetCore.Mongo.Test
                         new BsonDocument {
                             { "$match", new BsonDocument {
                                 { "Age",new BsonDocument {
-                                    { "$gte" , 25 }
+                                    { "$gte" , 22 }
                                 }}
                             }}
                         }
@@ -134,9 +146,9 @@ namespace XUCore.NetCore.Mongo.Test
                     }
                 };
 
-                var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+                var pipe = PipelineDefinition<UserMongoEntity, BsonDocument>.Create(stages);
 
-                var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
+                var obj = rep.GetTable<UserMongoEntity>().Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
 
                 if (obj != null && obj.Contains("total"))
                 {
@@ -168,9 +180,9 @@ namespace XUCore.NetCore.Mongo.Test
                     }
                 };
 
-                var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+                var pipe = PipelineDefinition<UserMongoEntity, BsonDocument>.Create(stages);
 
-                var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
+                var obj = rep.GetTable<UserMongoEntity>().Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
 
                 if (obj != null && obj.Contains("total"))
                 {
@@ -204,17 +216,17 @@ namespace XUCore.NetCore.Mongo.Test
             //        }
             //    };
 
-            //    var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+            //    var pipe = PipelineDefinition<UserMongoEntity, BsonDocument>.Create(stages);
 
-            //    var obj = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
+            //    var obj = rep.GetTable<UserMongoEntity>().Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).FirstOrDefault();
 
             //    if (obj != null && obj.Contains("total"))
             //        return obj["total"].ToInt64();
             //}
             //{
             //    //统计  aggregate
-            //    / 该示例用于参考 实现group去重后，并获取第一条最新的记录的objectid列表
-            //     var stages = new List<BsonDocument>();
+            //    /// 该示例用于参考 实现group去重后，并获取第一条最新的记录的objectid列表
+            //    var stages = new List<BsonDocument>();
             //    if (type > 0)
             //    {
             //        stages.Add(
@@ -268,9 +280,9 @@ namespace XUCore.NetCore.Mongo.Test
             //        }
             //    );
 
-            //    var pipe = PipelineDefinition<UserMongoModel, BsonDocument>.Create(stages);
+            //    var pipe = PipelineDefinition<UserMongoEntity, BsonDocument>.Create(stages);
 
-            //    var objs = mongoServiceProvider.Table.Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).ToList();
+            //    var objs = rep.GetTable<UserMongoEntity>().Aggregate(pipe, new AggregateOptions { AllowDiskUse = true }).ToList();
 
             //    var objIds = new List<string>();
 

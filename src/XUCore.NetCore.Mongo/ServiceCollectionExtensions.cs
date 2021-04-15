@@ -17,7 +17,8 @@ namespace XUCore.NetCore.Mongo
         /// <param name="services">服务集合</param>
         public static IServiceCollection AddMongoService(this IServiceCollection services)
         {
-            services.TryAddSingleton(typeof(IMongoService<>), typeof(MongoService<>));
+            services.TryAddSingleton(typeof(IMongoRepository<>), typeof(MongoRepository<>));
+            services.TryAddSingleton(typeof(IMongoRepository), typeof(MongoRepository));
 
             return services;
         }

@@ -8,8 +8,8 @@ using XUCore.Timing;
 namespace XUCore.NetCore.Mongo
 {
     [Serializable]
-    [ModelProperty]
-    public class MongoBaseModel
+    [Mongo]
+    public class MongoEntity
     {
         /// <summary>
         /// 自定义标识的主键ID
