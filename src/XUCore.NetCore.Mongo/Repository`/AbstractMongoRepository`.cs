@@ -361,11 +361,7 @@ namespace XUCore.NetCore.Mongo
             {
                 var writes = models.ToMap(c => new InsertOneModel<TEntity>(c));
 
-                return Table.BulkWrite(writes, new BulkWriteOptions
-                {
-                    IsOrdered = isOrdered,
-                    BypassDocumentValidation = bypassDocumentValidation
-                });
+                return BulkWrite(writes, isOrdered, bypassDocumentValidation);
             }
             else
                 return null;
@@ -379,11 +375,7 @@ namespace XUCore.NetCore.Mongo
             {
                 var writes = models.ToMap(c => new InsertOneModel<TEntity>(c));
 
-                return await Table.BulkWriteAsync(writes, new BulkWriteOptions
-                {
-                    IsOrdered = isOrdered,
-                    BypassDocumentValidation = bypassDocumentValidation
-                }, cancellationToken);
+                return await BulkWriteAsync(writes, isOrdered, bypassDocumentValidation);
             }
             else
                 return null;
