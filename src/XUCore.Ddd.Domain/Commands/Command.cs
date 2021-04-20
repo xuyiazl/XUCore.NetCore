@@ -15,7 +15,7 @@ namespace XUCore.Ddd.Domain.Commands
     public abstract class Command<TResponse> : Message<TResponse>
     {
         //时间戳
-        public DateTime Timestamp { get; private set; }
+        protected DateTime Timestamp { get; private set; }
         protected ValidationResult ValidationResult
         {
             get;

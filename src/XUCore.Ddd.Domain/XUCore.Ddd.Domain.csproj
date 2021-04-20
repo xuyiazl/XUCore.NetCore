@@ -7,7 +7,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core ddd Domain</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.0.0</Version>
+		<Version>5.0.1</Version>
 		<PackageId>XUCore.Ddd.Domain</PackageId>
 		<Product>XUCore.Ddd.Domain</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>

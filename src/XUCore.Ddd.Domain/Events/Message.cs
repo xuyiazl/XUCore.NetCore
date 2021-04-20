@@ -16,15 +16,15 @@ namespace XUCore.Ddd.Domain.Events
         /// <summary>
         /// 消息类型（命令）
         /// </summary>
-        public string MessageType { get; protected set; }
+        protected string MessageType { get; set; }
         /// <summary>
         /// 聚合根（也可用Guid，但是由于目前大多数的Id均为UUID所以这里也使用long）
         /// </summary>
-        public long AggregateId { get; protected set; }
+        protected long AggregateId { get; set; }
         /// <summary>
         /// 聚合根类型（主要配合聚合根的Id解决重复的问题）
         /// </summary>
-        public string AggregateType { get; protected set; }
+        protected string AggregateType { get; set; }
 
         protected Message()
         {
