@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Doman.Bus;
+using XUCore.Ddd.Domain.Bus;
 
-namespace XUCore.Ddd.Doman.Commands
+namespace XUCore.Ddd.Domain.Commands
 {
     /// <summary>
     /// 领域命令处理程序

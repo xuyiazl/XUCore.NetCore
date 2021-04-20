@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 定义领域实体基类

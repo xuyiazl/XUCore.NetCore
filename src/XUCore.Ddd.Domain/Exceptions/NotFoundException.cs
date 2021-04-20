@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Exceptions
+namespace XUCore.Ddd.Domain.Exceptions
 {
     public class NotFoundException : Exception
     {

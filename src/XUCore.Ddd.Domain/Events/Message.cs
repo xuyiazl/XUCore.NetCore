@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Events
+namespace XUCore.Ddd.Domain.Events
 {
     /// <summary>
     /// 抽象类Message，用来获取我们事件执行过程中的类名

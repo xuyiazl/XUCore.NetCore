@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Events
+namespace XUCore.Ddd.Domain.Events
 {
     /// <summary>
     /// 事件基类

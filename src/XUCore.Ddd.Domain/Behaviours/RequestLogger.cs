@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Behaviours
+namespace XUCore.Ddd.Domain.Behaviours
 {
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {

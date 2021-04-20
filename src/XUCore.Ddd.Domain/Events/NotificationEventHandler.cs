@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Events
+namespace XUCore.Ddd.Domain.Events
 {
     /// <summary>
     /// 事件通知抽象基类

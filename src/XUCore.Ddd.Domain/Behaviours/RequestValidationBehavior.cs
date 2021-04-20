@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = XUCore.Ddd.Doman.Exceptions.ValidationException;
+using ValidationException = XUCore.Ddd.Domain.Exceptions.ValidationException;
 
-namespace XUCore.Ddd.Doman.Behaviours
+namespace XUCore.Ddd.Domain.Behaviours
 {
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

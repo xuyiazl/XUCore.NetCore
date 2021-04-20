@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Doman.Commands;
-using XUCore.Ddd.Doman.Events;
+using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Events;
 
-namespace XUCore.Ddd.Doman.Bus
+namespace XUCore.Ddd.Domain.Bus
 {
     public interface IMediatorHandler
     {

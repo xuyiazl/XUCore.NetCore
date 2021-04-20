@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Doman.Commands
+namespace XUCore.Ddd.Domain.Commands
 {
     /// <summary>
     /// 命令验证抽象基类

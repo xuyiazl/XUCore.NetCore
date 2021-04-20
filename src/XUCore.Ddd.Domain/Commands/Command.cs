@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
-using XUCore.Ddd.Doman.Events;
+using XUCore.Ddd.Domain.Events;
 
-namespace XUCore.Ddd.Doman.Commands
+namespace XUCore.Ddd.Domain.Commands
 {
     /// <summary>
     /// 抽象命令基类
