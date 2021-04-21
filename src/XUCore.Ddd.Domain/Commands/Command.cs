@@ -14,8 +14,13 @@ namespace XUCore.Ddd.Domain.Commands
     /// </summary>
     public abstract class Command<TResponse> : Message<TResponse>
     {
-        //时间戳
+        /// <summary>
+        /// 时间戳
+        /// </summary>
         public DateTime Timestamp { get; private set; }
+        /// <summary>
+        /// 命令验证
+        /// </summary>
         protected ValidationResult ValidationResult
         {
             get;
@@ -27,14 +32,21 @@ namespace XUCore.Ddd.Domain.Commands
             Timestamp = DateTime.Now;
             ValidationResult = new ValidationResult();
         }
-
+        /// <summary>
+        /// 获取验证的错误消息
+        /// </summary>
+        /// <returns></returns>
         public virtual IList<ValidationFailure> GetErrors() => ValidationResult.Errors;
-
+        /// <summary>
+        /// 获取验证的错误消息
+        /// </summary>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public virtual string GetErrors(string separator) => ValidationResult.ToString(separator);
-
-        public virtual bool IsVaild()
-        {
-            return ValidationResult.IsValid;
-        }
+        /// <summary>
+        /// 是否验证通过
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool IsVaild() => ValidationResult.IsValid;
     }
 }

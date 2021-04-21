@@ -9,6 +9,35 @@
             抽象命令基类
             </summary>
         </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.Command`1.Timestamp">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.Command`1.ValidationResult">
+            <summary>
+            命令验证
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.GetErrors">
+            <summary>
+            获取验证的错误消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.GetErrors(System.String)">
+            <summary>
+            获取验证的错误消息
+            </summary>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.IsVaild">
+            <summary>
+            是否验证通过
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandHandler`2">
             <summary>
             领域命令处理程序
@@ -20,6 +49,36 @@
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddPerformanceBehaviour(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 DDD Mediator 性能监控
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddValidationBehavior(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 DDD 自动模型验证
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddMediatorBus``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 DDD Mediator 消息总线
+            </summary>
+            <typeparam name="TMediator"></typeparam>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddEventStore``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 DDD 事件存储
+            </summary>
+            <typeparam name="TEventStore"></typeparam>
+            <param name="services"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Ddd.Domain.Entity">
             <summary>
