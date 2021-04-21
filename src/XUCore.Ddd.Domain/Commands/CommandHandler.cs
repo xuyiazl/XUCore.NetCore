@@ -13,22 +13,29 @@ namespace XUCore.Ddd.Domain.Commands
     /// 领域命令处理程序
     /// 用来作为全部处理程序的基类，提供公共方法和接口数据
     /// </summary>
-    public abstract class CommandHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-         where TRequest : IRequest<TResponse>
+    public abstract class CommandHandler<TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
+         where TCommand : Command<TResponse>
     {
-        // 注入中介处理接口（目前用不到，在领域事件中用来发布事件）
+        /// <summary>
+        /// 注入中介处理接口（目前用不到，在领域事件中用来发布事件）
+        /// </summary>
         public readonly IMediatorHandler bus;
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CommandHandler()
         {
 
         }
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="bus">注入中介处理接口</param>
         public CommandHandler(IMediatorHandler bus)
         {
             this.bus = bus;
         }
 
-        public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+        public abstract Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken);
     }
 }

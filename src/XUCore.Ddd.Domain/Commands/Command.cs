@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
+using MediatR;
 using XUCore.Ddd.Domain.Events;
 
 namespace XUCore.Ddd.Domain.Commands
@@ -12,7 +13,7 @@ namespace XUCore.Ddd.Domain.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class Command<TResponse> : Message<TResponse>
+    public abstract class Command<TResponse> : Message, IRequest<TResponse>
     {
         /// <summary>
         /// 时间戳

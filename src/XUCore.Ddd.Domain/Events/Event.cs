@@ -10,7 +10,7 @@ namespace XUCore.Ddd.Domain.Events
     /// <summary>
     /// 事件基类
     /// </summary>
-    public abstract class Event : Message<bool>, INotification
+    public abstract class Event : Message, INotification
     {
         /// <summary>
         /// 当前触发时间

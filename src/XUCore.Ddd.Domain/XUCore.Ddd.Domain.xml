@@ -44,6 +44,22 @@
             用来作为全部处理程序的基类，提供公共方法和接口数据
             </summary>
         </member>
+        <member name="F:XUCore.Ddd.Domain.Commands.CommandHandler`2.bus">
+            <summary>
+            注入中介处理接口（目前用不到，在领域事件中用来发布事件）
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor(XUCore.Ddd.Domain.Bus.IMediatorHandler)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="bus">注入中介处理接口</param>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandValidator`1">
             <summary>
             命令验证抽象基类
@@ -147,23 +163,23 @@
             <typeparam name="T"> 泛型：Event命令模型</typeparam>
             <param name="theEvent"></param>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Events.Message`1">
+        <member name="T:XUCore.Ddd.Domain.Events.Message">
             <summary>
             抽象类Message，用来获取我们事件执行过程中的类名
             然后并且添加聚合根
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Message`1.MessageType">
+        <member name="P:XUCore.Ddd.Domain.Events.Message.MessageType">
             <summary>
             消息类型（命令）
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Message`1.AggregateId">
+        <member name="P:XUCore.Ddd.Domain.Events.Message.AggregateId">
             <summary>
             聚合根（也可用Guid，但是由于目前大多数的Id均为UUID所以这里也使用long）
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Message`1.AggregateType">
+        <member name="P:XUCore.Ddd.Domain.Events.Message.AggregateType">
             <summary>
             聚合根类型（主要配合聚合根的Id解决重复的问题）
             </summary>
