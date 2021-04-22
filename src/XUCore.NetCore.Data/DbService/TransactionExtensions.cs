@@ -14,18 +14,18 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 创建事务
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
-        public static void CreateTransaction(this IDbContext dbContext,
+        public static void CreateTransaction(this IUnitOfWork unitOfWork,
             Action<IDbContextTransaction> run,
             Action<IDbContextTransaction, Exception> error)
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             strategy.Execute(() =>
             {
-                using (var tran = dbContext.BeginTransaction())
+                using (var tran = unitOfWork.BeginTransaction())
                 {
                     try
                     {
@@ -45,21 +45,21 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 创建事务
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task CreateTransactionAsync(this IDbContext dbContext,
+        public static async Task CreateTransactionAsync(this IUnitOfWork unitOfWork,
             Func<IDbContextTransaction, CancellationToken, Task> run,
             Func<IDbContextTransaction, Exception, CancellationToken, Task> error,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             await strategy.ExecuteAsync(async (_cancel) =>
             {
-                using (var tran = await dbContext.BeginTransactionAsync(_cancel))
+                using (var tran = await unitOfWork.BeginTransactionAsync(_cancel))
                 {
                     try
                     {
@@ -80,21 +80,21 @@ namespace XUCore.NetCore.Data.DbService
         /// 创建事务
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <returns></returns>
-        public static TResult CreateTransaction<TResult>(this IDbContext dbContext,
+        public static TResult CreateTransaction<TResult>(this IUnitOfWork unitOfWork,
             Func<IDbContextTransaction, TResult> run,
             Func<IDbContextTransaction, Exception, TResult> error)
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             return strategy.Execute(() =>
             {
                 var tResult = default(TResult);
 
-                using (var tran = dbContext.BeginTransaction())
+                using (var tran = unitOfWork.BeginTransaction())
                 {
                     try
                     {
@@ -117,23 +117,23 @@ namespace XUCore.NetCore.Data.DbService
         /// 创建事务
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<TResult> CreateTransactionAsync<TResult>(this IDbContext dbContext,
+        public static Task<TResult> CreateTransactionAsync<TResult>(this IUnitOfWork unitOfWork,
             Func<IDbContextTransaction, CancellationToken, Task<TResult>> run,
             Func<IDbContextTransaction, Exception, CancellationToken, Task<TResult>> error,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             return strategy.ExecuteAsync(async (_cancel) =>
             {
                 var tResult = default(TResult);
 
-                using (var tran = await dbContext.BeginTransactionAsync(_cancel))
+                using (var tran = await unitOfWork.BeginTransactionAsync(_cancel))
                 {
                     try
                     {
@@ -156,14 +156,14 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 创建事务（适用于多数据库连接的情况）
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
-        public static void CreateTransactionScope(this IDbContext dbContext,
+        public static void CreateTransactionScope(this IUnitOfWork unitOfWork,
             Action<TransactionScope> run,
             Action<TransactionScope, Exception> error)
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             strategy.Execute(() =>
             {
@@ -188,16 +188,16 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 创建事务（适用于多数据库连接的情况）
         /// </summary>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <param name="cancellationToken"></param>
-        public static async Task CreateTransactionScopeAsync(this IDbContext dbContext,
+        public static async Task CreateTransactionScopeAsync(this IUnitOfWork unitOfWork,
             Func<TransactionScope, CancellationToken, Task> run,
             Func<TransactionScope, Exception, CancellationToken, Task> error,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             await strategy.ExecuteAsync(async (_cancel) =>
             {
@@ -223,15 +223,15 @@ namespace XUCore.NetCore.Data.DbService
         /// 创建事务（适用于多数据库连接的情况）
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <returns></returns>
-        public static TResult CreateTransactionScope<TResult>(this IDbContext dbContext,
+        public static TResult CreateTransactionScope<TResult>(this IUnitOfWork unitOfWork,
             Func<TransactionScope, TResult> run,
             Func<TransactionScope, Exception, TResult> error)
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             return strategy.Execute(() =>
             {
@@ -260,17 +260,17 @@ namespace XUCore.NetCore.Data.DbService
         /// 创建事务（适用于多数据库连接的情况）
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="dbContext"></param>
+        /// <param name="unitOfWork"></param>
         /// <param name="run">执行内容</param>
         /// <param name="error">异常消息</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task<TResult> CreateTransactionScope<TResult>(this IDbContext dbContext,
+        public static async Task<TResult> CreateTransactionScope<TResult>(this IUnitOfWork unitOfWork,
             Func<TransactionScope, CancellationToken, Task<TResult>> run,
             Func<TransactionScope, Exception, CancellationToken, Task<TResult>> error,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var strategy = dbContext.CreateExecutionStrategy();
+            var strategy = unitOfWork.CreateExecutionStrategy();
 
             return await strategy.ExecuteAsync(async (_cancel) =>
             {

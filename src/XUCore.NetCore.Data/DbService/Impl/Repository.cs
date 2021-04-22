@@ -25,6 +25,7 @@ namespace XUCore.NetCore.Data.DbService
     {
         protected string _connectionString { get; set; } = "";
         protected readonly TDbContext _context;
+        protected readonly IUnitOfWork unitOfWork;
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -33,6 +34,7 @@ namespace XUCore.NetCore.Data.DbService
         {
             _connectionString = context.ConnectionStrings;
             _context = context;
+            unitOfWork = new UnitOfWork(context);
         }
         /// <summary>
         /// 当前上下文
@@ -42,7 +44,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <summary>
         /// 工作单元
         /// </summary>
-        public IUnitOfWork UnitOfWork => _context;
+        public IUnitOfWork UnitOfWork => unitOfWork;
         /// <summary>
         /// 是否自动提交
         /// </summary>
@@ -64,7 +66,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().Add(entity);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -82,7 +84,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().AddRange(entities);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -100,7 +102,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().Update(entity);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -118,7 +120,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().UpdateRange(entities);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -136,7 +138,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().Remove(entity);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -154,7 +156,7 @@ namespace XUCore.NetCore.Data.DbService
 
             _context.Set<TEntity>().RemoveRange(entities);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -176,7 +178,7 @@ namespace XUCore.NetCore.Data.DbService
 
             await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -195,7 +197,7 @@ namespace XUCore.NetCore.Data.DbService
 
             await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
 
-            if (IsAutoCommit) return _context.Commit();
+            if (IsAutoCommit) return unitOfWork.Commit();
 
             return 0;
         }

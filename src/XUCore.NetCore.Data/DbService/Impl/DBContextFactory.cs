@@ -24,7 +24,7 @@ namespace XUCore.NetCore.Data.DbService
 
                 if (sqlOptions != null)
                 {
-                    this.ConnectionStrings = sqlOptions.ConnectionString;
+                    ConnectionStrings = sqlOptions.ConnectionString;
                     break;
                 }
 
@@ -44,10 +44,6 @@ namespace XUCore.NetCore.Data.DbService
             }
             this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        /// <summary>
-        /// 连接字符串
-        /// </summary>
-        public override string ConnectionStrings { get; set; }
 
         /// <summary>
         /// 需要检索的程序集

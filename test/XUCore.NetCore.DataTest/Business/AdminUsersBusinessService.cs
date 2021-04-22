@@ -102,7 +102,7 @@ namespace XUCore.NetCore.DataTest.Business
             {
                 //此例子证明 多数据库的分布式事务在Core 3.1以及以下版本是不支持的，官方表示在Net5中支持分布式事务
                 //see https://github.com/dotnet/runtime/issues/715
-                nigelDb.Context.CreateTransactionScope(
+                nigelDb.UnitOfWork.CreateTransactionScope(
                     run: (tran) =>
                     {
                         nigelDb.Delete(c => true);
@@ -145,9 +145,9 @@ namespace XUCore.NetCore.DataTest.Business
              */
             {
                 // 禁用SaveChanges默认的事务提交
-                nigelDb.Context.AutoTransactionsEnabled = false;
+                nigelDb.UnitOfWork.AutoTransactionsEnabled = false;
                 //创建事务
-                using (var tran = nigelDb.Context.BeginTransaction())
+                using (var tran = nigelDb.UnitOfWork.BeginTransaction())
                 {
                     try
                     {
@@ -167,9 +167,9 @@ namespace XUCore.NetCore.DataTest.Business
             }
             {
                 // 禁用SaveChanges默认的事务提交
-                db.Write.Context.AutoTransactionsEnabled = false;
+                db.Write.UnitOfWork.AutoTransactionsEnabled = false;
 
-                using (var tran = db.Write.Context.BeginTransaction())
+                using (var tran = db.Write.UnitOfWork.BeginTransaction())
                 {
                     try
                     {
@@ -188,7 +188,7 @@ namespace XUCore.NetCore.DataTest.Business
                 }
             }
             {
-                nigelDb.Context.CreateTransaction(
+                nigelDb.UnitOfWork.CreateTransaction(
                     (tran) =>
                     {
                         nigelDb.Delete(c => true);
@@ -203,7 +203,7 @@ namespace XUCore.NetCore.DataTest.Business
                     });
             }
             {
-                var res = nigelDb.Context.CreateTransaction(
+                var res = nigelDb.UnitOfWork.CreateTransaction(
                     (tran) =>
                     {
                         nigelDb.Delete(c => true);
@@ -222,7 +222,7 @@ namespace XUCore.NetCore.DataTest.Business
                     });
             }
             {
-                await nigelDb.Context.CreateTransactionAsync(
+                await nigelDb.UnitOfWork.CreateTransactionAsync(
                     async (tran, cancel) =>
                     {
                         await nigelDb.DeleteAsync(c => true);
@@ -240,7 +240,7 @@ namespace XUCore.NetCore.DataTest.Business
                     CancellationToken.None);
             }
             {
-                var res = await nigelDb.Context.CreateTransactionAsync(
+                var res = await nigelDb.UnitOfWork.CreateTransactionAsync(
                     async (tran, cancel) =>
                     {
                         await nigelDb.DeleteAsync(c => true);
@@ -262,11 +262,11 @@ namespace XUCore.NetCore.DataTest.Business
                     CancellationToken.None);
             }
             {
-                var strategy = nigelDb.Context.CreateExecutionStrategy();
+                var strategy = nigelDb.UnitOfWork.CreateExecutionStrategy();
 
                 strategy.Execute(() =>
                 {
-                    using (var tran = nigelDb.Context.BeginTransaction())
+                    using (var tran = nigelDb.UnitOfWork.BeginTransaction())
                     {
                         try
                         {
@@ -286,11 +286,11 @@ namespace XUCore.NetCore.DataTest.Business
                 });
             }
             {
-                var strategy = db.Write.Context.CreateExecutionStrategy();
+                var strategy = db.Write.UnitOfWork.CreateExecutionStrategy();
 
                 strategy.Execute(() =>
                 {
-                    using (var tran = db.Write.Context.BeginTransaction())
+                    using (var tran = db.Write.UnitOfWork.BeginTransaction())
                     {
                         try
                         {
@@ -328,7 +328,7 @@ namespace XUCore.NetCore.DataTest.Business
                          ③多线程带锁的情况，同一条业务线前半部分必须先SaveChanges，才能保证数据准确性(测试简单版本，实际的业务场景待补充！！！)
              */
             {
-                nigelDb.Context.CreateTransactionScope(
+                nigelDb.UnitOfWork.CreateTransactionScope(
                     run: (tran) =>
                     {
                         db.Delete(c => true);
@@ -343,7 +343,7 @@ namespace XUCore.NetCore.DataTest.Business
                     });
             }
             {
-                var res = nigelDb.Context.CreateTransactionScope(
+                var res = nigelDb.UnitOfWork.CreateTransactionScope(
                      run: (tran) =>
                      {
                          db.Delete(c => true);
