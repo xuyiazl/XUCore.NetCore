@@ -30,8 +30,6 @@ namespace XUCore.NetCore.Data.DbService
             }
         }
 
-        public virtual string ConnectionStrings { get; set; }
-
         public virtual int Commit()
         {
             return dbContext.SaveChanges();

@@ -69,12 +69,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
         }
     }
 
-    public interface INigelDbContext : IDbContext
-    {
-        DbSet<AdminUserEntity> User { get; }
-        DbSet<AdminUserAddressEntity> Address { get; }
-    }
-    public class NigelDbContext : DBContextFactory, INigelDbContext
+    public class NigelDbContext : DBContextFactory
     {
         public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options) { }
 
@@ -85,12 +80,12 @@ namespace XUCore.NetCore.DataTest.DbRepository
     public interface INigelDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
     public class NigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbRepository<TEntity> where TEntity : class, new()
     {
-        public NigelDbRepository(INigelDbContext context) : base(context) { }
+        public NigelDbRepository(NigelDbContext context) : base(context) { }
     }
 
-    public interface INigelDbRepository : IRepository<INigelDbContext> { }
-    public class NigelDbRepository : Repository<INigelDbContext>, INigelDbRepository
+    public interface INigelDbRepository : IRepository<NigelDbContext> { }
+    public class NigelDbRepository : Repository<NigelDbContext>, INigelDbRepository
     {
-        public NigelDbRepository(INigelDbContext context) : base(context) { }
+        public NigelDbRepository(NigelDbContext context) : base(context) { }
     }
 }

@@ -71,7 +71,7 @@ namespace XUCore.NetCore.DataTest.Business
             var ss = rep.Context.User.Include(c => c.AdminUserAddress.Take(2)).FirstOrDefault(c => c.Id == entity.Id);
         }
 
-        [TestMethod]
+        [Transaction(DbType = typeof(NigelDbContext))]
         public async Task TestAspectCore()
         {
             await Task.CompletedTask;
