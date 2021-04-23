@@ -375,6 +375,18 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DBContextFactory.OnBeforeMapping(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            在mapping映射之前处理ModelBuilder
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DBContextFactory.OnAfterMapping(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            在mapping映射之后处理ModelBuilder
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbService.DbRepository`1">
             <summary>
             数据库的基础仓储库

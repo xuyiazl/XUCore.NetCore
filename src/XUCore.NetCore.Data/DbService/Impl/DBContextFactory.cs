@@ -62,6 +62,8 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            OnBeforeMapping(modelBuilder);
+
             var typesToRegister = new List<Type>();
 
             foreach (var assembly in Assemblies)
@@ -82,6 +84,18 @@ namespace XUCore.NetCore.Data.DbService
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.ApplyConfiguration(configurationInstance);
             }
+
+            OnAfterMapping(modelBuilder);
         }
+        /// <summary>
+        /// 在mapping映射之前处理ModelBuilder
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected virtual void OnBeforeMapping(ModelBuilder modelBuilder) { }
+        /// <summary>
+        /// 在mapping映射之后处理ModelBuilder
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected virtual void OnAfterMapping(ModelBuilder modelBuilder) { }
     }
 }
