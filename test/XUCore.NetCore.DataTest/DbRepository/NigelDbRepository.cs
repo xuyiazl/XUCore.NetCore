@@ -73,11 +73,6 @@ namespace XUCore.NetCore.DataTest.DbRepository
     {
         public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options) { }
 
-        protected override void OnBeforeMapping(ModelBuilder modelBuilder)
-        {
-
-        }
-
         public DbSet<AdminUserEntity> User => Set<AdminUserEntity>();
         public DbSet<AdminUserAddressEntity> Address => Set<AdminUserAddressEntity>();
     }
