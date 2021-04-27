@@ -39,6 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
 	<ItemGroup>
