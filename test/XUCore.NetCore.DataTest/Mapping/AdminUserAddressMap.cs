@@ -8,11 +8,11 @@ using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.Mapping
 {
-    public class AdminUserAddressMap : EntityTypeConfiguration<AdminUserAddressEntity>
+    public class AdminUserAddressMap : BaseMapping<AdminUserAddressEntity>
     {
         public AdminUserAddressMap() : base("AdminUserAddress", t => t.Id)
         {
-            SetIndentity(t => t.Id);
+
         }
 
         public override void Configure(EntityTypeBuilder<AdminUserAddressEntity> builder)

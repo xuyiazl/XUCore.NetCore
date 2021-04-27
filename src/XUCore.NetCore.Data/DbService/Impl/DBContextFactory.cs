@@ -62,6 +62,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*
             var typesToRegister = new List<Type>();
 
             foreach (var assembly in Assemblies)
@@ -76,11 +77,37 @@ namespace XUCore.NetCore.Data.DbService
                 if (types != null && types.Count > 0)
                     typesToRegister.AddRange(types);
             }
+            */
+
+            var typesToRegister =
+                (
+                    from assembly in Assemblies
+                    from type in assembly.GetTypes()
+                    where type.IsAbstract == false && type.AnyBaseType(c => c.IsParticularGeneric(typeof(EntityTypeConfiguration<>)))
+                    select type
+                )
+                .ToList();
 
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.ApplyConfiguration(configurationInstance);
+            }
+        }
+    }
+
+    internal static class Extensions
+    {
+        public static bool IsParticularGeneric(this Type type, Type generic) => type.IsGenericType && type.GetGenericTypeDefinition() == generic;
+        public static bool AnyBaseType(this Type type, Func<Type, bool> predicate) => type.BaseTypes().Any(predicate);
+        public static IEnumerable<Type> BaseTypes(this Type type)
+        {
+            Type t = type;
+            while (true)
+            {
+                t = t.BaseType;
+                if (t == null) break;
+                yield return t;
             }
         }
     }

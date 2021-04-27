@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using XUCore.Ddd.Domain;
 using XUCore.Serializer;
 
 namespace XUCore.NetCore.DataTest.Entities
 {
-    public class AdminUserEntity
+    public class AdminUserEntity : Entity
     {
         public AdminUserEntity()
         {
             AdminUserAddress = new HashSet<AdminUserAddressEntity>();
         }
-        public long Id { get; set; }
         public string UserName { get; set; }
         public string Mobile { get; set; }
         public string Password { get; set; }
