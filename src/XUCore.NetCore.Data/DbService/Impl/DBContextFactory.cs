@@ -1,12 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using XUCore.Extensions;
 
 namespace XUCore.NetCore.Data.DbService
@@ -62,52 +58,12 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*
-            var typesToRegister = new List<Type>();
-
-            foreach (var assembly in Assemblies)
-            {
-                var types = assembly.GetTypes().Where(type =>
-                    type.Namespace.IsEmpty() == false &&
-                    type.BaseType != null &&
-                    type.BaseType.IsGenericType &&
-                    type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>)
-                ).ToList();
-
-                if (types != null && types.Count > 0)
-                    typesToRegister.AddRange(types);
-            }
-            */
-
-            var typesToRegister =
-                (
-                    from assembly in Assemblies
-                    from type in assembly.GetTypes()
-                    where type.IsAbstract == false && type.AnyBaseType(c => c.IsParticularGeneric(typeof(EntityTypeConfiguration<>)))
-                    select type
-                )
-                .ToList();
+            var typesToRegister = Assemblies.GetTypes(type => type.IsAbstract == false && type.AnyBaseType(typeof(EntityTypeConfiguration<>)));
 
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.ApplyConfiguration(configurationInstance);
-            }
-        }
-    }
-
-    internal static class Extensions
-    {
-        public static bool IsParticularGeneric(this Type type, Type generic) => type.IsGenericType && type.GetGenericTypeDefinition() == generic;
-        public static bool AnyBaseType(this Type type, Func<Type, bool> predicate) => type.BaseTypes().Any(predicate);
-        public static IEnumerable<Type> BaseTypes(this Type type)
-        {
-            Type t = type;
-            while (true)
-            {
-                t = t.BaseType;
-                if (t == null) break;
-                yield return t;
             }
         }
     }

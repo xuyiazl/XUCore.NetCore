@@ -4635,6 +4635,45 @@
             <param name="assembly">程序集</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Extensions.AssemblyExtensions.GetTypes(System.Reflection.Assembly[],System.Func{System.Type,System.Boolean})">
+            <summary>
+            扫描程序集中的指定条件类型
+            </summary>
+            <param name="assemblys">程序集列表</param>
+            <param name="selector">检索条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.AssemblyExtensions.GetTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})">
+            <summary>
+            扫描程序集中的指定条件类型
+            </summary>
+            <param name="assembly">程序集</param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.AssemblyExtensions.AnyBaseType(System.Type,System.Type)">
+            <summary>
+            是否包含指定类型
+            </summary>
+            <param name="type"></param>
+            <param name="baseType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.AssemblyExtensions.IsParticularGeneric(System.Type,System.Type)">
+            <summary>
+            是否是指定的类型
+            </summary>
+            <param name="type"></param>
+            <param name="generic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Extensions.AssemblyExtensions.GetBaseTypes(System.Type)">
+            <summary>
+            获取所有不等于空的baseType
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Extensions.PropertyInfoExtensions">
             <summary>
             属性信息(<see cref="T:System.Reflection.PropertyInfo"/>) 扩展
