@@ -39,7 +39,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
