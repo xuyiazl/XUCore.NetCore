@@ -89,7 +89,7 @@ namespace XUCore.NetCore.DataTest.Business
             await Task.CompletedTask;
         }
 
-        [RedisCacheMethod(HashKey = "mytest", Key = "{Id}", Seconds = CacheTime.Min1)]
+        [RedisCacheMethod(HashKey = "mytest", Key = "{Id}")]
         public async Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity)
         {
             //var list = unitOfWork.GetList<AdminUsersEntity>(c => true);

@@ -22,46 +22,40 @@ namespace XUCore.NetCore.DataTest
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await adminUsersBusinessService.TestAspectCore();
+            //await adminUsersBusinessService.TestAspectCore();
 
-            //await adminUsersBusinessService.TestCacheRemove(1111, new Entities.AdminUsersEntity
-            //{
-            //    Id = 1,
-            //    Name = "name",
-            //    UserName = "username"
-            //},
-            //null);
+            await adminUsersBusinessService.TestCacheRemove(1);
 
-            //await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
-            //{
-            //    Id = 1,
-            //    Name = "name",
-            //    UserName = "username"
-            //});
-            //await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
-            //{
-            //    Id = 2,
-            //    Name = "name",
-            //    UserName = "username"
-            //});
-            //await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
-            //{
-            //    Id = 3,
-            //    Name = "name",
-            //    UserName = "username"
-            //});
-            //await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
-            //{
-            //    Id = 2,
-            //    Name = "name",
-            //    UserName = "username"
-            //});
-            //await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUsersEntity
-            //{
-            //    Id = 3,
-            //    Name = "name",
-            //    UserName = "username"
-            //});
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUserEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUserEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUserEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUserEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            });
+            await adminUsersBusinessService.TestCacheAdd(new Entities.AdminUserEntity
+            {
+                Id = 1,
+                Name = "name",
+                UserName = "username"
+            });
 
             //await adminUsersBusinessService.TestCacheRemove(1);
 
