@@ -35,13 +35,13 @@ namespace XUCore.NetCore.AspectCore.Cache
                     paramList.Add(((string[])param).Join(","));
                 else
                 {
-                    var p = param.SafeString();
-                    if (p.IsJson())
+                    var json = param.ToJson();
+                    if (json.IsJson())
                     {
                         //如果是从对象中获取参数，则先转换成字典，再正则匹配替换（仅支持一层结构）
                         string tmp = ParamterKey;
 
-                        var jsonObj = p.ToObject<Dictionary<string, object>>();
+                        var jsonObj = json.ToObject<Dictionary<string, object>>();
 
                         if (jsonObj != null)
                         {

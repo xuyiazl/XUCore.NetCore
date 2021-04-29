@@ -26,10 +26,5 @@ namespace XUCore.NetCore.DataTest.Entities
         public DateTime CreatedTime { get; set; }
         public bool Status { get; set; }
         public ICollection<AdminUserAddressEntity> AdminUserAddress { get; private set; }
-
-        public override string ToString()
-        {
-            return this.ToJson();
-        }
     }
 }
