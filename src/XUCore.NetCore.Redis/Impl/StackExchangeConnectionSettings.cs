@@ -36,6 +36,10 @@ namespace XUCore.NetCore.Redis
         /// </summary>
         public string Password { get; set; }
         /// <summary>
+        /// 是否启用ssl
+        /// </summary>
+        public bool Ssl { get; set; }
+        /// <summary>
         /// 缓存操作对象
         /// </summary>
         public Lazy<ConnectionMultiplexer> Connection
@@ -68,6 +72,7 @@ namespace XUCore.NetCore.Redis
                             ConnectTimeout = 3000,
                             //Proxy=Proxy.Twemproxy,
                             SyncTimeout = 1200,
+                            Ssl = Ssl,
                             KeepAlive = 60,
                             //KeepAlive = 60,
                             //ConnectTimeout = 60,
