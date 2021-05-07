@@ -88,5 +88,11 @@ namespace XUCore.Paging
             else
                 Items = new List<T>();
         }
+
+
+        /// <summary>
+        /// PagedList模型转换
+        /// </summary>
+        public PagedList<T> List => new PagedList<T>(Items, TotalCount, CurrentPage, PageSize);
     }
 }

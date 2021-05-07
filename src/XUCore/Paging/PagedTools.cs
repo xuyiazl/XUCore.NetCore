@@ -11,15 +11,14 @@ namespace XUCore.Paging
     /// </summary>
     public static class PagedTools
     {
-
         /// <summary>
         /// 根据页码获取分页数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="size"></param>
-        /// <param name="total"></param>
-        /// <param name="data"></param>
-        /// <param name="process"></param>
+        /// <param name="size">每次获取大小</param>
+        /// <param name="total">总数</param>
+        /// <param name="data">数据块</param>
+        /// <param name="process">执行进程</param>
         /// <returns></returns>
         public static long Page<T>(int size, Func<long> total, Func<int, int, IList<T>> data, Action<IList<T>> process)
         {
@@ -42,10 +41,10 @@ namespace XUCore.Paging
         /// 根据页码获取分页数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="size"></param>
-        /// <param name="total"></param>
-        /// <param name="data"></param>
-        /// <param name="process"></param>
+        /// <param name="size">每次获取大小</param>
+        /// <param name="total">总数</param>
+        /// <param name="data">数据块</param>
+        /// <param name="process">执行进程</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public static async Task<long> PageAsync<T>(int size,
@@ -73,9 +72,9 @@ namespace XUCore.Paging
         /// 偏移获取数据分页
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="limit"></param>
-        /// <param name="data"></param>
-        /// <param name="process"></param>
+        /// <param name="limit">数据量</param>
+        /// <param name="data">数据块</param>
+        /// <param name="process">执行进程</param>
         /// <returns></returns>
         public static long Offset<T>(int limit, Func<int, int, IList<T>> data, Action<IList<T>> process)
         {
@@ -99,9 +98,9 @@ namespace XUCore.Paging
         /// 偏移获取数据分页
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="limit"></param>
-        /// <param name="data"></param>
-        /// <param name="process"></param>
+        /// <param name="limit">数据量</param>
+        /// <param name="data">数据块</param>
+        /// <param name="process">执行进程</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public static async Task<long> OffsetAsync<T>(int limit,
