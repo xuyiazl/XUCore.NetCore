@@ -295,7 +295,7 @@ namespace XUCore.Extensions
         /// <returns>分割后的数据</returns>
         public static string[] Split(this string value, string strSplit, bool removeEmptyEntries = false)
         {
-            return value.Split(new[] { strSplit },
+            return value.SafeString().Split(new[] { strSplit },
                 removeEmptyEntries ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
         }
 
@@ -318,7 +318,7 @@ namespace XUCore.Extensions
             char keyValueDelimeter, bool makeKeysCaseSensitive, bool makeValueCaseSensitive, bool trimValues)
         {
             IDictionary<string, string> map = new Dictionary<string, string>();
-            string[] tokens = delimitedText.Split(keyValuePairDelimiter);
+            string[] tokens = delimitedText.SafeString().Split(keyValuePairDelimiter);
 
             if (tokens == null) return map;
 
@@ -1037,7 +1037,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string ReplaceFirst(this string @this, int number, string oldValue, string newValue)
         {
-            List<string> list = @this.Split(oldValue).ToList();
+            List<string> list = @this.SafeString().Split(oldValue).ToList();
             var old = number + 1;
             IEnumerable<string> listStart = list.Take(old);
             IEnumerable<string> listEnd = list.Skip(old);
@@ -1079,7 +1079,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string ReplaceLast(this string @this, int number, string oldValue, string newValue)
         {
-            List<string> list = @this.Split(oldValue).ToList();
+            List<string> list = @this.SafeString().Split(oldValue).ToList();
             var old = Math.Max(0, list.Count - number - 1);
             IEnumerable<string> listStart = list.Take(old);
             IEnumerable<string> listEnd = list.Skip(old);
