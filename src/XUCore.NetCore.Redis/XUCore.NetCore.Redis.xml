@@ -136,6 +136,11 @@
             端口
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.DefaultDb">
+            <summary>
+            默认数据库
+            </summary>
+        </member>
         <member name="P:XUCore.NetCore.Redis.StackExchangeConnectionSettings.Password">
             <summary>
             连接Redis的密码

@@ -1,13 +1,8 @@
-﻿using System;
+﻿using StackExchange.Redis;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
-using StackExchange.Redis;
-using XUCore.Extensions;
-using XUCore.Serializer;
 using XUCore.NetCore.Redis.RedisCommand;
-using XUCore.Helpers;
 
 namespace XUCore.NetCore.Redis
 {
@@ -70,14 +65,10 @@ namespace XUCore.NetCore.Redis
 
                         HashSet(hashId, key, source, connectionWrite, serializer);
                         if (!exists)
-                        {
                             KeyExpire(hashId, seconds, connectionWrite);
-                        }
                     }
                     else
-                    {
                         HashSet(hashId, key, source, connectionWrite, serializer);
-                    }
                 }
                 return source;
             }
@@ -105,14 +96,10 @@ namespace XUCore.NetCore.Redis
                         bool exists = KeyExists(hashId, connectionRead);
                         HashSet(hashId, key, source, connectionWrite, serializer);
                         if (!exists)
-                        {
                             KeyExpire(hashId, seconds, connectionWrite);
-                        }
                     }
                     else
-                    {
                         HashSet(hashId, key, source, connectionWrite, serializer);
-                    }
                 }
                 return source;
             }

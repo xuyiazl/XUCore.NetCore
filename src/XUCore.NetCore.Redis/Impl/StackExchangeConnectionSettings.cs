@@ -26,11 +26,10 @@ namespace XUCore.NetCore.Redis
         /// 端口
         /// </summary>
         public string Port { get; set; }
-        ///// <summary>
-        ///// 默认数据库
-        ///// </summary>
+        /// <summary>
+        /// 默认数据库
+        /// </summary>
         public int DefaultDb { get; set; }
-
         /// <summary>
         /// 连接Redis的密码
         /// </summary>

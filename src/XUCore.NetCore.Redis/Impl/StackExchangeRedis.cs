@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
-using XUCore.Extensions;
-using XUCore.Serializer;
-using System.Threading.Tasks;
-using XUCore.NetCore.Redis.RedisCommand;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XUCore.NetCore.Redis
 {
@@ -69,11 +64,11 @@ namespace XUCore.NetCore.Redis
             {
                 if (string.IsNullOrEmpty(connectionName))
                 {
-                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Read).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Read || a.ConnectType == ConnectTypeEnum.ReadAndWrite).FirstOrDefault();
                 }
                 else
                 {
-                    return connMultiplexer.Value.Where(a => a.ConnectType == ConnectTypeEnum.Read && a.ConnectionName == connectionName).FirstOrDefault();
+                    return connMultiplexer.Value.Where(a => (a.ConnectType == ConnectTypeEnum.Read || a.ConnectType == ConnectTypeEnum.ReadAndWrite) && a.ConnectionName == connectionName).FirstOrDefault();
                 }
             }
             catch (Exception ex)

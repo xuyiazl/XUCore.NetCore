@@ -57,61 +57,26 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
-            var now = DateTime.Now;
-
-            var ss = now.SetDate(2022).SetTime(23, 59, 59);
-
-
+            User user = new User
             {
-                Parallel.For(0, 100, ndx =>
-               {
-                   Console.WriteLine(RandomName.GetFullName());
-               });
-            }
-
-            Console.ReadLine();
-            {
-                User user = new User
-                {
-                    Id = "1",
-                    Name = "张三1111",
-                    CreateTime = DateTime.Now
-                };
-                user.Dict = new Dictionary<string, object>();
-                user.Dict.Add("Id", 1);
-                user.Dict.Add("Name", "张三");
-                user.Info = new Info { Picture = "picture" };
-                user.Infos = new List<Info> {
-                new Info { Picture = "info1" },
-                new Info { Picture = "info2" },
-                new Info { Picture = "info3" },
-                new Info { Picture = "info4" },
-                new Info { Picture = "info5" }
+                Id = "1",
+                Name = "张三1111",
+                CreateTime = DateTime.Now
             };
+            user.Dict = new Dictionary<string, object>();
+            user.Dict.Add("Id", 1);
+            user.Dict.Add("Name", "张三");
+            user.Info = new Info { Picture = "picture" };
+            user.Infos = new List<Info> {
+                    new Info { Picture = "info1" },
+                    new Info { Picture = "info2" },
+                    new Info { Picture = "info3" },
+                    new Info { Picture = "info4" },
+                    new Info { Picture = "info5" }
+                };
 
-                var jj = user.ToMsgPackJson();
+            {
 
-                var _dict = user.ToMsgPackBytes();
-
-                var _dict1 = _dict.ToMsgPackObject<User>();
-
-                var _user1 = user.ToMsgPackBytes().ToMsgPackObject<User>();
-
-                var json = user.ToMsgPackJson(MessagePackSerializerResolver.UnixDateTimeOptions);
-
-                var jsonBytes = json.ToMsgPackBytesFromJson(MessagePackSerializerResolver.UnixDateTimeOptions);
-
-                var data = jsonBytes.ToMsgPackObject<User>(MessagePackSerializerResolver.UnixDateTimeOptions);
-
-                //var dict = new Dictionary<string, object>();
-                //dict.Add("Id", 1);
-                //dict.Add("Name", "张三");
-
-
-
-
-
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
                 var configuration = ConfigHelper.GetJsonConfig("appsettings.Test.json");
 
@@ -119,25 +84,25 @@ namespace XUCore.ConsoleTests
 
                 string hashId = "User";
 
-                //redisService.HashDelete(hashId, user.Id);
+                redisService.HashDelete(hashId, user.Id);
 
-                //redisService.HashSet<User>(hashId, user.Id, user);
+                redisService.HashSet<User>(hashId, user.Id, user, serializer: new MessagePackRedisSerializer());
 
                 var res = redisService.HashGet<User>(hashId, user.Id, serializer: new MessagePackRedisSerializer());
 
                 string hashId2 = "User2";
 
-                //redisService.HashDelete(hashId2, "2");
+                redisService.HashDelete(hashId2, "2");
 
-                //redisService.HashSet(hashId2, "2", "2");
+                redisService.HashSet(hashId2, "2", "2", serializer: new MessagePackRedisSerializer());
 
                 var res1 = redisService.HashGet<string>(hashId2, "2", serializer: new MessagePackRedisSerializer());
 
                 string hashId3 = "User3";
 
-                //redisService.HashDelete(hashId3, "3");
+                redisService.HashDelete(hashId3, "3");
 
-                //redisService.HashSet(hashId3, "3", "3");
+                redisService.HashSet(hashId3, "3", "3", serializer: new MessagePackRedisSerializer());
 
                 var res3 = redisService.HashGet<string>(hashId3, "3", serializer: new MessagePackRedisSerializer());
 
