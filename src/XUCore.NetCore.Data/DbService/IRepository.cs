@@ -28,10 +28,6 @@ namespace XUCore.NetCore.Data.DbService
         /// 工作单元
         /// </summary>
         IUnitOfWork UnitOfWork { get; }
-        /// <summary>
-        /// 是否自动提交
-        /// </summary>
-        bool IsAutoCommit { get; set; }
 
         //同步操作
 
@@ -39,38 +35,44 @@ namespace XUCore.NetCore.Data.DbService
         /// 插入一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Add<TEntity>(TEntity entity) where TEntity : class, new();
+        int Add<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new();
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Add<TEntity>(IEnumerable<TEntity> entities) where TEntity : class, new();
+        int Add<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new();
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Update<TEntity>(TEntity entity) where TEntity : class, new();
+        int Update<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new();
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Update<TEntity>(IEnumerable<TEntity> entities) where TEntity : class, new();
+        int Update<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new();
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Delete<TEntity>(TEntity entity) where TEntity : class, new();
+        int Delete<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new();
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : class, new();
+        int Delete<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new();
 
         //异步操作
 
@@ -78,17 +80,18 @@ namespace XUCore.NetCore.Data.DbService
         /// 异步插入一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : class, new();
+        Task<int> AddAsync<TEntity>(TEntity entity, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new();
         /// <summary>
         /// 批量写入数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : class, new();
-
+        Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new();
         ////同步查询
 
         ///// <summary>

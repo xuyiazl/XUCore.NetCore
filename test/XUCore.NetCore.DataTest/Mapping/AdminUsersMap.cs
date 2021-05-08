@@ -10,7 +10,7 @@ namespace XUCore.NetCore.DataTest.Mapping
 {
     public class AdminUsersMap : BaseMapping<AdminUserEntity>
     {
-        public AdminUsersMap() : base("AdminUsers", t => t.Id)
+        public AdminUsersMap() : base("AdminUser", t => t.Id)
         {
 
         }

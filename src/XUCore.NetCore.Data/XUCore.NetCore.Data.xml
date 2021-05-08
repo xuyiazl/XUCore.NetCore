@@ -789,66 +789,69 @@
             工作单元
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.Repository`1.IsAutoCommit">
-            <summary>
-            是否自动提交
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(``0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(``0,System.Boolean)">
             <summary>
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(``0,System.Boolean)">
             <summary>
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(``0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -918,66 +921,69 @@
             工作单元
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Data.DbService.IRepository`1.IsAutoCommit">
-            <summary>
-            是否自动提交
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(``0,System.Boolean)">
             <summary>
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(``0,System.Boolean)">
             <summary>
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(``0)">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(``0,System.Boolean)">
             <summary>
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(``0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1703,6 +1709,22 @@
             <param name="sql"></param>
             <param name="type"></param>
             <param name="parameters"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.TransactionAttribute">
+            <summary>
+            事务AOP
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.TransactionAttribute.DbType">
+            <summary>
+            Type of DbContext
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.TransactionAttribute.#ctor(System.Type)">
+            <summary>
+            事务AOP
+            </summary>
+            <param name="dbType">上下文<see cref="T:XUCore.NetCore.Data.DbService.IDbContext"/></param>
         </member>
         <member name="M:XUCore.NetCore.Data.DbService.TransactionExtensions.CreateTransaction(XUCore.NetCore.Data.DbService.IUnitOfWork,System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction},System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception})">
             <summary>

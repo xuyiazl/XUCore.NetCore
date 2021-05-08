@@ -35,9 +35,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        error.Invoke(tran, ex);
-
                         tran.Rollback();
+
+                        error.Invoke(tran, ex);
                     }
                 }
             });
@@ -69,9 +69,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        await error.Invoke(tran, ex, _cancel);
-
                         await tran.RollbackAsync(_cancel);
+
+                        await error.Invoke(tran, ex, _cancel);
                     }
                 }
             }, cancellationToken);
@@ -104,9 +104,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        tResult = error.Invoke(tran, ex);
-
                         tran.Rollback();
+
+                        tResult = error.Invoke(tran, ex);
                     }
                 }
 
@@ -143,9 +143,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        tResult = await error.Invoke(tran, ex, _cancel);
-
                         await tran.RollbackAsync(_cancel);
+
+                        tResult = await error.Invoke(tran, ex, _cancel);
                     }
                 }
 
@@ -177,9 +177,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        error.Invoke(tran, ex);
-
                         Transaction.Current.Rollback();
+
+                        error.Invoke(tran, ex);
                     }
                 }
             }
@@ -211,9 +211,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        await error.Invoke(tran, ex, _cancel);
-
                         Transaction.Current.Rollback();
+
+                        await error.Invoke(tran, ex, _cancel);
                     }
                 }
             },
@@ -247,9 +247,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        tResult = error.Invoke(tran, ex);
-
                         Transaction.Current.Rollback();
+
+                        tResult = error.Invoke(tran, ex);
                     }
                 }
 
@@ -286,9 +286,9 @@ namespace XUCore.NetCore.Data.DbService
                     }
                     catch (Exception ex)
                     {
-                        tResult = await error.Invoke(tran, ex, _cancel);
-
                         Transaction.Current.Rollback();
+
+                        tResult = await error.Invoke(tran, ex, _cancel);
                     }
                 }
 

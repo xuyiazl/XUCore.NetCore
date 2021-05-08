@@ -13,8 +13,10 @@ namespace XUCore.NetCore.Data.DbService
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext dbContext;
+        private readonly IDbContext _db;
         public UnitOfWork(IDbContext context)
         {
+            this._db = context;
             this.dbContext = context as DbContext;
         }
 
