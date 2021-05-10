@@ -10,19 +10,19 @@ using XUCore.NetCore.AspectCore;
 namespace XUCore.NetCore.Data.DbService
 {
     /// <summary>
-    /// 事务AOP
+    /// 工作单元AOP
     /// </summary>
-    public class TransactionAttribute : InterceptorBase
+    public class UnitOfWorkAttribute : InterceptorBase
     {
         /// <summary>
         /// Type of DbContext
         /// </summary>
         public Type DbType { get; set; }
         /// <summary>
-        /// 事务AOP
+        /// 工作单元AOP
         /// </summary>
         /// <param name="dbType">上下文<see cref="IDbContext"/></param>
-        public TransactionAttribute(Type dbType)
+        public UnitOfWorkAttribute(Type dbType)
         {
             DbType = dbType;
         }
@@ -35,18 +35,9 @@ namespace XUCore.NetCore.Data.DbService
 
             IUnitOfWork unitOfWork = new UnitOfWorkService(dbContext);
 
-            await unitOfWork.CreateTransactionAsync(
-                async (tran, cancel) =>
-                {
-                    await next(context);
-                },
-                async (tran, error, cancel) =>
-                {
-                    await Task.CompletedTask;
+            await next(context);
 
-                    throw error;
-                },
-                CancellationToken.None);
+            await unitOfWork.CommitAsync();
         }
     }
 }

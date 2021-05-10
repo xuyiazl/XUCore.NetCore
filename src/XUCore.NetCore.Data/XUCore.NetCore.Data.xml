@@ -1803,5 +1803,21 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.Data.DbService.UnitOfWorkAttribute">
+            <summary>
+            工作单元AOP
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.UnitOfWorkAttribute.DbType">
+            <summary>
+            Type of DbContext
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.UnitOfWorkAttribute.#ctor(System.Type)">
+            <summary>
+            工作单元AOP
+            </summary>
+            <param name="dbType">上下文<see cref="T:XUCore.NetCore.Data.DbService.IDbContext"/></param>
+        </member>
     </members>
 </doc>

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace XUCore.NetCore.Data.DbService
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWorkService : IUnitOfWork
     {
         private readonly DbContext dbContext;
         private readonly IDbContext _db;
-        public UnitOfWork(IDbContext context)
+        public UnitOfWorkService(IDbContext context)
         {
             this._db = context;
             this.dbContext = context as DbContext;

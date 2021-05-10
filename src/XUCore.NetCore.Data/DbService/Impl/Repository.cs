@@ -34,7 +34,7 @@ namespace XUCore.NetCore.Data.DbService
         {
             _connectionString = context.ConnectionStrings;
             _context = context;
-            unitOfWork = new UnitOfWork(context);
+            unitOfWork = new UnitOfWorkService(context);
         }
         /// <summary>
         /// 当前上下文
