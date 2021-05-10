@@ -20,7 +20,9 @@ namespace XUCore.Ddd.Domain.Events
             get;
             private set;
         }
-
+        /// <summary>
+        /// 事件基类
+        /// </summary>
         protected Event()
         {
             Timestamp = DateTime.Now;

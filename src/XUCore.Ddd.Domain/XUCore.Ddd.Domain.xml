@@ -4,6 +4,29 @@
         <name>XUCore.Ddd.Domain</name>
     </assembly>
     <members>
+        <member name="T:XUCore.Ddd.Domain.Bus.IMediatorHandler">
+            <summary>
+            消息总线
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Bus.IMediatorHandler.PublishEvent``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            发布事件通知
+            </summary>
+            <typeparam name="TNotification"></typeparam>
+            <param name="event">通知事件</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Bus.IMediatorHandler.SendCommand``1(XUCore.Ddd.Domain.Commands.Command{``0},System.Threading.CancellationToken)">
+            <summary>
+            发送命令请求
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <param name="command">命令</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.Command`1">
             <summary>
             抽象命令基类
@@ -17,6 +40,11 @@
         <member name="P:XUCore.Ddd.Domain.Commands.Command`1.ValidationResult">
             <summary>
             命令验证
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.#ctor">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:XUCore.Ddd.Domain.Commands.Command`1.GetErrors">
@@ -49,6 +77,11 @@
             注入中介处理接口（目前用不到，在领域事件中用来发布事件）
             </summary>
         </member>
+        <member name="F:XUCore.Ddd.Domain.Commands.CommandHandler`2.mapper">
+            <summary>
+            AutoMapper
+            </summary>
+        </member>
         <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor">
             <summary>
             构造函数
@@ -60,24 +93,33 @@
             </summary>
             <param name="bus">注入中介处理接口</param>
         </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor(XUCore.Ddd.Domain.Bus.IMediatorHandler,AutoMapper.IMapper)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="bus">注入中介处理接口</param>
+            <param name="mapper">automapper</param>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.Handle(`0,System.Threading.CancellationToken)">
+            <summary>
+            事件执行
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandValidator`1">
             <summary>
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddPerformanceBehaviour(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddRequestBehaviour(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.Ddd.Domain.RequestOptions})">
             <summary>
-            注册 DDD Mediator 性能监控
+            注册 DDD Mediator 监控等插件
             </summary>
             <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddValidationBehavior(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注册 DDD 自动模型验证
-            </summary>
-            <param name="services"></param>
+            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddMediatorBus``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
@@ -151,6 +193,11 @@
             当前触发时间
             </summary>
         </member>
+        <member name="M:XUCore.Ddd.Domain.Events.Event.#ctor">
+            <summary>
+            事件基类
+            </summary>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Events.IEventStoreService">
             <summary>
             领域存储服务接口
@@ -184,11 +231,49 @@
             聚合根类型（主要配合聚合根的Id解决重复的问题）
             </summary>
         </member>
+        <member name="M:XUCore.Ddd.Domain.Events.Message.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Events.NotificationEventHandler`1">
             <summary>
             事件通知抽象基类
             </summary>
             <typeparam name="TNotification"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Events.NotificationEventHandler`1.Handle(`0,System.Threading.CancellationToken)">
+            <summary>
+            事件执行
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.IAggregateRoot">
+            <summary>
+            聚合根
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.RequestOptions">
+            <summary>
+            Mediator 请求插件启用配置
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.RequestOptions.Logger">
+            <summary>
+            请求日志，输出请求命令具体位置记录
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.RequestOptions.Performance">
+            <summary>
+            性能监控，输出记录超过500ms的请求
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.RequestOptions.Validation">
+            <summary>
+            自动验证，<see cref="T:FluentValidation.IValidator"/>异常抛出，需要配合try catch捕获处理
+            </summary>
         </member>
     </members>
 </doc>

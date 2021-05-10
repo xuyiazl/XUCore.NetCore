@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace XUCore.Ddd.Domain
 {
+    /// <summary>
+    /// 聚合根
+    /// </summary>
     public interface IAggregateRoot
     {
     }

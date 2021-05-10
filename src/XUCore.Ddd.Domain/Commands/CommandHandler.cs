@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace XUCore.Ddd.Domain.Commands
         /// </summary>
         public readonly IMediatorHandler bus;
         /// <summary>
+        /// AutoMapper
+        /// </summary>
+        public readonly IMapper mapper;
+        /// <summary>
         /// 构造函数
         /// </summary>
         public CommandHandler()
@@ -35,7 +40,22 @@ namespace XUCore.Ddd.Domain.Commands
         {
             this.bus = bus;
         }
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="bus">注入中介处理接口</param>
+        /// <param name="mapper">automapper</param>
+        public CommandHandler(IMediatorHandler bus, IMapper mapper)
+        {
+            this.bus = bus;
+            this.mapper = mapper;
+        }
+        /// <summary>
+        /// 事件执行
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public abstract Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken);
     }
 }

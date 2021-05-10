@@ -27,7 +27,9 @@ namespace XUCore.Ddd.Domain.Commands
             get;
             set;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         protected Command()
         {
             Timestamp = DateTime.Now;

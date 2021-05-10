@@ -15,25 +15,25 @@ namespace XUCore.Ddd.Domain
     public static class DependencyInjection
     {
         /// <summary>
-        /// 注册 DDD Mediator 性能监控
+        /// 注册 DDD Mediator 监控等插件
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="action"></param>
         /// <returns></returns>
-        public static IServiceCollection AddPerformanceBehaviour(this IServiceCollection services)
+        public static IServiceCollection AddRequestBehaviour(this IServiceCollection services, Action<RequestOptions> action = null)
         {
-            services.AddTransient(typeof(IRequestPreProcessor<>), typeof(RequestLogger<>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+            RequestOptions option = new RequestOptions();
 
-            return services;
-        }
-        /// <summary>
-        /// 注册 DDD 自动模型验证
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddValidationBehavior(this IServiceCollection services)
-        {
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            action?.Invoke(option);
+
+            if (option.Logger)
+                services.AddTransient(typeof(IRequestPreProcessor<>), typeof(RequestLogger<>));
+
+            if (option.Performance)
+                services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+
+            if (option.Validation)
+                services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             return services;
         }

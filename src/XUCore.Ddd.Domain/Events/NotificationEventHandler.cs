@@ -15,6 +15,12 @@ namespace XUCore.Ddd.Domain.Events
     public abstract class NotificationEventHandler<TNotification> : INotificationHandler<TNotification>
          where TNotification : Event
     {
+        /// <summary>
+        /// 事件执行
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public abstract Task Handle(TNotification notification, CancellationToken cancellationToken);
     }
 }

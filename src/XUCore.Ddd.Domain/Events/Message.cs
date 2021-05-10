@@ -25,7 +25,9 @@ namespace XUCore.Ddd.Domain.Events
         /// 聚合根类型（主要配合聚合根的Id解决重复的问题）
         /// </summary>
         public string AggregateType { get; protected set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         protected Message()
         {
             MessageType = GetType().Name;
