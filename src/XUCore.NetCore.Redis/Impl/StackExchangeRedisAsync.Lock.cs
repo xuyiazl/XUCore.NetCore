@@ -15,7 +15,7 @@ namespace XUCore.NetCore.Redis
     {
         public async Task<bool> LockExtendAsync<T>(string key, T value, int seconds, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -27,7 +27,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<T> LockQueryAsync<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -40,7 +40,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<bool> LockReleaseAsync<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -52,7 +52,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<bool> LockTakeAsync<T>(string key, T value, int seconds, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {

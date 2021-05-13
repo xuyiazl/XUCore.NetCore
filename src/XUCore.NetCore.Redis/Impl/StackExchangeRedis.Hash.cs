@@ -10,7 +10,7 @@ namespace XUCore.NetCore.Redis
     {
         public bool HashSet<T>(string hashId, string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
              {
@@ -22,7 +22,7 @@ namespace XUCore.NetCore.Redis
 
         public bool HashSet<T>(string hashId, string key, T value, OverWrittenTypeDenum isAlways, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -49,7 +49,7 @@ namespace XUCore.NetCore.Redis
         public TResult HashGetOrInsert<TResult>(string hashId, string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return fetcher.Invoke();
@@ -81,7 +81,7 @@ namespace XUCore.NetCore.Redis
         public TResult HashGetOrInsert<T, TResult>(string hashId, string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return fetcher.Invoke(t);
@@ -111,7 +111,7 @@ namespace XUCore.NetCore.Redis
 
         public TResult HashGet<TResult>(string hashId, string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -124,7 +124,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<TResult> HashGet<TResult>(string hashId, string[] keys, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -168,7 +168,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<TResult> HashValues<TResult>(string hashId, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {

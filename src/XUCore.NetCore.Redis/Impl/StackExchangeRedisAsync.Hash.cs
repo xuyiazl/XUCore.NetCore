@@ -13,7 +13,7 @@ namespace XUCore.NetCore.Redis
     {
         public async Task<bool> HashSetAsync<T>(string hashId, string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -25,7 +25,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<bool> HashSetAsync<T>(string hashId, string key, T value, OverWrittenTypeDenum isAlways, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
              {
@@ -52,7 +52,7 @@ namespace XUCore.NetCore.Redis
         public async Task<TResult> HashGetOrInsertAsync<TResult>(string hashId, string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return await fetcher.Invoke();
@@ -88,7 +88,7 @@ namespace XUCore.NetCore.Redis
         public async Task<TResult> HashGetOrInsertAsync<T, TResult>(string hashId, string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return await fetcher.Invoke(t);
@@ -122,7 +122,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<TResult> HashGetAsync<TResult>(string hashId, string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -136,7 +136,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<IList<TResult>> HashGetAsync<TResult>(string hashId, string[] keys, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -181,7 +181,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<IList<TResult>> HashValuesAsync<TResult>(string hashId, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {

@@ -82,29 +82,29 @@ namespace XUCore.ConsoleTests
 
                 IRedisService redisService = new RedisServiceProvider(configuration, null);
 
-                string hashId = "User";
+                //string hashId = "User";
 
-                redisService.HashDelete(hashId, user.Id);
+                //redisService.HashDelete(hashId, user.Id);
 
-                redisService.HashSet<User>(hashId, user.Id, user, serializer: new MessagePackRedisSerializer());
+                //redisService.HashSet<User>(hashId, user.Id, user);
 
-                var res = redisService.HashGet<User>(hashId, user.Id, serializer: new MessagePackRedisSerializer());
+                //var res = redisService.HashGet<User>(hashId, user.Id);
 
                 string hashId2 = "User2";
 
                 redisService.HashDelete(hashId2, "2");
 
-                redisService.HashSet(hashId2, "2", "2", serializer: new MessagePackRedisSerializer());
+                redisService.HashSet(hashId2, "2", "2");
 
-                var res1 = redisService.HashGet<string>(hashId2, "2", serializer: new MessagePackRedisSerializer());
+                var res1 = redisService.HashGet<string>(hashId2, "2");
 
                 string hashId3 = "User3";
 
                 redisService.HashDelete(hashId3, "3");
 
-                redisService.HashSet(hashId3, "3", "3", serializer: new MessagePackRedisSerializer());
+                redisService.HashSet(hashId3, "3", "3");
 
-                var res3 = redisService.HashGet<string>(hashId3, "3", serializer: new MessagePackRedisSerializer());
+                var res3 = redisService.HashGet<string>(hashId3, "3");
 
 
                 Console.Read();

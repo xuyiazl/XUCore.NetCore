@@ -34,7 +34,7 @@ namespace XUCore.NetCore.Redis
 
         private void ThrowExceptions(StackExchangeConnectionSettings config, Exception ex)
         {
-            throw new RedisException(config.EndPoint, config.Port, ex.Message, "缓存服务器意外终止,请检查缓存服务器并且将缓存服务器打开");
+            throw new RedisException(config.EndPoint, config.Port, ex.Message, "缓存服务器意外终止,请检查缓存服务器");
         }
 
 

@@ -15,7 +15,7 @@ namespace XUCore.NetCore.Redis
     {
         public async Task<long> ListLeftPushWhenExistsAsync<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -27,7 +27,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListLeftPushAsync<T>(string key, List<T> value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -45,7 +45,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListLeftPushWhenNoExistsAsync<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -57,7 +57,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListRightPushWhenExistsAsync<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -69,7 +69,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListRightPushWhenNoExistsAsync<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -81,7 +81,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListRightPushAsync<T>(string key, List<T> value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -99,7 +99,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<T> ListLeftPopAsync<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -112,7 +112,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<T> ListRightPopAsync<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -133,7 +133,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task ListSetByIndexAsync<T>(string key, long index, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -153,7 +153,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<T> ListGetByIndexAsync<T>(string key, long index, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -166,7 +166,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<IList<T>> ListRangeAsync<T>(string key, long start, long end, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -179,7 +179,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListInsertBeforeAsync<T>(string key, T value, string insertvalue, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -191,7 +191,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListInsertAfterAsync<T>(string key, T value, string insertvalue, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -203,7 +203,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<long> ListRemoveAsync<T>(string key, T value, long removecount, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {

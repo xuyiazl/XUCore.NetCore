@@ -31,28 +31,31 @@ namespace XUCore.NetCore.Redis
         {
 
         }
+
         public RedisException(string format, object[] args) : base(string.Format(format, args))
         {
 
         }
 
         public RedisException(string host, string port, string sourceErrorMessage, string customErrorMessage)
-            : base(string.Format("地址{0}:{1}错误源信息:{2},自定义错误信息:{3}", host, port, sourceErrorMessage, customErrorMessage))
+            : base(string.Format("地址{0}:{1}，错误源信息:{2}，自定义错误信息:{3}", host, port, sourceErrorMessage, customErrorMessage))
         {
             this.Host = host;
             this.Port = port;
             this.SourceErrorMessage = sourceErrorMessage;
             this.CustomErrorMessage = customErrorMessage;
-
         }
     }
 
     public static class RedisThrow
     {
-        public static void NullSerializer(IRedisSerializer redisSerializer, IRedisSerializer serializer)
+        public static void NullSerializer(IRedisSerializer redisSerializer, ref IRedisSerializer serializer)
         {
             if (redisSerializer == null && serializer == null)
-                throw new ArgumentNullException(nameof(IRedisSerializer), "请注入或者传入Redis序列化组件，并实现IRedisSerializer接口");
+                serializer = RedisSerializerOptions.RedisValue;
+
+            //if (redisSerializer == null && serializer == null)
+            //    throw new ArgumentNullException(nameof(IRedisSerializer), "请注入或者传入Redis序列化组件，并实现IRedisSerializer接口");
         }
     }
 }

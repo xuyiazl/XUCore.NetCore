@@ -16,7 +16,7 @@ namespace XUCore.NetCore.Redis
 
         public bool LockExtend<T>(string key, T value, int seconds, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -28,7 +28,7 @@ namespace XUCore.NetCore.Redis
 
         public T LockQuery<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -41,7 +41,7 @@ namespace XUCore.NetCore.Redis
 
         public bool LockRelease<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -53,7 +53,7 @@ namespace XUCore.NetCore.Redis
 
         public bool LockTake<T>(string key, T value, int seconds, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {

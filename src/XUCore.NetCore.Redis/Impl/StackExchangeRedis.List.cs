@@ -15,7 +15,7 @@ namespace XUCore.NetCore.Redis
     {
         public long ListLeftPushWhenExists<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -27,7 +27,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListLeftPush<T>(string key, List<T> value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -46,7 +46,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListLeftPushWhenNoExists<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -58,7 +58,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListRightPushWhenExists<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -70,7 +70,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListRightPushWhenNoExists<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -82,7 +82,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListRightPush<T>(string key, List<T> value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -101,7 +101,7 @@ namespace XUCore.NetCore.Redis
 
         public T ListLeftPop<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -114,7 +114,7 @@ namespace XUCore.NetCore.Redis
 
         public T ListRightPop<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -135,7 +135,7 @@ namespace XUCore.NetCore.Redis
 
         public void ListSetByIndex<T>(string key, long index, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -156,7 +156,7 @@ namespace XUCore.NetCore.Redis
 
         public T ListGetByIndex<T>(string key, long index, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -169,7 +169,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<T> ListRange<T>(string key, long start, long end, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -182,7 +182,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListInsertBefore<T>(string key, T value, string insertvalue, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -194,7 +194,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListInsertAfter<T>(string key, T value, string insertvalue, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -206,7 +206,7 @@ namespace XUCore.NetCore.Redis
 
         public long ListRemove<T>(string key, T value, long removecount, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {

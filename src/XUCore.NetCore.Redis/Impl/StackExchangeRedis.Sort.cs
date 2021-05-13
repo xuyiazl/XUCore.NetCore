@@ -15,7 +15,7 @@ namespace XUCore.NetCore.Redis
     {
         public bool SortedAdd<T>(string key, T value, double score, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -27,7 +27,7 @@ namespace XUCore.NetCore.Redis
 
         public long SortedAdd<T>(string key, Dictionary<T, double> values, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -59,7 +59,7 @@ namespace XUCore.NetCore.Redis
 
         public long SortedRemove<T>(string key, IList<T> values, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -77,7 +77,7 @@ namespace XUCore.NetCore.Redis
 
         public bool SortedRemove<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -105,7 +105,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<T> SortedRangeByScore<T>(string key, double start, double stop, Exclude exclude = Exclude.None, Order orderby = Order.Ascending, int skip = 0, int take = -1, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -119,7 +119,7 @@ namespace XUCore.NetCore.Redis
 
         public Dictionary<T, double> SortedRange<T>(string key, long start, long stop, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -133,7 +133,7 @@ namespace XUCore.NetCore.Redis
 
         public long? SortedZrank<T>(string key, T value, Order orderby = Order.Ascending, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {

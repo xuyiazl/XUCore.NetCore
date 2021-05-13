@@ -16,7 +16,7 @@ namespace XUCore.NetCore.Redis
         public async Task<TResult> StringGetOrInsertAsync<TResult>(string key, Func<Task<TResult>> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return await fetcher.Invoke();
@@ -37,7 +37,7 @@ namespace XUCore.NetCore.Redis
         public async Task<TResult> StringGetOrInsertAsync<T, TResult>(string key, Func<T, Task<TResult>> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return await fetcher.Invoke(t);
@@ -57,7 +57,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<bool> StringSetAsync<T>(string key, T value, int seconds = 0, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
@@ -86,7 +86,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<TResult> StringGetAsync<TResult>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {
@@ -99,7 +99,7 @@ namespace XUCore.NetCore.Redis
 
         public async Task<IList<TResult>> StringGetAsync<TResult>(string[] keys, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return await ExecuteCommand(ConnectTypeEnum.Read, connectionName, async (db) =>
             {

@@ -14,7 +14,7 @@ namespace XUCore.NetCore.Redis
     {
         public bool SetAdd<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -26,7 +26,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<T> SetMembers<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -39,7 +39,7 @@ namespace XUCore.NetCore.Redis
 
         public bool SetExists<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -51,7 +51,7 @@ namespace XUCore.NetCore.Redis
 
         public bool SetRemove<T>(string key, T value, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -63,7 +63,7 @@ namespace XUCore.NetCore.Redis
 
         public T SetPop<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -84,7 +84,7 @@ namespace XUCore.NetCore.Redis
 
         public T SetRandom<T>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {

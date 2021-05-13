@@ -16,7 +16,7 @@ namespace XUCore.NetCore.Redis
         public TResult StringGetOrInsert<TResult>(string key, Func<TResult> fetcher, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return fetcher.Invoke();
@@ -37,7 +37,7 @@ namespace XUCore.NetCore.Redis
         public TResult StringGetOrInsert<T, TResult>(string key, Func<T, TResult> fetcher, T t, int seconds = 0, string connectionRead = null, string connectionWrite = null,
             bool isCache = true, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             if (!isCache)
                 return fetcher.Invoke(t);
@@ -57,7 +57,7 @@ namespace XUCore.NetCore.Redis
 
         public bool StringSet<T>(string key, T value, int seconds = 0, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
@@ -86,7 +86,7 @@ namespace XUCore.NetCore.Redis
 
         public TResult StringGet<TResult>(string key, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
@@ -100,7 +100,7 @@ namespace XUCore.NetCore.Redis
 
         public IList<TResult> StringGet<TResult>(string[] keys, string connectionName = null, IRedisSerializer serializer = null)
         {
-            RedisThrow.NullSerializer(redisSerializer, serializer);
+            RedisThrow.NullSerializer(redisSerializer, ref serializer);
 
             return ExecuteCommand(ConnectTypeEnum.Read, connectionName, (db) =>
             {
