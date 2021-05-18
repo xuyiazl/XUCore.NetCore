@@ -11,7 +11,7 @@ namespace XUCore.Ddd.Domain.Commands
         where TCommand : CommandLimit<TResponse>
     {
         /// <summary>
-        /// 注册分页模型验证
+        /// Limit验证（大于等于0 且小于默认100）
         /// </summary>
         /// <param name="max">最大数值（默认100）</param>
         public void AddLimitVaildator(int max = 100)

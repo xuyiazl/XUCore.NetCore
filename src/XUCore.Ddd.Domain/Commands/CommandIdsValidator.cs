@@ -7,15 +7,15 @@ namespace XUCore.Ddd.Domain.Commands
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public abstract class CommandIdValidator<TCommand, TResponse> : AbstractValidator<TCommand>
-        where TCommand : CommandId<TResponse>
+    public abstract class CommandIdsValidator<TCommand, TResponse> : AbstractValidator<TCommand>
+        where TCommand : CommandIds<TResponse>
     {
         /// <summary>
-        /// Id验证（大于0）
+        /// Id集合验证（不可为空）
         /// </summary>
-        public void AddIdValidator()
+        public void AddIdsValidator()
         {
-            RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("id");
+            RuleFor(x => x.Ids).NotEmpty().WithName("ids");
         }
     }
 }

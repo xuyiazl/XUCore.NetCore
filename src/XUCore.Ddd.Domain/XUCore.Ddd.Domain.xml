@@ -124,6 +124,33 @@
             抽象命令基类
             </summary>
         </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandIds`1">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.CommandIds`1.Ids">
+            <summary>
+            主键Id集合
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandIds`1.#ctor">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdsValidator`2">
+            <summary>
+            命令验证抽象基类
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdsValidator`2.AddIdsValidator">
+            <summary>
+            Id集合验证（不可为空）
+            </summary>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandIdValidator`2">
             <summary>
             命令验证抽象基类
@@ -133,7 +160,7 @@
         </member>
         <member name="M:XUCore.Ddd.Domain.Commands.CommandIdValidator`2.AddIdValidator">
             <summary>
-            注册分页模型验证
+            Id验证（大于0）
             </summary>
         </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandLimit`1">
@@ -160,7 +187,7 @@
         </member>
         <member name="M:XUCore.Ddd.Domain.Commands.CommandLimitValidator`2.AddLimitVaildator(System.Int32)">
             <summary>
-            注册分页模型验证
+            Limit验证（大于等于0 且小于默认100）
             </summary>
             <param name="max">最大数值（默认100）</param>
         </member>
@@ -191,10 +218,11 @@
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandPageValidator`2.AddPageVaildator">
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandPageValidator`2.AddPageVaildator(System.Int32)">
             <summary>
-            注册分页模型验证
+            分页验证(当前页码必须大于0，分页大小必须大于0且小于等于指定大小)
             </summary>
+            <param name="maxPageSize">最大分页大小（默认100）</param>
         </member>
         <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddRequestBehaviour(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.Ddd.Domain.RequestOptions})">
             <summary>
