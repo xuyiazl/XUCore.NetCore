@@ -13,12 +13,13 @@ namespace XUCore.Ddd.Domain.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class Command<TResponse> : Message, IRequest<TResponse>
+    //public abstract class Command<TResponse> : Message, IRequest<TResponse>
+    public abstract class Command<TResponse> : IRequest<TResponse>
     {
-        /// <summary>
-        /// 时间戳
-        /// </summary>
-        public DateTime Timestamp { get; private set; }
+        ///// <summary>
+        ///// 时间戳
+        ///// </summary>
+        //public DateTime Timestamp { get; private set; }
         /// <summary>
         /// 命令验证
         /// </summary>
@@ -32,7 +33,7 @@ namespace XUCore.Ddd.Domain.Commands
         /// </summary>
         protected Command()
         {
-            Timestamp = DateTime.Now;
+            //Timestamp = DateTime.Now;
             ValidationResult = new ValidationResult();
         }
         /// <summary>

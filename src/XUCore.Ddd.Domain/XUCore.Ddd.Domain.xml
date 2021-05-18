@@ -32,11 +32,6 @@
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.Command`1.Timestamp">
-            <summary>
-            时间戳
-            </summary>
-        </member>
         <member name="P:XUCore.Ddd.Domain.Commands.Command`1.ValidationResult">
             <summary>
             命令验证
@@ -113,6 +108,93 @@
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandId`1">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.CommandId`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandId`1.#ctor">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdValidator`2">
+            <summary>
+            命令验证抽象基类
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdValidator`2.AddIdValidator">
+            <summary>
+            注册分页模型验证
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandLimit`1">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.CommandLimit`1.Limit">
+            <summary>
+            记录数
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandLimit`1.#ctor">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandLimitValidator`2">
+            <summary>
+            命令验证抽象基类
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandLimitValidator`2.AddLimitVaildator(System.Int32)">
+            <summary>
+            注册分页模型验证
+            </summary>
+            <param name="max">最大数值（默认100）</param>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandPage`1">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.CommandPage`1.CurrentPage">
+            <summary>
+            当前页码
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.Commands.CommandPage`1.PageSize">
+            <summary>
+            分页大小
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandPage`1.#ctor">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandPageValidator`2">
+            <summary>
+            命令验证抽象基类
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandPageValidator`2.AddPageVaildator">
+            <summary>
+            注册分页模型验证
+            </summary>
         </member>
         <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddRequestBehaviour(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.Ddd.Domain.RequestOptions})">
             <summary>

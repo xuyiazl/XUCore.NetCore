@@ -8,6 +8,5 @@ namespace XUCore.Ddd.Domain.Commands
     /// <typeparam name="TCommand"></typeparam>
     public abstract class CommandValidator<TCommand> : AbstractValidator<TCommand>
     {
-
     }
 }
