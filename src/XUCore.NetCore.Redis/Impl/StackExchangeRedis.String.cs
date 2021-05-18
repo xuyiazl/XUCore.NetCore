@@ -76,11 +76,24 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public long StringIncrement(string key, long value = 1, string connectionName = null)
+        public long StringIncrement(string key, int value, string connectionName = null)
         {
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
                 return db.StringIncrement(key, value);
+            });
+        }
+
+        public long StringIncrement(string key, int min, int max, string connectionName = null)
+        {
+            if (min < 1) min = 1;
+            if (max < min) max = min;
+
+            if (min == max) return StringIncrement(key, min, connectionName);
+
+            return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
+            {
+                return db.StringIncrement(key, new Random().Next(min, max));
             });
         }
 

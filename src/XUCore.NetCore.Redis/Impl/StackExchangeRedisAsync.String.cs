@@ -76,11 +76,24 @@ namespace XUCore.NetCore.Redis
             });
         }
 
-        public async Task<long> StringIncrementAsync(string key, long value = 1, string connectionName = null)
+        public async Task<long> StringIncrementAsync(string key, int value, string connectionName = null)
         {
             return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, async (db) =>
             {
                 return await db.StringIncrementAsync(key, value);
+            });
+        }
+
+        public async Task<long> StringIncrementAsync(string key, int min, int max, string connectionName = null)
+        {
+            if (min < 1) min = 1;
+            if (max < min) max = min;
+
+            if (min == max) return await StringIncrementAsync(key, min, connectionName);
+
+            return await ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
+            {
+                return db.StringIncrementAsync(key, new Random().Next(min, max));
             });
         }
 

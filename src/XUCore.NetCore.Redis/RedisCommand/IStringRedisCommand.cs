@@ -55,7 +55,16 @@ namespace XUCore.NetCore.Redis.RedisCommand
         /// <param name="value"></param>
         /// <param name="connectionName"></param>
         /// <returns></returns>
-        long StringIncrement(string key, long value = 1, string connectionName = null);
+        long StringIncrement(string key, int value, string connectionName = null);
+        /// <summary>
+        /// 原子性自增列（随机递增）
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="connectionName"></param>
+        /// <returns></returns>
+        long StringIncrement(string key, int min, int max, string connectionName = null);
         /// <summary>
         /// 获得string的value值
         /// </summary>
