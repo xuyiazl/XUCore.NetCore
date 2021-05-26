@@ -124,6 +124,18 @@
             抽象命令基类
             </summary>
         </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdValidator`2">
+            <summary>
+            命令验证抽象基类
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdValidator`2.AddIdValidator">
+            <summary>
+            Id验证（大于0）
+            </summary>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandIds`1">
             <summary>
             抽象命令基类
@@ -149,18 +161,6 @@
         <member name="M:XUCore.Ddd.Domain.Commands.CommandIdsValidator`2.AddIdsValidator">
             <summary>
             Id集合验证（不可为空）
-            </summary>
-        </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdValidator`2">
-            <summary>
-            命令验证抽象基类
-            </summary>
-            <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
-        </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdValidator`2.AddIdValidator">
-            <summary>
-            Id验证（大于0）
             </summary>
         </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandLimit`1">
