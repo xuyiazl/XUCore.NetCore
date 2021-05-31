@@ -16623,28 +16623,49 @@
             要排除的字段
             </summary>
         </member>
-        <member name="P:XUCore.Serializer.LimitPropsCamelCaseContractResolver.Props">
+        <member name="T:XUCore.Serializer.ResolverMode">
+            <summary>
+            解析器 camelcase 小驼峰 ， default 默认大写
+            </summary>
+        </member>
+        <member name="F:XUCore.Serializer.ResolverMode.Default">
+            <summary>
+            默认，首字母大写
+            </summary>
+        </member>
+        <member name="F:XUCore.Serializer.ResolverMode.CamelCase">
+            <summary>
+            小驼峰
+            </summary>
+        </member>
+        <member name="P:XUCore.Serializer.LimitPropsContractResolver.Props">
             <summary>
             指定要序列化属性的清单
             </summary>
         </member>
-        <member name="P:XUCore.Serializer.LimitPropsCamelCaseContractResolver.LimitMode">
+        <member name="P:XUCore.Serializer.LimitPropsContractResolver.LimitMode">
             <summary>
             匹配模式
             </summary>
         </member>
-        <member name="P:XUCore.Serializer.LimitPropsCamelCaseContractResolver.PropsRename">
+        <member name="P:XUCore.Serializer.LimitPropsContractResolver.PropsRename">
             <summary>
             重命名对照表
             </summary>
         </member>
-        <member name="M:XUCore.Serializer.LimitPropsCamelCaseContractResolver.#ctor(System.String[],XUCore.Serializer.LimitPropsMode,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="P:XUCore.Serializer.LimitPropsContractResolver.Resolver">
+            <summary>
+            是否返回驼峰
+            </summary>
+        </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.#ctor(System.String[],XUCore.Serializer.LimitPropsMode,System.Collections.Generic.IDictionary{System.String,System.String},XUCore.Serializer.ResolverMode)">
             <summary>
             构造函数
             </summary>
             <param name="props">传入的属性数组</param>
             <param name="limitMode">Contains:表示props是需要保留的字段  Ignore：表示props是要排除的字段</param>
             <param name="propsRename">重命名对照表</param>
+            <param name="resolver">解析器 camelcase 小驼峰 ， default 默认大写</param>
         </member>
         <member name="T:XUCore.Serializer.SnakeCaseContractResolver">
             <summary>

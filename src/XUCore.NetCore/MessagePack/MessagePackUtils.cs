@@ -13,7 +13,7 @@ namespace XUCore.NetCore.MessagePack
     {
         public static void FormatterJsonOptions(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
         {
-            if (options.JsonSerializerSettings != null && options.JsonSerializerSettings.ContractResolver?.GetType() == typeof(LimitPropsCamelCaseContractResolver))
+            if (options.JsonSerializerSettings != null && options.JsonSerializerSettings.ContractResolver?.GetType() == typeof(LimitPropsContractResolver))
             {
                 var headers = context.HttpContext.Request.Headers;
                 // col1,col2
@@ -21,6 +21,8 @@ namespace XUCore.NetCore.MessagePack
                 // 指定输出字段 contain or match or equal
                 // 忽略指定字段 ignore
                 var limitMode = headers["limit-mode"].SafeString().ToLower();
+                // 解析器 camelcase 小驼峰 ， default 默认大写
+                var contractResolverMode = headers["limit-resolver"].SafeString().ToLower();
                 // column1=col1,column2=col2
                 var rename = headers["limit-field-rename"].SafeString().ToMap(',', '=', true, false, true);
 
@@ -55,7 +57,19 @@ namespace XUCore.NetCore.MessagePack
                         break;
                 }
 
-                options.JsonSerializerSettings.ContractResolver = new LimitPropsCamelCaseContractResolver(fields, _limitType, rename);
+                var _resolverMode = ResolverMode.Default;
+
+                switch (contractResolverMode)
+                {
+                    case "camelcase":
+                        _resolverMode = ResolverMode.CamelCase;
+                        break;
+                    default:
+                        _resolverMode = ResolverMode.Default;
+                        break;
+                }
+
+                options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver(fields, _limitType, rename, _resolverMode);
             }
         }
     }

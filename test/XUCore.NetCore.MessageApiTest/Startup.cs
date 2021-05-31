@@ -52,7 +52,7 @@ namespace XUCore.NetCore.MessageApiTest
                 {
                     DateTimeZoneHandling = DateTimeZoneHandling.Local,
                     //ContractResolver = new LimitPropsCamelCaseContractResolver(props, LimitPropsType.Contains, reProps)
-                    ContractResolver = new LimitPropsCamelCaseContractResolver()
+                    ContractResolver = new LimitPropsContractResolver()
                 };
                 //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
                 //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。

@@ -24,7 +24,23 @@ namespace XUCore.Serializer
         /// </summary>
         Ignore
     }
-    public class LimitPropsCamelCaseContractResolver : DefaultContractResolver
+
+    /// <summary>
+    /// 解析器 camelcase 小驼峰 ， default 默认大写
+    /// </summary>
+    public enum ResolverMode
+    {
+        /// <summary>
+        /// 默认，首字母大写
+        /// </summary>
+        Default,
+        /// <summary>
+        /// 小驼峰
+        /// </summary>
+        CamelCase
+    }
+
+    public class LimitPropsContractResolver : DefaultContractResolver
     {
         /// <summary>
         /// 指定要序列化属性的清单
@@ -38,8 +54,12 @@ namespace XUCore.Serializer
         /// 重命名对照表
         /// </summary>
         public IDictionary<string, string> PropsRename { get; set; }
+        /// <summary>
+        /// 是否返回驼峰
+        /// </summary>
+        public ResolverMode Resolver { get; set; }
 
-        public LimitPropsCamelCaseContractResolver()
+        public LimitPropsContractResolver()
         {
 
         }
@@ -50,22 +70,24 @@ namespace XUCore.Serializer
         /// <param name="props">传入的属性数组</param>
         /// <param name="limitMode">Contains:表示props是需要保留的字段  Ignore：表示props是要排除的字段</param>
         /// <param name="propsRename">重命名对照表</param>
-        public LimitPropsCamelCaseContractResolver(string[] props, LimitPropsMode limitMode = LimitPropsMode.Contains, IDictionary<string, string> propsRename = null)
+        /// <param name="resolver">解析器 camelcase 小驼峰 ， default 默认大写</param>
+        public LimitPropsContractResolver(string[] props, LimitPropsMode limitMode = LimitPropsMode.Contains, IDictionary<string, string> propsRename = null, ResolverMode resolver = ResolverMode.Default)
         {
             this.Props = props;
             this.LimitMode = limitMode;
             this.PropsRename = propsRename;
+            this.Resolver = resolver;
         }
 
         protected override string ResolvePropertyName(string propertyName)
         {
             if (PropsRename == null || PropsRename.Count == 0)
-                return base.ResolvePropertyName(propertyName.ToCamelCase());
+                return base.ResolvePropertyName(ResolverPropertyName(propertyName));
 
             if (PropsRename.TryGetValue(propertyName.ToLower(), out string newPropertyName))
                 return newPropertyName;
             else
-                return base.ResolvePropertyName(propertyName.ToCamelCase());
+                return base.ResolvePropertyName(ResolverPropertyName(propertyName));
         }
 
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
@@ -88,11 +110,20 @@ namespace XUCore.Serializer
             JsonProperty prop = base.CreateProperty(member, memberSerialization);
 
             if (!member.CustomAttributes.Any(att => att.AttributeType == typeof(JsonPropertyAttribute)))
-            {
-                prop.PropertyName = prop.PropertyName?.ToCamelCase();
-            }
+                prop.PropertyName = ResolverPropertyName(prop.PropertyName);
 
             return prop;
+        }
+
+        private string ResolverPropertyName(string propertyName)
+        {
+            switch (Resolver)
+            {
+                case ResolverMode.CamelCase:
+                    return propertyName.ToCamelCase();
+                default:
+                    return propertyName;
+            }
         }
     }
 }
