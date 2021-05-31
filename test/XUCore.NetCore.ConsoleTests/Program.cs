@@ -25,6 +25,7 @@ using MessagePack.Resolvers;
 using MessagePack.Formatters;
 using XUCore.Webs;
 using System.Net.Http;
+using XUCore.Develops;
 
 namespace XUCore.ConsoleTests
 {

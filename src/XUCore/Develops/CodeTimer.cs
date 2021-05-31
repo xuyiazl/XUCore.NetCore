@@ -219,7 +219,7 @@ namespace XUCore.Develops
         {
             if (_thread == null || !_thread.IsAlive)
                 return;
-            _thread.Abort();
+            _thread.Interrupt();
             _thread.Join(3000);
         }
 
@@ -261,6 +261,8 @@ namespace XUCore.Develops
                 {
                     break;
                 }
+                if (Thread.CurrentThread.IsAlive)
+                    break;
                 Thread.Sleep(500);
             }
             sw.Stop();
