@@ -13,12 +13,12 @@ namespace XUCore.Ddd.Domain.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class CommandIds<TResponse> : Command<TResponse>
+    public abstract class CommandIds<TResponse, TKey> : Command<TResponse>
     {
         /// <summary>
         /// 主键Id集合
         /// </summary>
-        public long[] Ids { get; set; }
+        public TKey[] Ids { get; set; }
         /// <summary>
         /// 抽象命令基类
         /// </summary>
@@ -34,8 +34,8 @@ namespace XUCore.Ddd.Domain.Commands
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public abstract class CommandIdsValidator<TCommand, TResponse> : AbstractValidator<TCommand>
-        where TCommand : CommandIds<TResponse>
+    public abstract class CommandIdsValidator<TCommand, TResponse, TKey> : AbstractValidator<TCommand>
+        where TCommand : CommandIds<TResponse, TKey>
     {
         /// <summary>
         /// Id集合验证（不可为空）

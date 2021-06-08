@@ -6,7 +6,7 @@ using XUCore.Serializer;
 
 namespace XUCore.NetCore.DataTest.Entities
 {
-    public class AdminUserAddressEntity : Entity
+    public class AdminUserAddressEntity : Entity<long>
     {
         public long UserId { get; set; }
         public string Address { get; set; }

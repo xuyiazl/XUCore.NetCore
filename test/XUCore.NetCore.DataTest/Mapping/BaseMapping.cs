@@ -10,15 +10,15 @@ using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.NetCore.DataTest.Mapping
 {
-    public abstract class BaseMapping<T> : KeyMapping<T>
-        where T : Entity, new()
+    public abstract class BaseMapping<TEntity, TKey> : KeyMapping<TEntity, TKey>
+        where TEntity : Entity<TKey>, new()
     {
-        public BaseMapping(string tableName, Expression<Func<T, object>> primaryKey) : base(tableName, primaryKey)
+        public BaseMapping(string tableName, Expression<Func<TEntity, object>> primaryKey) : base(tableName, primaryKey)
         {
 
         }
 
-        public override void Configure(EntityTypeBuilder<T> builder)
+        public override void Configure(EntityTypeBuilder<TEntity> builder)
         {
             base.Configure(builder);
         }

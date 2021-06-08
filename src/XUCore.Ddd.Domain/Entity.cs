@@ -9,12 +9,12 @@ namespace XUCore.Ddd.Domain
     /// <summary>
     /// 定义领域实体基类
     /// </summary>
-    public abstract class Entity
+    public abstract class Entity<TKey>
     {
         /// <summary>
         /// 唯一标识
         /// </summary>
-        public long Id { get; set; }
+        public TKey Id { get; set; }
 
         /// <summary>
         /// 重写方法 相等运算
@@ -23,7 +23,7 @@ namespace XUCore.Ddd.Domain
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var compareTo = obj as Entity;
+            var compareTo = obj as Entity<TKey>;
 
             if (ReferenceEquals(this, compareTo)) return true;
             if (ReferenceEquals(null, compareTo)) return false;
@@ -36,7 +36,7 @@ namespace XUCore.Ddd.Domain
         /// <param name="a">领域实体a</param>
         /// <param name="b">领域实体b</param>
         /// <returns></returns>
-        public static bool operator ==(Entity a, Entity b)
+        public static bool operator ==(Entity<TKey> a, Entity<TKey> b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
@@ -52,7 +52,7 @@ namespace XUCore.Ddd.Domain
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static bool operator !=(Entity a, Entity b)
+        public static bool operator !=(Entity<TKey> a, Entity<TKey> b)
         {
             return !(a == b);
         }

@@ -13,12 +13,12 @@ namespace XUCore.Ddd.Domain.Commands
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    public abstract class CommandId<TResponse> : Command<TResponse>
+    public abstract class CommandId<TResponse, TKey> : Command<TResponse>
     {
         /// <summary>
         /// 主键Id
         /// </summary>
-        public long Id { get; set; }
+        public TKey Id { get; set; }
         /// <summary>
         /// 抽象命令基类
         /// </summary>
@@ -33,15 +33,16 @@ namespace XUCore.Ddd.Domain.Commands
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public abstract class CommandIdValidator<TCommand, TResponse> : AbstractValidator<TCommand>
-        where TCommand : CommandId<TResponse>
+    /// <typeparam name="TKey"></typeparam>
+    public abstract class CommandIdValidator<TCommand, TResponse, TKey> : AbstractValidator<TCommand>
+        where TCommand : CommandId<TResponse, TKey>
     {
         /// <summary>
-        /// Id验证（大于0）
+        /// Id验证
         /// </summary>
         public void AddIdValidator()
         {
-            RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("id");
+            RuleFor(x => x.Id).NotEmpty().WithName("id");
         }
     }
 }

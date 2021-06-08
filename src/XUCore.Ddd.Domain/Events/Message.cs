@@ -18,13 +18,13 @@ namespace XUCore.Ddd.Domain.Events
         /// </summary>
         public string MessageType { get; protected set; }
         /// <summary>
-        /// 聚合根（也可用Guid，但是由于目前大多数的Id均为UUID所以这里也使用long）
+        /// 聚合根
         /// </summary>
-        public long AggregateId { get; protected set; }
-        /// <summary>
-        /// 聚合根类型（主要配合聚合根的Id解决重复的问题）
-        /// </summary>
-        public string AggregateType { get; protected set; }
+        public string AggregateId { get; protected set; }
+        ///// <summary>
+        ///// 聚合根类型（主要配合聚合根的Id解决重复的问题）
+        ///// </summary>
+        //public string AggregateType { get; protected set; }
         /// <summary>
         /// 
         /// </summary>

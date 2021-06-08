@@ -6,7 +6,7 @@ using XUCore.Serializer;
 
 namespace XUCore.NetCore.DataTest.Entities
 {
-    public class AdminUserEntity : Entity
+    public class AdminUserEntity : Entity<long>
     {
         public AdminUserEntity()
         {
