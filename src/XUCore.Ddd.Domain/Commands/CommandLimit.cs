@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace XUCore.Ddd.Domain.Commands
         /// <summary>
         /// 记录数
         /// </summary>
+        [Required]
         public int Limit { get; set; }
         /// <summary>
         /// 抽象命令基类
