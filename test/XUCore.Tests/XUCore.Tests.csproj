@@ -10,7 +10,7 @@
 		<PackageReference Include="ComponentAce.Compression.Libs.zlib" Version="1.0.4" />
 		<PackageReference Include="Shouldly" Version="4.0.3" />
 		<PackageReference Include="nunit" Version="3.13.2" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
+		<PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
