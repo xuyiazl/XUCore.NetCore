@@ -15340,7 +15340,7 @@
             是否能下一页
             </summary>
         </member>
-        <member name="P:XUCore.Paging.PagedList`1.Model">
+        <member name="M:XUCore.Paging.PagedList`1.ToModel">
             <summary>
             PagedModel模型转换（方便对外输出分页模型）
             </summary>
@@ -15408,7 +15408,7 @@
             <param name="currentPage">当前页码</param>
             <param name="pageSize">分页大小</param>
         </member>
-        <member name="P:XUCore.Paging.PagedModel`1.List">
+        <member name="M:XUCore.Paging.PagedModel`1.ToList">
             <summary>
             PagedList模型转换
             </summary>

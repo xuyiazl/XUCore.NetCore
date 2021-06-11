@@ -84,6 +84,6 @@
         /// <summary>
         /// PagedModel模型转换（方便对外输出分页模型）
         /// </summary>
-        public PagedModel<T> Model => new PagedModel<T>(this, TotalCount, CurrentPage, PageSize);
+        public PagedModel<T> ToModel() => new PagedModel<T>(this, TotalCount, CurrentPage, PageSize);
     }
 }
