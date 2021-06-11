@@ -73,5 +73,38 @@
             <param name="options"></param>
             <param name="apiXml"></param>
         </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SigninToSwagger(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            设置Swagger自动登录
+            </summary>
+            <param name="httpContext"></param>
+            <param name="accessToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SigninToSwagger(Microsoft.AspNetCore.Http.IHttpContextAccessor,System.String)">
+            <summary>
+            设置Swagger自动登录
+            </summary>
+            <param name="httpContextAccessor"></param>
+            <param name="accessToken"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SignoutToSwagger(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            设置Swagger退出登录
+            </summary>
+            <param name="httpContext"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SignoutToSwagger(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            设置Swagger退出登录
+            </summary>
+            <param name="httpContextAccessor"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.InjectMiniProfilerPlugin(Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions,System.Boolean)">
+            <summary>
+            注入 MiniProfiler 插件（自动登录）
+            </summary>
+            <param name="options"></param>
+            <param name="injectMiniProfiler"></param>
+        </member>
     </members>
 </doc>
