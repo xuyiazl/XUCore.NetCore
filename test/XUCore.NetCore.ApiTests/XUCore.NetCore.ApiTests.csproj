@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\src\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Jwt\XUCore.NetCore.Jwt.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />

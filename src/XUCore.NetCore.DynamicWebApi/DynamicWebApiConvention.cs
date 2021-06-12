@@ -11,7 +11,7 @@ using XUCore.NetCore.DynamicWebApi.Helper;
 
 namespace XUCore.NetCore.DynamicWebApi
 {
-    internal class DynamicWebApiConvention : IApplicationModelConvention
+    public class DynamicWebApiConvention : IApplicationModelConvention
     {
 
         public void Apply(ApplicationModel application)
@@ -71,21 +71,22 @@ namespace XUCore.NetCore.DynamicWebApi
         {
             foreach (var action in controller.Actions)
             {
-                foreach (var para in action.Parameters)
-                {
-                    if (para.BindingInfo != null)
+                if (!CheckNoMapMethod(action))
+                    foreach (var para in action.Parameters)
                     {
-                        continue;
-                    }
-
-                    if (!TypeHelper.IsPrimitiveExtendedIncludingNullable(para.ParameterInfo.ParameterType))
-                    {
-                        if (CanUseFormBodyBinding(action, para))
+                        if (para.BindingInfo != null)
                         {
-                            para.BindingInfo = BindingInfo.GetBindingInfo(new[] { new FromBodyAttribute() });
+                            continue;
+                        }
+
+                        if (!TypeHelper.IsPrimitiveExtendedIncludingNullable(para.ParameterInfo.ParameterType))
+                        {
+                            if (CanUseFormBodyBinding(action, para))
+                            {
+                                para.BindingInfo = BindingInfo.GetBindingInfo(new[] { new FromBodyAttribute() });
+                            }
                         }
                     }
-                }
             }
         }
 
@@ -140,7 +141,8 @@ namespace XUCore.NetCore.DynamicWebApi
 
             foreach (var action in controller.Actions)
             {
-                ConfigureApiExplorer(action);
+                if (!CheckNoMapMethod(action))
+                    ConfigureApiExplorer(action);
             }
         }
 
@@ -153,7 +155,24 @@ namespace XUCore.NetCore.DynamicWebApi
         }
 
         #endregion
+        /// <summary>
+        /// //不映射指定的方法
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        private bool CheckNoMapMethod(ActionModel action)
+        {
+            bool isExist = false;
+            var noMapMethod = ReflectionHelper.GetSingleAttributeOrDefault<NonDynamicMethodAttribute>(action.ActionMethod);
 
+            if (noMapMethod != null)
+            {
+                action.ApiExplorer.IsVisible = false;//对应的Api不映射
+                isExist = true;
+            }
+
+            return isExist;
+        }
         private void ConfigureSelector(ControllerModel controller, DynamicWebApiAttribute controllerAttr)
         {
 
@@ -171,7 +190,8 @@ namespace XUCore.NetCore.DynamicWebApi
 
             foreach (var action in controller.Actions)
             {
-                ConfigureSelector(areaName, controller.ControllerName, action);
+                if (!CheckNoMapMethod(action))
+                    ConfigureSelector(areaName, controller.ControllerName, action);
             }
         }
 
@@ -187,7 +207,8 @@ namespace XUCore.NetCore.DynamicWebApi
 
             if (action.Selectors.IsNullOrEmpty() || action.Selectors.Any(a => a.ActionConstraints.IsNullOrEmpty()))
             {
-                AddAppServiceSelector(areaName, controllerName, action);
+                if (!CheckNoMapMethod(action))
+                    AddAppServiceSelector(areaName, controllerName, action);
             }
             else
             {

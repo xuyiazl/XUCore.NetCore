@@ -21,6 +21,13 @@ using XUCore.Serializer;
 using XUCore.NetCore.Swagger;
 using XUCore.NetCore.DynamicWebApi;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using XUCore.NetCore;
+using System.Linq;
+using XUCore.Extensions;
+using System.Net;
+using System;
 
 namespace XUCore.ApiTests
 {
@@ -66,6 +73,11 @@ namespace XUCore.ApiTests
                     options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
+                })
+                .AddFluentValidation(opt =>
+                {
+                    opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                    opt.RegisterValidatorsFromAssemblyContaining(typeof(Program));
                 });
             //.AddNewtonsoftJson(options =>
             //{
@@ -81,6 +93,32 @@ namespace XUCore.ApiTests
             //});
 
 
+            //统一返回验证的信息
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = (context) =>
+                {
+                    var errors = context.ModelState
+                      .Values
+                      .SelectMany(x => x.Errors.Select(p => p.ErrorMessage))
+                      .ToList();
+
+                    var message = errors.Join("");
+
+                    return new ObjectResult(new Result<object>()
+                    {
+                        code = 0,
+                        subCode = "faild",
+                        message = message,
+                        data = null,
+                        elapsedTime = -1,
+                        operationTime = DateTime.Now
+                    })
+                    {
+                        StatusCode = (int)HttpStatusCode.OK
+                    };
+                };
+            });
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(options =>
             {

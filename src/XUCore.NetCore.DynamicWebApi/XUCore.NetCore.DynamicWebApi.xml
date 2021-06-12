@@ -35,6 +35,13 @@
             Equivalent to AreaName
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.DynamicWebApi.DynamicWebApiConvention.CheckNoMapMethod(Microsoft.AspNetCore.Mvc.ApplicationModels.ActionModel)">
+            <summary>
+            //不映射指定的方法
+            </summary>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.DynamicWebApi.DynamicWebApiConvention.GetRestFulActionName(System.String)">
             <summary>
             Processing action name
