@@ -163,7 +163,7 @@ namespace XUCore.NetCore.Swagger
 
             docs.ForEach(xml => options.IncludeXmlComments(Path.Combine(basePath, xml)));
 
-            options.DocumentFilter<ControllerDescriptionFilter>(docs[0]);
+            options.DocumentFilter<ControllerDescriptionFilter>(Path.Combine(basePath, docs[0]));
         }
         /// <summary>
         /// 添加隐藏API过滤器，可以在API上加HiddenApi标签隐藏。
