@@ -9,6 +9,9 @@ using XUCore.NetCore.Signature;
 
 namespace XUCore.NetCore.Swagger
 {
+    /// <summary>
+    /// http签名设置
+    /// </summary>
     public class HttpSignResponseHeadersFilter : IOperationFilter
     {
         private readonly string prefix;

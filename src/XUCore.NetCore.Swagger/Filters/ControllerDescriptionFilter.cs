@@ -13,7 +13,7 @@ namespace XUCore.NetCore.Swagger
     /// <summary>
     /// 加入controller层描述
     /// </summary>
-    public class ControllerDescriptions : IDocumentFilter
+    public class ControllerDescriptionFilter : IDocumentFilter
     {
         /// <summary>
         /// 匹配visual 生成的xml文件
@@ -31,7 +31,7 @@ namespace XUCore.NetCore.Swagger
         /// 加入controller层描述
         /// </summary>
         /// <param name="apixmlpath"></param>
-        public ControllerDescriptions(string apixmlpath)
+        public ControllerDescriptionFilter(string apixmlpath)
         {
 
             XmlDocument doc = new XmlDocument();

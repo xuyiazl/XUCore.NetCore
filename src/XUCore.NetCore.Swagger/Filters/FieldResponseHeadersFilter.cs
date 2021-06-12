@@ -8,6 +8,9 @@ using System.Text;
 
 namespace XUCore.NetCore.Swagger
 {
+    /// <summary>
+    /// 接口字段输出Swagger设置
+    /// </summary>
     public class FieldResponseHeadersFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
@@ -33,6 +36,13 @@ namespace XUCore.NetCore.Swagger
                         Description = "（选填）指定需要的字段，exp：col1,col2，注意：使用重名后的字段",
                         In = ParameterLocation.Header,
                         Name = "limit-field",
+                        Schema = new OpenApiSchema { Type = "String" },
+                    });
+                    operation.Parameters.Add(new OpenApiParameter
+                    {
+                        Description = "（选填）指定解析器 camelcase 小驼峰 ， default 默认大写",
+                        In = ParameterLocation.Header,
+                        Name = "limit-resolver",
                         Schema = new OpenApiSchema { Type = "String" },
                     });
                     operation.Parameters.Add(new OpenApiParameter

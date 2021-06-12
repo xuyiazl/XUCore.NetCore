@@ -27,7 +27,7 @@ namespace XUCore.ApiTests.Controllers
         }
 
         [HttpSignApi]
-        //[FieldResponse]
+        [FieldResponse]
         [HttpGet]
         public Result<User> Get()
         {
