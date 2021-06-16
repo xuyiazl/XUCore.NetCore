@@ -12,7 +12,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
     using System.Text;
+    using XUCore.Extensions;
 
     /// <summary>
     /// Url构造器
@@ -25,6 +27,7 @@
         private string _host;
         public string ClientName { get; set; }
         public string Url { get; private set; }
+        private bool _isCompleteParameter = true;
 
         /// <summary>
         /// 参数列表
@@ -34,6 +37,16 @@
             get
             {
                 return _parameters;
+            }
+        }
+        /// <summary>
+        /// Form Url Encode
+        /// </summary>
+        public HttpContent FormUrlEncodedContent
+        {
+            get
+            {
+                return new FormUrlEncodedContent(_parameters.Select(m => new KeyValuePair<string?, string?>(m.Key, m.Value.SafeString())));
             }
         }
         /// <summary>
@@ -115,6 +128,16 @@
         /// <returns></returns>
         public static UrlBuilder Create(string clientName, string requestUrl) => new UrlBuilder(clientName, requestUrl);
         /// <summary>
+        /// 是否合并参数
+        /// </summary>
+        /// <param name="completeParameter">是否合并参数</param>
+        /// <returns></returns>
+        public UrlBuilder SetCompleteParameter(bool completeParameter)
+        {
+            _isCompleteParameter = completeParameter;
+            return this;
+        }
+        /// <summary>
         /// 写入请求名
         /// </summary>
         /// <param name="clientName"></param>
@@ -158,11 +181,11 @@
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        /// <param name="filter"></param>
+        /// <param name="condition"></param>
         /// <returns></returns>
-        public UrlBuilder Add(string key, object value, Func<bool> filter)
+        public UrlBuilder Add(string key, object value, bool condition)
         {
-            if (!filter())
+            if (!condition)
             {
                 return this;
             }
@@ -214,17 +237,20 @@
             StringBuilder url = new StringBuilder();
             url.Append(_host);
 
-            if (_parameters.Count == 0)
+            if (_isCompleteParameter)
             {
-                Url = url.ToString();
-                return this;
-            }
-            if (!_host.EndsWith("&"))
-            {
-                url.Append("?");
-            }
+                if (_parameters.Count == 0)
+                {
+                    Url = url.ToString();
+                    return this;
+                }
+                if (!_host.EndsWith("&"))
+                {
+                    url.Append("?");
+                }
 
-            url.Append(ParameterString);
+                url.Append(ParameterString);
+            }
 
             Url = url.ToString();
             return this;

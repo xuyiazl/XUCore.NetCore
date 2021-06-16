@@ -52,6 +52,9 @@ namespace XUCore.NetCore.HttpFactory
                     {
                         var res = await httpContent.ReadAsStringAsync();
 
+                        if (typeof(TModel) == typeof(string))
+                            return res.As<TModel>();
+
                         return res.ToObject<TModel>();
                     }
             }

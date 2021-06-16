@@ -24,7 +24,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -87,7 +87,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -148,7 +148,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -211,7 +211,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -272,7 +272,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -335,7 +335,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -396,7 +396,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);
@@ -457,7 +457,7 @@ namespace XUCore.NetCore.HttpFactory
             options ??= HttpOptions<TResult>.Default;
 
             var client = httpMessageService.CreateClient(urlBuilder.ClientName)
-                .SetHeaderAccept(options.MediaType);
+                .SetAccept(options.MediaType);
 
             if (options.ClientHandler != null)
                 options.ClientHandler.Invoke(client);

@@ -13169,6 +13169,15 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Parameters.UrlParameterBuilder.Add(System.String,System.Object,System.Boolean)">
+            <summary>
+            添加参数
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Parameters.UrlParameterBuilder.GetValue(System.String)">
             <summary>
             获取值
@@ -18349,6 +18358,11 @@
             参数列表
             </summary>
         </member>
+        <member name="P:XUCore.Webs.UrlBuilder.FormUrlEncodedContent">
+            <summary>
+            Form Url Encode
+            </summary>
+        </member>
         <member name="P:XUCore.Webs.UrlBuilder.ParameterString">
             <summary>
             参数字符串
@@ -18403,6 +18417,13 @@
             <param name="requestUrl"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Webs.UrlBuilder.SetCompleteParameter(System.Boolean)">
+            <summary>
+            是否合并参数
+            </summary>
+            <param name="completeParameter">是否合并参数</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Webs.UrlBuilder.SetClientName(System.String)">
             <summary>
             写入请求名
@@ -18425,13 +18446,13 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Webs.UrlBuilder.Add(System.String,System.Object,System.Func{System.Boolean})">
+        <member name="M:XUCore.Webs.UrlBuilder.Add(System.String,System.Object,System.Boolean)">
             <summary>
             添加参数
             </summary>
             <param name="key"></param>
             <param name="value"></param>
-            <param name="filter"></param>
+            <param name="condition"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.Webs.UrlBuilder.Remove(System.String)">

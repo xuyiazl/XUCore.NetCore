@@ -155,6 +155,23 @@ namespace XUCore.Parameters
             ParameterBuilder.Add(key, value);
             return this;
         }
+        /// <summary>
+        /// 添加参数
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public UrlParameterBuilder Add(string key, object value, bool condition)
+        {
+            if (!condition)
+            {
+                return this;
+            }
+
+            ParameterBuilder.Add(key, value);
+            return this;
+        }
 
         #endregion Add(添加参数)
 

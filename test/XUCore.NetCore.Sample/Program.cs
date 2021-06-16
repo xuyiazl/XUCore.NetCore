@@ -59,6 +59,7 @@ namespace XUCore.NetCore.Sample
         {
             //services.AddLogging();
             services.AddHttpService("server", "https://testmsrightsapi.tostar.top");
+            services.AddHttpService("ocr", "https://netocr.com");
 
             //DI扫描器 注入http请求策略操作
             services.Scan(scan =>
