@@ -27,6 +27,29 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.Ddd.Domain.Bus.MediatorMemoryBus">
+            <summary>
+            Mediator 消息中介发布请求和通知
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.PublishEvent``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            发布事件通知
+            </summary>
+            <typeparam name="TNotification"></typeparam>
+            <param name="event">通知事件</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.SendCommand``1(XUCore.Ddd.Domain.Commands.Command{``0},System.Threading.CancellationToken)">
+            <summary>
+            发送命令请求
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <param name="command">命令</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.Command`1">
             <summary>
             抽象命令基类
