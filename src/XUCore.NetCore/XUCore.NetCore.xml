@@ -523,6 +523,22 @@
             <typeparam name="TFileUploadService">文件上传服务类型</typeparam>
             <param name="services">服务集合</param>
         </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddOssClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
+            <summary>
+            注册oss 上传客户端
+            </summary>
+            <param name="services"></param>
+            <param name="clients"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Extensions.Extensions.AddOssMultiPartClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
+            <summary>
+            注册oss 分片上传客户端
+            </summary>
+            <param name="services"></param>
+            <param name="clients"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.Extensions.Extensions.AddRazorHtml(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册Razor静态Html生成器
@@ -1456,6 +1472,111 @@
             </summary>
             <param name="response">Http响应</param>
             <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.Upload(System.String,System.String,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="relativePath"></param>
+            <param name="filePath"></param>
+            <param name="md5"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.Upload(System.String,System.IO.Stream,System.String)">
+            <summary>
+             上传文件
+            </summary>
+            <param name="relativePath"></param>
+            <param name="stream"></param>
+            <param name="md5"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.MutiPartUpload(System.String,System.String)">
+            <summary>
+            大文件上传
+            </summary>
+            <param name="relativePath"></param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.GetBucketsList">
+            <summary>
+            获取Bucket列表 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.GetObjectlist">
+            <summary>
+            获取Bucket中的文件列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.Delete(System.String)">
+            <summary>
+            删除一个Object
+            </summary>
+            <param name="relativePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.IOssClient.Delete">
+            <summary>
+            删除一个Bucket和其中的Objects 
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.Upload(System.String,System.String,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="relativePath"></param>
+            <param name="filePath"></param>
+            <param name="md5"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.Upload(System.String,System.IO.Stream,System.String)">
+            <summary>
+             上传文件
+            </summary>
+            <param name="relativePath"></param>
+            <param name="stream"></param>
+            <param name="md5"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.MutiPartUpload(System.String,System.String)">
+            <summary>
+            大文件上传
+            </summary>
+            <param name="relativePath"></param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.GetBucketsList">
+            <summary>
+            获取Bucket列表 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.GetObjectlist">
+            <summary>
+            获取Bucket中的文件列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.GetSize(System.Int64)">
+            <summary>
+            获取文件大小
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.Delete(System.String)">
+            <summary>
+            删除一个Object
+            </summary>
+            <param name="relativePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Oss.OssClient.Delete">
+            <summary>
+            删除一个Bucket和其中的Objects 
+            </summary>
         </member>
         <member name="T:XUCore.NetCore.Properties.LibraryResource">
             <summary>

@@ -14,6 +14,7 @@ using XUCore.NetCore.Redis;
 using XUCore.NetCore.Data.DbService;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using XUCore.NetCore.Oss;
 
 namespace XUCore.WebTests
 {
@@ -57,6 +58,42 @@ namespace XUCore.WebTests
             });
 
             services.AddUploadService();
+
+            services.AddOssClient(
+                    (
+                        "xxx-images", new OssOptions
+                        {
+                            AccessKey = "xxx",
+                            AccessKeySecret = "xxx",
+                            BluckName = "xxx",
+                            EndPoint = "oss-cn-hangzhou.aliyuncs.com",
+                            Domain = "https://img.xxx.com"
+                        }
+                    ),
+                    (
+                        "xxx-images-111", new OssOptions
+                        {
+                            AccessKey = "xxx",
+                            AccessKeySecret = "xxx",
+                            BluckName = "xxx",
+                            EndPoint = "oss-cn-hangzhou.aliyuncs.com",
+                            Domain = "https://img.xxx.com"
+                        }
+                    )
+            );
+
+            //services.AddOssMultiPartClient(
+            //    (
+            //        "xxx-files", new OssOptions
+            //        {
+            //            AccessKey = "xxxx",
+            //            AccessKeySecret = "xxxx",
+            //            BluckName = "xxx",
+            //            EndPoint = "oss-cn-hangzhou.aliyuncs.com",
+            //            Domain = "https://files.xxx.com"
+            //        }
+            //    )
+            //);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

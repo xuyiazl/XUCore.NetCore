@@ -16,6 +16,7 @@ using System.Net.Http;
 using XUCore.Develops;
 using XUCore.NetCore.Signature;
 using XUCore.Configs;
+using XUCore.NetCore.Oss;
 
 namespace XUCore.NetCore.Extensions
 {
@@ -80,6 +81,54 @@ namespace XUCore.NetCore.Extensions
             services.TryAddScoped<IFileUploadService, TFileUploadService>();
         }
 
+        /// <summary>
+        /// 注册oss 上传客户端
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="clients"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddOssClient(this IServiceCollection services, params (string name, OssOptions options)[] clients)
+        {
+            if (clients == null && clients.Length == 0) return services;
+
+            services.TryAddSingleton<IOssFactory>(o =>
+            {
+                var factory = new OssFactory();
+
+                clients.ForEach(c =>
+                {
+                    factory.CreateClient(c.name, c.options);
+                });
+
+                return factory;
+            });
+
+            return services;
+        }
+        /// <summary>
+        /// 注册oss 分片上传客户端
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="clients"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddOssMultiPartClient(this IServiceCollection services, params (string name, OssOptions options)[] clients)
+        {
+            if (clients == null && clients.Length == 0) return services;
+
+            services.TryAddSingleton<IOssMultiPartFactory>(o =>
+            {
+                var factory = new OssMultiPartFactory();
+
+                clients.ForEach(c =>
+                {
+                    factory.CreateClient(c.name, c.options);
+                });
+
+                return factory;
+            });
+
+            return services;
+        }
         /// <summary>
         /// 注册Razor静态Html生成器
         /// </summary>

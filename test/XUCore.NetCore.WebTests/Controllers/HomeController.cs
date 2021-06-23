@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using XUCore.NetCore.Redis;
 using MessagePack;
 using System;
+using XUCore.NetCore.Oss;
 
 namespace XUCore.WebTests.Controllers
 {
@@ -38,6 +39,8 @@ namespace XUCore.WebTests.Controllers
 
         private readonly IRedisService _redisService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IOssFactory _ossFactory;
+        private readonly IOssMultiPartFactory _ossMultiPartFactory;
         /// <summary>
         /// 文件上传服务
         /// </summary>
@@ -46,13 +49,17 @@ namespace XUCore.WebTests.Controllers
 
         public HomeController(ILogger<HomeController> logger,
             IServiceProvider serviceProvider,
-            IHttpService httpMessage, IFileUploadService fileUploadService, IRedisService redisService)
+            IHttpService httpMessage, IFileUploadService fileUploadService, IRedisService redisService,
+            IOssFactory ossFactory,
+            IOssMultiPartFactory ossMultiPartFactory)
         {
             _logger = logger;
             _httpMessage = httpMessage;
             _fileUploadService = fileUploadService;
             _redisService = redisService;
             _serviceProvider = serviceProvider;
+            _ossFactory = ossFactory;
+            _ossMultiPartFactory = ossMultiPartFactory;
 
         }
 
@@ -172,6 +179,24 @@ namespace XUCore.WebTests.Controllers
             };
 
             var result = await _fileUploadService.UploadImageAsync(param, cancellationToken);
+
+            // oss 单文件上传
+
+            var client = _ossFactory.GetClient("fx110-images");
+
+            (var res1, string message) = client.Delete("upload/images/master/2019/11/28/test111111.png");
+
+            (var res, string url) = client.Upload("upload/images/master/2019/11/28/test111111.png", @"C:\Users\Nigel\Downloads\QQ图片20200611104303.png");
+
+            //    oss 大文件分片上传
+
+            //    var client = ossMultiPartFactory.GetClient("fx110-files", "web传递进来的token", "upload/images/master/2019/11/28/test1.mp4");
+
+            //    var res1 = client.Upload(null, 1000, 1);
+
+            //    (var res, string url) = client.Done();
+
+            //    ossMultiPartFactory.RemoveClient("web传递进来的token");
 
             return View(result);
         }
