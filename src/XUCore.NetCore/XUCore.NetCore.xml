@@ -4,6 +4,392 @@
         <name>XUCore.NetCore</name>
     </assembly>
     <members>
+        <member name="T:XUCore.NetCore.Authorization.AppAuthorizeAttribute">
+            <summary>
+            策略授权特性
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeAttribute.#ctor(System.String[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="policies">多个策略</param>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.AppAuthorizeAttribute.Policies">
+            <summary>
+            策略
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.AppAuthorizeHandler">
+            <summary>
+            授权策略执行程序
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            授权验证核心方法
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeHandler.PipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">
+            <summary>
+            验证管道
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeHandler.PolicyPipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
+            <summary>
+            策略验证管道
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <param name="requirement"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeHandler.AuthorizeHandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            授权处理
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.AppAuthorizeProvider">
+            <summary>
+            授权策略提供器
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.AppAuthorizeProvider.FallbackPolicyProvider">
+            <summary>
+            默认回退策略
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeProvider.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Authorization.AuthorizationOptions})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeProvider.GetDefaultPolicyAsync">
+            <summary>
+            获取默认策略
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeProvider.GetFallbackPolicyAsync">
+            <summary>
+            获取回退策略
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeProvider.GetPolicyAsync(System.String)">
+            <summary>
+            获取策略
+            </summary>
+            <param name="policyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.AppAuthorizeRequirement">
+            <summary>
+            策略对应的需求
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AppAuthorizeRequirement.#ctor(System.String[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="policies"></param>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.AppAuthorizeRequirement.Policies">
+            <summary>
+            策略
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.AuthorizationHandlerContextExtensions">
+            <summary>
+            授权处理上下文拓展类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AuthorizationHandlerContextExtensions.GetCurrentHttpContext(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            获取当前 HttpContext 上下文
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.AuthorizationServiceCollectionExtensions">
+            <summary>
+            策略授权服务拓展类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.AuthorizationServiceCollectionExtensions.AddAppAuthorization``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Boolean)">
+            <summary>
+            添加策略授权服务
+            </summary>
+            <typeparam name="TAuthorizationHandler">策略授权处理程序</typeparam>
+            <param name="services">服务集合</param>
+            <param name="configure">自定义配置</param>
+            <param name="enableGlobalAuthorize">是否启用全局授权</param>
+            <returns>服务集合</returns>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions">
+            <summary>
+            JWT 授权服务拓展类
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
+            <summary>
+            添加 JWT 授权
+            </summary>
+            <param name="authenticationBuilder"></param>
+            <param name="tokenValidationParameters">token 验证参数</param>
+            <param name="jwtBearerConfigure"></param>
+            <param name="enableGlobalAuthorize">启动全局授权</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})">
+            <summary>
+            添加 JWT 授权
+            </summary>
+            <param name="services"></param>
+            <param name="authenticationConfigure">授权配置</param>
+            <param name="tokenValidationParameters">token 验证参数</param>
+            <param name="jwtBearerConfigure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
+            <summary>
+            添加 JWT 授权
+            </summary>
+            <typeparam name="TAuthorizationHandler"></typeparam>
+            <param name="services"></param>
+            <param name="authenticationConfigure"></param>
+            <param name="tokenValidationParameters"></param>
+            <param name="jwtBearerConfigure"></param>
+            <param name="enableGlobalAuthorize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.ConfigureJWTOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加 JWT 授权
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption">
+            <summary>
+            JWT 加解密
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
+            <summary>
+            生成 Token
+            </summary>
+            <param name="payload"></param>
+            <param name="expiredTime">过期时间（分钟）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            生成 Token
+            </summary>
+            <param name="issuerSigningKey"></param>
+            <param name="payload"></param>
+            <param name="algorithm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.String,System.String,System.String)">
+            <summary>
+            生成 Token
+            </summary>
+            <param name="issuerSigningKey"></param>
+            <param name="payload"></param>
+            <param name="algorithm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GenerateRefreshToken(System.String,System.Int32)">
+            <summary>
+            生成刷新 Token
+            </summary>
+            <param name="accessToken"></param>
+            <param name="days">刷新 Token 有效期（天）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Exchange(System.String,System.String,System.Nullable{System.Int64},System.Int64)">
+            <summary>
+            通过过期Token 和 刷新Token 换取新的 Token
+            </summary>
+            <param name="expiredToken"></param>
+            <param name="refreshToken"></param>
+            <param name="expiredTime">过期时间（分钟）</param>
+            <param name="clockSkew">刷新token容差值，秒做单位</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,System.Nullable{System.Int64},System.Int32,System.String,System.Int64)">
+            <summary>
+            自动刷新 Token 信息
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <param name="expiredTime">新 Token 过期时间（分钟）</param>
+            <param name="days">新刷新 Token 有效期（天）</param>
+            <param name="tokenPrefix"></param>
+            <param name="clockSkew"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Validate(System.String)">
+            <summary>
+            验证 Token
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.ValidateJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.IdentityModel.JsonWebTokens.JsonWebToken@,System.String,System.String)">
+            <summary>
+            验证 Token
+            </summary>
+            <param name="httpContext"></param>
+            <param name="token"></param>
+            <param name="headerKey"></param>
+            <param name="tokenPrefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.ReadJwtToken(System.String)">
+            <summary>
+            读取 Token，不含验证
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GetJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String)">
+            <summary>
+            获取 JWT Bearer Token
+            </summary>
+            <param name="httpContext"></param>
+            <param name="headerKey"></param>
+            <param name="tokenPrefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GetJWTSettings">
+            <summary>
+            获取 JWT 配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.CreateTokenValidationParameters(XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions)">
+            <summary>
+            生成Token验证参数
+            </summary>
+            <param name="jwtSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.CombinePayload(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
+            <summary>
+            组合 Claims 负荷
+            </summary>
+            <param name="payload"></param>
+            <param name="expiredTime">过期时间，单位：分钟</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.SetDefaultJwtSettings(XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions)">
+            <summary>
+            设置默认 Jwt 配置
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="F:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.StationaryClaimTypes">
+            <summary>
+            固定的 Claim 类型
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions">
+            <summary>
+            Jwt 配置
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateIssuerSigningKey">
+            <summary>
+            验证签发方密钥
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.IssuerSigningKey">
+            <summary>
+            签发方密钥
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateIssuer">
+            <summary>
+            验证签发方
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidIssuer">
+            <summary>
+            签发方
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateAudience">
+            <summary>
+            验证签收方
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidAudience">
+            <summary>
+            签收方
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateLifetime">
+            <summary>
+            验证生存期
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ClockSkew">
+            <summary>
+            过期时间容错值，解决服务器端时间不同步问题（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ExpiredTime">
+            <summary>
+            过期时间（分钟）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.Algorithm">
+            <summary>
+            加密算法
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.Penetrates">
+            <summary>
+            常量、公共方法配置类
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.Authorization.Penetrates.AppAuthorizePrefix">
+            <summary>
+            授权策略前缀
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.Authorization.SecurityDefineAttribute">
+            <summary>
+            安全定义特性
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.SecurityDefineAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Authorization.SecurityDefineAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="resourceId"></param>
+        </member>
+        <member name="P:XUCore.NetCore.Authorization.SecurityDefineAttribute.ResourceId">
+            <summary>
+            资源Id，必须是唯一的
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.Controllers.ApiControllerBase">
             <summary>
             WebApi控制器基类

@@ -651,5 +651,19 @@ namespace XUCore.Helpers
         }
 
         #endregion DownloadAsync(下载)
+
+        #region GetRefererUrlAddress(获取来源地址)
+        /// <summary>
+        /// 获取来源地址
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="refererHeaderKey"></param>
+        /// <returns></returns>
+        public static string GetRefererUrlAddress(this HttpRequest request, string refererHeaderKey = "Referer")
+        {
+            return request.Headers[refererHeaderKey].SafeString();
+        }
+        #endregion GetRefererUrlAddress(获取来源地址)
+
     }
 }

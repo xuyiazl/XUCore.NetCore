@@ -9488,6 +9488,14 @@
             <param name="fileName">文件名。包含扩展名</param>
             <param name="encoding">字符编码</param>
         </member>
+        <member name="M:XUCore.Helpers.Web.GetRefererUrlAddress(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
+            <summary>
+            获取来源地址
+            </summary>
+            <param name="request"></param>
+            <param name="refererHeaderKey"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Helpers.Xml">
             <summary>
             Xml操作 - 生成器

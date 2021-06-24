@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core 项目中间件</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.1.6</Version>
+		<Version>5.1.7</Version>
 		<PackageId>XUCore.NetCore</PackageId>
 		<Product>XUCore.NetCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -40,6 +40,7 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
 		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
 		<PackageReference Include="log4net" Version="2.0.12" />
 		<PackageReference Include="Quartz" Version="3.3.2" />
 	</ItemGroup>
