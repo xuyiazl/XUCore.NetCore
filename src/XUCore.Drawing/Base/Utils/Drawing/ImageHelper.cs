@@ -197,6 +197,37 @@ namespace XUCore.Drawing
         /// <summary>
         /// 等比例缩放图片
         /// </summary>
+        /// <param name="sourImage">源图</param>
+        /// <param name="destPath">压缩后的存储地址</param>
+        /// <param name="ratio">缩放比例</param>
+        /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+        /// <returns></returns>
+        public static void ZoomImage(Image sourImage, string destPath, double ratio = .5, int quality = 100)
+        {
+            int destHeight = (int)Math.Ceiling(sourImage.Height * ratio);
+            int destWidth = (int)Math.Ceiling(sourImage.Width * ratio);
+
+            var destImage = ZoomImage(sourImage, destHeight, destWidth, quality);
+
+            destImage.Save(destPath, sourImage.RawFormat);
+        }
+        /// <summary>
+        /// 等比例缩放图片
+        /// </summary>
+        /// <param name="sourImage">源图</param>
+        /// <param name="ratio">缩放比例</param>
+        /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+        /// <returns></returns>
+        public static Image ZoomImage(Image sourImage, double ratio = .5, int quality = 100)
+        {
+            int destHeight = (int)Math.Ceiling(sourImage.Height * ratio);
+            int destWidth = (int)Math.Ceiling(sourImage.Width * ratio);
+
+            return ZoomImage(sourImage, destHeight, destWidth, quality);
+        }
+        /// <summary>
+        /// 等比例缩放图片
+        /// </summary>
         /// <param name="sourImage"></param>
         /// <param name="destHeight"></param>
         /// <param name="destWidth"></param>

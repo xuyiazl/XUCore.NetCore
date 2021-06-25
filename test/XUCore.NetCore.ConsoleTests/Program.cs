@@ -61,9 +61,13 @@ namespace XUCore.ConsoleTests
         static void Main(string[] args)
         {
             {
-                var file = @"C:\Users\Nigel\Downloads\2.jpg";
+                var file = @"C:\Users\Nigel\Downloads\1.jpg";
 
                 ImageHelper.ZoomImage(file, @"C:\Users\Nigel\Downloads\1-1.jpg", minRatio: .3, maxSize: 100);
+
+                var source = ImageHelper.FromFile(file);
+
+                ImageHelper.ZoomImage(source, @"C:\Users\Nigel\Downloads\1-3.jpg", .4);
 
                 ImageHelper.MakeThumbnail(file, @"C:\Users\Nigel\Downloads\1-2.jpg", 1000);
             }

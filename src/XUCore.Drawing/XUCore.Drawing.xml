@@ -561,6 +561,25 @@
             <param name="maxSize">压缩后最大大小（kb）</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.String,System.Double,System.Int32)">
+            <summary>
+            等比例缩放图片
+            </summary>
+            <param name="sourImage">源图</param>
+            <param name="destPath">压缩后的存储地址</param>
+            <param name="ratio">缩放比例</param>
+            <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.Double,System.Int32)">
+            <summary>
+            等比例缩放图片
+            </summary>
+            <param name="sourImage">源图</param>
+            <param name="ratio">缩放比例</param>
+            <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32)">
             <summary>
             等比例缩放图片
