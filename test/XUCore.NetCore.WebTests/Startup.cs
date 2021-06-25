@@ -82,18 +82,18 @@ namespace XUCore.WebTests
                     )
             );
 
-            //services.AddOssMultiPartClient(
-            //    (
-            //        "xxx-files", new OssOptions
-            //        {
-            //            AccessKey = "xxxx",
-            //            AccessKeySecret = "xxxx",
-            //            BluckName = "xxx",
-            //            EndPoint = "oss-cn-hangzhou.aliyuncs.com",
-            //            Domain = "https://files.xxx.com"
-            //        }
-            //    )
-            //);
+            services.AddOssMultiPartClient(
+                (
+                    "xxx-files", new OssOptions
+                    {
+                        AccessKey = "xxxx",
+                        AccessKeySecret = "xxxx",
+                        BluckName = "xxx",
+                        EndPoint = "oss-cn-hangzhou.aliyuncs.com",
+                        Domain = "https://files.xxx.com"
+                    }
+                )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

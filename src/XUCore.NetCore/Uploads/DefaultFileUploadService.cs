@@ -126,17 +126,28 @@ namespace XUCore.NetCore.Uploads
 
             var imageInfo = await SaveImageAsync(param.FormFile, param.RelativePath, param.RootPath, cancellationToken);
 
+            if (param.IsZoomOriginal)
+            {
+                string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
+                string thumPath = $"{orgin}-tmp";
+
+                using (var source = ImageHelper.FromFile(orgin))
+                    ImageHelper.ZoomImage(source, thumPath, param.Ratio, param.Quality);
+
+                File.Move(thumPath, orgin, true);
+            }
 
             if (param.IsCutOriginal)
             {
                 string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
                 string thumPath = $"{orgin}-tmp";
-                ImageHelper.MakeThumbnail(orgin, thumPath, param.OriginalWidth, param.OriginalHeight, ThumbnailMode.Cut);
-                System.IO.File.Copy(thumPath, orgin, true);
-                FileHelper.Delete(thumPath);
+
+                ImageHelper.MakeThumbnail(orgin, thumPath, param.AutoCutSize);
+
+                File.Move(thumPath, orgin, true);
             }
 
-            if (param.Thumbs.Count == 0 || param.Thumbs == null || param.Thumbs.Count == 0)
+            if (param.Thumbs == null || param.Thumbs.Count == 0)
                 return imageInfo;
 
             foreach (var thumbSize in param.Thumbs)

@@ -16,19 +16,29 @@ namespace XUCore.NetCore.Uploads.Params
         public long Size { get; set; } = 1024 * 1024 * 2;
 
         /// <summary>
+        /// 是否等比缩放原图
+        /// </summary>
+        public bool IsZoomOriginal { get; set; } = false;
+
+        /// <summary>
+        /// 缩放比率
+        /// </summary>
+        public double Ratio { get; set; } = 0.4;
+
+        /// <summary>
+        /// 压缩质量（数字越小压缩率越高）1-100
+        /// </summary>
+        public int Quality { get; set; } = 100;
+
+        /// <summary>
         /// 是否裁剪原图
         /// </summary>
         public bool IsCutOriginal { get; set; } = false;
 
         /// <summary>
-        /// 裁剪原图的宽度
+        /// 自动裁剪原图的最大高度和宽度
         /// </summary>
-        public int OriginalWidth { get; set; }
-
-        /// <summary>
-        /// 裁剪原图的高度
-        /// </summary>
-        public int OriginalHeight { get; set; }
+        public int AutoCutSize { get; set; }
 
         /// <summary>
         /// 缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）

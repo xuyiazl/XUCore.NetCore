@@ -2894,19 +2894,29 @@
             允许上传的图片文件大小，默认2M
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.IsZoomOriginal">
+            <summary>
+            是否等比缩放原图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Ratio">
+            <summary>
+            缩放比率
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Quality">
+            <summary>
+            压缩质量（数字越小压缩率越高）1-100
+            </summary>
+        </member>
         <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.IsCutOriginal">
             <summary>
             是否裁剪原图
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.OriginalWidth">
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.AutoCutSize">
             <summary>
-            裁剪原图的宽度
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.OriginalHeight">
-            <summary>
-            裁剪原图的高度
+            自动裁剪原图的最大高度和宽度
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.ThumbCutMode">

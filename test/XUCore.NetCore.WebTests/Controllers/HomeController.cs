@@ -19,6 +19,7 @@ using XUCore.NetCore.Redis;
 using MessagePack;
 using System;
 using XUCore.NetCore.Oss;
+using System.IO;
 
 namespace XUCore.WebTests.Controllers
 {
@@ -174,19 +175,24 @@ namespace XUCore.WebTests.Controllers
                 RootPath = Web.WebRootPath,
                 Module = "Test",
                 Group = "Logo",
-                ThumbCutMode = ThumbnailMode.Cut,
-                Thumbs = new List<string> { "200x300", "400x200" },
+                IsZoomOriginal = true,
+                Ratio = .4,
+                Quality = 100,
+                //IsCutOriginal = true,
+                //AutoCutSize = 800
+                //ThumbCutMode = ThumbnailMode.Cut,
+                //Thumbs = new List<string> { "200x300", "400x200" },
             };
 
             var result = await _fileUploadService.UploadImageAsync(param, cancellationToken);
 
             // oss 单文件上传
 
-            var client = _ossFactory.GetClient("fx110-images");
+            //var client = _ossFactory.GetClient("fx110-images");
 
-            (var res1, string message) = client.Delete("upload/images/master/2019/11/28/test111111.png");
+            //(var res1, string message) = client.Delete("upload/images/master/2019/11/28/test111111.png");
 
-            (var res, string url) = client.Upload("upload/images/master/2019/11/28/test111111.png", @"C:\Users\Nigel\Downloads\QQ图片20200611104303.png");
+            //(var res, string url) = client.Upload("upload/images/master/2019/11/28/test111111.png", @"C:\Users\Nigel\Downloads\QQ图片20200611104303.png");
 
             //    oss 大文件分片上传
 

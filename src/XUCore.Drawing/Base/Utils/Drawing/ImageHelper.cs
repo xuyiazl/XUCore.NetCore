@@ -174,22 +174,22 @@ namespace XUCore.Drawing
         {
             var destSize = new FileInfo(sourcePath).Length;
 
-            var source = ImageHelper.FromFile(sourcePath);
-
             var tmp = $"{destPath}.{Guid.NewGuid()}";
 
-            while (destSize > 1024 * maxSize && ratio >= minRatio && ratio > 0)
+            using (var source = ImageHelper.FromFile(sourcePath))
             {
-                int destHeight = (int)Math.Ceiling(source.Height * ratio);
-                int destWidth = (int)Math.Ceiling(source.Width * ratio);
+                while (destSize > 1024 * maxSize && ratio >= minRatio && ratio > 0)
+                {
+                    int destHeight = (int)Math.Ceiling(source.Height * ratio);
+                    int destWidth = (int)Math.Ceiling(source.Width * ratio);
 
-                var dest = ZoomImage(source, destHeight, destWidth, quality);
+                    using (var dest = ZoomImage(source, destHeight, destWidth, quality))
+                        dest.Save(tmp, source.RawFormat);
 
-                dest.Save(tmp, source.RawFormat);
+                    destSize = new FileInfo(tmp).Length;
 
-                destSize = new FileInfo(tmp).Length;
-
-                ratio = ratio - 0.1;
+                    ratio = ratio - 0.1;
+                }
             }
 
             File.Move(tmp, destPath, true);
@@ -207,9 +207,8 @@ namespace XUCore.Drawing
             int destHeight = (int)Math.Ceiling(sourImage.Height * ratio);
             int destWidth = (int)Math.Ceiling(sourImage.Width * ratio);
 
-            var destImage = ZoomImage(sourImage, destHeight, destWidth, quality);
-
-            destImage.Save(destPath, sourImage.RawFormat);
+            using (var destImage = ZoomImage(sourImage, destHeight, destWidth, quality))
+                destImage.Save(destPath, sourImage.RawFormat);
         }
         /// <summary>
         /// 等比例缩放图片
