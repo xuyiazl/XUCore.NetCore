@@ -506,6 +506,21 @@
             <param name="appendPrefix">是否追加前缀</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Drawing.ImageHelper.MakeThumbnail(System.String,System.String,System.Int32)">
+            <summary>
+            生成缩略图（指定最大高宽，自动选择不变形缩放）
+            </summary>
+            <param name="sourceImagePath">源文件路径</param>
+            <param name="destImage">裁剪后的存储地址</param>
+            <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
+        </member>
+        <member name="M:XUCore.Drawing.ImageHelper.MakeThumbnail(System.Drawing.Image,System.Int32)">
+            <summary>
+            生成缩略图（指定最大高宽，自动选择不变形缩放）
+            </summary>
+            <param name="sourceImage">源图</param>
+            <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
+        </member>
         <member name="M:XUCore.Drawing.ImageHelper.MakeThumbnail(System.Drawing.Image,System.Int32,System.Int32,XUCore.Drawing.ThumbnailMode)">
             <summary>
             生成缩略图
@@ -528,11 +543,33 @@
             <summary>
             生成缩略图
             </summary>
-            <param name="sourceImagePath">文件路径</param>
+            <param name="sourceImagePath">源文件路径</param>
             <param name="thumbnailPath">缩略图文件生成路径</param>
             <param name="width">缩略图宽度</param>
             <param name="height">缩略图高度</param>
             <param name="mode">缩略图方式</param>
+        </member>
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.String,System.String,System.Double,System.Double,System.Int32,System.Int32)">
+            <summary>
+            等比例缩放图片
+            </summary>
+            <param name="sourcePath">源文件地址</param>
+            <param name="destPath">压缩后的存储地址</param>
+            <param name="ratio">缩放比例</param>
+            <param name="minRatio">缩放比例边界（最小比例，当达到最小边界，不管文件多大都会停止压缩）</param>
+            <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+            <param name="maxSize">压缩后最大大小（kb）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            等比例缩放图片
+            </summary>
+            <param name="sourImage"></param>
+            <param name="destHeight"></param>
+            <param name="destWidth"></param>
+            <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+            <returns></returns>
         </member>
         <member name="M:XUCore.Drawing.ImageHelper.DeleteCoordinate(System.String)">
             <summary>

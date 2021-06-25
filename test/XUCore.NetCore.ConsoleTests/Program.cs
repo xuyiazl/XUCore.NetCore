@@ -26,6 +26,8 @@ using MessagePack.Formatters;
 using XUCore.Webs;
 using System.Net.Http;
 using XUCore.Develops;
+using XUCore.Drawing;
+using System.Drawing.Imaging;
 
 namespace XUCore.ConsoleTests
 {
@@ -58,6 +60,14 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
+            {
+                var file = @"C:\Users\Nigel\Downloads\2.jpg";
+
+                ImageHelper.ZoomImage(file, @"C:\Users\Nigel\Downloads\1-1.jpg", minRatio: .3, maxSize: 100);
+
+                ImageHelper.MakeThumbnail(file, @"C:\Users\Nigel\Downloads\1-2.jpg", 1000);
+            }
+
             User user = new User
             {
                 Id = "1",

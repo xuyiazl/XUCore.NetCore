@@ -15,6 +15,36 @@ namespace XUCore.Drawing
         #region MakeThumbnail(生成缩略图)
 
         /// <summary>
+        /// 生成缩略图（指定最大高宽，自动选择不变形缩放）
+        /// </summary>
+        /// <param name="sourceImagePath">源文件路径</param>
+        /// <param name="destImage">裁剪后的存储地址</param>
+        /// <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
+        public static void MakeThumbnail(string sourceImagePath, string destImage, int maxWH)
+        {
+            using (var sourceImage = Image.FromFile(sourceImagePath))
+            {
+                using (var resultImage = MakeThumbnail(sourceImage, maxWH))
+                {
+                    resultImage.Save(destImage, sourceImage.RawFormat);
+                }
+            }
+        }
+        /// <summary>
+        /// 生成缩略图（指定最大高宽，自动选择不变形缩放）
+        /// </summary>
+        /// <param name="sourceImage">源图</param>
+        /// <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
+        public static Image MakeThumbnail(Image sourceImage, int maxWH)
+        {
+            if (sourceImage.Width > maxWH)
+                return MakeThumbnail(sourceImage, maxWH, 0, ThumbnailMode.FixedW);
+            if (sourceImage.Height > maxWH)
+                return MakeThumbnail(sourceImage, 0, maxWH, ThumbnailMode.FixedH);
+
+            return sourceImage;
+        }
+        /// <summary>
         /// 生成缩略图
         /// </summary>
         /// <param name="sourceImage">源图</param>
@@ -68,9 +98,12 @@ namespace XUCore.Drawing
             try
             {
                 //3、设置高质量插值法
-                g.InterpolationMode = InterpolationMode.High;
+                //g.InterpolationMode = InterpolationMode.High;
+                g.InterpolationMode = InterpolationMode.HighQualityBilinear;
                 //4、设置高质量，低速度呈现平滑程度
                 g.SmoothingMode = SmoothingMode.HighQuality;
+
+                g.CompositingQuality = CompositingQuality.HighQuality;
                 //5、清空画布并以透明背景色填充
                 g.Clear(Color.Transparent);
                 //6、在指定位置并且按指定大小绘制原图片的指定部分
@@ -106,7 +139,7 @@ namespace XUCore.Drawing
         /// <summary>
         /// 生成缩略图
         /// </summary>
-        /// <param name="sourceImagePath">文件路径</param>
+        /// <param name="sourceImagePath">源文件路径</param>
         /// <param name="thumbnailPath">缩略图文件生成路径</param>
         /// <param name="width">缩略图宽度</param>
         /// <param name="height">缩略图高度</param>
@@ -118,12 +151,123 @@ namespace XUCore.Drawing
             {
                 using (var resultImage = MakeThumbnail(sourceImage, width, height, mode))
                 {
-                    resultImage.Save(thumbnailPath, ImageFormat.Jpeg);
+                    resultImage.Save(thumbnailPath, sourceImage.RawFormat);
                 }
             }
         }
 
         #endregion MakeThumbnail(生成缩略图)
+
+        #region 等比例缩放图片
+
+        /// <summary>
+        /// 等比例缩放图片
+        /// </summary>
+        /// <param name="sourcePath">源文件地址</param>
+        /// <param name="destPath">压缩后的存储地址</param>
+        /// <param name="ratio">缩放比例</param>
+        /// <param name="minRatio">缩放比例边界（最小比例，当达到最小边界，不管文件多大都会停止压缩）</param>
+        /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+        /// <param name="maxSize">压缩后最大大小（kb）</param>
+        /// <returns></returns>
+        public static void ZoomImage(string sourcePath, string destPath, double ratio = .5, double minRatio = .5, int quality = 100, int maxSize = 512)
+        {
+            var destSize = new FileInfo(sourcePath).Length;
+
+            var source = ImageHelper.FromFile(sourcePath);
+
+            var tmp = $"{destPath}.{Guid.NewGuid()}";
+
+            while (destSize > 1024 * maxSize && ratio >= minRatio && ratio > 0)
+            {
+                int destHeight = (int)Math.Ceiling(source.Height * ratio);
+                int destWidth = (int)Math.Ceiling(source.Width * ratio);
+
+                var dest = ZoomImage(source, destHeight, destWidth, quality);
+
+                dest.Save(tmp, source.RawFormat);
+
+                destSize = new FileInfo(tmp).Length;
+
+                ratio = ratio - 0.1;
+            }
+
+            File.Move(tmp, destPath, true);
+        }
+        /// <summary>
+        /// 等比例缩放图片
+        /// </summary>
+        /// <param name="sourImage"></param>
+        /// <param name="destHeight"></param>
+        /// <param name="destWidth"></param>
+        /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
+        /// <returns></returns>
+        public static Image ZoomImage(Image sourImage, int destHeight, int destWidth, int quality = 100)
+        {
+            try
+            {
+                ImageCodecInfo ici = GetEncoder(ImageFormat.Jpeg);
+                int width = 0, height = 0;
+                //按比例缩放
+                int sourWidth = sourImage.Width;
+                int sourHeight = sourImage.Height;
+                if (sourHeight > destHeight || sourWidth > destWidth)
+                {
+                    if ((sourWidth * destHeight) > (sourHeight * destWidth))
+                    {
+                        width = destWidth;
+                        height = (destWidth * sourHeight) / sourWidth;
+                    }
+                    else
+                    {
+                        height = destHeight;
+                        width = (sourWidth * destHeight) / sourHeight;
+                    }
+                }
+                else
+                {
+                    width = sourWidth;
+                    height = sourHeight;
+                }
+                Bitmap destBitmap = new Bitmap(destWidth, destHeight);
+                Graphics g = Graphics.FromImage(destBitmap);
+                g.Clear(Color.Transparent);
+                //设置画布的描绘质量
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+
+                g.DrawImage(sourImage, new Rectangle((destWidth - width) / 2, (destHeight - height) / 2, width, height), 0, 0, sourImage.Width, sourImage.Height, GraphicsUnit.Pixel);
+                g.Dispose();
+                //设置压缩质量
+                EncoderParameters encoderParams = new EncoderParameters();
+                encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, new long[1] { quality });
+
+                return destBitmap;
+            }
+            catch
+            {
+                return sourImage;
+            }
+            finally
+            {
+                //sourImage.Dispose();
+            }
+        }
+        #endregion
+
+        public static ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
 
         #region TextWatermark(文字水印)
 
