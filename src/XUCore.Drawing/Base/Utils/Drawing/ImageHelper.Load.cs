@@ -69,6 +69,10 @@ namespace XUCore.Drawing
         private static string GetBase64String(string base64String)
         {
             string parttern = "^(data:image/.*?;base64,).*?$";
+
+            if (!Regex.IsMatch(base64String, parttern))
+                base64String = $"data:image/jpeg;base64,{ base64String}";
+
             var match = Regex.Match(base64String, parttern);
             return base64String.Replace(match.Groups[1].ToString(), "");
         }
