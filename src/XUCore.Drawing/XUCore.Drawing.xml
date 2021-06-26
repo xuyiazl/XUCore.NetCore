@@ -549,34 +549,34 @@
             <param name="height">缩略图高度</param>
             <param name="mode">缩略图方式</param>
         </member>
-        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.String,System.String,System.Double,System.Double,System.Int32,System.Int32)">
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             等比例缩放图片
             </summary>
             <param name="sourcePath">源文件地址</param>
             <param name="destPath">压缩后的存储地址</param>
-            <param name="ratio">缩放比例</param>
+            <param name="ratio">缩放比例1-100</param>
             <param name="minRatio">缩放比例边界（最小比例，当达到最小边界，不管文件多大都会停止压缩）</param>
             <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
             <param name="maxSize">压缩后最大大小（kb）</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.String,System.Double,System.Int32)">
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.String,System.Int32,System.Int32)">
             <summary>
             等比例缩放图片
             </summary>
             <param name="sourImage">源图</param>
             <param name="destPath">压缩后的存储地址</param>
-            <param name="ratio">缩放比例</param>
+            <param name="ratio">缩放比例1-100</param>
             <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.Double,System.Int32)">
+        <member name="M:XUCore.Drawing.ImageHelper.ZoomImage(System.Drawing.Image,System.Int32,System.Int32)">
             <summary>
             等比例缩放图片
             </summary>
             <param name="sourImage">源图</param>
-            <param name="ratio">缩放比例</param>
+            <param name="ratio">缩放比例1-100</param>
             <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
             <returns></returns>
         </member>
@@ -746,6 +746,12 @@
         <member name="M:XUCore.Drawing.ImageHelper.FromBase64String(System.String)">
             <summary>
             从指定Base64字符串创建图片
+            </summary>
+            <param name="base64String">Base64字符串</param>
+        </member>
+        <member name="M:XUCore.Drawing.ImageHelper.GetBytesFromBase64String(System.String)">
+            <summary>
+            从指定Base64字符串转换bytes
             </summary>
             <param name="base64String">Base64字符串</param>
         </member>

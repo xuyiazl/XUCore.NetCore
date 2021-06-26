@@ -167,6 +167,105 @@ namespace XUCore.NetCore.Uploads
             return imageInfo;
         }
 
+
+        /// <summary>
+        /// 上传Base64图片。单张图片
+        /// </summary>
+        /// <param name="param">参数</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public async Task<ImageFileInfo> UploadImageBase64Async(SingleImageBase64UploadParam param, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (param.Base64String.IsEmpty())
+                throw new ArgumentNullException("请传递图片Base64字符串!");
+
+            var imageInfo = await SaveImageAsync(param.Base64String, param.RelativePath, param.RootPath, cancellationToken);
+
+            if (param.IsZoomOriginal)
+            {
+                string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
+                string thumPath = $"{orgin}-tmp";
+
+                using (var source = ImageHelper.FromFile(orgin))
+                    ImageHelper.ZoomImage(source, thumPath, param.Ratio, param.Quality);
+
+                File.Move(thumPath, orgin, true);
+            }
+
+            if (param.IsCutOriginal)
+            {
+                string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
+                string thumPath = $"{orgin}-tmp";
+
+                ImageHelper.MakeThumbnail(orgin, thumPath, param.AutoCutSize);
+
+                File.Move(thumPath, orgin, true);
+            }
+
+            if (param.Thumbs == null || param.Thumbs.Count == 0)
+                return imageInfo;
+
+            foreach (var thumbSize in param.Thumbs)
+            {
+                var _size = thumbSize.Split('x', StringSplitOptions.RemoveEmptyEntries);
+                if (_size.Length < 2) continue;
+
+                var thumbPath = Path.Combine(imageInfo.Path, $"{imageInfo.Id.ToString().Replace("-", "")}-{thumbSize}.{imageInfo.Extension}");
+                var thumb = Path.Combine(param.RootPath, thumbPath);
+                var orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
+
+                ImageHelper.MakeThumbnail(orgin, thumb, _size[0].ToInt(), _size[1].ToInt(), param.ThumbCutMode);
+
+                imageInfo.Thumbs.TryAdd(thumbSize, thumbPath);
+            }
+
+
+            return imageInfo;
+        }
+
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        /// <param name="base64String">base64字符串</param>
+        /// <param name="relativePath">相对路径</param>
+        /// <param name="rootPath">根路径</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        private async Task<ImageFileInfo> SaveImageAsync(string base64String, string relativePath, string rootPath,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var date = DateTime.Now;
+
+            var id = Guid.NewGuid().ToString();
+            var name = $"{id.Replace("-", "")}.jpg";
+            var size = 0L;
+            var path = Path.Combine(relativePath, date.ToString("yyyyMMdd"));
+            var saveName = name;
+
+            var fullDir = Path.Combine(rootPath, path);
+
+            if (!Directory.Exists(fullDir))
+                Directory.CreateDirectory(fullDir);
+
+            var fullPath = Path.Combine(fullDir, saveName);
+
+            var md5 = "";
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                byte[] bytes = ImageHelper.GetBytesFromBase64String(base64String);
+
+                await stream.WriteAsync(bytes, cancellationToken);
+
+                size = bytes.Length;
+                md5 = Md5(stream);
+            }
+
+            var imageInfo = new ImageFileInfo(path, size, name, id);
+            imageInfo.SaveName = saveName;
+            imageInfo.Md5 = md5;
+
+            return imageInfo;
+        }
+
         /// <summary>
         /// 保存文件
         /// </summary>

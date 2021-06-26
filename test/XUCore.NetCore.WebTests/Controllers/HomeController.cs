@@ -101,6 +101,26 @@ namespace XUCore.WebTests.Controllers
         //[HtmlStatic(Template = "/static/{controller}/{action}-{id}.html")]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
+
+            var param = new SingleImageBase64UploadParam()
+            {
+                Base64String = System.IO.File.ReadAllText(@"C:\Users\Nigel\Downloads\1.txt"),
+                RootPath = Web.WebRootPath,
+                Module = "Test",
+                Group = "Logo",
+                //IsZoomOriginal = true,
+                //Ratio = 40,
+                //Quality = 100,
+                //IsCutOriginal = true,
+                //AutoCutSize = 800
+                //ThumbCutMode = ThumbnailMode.Cut,
+                //Thumbs = new List<string> { "200x300", "400x200" },
+            };
+
+            var result = await _fileUploadService.UploadImageBase64Async(param, cancellationToken);
+
+
+
             var url = UrlBuilder.Create("test", $"/api/CommentsLive/GetPaged")
                  .Add("aid", 1539)
                  .Add("commentId", 0)
@@ -176,7 +196,7 @@ namespace XUCore.WebTests.Controllers
                 Module = "Test",
                 Group = "Logo",
                 IsZoomOriginal = true,
-                Ratio = .4,
+                Ratio = 40,
                 Quality = 100,
                 //IsCutOriginal = true,
                 //AutoCutSize = 800

@@ -37,9 +37,9 @@ namespace XUCore.Drawing
         /// <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
         public static Image MakeThumbnail(Image sourceImage, int maxWH)
         {
-            if (sourceImage.Width > maxWH)
+            if (sourceImage.Width >= sourceImage.Height && sourceImage.Width > maxWH)
                 return MakeThumbnail(sourceImage, maxWH, 0, ThumbnailMode.FixedW);
-            if (sourceImage.Height > maxWH)
+            if (sourceImage.Height >= sourceImage.Width && sourceImage.Height > maxWH)
                 return MakeThumbnail(sourceImage, 0, maxWH, ThumbnailMode.FixedH);
 
             return sourceImage;
@@ -165,12 +165,12 @@ namespace XUCore.Drawing
         /// </summary>
         /// <param name="sourcePath">源文件地址</param>
         /// <param name="destPath">压缩后的存储地址</param>
-        /// <param name="ratio">缩放比例</param>
+        /// <param name="ratio">缩放比例1-100</param>
         /// <param name="minRatio">缩放比例边界（最小比例，当达到最小边界，不管文件多大都会停止压缩）</param>
         /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
         /// <param name="maxSize">压缩后最大大小（kb）</param>
         /// <returns></returns>
-        public static void ZoomImage(string sourcePath, string destPath, double ratio = .5, double minRatio = .5, int quality = 100, int maxSize = 512)
+        public static void ZoomImage(string sourcePath, string destPath, int ratio = 50, int minRatio = 50, int quality = 100, int maxSize = 512)
         {
             var destSize = new FileInfo(sourcePath).Length;
 
@@ -180,15 +180,15 @@ namespace XUCore.Drawing
             {
                 while (destSize > 1024 * maxSize && ratio >= minRatio && ratio > 0)
                 {
-                    int destHeight = (int)Math.Ceiling(source.Height * ratio);
-                    int destWidth = (int)Math.Ceiling(source.Width * ratio);
+                    int destHeight = (int)Math.Ceiling(source.Height * (ratio / 100.0));
+                    int destWidth = (int)Math.Ceiling(source.Width * (ratio / 100.0));
 
                     using (var dest = ZoomImage(source, destHeight, destWidth, quality))
                         dest.Save(tmp, source.RawFormat);
 
                     destSize = new FileInfo(tmp).Length;
 
-                    ratio = ratio - 0.1;
+                    ratio = ratio - 10;
                 }
             }
 
@@ -199,28 +199,25 @@ namespace XUCore.Drawing
         /// </summary>
         /// <param name="sourImage">源图</param>
         /// <param name="destPath">压缩后的存储地址</param>
-        /// <param name="ratio">缩放比例</param>
+        /// <param name="ratio">缩放比例1-100</param>
         /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
         /// <returns></returns>
-        public static void ZoomImage(Image sourImage, string destPath, double ratio = .5, int quality = 100)
+        public static void ZoomImage(Image sourImage, string destPath, int ratio = 50, int quality = 100)
         {
-            int destHeight = (int)Math.Ceiling(sourImage.Height * ratio);
-            int destWidth = (int)Math.Ceiling(sourImage.Width * ratio);
-
-            using (var destImage = ZoomImage(sourImage, destHeight, destWidth, quality))
+            using (var destImage = ZoomImage(sourImage, ratio, quality))
                 destImage.Save(destPath, sourImage.RawFormat);
         }
         /// <summary>
         /// 等比例缩放图片
         /// </summary>
         /// <param name="sourImage">源图</param>
-        /// <param name="ratio">缩放比例</param>
+        /// <param name="ratio">缩放比例1-100</param>
         /// <param name="quality">压缩质量（数字越小压缩率越高）1-100</param>
         /// <returns></returns>
-        public static Image ZoomImage(Image sourImage, double ratio = .5, int quality = 100)
+        public static Image ZoomImage(Image sourImage, int ratio = 50, int quality = 100)
         {
-            int destHeight = (int)Math.Ceiling(sourImage.Height * ratio);
-            int destWidth = (int)Math.Ceiling(sourImage.Width * ratio);
+            int destHeight = (int)Math.Ceiling(sourImage.Height * (ratio / 100.0));
+            int destWidth = (int)Math.Ceiling(sourImage.Width * (ratio / 100.0));
 
             return ZoomImage(sourImage, destHeight, destWidth, quality);
         }

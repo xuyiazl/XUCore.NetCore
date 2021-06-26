@@ -2730,6 +2730,22 @@
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageBase64Async(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传Base64图片。单张图片
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveImageAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="base64String">base64字符串</param>
+            <param name="relativePath">相对路径</param>
+            <param name="rootPath">根路径</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
         <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.SaveImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             保存文件
@@ -2780,6 +2796,13 @@
             <param name="param"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageBase64Async(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+            <summary>
+            上传Base64图片。单张图片
+            </summary>
+            <param name="param">参数</param>
+            <param name="cancellationToken">取消令牌</param>
         </member>
         <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.MultipleFileUploadParam,System.Threading.CancellationToken)">
             <summary>
@@ -2859,29 +2882,74 @@
             上传的文件对象
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.RootPath">
+        <member name="T:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase">
+            <summary>
+            单文件上传参数
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.RootPath">
             <summary>
             存储根路径
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Module">
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.Module">
             <summary>
             模块名称
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Group">
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.Group">
             <summary>
             分组
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.FullPath">
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.FullPath">
             <summary>
             完整目录
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.RelativePath">
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.RelativePath">
             <summary>
             相对目录
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Base64String">
+            <summary>
+            图片base64
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.IsZoomOriginal">
+            <summary>
+            是否等比缩放原图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Ratio">
+            <summary>
+            缩放比率（1-100）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Quality">
+            <summary>
+            压缩质量（数字越小压缩率越高）1-100
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.IsCutOriginal">
+            <summary>
+            是否裁剪原图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.AutoCutSize">
+            <summary>
+            自动裁剪原图的最大高度和宽度
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.ThumbCutMode">
+            <summary>
+            缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Thumbs">
+            <summary>
+            裁剪缩略图尺寸 item = 300x400
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Extensions">
@@ -2901,7 +2969,7 @@
         </member>
         <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Ratio">
             <summary>
-            缩放比率
+            缩放比率（1-100）
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Quality">

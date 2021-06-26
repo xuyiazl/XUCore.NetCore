@@ -26,6 +26,12 @@ namespace XUCore.NetCore.Uploads
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<ImageFileInfo> UploadImageAsync(SingleImageUploadParam param, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// 上传Base64图片。单张图片
+        /// </summary>
+        /// <param name="param">参数</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        Task<ImageFileInfo> UploadImageBase64Async(SingleImageBase64UploadParam param, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// 上传文件。多文件

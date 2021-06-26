@@ -3,17 +3,12 @@ using System.Collections.Generic;
 
 namespace XUCore.NetCore.Uploads.Params
 {
-    public class SingleImageUploadParam : SingleFileUploadParam
+    public class SingleImageBase64UploadParam : SingleFileUploadParamBase
     {
         /// <summary>
-        /// 允许上传的文件扩展名
+        /// 图片base64
         /// </summary>
-        public string[] Extensions { get; set; } = new string[] { "gif", "jpg", "jpeg", "png", "bmp" };
-
-        /// <summary>
-        /// 允许上传的图片文件大小，默认2M
-        /// </summary>
-        public long Size { get; set; } = 1024 * 1024 * 2;
+        public string Base64String { get; set; }
 
         /// <summary>
         /// 是否等比缩放原图

@@ -62,6 +62,15 @@ namespace XUCore.Drawing
         }
 
         /// <summary>
+        /// 从指定Base64字符串转换bytes
+        /// </summary>
+        /// <param name="base64String">Base64字符串</param>
+        public static byte[] GetBytesFromBase64String(string base64String)
+        {
+            return Convert.FromBase64String(GetBase64String(base64String));
+        }
+
+        /// <summary>
         /// 获取真正的图片Base64数据。
         /// 即去掉data:image/jpg;base64,这样的格式
         /// </summary>

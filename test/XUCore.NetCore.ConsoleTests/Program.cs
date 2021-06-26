@@ -1,33 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using XUCore.NetCore.Redis;
-using XUCore.Serializer;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using XUCore.Helpers;
-using XUCore.Threading.Asyncs;
-using XUCore.Extensions;
-using XUCore.Configs;
+﻿using MessagePack;
+using RedLockNet;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
-using System.Net;
-using RedLockNet;
-using MessagePack;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Dynamic;
-using XUCore.Timing;
-using MessagePack.Resolvers;
-using MessagePack.Formatters;
-using XUCore.Webs;
-using System.Net.Http;
-using XUCore.Develops;
+using System.Net;
+using System.Threading.Tasks;
+using XUCore.Configs;
 using XUCore.Drawing;
-using System.Drawing.Imaging;
+using XUCore.Extensions;
+using XUCore.Helpers;
+using XUCore.NetCore.Redis;
 
 namespace XUCore.ConsoleTests
 {
@@ -63,11 +47,11 @@ namespace XUCore.ConsoleTests
             {
                 var file = @"C:\Users\Nigel\Downloads\1.jpg";
 
-                ImageHelper.ZoomImage(file, @"C:\Users\Nigel\Downloads\1-1.jpg", minRatio: .3, maxSize: 100);
+                ImageHelper.ZoomImage(file, @"C:\Users\Nigel\Downloads\1-1.jpg", minRatio: 30, maxSize: 100);
 
                 var source = ImageHelper.FromFile(file);
 
-                ImageHelper.ZoomImage(source, @"C:\Users\Nigel\Downloads\1-3.jpg", .4);
+                ImageHelper.ZoomImage(source, @"C:\Users\Nigel\Downloads\1-3.jpg", 40);
 
                 ImageHelper.MakeThumbnail(file, @"C:\Users\Nigel\Downloads\1-2.jpg", 1000);
             }
