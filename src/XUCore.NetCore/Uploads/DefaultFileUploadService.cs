@@ -173,7 +173,7 @@ namespace XUCore.NetCore.Uploads
         /// </summary>
         /// <param name="param">参数</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public async Task<ImageFileInfo> UploadImageBase64Async(SingleImageBase64UploadParam param, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ImageFileInfo> UploadImageAsync(SingleImageBase64UploadParam param, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (param.Base64String.IsEmpty())
                 throw new ArgumentNullException("请传递图片Base64字符串!");
