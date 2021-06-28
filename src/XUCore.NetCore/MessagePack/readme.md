@@ -231,6 +231,17 @@ else
 
 ------------
 
+#### API隐藏操作说明
+
+| head  | value  | 说明  |
+| ------------ | ------------ | ------------ |
+| limit-mode  | `contain` or `ignore`| `contain` 的意思是指定输出字段， `ignore` 的意思是忽略指定字段|
+| limit-field | 字段集合  | 指定要输出或要忽略的字段，以英文逗号分隔，如：`column1,column2,column3` |
+| limit-field-rename | 要重命名的字段  | 字段以输出为准，比如：`code=c,subCode=sub,data=data,nickname=userNickName` |
+| limit-resolver  | `camelcase` or `default`| `camelcase` 的意思是指定输出小驼峰字段， `default` 的意思是默认输出大小写字段|
+| limit-date-unix  | `true` or `false`| 当设置为`true`的时候 则是所有`DateTime`时间全部返回时间戳，当为`false`的时候不启用   |
+| limit-date-format | 日期格式化字符串  | 比如：`yyyy-MM-dd'T'HH:mm:ss'Z'` 返回的数据如：`2021-01-06T10:03:38Z` |
+
 
 #### 1、如何改变DateTime的格式？
 
@@ -239,12 +250,11 @@ else
 | head  | value  | 说明  |
 | ------------ | ------------ | ------------ |
 | limit-date-unix  | `true` or `false`| 当设置为`true`的时候 则是所有`DateTime`时间全部返回时间戳，当为`false`的时候不启用   |
-|  limit-date-format | 日期格式化字符串  | 比如：`yyyy-MM-dd'T'HH:mm:ss'Z'` 返回的数据如：`2021-01-06T10:03:38Z` |
+| limit-date-format | 日期格式化字符串  | 比如：`yyyy-MM-dd'T'HH:mm:ss'Z'` 返回的数据如：`2021-01-06T10:03:38Z` |
 
 注意： `limit-date-unix`的优先级要大于`limit-date-format`
 
 ------------
-
 
 #### 2、如何重命名和指定输出需要的字段？
 
@@ -252,9 +262,17 @@ else
 | ------------ | ------------ | ------------ |
 | limit-mode  | `contain` or `ignore`| `contain` 的意思是指定输出字段， `ignore` 的意思是忽略指定字段|
 | limit-field | 字段集合  | 指定要输出或要忽略的字段，以英文逗号分隔，如：`column1,column2,column3` |
-| limit-field-rename | 要重命名的字段  | 字段以输出为准，比如：`code=c,subCode=sub,bodyMessage=data,nickname=userNickName` |
+| limit-field-rename | 要重命名的字段  | 字段以输出为准，比如：`code=c,subCode=sub,data=data,nickname=userNickName` |
 
 注意：当你使用重命名`limit-field-rename`字段后，指定输出的字段`limit-field`要以重命名后的字段名为准，大小写也请依照你重命名后的格式。
+
+> 任何指定输出，均不影响原始定义的结构。
+
+#### 3、如何指定输出小驼峰字段？
+
+| head  | value  | 说明  |
+| ------------ | ------------ | ------------ |
+| limit-resolver  | `camelcase` or `default`| `camelcase` 的意思是指定输出小驼峰字段， `default` 的意思是默认输出大小写字段|
 
 > 任何指定输出，均不影响原始定义的结构。
 
@@ -265,8 +283,7 @@ else
 |  设置 |  值 | 说明  |
 | ------------ | ------------ | ------------ |
 | limit-mode  | contain  |  指定匹配输出模式 |
-| limit-field  |  code,subCode,bodyMessage,userId,userNickName,entName |   设置需要的字段集合，英文逗号分隔|
-
+| limit-field  |  code,subCode,data,userId,userNickName,entName |   设置需要的字段集合，英文逗号分隔|
 
 ### 示例二
 
@@ -276,7 +293,7 @@ else
 | ------------ | ------------ | ------------ |
 | limit-mode  | contain  |  指定匹配输出模式 |
 | limit-field  |  code,sub,data,totalPages,totalRecords,pageDatas,createTime,nickName,entId,entName |   设置需要的字段集合，英文逗号分隔，并以重命名后的字段为准设置输出字段|
-| limit-field-rename  | subcode=sub,bodyMessage=data,items=pageDatas,userNickName=nickName  |  重命名字段 |
+| limit-field-rename  | subcode=sub,data=data,items=pageDatas,userNickName=nickName  |  重命名字段 |
 
 ### 示例三
 
@@ -296,7 +313,7 @@ else
 | limit-mode  | ignore  |  指定忽略输出模式 |
 | limit-field  | code,subCode,message,userId,userNickName,entName,productType,userHeadImg_48 |   设置要忽略的字段集合，英文逗号分隔|
 | limit-date-unix  | true |   设置DateTime输出时间戳|
-| Accept  | application/bailun-json |  指定输出bailun-json格式的json字符串格式|
+| Accept  | application/json |  指定输出json格式的json字符串格式|
 
 # 适用范围定义
 
