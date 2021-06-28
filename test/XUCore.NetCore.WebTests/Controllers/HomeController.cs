@@ -117,7 +117,7 @@ namespace XUCore.WebTests.Controllers
                 //Thumbs = new List<string> { "200x300", "400x200" },
             };
 
-            var result = await _fileUploadService.UploadImageBase64Async(param, cancellationToken);
+            var result = await _fileUploadService.UploadImageAsync(param, cancellationToken);
 
 
 

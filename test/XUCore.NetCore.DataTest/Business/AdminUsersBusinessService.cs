@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.NetCore.Data.DbService;
@@ -30,6 +29,11 @@ namespace XUCore.NetCore.DataTest.Business
             this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUserEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUserEntity>>();
             this.rep = serviceProvider.GetService<INigelDbRepository>();
+        }
+
+        public async Task TestQueryAsync()
+        {
+            var u = rep.Context.SqlQuery<AdminUserSimpleEntity>("select UserName,Password,Status,Id*100 as IdCount from AdminUser where Id > @Id", System.Data.CommandType.Text, new SqlParameter("Id", 1));
         }
 
         public async Task TestDbAsync()

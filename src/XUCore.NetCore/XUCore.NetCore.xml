@@ -2730,7 +2730,7 @@
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageBase64Async(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
             <summary>
             上传Base64图片。单张图片
             </summary>
@@ -2797,7 +2797,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageBase64Async(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
             <summary>
             上传Base64图片。单张图片
             </summary>

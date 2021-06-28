@@ -9,6 +9,7 @@ namespace XUCore.NetCore.DataTest.Business
 {
     public interface IAdminUsersBusinessService : IServiceDependency
     {
+        Task TestQueryAsync();
         Task TestDbAsync();
         Task TestAspectCore();
 

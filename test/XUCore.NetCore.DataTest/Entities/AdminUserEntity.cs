@@ -22,4 +22,15 @@ namespace XUCore.NetCore.DataTest.Entities
         public int Status { get; set; }
         public ICollection<AdminUserAddressEntity> AdminUserAddress { get; private set; }
     }
+
+    public class AdminUserSimpleEntity : Entity<long>
+    {
+        public AdminUserSimpleEntity()
+        {
+        }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public int Status { get; set; }
+        public long IdCount { get; set; }
+    }
 }
