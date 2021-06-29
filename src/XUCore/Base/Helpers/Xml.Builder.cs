@@ -107,7 +107,7 @@ namespace XUCore.Helpers
         /// <param name="parent">父节点</param>
         public XmlNode AddCDataNode(object value, XmlNode parent = null)
         {
-            var node = CreateNode(Id.Guid(), value, XmlNodeType.CDATA);
+            var node = CreateNode(Id.Guid, value, XmlNodeType.CDATA);
             GetParent(parent).AppendChild(node);
             return node;
         }

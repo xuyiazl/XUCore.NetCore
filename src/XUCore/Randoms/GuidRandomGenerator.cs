@@ -13,7 +13,7 @@ namespace XUCore.Randoms
         /// <returns></returns>
         public string Generate()
         {
-            return Id.Guid();
+            return Id.Guid;
         }
 
         /// <summary>

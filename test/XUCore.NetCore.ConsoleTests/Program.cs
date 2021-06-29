@@ -11,6 +11,7 @@ using XUCore.Configs;
 using XUCore.Drawing;
 using XUCore.Extensions;
 using XUCore.Helpers;
+using XUCore.IdGenerators.Core;
 using XUCore.NetCore.Redis;
 
 namespace XUCore.ConsoleTests
@@ -195,7 +196,7 @@ namespace XUCore.ConsoleTests
             int lockCounter = 0;
             Exception logException = null;
 
-            var lockToken = Id.GuidGenerator.Create().ToString();
+            var lockToken = Id.Guid;
             var lockName = key + "_lock";
 
             while (lockCounter < replyCount)

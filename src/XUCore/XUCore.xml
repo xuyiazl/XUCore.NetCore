@@ -7135,6 +7135,11 @@
             String 生成器
             </summary>
         </member>
+        <member name="P:XUCore.Helpers.Id.ObjectGenerator">
+            <summary>
+            ObjectId 生成器
+            </summary>
+        </member>
         <member name="M:XUCore.Helpers.Id.SetId(System.String)">
             <summary>
             设置Id
@@ -7146,24 +7151,64 @@
             重置Id
             </summary>
         </member>
-        <member name="M:XUCore.Helpers.Id.Guid">
+        <member name="P:XUCore.Helpers.Id.Guid">
             <summary>
             用Guid创建标识，去掉分隔符
             </summary>
         </member>
-        <member name="M:XUCore.Helpers.Id.NewGuid">
+        <member name="P:XUCore.Helpers.Id.SnowflakeId">
             <summary>
-            创建 Guid ID
+            创建 雪花算法Id
             </summary>
         </member>
-        <member name="M:XUCore.Helpers.Id.NewLong">
+        <member name="P:XUCore.Helpers.Id.TimestampId">
             <summary>
-            创建 Long ID
+            创建 时间戳Id
             </summary>
         </member>
-        <member name="M:XUCore.Helpers.Id.NewString">
+        <member name="P:XUCore.Helpers.Id.ObjectId">
             <summary>
-            创建 String ID
+            创建 ObjectId
+            </summary>
+        </member>
+        <member name="T:XUCore.Helpers.Id.Sequential">
+            <summary>
+            有序GUid
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.Sequential.Binary">
+            <summary>
+            创建 有序Guid（生成的GUID 按照二进制的顺序排列）
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.Sequential.String">
+            <summary>
+            创建 有序Guid（生成的GUID 按照字符串顺序排列）
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.Sequential.End">
+            <summary>
+            创建 有序Guid（生成的GUID 像SQL Server, 按照末尾部分排列）
+            </summary>
+        </member>
+        <member name="T:XUCore.Helpers.Id.SequentialString">
+            <summary>
+            有序GUid（ToString("N")）
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.SequentialString.Binary">
+            <summary>
+            创建 有序Guid（生成的GUID 按照二进制的顺序排列）
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.SequentialString.String">
+            <summary>
+            创建 有序Guid（生成的GUID 按照字符串顺序排列）
+            </summary>
+        </member>
+        <member name="P:XUCore.Helpers.Id.SequentialString.End">
+            <summary>
+            创建 有序Guid（生成的GUID 像SQL Server, 按照末尾部分排列）
             </summary>
         </member>
         <member name="T:XUCore.Helpers.Internal.RsaHelper">

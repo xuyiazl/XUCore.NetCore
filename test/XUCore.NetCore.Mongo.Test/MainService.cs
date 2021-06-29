@@ -79,7 +79,7 @@ namespace XUCore.NetCore.Mongo.Test
                     {
                         models.Add(new UserMongoEntity
                         {
-                            AutoId = Id.NewLong(),
+                            AutoId = Id.SnowflakeId,
                             Name = $"王五{c + 1}",
                             Age = new Random().Next(18, 30),
                             Birthday = DateTime.Parse("2000-01-30"),
