@@ -29,18 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.Net5.Template.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.Net5.Template.Web", "XUCore.Net5.Template.Web\XUCore.Net5.Template.Web.csproj", "{37748C0C-CD77-4C7C-B050-E098EFC636C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.Data", "..\..\..\..\src\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj", "{DC23E94F-B8A4-4464-9BAF-5FE62ED5A11E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.DynamicWebApi", "..\..\..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj", "{174739F8-73E0-4708-9D56-24A305B6E8A3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.Ddd.Domain", "..\..\..\..\src\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj", "{E0DA56A1-441C-47F9-950B-2444BCFC7A16}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore", "..\..\..\..\src\XUCore.NetCore\XUCore.NetCore.csproj", "{293345B6-B111-45EA-ABC7-1B6DD85CE6DE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.AspectCore", "..\..\..\..\src\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj", "{5C71E42B-3871-4FC8-84AD-84A1F2A90FA3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.Swagger", "..\..\..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj", "{29BD7042-B141-48DD-8BB4-AE0F81AD561B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,30 +63,6 @@ Global
 		{37748C0C-CD77-4C7C-B050-E098EFC636C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37748C0C-CD77-4C7C-B050-E098EFC636C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37748C0C-CD77-4C7C-B050-E098EFC636C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC23E94F-B8A4-4464-9BAF-5FE62ED5A11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC23E94F-B8A4-4464-9BAF-5FE62ED5A11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC23E94F-B8A4-4464-9BAF-5FE62ED5A11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC23E94F-B8A4-4464-9BAF-5FE62ED5A11E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{174739F8-73E0-4708-9D56-24A305B6E8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{174739F8-73E0-4708-9D56-24A305B6E8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{174739F8-73E0-4708-9D56-24A305B6E8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{174739F8-73E0-4708-9D56-24A305B6E8A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0DA56A1-441C-47F9-950B-2444BCFC7A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0DA56A1-441C-47F9-950B-2444BCFC7A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0DA56A1-441C-47F9-950B-2444BCFC7A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0DA56A1-441C-47F9-950B-2444BCFC7A16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{293345B6-B111-45EA-ABC7-1B6DD85CE6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{293345B6-B111-45EA-ABC7-1B6DD85CE6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{293345B6-B111-45EA-ABC7-1B6DD85CE6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{293345B6-B111-45EA-ABC7-1B6DD85CE6DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C71E42B-3871-4FC8-84AD-84A1F2A90FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C71E42B-3871-4FC8-84AD-84A1F2A90FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C71E42B-3871-4FC8-84AD-84A1F2A90FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C71E42B-3871-4FC8-84AD-84A1F2A90FA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29BD7042-B141-48DD-8BB4-AE0F81AD561B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29BD7042-B141-48DD-8BB4-AE0F81AD561B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29BD7042-B141-48DD-8BB4-AE0F81AD561B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29BD7042-B141-48DD-8BB4-AE0F81AD561B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

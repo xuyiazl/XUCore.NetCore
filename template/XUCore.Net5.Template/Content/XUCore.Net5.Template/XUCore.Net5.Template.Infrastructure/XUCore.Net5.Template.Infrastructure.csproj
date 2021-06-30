@@ -5,7 +5,10 @@
   </PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
+		<PackageReference Include="XUCore.NetCore.DynamicWebApi" Version="5.2.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <ProjectReference Include="..\XUCore.Net5.Template.Persistence\XUCore.Net5.Template.Persistence.csproj" />
 	</ItemGroup>
 	

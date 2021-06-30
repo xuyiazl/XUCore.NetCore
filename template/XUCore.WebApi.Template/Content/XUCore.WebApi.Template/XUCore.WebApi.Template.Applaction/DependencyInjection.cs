@@ -150,9 +150,6 @@ namespace XUCore.WebApi.Template.Applaction
                     )
                 );
 
-            // 注册Quartz任务服务
-            services.AddEasyQuartzService();
-
             return services;
         }
 

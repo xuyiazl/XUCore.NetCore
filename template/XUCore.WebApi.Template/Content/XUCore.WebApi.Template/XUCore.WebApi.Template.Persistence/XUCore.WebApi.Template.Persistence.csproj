@@ -14,7 +14,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
+		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <ProjectReference Include="..\XUCore.WebApi.Template.Core\XUCore.WebApi.Template.Core.csproj" />
 	</ItemGroup>
 	

@@ -7,10 +7,13 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<DocumentationFile>XUCore.SimpleApi.Template.Applaction.xml</DocumentationFile>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.0" />
+		<PackageReference Include="XUCore.NetCore.DynamicWebApi" Version="5.2.0" />
+	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
 	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Core\XUCore.SimpleApi.Template.Core.csproj" />
 	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Persistence\XUCore.SimpleApi.Template.Persistence.csproj" />
 	</ItemGroup>

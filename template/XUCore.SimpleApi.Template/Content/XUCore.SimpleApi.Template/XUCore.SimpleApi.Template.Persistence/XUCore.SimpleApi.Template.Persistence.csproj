@@ -12,9 +12,12 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7"></PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7"></PackageReference>
 	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.0" />
+	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
 	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Core\XUCore.SimpleApi.Template.Core.csproj" />
 	</ItemGroup>
 	

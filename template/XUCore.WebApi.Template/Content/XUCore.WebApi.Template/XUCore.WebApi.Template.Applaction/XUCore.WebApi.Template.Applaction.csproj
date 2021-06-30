@@ -9,7 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\XUCore.WebApi.Template.DbService\XUCore.WebApi.Template.DbService.csproj" />
 	</ItemGroup>
 

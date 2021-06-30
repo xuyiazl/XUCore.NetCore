@@ -13,11 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore\XUCore.NetCore.csproj" />
-	  <ProjectReference Include="..\..\..\..\..\src\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Update="XUCore.WebApi.Template.Core.xml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
