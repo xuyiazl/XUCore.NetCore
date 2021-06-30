@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using XUCore;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DynamicWebApi;
-using XUCore.SimpleApi.Template.Core;
-using XUCore.SimpleApi.Template.Core.Enums;
-using XUCore.SimpleApi.Template.Persistence;
+using Sample.Mini.Core;
+using Sample.Mini.Core.Enums;
+using Sample.Mini.Persistence;
 
-namespace XUCore.SimpleApi.Template.Applaction.Permission
+namespace Sample.Mini.Applaction.Permission
 {
     [NonDynamicWebApi]
     public class PermissionCacheService : IPermissionCacheService

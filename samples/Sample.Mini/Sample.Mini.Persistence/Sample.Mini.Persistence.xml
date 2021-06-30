@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sample.Mini.Persistence</name>
+    </assembly>
+    <members>
+        <member name="P:Sample.Mini.Persistence.Entities.BaseEntity.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:Sample.Mini.Persistence.Entities.BaseEntity.Created_At">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Sample.Mini.Persistence.Entities.BaseEntity.Updated_At">
+            <summary>
+            最后更新时间
+            </summary>
+        </member>
+        <member name="P:Sample.Mini.Persistence.Entities.BaseEntity.Deleted_At">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+    </members>
+</doc>

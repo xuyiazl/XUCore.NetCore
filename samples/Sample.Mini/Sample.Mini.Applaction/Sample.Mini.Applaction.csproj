@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Sample.Mini.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.0" />
+		<PackageReference Include="XUCore.NetCore.DynamicWebApi" Version="5.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Sample.Mini.Core\Sample.Mini.Core.csproj" />
+	  <ProjectReference Include="..\Sample.Mini.Persistence\Sample.Mini.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>
