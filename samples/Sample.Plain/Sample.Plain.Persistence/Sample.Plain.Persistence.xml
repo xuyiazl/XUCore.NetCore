@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sample.Plain.Persistence</name>
+    </assembly>
+    <members>
+        <member name="P:Sample.Plain.Persistence.Entities.BaseEntity.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:Sample.Plain.Persistence.Entities.BaseEntity.Created_At">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Sample.Plain.Persistence.Entities.BaseEntity.Updated_At">
+            <summary>
+            最后更新时间
+            </summary>
+        </member>
+        <member name="P:Sample.Plain.Persistence.Entities.BaseEntity.Deleted_At">
+            <summary>
+            删除时间
+            </summary>
+        </member>
+        <member name="T:Sample.Plain.Persistence.Entities.Enums.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="F:Sample.Plain.Persistence.Entities.Enums.Status.Default">
+            <summary>
+            默认状态
+            </summary>
+        </member>
+        <member name="F:Sample.Plain.Persistence.Entities.Enums.Status.Show">
+            <summary>
+            正常显示
+            </summary>
+        </member>
+        <member name="F:Sample.Plain.Persistence.Entities.Enums.Status.SoldOut">
+            <summary>
+            数据下架（隐藏）
+            </summary>
+        </member>
+        <member name="F:Sample.Plain.Persistence.Entities.Enums.Status.Trash">
+            <summary>
+            数据已被删除，非物理删除（回收站）
+            </summary>
+        </member>
+    </members>
+</doc>

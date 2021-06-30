@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Sample.Ddd.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Update="Sample.Ddd.Applaction.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Sample.Ddd.Domain\Sample.Ddd.Domain.csproj" />
+	  <ProjectReference Include="..\Sample.Ddd.Infrastructure\Sample.Ddd.Infrastructure.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sample.Plain.Core</name>
+    </assembly>
+    <members>
+        <member name="F:Sample.Plain.Core.Enums.AccountMode.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:Sample.Plain.Core.Enums.AccountMode.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="T:Sample.Plain.Core.SubCode">
+            <summary>
+            业务代码
+            </summary>
+        </member>
+    </members>
+</doc>
