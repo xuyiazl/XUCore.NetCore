@@ -9,45 +9,65 @@ namespace XUCore.NetCore.Filters
     /// </summary>
     public class ApiElapsedTimeAttribute : ActionFilterAttribute
     {
+        private string ElapsedField = "ElapsedTime";
+        private bool Open = true;
+
+        public ApiElapsedTimeAttribute(bool Open = true, string ElapsedField = "ElapsedTime")
+        {
+            this.Open = Open;
+            this.ElapsedField = ElapsedField;
+        }
+
         private Stopwatch stopwatch = new Stopwatch();
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (stopwatch == null)
-                stopwatch = new Stopwatch();
-            stopwatch.Reset();
-            stopwatch.Restart();
+            if (Open)
+            {
+                if (stopwatch == null)
+                    stopwatch = new Stopwatch();
+                stopwatch.Reset();
+                stopwatch.Restart();
+            }
             base.OnActionExecuting(context);
         }
 
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
         {
-            if (stopwatch == null)
-                stopwatch = new Stopwatch();
-            base.OnActionExecuted(actionExecutedContext);
-            stopwatch.Stop();
-
-            var reType = actionExecutedContext.Result?.GetType();
-
-            if (reType == typeof(Result))
+            if (Open)
             {
-                var res = (Result)actionExecutedContext.Result;
-                if (res != null)
-                {
-                    res.Value?.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+                if (stopwatch == null)
+                    stopwatch = new Stopwatch();
+                base.OnActionExecuted(actionExecutedContext);
+                stopwatch.Stop();
 
-                    actionExecutedContext.Result = res;
+                var reType = actionExecutedContext.Result?.GetType();
+
+                if (reType == typeof(Result))
+                {
+                    var res = (Result)actionExecutedContext.Result;
+                    if (res != null)
+                    {
+                        res.ElapsedTime = stopwatch.ElapsedMilliseconds;
+                        //res.Value?.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+
+                        actionExecutedContext.Result = res;
+                    }
+                }
+                else if (reType == typeof(ObjectResult))
+                {
+                    var res = (ObjectResult)actionExecutedContext.Result;
+                    if (res != null && res.Value.GetType().Name == typeof(Result<>).Name)
+                    {
+                        res.Value?.GetType().GetProperty(ElapsedField).SetValue(res.Value, stopwatch.ElapsedMilliseconds);
+
+                        actionExecutedContext.Result = res;
+                    }
                 }
             }
-            else if (reType == typeof(ObjectResult))
+            else
             {
-                var res = (ObjectResult)actionExecutedContext.Result;
-                if (res != null)
-                {
-                    res.Value?.GetType().GetProperty("elapsedTime").SetValue(res.Value, stopwatch.ElapsedMilliseconds);
-
-                    actionExecutedContext.Result = res;
-                }
+                base.OnActionExecuted(actionExecutedContext);
             }
         }
     }

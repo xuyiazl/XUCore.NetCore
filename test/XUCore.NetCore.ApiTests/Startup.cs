@@ -107,12 +107,12 @@ namespace XUCore.ApiTests
 
                     return new ObjectResult(new Result<object>()
                     {
-                        code = 0,
-                        subCode = "faild",
-                        message = message,
-                        data = null,
-                        elapsedTime = -1,
-                        operationTime = DateTime.Now
+                        Code = 0,
+                        SubCode = "faild",
+                        Message = message,
+                        Data = null,
+                        ElapsedTime = -1,
+                        OperationTime = DateTime.Now
                     })
                     {
                         StatusCode = (int)HttpStatusCode.OK

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "XUCore",
+  "classifications": [ "xucore.simpleapi.template" ],
+  "name": "xucore simpleapi template",
+  "identity": "xucore.simpleapi.template",
+  "groupIdentity": "xucore.simpleapi.template",
+  "shortName": "xucore-simpleapi-template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "XUCore.SimpleApi.Template",
+  "preferNameDirectory": true
+}

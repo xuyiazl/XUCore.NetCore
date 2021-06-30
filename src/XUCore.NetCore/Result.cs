@@ -13,32 +13,32 @@ namespace XUCore.NetCore
         /// <summary>
         /// 状态码
         /// </summary>
-        public int code { get; }
+        public int Code { get; }
 
         /// <summary>
         /// 业务状态码
         /// </summary>
-        public string subCode { get; }
+        public string SubCode { get; }
 
         /// <summary>
         /// 消息
         /// </summary>
-        public string message { get; }
+        public string Message { get; }
 
         /// <summary>
         /// 数据
         /// </summary>
-        public dynamic data { get; }
+        public dynamic Data { get; }
 
         /// <summary>
         /// 操作时间
         /// </summary>
-        public DateTime operationTime { get; }
+        public DateTime OperationTime { get; }
 
         /// <summary>
         /// 请求耗时
         /// </summary>
-        public long elapsedTime { get; set; }
+        public long ElapsedTime { get; set; }
 
         /// <summary>
         /// 初始化一个<see cref="Result"/>类型的实例
@@ -49,12 +49,12 @@ namespace XUCore.NetCore
         /// <param name="data">数据</param>
         public Result(int code, string subCode, string message, dynamic data = null) : base(null)
         {
-            this.code = code;
-            this.subCode = subCode;
-            this.message = message;
-            this.data = data;
-            this.operationTime = DateTime.Now;
-            this.elapsedTime = -1;
+            this.Code = code;
+            this.SubCode = subCode;
+            this.Message = message;
+            this.Data = data;
+            this.OperationTime = DateTime.Now;
+            this.ElapsedTime = -1;
         }
 
         /// <summary>
@@ -66,12 +66,12 @@ namespace XUCore.NetCore
         /// <param name="data">数据</param>
         public Result(StateCode code, string subCode, string message, dynamic data = null) : base(null)
         {
-            this.code = code.Value();
-            this.subCode = subCode;
-            this.message = message;
-            this.data = data;
-            this.operationTime = DateTime.Now;
-            this.elapsedTime = -1;
+            this.Code = code.Value();
+            this.SubCode = subCode;
+            this.Message = message;
+            this.Data = data;
+            this.OperationTime = DateTime.Now;
+            this.ElapsedTime = -1;
         }
 
         /// <summary>
@@ -83,12 +83,12 @@ namespace XUCore.NetCore
                 throw new ArgumentNullException(nameof(context));
             this.Value = new
             {
-                code,
-                subCode,
-                message,
-                elapsedTime,
-                operationTime,
-                data
+                Code,
+                SubCode,
+                Message,
+                ElapsedTime,
+                OperationTime,
+                Data
             };
             return base.ExecuteResultAsync(context);
         }

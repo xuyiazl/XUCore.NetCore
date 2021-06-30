@@ -980,17 +980,6 @@
             API查询时间
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Filters.ApiErrorAttribute">
-            <summary>
-            API错误日志过滤器
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Filters.ApiErrorAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
-            <summary>
-            异常处理
-            </summary>
-            <param name="context">异常上下文</param>
-        </member>
         <member name="T:XUCore.NetCore.Filters.ApiTraceAttribute">
             <summary>
             API跟踪日志过滤器
@@ -2346,32 +2335,32 @@
             返回结果
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.code">
+        <member name="P:XUCore.NetCore.Result.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.subCode">
+        <member name="P:XUCore.NetCore.Result.SubCode">
             <summary>
             业务状态码
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.message">
+        <member name="P:XUCore.NetCore.Result.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.data">
+        <member name="P:XUCore.NetCore.Result.Data">
             <summary>
             数据
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.operationTime">
+        <member name="P:XUCore.NetCore.Result.OperationTime">
             <summary>
             操作时间
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result.elapsedTime">
+        <member name="P:XUCore.NetCore.Result.ElapsedTime">
             <summary>
             请求耗时
             </summary>
@@ -2439,32 +2428,32 @@
             <param name="message"></param>
             <param name="data"></param>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.code">
+        <member name="P:XUCore.NetCore.Result`1.Code">
             <summary>
             状态码
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.subCode">
+        <member name="P:XUCore.NetCore.Result`1.SubCode">
             <summary>
             业务状态码
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.message">
+        <member name="P:XUCore.NetCore.Result`1.Message">
             <summary>
             消息
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.operationTime">
+        <member name="P:XUCore.NetCore.Result`1.OperationTime">
             <summary>
             操作时间
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.elapsedTime">
+        <member name="P:XUCore.NetCore.Result`1.ElapsedTime">
             <summary>
             请求耗时
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Result`1.data">
+        <member name="P:XUCore.NetCore.Result`1.Data">
             <summary>
             数据
             </summary>

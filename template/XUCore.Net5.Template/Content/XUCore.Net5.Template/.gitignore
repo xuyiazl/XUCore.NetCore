@@ -1,0 +1,22 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/DDD.Applaction/bin/Debug/net5.0
+/DDD.Applaction/obj
+/DDD.Domain/bin/Debug/net5.0
+/DDD.Domain/obj
+/DDD.Infrastructure/bin/Debug/net5.0
+/DDD.Infrastructure/obj
+/DDD.Persistence/bin/Debug/net5.0
+/DDD.Persistence/obj
+/DDD.WebApi/bin/Debug/net5.0
+/DDD.WebApi/obj
+/.vs/Demo/v16
+/.vs/Demo/DesignTimeBuild
+/DDD.Domain.Core/bin/Debug/net5.0
+/DDD.Domain.Core/obj
+/.vs/Demo/config
+/DDD.Web/bin/Debug/net5.0
+/DDD.Web/obj
+*.user

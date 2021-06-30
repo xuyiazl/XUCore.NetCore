@@ -10,7 +10,6 @@ namespace XUCore.NetCore.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [ApiError]
     [ApiTrace]
     [ApiElapsedTime]
     public abstract class ApiControllerBase : Controller

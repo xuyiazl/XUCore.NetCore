@@ -31,11 +31,11 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
 
             var list = new Result<IList<WeatherForecast>>
             {
-                code = 0,
-                elapsedTime = 12,
-                subCode = "0000001",
-                message = "成功啦",
-                data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                Code = 0,
+                ElapsedTime = 12,
+                SubCode = "0000001",
+                Message = "成功啦",
+                Data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
@@ -76,7 +76,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             var res = await HttpRemote.Service.GetAsync<Result<List<WeatherForecast>>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            return Success("0000001", "查询成功", res.data);
+            return Success("0000001", "查询成功", res.Data);
         }
 
         [HttpGet]
@@ -109,7 +109,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             var res = await HttpRemote.Service.PostAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            return Success("0000001", "POST成功", res.data);
+            return Success("0000001", "POST成功", res.Data);
         }
 
         [HttpPost]
@@ -135,7 +135,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             var res = await HttpRemote.Service.PutAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            return Success("0000001", "POST成功", res.data);
+            return Success("0000001", "POST成功", res.Data);
         }
 
         [HttpPut]
@@ -161,7 +161,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             var res = await HttpRemote.Service.PatchAsync<WeatherForecast, Result<WeatherForecast>>(url, weather,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            return Success("0000001", "PATCH成功", res.data);
+            return Success("0000001", "PATCH成功", res.Data);
         }
 
         [HttpPatch]
@@ -180,7 +180,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             var res = await HttpRemote.Service.DeleteAsync<Result<WeatherForecast>>(url,
                 HttpMediaType.MessagePack, MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            return Success("0000001", "POST成功", res.data);
+            return Success("0000001", "POST成功", res.Data);
         }
 
         [HttpDelete]

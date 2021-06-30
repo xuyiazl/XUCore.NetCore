@@ -53,10 +53,10 @@ namespace XUCore.NetCore
         /// <param name="data"></param>
         public Result(int code, string subCode, string message, T data = default)
         {
-            this.code = code;
-            this.subCode = subCode;
-            this.message = message;
-            this.data = data;
+            this.Code = code;
+            this.SubCode = subCode;
+            this.Message = message;
+            this.Data = data;
         }
         public Result()
         {
@@ -66,36 +66,36 @@ namespace XUCore.NetCore
         /// 状态码
         /// </summary>
         [Key(0)]
-        public int code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// 业务状态码
         /// </summary>
         [Key(1)]
-        public string subCode { get; set; }
+        public string SubCode { get; set; }
 
         /// <summary>
         /// 消息
         /// </summary>
         [Key(2)]
-        public string message { get; set; }
+        public string Message { get; set; }
 
         /// <summary>
         /// 操作时间
         /// </summary>
         [Key(3)]
-        public DateTime operationTime { get; set; } = DateTime.UtcNow;
+        public DateTime OperationTime { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// 请求耗时
         /// </summary>
         [Key(4)]
-        public long elapsedTime { get; set; } = -1;
+        public long ElapsedTime { get; set; } = -1;
 
         /// <summary>
         /// 数据
         /// </summary>
         [Key(5)]
-        public T data { get; set; }
+        public T Data { get; set; }
     }
 }

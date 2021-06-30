@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.WebApi.Template.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
+		<ProjectReference Include="..\XUCore.WebApi.Template.DbService\XUCore.WebApi.Template.DbService.csproj" />
+	</ItemGroup>
+
+</Project>

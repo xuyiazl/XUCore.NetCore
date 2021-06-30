@@ -1,0 +1,73 @@
+﻿### database-first
+
+加入nuget包
+```xml
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7"></PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7"></PackageReference>
+	</ItemGroup>
+```
+
+执行命令，从database生成DbContext
+
+```bash
+Scaffold-DbContext "Server=.,1433;Database=NigelDB;User Id=sa;Password=sasasa" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
+```
+
+
+### code-first
+
+加入nuget包
+```xml
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7"></PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7"></PackageReference>
+	</ItemGroup>
+```
+
+
+
+#### 第一步：启动迁移
+
+```bash
+Enable-Migrations
+```
+
+#### 第二步：初步创建迁移
+
+如果每次模型结构有变更，都需要使用`Add-Migration`来创建版本变更
+
+```bash
+Add-Migration NigelDbCreate
+```
+`NigelDbCreate` 为自己定义名字
+
+如果出现如下错误
+
+> Both Entity Framework 6 and Entity Framework Core are installed. The Entity Framework 6 tools are running. Use 'EntityFrameworkCore\Add-Migration' for Entity Framework Core.
+
+使用下面方式创建
+```bash
+EntityFrameworkCore\Add-Migration NigelDbCreate
+```
+
+#### 第三步：
+
+```bash
+update-database
+```
+或者
+```bash
+update-database -verbose
+```
+
+如果出现错误，请使用这个命令
+```bash
+EntityFrameworkCore\update-database
+```
+
+#### 第四步：
+
+在DbConext中加入 `base.Database.Migrate();` 进行自动创建
+
+程序在启动的时候自动同步结构

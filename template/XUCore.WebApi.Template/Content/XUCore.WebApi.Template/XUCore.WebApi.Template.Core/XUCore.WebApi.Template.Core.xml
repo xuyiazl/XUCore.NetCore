@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.WebApi.Template.Core</name>
+    </assembly>
+    <members>
+        <member name="F:XUCore.WebApi.Template.Core.Enums.AccountMode.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:XUCore.WebApi.Template.Core.Enums.AccountMode.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="T:XUCore.WebApi.Template.Core.SubCode">
+            <summary>
+            业务代码
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.SimpleApi.Template.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
+	  <ProjectReference Include="..\..\..\..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
+	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Core\XUCore.SimpleApi.Template.Core.csproj" />
+	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Persistence\XUCore.SimpleApi.Template.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -68,7 +68,7 @@ namespace XUCore.NetCore.MessageApiTest
                     .Where(e => e.Value.Errors.Count > 0)
                     .Select(e => e.Value.Errors.First().ErrorMessage)
                     .ToList();
-                    return new BadRequestObjectResult(new Result<string>() { code = 0, subCode = "", message = errors.Join(), data = "", elapsedTime = -1 });
+                    return new BadRequestObjectResult(new Result<string>() { Code = 0, SubCode = "", Message = errors.Join(), Data = "", ElapsedTime = -1 });
                 };
             });
 

@@ -42,7 +42,7 @@ namespace XUCore.NetCore.Filters
             if (next == null)
                 throw new ArgumentNullException(nameof(next));
 
-            _logger = Web.GetService<ILogger<ApiErrorAttribute>>();
+            _logger = Web.GetService<ILogger<ApiTraceAttribute>>();
 
             Str logString = new Str();
             OnActionExecuting(context);
@@ -203,9 +203,9 @@ namespace XUCore.NetCore.Filters
         {
             if (!(context.Result is Result result))
                 return;
-            log.AppendLine($"【响应消息】{result.message}")
+            log.AppendLine($"【响应消息】{result.Message}")
                 .AppendLine("【响应结果】")
-                .AppendLine(JsonHelper.ToJson(result.data));
+                .AppendLine(JsonHelper.ToJson(result.Data));
         }
     }
 }

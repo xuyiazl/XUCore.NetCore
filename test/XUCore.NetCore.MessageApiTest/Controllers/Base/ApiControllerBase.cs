@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using XUCore.NetCore;
-using XUCore.NetCore.MessagePack;
-using System;
 using XUCore.NetCore.Filters;
+using XUCore.NetCore.MessagePack;
 
 namespace XUCore.NetCore.MessageApiTest
 {
@@ -14,7 +10,6 @@ namespace XUCore.NetCore.MessageApiTest
     /// </summary>
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [ApiError]
     [ApiTrace(Ignore = true)] //忽略API请求业务跟踪
     [ApiElapsedTime]
     [MessagePackRequestContentType("application/json")]
@@ -42,11 +37,11 @@ namespace XUCore.NetCore.MessageApiTest
         protected virtual Result<T> Success<T>(string subCode, string message, T data = default) =>
             new Result<T>()
             {
-                code = 0,
-                subCode = subCode,
-                message = message,
-                data = data,
-                elapsedTime = -1
+                Code = 0,
+                SubCode = subCode,
+                Message = message,
+                Data = data,
+                ElapsedTime = -1
             };
 
         /// <summary>
@@ -60,11 +55,11 @@ namespace XUCore.NetCore.MessageApiTest
         protected Result<T> Fail<T>(string subCode, string message, T data = default) =>
              new Result<T>()
              {
-                 code = 0,
-                 subCode = subCode,
-                 message = message,
-                 data = data,
-                 elapsedTime = -1
+                 Code = 0,
+                 SubCode = subCode,
+                 Message = message,
+                 Data = data,
+                 ElapsedTime = -1
              };
     }
 }

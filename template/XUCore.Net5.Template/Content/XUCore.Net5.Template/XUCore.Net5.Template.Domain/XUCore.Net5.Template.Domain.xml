@@ -1,0 +1,890 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.Net5.Template.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.Net5.Template.Domain.Notifications.DomainNotification">
+            <summary>
+            领域通知模型，用来获取当前总线中出现的通知信息
+            继承自领域事件和 INotification（也就意味着可以拥有中介的发布/订阅模式）
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Notifications.DomainNotificationHandler">
+            <summary>
+            领域通知处理程序，把所有的通知信息放到事件总线中
+            （用来收集领域的错误信息，但模板中没有使用，默认是在Applaction中使用了SubCode来返回，这个可以自行权衡）
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand">
+            <summary>
+            创建导航命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.FatherId">
+            <summary>
+            导航父级id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.Icon">
+            <summary>
+            图标样式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.Url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.OnlyCode">
+            <summary>
+            唯一代码（权限使用）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.Weight">
+            <summary>
+            排序权重
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.IsExpress">
+            <summary>
+            是否是快捷导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuCreateCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDeleteCommand">
+            <summary>
+            删除导航命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.CreateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminMenu.CreateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminMenu.CreateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理创建后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.DeleteEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminMenu.DeleteEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminMenu.DeleteEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理删除后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.UpdateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminMenu.UpdateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminMenu.UpdateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理修改后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand">
+            <summary>
+            更新导航命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.FatherId">
+            <summary>
+            导航父级id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.Icon">
+            <summary>
+            图标样式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.Url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.OnlyCode">
+            <summary>
+            唯一代码（权限使用）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.Weight">
+            <summary>
+            排序权重
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.IsExpress">
+            <summary>
+            是否是快捷导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateFieldCommand">
+            <summary>
+            更新部分字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateFieldCommand.Field">
+            <summary>
+            字段名
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateFieldCommand.Value">
+            <summary>
+            需要修改的值
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateStatusCommand">
+            <summary>
+            更新数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuUpdateStatusCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.FatherId">
+            <summary>
+            导航父级id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.Icon">
+            <summary>
+            图标样式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.Url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.OnlyCode">
+            <summary>
+            唯一代码（权限使用）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.Weight">
+            <summary>
+            排序权重
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuDto.IsExpress">
+            <summary>
+            是否是快捷导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.FatherId">
+            <summary>
+            导航父级id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.Icon">
+            <summary>
+            图标样式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.Url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.OnlyCode">
+            <summary>
+            唯一代码（权限使用）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.Weight">
+            <summary>
+            排序权重
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuTreeDto.IsExpress">
+            <summary>
+            是否是快捷导航
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuQueryByTree">
+            <summary>
+            查询导航树命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuQueryByWeight">
+            <summary>
+            查询导航列表命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuQueryByWeight.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminMenu.AdminMenuQueryDetail">
+            <summary>
+            查询导航记录命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleCreateCommand">
+            <summary>
+            创建角色命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleCreateCommand.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleCreateCommand.MenuIds">
+            <summary>
+            导航关联id集合
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleCreateCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleDeleteCommand">
+            <summary>
+            删除导航命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.CreateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminRole.CreateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminRole.CreateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理创建后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.DeleteEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminRole.DeleteEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminRole.DeleteEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理删除后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.UpdateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminRole.UpdateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminRole.UpdateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理修改后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateCommand">
+            <summary>
+            角色修改命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateCommand.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateCommand.MenuIds">
+            <summary>
+            导航id集合
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateFieldCommand">
+            <summary>
+            更新部分字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateFieldCommand.Field">
+            <summary>
+            字段名
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateFieldCommand.Value">
+            <summary>
+            需要修改的值
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateStatusCommand">
+            <summary>
+            更新数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleUpdateStatusCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleDto.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryAll">
+            <summary>
+            查询所有角色命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryDetail">
+            <summary>
+            查询一条角色记录命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryMenuKeys">
+            <summary>
+            查询角色关联的导航id集合
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryMenuKeys.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged">
+            <summary>
+            角色查询命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged.Field">
+            <summary>
+            搜索字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged.Search">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged.Sort">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged.Order">
+            <summary>
+            排序方式 exp：“asc or desc”
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminRole.AdminRoleQueryPaged.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand">
+            <summary>
+            创建管理员命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Location">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Position">
+            <summary>
+            职位
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserCreateCommand.Roles">
+            <summary>
+            角色id集合
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDeleteCommand">
+            <summary>
+            删除导航命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.CreateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminUser.CreateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminUser.CreateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理创建后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.DeleteEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminUser.DeleteEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminUser.DeleteEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理删除后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.UpdateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.AdminUser.UpdateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.AdminUser.UpdateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理修改后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserLoginCommand">
+            <summary>
+            登录命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserLoginCommand.Account">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserLoginCommand.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserRelevanceRoleCommand">
+            <summary>
+            关联角色命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserRelevanceRoleCommand.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserRelevanceRoleCommand.RoleIds">
+            <summary>
+            角色id集合
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateFieldCommand">
+            <summary>
+            更新部分字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateFieldCommand.Field">
+            <summary>
+            字段名
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateFieldCommand.Value">
+            <summary>
+            需要修改的值
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateInfoCommand">
+            <summary>
+            用户信息修改命令
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateInfoCommand.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateInfoCommand.Location">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateInfoCommand.Position">
+            <summary>
+            职位
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateInfoCommand.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdatePasswordCommand">
+            <summary>
+            更新密码
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateStatusCommand">
+            <summary>
+            更新数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserUpdateStatusCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Location">
+            <summary>
+            位置
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Position">
+            <summary>
+            职位
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.Picture">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.LoginCount">
+            <summary>
+            登录次数
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.LoginLastTime">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserDto.LoginLastIp">
+            <summary>
+            最后登录IP
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserAnyByAccount">
+            <summary>
+            查询账号是否存在
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserAnyByAccount.AccountMode">
+            <summary>
+            账号类型
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserAnyByAccount.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserAnyByAccount.NotId">
+            <summary>
+            排除id
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryByAccount">
+            <summary>
+            账号查询
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryByAccount.AccountMode">
+            <summary>
+            账号类型
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryByAccount.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryDetail">
+            <summary>
+            查询一条记录命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged">
+            <summary>
+            管理员查询分页
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged.Field">
+            <summary>
+            搜索字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged.Search">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged.Sort">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged.Order">
+            <summary>
+            排序方式 exp：“asc or desc”
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryPaged.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryRoleKeys">
+            <summary>
+            查询关联角色id集合
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.AdminUser.AdminUserQueryRoleKeys.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordCreateCommand">
+            <summary>
+            记录登录记录
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordCreateCommand.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordCreateCommand.LoginWay">
+            <summary>
+            登录方式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordCreateCommand.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordCreateCommand.LoginIp">
+            <summary>
+            登录ip
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.LoginRecord.CreateEvent.Handler">
+            <summary>
+            事件通知操作
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.LoginRecord.CreateEvent.Handler.Handle(XUCore.Net5.Template.Domain.Sys.LoginRecord.CreateEvent,System.Threading.CancellationToken)">
+            <summary>
+            接受消息处理创建后的业务
+            </summary>
+            <param name="notification"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.LoginWay">
+            <summary>
+            登录方式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.LoginIp">
+            <summary>
+            登录ip
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.Mobile">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordDto.Picture">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryList">
+            <summary>
+            查询登录记录
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryList.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged">
+            <summary>
+            登录记录查询分页
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged.Field">
+            <summary>
+            搜索字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged.Search">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged.Sort">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged.Order">
+            <summary>
+            排序方式 exp：“asc or desc”
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Sys.LoginRecord.LoginRecordQueryPaged.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.LoginRecord.View.Create(XUCore.Net5.Template.Domain.Core.INigelDbContext)">
+            <summary>
+            linq 关联查询，关联账号信息
+            </summary>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Net5.Template.Domain.Sys.Permission.View.Create(XUCore.Net5.Template.Domain.Sys.Permission.PermissionViewModel,System.Int64)">
+            <summary>
+            获取当前账号的权限导航列表
+            </summary>
+            <param name="model"></param>
+            <param name="AdminID"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
