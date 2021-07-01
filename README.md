@@ -28,18 +28,18 @@
 
 | 版本										 | 名称										 |描述							|
 | ------------------------------------------ | ------------------------------------------ |--------------------------	|
-|[![nuget](https://img.shields.io/nuget/v/XUCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore)|XUCore										 |XUCore 基础扩展包、Helper库              |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.Drawing.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Drawing)|XUCore.Drawing								 |Drawing 绘图扩展，验证码、图片缩放裁剪、图像灰度等操作处理 |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore)|XUCore.NetCore								 |NetCore 中间件、Oss、Razor、Sign、Quartz、Jwt、上传等，基于NetCore的特性扩展          |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Data.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Data)|XUCore.NetCore.Data							 |数据库组件，支持MSSQL、MYSQL等常用组件  |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Mongo.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Mongo)|XUCore.NetCore.Mongo						 |Mongo 仓储组件      |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Redis.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Redis)|XUCore.NetCore.Redis						 |Redis 仓储组件 |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.DynamicWebApi.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.DynamicWebApi)|XUCore.NetCore.DynamicWebApi				 |动态WebApi组件，简化开发，Restful       |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AspectCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AspectCore)|XUCore.NetCore.AspectCore					 |Aspect扩展，缓存拦截器、事务等，自定义AOP      |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AccessControl.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AccessControl)|XUCore.NetCore.AccessControl				 |资源授权插件（权限），支持MVC、Razor，API端请用XUCore.NetCore内的JWT      |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Swagger.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Swagger)|XUCore.NetCore.Swagger						 |Swagger文档扩展，支持jwt登录存储      |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Jwt.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)|XUCore.NetCore.Jwt							 |Jwt的实现，目前【弃用】准备用微软自带的      |
-|[![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)|XUCore.Ddd.Domain							 |基于MediatR的Ddd Domain扩展      |
+|[![nuget](https://img.shields.io/nuget/v/XUCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore)													|XUCore										 |XUCore 基础扩展包、Helper库|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.Drawing.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Drawing)									|XUCore.Drawing								 |Drawing 绘图扩展，验证码、图片缩放裁剪、图像灰度等操作处理|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore)									|XUCore.NetCore								 |NetCore 中间件、Oss、Razor、Sign、Quartz、Jwt、上传等，基于NetCore的特性扩展|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Data.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Data)							|XUCore.NetCore.Data						 |数据库组件，支持MSSQL、MYSQL等常用组件|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Mongo.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Mongo)						|XUCore.NetCore.Mongo						 |Mongo 仓储组件|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Redis.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Redis)						|XUCore.NetCore.Redis						 |Redis 仓储组件|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.DynamicWebApi.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.DynamicWebApi)		|XUCore.NetCore.DynamicWebApi				 |动态WebApi组件，简化开发，Restful|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AspectCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AspectCore)				|XUCore.NetCore.AspectCore					 |Aspect扩展，缓存拦截器、事务等，自定义AOP|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AccessControl.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AccessControl)		|XUCore.NetCore.AccessControl				 |资源授权插件（权限），支持MVC、Razor，API端请用XUCore.NetCore内的JWT|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Swagger.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Swagger)					|XUCore.NetCore.Swagger						 |Swagger文档扩展，支持jwt登录存储|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Jwt.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)							|XUCore.NetCore.Jwt							 |Jwt的实现，目前【弃用】准备用微软自带的|
+|[![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)								|XUCore.Ddd.Domain							 |基于MediatR的Ddd Domain扩展|
 
 
 ## 🍄 框架脚手架
