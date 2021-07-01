@@ -23,7 +23,7 @@
 |[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)        | XUCore.NetCore.Jwt              |              [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Jwt.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)              | Jwt的实现，目前【弃用】准备用微软自带的      |
 |[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)        | XUCore.Ddd.Domain              |              [![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)              | 基于MediatR的Ddd Domain扩展      |
 
-[![nuget](https://img.shields.io/badge/anything-youlike-brightgreen.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore)
+[![nuget](https://img.shields.io/badge/XUCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore)
 
 ## 🍄 框架脚手架
 
@@ -33,6 +33,8 @@
 |[![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.WebApi.Template)        | XUCore.WebApi.Template              |              [![nuget](https://img.shields.io/nuget/v/XUCore.WebApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.WebApi.Template)              | WebApi 模板（三层模式）           |
 |[![nuget](https://shields.io/badge/-Nuget-yellow?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)        | XUCore.SimpleApi.Template              |              [![nuget](https://img.shields.io/nuget/v/XUCore.SimpleApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)              | WebApi 模板（单层快速开发）        |
 
-**[如何使用脚手架 XUCore.Net5.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.Net5.Template)**
-**[如何使用脚手架 XUCore.WebApi.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.WebApi.Template)**
-**[如何使用脚手架 XUCore.SimpleApi.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.SimpleApi.Template)**
+[如何使用脚手架 XUCore.Net5.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.Net5.Template)
+
+[如何使用脚手架 XUCore.WebApi.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.WebApi.Template)
+
+[如何使用脚手架 XUCore.SimpleApi.Template](https://github.com/xuyiazl/XUCore.NetCore/template/XUCore.SimpleApi.Template)
