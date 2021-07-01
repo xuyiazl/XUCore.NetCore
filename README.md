@@ -21,9 +21,9 @@
 |[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.AccessControl)        | XUCore.NetCore.AccessControl              |              [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AccessControl.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AccessControl)              | 资源授权插件（权限），支持MVC、Razor，API端请用XUCore.NetCore内的JWT      |
 |[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Swagger)        | XUCore.NetCore.Swagger              |              [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Swagger.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Swagger)              | Swagger文档扩展，支持jwt登录存储      |
 |[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)        | XUCore.NetCore.Jwt              |              [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Jwt.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Jwt)              | Jwt的实现，目前【弃用】准备用微软自带的      |
+|[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)        | XUCore.Ddd.Domain              |              [![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)              | 基于MediatR的Ddd Domain扩展      |
 
-|[![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)        | XUCore.Ddd.Domain              |              [![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)              | 基于MediatR的Ddd Domain扩展，      |
-
+[![nuget](https://img.shields.io/badge/anything-youlike-brightgreen.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore)
 
 ## 🍄 框架脚手架
 
