@@ -373,90 +373,52 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
 
 
         #region [ AdoNet ]
-        /// <summary>
-        /// 通过EF执行原生SQL 返回影响行数
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual int ExecuteSql(string sql, params IDataParameter[] parameters)
+
+
+        public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
         {
-            if (Write != null)
-                return Write.ExecuteSql(sql, parameters);
-            return -1;
-        }
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
-        {
-            if (Read != null)
-                return Read.Select<T>(sql, type, parameters);
-            return default;
-        }
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new()
-        {
-            if (Read != null)
-                return Read.SelectList<T>(sql, type, parameters);
-            return default;
-        }
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Read != null)
-                return Read.SelectList(sql, type, parameters);
-            return null;
-        }
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public virtual DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Read != null)
-                return Read.SelectDataSet(sql, type, parameters);
-            return null;
-        }
-        /// <summary>
-        /// 通过原生执行ADONET查询操作
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        public virtual int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters)
-        {
-            if (Write != null)
-                return Write.ExecuteAdoNet(sql, type, parameters);
-            return -1;
+            return Read.SqlFirstOrDefault<TEntity>(sql, model, type);
         }
 
-        public virtual IDataParameter GetParameter(string paramterName, object value)
-            => Write.GetParameter(paramterName, value);
+        public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            return await Read.SqlFirstOrDefaultAsync<TEntity>(sql, model, type, cancellationToken);
+        }
 
-        public virtual IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters)
-            => Write.GetParameters(paramters);
+        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
+        {
+            return Read.SqlQuery<TEntity>(sql, model, type);
+        }
+
+        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            return await Read.SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
+        }
+
+        public virtual DataTable ExecuteReader(string sql, object model = null, CommandType type = CommandType.Text)
+            => Read.ExecuteReader(sql, model, type);
+
+        public virtual async Task<DataTable> ExecuteReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+            => await Read.ExecuteReaderAsync(sql, model, type, cancellationToken);
+
+        public virtual DataSet DataAdapterFill(string sql, object model = null, CommandType type = CommandType.Text)
+            => Read.DataAdapterFill(sql, model, type);
+
+        public virtual async Task<DataSet> DataAdapterFillAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+            => await Read.DataAdapterFillAsync(sql, model, type, cancellationToken);
+
+        public virtual int ExecuteNonQuery(string sql, object model = null, CommandType type = CommandType.Text)
+            => Write.ExecuteNonQuery(sql, model, type);
+
+        public virtual async Task<int> ExecuteNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+            => await Write.ExecuteNonQueryAsync(sql, model, type, cancellationToken);
+
+        public virtual T ExecuteScalar<T>(string sql, object model = null, CommandType type = CommandType.Text)
+            => Write.ExecuteScalar<T>(sql, model, type);
+
+        public virtual async Task<T> ExecuteScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+            => await Write.ExecuteScalarAsync<T>(sql, model, type, cancellationToken);
+
 
         #endregion
 

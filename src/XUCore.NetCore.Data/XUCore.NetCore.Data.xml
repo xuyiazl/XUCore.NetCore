@@ -27,6 +27,272 @@
             Used for Sqlite, Truncate table 
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbHelpers.ConvertToDbParameters(System.Object,System.Data.Common.DbCommand)">
+            <summary>
+            将模型转为 DbParameter 集合
+            </summary>
+            <param name="model">参数模型</param>
+            <param name="dbCommand">数据库命令对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbHelpers.ConvertToDbParameters(System.Collections.Generic.Dictionary{System.String,System.Object},System.Data.Common.DbCommand)">
+            <summary>
+            将字典转换成命令参数
+            </summary>
+            <param name="keyValues">字典</param>
+            <param name="dbCommand">数据库命令对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbHelpers.SetDbParameters(System.Data.Common.DbCommand,System.Data.Common.DbParameter[])">
+            <summary>
+            设置数据库命令对象参数
+            </summary>
+            <param name="dbCommand">数据库命令对象</param>
+            <param name="parameters">命令参数</param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.DbHelpers.FixSqlParameterPlaceholder(System.String)">
+            <summary>
+            修正不同数据库命令参数前缀不一致问题
+            </summary>
+            <param name="parameterName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.Data.DbService.IContextRepository`1">
+            <summary>
+            通用仓储库的方法定义
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.IContextRepository`1.Context">
+            <summary>
+            当前上下文
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.IContextRepository`1.UnitOfWork">
+            <summary>
+            工作单元
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Add``1(``0,System.Boolean)">
+            <summary>
+            插入一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            批量插入数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Update``1(``0,System.Boolean)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Delete``1(``0,System.Boolean)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            批量删除数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            异步插入一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量写入数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetSingle``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Any``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Any数据检测
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetCount``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取记录数
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetSingleAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.AnyAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Any数据检测
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.GetCountAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            获取记录数
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String})">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="updateValues">更新的新数据数据</param>
+            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="Update">更新的新数据数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.Delete``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            根据条件批量删除
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="updateValues">更新的新数据数据</param>
+            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="Update">更新的新数据数据</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.IContextRepository`1.DeleteAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量删除
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbService.IDbContext">
             <summary>
             多数据库操作继承该接口
@@ -296,68 +562,240 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
+        <member name="T:XUCore.NetCore.Data.DbService.ContextRepository`1">
             <summary>
-            通过EF执行原生SQL 返回影响行数
+            数据库的基础仓储库
             </summary>
-            <param name="sql"></param>
-            <param name="parameters"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.ContextRepository`1.Context">
+            <summary>
+            当前上下文
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.ContextRepository`1.UnitOfWork">
+            <summary>
+            工作单元
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Add``1(``0,System.Boolean)">
+            <summary>
+            插入一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
+            批量插入数据
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Update``1(``0,System.Boolean)">
             <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
+            更新一条数据（全量更新）
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
+        <!-- Badly formed XML comment ignored for member "M:XUCore.NetCore.Data.DbService.ContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)" -->
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Delete``1(``0,System.Boolean)">
             <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
+            删除一条数据
             </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
+            批量删除数据
             </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
             <summary>
-            通过原生执行ADONET查询操作
+            异步插入一条数据
             </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDbTransaction,System.Data.IDataParameter[])">
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
-            通过原生执行ADONET查询操作
+            批量写入数据
             </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="dbTransaction"></param>
-            <param name="parameters"></param>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetSingle``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Any``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Any数据检测
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetCount``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取记录数
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetSingleAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.AnyAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Any数据检测
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.GetCountAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            获取记录数
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String})">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="updateValues">更新的新数据数据</param>
+            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="Update">更新的新数据数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.Delete``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            根据条件批量删除
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="updateValues">更新的新数据数据</param>
+            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量更新（部分字段）
+            </summary>
+            <param name="selector">查询条件</param>
+            <param name="Update">更新的新数据数据</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.ContextRepository`1.DeleteAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            根据条件批量删除
+            </summary>
+            <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.NetCore.Data.DbService.DBContextBase">
             <summary>
@@ -627,71 +1065,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
-            <summary>
-            通过EF执行原生SQL 返回影响行数
-            </summary>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataEntity)
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns>返回DataEntity</returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns>返回DataSet</returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过原生执行ADONET查询操作
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDbTransaction,System.Data.IDataParameter[])">
-            <summary>
-            通过原生执行ADONET查询操作
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="dbTransaction"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.NetCore.Data.DbService.EntityTypeConfiguration`1">
             <summary>
             net core 跟 netFramework下面的EF统一配置字段不一致
@@ -761,282 +1134,6 @@
             仅在添加或者修改时设置默认值
             </summary>
             <param name="insertOrUpdates"></param>
-        </member>
-        <member name="T:XUCore.NetCore.Data.DbService.MsSqlRepository`1">
-            <summary>
-            sql server的仓库
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-        </member>
-        <member name="T:XUCore.NetCore.Data.DbService.Repository`1">
-            <summary>
-            数据库的基础仓储库
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.#ctor(`0)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="P:XUCore.NetCore.Data.DbService.Repository`1.Context">
-            <summary>
-            当前上下文
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.DbService.Repository`1.UnitOfWork">
-            <summary>
-            工作单元
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(``0,System.Boolean)">
-            <summary>
-            插入一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量插入数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(``0,System.Boolean)">
-            <summary>
-            更新一条数据（全量更新）
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量更新数据（全量更新）
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(``0,System.Boolean)">
-            <summary>
-            删除一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量删除数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            异步插入一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            批量写入数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String})">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="updateValues">更新的新数据数据</param>
-            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}})">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="Update">更新的新数据数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.Delete``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
-            <summary>
-            根据条件批量删除
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="updateValues">更新的新数据数据</param>
-            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="Update">更新的新数据数据</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.Repository`1.DeleteAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量删除
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.NetCore.Data.DbService.IRepository`1">
-            <summary>
-            通用仓储库的方法定义
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.DbService.IRepository`1.Context">
-            <summary>
-            当前上下文
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.DbService.IRepository`1.UnitOfWork">
-            <summary>
-            工作单元
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(``0,System.Boolean)">
-            <summary>
-            插入一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量插入数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(``0,System.Boolean)">
-            <summary>
-            更新一条数据（全量更新）
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量更新数据（全量更新）
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(``0,System.Boolean)">
-            <summary>
-            删除一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
-            <summary>
-            批量删除数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            异步插入一条数据
-            </summary>
-            <param name="entity"></param>
-            <param name="commit">马上提交</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            批量写入数据
-            </summary>
-            <param name="entities"></param>
-            <param name="commit">马上提交</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String})">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="updateValues">更新的新数据数据</param>
-            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Update``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}})">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="Update">更新的新数据数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.Delete``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
-            <summary>
-            根据条件批量删除
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},``0,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="updateValues">更新的新数据数据</param>
-            <param name="updateColumns">指定字段，如果需要更新为默认数据，那么需要指定字段，因为在内部实现会排除掉没有赋值的默认字段数据</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.UpdateAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``0}},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量更新（部分字段）
-            </summary>
-            <param name="selector">查询条件</param>
-            <param name="Update">更新的新数据数据</param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IRepository`1.DeleteAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
-            <summary>
-            根据条件批量删除
-            </summary>
-            <param name="selector"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
         </member>
         <member name="T:XUCore.NetCore.Data.DbService.IUnitOfWork">
             <summary>
@@ -1363,60 +1460,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
-            <summary>
-            通过EF执行原生SQL 返回影响行数
-            </summary>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.DbService`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过原生执行ADONET查询操作
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-        </member>
         <member name="T:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1">
             <summary>
             数据领域层接口
@@ -1655,60 +1698,6 @@
             <param name="selector"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.ExecuteSql(System.String,System.Data.IDataParameter[])">
-            <summary>
-            通过EF执行原生SQL 返回影响行数
-            </summary>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.Select``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.SelectList``1(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.SelectList(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.SelectDataSet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ServiceProvider.IDbService`1.ExecuteAdoNet(System.String,System.Data.CommandType,System.Data.IDataParameter[])">
-            <summary>
-            通过原生执行ADONET查询操作
-            </summary>
-            <param name="sql"></param>
-            <param name="type"></param>
-            <param name="parameters"></param>
         </member>
         <member name="T:XUCore.NetCore.Data.DbService.TransactionAttribute">
             <summary>

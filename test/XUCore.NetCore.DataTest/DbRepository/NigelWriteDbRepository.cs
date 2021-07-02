@@ -35,13 +35,13 @@ namespace XUCore.NetCore.DataTest.DbRepository
     }
 
 
-    public interface INigelWriteDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
+    public interface INigelWriteDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
     public class NigelWriteDbContext : DBContextFactory
     {
         public NigelWriteDbContext(DbContextOptions<NigelWriteDbContext> options): base(options) { }
     }
 
-    public class WriteNigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelWriteDbRepository<TEntity> where TEntity : class, new()
+    public class WriteNigelDbRepository<TEntity> : DbRepository<TEntity>, INigelWriteDbRepository<TEntity> where TEntity : class, new()
     {
         public WriteNigelDbRepository(NigelWriteDbContext context) : base(context) { }
     }

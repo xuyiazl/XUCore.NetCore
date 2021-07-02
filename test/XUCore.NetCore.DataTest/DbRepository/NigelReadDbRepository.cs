@@ -40,8 +40,8 @@ namespace XUCore.NetCore.DataTest.DbRepository
         public NigelReadDbContext(DbContextOptions<NigelReadDbContext> options) : base(options) { }
     }
 
-    public interface INigelReadDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelReadDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelReadDbRepository<TEntity> where TEntity : class, new()
+    public interface INigelReadDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
+    public class NigelReadDbRepository<TEntity> : DbRepository<TEntity>, INigelReadDbRepository<TEntity> where TEntity : class, new()
     {
         public NigelReadDbRepository(NigelReadDbContext context) : base(context) { }
     }

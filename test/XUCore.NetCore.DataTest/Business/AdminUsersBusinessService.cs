@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,18 +23,22 @@ namespace XUCore.NetCore.DataTest.Business
         private readonly IAdminUsersDbServiceProvider db;
         private readonly INigelDbRepository<AdminUserEntity> nigelDb;
         private readonly INigelCopyDbRepository<AdminUserEntity> nigelCopyDb;
-        private readonly INigelDbRepository rep;
+        private readonly INigelDbContextRepository rep;
         public AdminUsersBusinessService(IServiceProvider serviceProvider)
         {
             this.db = serviceProvider.GetService<IAdminUsersDbServiceProvider>();
             this.nigelDb = serviceProvider.GetService<INigelDbRepository<AdminUserEntity>>();
             this.nigelCopyDb = serviceProvider.GetService<INigelCopyDbRepository<AdminUserEntity>>();
-            this.rep = serviceProvider.GetService<INigelDbRepository>();
+            this.rep = serviceProvider.GetService<INigelDbContextRepository>();
         }
 
         public async Task TestQueryAsync()
         {
-            var u = rep.Context.SqlQuery<AdminUserSimpleEntity>("select UserName,Password,Status,Id*100 as IdCount from AdminUser where Id > @Id", System.Data.CommandType.Text, new SqlParameter("Id", 1));
+            var res1 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
+            var res2 = rep.DataAdapterFill("select * from AdminUser where Id = @Id", new { Id = 2 });
+            var res3 = rep.ExecuteScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
+            var res4 = rep.ExecuteNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
+            var res5 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
         }
 
         public async Task TestDbAsync()

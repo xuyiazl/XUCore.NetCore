@@ -256,66 +256,29 @@ namespace XUCore.NetCore.Data.DbService
 
         #region adonet
 
-        /// <summary>
-        /// 通过EF执行原生SQL 返回影响行数
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        int ExecuteSql(string sql, params IDataParameter[] parameters);
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        T Select<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        IList<T> SelectList<T>(string sql, CommandType type, params IDataParameter[] parameters) where T : class, new();
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数 返回查询结果集合(DataTable)
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        DataTable SelectList(string sql, CommandType type, params IDataParameter[] parameters);
-        /// <summary>
-        /// 通过ADO.NET通过EF执行原生SQL 返回影响行数返回数据集(DataSet);
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        DataSet SelectDataSet(string sql, CommandType type, params IDataParameter[] parameters);
-        /// <summary>
-        /// 通过原生执行ADONET查询操作
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="parameters"></param>
-        int ExecuteAdoNet(string sql, CommandType type, params IDataParameter[] parameters);
-        /// <summary>
-        /// 通过原生执行ADONET查询操作
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="type"></param>
-        /// <param name="dbTransaction"></param>
-        /// <param name="parameters"></param>
-        int ExecuteAdoNet(string sql, CommandType type, IDbTransaction dbTransaction, params IDataParameter[] parameters);
+        TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
 
-        IDataParameter GetParameter(string paramterName, object value);
+        Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
 
-        IDataParameter[] GetParameters(params (string paramterName, object value)[] paramters);
+        IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
+
+        Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
+
+        DataTable ExecuteReader(string sql, object model = null, CommandType type = CommandType.Text);
+
+        Task<DataTable> ExecuteReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+
+        DataSet DataAdapterFill(string sql, object model = null, CommandType type = CommandType.Text);
+
+        Task<DataSet> DataAdapterFillAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+
+        int ExecuteNonQuery(string sql, object model = null, CommandType type = CommandType.Text);
+
+        Task<int> ExecuteNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+
+        T ExecuteScalar<T>(string sql, object model = null, CommandType type = CommandType.Text);
+
+        Task<T> ExecuteScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
 
         #endregion
     }

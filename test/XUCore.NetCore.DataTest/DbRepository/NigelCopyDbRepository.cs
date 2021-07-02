@@ -44,8 +44,8 @@ namespace XUCore.NetCore.DataTest.DbRepository
         public NigelCopyDbContext(DbContextOptions<NigelCopyDbContext> options) : base(options) { }
     }
 
-    public interface INigelCopyDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelCopyDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelCopyDbRepository<TEntity> where TEntity : class, new()
+    public interface INigelCopyDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
+    public class NigelCopyDbRepository<TEntity> : DbRepository<TEntity>, INigelCopyDbRepository<TEntity> where TEntity : class, new()
     {
         public NigelCopyDbRepository(NigelCopyDbContext context) : base(context) { }
     }

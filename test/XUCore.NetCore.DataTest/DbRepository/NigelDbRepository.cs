@@ -63,7 +63,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
             //});
 
             services.AddScoped(typeof(INigelDbRepository<>), typeof(NigelDbRepository<>));
-            services.AddScoped(typeof(INigelDbRepository), typeof(NigelDbRepository));
+            services.AddScoped(typeof(INigelDbContextRepository), typeof(NigelDbContextRepository));
 
             return services;
         }
@@ -77,15 +77,15 @@ namespace XUCore.NetCore.DataTest.DbRepository
         public DbSet<AdminUserAddressEntity> Address => Set<AdminUserAddressEntity>();
     }
 
-    public interface INigelDbRepository<TEntity> : IMsSqlRepository<TEntity> where TEntity : class, new() { }
-    public class NigelDbRepository<TEntity> : MsSqlRepository<TEntity>, INigelDbRepository<TEntity> where TEntity : class, new()
+    public interface INigelDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
+    public class NigelDbRepository<TEntity> : DbRepository<TEntity>, INigelDbRepository<TEntity> where TEntity : class, new()
     {
         public NigelDbRepository(NigelDbContext context) : base(context) { }
     }
 
-    public interface INigelDbRepository : IRepository<NigelDbContext> { }
-    public class NigelDbRepository : Repository<NigelDbContext>, INigelDbRepository
+    public interface INigelDbContextRepository : IContextRepository<NigelDbContext> { }
+    public class NigelDbContextRepository : ContextRepository<NigelDbContext>, INigelDbContextRepository
     {
-        public NigelDbRepository(NigelDbContext context) : base(context) { }
+        public NigelDbContextRepository(NigelDbContext context) : base(context) { }
     }
 }

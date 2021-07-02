@@ -27,6 +27,13 @@
 		<DocumentationFile>XUCore.NetCore.Data.xml</DocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="DbService\Impl\MsSqlRepository.cs" />
+	  <Compile Remove="DbService\Impl\MySqlRepository.cs" />
+	  <Compile Remove="DbService\IMsSqlRepository.cs" />
+	  <Compile Remove="DbService\IMySqlRepository.cs" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="FastMember" Version="1.5.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
