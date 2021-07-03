@@ -8,24 +8,26 @@ using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace XUCore.NetCore.Data.DbService
 {
 
     /// <summary>
-    /// 通用仓储库的方法定义
+    /// 数据领域层接口
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IDbRepository<TEntity> : ISqlRepository
-        where TEntity : class, new()
+    public interface IDbServiceProvider<TEntity> : ISqlRepository, IDisposable where TEntity : class, new()
     {
         /// <summary>
-        /// 当前上下文
+        /// 只读对象
         /// </summary>
-        IDbContext Context { get; }
+        IDbRepository<TEntity> Read { get; }
+        /// <summary>
+        /// 只写对象
+        /// </summary>
+        IDbRepository<TEntity> Write { get; }
         /// <summary>
         /// 当前DbSet对象
         /// </summary>
@@ -35,12 +37,6 @@ namespace XUCore.NetCore.Data.DbService
         /// 工作单元
         /// </summary>
         IUnitOfWork UnitOfWork { get; }
-        /// <summary>
-        /// 转换上下文
-        /// </summary>
-        /// <typeparam name="TDbContext"></typeparam>
-        /// <returns></returns>
-        TDbContext As<TDbContext>() where TDbContext : IDbContext;
 
         //同步操作
 
@@ -127,10 +123,10 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10);
+        PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10);
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -176,11 +172,11 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageNumber">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default);
+        Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int pageNumber = 1, int pageSize = 10, CancellationToken cancellationToken = default);
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -250,6 +246,5 @@ namespace XUCore.NetCore.Data.DbService
         Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
 
         #endregion
-
     }
 }

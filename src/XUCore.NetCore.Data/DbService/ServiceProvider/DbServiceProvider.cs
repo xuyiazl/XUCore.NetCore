@@ -1,24 +1,20 @@
-﻿using XUCore.Paging;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data.Common;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using XUCore.Paging;
 
-namespace XUCore.NetCore.Data.DbService.ServiceProvider
+namespace XUCore.NetCore.Data.DbService
 {
 
     /// <summary>
     /// 数据库领域操作的基础对象
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class DbService<TEntity> : IDbService<TEntity> where TEntity : class, new()
+    public abstract class DbServiceProvider<TEntity> : IDbServiceProvider<TEntity> where TEntity : class, new()
     {
         /// <summary>
         /// 只读对象
@@ -38,7 +34,7 @@ namespace XUCore.NetCore.Data.DbService.ServiceProvider
         /// </summary>
         public IUnitOfWork UnitOfWork => Write.UnitOfWork;
 
-        protected DbService(IDbRepository<TEntity> readRepository, IDbRepository<TEntity> writeRepository)
+        protected DbServiceProvider(IDbRepository<TEntity> readRepository, IDbRepository<TEntity> writeRepository)
         {
             this.Read = readRepository;
             this.Write = writeRepository;

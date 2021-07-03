@@ -29,8 +29,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="DbService\Impl\MsSqlRepository.cs" />
-	  <Compile Remove="DbService\Impl\MySqlRepository.cs" />
 	  <Compile Remove="DbService\IMsSqlRepository.cs" />
 	  <Compile Remove="DbService\IMySqlRepository.cs" />
 	</ItemGroup>
