@@ -20,7 +20,7 @@ namespace XUCore.NetCore.Data.DbService
     /// <summary>
     /// 数据库的基础仓储库
     /// </summary>
-    public abstract class ContextRepository<TDbContext> : IContextRepository<TDbContext>
+    public abstract class DbContextRepository<TDbContext> : SqlRepository, IDbContextRepository<TDbContext>
         where TDbContext : IDbContext
     {
         protected string _connectionString { get; set; } = "";
@@ -30,7 +30,7 @@ namespace XUCore.NetCore.Data.DbService
         /// 构造函数
         /// </summary>
         /// <param name="context"></param>
-        public ContextRepository(TDbContext context)
+        public DbContextRepository(TDbContext context) : base(context)
         {
             _connectionString = context.ConnectionStrings;
             _context = context;

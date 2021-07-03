@@ -1,19 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using XUCore.NetCore.Data.BulkExtensions;
-using XUCore.Extensions;
-using XUCore.Paging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data.Common;
-using System.Data;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using XUCore.Extensions;
 using XUCore.Extensions.Datas;
+using XUCore.NetCore.Data.BulkExtensions;
+using XUCore.Paging;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -22,7 +18,7 @@ namespace XUCore.NetCore.Data.DbService
     /// 数据库的基础仓储库
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class DbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new()
+    public abstract class DbRepository<TEntity> : SqlRepository, IDbRepository<TEntity> where TEntity : class, new()
     {
         protected string _connectionString { get; set; } = "";
         protected readonly IDbContext _context;
@@ -31,7 +27,7 @@ namespace XUCore.NetCore.Data.DbService
         /// 构造函数
         /// </summary>
         /// <param name="context"></param>
-        public DbRepository(IDbContext context)
+        public DbRepository(IDbContext context) : base(context)
         {
             _connectionString = context.ConnectionStrings;
             _context = context;
@@ -45,10 +41,6 @@ namespace XUCore.NetCore.Data.DbService
         /// 工作单元
         /// </summary>
         public IUnitOfWork UnitOfWork => unitOfWork;
-        /// <summary>
-        /// 是否自动提交
-        /// </summary>
-        public bool IsAutoCommit { get; set; } = true;
         /// <summary>
         /// 当前DbSet对象
         /// </summary>
@@ -68,7 +60,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual int Add(TEntity entity)
+        public virtual int Add(TEntity entity, bool commit = true)
         {
             if (entity == null)
             {
@@ -77,7 +69,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.Add(entity);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -86,7 +78,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Add(IEnumerable<TEntity> entities)
+        public virtual int Add(IEnumerable<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -95,7 +87,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.AddRange(entities);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -104,7 +96,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual int Update(TEntity entity)
+        public virtual int Update(TEntity entity, bool commit = true)
         {
             if (entity == null)
             {
@@ -113,7 +105,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.Update(entity);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -122,7 +114,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Update(IEnumerable<TEntity> entities)
+        public virtual int Update(IEnumerable<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -131,7 +123,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.UpdateRange(entities);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -140,7 +132,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual int Delete(TEntity entity)
+        public virtual int Delete(TEntity entity, bool commit = true)
         {
             if (entity == null)
             {
@@ -149,7 +141,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.Remove(entity);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -158,7 +150,7 @@ namespace XUCore.NetCore.Data.DbService
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Delete(IEnumerable<TEntity> entities)
+        public virtual int Delete(IEnumerable<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -167,7 +159,7 @@ namespace XUCore.NetCore.Data.DbService
 
             Table.RemoveRange(entities);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -180,7 +172,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(TEntity entity, bool commit = true, CancellationToken cancellationToken = default)
         {
             if (entity == null)
             {
@@ -189,7 +181,7 @@ namespace XUCore.NetCore.Data.DbService
 
             await Table.AddAsync(entity, cancellationToken);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -199,7 +191,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="entities"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {
@@ -208,7 +200,7 @@ namespace XUCore.NetCore.Data.DbService
 
             await Table.AddRangeAsync(entities, cancellationToken);
 
-            if (IsAutoCommit) return unitOfWork.Commit();
+            if (commit) return unitOfWork.Commit();
 
             return 0;
         }
@@ -486,56 +478,6 @@ namespace XUCore.NetCore.Data.DbService
         #endregion
 
         #region adonet
-
-        public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
-        {
-            var res = SqlQuery<TEntity>(sql, model, type);
-
-            return res.Count > 0 ? res[0] : default;
-        }
-
-        public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
-        {
-            var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
-
-            return res.Count > 0 ? res[0] : default;
-        }
-
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
-        {
-            return ExecuteReader(sql, model, type).ToList<TEntity>();
-        }
-
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
-        {
-            var res = await ExecuteReaderAsync(sql, model, type, cancellationToken);
-
-            return res.ToList<TEntity>();
-        }
-
-        public virtual DataTable ExecuteReader(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteReader(sql, model, type);
-
-        public virtual async Task<DataTable> ExecuteReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteReaderAsync(sql, model, type, cancellationToken);
-
-        public virtual DataSet DataAdapterFill(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.DataAdapterFill(sql, model, type);
-
-        public virtual async Task<DataSet> DataAdapterFillAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.DataAdapterFillAsync(sql, model, type, cancellationToken);
-
-        public virtual int ExecuteNonQuery(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteNonQuery(sql, model, type);
-
-        public virtual async Task<int> ExecuteNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteNonQueryAsync(sql, model, type, cancellationToken);
-
-        public virtual T ExecuteScalar<T>(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteScalar<T>(sql, model, type);
-
-        public virtual async Task<T> ExecuteScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteScalarAsync<T>(sql, model, type, cancellationToken);
 
         #endregion
     }

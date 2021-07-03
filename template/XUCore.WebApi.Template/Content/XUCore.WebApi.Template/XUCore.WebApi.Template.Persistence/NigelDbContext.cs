@@ -5,9 +5,9 @@ using XUCore.NetCore.Data.DbService;
 
 namespace XUCore.WebApi.Template.Persistence
 {
-    public interface INigelDbRepository : IRepository<NigelDbContext> { }
+    public interface INigelDbRepository : IDbContextRepository<NigelDbContext> { }
 
-    public class NigelDbRepository : Repository<NigelDbContext>, INigelDbRepository
+    public class NigelDbRepository : DbContextRepository<NigelDbContext>, INigelDbRepository
     {
         public NigelDbRepository(NigelDbContext context) : base(context) { }
     }

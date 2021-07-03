@@ -9,9 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCore.Ddd.Domain" Version="5.2.0" />
-		<PackageReference Include="XUCore.NetCore" Version="5.2.0" />
-		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.0" />
+		<PackageReference Include="XUCore.Ddd.Domain" Version="5.2.1" />
+		<PackageReference Include="XUCore.NetCore" Version="5.2.1" />
+		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.1" />
 	</ItemGroup>
 
 

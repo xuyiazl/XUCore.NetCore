@@ -83,8 +83,8 @@ namespace XUCore.NetCore.DataTest.DbRepository
         public NigelDbRepository(NigelDbContext context) : base(context) { }
     }
 
-    public interface INigelDbContextRepository : IContextRepository<NigelDbContext> { }
-    public class NigelDbContextRepository : ContextRepository<NigelDbContext>, INigelDbContextRepository
+    public interface INigelDbContextRepository : IDbContextRepository<NigelDbContext> { }
+    public class NigelDbContextRepository : DbContextRepository<NigelDbContext>, INigelDbContextRepository
     {
         public NigelDbContextRepository(NigelDbContext context) : base(context) { }
     }

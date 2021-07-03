@@ -1,16 +1,9 @@
-﻿using XUCore.Paging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data.Common;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Linq;
+using XUCore.Paging;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -18,7 +11,8 @@ namespace XUCore.NetCore.Data.DbService
     /// <summary>
     /// 通用仓储库的方法定义
     /// </summary>
-    public interface IContextRepository<TDbContext> where TDbContext : IDbContext
+    public interface IDbContextRepository<TDbContext> : ISqlRepository
+        where TDbContext : IDbContext
     {
         /// <summary>
         /// 当前上下文
@@ -242,35 +236,6 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<int> DeleteAsync<TEntity>(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default) where TEntity : class, new();
-
-        #endregion
-
-
-        #region adonet
-
-        TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
-
-        Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
-
-        IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
-
-        Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
-
-        DataTable ExecuteReader(string sql, object model = null, CommandType type = CommandType.Text);
-
-        Task<DataTable> ExecuteReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
-
-        DataSet DataAdapterFill(string sql, object model = null, CommandType type = CommandType.Text);
-
-        Task<DataSet> DataAdapterFillAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
-
-        int ExecuteNonQuery(string sql, object model = null, CommandType type = CommandType.Text);
-
-        Task<int> ExecuteNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
-
-        T ExecuteScalar<T>(string sql, object model = null, CommandType type = CommandType.Text);
-
-        Task<T> ExecuteScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
 
         #endregion
     }
