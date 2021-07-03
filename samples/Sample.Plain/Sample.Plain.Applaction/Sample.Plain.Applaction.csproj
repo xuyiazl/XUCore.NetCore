@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.0" />
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.1" />
 	</ItemGroup>
 
 	<ItemGroup>
