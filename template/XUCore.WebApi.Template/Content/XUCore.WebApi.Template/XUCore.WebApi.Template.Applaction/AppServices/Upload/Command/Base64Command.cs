@@ -2,7 +2,7 @@
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 
-namespace XUCore.Net5.Template.Application.AppServices.Upload
+namespace XUCore.WebApi.Template.Applaction.Upload
 {
     public class Base64Command : Command<bool>
     {
