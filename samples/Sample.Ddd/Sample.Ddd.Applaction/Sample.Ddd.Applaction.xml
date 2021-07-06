@@ -634,7 +634,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Ddd.Application.AppServices.Upload.UploadAppService.UploadBase64(Sample.Ddd.Application.AppServices.Upload.UploadCommand,System.Threading.CancellationToken)">
+        <member name="M:Sample.Ddd.Application.AppServices.Upload.UploadAppService.UploadBase64(Sample.Ddd.Application.AppServices.Upload.Base64Command,System.Threading.CancellationToken)">
             <summary>
             上传图片
             </summary>

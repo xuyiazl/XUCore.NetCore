@@ -10,7 +10,7 @@ using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
 using Sample.Plain.Core;
-using Sample.Plain.Persistence.Entities.Enums;
+using Sample.Plain.Core.Enums;
 using Sample.Plain.Persistence;
 using Sample.Plain.Persistence.Entities.Sys.Admin;
 

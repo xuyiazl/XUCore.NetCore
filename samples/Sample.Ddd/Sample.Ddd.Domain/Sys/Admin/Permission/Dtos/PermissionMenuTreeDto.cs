@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Sample.Ddd.Domain.Common.Mappings;
+using Sample.Ddd.Domain.Core.Mappings;
 using Sample.Ddd.Domain.Core.Entities.Sys.Admin;
 using System;
 using System.Collections.Generic;

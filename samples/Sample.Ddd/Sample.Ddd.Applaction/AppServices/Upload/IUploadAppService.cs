@@ -14,6 +14,6 @@ namespace Sample.Ddd.Application.AppServices.Upload
     {
         Task<Result<XUCore.Files.FileInfo>> UploadFile(IFormFile formFile, CancellationToken cancellationToken);
         Task<Result<ImageFileInfo>> UploadImage(IFormFile formFile, CancellationToken cancellationToken);
-        Task<Result<ImageFileInfo>> UploadBase64(UploadCommand model, CancellationToken cancellationToken);
+        Task<Result<ImageFileInfo>> UploadBase64(Base64Command model, CancellationToken cancellationToken);
     }
 }

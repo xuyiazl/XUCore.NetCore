@@ -2,7 +2,7 @@
 using Sample.Ddd.Domain.Core;
 using System;
 
-namespace Sample.Ddd.Domain.Common.Mappings
+namespace Sample.Ddd.Domain.Core.Mappings
 {
     public abstract class DtoBase<T> : IMapFrom<T>
     {

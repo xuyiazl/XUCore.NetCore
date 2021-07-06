@@ -43,7 +43,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateUserAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateUserAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新状态
             </summary>
@@ -137,7 +137,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateRoleAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateRoleAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新角色状态
             </summary>
@@ -211,7 +211,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateMenuAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.IAdminAppService.UpdateMenuAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新导航状态
             </summary>
@@ -290,7 +290,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateUserAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateUserAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新状态
             </summary>
@@ -384,7 +384,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateRoleAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateRoleAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新角色状态
             </summary>
@@ -458,7 +458,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateMenuAsync(System.Int64[],Sample.Plain.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:Sample.Plain.Applaction.Admin.AdminAppService.UpdateMenuAsync(System.Int64[],Sample.Plain.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新导航状态
             </summary>

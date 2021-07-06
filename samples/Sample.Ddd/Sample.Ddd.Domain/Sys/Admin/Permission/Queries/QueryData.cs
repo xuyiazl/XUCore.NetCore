@@ -1,11 +1,9 @@
-﻿using Sample.Ddd.Domain.Common;
-using Sample.Ddd.Domain.Core;
-using FluentValidation;
+﻿using FluentValidation;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.Ddd.Domain.Commands;
+using Sample.Ddd.Domain.Core;
 using XUCore.NetCore.AspectCore.Cache;
 
 namespace Sample.Ddd.Domain.Sys.Permission

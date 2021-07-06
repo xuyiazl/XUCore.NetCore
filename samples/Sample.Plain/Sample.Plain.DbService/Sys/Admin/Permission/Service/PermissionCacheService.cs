@@ -2,10 +2,9 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.NetCore.AspectCore.Cache;
 using Sample.Plain.Core;
-using Sample.Plain.Persistence.Entities.Enums;
+using Sample.Plain.Core.Enums;
 using Sample.Plain.Persistence;
 
 namespace Sample.Plain.DbService.Sys.Admin.Permission

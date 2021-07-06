@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Sample.Mini.Core;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -19,6 +18,7 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
+using Sample.Mini.Core;
 
 namespace Sample.Mini.Applaction
 {

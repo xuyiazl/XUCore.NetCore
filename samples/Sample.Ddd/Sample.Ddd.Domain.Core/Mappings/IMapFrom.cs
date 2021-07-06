@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Sample.Ddd.Domain.Common.Mappings
+namespace Sample.Ddd.Domain.Core.Mappings
 {
     public interface IMapFrom<T>
     {

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
 using Sample.Plain.Core;
+using Sample.Plain.Core.Enums;
 using Sample.Plain.Persistence;
-using Sample.Plain.Persistence.Entities.Enums;
 using Sample.Plain.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Plain.DbService.Sys.Admin.AdminMenu

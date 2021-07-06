@@ -1,4 +1,5 @@
 ﻿using System;
+using Sample.Plain.Core;
 
 namespace Sample.Plain.DbService.Sys.Admin.LoginRecord
 {

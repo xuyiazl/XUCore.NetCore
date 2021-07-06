@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using Sample.Ddd.Domain.Common;
-using Sample.Ddd.Domain.Core;
-using Sample.Ddd.Domain.Core.Entities.Sys.Admin;
 using FluentValidation;
 using System;
 using System.Linq;
@@ -9,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Ddd.Domain.Commands;
+using Sample.Ddd.Domain.Core;
+using Sample.Ddd.Domain.Core.Entities.Sys.Admin;
 using XUCore.NetCore.AspectCore.Cache;
 
 namespace Sample.Ddd.Domain.Sys.AdminUser

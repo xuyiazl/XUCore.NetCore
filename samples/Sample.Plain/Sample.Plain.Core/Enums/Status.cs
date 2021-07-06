@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Sample.Plain.Persistence.Entities.Enums
+namespace Sample.Plain.Core.Enums
 {
     /// <summary>
     /// 数据状态

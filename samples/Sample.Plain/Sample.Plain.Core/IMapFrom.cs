@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.DependencyModel;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using XUCore.Extensions;
-using Sample.Plain.Persistence.Entities.Enums;
+using Sample.Plain.Core.Enums;
 
-namespace Sample.Plain.DbService
+namespace Sample.Plain.Core
 {
     public interface IMapFrom<T>
     {
@@ -16,7 +19,26 @@ namespace Sample.Plain.DbService
     {
         public MappingProfile()
         {
-            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            CurrentProjectAssemblies
+                .ForEach(a => ApplyMappingsFromAssembly(a));
+        }
+        /// <summary>
+        /// 当前项目程序集
+        /// </summary>
+        public List<Assembly> CurrentProjectAssemblies
+        {
+            get
+            {
+                var list = new List<Assembly>();
+                var deps = DependencyContext.Default;
+                var libs = deps.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith("Sample.Plain"));
+                foreach (var lib in libs)
+                {
+                    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
+                    list.Add(assembly);
+                }
+                return list;
+            }
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

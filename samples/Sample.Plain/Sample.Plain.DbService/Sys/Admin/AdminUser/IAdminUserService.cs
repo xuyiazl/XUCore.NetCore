@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Paging;
 using Sample.Plain.Core.Enums;
-using Sample.Plain.Persistence.Entities.Enums;
 
 namespace Sample.Plain.DbService.Sys.Admin.AdminUser
 {

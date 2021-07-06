@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
+using Sample.Plain.Core;
 using Sample.Plain.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Plain.DbService.Sys.Admin.LoginRecord

@@ -10,7 +10,6 @@ using Sample.Plain.Core.Enums;
 using Sample.Plain.DbService.Sys.Admin.AdminMenu;
 using Sample.Plain.DbService.Sys.Admin.AdminRole;
 using Sample.Plain.DbService.Sys.Admin.AdminUser;
-using Sample.Plain.Persistence.Entities.Enums;
 
 namespace Sample.Plain.Applaction.Admin
 {

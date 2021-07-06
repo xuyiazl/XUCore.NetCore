@@ -1,4 +1,5 @@
-﻿using Sample.Plain.Persistence.Entities.Sys.Admin;
+﻿using Sample.Plain.Core;
+using Sample.Plain.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Plain.DbService.Sys.Admin.Permission
 {

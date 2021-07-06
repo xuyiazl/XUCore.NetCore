@@ -1,6 +1,6 @@
 ﻿using System;
 using XUCore.Ddd.Domain;
-using Sample.Plain.Persistence.Entities.Enums;
+using Sample.Plain.Core.Enums;
 
 namespace Sample.Plain.Persistence.Entities
 {

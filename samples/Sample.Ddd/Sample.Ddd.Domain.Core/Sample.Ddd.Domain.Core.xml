@@ -287,6 +287,11 @@
             <param name="data"></param>
             <param name="user"></param>
         </member>
+        <member name="P:Sample.Ddd.Domain.Core.Mappings.MappingProfile.CurrentProjectAssemblies">
+            <summary>
+            当前项目程序集
+            </summary>
+        </member>
         <member name="T:Sample.Ddd.Domain.Core.SubCode">
             <summary>
             业务代码

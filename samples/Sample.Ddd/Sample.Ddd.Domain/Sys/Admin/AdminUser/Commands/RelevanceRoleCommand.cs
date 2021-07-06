@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Sample.Ddd.Domain.Common;
-using Sample.Ddd.Domain.Core;
-using Sample.Ddd.Domain.Core.Entities.Sys.Admin;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Ddd.Domain.Commands;
+using Sample.Ddd.Domain.Core;
+using Sample.Ddd.Domain.Core.Entities.Sys.Admin;
 using XUCore.NetCore.AspectCore.Cache;
-using System.ComponentModel.DataAnnotations;
 
 namespace Sample.Ddd.Domain.Sys.AdminUser
 {

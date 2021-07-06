@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Helpers;
-using Sample.Mini.Core.Enums;
 using Sample.Mini.Core;
+using Sample.Mini.Core.Enums;
 using Sample.Mini.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Mini.Applaction.Admin

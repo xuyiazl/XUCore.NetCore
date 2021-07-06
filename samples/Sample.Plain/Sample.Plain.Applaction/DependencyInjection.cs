@@ -37,7 +37,7 @@ namespace Sample.Plain.Applaction
 
             services.AddHttpContextAccessor();
 
-            services.AddAutoMapper(typeof(IMapFrom<>));
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddMediatR(typeof(IAppService), typeof(IDbService));
 

@@ -16,7 +16,6 @@ using Sample.Plain.Core;
 using Sample.Plain.Core.Enums;
 using Sample.Plain.DbService.Events;
 using Sample.Plain.Persistence;
-using Sample.Plain.Persistence.Entities.Enums;
 using Sample.Plain.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Plain.DbService.Sys.Admin.AdminUser

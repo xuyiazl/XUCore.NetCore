@@ -1,6 +1,6 @@
-﻿using Sample.Mini.Persistence.Entities.Sys.Admin;
+﻿using System.Collections.Generic;
 using Sample.Mini.Core;
-using System.Collections.Generic;
+using Sample.Mini.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Mini.Applaction.Admin
 {

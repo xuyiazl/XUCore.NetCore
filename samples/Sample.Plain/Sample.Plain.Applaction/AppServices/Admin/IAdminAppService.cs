@@ -3,11 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
-using Sample.Plain.Persistence.Entities.Enums;
+using Sample.Plain.Core.Enums;
 using Sample.Plain.DbService.Sys.Admin.AdminMenu;
 using Sample.Plain.DbService.Sys.Admin.AdminRole;
 using Sample.Plain.DbService.Sys.Admin.AdminUser;
-using Sample.Plain.Core.Enums;
 
 namespace Sample.Plain.Applaction.Admin
 {
