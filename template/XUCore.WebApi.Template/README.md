@@ -22,7 +22,7 @@ dotnet new -u XUCore.WebApi.Template
 
 ```bash
 
-dotnet new --install XUCore.WebApi.Template::1.0.2
+dotnet new --install XUCore.WebApi.Template::1.0.3
 
 ```
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>XUCore.WebApi.Template</id>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 		<description>
 			XUCore.WebApi 简单三层快速开发项目模板，直接生成WebApi项目，
 		</description>
