@@ -1,6 +1,6 @@
 ﻿using System;
 using XUCore.Ddd.Domain;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
+using XUCore.WebApi.Template.Core.Enums;
 
 namespace XUCore.WebApi.Template.Persistence.Entities
 {

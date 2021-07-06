@@ -5,6 +5,7 @@ using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using Sample.Mini.Persistence.Entities.Sys.Admin;
+using Sample.Mini.Core;
 
 namespace Sample.Mini.Applaction.Admin
 {

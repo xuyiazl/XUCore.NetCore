@@ -24,30 +24,5 @@
             删除时间
             </summary>
         </member>
-        <member name="T:XUCore.WebApi.Template.Persistence.Entities.Enums.Status">
-            <summary>
-            数据状态
-            </summary>
-        </member>
-        <member name="F:XUCore.WebApi.Template.Persistence.Entities.Enums.Status.Default">
-            <summary>
-            默认状态
-            </summary>
-        </member>
-        <member name="F:XUCore.WebApi.Template.Persistence.Entities.Enums.Status.Show">
-            <summary>
-            正常显示
-            </summary>
-        </member>
-        <member name="F:XUCore.WebApi.Template.Persistence.Entities.Enums.Status.SoldOut">
-            <summary>
-            数据下架（隐藏）
-            </summary>
-        </member>
-        <member name="F:XUCore.WebApi.Template.Persistence.Entities.Enums.Status.Trash">
-            <summary>
-            数据已被删除，非物理删除（回收站）
-            </summary>
-        </member>
     </members>
 </doc>

@@ -108,7 +108,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Upload
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[Controller]/Base64")]
-        public async Task<Result<ImageFileInfo>> UploadBase64([Required][FromBody] UploadCommand command, CancellationToken cancellationToken)
+        public async Task<Result<ImageFileInfo>> UploadBase64([Required][FromBody] Base64Command command, CancellationToken cancellationToken)
         {
             var param = new SingleImageBase64UploadParam()
             {

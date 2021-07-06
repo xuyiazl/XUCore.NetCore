@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Paging;
 using XUCore.WebApi.Template.Core.Enums;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
 {

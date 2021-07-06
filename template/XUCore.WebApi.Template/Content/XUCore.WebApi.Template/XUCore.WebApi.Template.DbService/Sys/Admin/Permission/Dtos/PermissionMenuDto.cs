@@ -1,4 +1,5 @@
-﻿using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
+﻿using XUCore.WebApi.Template.Core;
+using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.Permission
 {

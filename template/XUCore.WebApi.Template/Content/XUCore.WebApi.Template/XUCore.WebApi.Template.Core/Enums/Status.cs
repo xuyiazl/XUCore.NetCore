@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace XUCore.WebApi.Template.Persistence.Entities.Enums
+namespace XUCore.WebApi.Template.Core.Enums
 {
     /// <summary>
     /// 数据状态

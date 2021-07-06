@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace XUCore.Net5.Template.Domain.Common.Mappings
+namespace XUCore.Net5.Template.Domain.Core.Mappings
 {
     public interface IMapFrom<T>
     {

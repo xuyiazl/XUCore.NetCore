@@ -3,6 +3,7 @@ using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
+using XUCore.WebApi.Template.Core;
 using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 
 

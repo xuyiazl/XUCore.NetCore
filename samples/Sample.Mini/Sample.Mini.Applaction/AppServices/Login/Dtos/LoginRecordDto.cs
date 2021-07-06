@@ -1,4 +1,5 @@
 ﻿using System;
+using Sample.Mini.Core;
 
 namespace Sample.Mini.Applaction.Login
 {

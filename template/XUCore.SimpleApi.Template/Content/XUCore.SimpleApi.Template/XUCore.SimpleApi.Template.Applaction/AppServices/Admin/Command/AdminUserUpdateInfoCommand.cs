@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.SimpleApi.Template.Core;
 using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.SimpleApi.Template.Applaction.Admin

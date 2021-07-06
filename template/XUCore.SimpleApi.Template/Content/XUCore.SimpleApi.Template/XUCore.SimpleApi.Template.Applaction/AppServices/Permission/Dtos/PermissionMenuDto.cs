@@ -1,4 +1,5 @@
-﻿using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
+﻿using XUCore.SimpleApi.Template.Core;
+using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.SimpleApi.Template.Applaction.Permission
 {

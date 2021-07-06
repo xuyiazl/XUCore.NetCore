@@ -10,7 +10,6 @@ using XUCore.WebApi.Template.Core.Enums;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminMenu;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminRole;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
 
 namespace XUCore.WebApi.Template.Applaction.Admin
 {

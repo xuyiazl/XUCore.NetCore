@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using XUCore.Net5.Template.Domain.Common.Mappings;
+using XUCore.Net5.Template.Domain.Core.Mappings;
 using System;
 
 namespace XUCore.Net5.Template.Domain.Sys.LoginRecord

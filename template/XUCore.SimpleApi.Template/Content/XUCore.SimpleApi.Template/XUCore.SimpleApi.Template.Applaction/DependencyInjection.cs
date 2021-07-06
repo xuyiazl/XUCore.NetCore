@@ -18,6 +18,7 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
+using XUCore.SimpleApi.Template.Core;
 
 namespace XUCore.SimpleApi.Template.Applaction
 {
@@ -32,7 +33,7 @@ namespace XUCore.SimpleApi.Template.Applaction
 
             services.AddHttpContextAccessor();
 
-            services.AddAutoMapper(typeof(IMapFrom<>));
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddMediatR(typeof(IAppService));
 

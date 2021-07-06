@@ -7745,6 +7745,13 @@
             <param name="directoryPath">目录绝对路径</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Helpers.Reflection.GetCurrentProjectAssemblies(System.String)">
+            <summary>
+            获取当前项目中所有程序集
+            </summary>
+            <param name="filter">过滤条件，StartsWith</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Helpers.Reflection.GetCurrentAssemblyName">
             <summary>
             获取当前程序集名称

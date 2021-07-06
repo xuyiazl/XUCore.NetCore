@@ -7,6 +7,7 @@ using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using Sample.Mini.Core.Enums;
 using Sample.Mini.Persistence.Entities.Sys.Admin;
+using Sample.Mini.Core;
 
 namespace Sample.Mini.Applaction.Admin
 {

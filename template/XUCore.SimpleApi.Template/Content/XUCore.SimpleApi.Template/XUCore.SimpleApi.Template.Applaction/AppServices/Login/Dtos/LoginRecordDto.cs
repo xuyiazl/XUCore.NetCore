@@ -1,4 +1,5 @@
 ﻿using System;
+using XUCore.SimpleApi.Template.Core;
 
 namespace XUCore.SimpleApi.Template.Applaction.Login
 {

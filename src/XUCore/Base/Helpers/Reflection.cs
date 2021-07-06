@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyModel;
+using System.Runtime.Loader;
 
 namespace XUCore.Helpers
 {
@@ -298,6 +300,28 @@ namespace XUCore.Helpers
         }
 
         #endregion GetAssemblies(从目录获取所有程序集)
+
+        #region GetCurrentProjectAssemblies(获取当前项目中所有程序集)
+
+        /// <summary>
+        /// 获取当前项目中所有程序集
+        /// </summary>
+        /// <param name="filter">过滤条件，StartsWith</param>
+        /// <returns></returns>
+        public static List<Assembly> GetCurrentProjectAssemblies(string filter)
+        {
+            var list = new List<Assembly>();
+            var deps = DependencyContext.Default;
+            var libs = deps.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith(filter));
+            foreach (var lib in libs)
+            {
+                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
+                list.Add(assembly);
+            }
+            return list;
+        }
+
+        #endregion GetCurrentProjectAssemblies(获取当前项目中所有程序集)
 
         #region GetCurrentAssemblyName(获取当前程序集名称)
 

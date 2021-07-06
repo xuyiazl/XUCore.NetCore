@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using XUCore.Net5.Template.Domain.Common;
-using XUCore.Net5.Template.Domain.Common.Mappings;
-using XUCore.Net5.Template.Domain.Core;
-using XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin;
 using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +7,9 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Helpers;
+using XUCore.Net5.Template.Domain.Core;
+using XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin;
+using XUCore.Net5.Template.Domain.Core.Mappings;
 using XUCore.NetCore.AspectCore.Cache;
 
 namespace XUCore.Net5.Template.Domain.Sys.AdminUser

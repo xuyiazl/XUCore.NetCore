@@ -1,4 +1,5 @@
 ﻿using System;
+using XUCore.WebApi.Template.Core;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
 {

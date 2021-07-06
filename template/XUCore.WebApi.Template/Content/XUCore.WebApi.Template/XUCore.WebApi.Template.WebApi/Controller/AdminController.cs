@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.WebApi.Template.Applaction.Admin;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
+using XUCore.WebApi.Template.Core.Enums;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminMenu;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminRole;
 using XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser;
-using XUCore.WebApi.Template.Core.Enums;
 
 namespace XUCore.WebApi.Template.WebApi.Controller
 {

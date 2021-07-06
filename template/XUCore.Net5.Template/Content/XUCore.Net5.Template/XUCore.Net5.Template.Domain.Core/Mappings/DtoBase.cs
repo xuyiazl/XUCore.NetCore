@@ -2,7 +2,7 @@
 using XUCore.Net5.Template.Domain.Core;
 using System;
 
-namespace XUCore.Net5.Template.Domain.Common.Mappings
+namespace XUCore.Net5.Template.Domain.Core.Mappings
 {
     public abstract class DtoBase<T> : IMapFrom<T>
     {

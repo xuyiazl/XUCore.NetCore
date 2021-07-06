@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
+using XUCore.WebApi.Template.Core.Enums;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminRole
 {

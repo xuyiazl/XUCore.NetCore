@@ -16,7 +16,6 @@ using XUCore.WebApi.Template.Core;
 using XUCore.WebApi.Template.Core.Enums;
 using XUCore.WebApi.Template.DbService.Events;
 using XUCore.WebApi.Template.Persistence;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
 using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser

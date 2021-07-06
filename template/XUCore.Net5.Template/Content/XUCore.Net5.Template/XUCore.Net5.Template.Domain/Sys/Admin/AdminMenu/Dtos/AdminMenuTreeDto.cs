@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using XUCore.Net5.Template.Domain.Common.Mappings;
+using XUCore.Net5.Template.Domain.Core.Mappings;
 using XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin;
 using System;
 using System.Collections.Generic;

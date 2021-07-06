@@ -2,10 +2,9 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.WebApi.Template.Core;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
+using XUCore.WebApi.Template.Core.Enums;
 using XUCore.WebApi.Template.Persistence;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.Permission

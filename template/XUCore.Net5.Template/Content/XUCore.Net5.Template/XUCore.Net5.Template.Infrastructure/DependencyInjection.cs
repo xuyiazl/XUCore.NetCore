@@ -10,7 +10,8 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.Ddd.Domain;
 using XUCore.Ddd.Domain.Bus;
-using XUCore.Net5.Template.Domain.Common.Mappings;
+using XUCore.Net5.Template.Domain.Core.Mappings;
+using XUCore.Net5.Template.Domain.Notifications;
 using XUCore.Net5.Template.Infrastructure.Authorization;
 using XUCore.Net5.Template.Infrastructure.Events;
 using XUCore.NetCore.AspectCore.Cache;
@@ -35,9 +36,9 @@ namespace XUCore.Net5.Template.Infrastructure
 
             services.AddHttpContextAccessor();
 
-            services.AddAutoMapper(typeof(IMapFrom<>));
+            services.AddAutoMapper(typeof(MappingProfile));
 
-            services.AddMediatR(typeof(IMapFrom<>));
+            services.AddMediatR(typeof(DomainNotificationHandler));
 
             services.AddRequestBehaviour(options =>
             {

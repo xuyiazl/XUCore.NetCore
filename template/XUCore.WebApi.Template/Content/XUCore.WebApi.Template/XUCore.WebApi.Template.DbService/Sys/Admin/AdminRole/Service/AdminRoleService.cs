@@ -10,7 +10,7 @@ using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
 using XUCore.WebApi.Template.Core;
-using XUCore.WebApi.Template.Persistence.Entities.Enums;
+using XUCore.WebApi.Template.Core.Enums;
 using XUCore.WebApi.Template.Persistence;
 using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 

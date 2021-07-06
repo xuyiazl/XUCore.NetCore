@@ -1,4 +1,5 @@
 ﻿using Sample.Mini.Persistence.Entities.Sys.Admin;
+using Sample.Mini.Core;
 using System.Collections.Generic;
 
 namespace Sample.Mini.Applaction.Admin

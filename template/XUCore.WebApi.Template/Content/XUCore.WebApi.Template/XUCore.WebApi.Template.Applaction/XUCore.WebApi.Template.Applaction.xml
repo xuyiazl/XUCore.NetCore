@@ -43,7 +43,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateUserAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateUserAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新状态
             </summary>
@@ -137,7 +137,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateRoleAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateRoleAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新角色状态
             </summary>
@@ -211,7 +211,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateMenuAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.IAdminAppService.UpdateMenuAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新导航状态
             </summary>
@@ -290,7 +290,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateUserAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateUserAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新状态
             </summary>
@@ -384,7 +384,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateRoleAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateRoleAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新角色状态
             </summary>
@@ -458,7 +458,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateMenuAsync(System.Int64[],XUCore.WebApi.Template.Persistence.Entities.Enums.Status,System.Threading.CancellationToken)">
+        <member name="M:XUCore.WebApi.Template.Applaction.Admin.AdminAppService.UpdateMenuAsync(System.Int64[],XUCore.WebApi.Template.Core.Enums.Status,System.Threading.CancellationToken)">
             <summary>
             更新导航状态
             </summary>

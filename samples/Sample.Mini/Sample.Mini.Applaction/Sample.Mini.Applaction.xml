@@ -1379,36 +1379,6 @@
             </summary>
             <param name="context">异常上下文</param>
         </member>
-        <member name="P:Sample.Mini.Applaction.DtoBase`1.Id">
-            <summary>
-            主键Id
-            </summary>
-        </member>
-        <member name="P:Sample.Mini.Applaction.DtoBase`1.Status">
-            <summary>
-            数据状态
-            </summary>
-        </member>
-        <member name="P:Sample.Mini.Applaction.DtoBase`1.Created_At">
-            <summary>
-            创建日期
-            </summary>
-        </member>
-        <member name="P:Sample.Mini.Applaction.DtoBase`1.Updated_At">
-            <summary>
-            更新日期
-            </summary>
-        </member>
-        <member name="P:Sample.Mini.Applaction.DtoBase`1.Deleted_At">
-            <summary>
-            删除日期
-            </summary>
-        </member>
-        <member name="P:Sample.Mini.Applaction.DtoKeyBase`1.Id">
-            <summary>
-            主键Id
-            </summary>
-        </member>
         <member name="T:Sample.Mini.Applaction.JwtHandler">
             <summary>
             JWT 授权自定义处理程序
