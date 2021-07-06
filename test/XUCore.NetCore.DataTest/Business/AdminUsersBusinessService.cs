@@ -35,9 +35,9 @@ namespace XUCore.NetCore.DataTest.Business
         public async Task TestQueryAsync()
         {
             var res1 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
-            var res2 = rep.DataAdapterFill("select * from AdminUser where Id = @Id", new { Id = 2 });
-            var res3 = rep.ExecuteScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
-            var res4 = rep.ExecuteNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
+            var res2 = rep.SqlQueries("select * from AdminUser where Id = @Id", new { Id = 2 });
+            var res3 = rep.SqlScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
+            var res4 = rep.SqlNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
             var res5 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
         }
 

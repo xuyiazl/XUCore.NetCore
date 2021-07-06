@@ -58,7 +58,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        DataTable ExecuteReader(string sql, object model = null, CommandType type = CommandType.Text);
+        DataTable SqlReader(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// SQL查询，返回DataTable
         /// </summary>
@@ -67,7 +67,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<DataTable> ExecuteReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<DataTable> SqlReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
         /// <summary>
         /// SQL查询，返回DataSet
         /// </summary>
@@ -75,7 +75,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        DataSet DataAdapterFill(string sql, object model = null, CommandType type = CommandType.Text);
+        DataSet SqlQueries(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// SQL查询，返回DataSet
         /// </summary>
@@ -84,7 +84,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<DataSet> DataAdapterFillAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<DataSet> SqlQueriesAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
         /// <summary>
         /// 执行SQL，执行一个SqlCommand,该命令返回受操作影响的行数,该命令主要用于确定操作是否成功
         /// </summary>
@@ -92,7 +92,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        int ExecuteNonQuery(string sql, object model = null, CommandType type = CommandType.Text);
+        int SqlNonQuery(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// 执行SQL，执行一个SqlCommand,该命令返回受操作影响的行数,该命令主要用于确定操作是否成功
         /// </summary>
@@ -101,7 +101,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> ExecuteNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<int> SqlNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
         /// <summary>
         /// 执行SQL，并返回查询所返回的结果集中第一行的第一列
         /// </summary>
@@ -110,7 +110,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        T ExecuteScalar<T>(string sql, object model = null, CommandType type = CommandType.Text);
+        T SqlScalar<T>(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// 执行SQL，并返回查询所返回的结果集中第一行的第一列
         /// </summary>
@@ -120,7 +120,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<T> ExecuteScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<T> SqlScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
 
     }
 }

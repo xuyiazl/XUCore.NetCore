@@ -1768,7 +1768,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteReader(System.String,System.Object,System.Data.CommandType)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlReader(System.String,System.Object,System.Data.CommandType)">
             <summary>
             SQL查询，返回DataTable
             </summary>
@@ -1777,7 +1777,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteReaderAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlReaderAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
             <summary>
             SQL查询，返回DataTable
             </summary>
@@ -1787,7 +1787,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.DataAdapterFill(System.String,System.Object,System.Data.CommandType)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlQueries(System.String,System.Object,System.Data.CommandType)">
             <summary>
             SQL查询，返回DataSet
             </summary>
@@ -1796,7 +1796,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.DataAdapterFillAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlQueriesAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
             <summary>
             SQL查询，返回DataSet
             </summary>
@@ -1806,7 +1806,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteNonQuery(System.String,System.Object,System.Data.CommandType)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlNonQuery(System.String,System.Object,System.Data.CommandType)">
             <summary>
             执行SQL，执行一个SqlCommand,该命令返回受操作影响的行数,该命令主要用于确定操作是否成功
             </summary>
@@ -1815,7 +1815,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteNonQueryAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlNonQueryAsync(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
             <summary>
             执行SQL，执行一个SqlCommand,该命令返回受操作影响的行数,该命令主要用于确定操作是否成功
             </summary>
@@ -1825,7 +1825,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteScalar``1(System.String,System.Object,System.Data.CommandType)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlScalar``1(System.String,System.Object,System.Data.CommandType)">
             <summary>
             执行SQL，并返回查询所返回的结果集中第一行的第一列
             </summary>
@@ -1835,7 +1835,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.ExecuteScalarAsync``1(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlScalarAsync``1(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
             <summary>
             执行SQL，并返回查询所返回的结果集中第一行的第一列
             </summary>
