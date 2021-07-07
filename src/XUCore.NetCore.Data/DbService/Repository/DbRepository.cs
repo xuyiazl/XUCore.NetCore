@@ -222,7 +222,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
+        public virtual TEntity GetFirst(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
             var query = Table.AsQueryable();
 

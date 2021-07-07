@@ -17,12 +17,12 @@ namespace XUCore.NetCore.Data.DbService
             this.dbContext = dbContext;
         }
 
-        public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
+        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
         {
             return SqlQuery<TEntity>(sql, model, type)?.FirstOrDefault();
         }
 
-        public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
 

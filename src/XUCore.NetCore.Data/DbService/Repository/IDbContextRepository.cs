@@ -100,7 +100,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        TEntity GetSingle<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class, new();
+        TEntity GetFirst<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class, new();
         /// <summary>
         /// 获取数据
         /// </summary>

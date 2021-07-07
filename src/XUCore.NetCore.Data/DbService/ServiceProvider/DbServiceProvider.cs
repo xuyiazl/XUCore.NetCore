@@ -141,10 +141,10 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
+        public virtual TEntity GetFirst(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
         {
             if (Read != null)
-                return Read.GetSingle(selector, orderby);
+                return Read.GetFirst(selector, orderby);
             return default;
         }
         /// <summary>
@@ -371,14 +371,14 @@ namespace XUCore.NetCore.Data.DbService
         #region [ AdoNet ]
 
 
-        public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
+        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
         {
-            return Read.SqlFirstOrDefault<TEntity>(sql, model, type);
+            return Read.SqlFirst<TEntity>(sql, model, type);
         }
 
-        public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
-            return await Read.SqlFirstOrDefaultAsync<TEntity>(sql, model, type, cancellationToken);
+            return await Read.SqlFirstAsync<TEntity>(sql, model, type, cancellationToken);
         }
 
         public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()

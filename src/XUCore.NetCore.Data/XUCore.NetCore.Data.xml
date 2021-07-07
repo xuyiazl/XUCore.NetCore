@@ -371,7 +371,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbContextRepository`1.GetSingle``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbContextRepository`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -618,7 +618,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.GetFirst(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -854,7 +854,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbContextRepository`1.GetSingle``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbContextRepository`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1095,7 +1095,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.GetFirst(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1334,7 +1334,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbServiceProvider`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbServiceProvider`1.GetFirst(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1573,7 +1573,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbServiceProvider`1.GetSingle(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbServiceProvider`1.GetFirst(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1726,7 +1726,7 @@
             sql仓储
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlFirstOrDefault``1(System.String,System.Object,System.Data.CommandType)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlFirst``1(System.String,System.Object,System.Data.CommandType)">
             <summary>
             SQL查询并返回第一条记录
             </summary>
@@ -1736,7 +1736,7 @@
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlFirstOrDefaultAsync``1(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.ISqlRepository.SqlFirstAsync``1(System.String,System.Object,System.Data.CommandType,System.Threading.CancellationToken)">
             <summary>
             SQL查询并返回第一条记录
             </summary>

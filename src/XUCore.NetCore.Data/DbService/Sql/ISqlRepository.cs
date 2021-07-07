@@ -21,7 +21,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
+        TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new();
         /// <summary>
         /// SQL查询并返回第一条记录
         /// </summary>
@@ -31,7 +31,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
+        Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new();
         /// <summary>
         /// SQL查询
         /// </summary>

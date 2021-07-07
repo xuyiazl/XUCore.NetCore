@@ -1,16 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
-using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.NetCore.Data.DbService;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.DbService;
@@ -36,11 +33,11 @@ namespace XUCore.NetCore.DataTest.Business
         {
             await TestDbAsync();
 
-            var res1 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
+            var res1 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
             var res2 = rep.SqlQueries("select * from AdminUser where Id = @Id", new { Id = 2 });
             var res3 = rep.SqlScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
             var res4 = rep.SqlNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
-            var res5 = rep.SqlFirstOrDefault<AdminUserEntity>("select * from AdminUser where Id = 2");
+            var res5 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
         }
 
         public async Task TestDbAsync()
