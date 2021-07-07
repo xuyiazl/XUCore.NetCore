@@ -3971,12 +3971,35 @@
             数据表(<see cref="T:System.Data.DataTable"/>) 扩展
             </summary>
         </member>
-        <member name="M:XUCore.Extensions.Datas.DataTableExtensions.ToList``1(System.Data.DataTable)">
+        <member name="M:XUCore.Extensions.Datas.DataTableExtensions.ToRefList``1(System.Data.DataTable)">
             <summary>
             DataTable转换为泛型集合
             </summary>
             <typeparam name="T">类型</typeparam>
             <param name="dataTable">数据表</param>
+        </member>
+        <member name="M:XUCore.Extensions.Datas.DataTableExtensions.ToList``1(System.Data.DataTable)">
+            <summary>
+            将 DataTable 转 List 集合
+            </summary>
+            <typeparam name="T">返回值类型</typeparam>
+            <param name="dataTable">DataTable</param>
+            <returns>List{T}</returns>
+        </member>
+        <member name="M:XUCore.Extensions.Datas.DataTableExtensions.ToList(System.Data.DataTable,System.Type)">
+            <summary>
+            将 DataTable 转 特定类型
+            </summary>
+            <param name="dataTable">DataTable</param>
+            <param name="returnType">返回值类型</param>
+            <returns>object</returns>
+        </member>
+        <member name="M:XUCore.Extensions.Datas.DataTableExtensions.IsRichPrimitive(System.Type)">
+            <summary>
+            判断是否是富基元类型
+            </summary>
+            <param name="type">类型</param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Extensions.DateTimeExtensions">
             <summary>
@@ -6272,6 +6295,14 @@
             </summary>
             <typeparam name="T">目标类型</typeparam>
             <param name="input">输入值</param>
+        </member>
+        <member name="M:XUCore.Helpers.Conv.ChangeType(System.Object,System.Type)">
+            <summary>
+            将一个对象转换为指定类型
+            </summary>
+            <param name="obj">待转换的对象</param>
+            <param name="type">目标类型</param>
+            <returns>转换后的对象</returns>
         </member>
         <member name="T:XUCore.Helpers.Encrypt">
             <summary>

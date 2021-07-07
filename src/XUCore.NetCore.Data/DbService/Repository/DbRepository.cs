@@ -476,9 +476,5 @@ namespace XUCore.NetCore.Data.DbService
         }
 
         #endregion
-
-        #region adonet
-
-        #endregion
     }
 }

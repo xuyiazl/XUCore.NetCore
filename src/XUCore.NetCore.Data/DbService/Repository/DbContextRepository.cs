@@ -478,55 +478,5 @@ namespace XUCore.NetCore.Data.DbService
 
         #endregion
 
-
-        public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
-        {
-            var res = SqlQuery<TEntity>(sql, model, type);
-
-            return res.Count > 0 ? res[0] : default;
-        }
-
-        public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
-        {
-            var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
-
-            return res.Count > 0 ? res[0] : default;
-        }
-
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
-        {
-            return SqlReader(sql, model, type).ToList<TEntity>();
-        }
-
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
-        {
-            var res = await SqlReaderAsync(sql, model, type, cancellationToken);
-
-            return res.ToList<TEntity>();
-        }
-
-        public virtual DataTable SqlReader(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteReader(sql, model, type);
-
-        public virtual async Task<DataTable> SqlReaderAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteReaderAsync(sql, model, type, cancellationToken);
-
-        public virtual DataSet SqlQueries(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.DataAdapterFill(sql, model, type);
-
-        public virtual async Task<DataSet> SqlQueriesAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.DataAdapterFillAsync(sql, model, type, cancellationToken);
-
-        public virtual int SqlNonQuery(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteNonQuery(sql, model, type);
-
-        public virtual async Task<int> SqlNonQueryAsync(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteNonQueryAsync(sql, model, type, cancellationToken);
-
-        public virtual T SqlScalar<T>(string sql, object model = null, CommandType type = CommandType.Text)
-            => _context.Database.ExecuteScalar<T>(sql, model, type);
-
-        public virtual async Task<T> SqlScalarAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
-            => await _context.Database.ExecuteScalarAsync<T>(sql, model, type, cancellationToken);
     }
 }
