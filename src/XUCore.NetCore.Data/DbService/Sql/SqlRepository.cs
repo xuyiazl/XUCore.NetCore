@@ -19,16 +19,14 @@ namespace XUCore.NetCore.Data.DbService
 
         public virtual TEntity SqlFirstOrDefault<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
         {
-            var res = SqlQuery<TEntity>(sql, model, type);
-
-            return res.Count > 0 ? res[0] : default;
+            return SqlQuery<TEntity>(sql, model, type)?.FirstOrDefault();
         }
 
         public virtual async Task<TEntity> SqlFirstOrDefaultAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
 
-            return res.Count > 0 ? res[0] : default;
+            return res?.FirstOrDefault();
         }
 
         public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
