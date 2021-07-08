@@ -19,6 +19,7 @@ using XUCore.NetCore.Oss;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using Sample.Mini.Core;
+using XUCore.Ddd.Domain;
 
 namespace Sample.Mini.Applaction
 {

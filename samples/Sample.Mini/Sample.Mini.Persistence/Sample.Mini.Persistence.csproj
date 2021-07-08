@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.1" />
+		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.2" />
 	</ItemGroup>
 	
 	<ItemGroup>

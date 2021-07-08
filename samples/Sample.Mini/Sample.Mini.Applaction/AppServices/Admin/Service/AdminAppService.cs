@@ -20,6 +20,7 @@ using Sample.Mini.Core;
 using Sample.Mini.Core.Enums;
 using Sample.Mini.Persistence;
 using Sample.Mini.Persistence.Entities.Sys.Admin;
+using XUCore.NetCore.Data.DbService;
 
 namespace Sample.Mini.Applaction.Admin
 {
