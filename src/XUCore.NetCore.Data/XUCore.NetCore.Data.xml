@@ -1721,6 +1721,56 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.Data.DbService.SqlPage">
+            <summary>
+            sql分页
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.SqlPage.#ctor(XUCore.NetCore.Data.DbService.ISqlRepository)">
+            <summary>
+            sql分页
+            </summary>
+            <param name="sqlRepository"></param>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.SqlPage.Fields">
+            <summary>
+            需要查询的字段
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.SqlPage.Table">
+            <summary>
+            表，可以是多表组合，视图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.SqlPage.Where">
+            <summary>
+            where条件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.DbService.SqlPage.Orderby">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.SqlPage.PageSql(System.Int32,System.Int32)">
+            <summary>
+            分页SQL
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.SqlPage.CountSql">
+            <summary>
+            count SQL
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbService.SqlPage.GetPage``1(System.Int32,System.Int32,System.Object)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="currentPage">当前页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbService.ISqlRepository">
             <summary>
             sql仓储
@@ -1921,23 +1971,6 @@
             <param name="run">执行内容</param>
             <param name="error">异常消息</param>
             <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.NetCore.Data.DbService.TSQL">
-            <summary>
-            常用T-SQL
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.TSQL.ToBetweenPageSql(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            获取分页SQL
-            </summary>
-            <param name="fields">需要查询的字段</param>
-            <param name="tableName">表，可以是多表组合，试图</param>
-            <param name="pageSize">分页大小</param>
-            <param name="pageNumber">页码</param>
-            <param name="where">where条件</param>
-            <param name="orderby">排序</param>
             <returns></returns>
         </member>
     </members>

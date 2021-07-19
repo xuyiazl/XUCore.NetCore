@@ -31,6 +31,16 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestQueryAsync()
         {
+            var page = new SqlPage(rep)
+            {
+                Fields = "a.Id",
+                Table = "AdminUser a",
+                Where = "a.Id = @Id",
+                Orderby = "a.Id desc"
+            };
+
+            var p = page.GetPage<AdminUserEntity>(1, 10, new { Id = 1 });
+
             await TestDbAsync();
 
             var res1 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
