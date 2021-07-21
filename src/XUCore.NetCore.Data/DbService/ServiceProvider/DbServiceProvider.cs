@@ -219,10 +219,10 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
+        public virtual async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
         {
             if (Read != null)
-                return await Read.GetSingleAsync(selector, orderby, cancellationToken);
+                return await Read.GetFirstAsync(selector, orderby, cancellationToken);
             return default;
         }
         /// <summary>

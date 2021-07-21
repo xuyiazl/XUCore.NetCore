@@ -421,7 +421,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbContextRepository`1.GetSingleAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbContextRepository`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -668,7 +668,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbRepository`1.GetFirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -904,7 +904,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbContextRepository`1.GetSingleAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbContextRepository`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1145,7 +1145,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbRepository`1.GetFirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1384,7 +1384,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.DbServiceProvider`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.DbServiceProvider`1.GetFirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             查询一条数据
             </summary>
@@ -1623,7 +1623,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbService.IDbServiceProvider`1.GetSingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbService.IDbServiceProvider`1.GetFirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
             <summary>
             根据条件获取一条数据
             </summary>
@@ -1933,7 +1933,7 @@
             获取分页SQL
             </summary>
             <param name="fields">需要查询的字段</param>
-            <param name="tableName">表，可以是多表组合，试图</param>
+            <param name="tableName">表，可以是多表组合，视图</param>
             <param name="pageSize">分页大小</param>
             <param name="pageNumber">页码</param>
             <param name="where">where条件</param>

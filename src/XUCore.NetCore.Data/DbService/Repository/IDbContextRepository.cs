@@ -148,7 +148,7 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TEntity> GetSingleAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class, new();
+        Task<TEntity> GetFirstAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class, new();
         /// <summary>
         /// 获取数据
         /// </summary>
