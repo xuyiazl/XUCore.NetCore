@@ -1973,25 +1973,5 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-<<<<<<< HEAD
-        <member name="T:XUCore.NetCore.Data.DbService.TSQL">
-            <summary>
-            常用T-SQL
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.TSQL.ToBetweenPageSql(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            获取分页SQL
-            </summary>
-            <param name="fields">需要查询的字段</param>
-            <param name="tableName">表，可以是多表组合，视图</param>
-            <param name="pageSize">分页大小</param>
-            <param name="pageNumber">页码</param>
-            <param name="where">where条件</param>
-            <param name="orderby">排序</param>
-            <returns></returns>
-        </member>
-=======
->>>>>>> 6118171bc48c50af112aad235d966bef6a3c33b6
     </members>
 </doc>

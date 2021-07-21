@@ -17,24 +17,24 @@ namespace XUCore.NetCore.Data.DbService
             this.dbContext = dbContext;
         }
 
-        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
+        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : new()
         {
-            return SqlQuery<TEntity>(sql, model, type)?.FirstOrDefault();
+            return SqlQuery<TEntity>(sql, model, type).FirstOrDefault();
         }
 
-        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : new()
         {
             var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
 
-            return res?.FirstOrDefault();
+            return res.FirstOrDefault();
         }
 
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : class, new()
+        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : new()
         {
             return SqlReader(sql, model, type).ToList<TEntity>();
         }
 
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : class, new()
+        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : new()
         {
             var res = await SqlReaderAsync(sql, model, type, cancellationToken);
 
