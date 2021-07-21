@@ -61,7 +61,7 @@ namespace XUCore.Extensions.Datas
         /// <typeparam name="T">返回值类型</typeparam>
         /// <param name="dataTable">DataTable</param>
         /// <returns>List{T}</returns>
-        public static List<T> ToList<T>(this DataTable dataTable) where T : new()
+        public static List<T> ToList<T>(this DataTable dataTable)
         {
             return dataTable.ToList(typeof(List<T>)) as List<T>;
         }

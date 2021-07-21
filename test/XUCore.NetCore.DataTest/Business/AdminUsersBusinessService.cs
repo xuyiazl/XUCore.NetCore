@@ -31,6 +31,8 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestQueryAsync()
         {
+            //await TestDbAsync();
+
             var page = new SqlPage(rep)
             {
                 Fields = "a.Id",
@@ -41,13 +43,13 @@ namespace XUCore.NetCore.DataTest.Business
 
             var p = page.GetPage<AdminUserEntity>(1, 10, new { Id = 1 });
 
-            await TestDbAsync();
-
             var res1 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
-            var res2 = rep.SqlQueries("select * from AdminUser where Id = @Id", new { Id = 2 });
-            var res3 = rep.SqlScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
-            var res4 = rep.SqlNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
-            var res5 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
+            var res2 = rep.SqlFirst<string>("select top 1 Name from AdminUser where Id = 2");
+            var res3 = rep.SqlQuery<string>("select Name from AdminUser");
+            var res4 = rep.SqlQueries("select * from AdminUser where Id = @Id", new { Id = 2 });
+            var res5 = rep.SqlScalar<int>("select count(*) from AdminUser where Id = @Id", new { Id = 2 });
+            var res6 = rep.SqlNonQuery("update AdminUser set Name = @Name where Id = @Id", new { Name = "王五", Id = 2 });
+            var res7 = rep.SqlFirst<AdminUserEntity>("select * from AdminUser where Id = 2");
         }
 
         public async Task TestDbAsync()

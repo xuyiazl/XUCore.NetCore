@@ -371,22 +371,22 @@ namespace XUCore.NetCore.Data.DbService
         #region [ AdoNet ]
 
 
-        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : new()
+        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
         {
             return Read.SqlFirst<TEntity>(sql, model, type);
         }
 
-        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : new()
+        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
             return await Read.SqlFirstAsync<TEntity>(sql, model, type, cancellationToken);
         }
 
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text) where TEntity : new()
+        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
         {
             return Read.SqlQuery<TEntity>(sql, model, type);
         }
 
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default) where TEntity : new()
+        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
             return await Read.SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
         }
