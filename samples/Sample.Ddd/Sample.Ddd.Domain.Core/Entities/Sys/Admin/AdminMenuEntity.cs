@@ -11,7 +11,7 @@ namespace Sample.Ddd.Domain.Core.Entities.Sys.Admin
     {
         public AdminMenuEntity()
         {
-            RoleMenus = new HashSet<AdminRoleMenuEntity>();
+            RoleMenus = new List<AdminRoleMenuEntity>();
         }
         /// <summary>
         /// 导航父级id

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 namespace XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin
 {
     /// <summary>
-    /// 角色二标
+    /// 角色表
     /// </summary>
     public partial class AdminRoleEntity : BaseEntity
     {
         public AdminRoleEntity()
         {
-            RoleMenus = new HashSet<AdminRoleMenuEntity>();
-            UserRoles = new HashSet<AdminUserRoleEntity>();
+            RoleMenus = new List<AdminRoleMenuEntity>();
+            UserRoles = new List<AdminUserRoleEntity>();
         }
         /// <summary>
         /// 角色名

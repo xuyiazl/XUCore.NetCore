@@ -11,8 +11,8 @@ namespace Sample.Ddd.Domain.Core.Entities.Sys.Admin
     {
         public AdminUserEntity()
         {
-            UserRoles = new HashSet<AdminUserRoleEntity>();
-            LoginRecords = new HashSet<LoginRecordEntity>();
+            UserRoles = new List<AdminUserRoleEntity>();
+            LoginRecords = new List<LoginRecordEntity>();
         }
         /// <summary>
         /// 用户名

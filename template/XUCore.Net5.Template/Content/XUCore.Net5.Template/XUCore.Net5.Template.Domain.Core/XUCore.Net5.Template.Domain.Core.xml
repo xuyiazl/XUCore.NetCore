@@ -76,7 +76,7 @@
         </member>
         <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity">
             <summary>
-            角色二标
+            角色表
             </summary>
         </member>
         <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity.Name">
@@ -287,9 +287,34 @@
             <param name="data"></param>
             <param name="user"></param>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.MappingProfile.CurrentProjectAssemblies">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Id">
             <summary>
-            当前项目程序集
+            主键Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Created_At">
+            <summary>
+            创建日期
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Updated_At">
+            <summary>
+            更新日期
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Deleted_At">
+            <summary>
+            删除日期
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoKeyBase`1.Id">
+            <summary>
+            主键Id
             </summary>
         </member>
         <member name="T:XUCore.Net5.Template.Domain.Core.SubCode">

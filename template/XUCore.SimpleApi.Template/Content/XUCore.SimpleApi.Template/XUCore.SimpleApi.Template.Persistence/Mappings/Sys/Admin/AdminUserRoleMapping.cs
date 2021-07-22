@@ -21,14 +21,14 @@ namespace XUCore.SimpleApi.Template.Persistence.Mappings.Sys.Admin
                 .HasColumnType("bigint(20)")
                 .HasColumnName("RoleID");
 
-            builder.Property(e => e.UserId)
+            builder.Property(e => e.AdminId)
                 .IsRequired()
                 .HasColumnType("bigint(20)")
-                .HasColumnName("UserID");
+                .HasColumnName("AdminId");
 
             builder.HasOne(d => d.AdminUser)
               .WithMany(p => p.UserRoles)
-              .HasForeignKey(d => d.UserId)
+              .HasForeignKey(d => d.AdminId)
               .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("FK_AdminUser_AdminAuthUserRole");
 

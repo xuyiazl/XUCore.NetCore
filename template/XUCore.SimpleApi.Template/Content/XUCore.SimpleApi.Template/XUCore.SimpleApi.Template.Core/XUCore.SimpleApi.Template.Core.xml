@@ -39,11 +39,6 @@
             数据已被删除，非物理删除（回收站）
             </summary>
         </member>
-        <member name="P:XUCore.SimpleApi.Template.Core.MappingProfile.CurrentProjectAssemblies">
-            <summary>
-            当前项目程序集
-            </summary>
-        </member>
         <member name="P:XUCore.SimpleApi.Template.Core.DtoBase`1.Id">
             <summary>
             主键Id

@@ -45,7 +45,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
                 entity.UserRoles = Array.ConvertAll(request.Roles, roleid => new AdminUserRoleEntity
                 {
                     RoleId = roleid,
-                    UserId = entity.Id
+                    AdminId = entity.Id
                 });
             }
 
@@ -145,7 +145,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
                 //删除登录记录
                 await db.DeleteAsync<LoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
-                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.UserId), cancellationToken);
+                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
             }
 
             return res;
@@ -155,12 +155,12 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
         public async Task<int> RelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
         {
             //先清空用户的角色，确保没有冗余的数据
-            await db.DeleteAsync<AdminUserRoleEntity>(c => c.UserId == request.AdminId, cancellationToken);
+            await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
 
             var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
             {
                 RoleId = roleid,
-                UserId = request.AdminId
+                AdminId = request.AdminId
             });
 
             //添加角色
@@ -297,7 +297,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
         public async Task<IList<long>> GetRoleKeysAsync(long adminId, CancellationToken cancellationToken)
         {
             return await db.Context.AdminAuthUserRole
-                .Where(c => c.UserId == adminId)
+                .Where(c => c.AdminId == adminId)
                 .Select(c => c.RoleId)
                 .ToListAsync(cancellationToken);
         }

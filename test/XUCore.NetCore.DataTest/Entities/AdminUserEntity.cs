@@ -10,7 +10,7 @@ namespace XUCore.NetCore.DataTest.Entities
     {
         public AdminUserEntity()
         {
-            AdminUserAddress = new HashSet<AdminUserAddressEntity>();
+            AdminUserAddress = new List<AdminUserAddressEntity>();
         }
         public string UserName { get; set; }
         public string Password { get; set; }

@@ -91,39 +91,17 @@ namespace XUCore.NetCore.DataTest.Business
             var ss = rep.Context.User.Include(c => c.AdminUserAddress.Take(2)).FirstOrDefault(c => c.Id == entity.Id);
         }
 
-        [Transaction(typeof(NigelDbContext))]
-        public async Task TestAspectCore()
+        [UnitOfWork(typeof(NigelDbContext))]
+        public async Task<AdminUserEntity> TestAspectCore()
         {
             rep.Delete<AdminUserEntity>(c => true);
             rep.Delete<AdminUserAddressEntity>(c => true);
 
             var entity = BuildRecords(1)[0];
 
-            var l = new List<AdminUserAddressEntity> { new AdminUserAddressEntity
-            {
-                UserId = entity.Id,
-                Address = "address1",
-            }, new AdminUserAddressEntity
-            {
-                UserId = entity.Id,
-                Address = "address2",
-            }, new AdminUserAddressEntity
-            {
-                UserId = entity.Id,
-                Address = "address3",
-            }, new AdminUserAddressEntity
-            {
-                UserId = entity.Id,
-                Address = "address4",
-            }, new AdminUserAddressEntity
-            {
-                UserId = entity.Id,
-                Address = "address5",
-            } };
-
-            entity.AdminUserAddress.AddRange(l);
-
             rep.Add(entity);
+
+            return entity;
         }
 
         [CacheRemove(Key = "Cache_Test", ParamterKey = "{Id}_{Name}_{UserName}_{0}")]
@@ -141,8 +119,6 @@ namespace XUCore.NetCore.DataTest.Business
         [RedisCacheMethod(HashKey = "mytest", Key = "{Id}")]
         public async Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity)
         {
-            //var list = unitOfWork.GetList<AdminUsersEntity>(c => true);
-
             return entity;
         }
 
@@ -436,8 +412,6 @@ namespace XUCore.NetCore.DataTest.Business
 
                 await db.AddAsync(list.ToArray());
 
-                db.UnitOfWork.Commit();
-
                 var res2 = db.Update(c => c.Id > 22, new AdminUserEntity() { Name = "哈德斯" });
 
                 var res3 = await db.UpdateAsync(c => c.Id > 22, c => new AdminUserEntity() { Name = "哈德斯" });
@@ -450,7 +424,7 @@ namespace XUCore.NetCore.DataTest.Business
         {
             var list = new List<AdminUserEntity>();
 
-            for (var ndx = 0; ndx < limit; ndx++)
+            limit.Times(ndx =>
             {
                 var user = new AdminUserEntity
                 {
@@ -463,8 +437,15 @@ namespace XUCore.NetCore.DataTest.Business
                     Status = 1,
                     UserName = "xuyi"
                 };
+                5.Times(a =>
+                {
+                    user.AdminUserAddress.Add(new AdminUserAddressEntity
+                    {
+                        Address = $"address{a}",
+                    });
+                });
                 list.Add(user);
-            }
+            });
 
             return list;
         }

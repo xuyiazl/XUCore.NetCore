@@ -129,7 +129,7 @@ namespace XUCore.WebApi.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserID = table.Column<long>(type: "bigint(20)", nullable: false),
+                    AdminId = table.Column<long>(type: "bigint(20)", nullable: false),
                     RoleID = table.Column<long>(type: "bigint(20)", nullable: false)
                 },
                 constraints: table =>
@@ -143,7 +143,7 @@ namespace XUCore.WebApi.Template.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AdminUser_AdminAuthUserRole",
-                        column: x => x.UserID,
+                        column: x => x.AdminId,
                         principalTable: "sys_admin_users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -191,9 +191,9 @@ namespace XUCore.WebApi.Template.Persistence.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sys_admin_authuserrole_UserID",
+                name: "IX_sys_admin_authuserrole_AdminId",
                 table: "sys_admin_authuserrole",
-                column: "UserID");
+                column: "AdminId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sys_admin_loginrecord_AdminId",

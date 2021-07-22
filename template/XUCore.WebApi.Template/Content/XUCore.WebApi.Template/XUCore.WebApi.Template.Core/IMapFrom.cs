@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.DependencyModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 using XUCore.Extensions;
+using XUCore.Helpers;
 using XUCore.WebApi.Template.Core.Enums;
 
 namespace XUCore.WebApi.Template.Core
@@ -19,26 +17,8 @@ namespace XUCore.WebApi.Template.Core
     {
         public MappingProfile()
         {
-            CurrentProjectAssemblies
+            Reflection.GetCurrentProjectAssemblies("XUCore.WebApi.Template")
                 .ForEach(a => ApplyMappingsFromAssembly(a));
-        }
-        /// <summary>
-        /// 当前项目程序集
-        /// </summary>
-        public List<Assembly> CurrentProjectAssemblies
-        {
-            get
-            {
-                var list = new List<Assembly>();
-                var deps = DependencyContext.Default;
-                var libs = deps.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package" && lib.Name.StartsWith("XUCore.WebApi.Template"));
-                foreach (var lib in libs)
-                {
-                    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib.Name));
-                    list.Add(assembly);
-                }
-                return list;
-            }
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

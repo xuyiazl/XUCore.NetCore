@@ -22,7 +22,7 @@ namespace XUCore.NetCore.DataTest
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await adminUsersBusinessService.TestQueryAsync();
+            //await adminUsersBusinessService.TestQueryAsync();
 
             await adminUsersBusinessService.TestAspectCore();
 

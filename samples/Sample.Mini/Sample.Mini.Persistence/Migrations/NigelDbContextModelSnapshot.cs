@@ -228,15 +228,15 @@ namespace Sample.Mini.Persistence.Migrations
                         .HasColumnType("bigint(20)")
                         .HasColumnName("RoleID");
 
-                    b.Property<long>("UserId")
+                    b.Property<long>("AdminId")
                         .HasColumnType("bigint(20)")
-                        .HasColumnName("UserID");
+                        .HasColumnName("AdminId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AdminId");
 
                     b.ToTable("sys_admin_authuserrole");
                 });
@@ -303,7 +303,7 @@ namespace Sample.Mini.Persistence.Migrations
 
                     b.HasOne("DDD.Domain.Core.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AdminId")
                         .HasConstraintName("FK_AdminUser_AdminAuthUserRole")
                         .IsRequired();
 

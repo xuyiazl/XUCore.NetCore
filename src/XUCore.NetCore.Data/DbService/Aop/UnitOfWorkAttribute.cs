@@ -10,7 +10,7 @@ using XUCore.NetCore.AspectCore;
 namespace XUCore.NetCore.Data.DbService
 {
     /// <summary>
-    /// 工作单元AOP
+    /// 工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）
     /// </summary>
     public class UnitOfWorkAttribute : InterceptorBase
     {
@@ -35,9 +35,24 @@ namespace XUCore.NetCore.Data.DbService
 
             IUnitOfWork unitOfWork = new UnitOfWorkService(dbContext);
 
-            await next(context);
+            //await next(context);
 
-            await unitOfWork.CommitAsync();
+            //await unitOfWork.CommitAsync();
+
+            await unitOfWork.CreateTransactionAsync(
+                async (tran, cancel) =>
+                {
+                    await next(context);
+
+                    await unitOfWork.CommitAsync();
+                },
+                async (tran, error, cancel) =>
+                {
+                    await Task.CompletedTask;
+
+                    throw error;
+                },
+                CancellationToken.None);
         }
     }
 }

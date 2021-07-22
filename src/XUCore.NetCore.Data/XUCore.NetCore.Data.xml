@@ -27,25 +27,9 @@
             Used for Sqlite, Truncate table 
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Data.DbService.TransactionAttribute">
-            <summary>
-            事务AOP
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.DbService.TransactionAttribute.DbType">
-            <summary>
-            Type of DbContext
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.DbService.TransactionAttribute.#ctor(System.Type)">
-            <summary>
-            事务AOP
-            </summary>
-            <param name="dbType">上下文<see cref="T:XUCore.NetCore.Data.DbService.IDbContext"/></param>
-        </member>
         <member name="T:XUCore.NetCore.Data.DbService.UnitOfWorkAttribute">
             <summary>
-            工作单元AOP
+            工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Data.DbService.UnitOfWorkAttribute.DbType">

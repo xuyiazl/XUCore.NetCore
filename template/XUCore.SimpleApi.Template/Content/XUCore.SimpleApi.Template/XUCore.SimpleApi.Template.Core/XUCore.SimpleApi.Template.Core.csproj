@@ -10,8 +10,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Scrutor" Version="3.3.0" />
-		<PackageReference Include="XUCore.NetCore" Version="5.2.2" />
-		<PackageReference Include="XUCore.Ddd.Domain" Version="5.2.2" />
+		<PackageReference Include="XUCore.NetCore" Version="5.2.3" />
+		<PackageReference Include="XUCore.Ddd.Domain" Version="5.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>

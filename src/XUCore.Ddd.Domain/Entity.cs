@@ -57,7 +57,7 @@ namespace XUCore.Ddd.Domain
             return !(a == b);
         }
         /// <summary>
-        /// 获取哈希
+        /// 获取哈希（为了保持领域一致性，采用Id获取hashcode，实体主外键映射实体中，添加多条记录的时候，ICollection不可以使用HashSet，否则无法添加）
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

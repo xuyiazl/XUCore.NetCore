@@ -22,7 +22,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Permission
 
                     join menus in model.Menus on roleMenus.MenuId equals menus.Id
 
-                    where userRoles.UserId == AdminID
+                    where userRoles.AdminId == AdminID
 
                     select menus
                 )
