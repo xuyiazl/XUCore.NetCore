@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Linq;
+using XUCore.NetCore.Data.BulkExtensions;
 
 namespace XUCore.NetCore.Data.DbService
 {
@@ -248,6 +249,62 @@ namespace XUCore.NetCore.Data.DbService
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default);
+
+
+
+        void BulkAdd<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkAdd<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void BulkUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void BulkDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void BulkRead<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null);
+
+        void BulkRead<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null);
+
+        void Truncate<TEntity>();
+
+        // Async methods
+
+        Task BulkAddAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkAddAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkReadAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task BulkReadAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default);
+
+        Task TruncateAsync<TEntity>(CancellationToken cancellationToken = default);
 
         #endregion
 
