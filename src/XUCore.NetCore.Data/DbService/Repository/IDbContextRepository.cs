@@ -240,59 +240,59 @@ namespace XUCore.NetCore.Data.DbService
 
 
 
-        void BulkAdd<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAdd<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkAdd<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAdd<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkRead<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
+        //void BulkRead<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class;
 
-        void BulkRead<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
+        //void BulkRead<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class;
 
-        void Truncate<TEntity>() where TEntity : class;
+        //void Truncate<TEntity>() where TEntity : class;
 
-        // Async methods
+        //// Async methods
 
-        Task BulkAddAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkAddAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkReadAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkReadAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task BulkReadAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
+        //Task BulkReadAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class;
 
-        Task TruncateAsync<TEntity>(CancellationToken cancellationToken = default) where TEntity : class;
+        //Task TruncateAsync<TEntity>(CancellationToken cancellationToken = default) where TEntity : class;
 
         #endregion
     }

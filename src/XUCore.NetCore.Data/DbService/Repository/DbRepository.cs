@@ -476,137 +476,137 @@ namespace XUCore.NetCore.Data.DbService
         }
 
 
-        public virtual void BulkAdd(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsert(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkAdd(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsert(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkAdd(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsert(entities, bulkAction, progress);
-        }
+        //public virtual void BulkAdd(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsert(entities, bulkAction, progress);
+        //}
 
-        public virtual void BulkAddOrUpdate(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkAddOrUpdate(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkAddOrUpdate(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkAction, progress);
-        }
+        //public virtual void BulkAddOrUpdate(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkAction, progress);
+        //}
 
-        public virtual void BulkAddOrUpdateOrDelete(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkAddOrUpdateOrDelete(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkAddOrUpdateOrDelete(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkAction, progress);
-        }
+        //public virtual void BulkAddOrUpdateOrDelete(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkAction, progress);
+        //}
 
-        public virtual void BulkUpdate(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkUpdate(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkUpdate(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkUpdate(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkUpdate(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkUpdate(entities, bulkAction, progress);
-        }
+        //public virtual void BulkUpdate(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkUpdate(entities, bulkAction, progress);
+        //}
 
-        public virtual void BulkDelete(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkDelete(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkDelete(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkDelete(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkDelete(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkDelete(entities, bulkAction, progress);
-        }
+        //public virtual void BulkDelete(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkDelete(entities, bulkAction, progress);
+        //}
 
-        public virtual void BulkRead(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkRead(entities, bulkConfig, progress);
-        }
+        //public virtual void BulkRead(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkRead(entities, bulkConfig, progress);
+        //}
 
-        public virtual void BulkRead(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
-        {
-            _context.As<DbContext>().BulkRead(entities, bulkAction, progress);
-        }
+        //public virtual void BulkRead(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null)
+        //{
+        //    _context.As<DbContext>().BulkRead(entities, bulkAction, progress);
+        //}
 
-        public virtual void Truncate()
-        {
-            _context.As<DbContext>().Truncate<TEntity>();
-        }
+        //public virtual void Truncate()
+        //{
+        //    _context.As<DbContext>().Truncate<TEntity>();
+        //}
 
-        // Async methods
+        //// Async methods
 
-        public virtual Task BulkAddAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkAddAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkAddOrUpdateAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddOrUpdateAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkAddOrUpdateAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddOrUpdateAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkAddOrUpdateOrDeleteAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddOrUpdateOrDeleteAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkAddOrUpdateOrDeleteAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkAddOrUpdateOrDeleteAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkUpdateAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkUpdateAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkUpdateAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkUpdateAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkUpdateAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkUpdateAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkUpdateAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkUpdateAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkDeleteAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkDeleteAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkDeleteAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkDeleteAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkDeleteAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkDeleteAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkDeleteAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkDeleteAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkReadAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkReadAsync(entities, bulkConfig, progress, cancellationToken);
-        }
+        //public virtual Task BulkReadAsync(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkReadAsync(entities, bulkConfig, progress, cancellationToken);
+        //}
 
-        public virtual Task BulkReadAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().BulkReadAsync(entities, bulkAction, progress, cancellationToken);
-        }
+        //public virtual Task BulkReadAsync(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().BulkReadAsync(entities, bulkAction, progress, cancellationToken);
+        //}
 
-        public virtual Task TruncateAsync(CancellationToken cancellationToken = default)
-        {
-            return _context.As<DbContext>().TruncateAsync<TEntity>(cancellationToken);
-        }
+        //public virtual Task TruncateAsync(CancellationToken cancellationToken = default)
+        //{
+        //    return _context.As<DbContext>().TruncateAsync<TEntity>(cancellationToken);
+        //}
 
         #endregion
     }
