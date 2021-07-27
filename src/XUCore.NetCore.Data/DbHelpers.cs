@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Helpers;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     internal static class DbHelpers
     {

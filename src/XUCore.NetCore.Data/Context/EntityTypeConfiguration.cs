@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     /// <summary>
     /// net core 跟 netFramework下面的EF统一配置字段不一致

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Paging;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
 
     /// <summary>

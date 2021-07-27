@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.DbRepository

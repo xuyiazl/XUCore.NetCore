@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     /// <summary>
     /// 工作单元

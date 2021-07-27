@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.Entities;
 

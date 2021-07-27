@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     public abstract class DBContextFactory : DBContextBase, IDbContext
     {

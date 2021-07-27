@@ -11,7 +11,7 @@ using XUCore.NetCore.Extensions;
 using XUCore.NetCore.HttpFactory;
 using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using XUCore.NetCore.Oss;

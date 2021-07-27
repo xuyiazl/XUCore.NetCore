@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions.Datas;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     public class SqlRepository : ISqlRepository
     {

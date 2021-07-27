@@ -3,7 +3,7 @@ using System;
 using System.Linq.Expressions;
 using XUCore.Ddd.Domain;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     public abstract class KeyMapping<TEntity, TKey> : EntityTypeConfiguration<TEntity>
          where TEntity : Entity<TKey>, new()

@@ -29,9 +29,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="DbService\Aop\TransactionAttribute.cs" />
-	  <Compile Remove="DbService\IMsSqlRepository.cs" />
-	  <Compile Remove="DbService\IMySqlRepository.cs" />
+	  <Compile Remove="Aop\TransactionAttribute.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="FastMember" Version="1.5.0" />

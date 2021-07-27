@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore.AspectCore;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     /// <summary>
     /// 工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 using XUCore.NetCore.DataTest.DbRepository;
 using XUCore.NetCore.DataTest.DbService;
 using XUCore.NetCore.DataTest.Entities;

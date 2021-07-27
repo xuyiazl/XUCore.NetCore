@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Linq;
 using XUCore.NetCore.Data.BulkExtensions;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
 
     /// <summary>
