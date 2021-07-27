@@ -975,6 +975,14 @@
             <param name="pageName"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.NetCore.HttpContextExtensions.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeAttribute">
             <summary>
             API查询时间
