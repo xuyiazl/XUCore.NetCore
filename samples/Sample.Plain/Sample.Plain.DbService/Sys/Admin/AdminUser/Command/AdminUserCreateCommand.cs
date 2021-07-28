@@ -73,7 +73,7 @@ namespace Sample.Plain.DbService.Sys.Admin.AdminUser
 
                         return !res;
                     })
-                    .WithMessage(c => $"该账号已存在");
+                    .WithMessage(c => $"该账号已存在。");
 
                 RuleFor(x => x.Mobile).NotEmpty().MaximumLength(11).WithName("手机号码")
                     .MustAsync(async (account, cancel) =>
@@ -82,7 +82,7 @@ namespace Sample.Plain.DbService.Sys.Admin.AdminUser
 
                         return !res;
                     })
-                    .WithMessage(c => $"该手机号码已存在");
+                    .WithMessage(c => $"该手机号码已存在。");
 
                 RuleFor(x => x.Password).NotEmpty().MaximumLength(50).WithName("密码");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");

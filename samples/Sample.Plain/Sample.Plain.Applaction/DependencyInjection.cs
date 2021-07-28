@@ -2,21 +2,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using System;
 using System.Linq;
-using System.Net;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.Extensions;
-using XUCore.NetCore;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.NetCore.EasyQuartz;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
@@ -100,7 +97,7 @@ namespace Sample.Plain.Applaction
             })
             .AddFluentValidation(opt =>
             {
-                opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                //opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
             });
 
@@ -116,19 +113,9 @@ namespace Sample.Plain.Applaction
 
                     var message = errors.Join("");
 
-                    (var code, _) = SubCodeMessage.Message(SubCode.ValidError);
-
-                    return new ObjectResult(new Result<object>()
+                    return new ObjectResult(RestFull.Fail<object>(SubCode.ValidError, message))
                     {
-                        Code = 0,
-                        SubCode = code,
-                        Message = message,
-                        Data = null,
-                        ElapsedTime = -1,
-                        OperationTime = DateTime.Now
-                    })
-                    {
-                        StatusCode = (int)HttpStatusCode.OK
+                        StatusCode = StatusCodes.Status200OK
                     };
                 };
             });

@@ -42,7 +42,7 @@ namespace Sample.Plain.Applaction.Login
         {
             (var accessToken, var refreshToken) = await authService.LoginAsync(command, cancellationToken);
 
-            return Success(SubCode.Success, new LoginTokenDto
+            return RestFull.Success(data: new LoginTokenDto
             {
                 Token = accessToken
             });
@@ -54,7 +54,7 @@ namespace Sample.Plain.Applaction.Login
         /// <returns></returns>
         public async Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken)
         {
-            return Success(SubCode.Success, data: new
+            return RestFull.Success(data: new
             {
                 authService.AdminId,
                 authService.AdminName
@@ -76,7 +76,7 @@ namespace Sample.Plain.Applaction.Login
         {
             var res = await permissionService.ExistsAsync(adminId, onlyCode, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航
@@ -88,7 +88,7 @@ namespace Sample.Plain.Applaction.Login
         {
             var res = await permissionService.GetMenusAsync(adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航（快捷导航）
@@ -100,7 +100,7 @@ namespace Sample.Plain.Applaction.Login
         {
             var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -118,7 +118,7 @@ namespace Sample.Plain.Applaction.Login
         {
             var res = await loginRecordService.GetListByAdminIdAsync(limit, adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取所有登录记录分页
@@ -130,7 +130,7 @@ namespace Sample.Plain.Applaction.Login
         {
             var res = await loginRecordService.GetPageListAsync(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion

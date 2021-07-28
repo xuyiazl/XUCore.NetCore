@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
@@ -16,7 +16,6 @@ using XUCore.NetCore.Properties;
 
 namespace Sample.Ddd.Infrastructure.Filters
 {
-
     /// <summary>
     /// API错误日志过滤器
     /// </summary>
@@ -32,30 +31,15 @@ namespace Sample.Ddd.Infrastructure.Filters
             if (context == null)
                 return;
 
+            var result = new Result<object>();
+
             if (context.Exception is OperationCanceledException)
             {
-                (var code, _) = SubCodeMessage.Message(SubCode.Cancel);
-
-                context.ExceptionHandled = true;
-                context.Result = new ObjectResult(new Result<object>(StateCode.Fail, R.CanceledMessage)
-                {
-                    SubCode = code
-                })
-                {
-                    StatusCode = (int)HttpStatusCode.BadRequest
-                };
+                result = RestFull.Fail<object>(SubCode.Cancel, R.CanceledMessage);
             }
             else if (context.Exception is UnauthorizedAccessException)
             {
-                (var code, _) = SubCodeMessage.Message(SubCode.Unauthorized);
-
-                context.Result = new ObjectResult(new Result<object>(StateCode.Fail, context.Exception.Message)
-                {
-                    SubCode = code
-                })
-                {
-                    StatusCode = (int)HttpStatusCode.Unauthorized
-                };
+                result = RestFull.Fail<object>(SubCode.Unauthorized, context.Exception.Message);
             }
             else if (context.Exception.IsFailure())
             {
@@ -63,20 +47,7 @@ namespace Sample.Ddd.Infrastructure.Filters
 
                 var message = ex.Failures.Select(c => c.Value.Join("")).Join("");
 
-                (var code, _) = SubCodeMessage.Message(SubCode.ValidError);
-
-                context.Result = new ObjectResult(new Result<object>()
-                {
-                    Code = 0,
-                    SubCode = code,
-                    Message = message,
-                    Data = null,
-                    ElapsedTime = -1,
-                    OperationTime = DateTime.Now
-                })
-                {
-                    StatusCode = (int)HttpStatusCode.OK
-                };
+                result = RestFull.Fail<object>(SubCode.ValidError, message);
             }
             else
             {
@@ -95,18 +66,15 @@ namespace Sample.Ddd.Infrastructure.Filters
                     logger.LogError(context.Exception.FormatMessage(str.ToString()));
                 }
 
-                (var code, _) = SubCodeMessage.Message(SubCode.Fail);
-
-                context.Result = new ObjectResult(new Result<object>(StateCode.Fail, context.Exception.Message)
-                {
-                    SubCode = code
-                })
-                {
-                    StatusCode = (int)HttpStatusCode.InternalServerError
-                };
-
-                base.OnException(context);
+                result = RestFull.Fail<object>(SubCode.Fail, context.Exception.Message);
             }
+
+            context.Result = new ObjectResult(result)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+
+            //base.OnException(context);
         }
     }
 }

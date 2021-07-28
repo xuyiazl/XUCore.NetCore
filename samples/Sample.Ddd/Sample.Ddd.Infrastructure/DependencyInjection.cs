@@ -17,7 +17,6 @@ using Sample.Ddd.Infrastructure.Events;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
-using XUCore.NetCore.EasyQuartz;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
@@ -118,7 +117,7 @@ namespace Sample.Ddd.Infrastructure
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
                 })
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(IMapFrom<>)));
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(DomainNotificationHandler)));
 
             // 注册上传服务
             services.AddUploadService();

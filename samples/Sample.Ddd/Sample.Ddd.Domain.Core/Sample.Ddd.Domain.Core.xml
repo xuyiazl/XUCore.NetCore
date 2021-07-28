@@ -322,5 +322,30 @@
             业务代码
             </summary>
         </member>
+        <member name="T:Sample.Ddd.Domain.Core.RestFull">
+            <summary>
+            标准化返回
+            </summary>
+        </member>
+        <member name="M:Sample.Ddd.Domain.Core.RestFull.Success``1(Sample.Ddd.Domain.Core.SubCode,System.String,``0)">
+            <summary>
+            返回成功消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sample.Ddd.Domain.Core.RestFull.Fail``1(Sample.Ddd.Domain.Core.SubCode,System.String,``0)">
+            <summary>
+            返回失败消息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="subCode"></param>
+            <param name="message"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
