@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "XUCore",
+  "classifications": [ "xucore.webapi2.template" ],
+  "name": "xucore webapi2 template",
+  "identity": "xucore.webapi2.template",
+  "groupIdentity": "xucore.webapi2.template",
+  "shortName": "xucore-webapi2-template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "XUCore.WebApi2.Template",
+  "preferNameDirectory": true
+}
