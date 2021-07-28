@@ -48,11 +48,14 @@
 | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Net5.Template)				| XUCore.Net5.Template				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Net5.Template.svg)](https://nuget.org/packages/XUCore.Net5.Template)					| [![nuget](https://img.shields.io/nuget/v/XUCore.Net5.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Net5.Template)						| Mvc/WebApi 模板（Ddd架构模式）				|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.WebApi.Template)			| XUCore.WebApi.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.WebApi.Template.svg)](https://nuget.org/packages/XUCore.WebApi.Template)				| [![nuget](https://img.shields.io/nuget/v/XUCore.WebApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.WebApi.Template)					| WebApi 模板（三层模式）						|
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.WebApi2.Template)			| XUCore.WebApi2.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.WebApi2.Template.svg)](https://nuget.org/packages/XUCore.WebApi2.Template)				| [![nuget](https://img.shields.io/nuget/v/XUCore.WebApi2.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.WebApi2.Template)					| WebApi2 模板（精简三层模式）						|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)		| XUCore.SimpleApi.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.SimpleApi.Template.svg)](https://nuget.org/packages/XUCore.SimpleApi.Template)		| [![nuget](https://img.shields.io/nuget/v/XUCore.SimpleApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)				| WebApi 模板（单层快速开发）					|
 
 
 [如何使用脚手架 XUCore.Net5.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Net5.Template)
 
 [如何使用脚手架 XUCore.WebApi.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.WebApi.Template)
+
+[如何使用脚手架 XUCore.WebApi2.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.WebApi2.Template)
 
 [如何使用脚手架 XUCore.SimpleApi.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.SimpleApi.Template)
