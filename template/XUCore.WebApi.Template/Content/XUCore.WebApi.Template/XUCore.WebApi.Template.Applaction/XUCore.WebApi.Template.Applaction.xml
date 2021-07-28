@@ -666,64 +666,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Success``1(System.String,System.String,``0)">
-            <summary>
-            返回成功消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Success``1(XUCore.WebApi.Template.Core.SubCode,``0)">
-            <summary>
-            返回成功消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Success``1(XUCore.WebApi.Template.Core.SubCode,System.String,``0)">
-            <summary>
-            返回成功消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Fail``1(System.String,System.String,``0)">
-            <summary>
-            返回失败消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Fail``1(XUCore.WebApi.Template.Core.SubCode,System.String,``0)">
-            <summary>
-            返回失败消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.WebApi.Template.Applaction.AppService.Fail``1(XUCore.WebApi.Template.Core.SubCode,``0)">
-            <summary>
-            返回失败消息
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="subCode"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.WebApi.Template.Applaction.JwtHandler">
             <summary>
             JWT 授权自定义处理程序

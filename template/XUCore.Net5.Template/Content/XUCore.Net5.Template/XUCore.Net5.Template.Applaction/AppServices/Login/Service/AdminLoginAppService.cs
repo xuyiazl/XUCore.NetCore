@@ -57,7 +57,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
-            return Success(SubCode.Success, new LoginTokenDto
+            return RestFull.Success(data: new LoginTokenDto
             {
                 Token = accessToken
             });
@@ -72,7 +72,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             await Task.CompletedTask;
 
-            return Success(SubCode.Success, data: new { _adminManager.AdminId, _adminManager.AdminName }.ToJson());
+            return RestFull.Success(SubCode.Success, data: new { _adminManager.AdminId, _adminManager.AdminName }.ToJson());
         }
 
         #endregion
@@ -90,7 +90,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             var res = await bus.SendCommand(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航
@@ -103,7 +103,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             var res = await bus.SendCommand(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航（快捷导航）
@@ -116,7 +116,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             var res = await bus.SendCommand(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -134,7 +134,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             var res = await bus.SendCommand(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取所有登录记录分页
@@ -147,7 +147,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             var res = await bus.SendCommand(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion

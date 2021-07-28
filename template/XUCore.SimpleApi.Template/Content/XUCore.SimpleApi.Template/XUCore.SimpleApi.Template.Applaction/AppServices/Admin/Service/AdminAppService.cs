@@ -74,10 +74,10 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             {
                 await mediator.Publish(new AdminUserCreateEvent(entity.Id, entity), cancellationToken);
 
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             }
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新账号信息
@@ -94,16 +94,16 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
-                return Success(SubCode.Fail, 0);
+                return RestFull.Fail(data: 0);
 
             entity = mapper.Map(request, entity);
 
             var res = db.Update(entity);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新密码
@@ -127,9 +127,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新指定字段内容
@@ -176,9 +176,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新状态
@@ -209,9 +209,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除账号（物理删除）
@@ -232,10 +232,10 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 //删除关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
 
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             }
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取账号信息
@@ -251,7 +251,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取账号信息（根据账号或手机号码）
@@ -272,7 +272,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                         .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync(cancellationToken);
 
-                    return Success(SubCode.Success, res);
+                    return RestFull.Success(data: res);
 
                 case AccountMode.Mobile:
 
@@ -281,10 +281,10 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                         .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                         .FirstOrDefaultAsync(cancellationToken);
 
-                    return Success(SubCode.Success, res);
+                    return RestFull.Success(data: res);
             }
 
-            return Success(SubCode.Fail, default(AdminUserDto));
+            return RestFull.Fail(data: default(AdminUserDto));
         }
         /// <summary>
         /// 检查账号或者手机号是否存在
@@ -324,7 +324,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 }
             }
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取账号分页
@@ -350,7 +350,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                    .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                    .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
 
-            return Success(SubCode.Success, res.ToModel());
+            return RestFull.Success(data: res.ToModel());
         }
 
         #endregion
@@ -383,7 +383,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 var res = await db.AddAsync(userRoles, cancellationToken: cancellationToken);
             }
 
-            return Success(SubCode.Success, 1);
+            return RestFull.Success(data: 1);
         }
         /// <summary>
         /// 获取账号关联的角色id集合
@@ -399,7 +399,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .Select(c => c.RoleId)
                 .ToListAsync(cancellationToken);
 
-            return Success(SubCode.Success, res.As<IList<long>>());
+            return RestFull.Success(data: res.As<IList<long>>());
         }
 
         #endregion
@@ -433,9 +433,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var res = await db.AddAsync(entity, cancellationToken: cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色信息
@@ -452,7 +452,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
-                return Success(SubCode.Fail, 0);
+                return RestFull.Fail(data: 0);
 
             entity = mapper.Map(request, entity);
 
@@ -472,9 +472,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var res = db.Update(entity);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色指定字段内容
@@ -500,9 +500,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色状态
@@ -534,9 +534,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除角色（物理删除）
@@ -557,10 +557,10 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 //删除用户关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.RoleId));
 
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             }
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取角色信息
@@ -576,7 +576,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取所有角色
@@ -591,7 +591,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return Success(SubCode.Success, res.As<IList<AdminRoleDto>>());
+            return RestFull.Success(data: res.As<IList<AdminRoleDto>>());
         }
         /// <summary>
         /// 获取角色分页
@@ -614,7 +614,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
 
-            return Success(SubCode.Success, res.ToModel());
+            return RestFull.Success(data: res.ToModel());
         }
         /// <summary>
         /// 获取角色关联的所有导航id集合
@@ -631,7 +631,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                           .Select(c => c.MenuId)
                           .ToListAsync();
 
-            return Success(SubCode.Success, res.As<IList<long>>());
+            return RestFull.Success(data: res.As<IList<long>>());
         }
 
         #endregion
@@ -655,9 +655,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var res = await db.AddAsync(entity, cancellationToken: cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航信息
@@ -673,16 +673,16 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             var entity = await db.Context.AdminAuthMenus.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
-                return Success(SubCode.Fail, 0);
+                return RestFull.Fail(data: 0);
 
             entity = mapper.Map(request, entity);
 
             var res = db.Update(entity);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航指定字段内容
@@ -717,9 +717,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航状态
@@ -750,9 +750,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             }
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除导航（物理删除）
@@ -770,10 +770,10 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             {
                 await db.DeleteAsync<AdminRoleMenuEntity>(c => ids.Contains(c.MenuId), cancellationToken);
 
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             }
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取导航信息
@@ -789,7 +789,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                   .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
                   .FirstOrDefaultAsync(cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取导航树形结构
@@ -805,7 +805,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
 
             var res = AuthMenuTree(list, 0);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         private IList<AdminMenuTreeDto> AuthMenuTree(IList<AdminMenuEntity> entities, long parentId)
@@ -838,7 +838,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                 .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return Success(SubCode.Success, res.As<IList<AdminMenuDto>>());
+            return RestFull.Success(data: res.As<IList<AdminMenuDto>>());
         }
 
         #endregion

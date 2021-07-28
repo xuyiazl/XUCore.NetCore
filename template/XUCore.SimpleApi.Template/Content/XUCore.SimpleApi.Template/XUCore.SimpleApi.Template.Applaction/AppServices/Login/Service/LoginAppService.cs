@@ -58,7 +58,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
 
             (var accessToken, var refreshToken) = await authService.LoginAsync(request, cancellationToken);
 
-            return Success(SubCode.Success, new LoginTokenDto
+            return RestFull.Success(data: new LoginTokenDto
             {
                 Token = accessToken
             });
@@ -71,7 +71,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         [HttpGet]
         public async Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken)
         {
-            return Success(SubCode.Success, data: new
+            return RestFull.Success(data: new
             {
                 authService.AdminId,
                 authService.AdminName
@@ -94,7 +94,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         {
             var res = await permissionService.ExistsAsync(adminId, onlyCode, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航
@@ -107,7 +107,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         {
             var res = await permissionService.GetMenusAsync(adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航（快捷导航）
@@ -120,7 +120,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         {
             var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -147,7 +147,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
                  .ProjectTo<LoginRecordDto>(mapper.ConfigurationProvider)
                  .ToListAsync(cancellationToken);
 
-            return Success(SubCode.Success, res.As<IList<LoginRecordDto>>());
+            return RestFull.Success(data: res.As<IList<LoginRecordDto>>());
         }
         /// <summary>
         /// 获取所有登录记录分页
@@ -169,7 +169,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
                  .ProjectTo<LoginRecordDto>(mapper.ConfigurationProvider)
                  .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
 
-            return Success(SubCode.Success, res.ToModel());
+            return RestFull.Success(data: res.ToModel());
         }
 
         #endregion

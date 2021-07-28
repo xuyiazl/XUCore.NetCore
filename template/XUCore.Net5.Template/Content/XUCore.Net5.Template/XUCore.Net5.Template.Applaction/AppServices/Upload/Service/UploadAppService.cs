@@ -54,7 +54,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Upload
 
             result.Url = $"https://www.xx.com/{result.FullPath.Replace("\\", "/")}";
 
-            return Success(SubCode.Success, result);
+            return RestFull.Success(data: result);
         }
         /// <summary>
         /// 上传图片
@@ -99,7 +99,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Upload
 
             //(var res, string url) = client.Upload("upload/images/master/2019/11/28/test111111.png", @"C:\Users\Nigel\Downloads\QQ图片20200611104303.png");
 
-            return Success(SubCode.Success, result);
+            return RestFull.Success(data: result);
         }
         /// <summary>
         /// 上传图片
@@ -143,7 +143,7 @@ namespace XUCore.Net5.Template.Application.AppServices.Upload
 
             //(var res, string url) = client.Upload("upload/images/master/2019/11/28/test111111.png", @"C:\Users\Nigel\Downloads\QQ图片20200611104303.png");
 
-            return Success(SubCode.Success, result);
+            return RestFull.Success(data: result);
         }
     }
 }

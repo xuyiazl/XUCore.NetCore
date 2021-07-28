@@ -42,11 +42,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.CreateAsync(command, cancellationToken);
 
             if (res > 0)
-            {
-                return Success(SubCode.Success, res);
-            }
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新账号信息
@@ -59,9 +57,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.UpdateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新密码
@@ -74,9 +72,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.UpdateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新指定字段内容
@@ -91,9 +89,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.UpdateAsync(id, field, value, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新状态
@@ -107,9 +105,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.UpdateAsync(ids, status, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除账号（物理删除）
@@ -122,9 +120,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.DeleteAsync(ids, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取账号信息
@@ -136,7 +134,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminUserService.GetByIdAsync(id, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取账号信息（根据账号或手机号码）
@@ -149,7 +147,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminUserService.GetByAccountAsync(accountMode, account, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 检查账号或者手机号是否存在
@@ -163,7 +161,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminUserService.AnyByAccountAsync(accountMode, account, notId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取账号分页
@@ -175,7 +173,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminUserService.GetPagedListAsync(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -193,9 +191,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminUserService.RelevanceRoleAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取账号关联的角色id集合
@@ -207,7 +205,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminUserService.GetRoleKeysAsync(adminId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -225,9 +223,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminRoleService.CreateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色信息
@@ -240,9 +238,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminRoleService.UpdateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色指定字段内容
@@ -257,9 +255,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminRoleService.UpdateAsync(id, field, value, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新角色状态
@@ -273,9 +271,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminRoleService.UpdateAsync(ids, status, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除角色（物理删除）
@@ -288,9 +286,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminRoleService.DeleteAsync(ids, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取角色信息
@@ -302,7 +300,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminRoleService.GetByIdAsync(id, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取所有角色
@@ -313,7 +311,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminRoleService.GetAllAsync(cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取角色分页
@@ -325,7 +323,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminRoleService.GetPageListAsync(command, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取角色关联的所有导航id集合
@@ -337,7 +335,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminRoleService.GetRelevanceMenuIdsAsync(roleId, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
@@ -355,9 +353,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminMenuService.CreateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航信息
@@ -370,9 +368,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminMenuService.UpdateAsync(command, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航指定字段内容
@@ -387,9 +385,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminMenuService.UpdateAsync(id, field, value, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 更新导航状态
@@ -403,9 +401,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminMenuService.UpdateAsync(ids, status, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 删除导航（物理删除）
@@ -418,9 +416,9 @@ namespace XUCore.WebApi.Template.Applaction.Admin
             var res = await adminMenuService.DeleteAsync(ids, cancellationToken);
 
             if (res > 0)
-                return Success(SubCode.Success, res);
+                return RestFull.Success(data: res);
             else
-                return Success(SubCode.Fail, res);
+                return RestFull.Fail(data: res);
         }
         /// <summary>
         /// 获取导航信息
@@ -432,7 +430,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminMenuService.GetByIdAsync(id, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取导航树形结构
@@ -443,7 +441,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminMenuService.GetListByTreeAsync(cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取导航列表
@@ -455,7 +453,7 @@ namespace XUCore.WebApi.Template.Applaction.Admin
         {
             var res = await adminMenuService.GetListByWeightAsync(isMenu, cancellationToken);
 
-            return Success(SubCode.Success, res);
+            return RestFull.Success(data: res);
         }
 
         #endregion
