@@ -75,6 +75,7 @@ namespace XUCore.NetCore.DataTest.DbRepository
 
         public DbSet<AdminUserEntity> User => Set<AdminUserEntity>();
         public DbSet<AdminUserAddressEntity> Address => Set<AdminUserAddressEntity>();
+        public DbSet<TestKeyEntity> TestKey => Set<TestKeyEntity>();
     }
 
     public interface INigelDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
