@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
@@ -40,7 +41,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateUserAsync(AdminUserCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -58,7 +59,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Result<int>> UpdateUserAsync(AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -76,7 +77,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Password")]
-        public async Task<Result<int>> UpdateUserAsync(AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -96,7 +97,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Field")]
-        public async Task<Result<int>> UpdateUserAsync(long id, string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -113,7 +114,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Status")]
-        public async Task<Result<int>> UpdateUserAsync(long[] ids, Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.UpdateAsync(ids, status, cancellationToken);
 
@@ -129,7 +130,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteUserAsync(long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteUserAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.DeleteAsync(ids, cancellationToken);
 
@@ -145,7 +146,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/User/{id}")]
-        public async Task<Result<AdminUserDto>> GetUserAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<Result<AdminUserDto>> GetUserAsync([Required] long id, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.GetByIdAsync(id, cancellationToken);
 
@@ -159,7 +160,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/User/Account")]
-        public async Task<Result<AdminUserDto>> GetUserByAccountAsync(AccountMode accountMode, string account, CancellationToken cancellationToken = default)
+        public async Task<Result<AdminUserDto>> GetUserByAccountAsync([Required] AccountMode accountMode, [Required] string account, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.GetByAccountAsync(accountMode, account, cancellationToken);
 
@@ -174,7 +175,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/User/Any")]
-        public async Task<Result<bool>> GetUserAnyAsync(AccountMode accountMode, string account, long notId, CancellationToken cancellationToken = default)
+        public async Task<Result<bool>> GetUserAnyAsync([Required] AccountMode accountMode, [Required] string account, [Required] long notId, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.AnyByAccountAsync(accountMode, account, notId, cancellationToken);
 
@@ -187,7 +188,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/User/Page")]
-        public async Task<Result<PagedModel<AdminUserDto>>> GetUserPagedAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<PagedModel<AdminUserDto>>> GetUserPagedAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -207,7 +208,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[controller]/User/RelevancRole")]
-        public async Task<Result<int>> CreateUserRelevanceRoleIdAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> CreateUserRelevanceRoleIdAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -225,7 +226,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/User/RelevancRole/{adminId}")]
-        public async Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync(long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.GetRoleKeysAsync(adminId, cancellationToken);
 
@@ -243,7 +244,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateRoleAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -261,7 +262,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Result<int>> UpdateRoleAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -281,7 +282,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Field")]
-        public async Task<Result<int>> UpdateRoleAsync(long id, string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -298,7 +299,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Status")]
-        public async Task<Result<int>> UpdateRoleAsync(long[] ids, Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.UpdateAsync(ids, status, cancellationToken);
 
@@ -314,7 +315,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteRoleAsync(long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteRoleAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.DeleteAsync(ids, cancellationToken);
 
@@ -330,7 +331,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Role/{id}")]
-        public async Task<Result<AdminRoleDto>> GetRoleAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<Result<AdminRoleDto>> GetRoleAsync([Required] long id, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.GetByIdAsync(id, cancellationToken);
 
@@ -355,7 +356,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Role/Page")]
-        public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePagedAsync(AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePagedAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -370,7 +371,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Role/RelevanceMenu/{roleId}")]
-        public async Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync(int roleId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync([Required] int roleId, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.GetRelevanceMenuIdsAsync(roleId, cancellationToken);
 
@@ -388,7 +389,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateMenuAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -406,7 +407,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<Result<int>> UpdateMenuAsync(AdminMenuUpdateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required][FromBody] AdminMenuUpdateCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 
@@ -426,7 +427,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Field")]
-        public async Task<Result<int>> UpdateMenuAsync(long id, string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -443,7 +444,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Status")]
-        public async Task<Result<int>> UpdateMenuAsync(long[] ids, Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.UpdateAsync(ids, status, cancellationToken);
 
@@ -459,7 +460,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteMenuAsync(long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteMenuAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.DeleteAsync(ids, cancellationToken);
 
@@ -475,7 +476,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Menu/{id}")]
-        public async Task<Result<AdminMenuDto>> GetMenuAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<Result<AdminMenuDto>> GetMenuAsync([Required] long id, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.GetByIdAsync(id, cancellationToken);
 
@@ -500,7 +501,7 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Menu/List")]
-        public async Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync(bool isMenu = true, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync([Required] bool isMenu = true, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.GetListByWeightAsync(isMenu, cancellationToken);
 

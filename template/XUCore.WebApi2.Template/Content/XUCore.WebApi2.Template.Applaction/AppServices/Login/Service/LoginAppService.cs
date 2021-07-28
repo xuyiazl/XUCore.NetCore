@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
@@ -43,7 +44,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<Result<LoginTokenDto>> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken)
+        public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
             request.IsVaild();
 
@@ -81,7 +82,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Exists")]
-        public async Task<Result<bool>> GetPermissionExistsAsync(long adminId, string onlyCode, CancellationToken cancellationToken = default)
+        public async Task<Result<bool>> GetPermissionExistsAsync([Required] long adminId, [Required] string onlyCode, CancellationToken cancellationToken = default)
         {
             var res = await permissionService.ExistsAsync(adminId, onlyCode, cancellationToken);
 
@@ -94,7 +95,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Menu")]
-        public async Task<Result<IList<PermissionMenuTreeDto>>> GetPermissionMenusAsync(long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<PermissionMenuTreeDto>>> GetPermissionMenusAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await permissionService.GetMenusAsync(adminId, cancellationToken);
 
@@ -107,7 +108,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Express")]
-        public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync(long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
 
@@ -126,7 +127,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Record/List")]
-        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync(int limit, long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync([Required] int limit, [Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await loginRecordService.GetListByAdminIdAsync(limit, adminId, cancellationToken);
 
@@ -139,7 +140,7 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Record/Page")]
-        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync(LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
             request.IsVaild();
 

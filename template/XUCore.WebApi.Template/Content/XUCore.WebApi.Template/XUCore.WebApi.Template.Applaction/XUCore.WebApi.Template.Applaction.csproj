@@ -16,4 +16,9 @@
 		<ProjectReference Include="..\XUCore.WebApi.Template.DbService\XUCore.WebApi.Template.DbService.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="XUCore.WebApi.Template.Applaction.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>

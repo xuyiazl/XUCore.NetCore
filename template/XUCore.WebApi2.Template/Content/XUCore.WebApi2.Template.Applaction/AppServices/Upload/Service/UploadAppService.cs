@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Helpers;
@@ -35,7 +36,7 @@ namespace XUCore.WebApi2.Template.Applaction.Upload
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[Controller]/File")]
-        public async Task<Result<XUCore.Files.FileInfo>> UploadFile(IFormFile formFile, CancellationToken cancellationToken)
+        public async Task<Result<XUCore.Files.FileInfo>> UploadFile([Required] IFormFile formFile, CancellationToken cancellationToken)
         {
             var param = new SingleFileUploadParam()
             {
@@ -59,7 +60,7 @@ namespace XUCore.WebApi2.Template.Applaction.Upload
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[Controller]/Image")]
-        public async Task<Result<ImageFileInfo>> UploadImage(IFormFile formFile, CancellationToken cancellationToken)
+        public async Task<Result<ImageFileInfo>> UploadImage([Required] IFormFile formFile, CancellationToken cancellationToken)
         {
             var param = new SingleImageUploadParam()
             {
@@ -104,7 +105,7 @@ namespace XUCore.WebApi2.Template.Applaction.Upload
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[Controller]/Base64")]
-        public async Task<Result<ImageFileInfo>> UploadImage(Base64Command request, CancellationToken cancellationToken)
+        public async Task<Result<ImageFileInfo>> UploadImage([Required][FromBody] Base64Command request, CancellationToken cancellationToken)
         {
             request.IsVaild();
 
