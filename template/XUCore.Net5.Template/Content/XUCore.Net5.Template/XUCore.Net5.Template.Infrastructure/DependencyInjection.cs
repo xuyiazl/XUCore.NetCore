@@ -117,7 +117,12 @@ namespace XUCore.Net5.Template.Infrastructure
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
                 })
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(DomainNotificationHandler)));
+                .AddFluentValidation(opt =>
+                {
+                    opt.ValidatorOptions.CascadeMode = FluentValidation.CascadeMode.Stop;
+                    opt.DisableDataAnnotationsValidation = false;
+                    opt.RegisterValidatorsFromAssemblyContaining(typeof(DomainNotificationHandler));
+                });
 
             // 注册上传服务
             services.AddUploadService();

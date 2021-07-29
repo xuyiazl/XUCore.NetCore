@@ -95,11 +95,6 @@ namespace XUCore.WebApi2.Template.Applaction
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
                 });
-                //.AddFluentValidation(opt =>
-                //{
-                //    //opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                //    opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
-                //});
 
             // 注入动态API
             services.AddDynamicWebApi();

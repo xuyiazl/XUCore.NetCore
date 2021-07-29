@@ -75,7 +75,7 @@ namespace XUCore.SimpleApi.Template.Applaction
                 .AddControllers()
                 .AddMessagePackFormatters(options =>
                 {
-                    options.JsonSerializerSettings.w = DateTimeZoneHandling.Local;
+                    options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
                     options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
 
                     //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
@@ -83,10 +83,6 @@ namespace XUCore.SimpleApi.Template.Applaction
                     options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
                 });
-                //.AddFluentValidation(opt =>
-                //{
-                //    opt.RegisterValidatorsFromAssemblyContaining(typeof(IAppService));
-                //});
 
             // 注入动态API
             services.AddDynamicWebApi();

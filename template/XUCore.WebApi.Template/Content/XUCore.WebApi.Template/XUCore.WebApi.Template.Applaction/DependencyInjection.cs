@@ -53,7 +53,7 @@ namespace XUCore.WebApi.Template.Applaction
             );
 
             // 注入redis插件
-            services.AddRedisService().AddJsonRedisSerializer();
+            //services.AddRedisService().AddJsonRedisSerializer();
 
             //// 注入缓存拦截器（Redis分布式缓存）
             //services.AddCacheService<RedisCacheService>((option) =>
@@ -72,34 +72,31 @@ namespace XUCore.WebApi.Template.Applaction
                     builder.AllowAnyHeader();
                     builder.AllowAnyOrigin();
                     builder.AllowAnyMethod();
-                    //builder.AllowCredentials(); 该方法不能和AllowAnyOrigin 同时使用，否则会触发异常：The CORS protocol does not allow specifying a wildcard (any) origin and credentials at the same time. Configure the CORS policy by listing individual origins if credentials needs to be supported
                 })
             );
 
             // 注册jwt
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);//enableGlobalAuthorize: true
 
-            services.AddControllers(options =>
-            {
-                options.MaxModelValidationErrors = 50;
-                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            })
-            .AddMessagePackFormatters(options =>
-            {
-                options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-                options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
+            services
+                .AddControllers()
+                .AddMessagePackFormatters(options =>
+                {
+                    options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                    options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
 
-                //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
-                //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
-                options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
-                options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+                    //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
+                    //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
+                    options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
+                    options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-            })
-            .AddFluentValidation(opt =>
-            {
-                //opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
-            });
+                })
+                .AddFluentValidation(opt =>
+                {
+                    opt.ValidatorOptions.CascadeMode = FluentValidation.CascadeMode.Stop;
+                    opt.DisableDataAnnotationsValidation = false;
+                    opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
+                });
 
             // 统一返回验证的信息
             services.Configure<ApiBehaviorOptions>(options =>

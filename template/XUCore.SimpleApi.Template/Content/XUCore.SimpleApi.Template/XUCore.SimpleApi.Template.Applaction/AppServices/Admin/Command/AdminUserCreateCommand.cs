@@ -88,9 +88,9 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
                     .Matches("^[1][3-9]\\d{9}$").WithMessage("手机号格式不正确。")
                     .MustAsync(async (account, cancel) =>
                     {
-                        var res = await Web.GetService<IAdminUserService>().AnyByAccountAsync(AccountMode.Mobile, account, 0, cancel);
+                        var res = await Web.GetService<IAdminAppService>().AnyUserAsync(AccountMode.Mobile, account, 0, cancel);
 
-                        return !res;
+                        return !res.Data;
                     })
                     .WithMessage(c => $"该手机号码已存在。");
 
