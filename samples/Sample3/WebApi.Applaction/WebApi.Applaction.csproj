@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>WebApi.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\WebApi.DbService\WebApi.DbService.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="WebApi.Applaction.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

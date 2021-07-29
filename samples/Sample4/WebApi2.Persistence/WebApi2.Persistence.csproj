@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>WebApi2.Persistence.xml</DocumentationFile>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7"></PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7"></PackageReference>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.4" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\WebApi2.Core\WebApi2.Core.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Update="WebApi2.Persistence.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>

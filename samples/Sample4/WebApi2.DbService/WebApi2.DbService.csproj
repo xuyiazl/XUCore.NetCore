@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>WebApi2.DbService.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\WebApi2.Core\WebApi2.Core.csproj" />
+		<ProjectReference Include="..\WebApi2.Persistence\WebApi2.Persistence.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="WebApi2.DbService.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>
