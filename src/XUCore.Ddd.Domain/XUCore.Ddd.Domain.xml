@@ -50,35 +50,35 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.Command`1">
+        <member name="T:XUCore.Ddd.Domain.Commands.Command">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.Command`1.ValidationResult">
+        <member name="P:XUCore.Ddd.Domain.Commands.Command.ValidationResult">
             <summary>
             命令验证
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.#ctor">
+        <member name="M:XUCore.Ddd.Domain.Commands.Command.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.GetErrors">
+        <member name="M:XUCore.Ddd.Domain.Commands.Command.GetErrors">
             <summary>
             获取验证的错误消息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.GetErrors(System.String)">
+        <member name="M:XUCore.Ddd.Domain.Commands.Command.GetErrors(System.String)">
             <summary>
             获取验证的错误消息
             </summary>
             <param name="separator"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.IsVaild">
+        <member name="M:XUCore.Ddd.Domain.Commands.Command.IsVaild">
             <summary>
             是否验证通过
             </summary>
@@ -131,6 +131,16 @@
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.Commands.Command`1">
+            <summary>
+            抽象命令基类
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:XUCore.Ddd.Domain.Commands.CommandId`2">
             <summary>

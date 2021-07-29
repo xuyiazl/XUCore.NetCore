@@ -1,25 +1,13 @@
-﻿using System;
+﻿using FluentValidation.Results;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Results;
-using MediatR;
-using XUCore.Ddd.Domain.Events;
 
 namespace XUCore.Ddd.Domain.Commands
 {
     /// <summary>
     /// 抽象命令基类
     /// </summary>
-    //public abstract class Command<TResponse> : Message, IRequest<TResponse>
-    public abstract class Command<TResponse> : IRequest<TResponse>
+    public abstract class Command
     {
-        ///// <summary>
-        ///// 时间戳
-        ///// </summary>
-        //public DateTime Timestamp { get; private set; }
         /// <summary>
         /// 命令验证
         /// </summary>
@@ -33,7 +21,6 @@ namespace XUCore.Ddd.Domain.Commands
         /// </summary>
         protected Command()
         {
-            //Timestamp = DateTime.Now;
             ValidationResult = new ValidationResult();
         }
         /// <summary>
