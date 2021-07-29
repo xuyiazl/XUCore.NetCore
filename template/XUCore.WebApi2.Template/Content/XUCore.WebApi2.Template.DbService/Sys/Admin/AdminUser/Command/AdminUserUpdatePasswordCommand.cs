@@ -40,8 +40,8 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             public Validator()
             {
                 RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
-                RuleFor(x => x.OldPassword).NotEmpty().MaximumLength(50).WithName("旧密码");
-                RuleFor(x => x.NewPassword).NotEmpty().MaximumLength(50).When(c => c.OldPassword != c.NewPassword).WithName("新密码");
+                RuleFor(x => x.OldPassword).NotEmpty().MaximumLength(30).WithName("旧密码");
+                RuleFor(x => x.NewPassword).NotEmpty().MaximumLength(30).WithName("新密码").NotEqual(c => c.OldPassword).WithName("新密码不能和旧密码相同");
             }
         }
     }

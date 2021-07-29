@@ -75,16 +75,18 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
                     })
                     .WithMessage(c => $"该账号已存在。");
 
-                RuleFor(x => x.Mobile).NotEmpty().MaximumLength(11).WithName("手机号码")
+                RuleFor(x => x.Mobile)
+                    .NotEmpty()
+                    .Matches("^[1][3-9]\\d{9}$").WithMessage("手机号格式不正确。")
                     .MustAsync(async (account, cancel) =>
                     {
-                        var res = await adminUserService.AnyByAccountAsync(AccountMode.Mobile, account, 0, cancel);
+                        var res = await Web.GetService<IAdminUserService>().AnyByAccountAsync(AccountMode.Mobile, account, 0, cancel);
 
                         return !res;
                     })
                     .WithMessage(c => $"该手机号码已存在。");
 
-                RuleFor(x => x.Password).NotEmpty().MaximumLength(50).WithName("密码");
+                RuleFor(x => x.Password).NotEmpty().MaximumLength(30).WithName("密码");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
                 RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
                 RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");

@@ -57,7 +57,7 @@ namespace XUCore.WebApi2.Template.Applaction
             );
 
             // 注入redis插件
-            services.AddRedisService().AddJsonRedisSerializer();
+            //services.AddRedisService().AddJsonRedisSerializer();
 
             //// 注入缓存拦截器（Redis分布式缓存）
             //services.AddCacheService<RedisCacheService>((option) =>
@@ -94,12 +94,12 @@ namespace XUCore.WebApi2.Template.Applaction
                     options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
-                })
-                .AddFluentValidation(opt =>
-                {
-                    //opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                    opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
                 });
+                //.AddFluentValidation(opt =>
+                //{
+                //    //opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                //    opt.RegisterValidatorsFromAssemblyContaining(typeof(IDbService));
+                //});
 
             // 注入动态API
             services.AddDynamicWebApi();
