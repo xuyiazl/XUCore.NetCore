@@ -11,6 +11,7 @@ namespace XUCore.WebApi2.Template.Applaction
     //[DynamicWebApi(Module = "v1")]
     [DynamicWebApi]
     [ApiError]
+    [ApiFluentValidationFilter]
     [ApiElapsedTime]
     [MessagePackResponseContentType]
     public class AppService : IAppService

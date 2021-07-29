@@ -46,8 +46,6 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
-            request.IsVaild();
-
             (var accessToken, var refreshToken) = await authService.LoginAsync(request, cancellationToken);
 
             return RestFull.Success(data: new LoginTokenDto
@@ -142,8 +140,6 @@ namespace XUCore.WebApi2.Template.Applaction.Login
         [HttpGet("/api/[controller]/Record/Page")]
         public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await loginRecordService.GetPageListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);

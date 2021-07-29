@@ -8,7 +8,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 登录命令
     /// </summary>
-    public class AdminUserLoginCommand
+    public class AdminUserLoginCommand : Command<bool>
     {
         /// <summary>
         /// 登录账号

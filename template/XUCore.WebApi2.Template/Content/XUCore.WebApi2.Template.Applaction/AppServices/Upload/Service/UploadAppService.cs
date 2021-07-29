@@ -107,8 +107,6 @@ namespace XUCore.WebApi2.Template.Applaction.Upload
         [HttpPost("/api/[Controller]/Base64")]
         public async Task<Result<ImageFileInfo>> UploadImage([Required][FromBody] Base64Command request, CancellationToken cancellationToken)
         {
-            request.IsVaild();
-
             var param = new SingleImageBase64UploadParam()
             {
                 Base64String = request.Base64,

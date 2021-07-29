@@ -54,8 +54,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
-            request.IsVaild();
-
             (var accessToken, var refreshToken) = await authService.LoginAsync(request, cancellationToken);
 
             return RestFull.Success(data: new LoginTokenDto
@@ -158,8 +156,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         [HttpGet("/api/[controller]/Record/Page")]
         public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await View.Create(db.Context)
 
                  .WhereIf(c => c.Name.Contains(request.Search) || c.Mobile.Contains(request.Search) || c.UserName.Contains(request.Search), !string.IsNullOrEmpty(request.Search))

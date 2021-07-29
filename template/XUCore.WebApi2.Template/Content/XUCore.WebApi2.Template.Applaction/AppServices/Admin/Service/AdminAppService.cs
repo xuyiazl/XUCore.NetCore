@@ -43,8 +43,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPost]
         public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminUserService.CreateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -61,8 +59,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPut]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminUserService.UpdateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -79,8 +75,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPut("Password")]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminUserService.UpdateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -190,8 +184,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpGet("/api/[controller]/User/Page")]
         public async Task<Result<PagedModel<AdminUserDto>>> GetUserPagedAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminUserService.GetPagedListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
@@ -210,8 +202,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPost("/api/[controller]/User/RelevancRole")]
         public async Task<Result<int>> CreateUserRelevanceRoleIdAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminUserService.RelevanceRoleAsync(request, cancellationToken);
 
             if (res > 0)
@@ -246,8 +236,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPost]
         public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminRoleService.CreateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -264,8 +252,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPut]
         public async Task<Result<int>> UpdateRoleAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminRoleService.UpdateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -358,8 +344,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpGet("/api/[controller]/Role/Page")]
         public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePagedAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminRoleService.GetPageListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
@@ -391,8 +375,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPost]
         public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminMenuService.CreateAsync(request, cancellationToken);
 
             if (res > 0)
@@ -409,8 +391,6 @@ namespace XUCore.WebApi2.Template.Applaction.Admin
         [HttpPut]
         public async Task<Result<int>> UpdateMenuAsync([Required][FromBody] AdminMenuUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await adminMenuService.UpdateAsync(request, cancellationToken);
 
             if (res > 0)

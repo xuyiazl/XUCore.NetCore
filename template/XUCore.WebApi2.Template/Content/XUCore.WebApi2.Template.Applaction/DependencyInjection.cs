@@ -2,25 +2,20 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using XUCore.Extensions;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
-using XUCore.NetCore.Redis;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using XUCore.WebApi2.Template.Core;
@@ -94,6 +89,11 @@ namespace XUCore.WebApi2.Template.Applaction
                     options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
 
+                })
+                .AddFluentValidation(opt =>
+                {
+                    opt.ValidatorOptions.CascadeMode = FluentValidation.CascadeMode.Stop;
+                    opt.DisableDataAnnotationsValidation = false;
                 });
 
             // 注入动态API

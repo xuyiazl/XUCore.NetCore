@@ -82,6 +82,11 @@ namespace XUCore.SimpleApi.Template.Applaction
                     //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
                     options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
                     options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+                })
+                .AddFluentValidation(opt =>
+                {
+                    opt.ValidatorOptions.CascadeMode = FluentValidation.CascadeMode.Stop;
+                    opt.DisableDataAnnotationsValidation = false;
                 });
 
             // 注入动态API

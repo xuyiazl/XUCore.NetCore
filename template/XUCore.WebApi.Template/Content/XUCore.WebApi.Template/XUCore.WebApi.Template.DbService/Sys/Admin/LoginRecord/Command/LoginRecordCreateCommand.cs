@@ -9,7 +9,7 @@ using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
 {
-    public class LoginRecordCreateCommand : IMapFrom<LoginRecordEntity>
+    public class LoginRecordCreateCommand : Command<bool>, IMapFrom<LoginRecordEntity>
     {
         /// <summary>
         /// 管理员id

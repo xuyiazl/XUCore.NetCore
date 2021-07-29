@@ -13,7 +13,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 创建管理员命令
     /// </summary>
-    public class AdminUserCreateCommand : IMapFrom<AdminUserEntity>
+    public class AdminUserCreateCommand : Command<bool>, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 账号

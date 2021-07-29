@@ -53,8 +53,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
 
             //角色操作
@@ -89,8 +87,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
@@ -114,8 +110,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [HttpPut("Password")]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var admin = await db.Context.AdminUser.FindAsync(request.Id);
 
             request.NewPassword = Encrypt.Md5By32(request.NewPassword);
@@ -335,8 +329,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [HttpGet("/api/[controller]/User/Page")]
         public async Task<Result<PagedModel<AdminUserDto>>> GetUserPageAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await db.Context.AdminUser
 
                    .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
@@ -366,8 +358,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [HttpPost("/api/[controller]/User/RelevancRole")]
         public async Task<Result<int>> CreateUserRelevanceRoleAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             //先清空用户的角色，确保没有冗余的数据
             await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
 
@@ -416,8 +406,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
 
             //保存关联导航
@@ -447,8 +435,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
@@ -602,8 +588,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [HttpGet("/api/[controller]/Role/Page")]
         public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePageAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var res = await db.Context.AdminAuthRole
 
                 .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
@@ -648,8 +632,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = mapper.Map<AdminMenuCreateCommand, AdminMenuEntity>(request);
 
             var res = await db.AddAsync(entity, cancellationToken: cancellationToken);
@@ -668,8 +650,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         [HttpPut]
         public async Task<Result<int>> UpdateMenuAsync([Required][FromBody] AdminMenuUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
             var entity = await db.Context.AdminAuthMenus.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
