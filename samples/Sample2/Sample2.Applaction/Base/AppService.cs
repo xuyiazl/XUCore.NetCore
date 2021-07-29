@@ -3,10 +3,10 @@ using XUCore.NetCore;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Filters;
 using XUCore.NetCore.MessagePack;
-using Sample.Mini.Applaction.Filters;
-using Sample.Mini.Core;
+using Sample2.Applaction.Filters;
+using Sample2.Core;
 
-namespace Sample.Mini.Applaction
+namespace Sample2.Applaction
 {
     //[DynamicWebApi(Module = "v1")]
     [DynamicWebApi]

@@ -7,6 +7,7 @@ using Sample.Ddd.Infrastructure.Filters;
 using XUCore.NetCore;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Filters;
+using XUCore.NetCore.MessagePack;
 
 namespace Sample.Ddd.Applaction.Common
 {
@@ -14,6 +15,7 @@ namespace Sample.Ddd.Applaction.Common
     [DynamicWebApi]
     [ApiError]
     [ApiElapsedTime]
+    [MessagePackResponseContentType]
     public class AppService : IAppService
     {
         // 中介者 总线
