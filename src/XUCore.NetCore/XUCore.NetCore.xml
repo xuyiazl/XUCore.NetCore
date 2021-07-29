@@ -975,14 +975,6 @@
             <param name="pageName"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.HttpContextExtensions.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            获取 Action 特性
-            </summary>
-            <typeparam name="TAttribute"></typeparam>
-            <param name="httpContext"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeAttribute">
             <summary>
             API查询时间
@@ -2682,7 +2674,7 @@
             状态码
             </summary>
         </member>
-        <member name="F:XUCore.NetCore.StateCode.Ok">
+        <member name="F:XUCore.NetCore.StateCode.Success">
             <summary>
             成功
             </summary>
@@ -2993,6 +2985,14 @@
             <summary>
             裁剪缩略图尺寸 item = 300x400
             </summary>
+        </member>
+        <member name="M:XUCore.HttpContextExtensions.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"></param>
+            <returns></returns>
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperViewExtensions.AddMvcAction(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>

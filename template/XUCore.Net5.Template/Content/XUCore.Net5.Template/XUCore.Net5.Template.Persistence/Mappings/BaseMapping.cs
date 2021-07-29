@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Linq.Expressions;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 
 namespace XUCore.Net5.Template.Persistence.Mappings
 {

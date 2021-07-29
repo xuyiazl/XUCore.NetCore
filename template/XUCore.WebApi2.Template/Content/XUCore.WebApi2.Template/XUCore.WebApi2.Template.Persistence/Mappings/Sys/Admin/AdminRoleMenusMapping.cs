@@ -1,7 +1,7 @@
 ﻿using XUCore.WebApi2.Template.Persistence.Entities.Sys.Admin;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 
 namespace XUCore.WebApi2.Template.Persistence.Mappings.Sys.Admin
 {

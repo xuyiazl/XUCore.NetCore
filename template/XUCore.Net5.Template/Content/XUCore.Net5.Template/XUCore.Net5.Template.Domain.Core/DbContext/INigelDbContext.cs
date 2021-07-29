@@ -1,7 +1,7 @@
 ﻿using XUCore.Net5.Template.Domain.Core.Entities;
 using XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin;
 using Microsoft.EntityFrameworkCore;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 
 namespace XUCore.Net5.Template.Domain.Core
 {

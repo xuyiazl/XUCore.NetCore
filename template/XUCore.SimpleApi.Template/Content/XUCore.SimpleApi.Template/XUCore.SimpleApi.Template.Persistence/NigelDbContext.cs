@@ -1,7 +1,7 @@
 ﻿using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 
 namespace XUCore.SimpleApi.Template.Persistence
 {

@@ -11,7 +11,7 @@ namespace XUCore.NetCore
         /// 成功
         /// </summary>
         [Description("成功")]
-        Ok = 0,
+        Success = 0,
 
         /// <summary>
         /// 失败

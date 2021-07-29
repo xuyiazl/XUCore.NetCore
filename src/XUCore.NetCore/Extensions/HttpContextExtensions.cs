@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore
+namespace XUCore
 {
     public static class HttpContextExtensions
     {

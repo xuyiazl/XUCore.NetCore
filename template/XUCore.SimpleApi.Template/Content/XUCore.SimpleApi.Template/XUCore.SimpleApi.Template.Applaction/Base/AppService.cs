@@ -1,18 +1,16 @@
-﻿using System;
-using XUCore.NetCore;
+﻿using XUCore.Ddd.Domain.Filters;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Filters;
 using XUCore.NetCore.MessagePack;
 using XUCore.SimpleApi.Template.Applaction.Filters;
-using XUCore.SimpleApi.Template.Core;
 
 namespace XUCore.SimpleApi.Template.Applaction
 {
     //[DynamicWebApi(Module = "v1")]
     [DynamicWebApi]
     [ApiError]
-    [ApiFluentValidationFilter]
     [ApiElapsedTime]
+    [CommandValidation]
     [MessagePackResponseContentType]
     public class AppService : IAppService
     {

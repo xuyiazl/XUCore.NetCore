@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin;
-using XUCore.NetCore.Data.DbService;
+using XUCore.NetCore.Data;
 
 namespace XUCore.Net5.Template.Persistence.Mappings.Sys.Admin
 {

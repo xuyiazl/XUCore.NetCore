@@ -35,7 +35,7 @@ namespace XUCore.NetCore.Controllers
         {
             if (message == null)
                 message = R.Success;
-            return new Result(StateCode.Ok, subCode, message, data);
+            return new Result(StateCode.Success, subCode, message, data);
         }
 
         /// <summary>

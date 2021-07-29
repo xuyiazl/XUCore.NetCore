@@ -58,7 +58,7 @@ namespace XUCore.WebApi.Template.Core
         {
             var msg = GetMessage(subCode);
 
-            return new Result<T>(StateCode.Ok, msg.SubCode, message.IsEmpty() ? msg.Message : message, data)
+            return new Result<T>(StateCode.Success, msg.SubCode, message.IsEmpty() ? msg.Message : message, data)
             {
                 ElapsedTime = -1,
                 OperationTime = DateTime.Now

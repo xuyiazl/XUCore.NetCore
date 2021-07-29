@@ -12,10 +12,5 @@ namespace XUCore.NetCore.Data
         {
             SetIndentity(t => t.Id);
         }
-
-        public override void Configure(EntityTypeBuilder<TEntity> builder)
-        {
-            base.Configure(builder);
-        }
     }
 }
