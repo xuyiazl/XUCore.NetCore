@@ -16,6 +16,11 @@ namespace XUCore.NetCore.DynamicWebApi
             DefaultHttpVerb = "POST";
             DefaultApiPrefix = "api";
             AssemblyDynamicWebApiOptions = new Dictionary<Assembly, AssemblyDynamicWebApiOptions>();
+            SplitActionCamelCase = false;
+            SplitActionCamelCaseSeparator = "-";
+            SplitControllerCamelCase = false;
+            SplitControllerCamelCaseSeparator = "-";
+            VersionSeparator = "@";
         }
 
 
@@ -48,6 +53,26 @@ namespace XUCore.NetCore.DynamicWebApi
         /// Default value is {"Async"}.
         /// </summary>
         public List<string> RemoveActionPostfixes { get; set; }
+        /// <summary>
+        /// 是否将Controller驼峰拆分
+        /// </summary>
+        public bool SplitControllerCamelCase { get; set; }
+        /// <summary>
+        /// Controller驼峰拆分分隔符
+        /// </summary>
+        public string SplitControllerCamelCaseSeparator { get; set; }
+        /// <summary>
+        /// 是否将Action驼峰拆分
+        /// </summary>
+        public bool SplitActionCamelCase { get; set; }
+        /// <summary>
+        /// Action驼峰拆分分隔符
+        /// </summary>
+        public string SplitActionCamelCaseSeparator { get; set; }
+        /// <summary>
+        /// 版本分隔符
+        /// </summary>
+        public string VersionSeparator { get; set; }
 
         /// <summary>
         /// Ignore MVC Form Binding types.

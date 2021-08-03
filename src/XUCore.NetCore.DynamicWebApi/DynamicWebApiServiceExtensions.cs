@@ -36,6 +36,11 @@ namespace XUCore.NetCore.DynamicWebApi
             AppConsts.FormBodyBindingIgnoredTypes = options.FormBodyBindingIgnoredTypes;
             AppConsts.GetRestFulActionName = options.GetRestFulActionName;
             AppConsts.AssemblyDynamicWebApiOptions = options.AssemblyDynamicWebApiOptions;
+            AppConsts.SplitActionCamelCase = options.SplitActionCamelCase;
+            AppConsts.SplitActionCamelCaseSeparator = options.SplitActionCamelCaseSeparator;
+            AppConsts.SplitControllerCamelCase = options.SplitControllerCamelCase;
+            AppConsts.SplitControllerCamelCaseSeparator = options.SplitControllerCamelCaseSeparator;
+            AppConsts.VersionSeparator = options.VersionSeparator;
 
             var partManager = services.GetSingletonInstanceOrNull<ApplicationPartManager>();
 

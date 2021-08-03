@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -187,6 +188,20 @@ namespace XUCore.NetCore.DynamicWebApi.Helper
             }
         }
 
+        /// <summary>
+        /// 切割骆驼命名式字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string[] SplitCamelCase(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str)) return new string[] { str };
+            if (str.Length == 1) return new string[] { str };
+
+            return Regex.Split(str, @"(?=\p{Lu}\p{Ll})|(?<=\p{Ll})(?=\p{Lu})")
+                .Where(u => u.Length > 0)
+                .ToArray();
+        }
 
     }
 }

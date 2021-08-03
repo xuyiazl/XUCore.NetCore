@@ -30,9 +30,19 @@
             <param name="apiPrefix">Routing prefix for all APIs</param>
             <param name="httpVerb">API HTTP Verb.</param>
         </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiAttribute.Name">
+            <summary>
+            Controller Name
+            </summary>
+        </member>
         <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiAttribute.Module">
             <summary>
             Equivalent to AreaName
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiAttribute.Version">
+            <summary>
+            版本号
             </summary>
         </member>
         <member name="M:XUCore.NetCore.DynamicWebApi.DynamicWebApiConvention.CheckNoMapMethod(Microsoft.AspNetCore.Mvc.ApplicationModels.ActionModel)">
@@ -77,6 +87,31 @@
             Default value is {"Async"}.
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.SplitControllerCamelCase">
+            <summary>
+            是否将Controller驼峰拆分
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.SplitControllerCamelCaseSeparator">
+            <summary>
+            Controller驼峰拆分分隔符
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.SplitActionCamelCase">
+            <summary>
+            是否将Action驼峰拆分
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.SplitActionCamelCaseSeparator">
+            <summary>
+            Action驼峰拆分分隔符
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.VersionSeparator">
+            <summary>
+            版本分隔符
+            </summary>
+        </member>
         <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.FormBodyBindingIgnoredTypes">
             <summary>
             Ignore MVC Form Binding types.
@@ -116,6 +151,13 @@
             </summary>
             <param name="services"></param>
             <param name="options">configuration</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.DynamicWebApi.Helper.ExtensionMethods.SplitCamelCase(System.String)">
+            <summary>
+            切割骆驼命名式字符串
+            </summary>
+            <param name="str"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.DynamicWebApi.Helper.ReflectionHelper.GetSingleAttributeOrNull``1(System.Reflection.MemberInfo,System.Boolean)">

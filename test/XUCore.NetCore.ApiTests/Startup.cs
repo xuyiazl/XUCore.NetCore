@@ -139,7 +139,11 @@ namespace XUCore.ApiTests
 
             });
 
-            services.AddDynamicWebApi();
+            services.AddDynamicWebApi(opt =>
+            {
+                opt.SplitActionCamelCase = true;
+                opt.SplitActionCamelCaseSeparator = "-";
+            });
 
             // ×Ô¶¨ÒåÅäÖÃ
             //services.AddDynamicWebApi((options) =>

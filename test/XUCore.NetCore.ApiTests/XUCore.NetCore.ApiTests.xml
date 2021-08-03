@@ -62,38 +62,38 @@
             json数据
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Get(System.Int32)">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.Get(System.Int32)">
             <summary>
             Get An Apple.
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.GetAllAsync">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.GetAllAsync">
             <summary>
             Get  All Apple Async.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Get">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.Get">
             <summary>
             Get All Apple.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.GetBigApple">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.GetBigApple">
             <summary>
             Get All Apple.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Update(XUCore.NetCore.ApiTests.Dtos.UpdateAppleDto)">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.Update(XUCore.NetCore.ApiTests.Dtos.UpdateAppleDto)">
             <summary>
             Update Apple
             </summary>
             <param name="dto"></param>
         </member>
-        <member name="M:XUCore.NetCore.ApiTests.Dynamic.AppleAppService.Delete(System.Int32)">
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.Delete(System.Int32)">
             <summary>
             Delete Apple
             </summary>

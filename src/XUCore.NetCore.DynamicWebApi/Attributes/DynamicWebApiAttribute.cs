@@ -11,9 +11,17 @@ namespace XUCore.NetCore.DynamicWebApi
     public class DynamicWebApiAttribute : Attribute
     {
         /// <summary>
+        /// Controller Name
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// Equivalent to AreaName
         /// </summary>
         public string Module { get; set; }
+        /// <summary>
+        /// 版本号
+        /// </summary>
+        public string Version { get; set; }
 
         internal static bool IsExplicitlyEnabledFor(Type type)
         {

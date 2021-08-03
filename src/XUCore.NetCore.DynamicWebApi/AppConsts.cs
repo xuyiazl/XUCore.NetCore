@@ -22,6 +22,16 @@ namespace XUCore.NetCore.DynamicWebApi
 
         public static Func<string, string> GetRestFulActionName { get; set; }
 
+        public static bool SplitControllerCamelCase { get; set; }
+
+        public static string SplitControllerCamelCaseSeparator { get; set; }
+
+        public static bool SplitActionCamelCase { get; set; }
+
+        public static string SplitActionCamelCaseSeparator { get; set; }
+
+        public static string VersionSeparator { get; set; }
+
         public static Dictionary<Assembly, AssemblyDynamicWebApiOptions> AssemblyDynamicWebApiOptions { get; set; }
 
         static AppConsts()

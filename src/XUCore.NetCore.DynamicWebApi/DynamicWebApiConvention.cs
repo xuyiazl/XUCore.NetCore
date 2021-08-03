@@ -22,8 +22,8 @@ namespace XUCore.NetCore.DynamicWebApi
                 var dynamicWebApiAttr = ReflectionHelper.GetSingleAttributeOrDefaultByFullSearch<DynamicWebApiAttribute>(type.GetTypeInfo());
                 if (typeof(IDynamicWebApi).GetTypeInfo().IsAssignableFrom(type))
                 {
-                    controller.ControllerName = controller.ControllerName.RemovePostFix(AppConsts.ControllerPostfixes.ToArray());
                     ConfigureArea(controller, dynamicWebApiAttr);
+                    ConfigureController(controller, dynamicWebApiAttr);
                     ConfigureDynamicWebApi(controller, dynamicWebApiAttr);
                 }
                 else
@@ -31,6 +31,7 @@ namespace XUCore.NetCore.DynamicWebApi
                     if (dynamicWebApiAttr != null)
                     {
                         ConfigureArea(controller, dynamicWebApiAttr);
+                        ConfigureController(controller, dynamicWebApiAttr);
                         ConfigureDynamicWebApi(controller, dynamicWebApiAttr);
                     }
                 }
@@ -41,9 +42,7 @@ namespace XUCore.NetCore.DynamicWebApi
         private void ConfigureArea(ControllerModel controller, DynamicWebApiAttribute attr)
         {
             if (attr == null)
-            {
                 throw new ArgumentException(nameof(attr));
-            }
 
             if (!controller.RouteValues.ContainsKey("area"))
             {
@@ -56,7 +55,23 @@ namespace XUCore.NetCore.DynamicWebApi
                     controller.RouteValues["area"] = AppConsts.DefaultAreaName;
                 }
             }
+        }
 
+        private void ConfigureController(ControllerModel controller, DynamicWebApiAttribute attr)
+        {
+            if (attr == null)
+                throw new ArgumentException(nameof(attr));
+
+            if (!string.IsNullOrEmpty(attr.Name))
+                controller.ControllerName = attr.Name;
+
+            controller.ControllerName = controller.ControllerName.RemovePostFix(AppConsts.ControllerPostfixes.ToArray());
+
+            if (AppConsts.SplitControllerCamelCase)
+                controller.ControllerName = string.Join(AppConsts.SplitControllerCamelCaseSeparator, controller.ControllerName.SplitCamelCase());
+
+            if (!string.IsNullOrEmpty(attr.Version))
+                controller.ControllerName = $"{ controller.ControllerName }{AppConsts.VersionSeparator}{ attr.Version }";
         }
 
         private void ConfigureDynamicWebApi(ControllerModel controller, DynamicWebApiAttribute controllerAttr)
@@ -200,10 +215,7 @@ namespace XUCore.NetCore.DynamicWebApi
 
             var nonAttr = ReflectionHelper.GetSingleAttributeOrDefault<NonDynamicWebApiAttribute>(action.ActionMethod);
 
-            if (nonAttr != null)
-            {
-                return;
-            }
+            if (nonAttr != null) return;
 
             if (action.Selectors.IsNullOrEmpty() || action.Selectors.Any(a => a.ActionConstraints.IsNullOrEmpty()))
             {
@@ -218,7 +230,6 @@ namespace XUCore.NetCore.DynamicWebApi
 
         private void AddAppServiceSelector(string areaName, string controllerName, ActionModel action)
         {
-
             var verb = GetHttpVerb(action);
 
             action.ActionName = GetRestFulActionName(action.ActionName);
@@ -255,8 +266,6 @@ namespace XUCore.NetCore.DynamicWebApi
 
         }
 
-
-
         /// <summary>
         /// Processing action name
         /// </summary>
@@ -267,9 +276,7 @@ namespace XUCore.NetCore.DynamicWebApi
             // custom process action name
             var appConstsActionName = AppConsts.GetRestFulActionName?.Invoke(actionName);
             if (appConstsActionName != null)
-            {
                 return appConstsActionName;
-            }
 
             // default process action name.
 
@@ -278,26 +285,25 @@ namespace XUCore.NetCore.DynamicWebApi
 
             // Remove Prefix
             var verbKey = actionName.GetPascalOrCamelCaseFirstWord().ToLower();
+
             if (AppConsts.HttpVerbs.ContainsKey(verbKey))
             {
                 if (actionName.Length == verbKey.Length)
-                {
-                    return "";
-                }
+                    actionName = "";
                 else
-                {
-                    return actionName.Substring(verbKey.Length);
-                }
+                    actionName = actionName.Substring(verbKey.Length);
             }
-            else
-            {
-                return actionName;
-            }
+
+            if (AppConsts.SplitActionCamelCase)
+                actionName = string.Join(AppConsts.SplitActionCamelCaseSeparator, actionName.SplitCamelCase());
+
+            return actionName;
         }
 
         private static void NormalizeSelectorRoutes(string areaName, string controllerName, ActionModel action)
         {
             action.ActionName = GetRestFulActionName(action.ActionName);
+
             foreach (var selector in action.Selectors)
             {
                 selector.AttributeRouteModel = selector.AttributeRouteModel == null ?

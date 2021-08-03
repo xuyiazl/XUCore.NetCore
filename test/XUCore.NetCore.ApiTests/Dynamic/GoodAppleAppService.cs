@@ -9,8 +9,9 @@ using XUCore.NetCore.DynamicWebApi;
 
 namespace XUCore.NetCore.ApiTests.Dynamic
 {
-    [DynamicWebApi]
-    public class AppleAppService : IDynamicWebApi
+    [DynamicWebApi(Name = "Apple", Version = "1.0")]
+    [ApiExplorerSettings(GroupName = "test")]
+    public class GoodAppleAppService : IDynamicWebApi
     {
         private static readonly Dictionary<int, string> Apples = new Dictionary<int, string>()
         {
@@ -21,7 +22,20 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         [AllowAnonymous]
         public async Task UpdateAppleAsync(UpdateAppleDto dto)
         {
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
+                if (Apples.ContainsKey(dto.Id))
+                {
+                    Apples[dto.Id] = dto.Name;
+                }
+            });
+
+        }
+        [AllowAnonymous]
+        public async Task UpdateAppleInfoIsGoodAsync(UpdateAppleDto dto)
+        {
+            await Task.Run(() =>
+            {
                 if (Apples.ContainsKey(dto.Id))
                 {
                     Apples[dto.Id] = dto.Name;
@@ -37,6 +51,18 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         /// <returns></returns>
         [HttpGet("{id:int}")]
         public string Get(int id)
+        {
+            if (Apples.ContainsKey(id))
+            {
+                return Apples[id];
+            }
+            else
+            {
+                return "No Apple!";
+            }
+        }
+        [HttpGet("{id:int}")]
+        public string GetById(int id)
         {
             if (Apples.ContainsKey(id))
             {
