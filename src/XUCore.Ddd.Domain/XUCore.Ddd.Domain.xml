@@ -389,11 +389,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Filters.CommandValidationAttribute">
-            <summary>
-            FluentValidation 验证拦截（因使用动态API，自动验证失效，导致需要手工操作。）
-            </summary>
-        </member>
         <member name="T:XUCore.Ddd.Domain.IAggregateRoot">
             <summary>
             聚合根

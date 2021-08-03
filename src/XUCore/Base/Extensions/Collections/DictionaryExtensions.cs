@@ -108,6 +108,30 @@ namespace XUCore.Extensions
 
         #endregion GetOrAdd(获取指定键的值，不存在则按指定委托添加值)
 
+        #region AddOrUpdate(合并两个字典)
+        /// <summary>
+        /// 合并两个字典
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dic">字典</param>
+        /// <param name="newDic">新字典</param>
+        /// <returns></returns>
+        public static Dictionary<TKey, TValue> AddOrUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dic, Dictionary<TKey, TValue> newDic)
+        {
+            foreach (var key in newDic.Keys)
+            {
+                if (dic.ContainsKey(key))
+                    dic[key] = newDic[key];
+                else
+                    dic.Add(key, newDic[key]);
+            }
+
+            return dic;
+        }
+
+        #endregion GetOrAdd(获取指定键的值，不存在则按指定委托添加值)
+
         #region Sort(字段排序)
 
         /// <summary>

@@ -2377,6 +2377,16 @@
             <param name="addFunc">添加值的委托</param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.AddOrUpdate``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            合并两个字典
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dic">字典</param>
+            <param name="newDic">新字典</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Extensions.DictionaryExtensions.Sort``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             对指定的字典进行排序
