@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>XUCore.WebApi2.Template</id>
-		<version>2.0.0</version>
-		<description>
-			WebApi2 精简三层快速开发项目模板，直接生成WebApi项目
-		</description>
+		<version>2.0.1</version>
+		<description>WebApi2 精简三层快速开发项目模板，生成WebApi项目</description>
 		<authors>XUCore</authors>
+		<copyright>Copyright © XUCore 2020</copyright>
+		<projectUrl>https://github.com/xuyiazl/XUCore.NetCore</projectUrl>
+		<iconUrl>http://www.3624091.com/favicon.ico</iconUrl>
 		<packageTypes>
 			<packageType name="Template" />
 		</packageTypes>

@@ -14,10 +14,6 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.Data" Version="5.2.4" />
-	</ItemGroup>
-	
-	<ItemGroup>
 	  <ProjectReference Include="..\XUCore.WebApi.Template.Core\XUCore.WebApi.Template.Core.csproj" />
 	</ItemGroup>
 	

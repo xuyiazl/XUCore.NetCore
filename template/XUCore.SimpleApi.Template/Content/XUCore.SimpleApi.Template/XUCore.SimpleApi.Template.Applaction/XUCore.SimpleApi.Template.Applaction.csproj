@@ -9,11 +9,6 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.4" />
-		<PackageReference Include="XUCore.NetCore.DynamicWebApi" Version="5.2.4" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Core\XUCore.SimpleApi.Template.Core.csproj" />
 	  <ProjectReference Include="..\XUCore.SimpleApi.Template.Persistence\XUCore.SimpleApi.Template.Persistence.csproj" />
 	</ItemGroup>

@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.DynamicWebApi" Version="5.2.4" />
+		<ProjectReference Include="..\XUCore.Net5.Template.Persistence\XUCore.Net5.Template.Persistence.csproj" />
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\XUCore.Net5.Template.Persistence\XUCore.Net5.Template.Persistence.csproj" />
-	</ItemGroup>
-	
+
 </Project>
