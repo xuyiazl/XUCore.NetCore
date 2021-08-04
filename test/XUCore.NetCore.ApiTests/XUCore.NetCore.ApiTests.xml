@@ -99,6 +99,26 @@
             </summary>
             <param name="id">Apple Id</param>
         </member>
+        <member name="T:XUCore.NetCore.ApiTests.JwtHandler">
+            <summary>
+            JWT 授权自定义处理程序
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            重写 Handler 添加自动刷新收取逻辑
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.ApiTests.JwtHandler.PipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">
+            <summary>
+            验证管道
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.ApiTests.SignMiddlewareDemo.GetAppSecretAsync(System.String)">
             <summary>
             

@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Description>
+			XUCore 基础集合库
+		</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Authors>xuyi</Authors>
+		<Company>personal</Company>
+		<Description>.NET Core Common 基础集合库</Description>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<Version>5.2.7</Version>
+		<PackageId>XUCoreApp</PackageId>
+		<Product>XUCoreApp</Product>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>XUCoreApp.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\release\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCoreApp.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore\XUCore.csproj" />
+		<ProjectReference Include="..\XUCore.Drawing\XUCore.Drawing.csproj" />
+		<ProjectReference Include="..\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.AccessControl\XUCore.NetCore.AccessControl.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.Mongo\XUCore.NetCore.Mongo.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
+		<ProjectReference Include="..\XUCore.NetCore\XUCore.NetCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="XUCoreApp.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

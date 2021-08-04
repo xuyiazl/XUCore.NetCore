@@ -9,18 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controllers\TokenController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
-		<ProjectReference Include="..\..\src\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
-		<ProjectReference Include="..\..\src\XUCore.NetCore.Jwt\XUCore.NetCore.Jwt.csproj" />
-		<ProjectReference Include="..\..\src\XUCore.NetCore.Swagger\XUCore.NetCore.Swagger.csproj" />
-		<ProjectReference Include="..\..\src\XUCore.NetCore\XUCore.NetCore.csproj" />
-		<ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
+	  <ProjectReference Include="..\..\src\XUCoreApp\XUCoreApp.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

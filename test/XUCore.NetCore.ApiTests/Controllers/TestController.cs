@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using XUCore.NetCore.Controllers;
 using System;
+using System.Collections.Generic;
+using XUCore.Extensions;
+using XUCore.Helpers;
+using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.NetCore.Controllers;
+using XUCore.NetCore.Swagger;
 
 namespace XUCore.ApiTests.Controllers
 {
@@ -12,6 +18,40 @@ namespace XUCore.ApiTests.Controllers
         {
         }
 
+        [Route("login")]
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            // 生成 token
+            var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
+            {
+                { "userId" ,1},
+                { "userName"  ,"name"},
+                { "loginTime"  ,DateTime.Now.ToString()}
+            });
+
+            // 生成 刷新token
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken);
+
+            // 设置 Swagger 自动登录
+            Web.HttpContext.SigninToSwagger(accessToken);
+            // 设置刷新 token
+            Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
+
+            return Success("000", "成功", "哈哈");
+        }
+        [Route("verifylogin")]
+        [HttpPost]
+        public IActionResult VerifyLogin()
+        {
+            return Success("000", "成功", new
+            {
+                UserId = Web.HttpContext.User.Identity.GetValue<long>("userId"),
+                UserName = Web.HttpContext.User.Identity.GetValue<string>("userName"),
+                LoginTime = Web.HttpContext.User.Identity.GetValue<string>("loginTime")
+            });
+        }
         [Route("create")]
         [HttpGet]
         public IActionResult Create()

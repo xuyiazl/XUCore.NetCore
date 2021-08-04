@@ -99,12 +99,6 @@
             </summary>
             <param name="value">颜色值</param>
         </member>
-        <member name="M:XUCore.Extensions.BitmapExtensions.Copy(System.Byte[0:,0:])">
-            <summary>
-            复制一份二维数组的副本
-            </summary>
-            <param name="bytes">二维数组</param>
-        </member>
         <member name="M:XUCore.Extensions.BitmapExtensions.FloodFill(System.Byte[0:,0:],System.Drawing.Point,System.Byte)">
             <summary>
             泛水填充算法，将相连通的区域使用指定灰度值填充

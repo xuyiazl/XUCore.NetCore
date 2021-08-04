@@ -1,33 +1,30 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Linq;
+using System.Net;
+using XUCore.Extensions;
+using XUCore.NetCore;
+using XUCore.NetCore.ApiTests;
+using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Extensions;
-using XUCore.NetCore.Jwt;
 using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Signature;
-using XUCore.Configs;
-using XUCore.NetCore.ApiTests;
-using Microsoft.OpenApi.Models;
-using System.IO;
-using XUCore.Serializer;
 using XUCore.NetCore.Swagger;
-using XUCore.NetCore.DynamicWebApi;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
-using XUCore.NetCore;
-using System.Linq;
-using XUCore.Extensions;
-using System.Net;
-using System;
+using XUCore.Serializer;
 
 namespace XUCore.ApiTests
 {
@@ -49,18 +46,21 @@ namespace XUCore.ApiTests
 
             services.AddHttpSignService();
 
-            var jwtSettings = appSection.Get<JwtOptions>();
-            services.AddJwtOptions(options => appSection.Bind(options));
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddJwt(JwtAuthenticationDefaults.AuthenticationScheme, options =>
-             {
-                 options.Keys = new[] { jwtSettings.Secret };
-                 options.VerifySignature = true;
-             });
+            //var jwtSettings = appSection.Get<JwtOptions>();
+            //services.AddJwtOptions(options => appSection.Bind(options));
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtAuthenticationDefaults.AuthenticationScheme;
+            //})
+            //.AddJwt(JwtAuthenticationDefaults.AuthenticationScheme, options =>
+            // {
+            //     options.Keys = new[] { jwtSettings.Secret };
+            //     options.VerifySignature = true;
+            // });
+
+            // ×¢²ájwt
+            services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);//enableGlobalAuthorize: true
 
             services.AddControllers()
                 .AddMessagePackFormatters(options =>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using XUCore.Extensions;
 using XUCore.IO;
@@ -133,7 +132,7 @@ namespace XUCore.Helpers
         {
             get
             {
-                Request.EnableRewind();
+                Request.EnableBuffering();
                 return FileHelper.ToString(Request.Body, isCloseStream: false);
             }
         }
@@ -583,7 +582,7 @@ namespace XUCore.Helpers
         /// </summary>
         public static async Task<string> GetBodyAsync()
         {
-            Request.EnableRewind();
+            Request.EnableBuffering();
             return await FileHelper.ToStringAsync(Request.Body, isCloseStream: false);
         }
 
