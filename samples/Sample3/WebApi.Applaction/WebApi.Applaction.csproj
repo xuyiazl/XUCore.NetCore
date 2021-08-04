@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCore.NetCore.Swagger" Version="5.2.4" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\WebApi.DbService\WebApi.DbService.csproj" />
 	</ItemGroup>
 
