@@ -24,6 +24,14 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)				| XUCore.Ddd.Domain					| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Ddd.Domain.svg)](https://nuget.org/packages/XUCore.Ddd.Domain)							| [![nuget](https://img.shields.io/nuget/v/XUCore.Ddd.Domain.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)								| Ddd Domain扩展				|
 
 
+## 🥥 框架包
+
+如果您不想一个一个的引用，那么可以直接引用`XUCoreApp`来直接使用所有包
+
+|																																		| 名称								|下载																																			| 版本																																								| 描述						|
+| ------------------------------------------------------------------------------------------------------------------------------------  | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCoreApp)							| XUCoreApp							| [![Downloads](https://img.shields.io/nuget/dt/XUCoreApp.svg)](https://nuget.org/packages/XUCoreApp)													| [![nuget](https://img.shields.io/nuget/v/XUCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCoreApp)													| XUCore 组件包大集合			|
+
 ## 🥥 框架描述
 
 |																																		| 名称								| 描述																				|
