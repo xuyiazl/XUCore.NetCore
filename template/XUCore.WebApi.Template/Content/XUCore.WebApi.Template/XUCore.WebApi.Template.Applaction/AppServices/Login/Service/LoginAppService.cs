@@ -60,6 +60,15 @@ namespace XUCore.WebApi.Template.Applaction.Login
                 authService.AdminName
             }.ToJson());
         }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await authService.LoginOutAsync(cancellationToken);
+        }
 
         #endregion
 

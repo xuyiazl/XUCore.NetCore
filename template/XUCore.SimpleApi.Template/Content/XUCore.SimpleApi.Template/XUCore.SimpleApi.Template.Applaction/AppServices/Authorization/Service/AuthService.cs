@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Cache;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
@@ -29,15 +30,18 @@ namespace XUCore.SimpleApi.Template.Applaction.Authorization
     {
         private const string userId = "_admin_userid_";
         private const string userName = "_admin_username_";
+        private const string loginToken = "_admin_login_";
 
         private readonly IPermissionService permissionService;
         private readonly INigelDbRepository db;
         private readonly IMapper mapper;
+        private readonly ICacheManager cacheManager;
         public AuthService(IServiceProvider serviceProvider)
         {
             permissionService = serviceProvider.GetService<IPermissionService>();
-            this.db = serviceProvider.GetService<INigelDbRepository>();
-            this.mapper = serviceProvider.GetService<IMapper>();
+            db = serviceProvider.GetService<INigelDbRepository>();
+            mapper = serviceProvider.GetService<IMapper>();
+            cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
         public async Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default)
@@ -100,19 +104,50 @@ namespace XUCore.SimpleApi.Template.Applaction.Authorization
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
+            SetLoginToken(user.Id, accessToken);
+
             return (accessToken, refreshToken);
         }
 
-        public async Task LoginOutAsync()
+
+        public async Task LoginOutAsync(CancellationToken cancellationToken = default)
         {
+            RemoveLoginToken();
+
             await Task.CompletedTask;
         }
 
-        public bool IsCanAccess(string accessKey)
+        /// <summary>
+        /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="token"></param>
+        private void SetLoginToken(long adminId, string token)
         {
-            if (!accessKey.IsEmpty())
-                return permissionService.ExistsAsync(AdminId, accessKey, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            return true;
+            cacheManager.Set($"{loginToken}{adminId}", token);
+        }
+        /// <summary>
+        /// 删除登录标记，模拟退出
+        /// </summary>
+        private void RemoveLoginToken()
+        {
+            cacheManager.Remove($"{loginToken}{AdminId}");
+        }
+        /// <summary>
+        /// 验证token是否一致
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool VaildLoginToken(string token)
+        {
+            var cacheToken = cacheManager.Get<string>($"{loginToken}{AdminId}");
+
+            return token == cacheToken;
+        }
+
+        public async Task<bool> IsCanAccessAsync(string accessKey)
+        {
+            return await permissionService.ExistsAsync(AdminId, accessKey, CancellationToken.None);
         }
 
         public bool IsAuthenticated => Identity.IsAuthenticated;

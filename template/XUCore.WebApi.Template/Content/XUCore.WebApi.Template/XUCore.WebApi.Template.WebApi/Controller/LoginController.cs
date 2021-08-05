@@ -34,7 +34,7 @@ namespace XUCore.WebApi.Template.WebApi.Controller
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand command, CancellationToken cancellationToken)
         {
@@ -49,6 +49,16 @@ namespace XUCore.WebApi.Template.WebApi.Controller
         public async Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken)
         {
             return await loginAppService.VerifyTokenAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/Out")]
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await loginAppService.LoginOutAsync(cancellationToken);
         }
 
         #endregion

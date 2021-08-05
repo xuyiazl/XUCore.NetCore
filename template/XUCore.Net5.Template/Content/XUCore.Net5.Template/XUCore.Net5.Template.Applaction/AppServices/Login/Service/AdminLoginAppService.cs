@@ -26,11 +26,11 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
     [ApiExplorerSettings(GroupName = ApiGroup.Login)]
     public class AdminLoginAppService : AppService, IAdminLoginAppService
     {
-        private readonly IAdminManager _adminManager;
+        private readonly IAuthService authService;
 
-        public AdminLoginAppService(IMediatorHandler bus, IAdminManager adminManager) : base(bus)
+        public AdminLoginAppService(IMediatorHandler bus, IAuthService authService) : base(bus)
         {
-            _adminManager = adminManager;
+            this.authService = authService;
         }
 
         #region [ 登录 ]
@@ -46,11 +46,11 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> Login([FromBody] AdminUserLoginCommand command, CancellationToken cancellationToken)
         {
-            (var accessToken, var refreshToken) = await _adminManager.LoginAsync(command);
+            (var accessToken, var refreshToken) = await authService.LoginAsync(command);
 
             // 设置 Swagger 自动登录
             Web.HttpContext.SigninToSwagger(accessToken);
@@ -72,7 +72,17 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         {
             await Task.CompletedTask;
 
-            return RestFull.Success(SubCode.Success, data: new { _adminManager.AdminId, _adminManager.AdminName }.ToJson());
+            return RestFull.Success(SubCode.Success, data: new { authService.AdminId, authService.AdminName }.ToJson());
+        }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/Out")]
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await authService.LoginOutAsync(cancellationToken);
         }
 
         #endregion

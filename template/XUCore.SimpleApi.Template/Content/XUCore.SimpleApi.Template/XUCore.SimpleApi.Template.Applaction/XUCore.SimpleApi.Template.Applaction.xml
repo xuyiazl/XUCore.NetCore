@@ -997,10 +997,36 @@
             身份认证
             </summary>
         </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Authorization.IAuthService.VaildLoginToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.SimpleApi.Template.Applaction.Authorization.AuthService">
             <summary>
             身份认证
             </summary>
+        </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Authorization.AuthService.SetLoginToken(System.Int64,System.String)">
+            <summary>
+            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+            </summary>
+            <param name="adminId"></param>
+            <param name="token"></param>
+        </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Authorization.AuthService.RemoveLoginToken">
+            <summary>
+            删除登录标记，模拟退出
+            </summary>
+        </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Authorization.AuthService.VaildLoginToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.SimpleApi.Template.Applaction.Login.AdminUserLoginCommand">
             <summary>
@@ -1117,6 +1143,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Login.ILoginAppService.LoginOutAsync(System.Threading.CancellationToken)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.SimpleApi.Template.Applaction.Login.ILoginAppService.GetPermissionExistsAsync(System.Int64,System.String,System.Threading.CancellationToken)">
             <summary>
             查询是否有权限
@@ -1175,6 +1208,13 @@
         <member name="M:XUCore.SimpleApi.Template.Applaction.Login.LoginAppService.VerifyTokenAsync(System.Threading.CancellationToken)">
             <summary>
             验证Token
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.SimpleApi.Template.Applaction.Login.LoginAppService.LoginOutAsync(System.Threading.CancellationToken)">
+            <summary>
+            退出登录
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -1338,13 +1378,6 @@
             验证管道
             </summary>
             <param name="context"></param>
-            <param name="httpContext"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.SimpleApi.Template.Applaction.JwtHandler.CheckAuthorzie(Microsoft.AspNetCore.Http.DefaultHttpContext)">
-            <summary>
-            检查权限
-            </summary>
             <param name="httpContext"></param>
             <returns></returns>
         </member>

@@ -33,6 +33,13 @@ namespace XUCore.Net5.Template.Application.AppServices.Login
         /// <returns></returns>
         Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken);
 
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task LoginOutAsync(CancellationToken cancellationToken);
+
         #endregion
 
         #region [ 登录后的权限获取 ]

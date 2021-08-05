@@ -1,10 +1,14 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser;
+using XUCore.Net5.Template.Domain.Sys.AdminUser;
 
-namespace XUCore.WebApi.Template.Applaction.Authorization
+namespace XUCore.Net5.Template.Infrastructure.Authorization
 {
-    public interface IAuthService : IAppService
+    public interface IAuthService
     {
         long AdminId { get; }
 

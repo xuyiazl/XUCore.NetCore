@@ -63,6 +63,8 @@ namespace XUCore.WebApi2.Template.Applaction
 
             // 注入缓存拦截器（内存缓存）
             services.AddCacheService<MemoryCacheService>();
+            // 注入内存缓存
+            services.AddCacheManager();
 
             //添加跨域配置，加载进来，启用的话需要使用Configure
             services.AddCors(options =>

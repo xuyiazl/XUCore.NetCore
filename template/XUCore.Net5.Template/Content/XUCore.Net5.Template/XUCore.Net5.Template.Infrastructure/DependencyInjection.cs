@@ -52,7 +52,7 @@ namespace XUCore.Net5.Template.Infrastructure
             // 注入 基础设施层 - 事件溯源
             services.AddEventStore<SqlEventStoreService>();
 
-            services.AddScoped<IAdminManager, AdminManagerService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             // 注入redis插件
             services.AddRedisService().AddJsonRedisSerializer();
@@ -66,6 +66,8 @@ namespace XUCore.Net5.Template.Infrastructure
 
             // 注入缓存拦截器（内存缓存）
             services.AddCacheService<MemoryCacheService>();
+            // 注入内存缓存
+            services.AddCacheManager();
 
             // 注册jwt
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);//enableGlobalAuthorize: true

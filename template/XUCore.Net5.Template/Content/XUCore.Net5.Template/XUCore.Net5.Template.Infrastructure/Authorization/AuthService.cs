@@ -5,41 +5,31 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Cache;
+using XUCore.Ddd.Domain.Bus;
 using XUCore.Extensions;
 using XUCore.Helpers;
+using XUCore.Net5.Template.Domain.Sys.AdminUser;
+using XUCore.Net5.Template.Domain.Sys.Permission;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.NetCore.DynamicWebApi;
-using XUCore.NetCore.Swagger;
-using XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser;
-using XUCore.WebApi2.Template.DbService.Sys.Admin.Permission;
 
-namespace XUCore.WebApi2.Template.Applaction.Authorization
+namespace XUCore.Net5.Template.Infrastructure.Authorization
 {
-    /// <summary>
-    /// 管理员服务
-    /// </summary>
-    [NonDynamicWebApi]
     public class AuthService : IAuthService
     {
-        private const string userId = "_admin_userid";
-        private const string userName = "_admin_username";
+        private const string userId = "_admin_userid_";
+        private const string userName = "_admin_username_";
         private const string loginToken = "_admin_login_";
-
-        private readonly IAdminUserService adminUserService;
-        private readonly IPermissionService permissionService;
         private readonly ICacheManager cacheManager;
+        private readonly IMediatorHandler bus;
         public AuthService(IServiceProvider serviceProvider)
         {
-            adminUserService = serviceProvider.GetService<IAdminUserService>();
-            permissionService = serviceProvider.GetService<IPermissionService>();
+            bus = serviceProvider.GetService<IMediatorHandler>();
             cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
-        public async Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default)
+        public async Task<(string, string)> LoginAsync(AdminUserLoginCommand command, CancellationToken cancellationToken = default)
         {
-            request.IsVaild();
-
-            var user = await adminUserService.LoginAsync(request, cancellationToken);
+            var user = await bus.SendCommand(command, cancellationToken);
 
             // 生成 token
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
@@ -50,11 +40,6 @@ namespace XUCore.WebApi2.Template.Applaction.Authorization
 
             // 生成 刷新token
             var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken);
-
-            // 设置 Swagger 自动登录
-            Web.HttpContext.SigninToSwagger(accessToken);
-            // 设置刷新 token
-            Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
             SetLoginToken(user.Id, accessToken);
 
@@ -98,7 +83,7 @@ namespace XUCore.WebApi2.Template.Applaction.Authorization
 
         public async Task<bool> IsCanAccessAsync(string accessKey)
         {
-            return await permissionService.ExistsAsync(AdminId, accessKey, CancellationToken.None);
+            return await bus.SendCommand(new PermissionQueryExists { AdminId = AdminId, OnlyCode = accessKey }, CancellationToken.None);
         }
 
         public bool IsAuthenticated => Identity.IsAuthenticated;

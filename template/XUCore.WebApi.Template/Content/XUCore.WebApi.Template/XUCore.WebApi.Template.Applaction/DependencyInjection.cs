@@ -17,7 +17,6 @@ using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
-using XUCore.NetCore.Redis;
 using XUCore.Serializer;
 using XUCore.WebApi.Template.Core;
 using XUCore.WebApi.Template.DbService;
@@ -64,6 +63,8 @@ namespace XUCore.WebApi.Template.Applaction
 
             // 注入缓存拦截器（内存缓存）
             services.AddCacheService<MemoryCacheService>();
+            // 注入内存缓存
+            services.AddCacheManager();
 
             //添加跨域配置，加载进来，启用的话需要使用Configure
             services.AddCors(options =>

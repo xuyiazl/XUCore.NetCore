@@ -15,10 +15,16 @@ namespace XUCore.SimpleApi.Template.Applaction.Authorization
 
         bool IsAuthenticated { get; }
 
-        bool IsCanAccess(string accessKey);
+        Task<bool> IsCanAccessAsync(string accessKey);
 
-        Task<(string, string)> LoginAsync(AdminUserLoginCommand command, CancellationToken cancellationToken = default);
+        Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default);
 
-        Task LoginOutAsync();
+        Task LoginOutAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 验证token是否一致
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        bool VaildLoginToken(string token);
     }
 }

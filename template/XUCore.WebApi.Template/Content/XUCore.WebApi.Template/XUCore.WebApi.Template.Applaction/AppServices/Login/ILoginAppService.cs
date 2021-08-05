@@ -30,6 +30,12 @@ namespace XUCore.WebApi.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken);
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task LoginOutAsync(CancellationToken cancellationToken);
 
         #endregion
 

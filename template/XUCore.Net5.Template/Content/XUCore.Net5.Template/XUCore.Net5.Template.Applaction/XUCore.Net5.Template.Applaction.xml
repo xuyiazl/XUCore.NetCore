@@ -498,6 +498,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Net5.Template.Application.AppServices.Login.IAdminLoginAppService.LoginOutAsync(System.Threading.CancellationToken)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Net5.Template.Application.AppServices.Login.IAdminLoginAppService.GetPermissionAsync(XUCore.Net5.Template.Domain.Sys.Permission.PermissionQueryExists,System.Threading.CancellationToken)">
             <summary>
             查询是否有权限
@@ -559,6 +566,13 @@
         <member name="M:XUCore.Net5.Template.Application.AppServices.Login.AdminLoginAppService.VerifyTokenAsync(System.Threading.CancellationToken)">
             <summary>
             验证Token
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Net5.Template.Application.AppServices.Login.AdminLoginAppService.LoginOutAsync(System.Threading.CancellationToken)">
+            <summary>
+            退出登录
             </summary>
             <param name="cancellationToken"></param>
             <returns></returns>

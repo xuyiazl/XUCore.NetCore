@@ -50,7 +50,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
@@ -74,6 +74,16 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
                 authService.AdminId,
                 authService.AdminName
             }.ToJson());
+        }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/Out")]
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await authService.LoginOutAsync(cancellationToken);
         }
 
         #endregion

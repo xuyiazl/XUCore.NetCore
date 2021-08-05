@@ -287,6 +287,13 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.WebApi.Template.WebApi.Controller.LoginController.LoginOutAsync(System.Threading.CancellationToken)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.WebApi.Template.WebApi.Controller.LoginController.GetPermissionExistsAsync(System.Int64,System.String,System.Threading.CancellationToken)">
             <summary>
             查询是否有权限

@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
-using XUCore.SimpleApi.Template.Applaction.Admin;
 using XUCore.SimpleApi.Template.Applaction.Permission;
 
 namespace XUCore.SimpleApi.Template.Applaction.Login
@@ -29,6 +28,13 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task LoginOutAsync(CancellationToken cancellationToken);
 
         #endregion
 
