@@ -284,14 +284,17 @@ namespace XUCore.NetCore.DynamicWebApi
             actionName = actionName.RemovePostFix(AppConsts.ActionPostfixes.ToArray());
 
             // Remove Prefix
-            var verbKey = actionName.GetPascalOrCamelCaseFirstWord().ToLower();
-
-            if (AppConsts.HttpVerbs.ContainsKey(verbKey))
+            if (AppConsts.IsRemoveVerbs)
             {
-                if (actionName.Length == verbKey.Length)
-                    actionName = "";
-                else
-                    actionName = actionName.Substring(verbKey.Length);
+                var verbKey = actionName.GetPascalOrCamelCaseFirstWord().ToLower();
+
+                if (AppConsts.HttpVerbs.ContainsKey(verbKey))
+                {
+                    if (actionName.Length == verbKey.Length)
+                        actionName = "";
+                    else
+                        actionName = actionName.Substring(verbKey.Length);
+                }
             }
 
             if (AppConsts.SplitActionCamelCase)

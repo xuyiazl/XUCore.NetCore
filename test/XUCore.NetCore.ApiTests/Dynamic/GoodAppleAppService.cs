@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using XUCore.NetCore.ApiTests.Dtos;
 using XUCore.NetCore.DynamicWebApi;
+using XUCore.NetCore.Swagger;
 
 namespace XUCore.NetCore.ApiTests.Dynamic
 {
@@ -18,8 +19,6 @@ namespace XUCore.NetCore.ApiTests.Dynamic
             [1] = "Big Apple",
             [2] = "Small Apple"
         };
-
-        [AllowAnonymous]
         public async Task UpdateAppleAsync(UpdateAppleDto dto)
         {
             await Task.Run(() =>
@@ -32,6 +31,7 @@ namespace XUCore.NetCore.ApiTests.Dynamic
 
         }
         [AllowAnonymous]
+        [NonDynamicMethod]
         public async Task UpdateAppleInfoIsGoodAsync(UpdateAppleDto dto)
         {
             await Task.Run(() =>
@@ -50,6 +50,7 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
+        [HiddenApi]
         public string Get(int id)
         {
             if (Apples.ContainsKey(id))
@@ -62,6 +63,7 @@ namespace XUCore.NetCore.ApiTests.Dynamic
             }
         }
         [HttpGet("{id:int}")]
+        [NonDynamicMethod]
         public string GetById(int id)
         {
             if (Apples.ContainsKey(id))

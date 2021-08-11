@@ -90,12 +90,11 @@
             <param name="type">当前程序集类型，为 Swagger JSON and UI设置xml文档注释路径</param>
             <param name="docs">xml注释文档名，请把controller的xml注释文件放第一个</param>
         </member>
-        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.AddHiddenApi(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions,System.String)">
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.AddHiddenApi(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
             <summary>
             添加隐藏API过滤器，可以在API上加HiddenApi标签隐藏。
             </summary>
             <param name="options"></param>
-            <param name="apiXml"></param>
         </member>
         <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.SigninToSwagger(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>

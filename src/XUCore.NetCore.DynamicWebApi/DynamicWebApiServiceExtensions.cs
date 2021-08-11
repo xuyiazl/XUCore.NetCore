@@ -28,6 +28,7 @@ namespace XUCore.NetCore.DynamicWebApi
 
             options.Valid();
 
+            AppConsts.IsRemoveVerbs = options.IsRemoveVerbs;
             AppConsts.DefaultAreaName = options.DefaultAreaName;
             AppConsts.DefaultHttpVerb = options.DefaultHttpVerb;
             AppConsts.DefaultApiPreFix = options.DefaultApiPrefix;

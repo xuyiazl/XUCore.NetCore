@@ -132,15 +132,17 @@ namespace XUCore.ApiTests
                 options.AddJwtBearerDoc();
                 options.AddHttpSignDoc(services);
                 options.AddFiledDoc();
+                options.AddHiddenApi();
                 options.AddDescriptions(typeof(Program), "XUCore.NetCore.ApiTests.xml");
 
                 // TODO:一定要返回true！
-                //options.DocInclusionPredicate((docName, description) => true);
+                options.DocInclusionPredicate((docName, description) => true);
 
             });
 
             services.AddDynamicWebApi(opt =>
             {
+                opt.IsRemoveVerbs = false;
                 opt.SplitActionCamelCase = true;
                 opt.SplitActionCamelCaseSeparator = "-";
             });

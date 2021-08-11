@@ -169,8 +169,7 @@ namespace XUCore.NetCore.Swagger
         /// 添加隐藏API过滤器，可以在API上加HiddenApi标签隐藏。
         /// </summary>
         /// <param name="options"></param>
-        /// <param name="apiXml"></param>
-        public static void AddHiddenApi(this SwaggerGenOptions options, string apiXml)
+        public static void AddHiddenApi(this SwaggerGenOptions options)
         {
             options.DocumentFilter<HiddenApiFilter>();
         }

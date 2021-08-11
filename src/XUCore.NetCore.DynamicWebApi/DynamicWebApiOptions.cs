@@ -21,8 +21,10 @@ namespace XUCore.NetCore.DynamicWebApi
             SplitControllerCamelCase = false;
             SplitControllerCamelCaseSeparator = "-";
             VersionSeparator = "@";
+            IsRemoveVerbs = true;
         }
 
+        public bool IsRemoveVerbs { get; set; }
 
         /// <summary>
         /// API HTTP Verb.
