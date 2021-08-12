@@ -1,4 +1,10 @@
-﻿using XUCore.Ddd.Domain.Events;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using XUCore.Ddd.Domain.Events;
+using XUCore.Net5.Template.Domain.Core;
+using XUCore.Net5.Template.Domain.Core.Events;
+using XUCore.Net5.Template.Infrastructure.Authorization;
+using XUCore.Serializer;
 
 namespace XUCore.Net5.Template.Infrastructure.Events
 {
@@ -7,13 +13,12 @@ namespace XUCore.Net5.Template.Infrastructure.Events
     /// </summary>
     public class SqlEventStoreService : IEventStoreService
     {
-        // 注入仓储接口
-        //private readonly IEventStoreRepository _eventStoreRepository;
-        //private readonly IUser _user;
-        public SqlEventStoreService(/*IEventStoreRepository eventStoreRepository, IUser user*/)
+        private readonly ITaxDbRepository db;
+        private readonly IServiceProvider serviceProvider;
+        public SqlEventStoreService(IServiceProvider serviceProvider, ITaxDbRepository db)
         {
-            //_eventStoreRepository = eventStoreRepository;
-            //_user = user;
+            this.db = db;
+            this.serviceProvider = serviceProvider;
         }
 
         /// <summary>
@@ -23,15 +28,16 @@ namespace XUCore.Net5.Template.Infrastructure.Events
         /// <param name="theEvent"></param>
         public void Save<T>(T theEvent) where T : Event
         {
-            // 对事件模型序列化
-            //var serializedData = theEvent.ToJson();
+            var serializedData = theEvent.ToJson();
 
-            //var storedEvent = new StoredEvent(
-            //    theEvent,
-            //    serializedData,
-            //    _user.Name);
+            var auth = serviceProvider.GetService<IAuthService>();
 
-            //eventStoreRepository.Store(storedEvent);
+            var storedEvent = new StoredEvent(
+                theEvent,
+                serializedData,
+                auth.UserId);
+
+            db.Add(storedEvent);
         }
     }
 }

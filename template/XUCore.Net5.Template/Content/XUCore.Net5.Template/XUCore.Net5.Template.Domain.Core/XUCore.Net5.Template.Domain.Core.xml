@@ -4,244 +4,294 @@
         <name>XUCore.Net5.Template.Domain.Core</name>
     </assembly>
     <members>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.StoredEvent">
+            <summary>
+            事件存储模型
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.User">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.UserRole">
+            <summary>
+            用户角色关联
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.UserLoginRecord">
+            <summary>
+            用户登录记录
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.RoleMenu">
+            <summary>
+            角色菜单关联
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.Menu">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity">
+            <summary>
+            权限导航表
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.FatherId">
+            <summary>
+            导航父级id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.Icon">
+            <summary>
+            图标样式
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.Url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.OnlyCode">
+            <summary>
+            唯一代码（权限使用）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.Weight">
+            <summary>
+            排序权重
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.IsExpress">
+            <summary>
+            是否是快捷导航
+            </summary>
+        </member>
+        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Auth.MenuEntity.RoleMenus">
+            <summary>
+            角色导航关联列表
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleEntity">
+            <summary>
+            角色表
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleEntity.Name">
+            <summary>
+            角色名
+            </summary>
+        </member>
+        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleEntity.RoleMenus">
+            <summary>
+            角色导航关联列表
+            </summary>
+        </member>
+        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleEntity.UserRoles">
+            <summary>
+            用户角色关联列表
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleMenuEntity">
+            <summary>
+            角色导航关联表
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleMenuEntity.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleMenuEntity.MenuId">
+            <summary>
+            导航id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleMenuEntity.Menu">
+            <summary>
+            对应关联的导航
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.RoleMenuEntity.Role">
+            <summary>
+            对应关联的角色
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Auth.UserRoleEntity">
+            <summary>
+            用户角色关联表
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.UserRoleEntity.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.UserRoleEntity.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.UserRoleEntity.User">
+            <summary>
+            对应用户
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Auth.UserRoleEntity.Role">
+            <summary>
+            对应角色
+            </summary>
+        </member>
         <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.Status">
             <summary>
             数据状态
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.Created_At">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.CreatedAt">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.Updated_At">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.CreatedAtUserId">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.UpdatedAt">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.Deleted_At">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.UpdatedAtUserId">
+            <summary>
+            最后更新人
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.DeletedAt">
             <summary>
             删除时间
             </summary>
         </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.BaseEntity.DeletedAtUserId">
             <summary>
-            权限导航表
+            删除人
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.FatherId">
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity">
             <summary>
-            导航父级id
+            用户表
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.Name">
-            <summary>
-            名字
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.Icon">
-            <summary>
-            图标样式
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.Url">
-            <summary>
-            链接地址
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.OnlyCode">
-            <summary>
-            唯一代码（权限使用）
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.IsMenu">
-            <summary>
-            是否是导航
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.Weight">
-            <summary>
-            排序权重
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.IsExpress">
-            <summary>
-            是否是快捷导航
-            </summary>
-        </member>
-        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminMenuEntity.RoleMenus">
-            <summary>
-            角色导航关联列表
-            </summary>
-        </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity">
-            <summary>
-            角色表
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity.Name">
-            <summary>
-            角色名
-            </summary>
-        </member>
-        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity.RoleMenus">
-            <summary>
-            角色导航关联列表
-            </summary>
-        </member>
-        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleEntity.UserRoles">
-            <summary>
-            用户角色关联列表
-            </summary>
-        </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleMenuEntity">
-            <summary>
-            角色导航关联表
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleMenuEntity.RoleId">
-            <summary>
-            角色id
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleMenuEntity.MenuId">
-            <summary>
-            导航id
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleMenuEntity.Menus">
-            <summary>
-            对应关联的导航
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminRoleMenuEntity.Role">
-            <summary>
-            对应关联的角色
-            </summary>
-        </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity">
-            <summary>
-            管理员表
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.UserName">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.UserName">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Mobile">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Mobile">
             <summary>
             手机号
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Password">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Password">
             <summary>
             密码
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Name">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Name">
             <summary>
             名字
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Picture">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Picture">
             <summary>
             头像
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Location">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Location">
             <summary>
             所在位置
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Position">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Position">
             <summary>
             职位
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.Company">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.Company">
             <summary>
             公司
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.LoginCount">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.LoginCount">
             <summary>
             登录次数
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.LoginLastTime">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.LoginLastTime">
             <summary>
             最后登录时间
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.LoginLastIp">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.LoginLastIp">
             <summary>
             最后登录id
             </summary>
         </member>
-        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.UserRoles">
+        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.UserRoles">
             <summary>
             对应用户角色关联
             </summary>
         </member>
-        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserEntity.LoginRecords">
+        <member name="F:XUCore.Net5.Template.Domain.Core.Entities.User.UserEntity.LoginRecords">
             <summary>
             对应登录记录关联
             </summary>
         </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserRoleEntity">
-            <summary>
-            管理员角色关联表
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserRoleEntity.AdminId">
-            <summary>
-            管理员id
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserRoleEntity.RoleId">
-            <summary>
-            角色id
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserRoleEntity.AdminUser">
-            <summary>
-            对应管理员
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.AdminUserRoleEntity.Role">
-            <summary>
-            对应角色
-            </summary>
-        </member>
-        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity">
+        <member name="T:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity">
             <summary>
             登录记录表
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity.AdminId">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity.UserId">
             <summary>
-            管理员id
+            用户id
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity.LoginWay">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity.LoginWay">
             <summary>
             登录方式
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity.LoginTime">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity.LoginTime">
             <summary>
             登录时间
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity.LoginIp">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity.LoginIp">
             <summary>
             登录ip
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.Sys.Admin.LoginRecordEntity.AdminUser">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Entities.User.UserLoginRecordEntity.User">
             <summary>
-            对应管理员
+            对应用户
             </summary>
         </member>
         <member name="F:XUCore.Net5.Template.Domain.Core.AccountMode.UserName">
@@ -276,7 +326,7 @@
         </member>
         <member name="T:XUCore.Net5.Template.Domain.Core.Events.StoredEvent">
             <summary>
-            事件存储模型，继承事件
+            事件存储模型
             </summary>
         </member>
         <member name="M:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.#ctor(XUCore.Ddd.Domain.Events.Event,System.String,System.String)">
@@ -285,11 +335,36 @@
             </summary>
             <param name="theEvent"></param>
             <param name="data"></param>
-            <param name="user"></param>
+            <param name="userId"></param>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Id">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.MessageType">
             <summary>
-            主键Id
+            消息类型（命令）
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.AggregateId">
+            <summary>
+            聚合根
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.Data">
+            <summary>
+            存储的数据
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Net5.Template.Domain.Core.Events.StoredEvent.Timestamp">
+            <summary>
+            当前触发时间
+            </summary>
+        </member>
+        <member name="T:XUCore.Net5.Template.Domain.Core.LoginInfo">
+            <summary>
+            创建/修改/删除获取用户id记录的临时解决方案
             </summary>
         </member>
         <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Status">
@@ -297,19 +372,9 @@
             数据状态
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Created_At">
+        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.CreatedAt">
             <summary>
-            创建日期
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Updated_At">
-            <summary>
-            更新日期
-            </summary>
-        </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoBase`1.Deleted_At">
-            <summary>
-            删除日期
+            创建时间
             </summary>
         </member>
         <member name="P:XUCore.Net5.Template.Domain.Core.Mappings.DtoKeyBase`1.Id">

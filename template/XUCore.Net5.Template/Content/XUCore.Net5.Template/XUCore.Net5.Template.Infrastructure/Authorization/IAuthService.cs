@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Net5.Template.Domain.Sys.AdminUser;
+using XUCore.Net5.Template.Domain.User.User;
 
 namespace XUCore.Net5.Template.Infrastructure.Authorization
 {
     public interface IAuthService
     {
-        long AdminId { get; }
+        string UserId { get; }
 
-        string AdminName { get; }
+        string UserName { get; }
 
         bool IsAuthenticated { get; }
 
         Task<bool> IsCanAccessAsync(string accessKey);
 
-        Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default);
+        Task<(string, string)> LoginAsync(UserLoginCommand request, CancellationToken cancellationToken = default);
 
         Task LoginOutAsync(CancellationToken cancellationToken = default);
         /// <summary>

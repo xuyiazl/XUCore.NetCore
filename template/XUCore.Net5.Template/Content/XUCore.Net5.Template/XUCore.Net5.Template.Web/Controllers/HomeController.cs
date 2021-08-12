@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Net5.Template.Application.AppServices.Login;
-using XUCore.Net5.Template.Domain.Sys.AdminUser;
+using XUCore.Net5.Template.Applaction.AppServices.Login;
+using XUCore.Net5.Template.Domain.User.User;
 using XUCore.Net5.Template.Web.Models;
 
 namespace XUCore.Net5.Template.Web.Controllers
@@ -15,19 +13,19 @@ namespace XUCore.Net5.Template.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAdminLoginAppService adminLoginAppService;
+        private readonly ILoginAppService loginAppService;
 
-        public HomeController(ILogger<HomeController> logger, IAdminLoginAppService adminLoginAppService)
+        public HomeController(ILogger<HomeController> logger, ILoginAppService loginAppService)
         {
             _logger = logger;
-            this.adminLoginAppService = adminLoginAppService;
+            this.loginAppService = loginAppService;
         }
 
         public async Task<IActionResult> IndexAsync()
         {
             //测试接入登录
 
-            var command = new AdminUserLoginCommand
+            var command = new UserLoginCommand
             {
                 Account = "",
                 Password = ""
@@ -38,7 +36,7 @@ namespace XUCore.Net5.Template.Web.Controllers
                 throw new Exception(command.GetErrors(""));
 
             //登录
-            var res = await adminLoginAppService.Login(command, CancellationToken.None);
+            var res = await loginAppService.Login(command, CancellationToken.None);
 
             return View();
         }

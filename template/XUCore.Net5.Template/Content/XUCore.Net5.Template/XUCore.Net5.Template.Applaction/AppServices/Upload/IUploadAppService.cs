@@ -5,7 +5,7 @@ using XUCore.Net5.Template.Applaction.Common.Interfaces;
 using XUCore.NetCore;
 using XUCore.NetCore.Uploads.Params;
 
-namespace XUCore.Net5.Template.Application.AppServices.Upload
+namespace XUCore.Net5.Template.Applaction.AppServices.Upload
 {
     /// <summary>
     /// 文件上传

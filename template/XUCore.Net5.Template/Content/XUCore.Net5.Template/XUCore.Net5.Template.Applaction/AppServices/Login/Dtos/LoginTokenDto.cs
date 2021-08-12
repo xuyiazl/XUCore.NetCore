@@ -1,4 +1,4 @@
-﻿namespace XUCore.Net5.Template.Application.AppServices.Login
+﻿namespace XUCore.Net5.Template.Applaction.AppServices.Login
 {
     public class LoginTokenDto
     {

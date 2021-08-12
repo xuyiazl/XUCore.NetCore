@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using XUCore.Net5.Template.Applaction;
 
 namespace XUCore.Net5.Template.WebApi
 {

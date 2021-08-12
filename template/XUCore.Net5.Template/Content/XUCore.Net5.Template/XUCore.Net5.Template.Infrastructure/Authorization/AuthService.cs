@@ -8,17 +8,17 @@ using XUCore.Cache;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.Net5.Template.Domain.Sys.AdminUser;
-using XUCore.Net5.Template.Domain.Sys.Permission;
+using XUCore.Net5.Template.Domain.Auth.Permission;
+using XUCore.Net5.Template.Domain.User.User;
 using XUCore.NetCore.Authorization.JwtBearer;
 
 namespace XUCore.Net5.Template.Infrastructure.Authorization
 {
     public class AuthService : IAuthService
     {
-        private const string userId = "_admin_userid_";
-        private const string userName = "_admin_username_";
-        private const string loginToken = "_admin_login_";
+        private const string userId = "__user_id__";
+        private const string userName = "__user_name__";
+        private const string loginToken = "__login_token__";
         private readonly ICacheManager cacheManager;
         private readonly IMediatorHandler bus;
         public AuthService(IServiceProvider serviceProvider)
@@ -27,7 +27,7 @@ namespace XUCore.Net5.Template.Infrastructure.Authorization
             cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
-        public async Task<(string, string)> LoginAsync(AdminUserLoginCommand command, CancellationToken cancellationToken = default)
+        public async Task<(string, string)> LoginAsync(UserLoginCommand command, CancellationToken cancellationToken = default)
         {
             var user = await bus.SendCommand(command, cancellationToken);
 
@@ -56,18 +56,18 @@ namespace XUCore.Net5.Template.Infrastructure.Authorization
         /// <summary>
         /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
         /// </summary>
-        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
         /// <param name="token"></param>
-        private void SetLoginToken(long adminId, string token)
+        private void SetLoginToken(string userId, string token)
         {
-            cacheManager.Set($"{loginToken}{adminId}", token);
+            cacheManager.Set($"{loginToken}{userId}", token);
         }
         /// <summary>
         /// 删除登录标记，模拟退出
         /// </summary>
         private void RemoveLoginToken()
         {
-            cacheManager.Remove($"{loginToken}{AdminId}");
+            cacheManager.Remove($"{loginToken}{UserId}");
         }
         /// <summary>
         /// 验证token是否一致
@@ -76,22 +76,22 @@ namespace XUCore.Net5.Template.Infrastructure.Authorization
         /// <returns></returns>
         public bool VaildLoginToken(string token)
         {
-            var cacheToken = cacheManager.Get<string>($"{loginToken}{AdminId}");
+            var cacheToken = cacheManager.Get<string>($"{loginToken}{UserId}");
 
             return token == cacheToken;
         }
 
         public async Task<bool> IsCanAccessAsync(string accessKey)
         {
-            return await bus.SendCommand(new PermissionQueryExists { AdminId = AdminId, OnlyCode = accessKey }, CancellationToken.None);
+            return await bus.SendCommand(new PermissionQueryExists { UserId = UserId, OnlyCode = accessKey }, CancellationToken.None);
         }
 
         public bool IsAuthenticated => Identity.IsAuthenticated;
 
         private IIdentity Identity => Web.HttpContext.User.Identity;
 
-        public long AdminId => Identity.GetValue<long>(userId);
+        public string UserId => Identity.GetValue<string>(userId);
 
-        public string AdminName => Identity.GetValue<string>(userName);
+        public string UserName => Identity.GetValue<string>(userName);
     }
 }

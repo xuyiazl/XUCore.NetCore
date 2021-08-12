@@ -14,17 +14,11 @@ namespace XUCore.Net5.Template.Applaction
             //注册Swagger生成器，定义一个和多个Swagger 文档
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
+                options.SwaggerDoc(ApiGroup.User, new OpenApiInfo
                 {
                     Version = "v1.0.0",
-                    Title = $"Admin Api - {environment.EnvironmentName}",
-                    Description = $"Admin Api - {environment.EnvironmentName}"
-                });
-                options.SwaggerDoc(ApiGroup.Login, new OpenApiInfo
-                {
-                    Version = "v1.0.0",
-                    Title = $"Login Api - {environment.EnvironmentName}",
-                    Description = $"Login Api - {environment.EnvironmentName}"
+                    Title = $"User Api - {environment.EnvironmentName}",
+                    Description = $"User Api - {environment.EnvironmentName}"
                 });
                 options.SwaggerDoc(ApiGroup.File, new OpenApiInfo
                 {
@@ -69,8 +63,7 @@ namespace XUCore.Net5.Template.Applaction
             {
                 c.AddMiniProfiler();
 
-                c.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", "Admin API");
-                c.SwaggerEndpoint($"/swagger/{ApiGroup.Login}/swagger.json", "Login API");
+                c.SwaggerEndpoint($"/swagger/{ApiGroup.User}/swagger.json", "User API");
                 c.SwaggerEndpoint($"/swagger/{ApiGroup.File}/swagger.json", "File API");
 
                 c.DocExpansion(DocExpansion.None);

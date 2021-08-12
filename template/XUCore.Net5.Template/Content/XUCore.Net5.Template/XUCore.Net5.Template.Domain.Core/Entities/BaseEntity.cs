@@ -3,7 +3,7 @@ using XUCore.Ddd.Domain;
 
 namespace XUCore.Net5.Template.Domain.Core.Entities
 {
-    public class BaseEntity : Entity<long>, IAggregateRoot
+    public class BaseEntity : BaseKeyEntity
     {
         /// <summary>
         /// 数据状态
@@ -12,15 +12,31 @@ namespace XUCore.Net5.Template.Domain.Core.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime Created_At { get; set; }
+        public DateTime CreatedAt { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        public string CreatedAtUserId { get; set; }
         /// <summary>
         /// 最后更新时间
         /// </summary>
-        public DateTime? Updated_At { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        /// <summary>
+        /// 最后更新人
+        /// </summary>
+        public string UpdatedAtUserId { get; set; }
         /// <summary>
         /// 删除时间
         /// </summary>
-        public DateTime? Deleted_At { get; set; }
+        public DateTime? DeletedAt { get; set; }
+        /// <summary>
+        /// 删除人
+        /// </summary>
+        public string DeletedAtUserId { get; set; }
     }
 
+    public class BaseKeyEntity : Entity<string>, IAggregateRoot
+    {
+
+    }
 }

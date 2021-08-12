@@ -8,6 +8,6 @@ namespace XUCore.Net5.Template.Domain.Core
 {
     public struct RedisKey
     {
-        public const string Admin = "Admin";
+        public const string User = "User";
     }
 }

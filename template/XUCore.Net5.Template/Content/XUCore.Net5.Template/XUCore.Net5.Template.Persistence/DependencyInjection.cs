@@ -32,7 +32,7 @@ namespace XUCore.Net5.Template.Persistence
 
             // mysql
 
-            services.AddDbContext<NigelDbContext>(options =>
+            services.AddDbContext<TaxDbContext>(options =>
             {
                 options.UseMySql(
                     connectionString: configuration.GetConnectionString("NigelDBConnection-mysql"),
@@ -50,8 +50,8 @@ namespace XUCore.Net5.Template.Persistence
                 //options.UseLoggerFactory(MyLoggerFactory);
             });
 
-            services.AddScoped(typeof(INigelDbContext), typeof(NigelDbContext));
-            services.AddScoped(typeof(INigelDbRepository), typeof(NigelDbRepository));
+            services.AddScoped(typeof(ITaxDbContext), typeof(TaxDbContext));
+            services.AddScoped(typeof(ITaxDbRepository), typeof(TaxDbRepository));
 
             return services;
         }
@@ -60,7 +60,7 @@ namespace XUCore.Net5.Template.Persistence
         {
             var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-            var dbContext = scope.ServiceProvider.GetService<NigelDbContext>();
+            var dbContext = scope.ServiceProvider.GetService<TaxDbContext>();
 
             dbContext.Database.Migrate();
 

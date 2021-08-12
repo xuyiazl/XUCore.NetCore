@@ -8,6 +8,6 @@ namespace XUCore.Net5.Template.Domain.Core
 {
     public struct CacheKey
     {
-        public const string AuthTables = "AuthTables";
+        public const string UserAuth = "UserAuth";
     }
 }

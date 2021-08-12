@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using XUCore.Ddd.Domain.Bus;
+﻿using XUCore.Ddd.Domain.Bus;
 using XUCore.Net5.Template.Applaction.Common.Interfaces;
-using XUCore.Net5.Template.Domain.Core;
 using XUCore.Net5.Template.Infrastructure.Filters;
-using XUCore.NetCore;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Filters;
 using XUCore.NetCore.MessagePack;
