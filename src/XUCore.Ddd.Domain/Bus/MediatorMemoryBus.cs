@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
@@ -15,6 +16,10 @@ namespace XUCore.Ddd.Domain.Bus
         private readonly IMediator mediator;
         // 事件仓储服务
         private readonly IEventStoreService eventStoreService;
+        /// <summary>
+        /// 不需要存储的事件
+        /// </summary>
+        public IList<string> NotEventStore = new List<string>() { "DomainNotification" };
         public MediatorMemoryBus(IMediator mediator, IEventStoreService eventStoreService)
         {
             this.mediator = mediator;
@@ -31,7 +36,7 @@ namespace XUCore.Ddd.Domain.Bus
         public Task PublishEvent<TNotification>(TNotification @event, CancellationToken cancellationToken = default(CancellationToken)) where TNotification : Event
         {
             // 除了领域通知以外的事件都保存下来
-            if (!@event.MessageType.Equals("DomainNotification"))
+            if (!NotEventStore.Contains(@event.MessageType))
                 eventStoreService?.Save(@event);
 
             // MediatR中介者模式中的第二种方法，发布/订阅模式
