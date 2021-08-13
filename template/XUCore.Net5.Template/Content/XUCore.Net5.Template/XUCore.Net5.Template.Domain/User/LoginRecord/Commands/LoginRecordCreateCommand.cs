@@ -54,9 +54,9 @@ namespace XUCore.Net5.Template.Domain.User.LoginRecord
 
         public class Handler : CommandHandler<LoginRecordCreateCommand, int>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
 
-            public Handler(INigelDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus, mapper)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus, mapper)
             {
                 this.db = db;
             }

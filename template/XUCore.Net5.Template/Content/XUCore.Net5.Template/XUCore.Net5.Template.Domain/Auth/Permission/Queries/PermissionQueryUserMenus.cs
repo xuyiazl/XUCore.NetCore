@@ -26,9 +26,9 @@ namespace XUCore.Net5.Template.Domain.Auth.Permission
 
         public class Handler : CommandHandler<PermissionQueryUserMenus, IList<MenuEntity>>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
 
-            public Handler(INigelDbRepository db)
+            public Handler(IDefaultDbRepository db)
             {
                 this.db = db;
             }

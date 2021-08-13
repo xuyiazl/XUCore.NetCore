@@ -16,7 +16,7 @@ namespace XUCore.Net5.Template.Persistence
             //services.AddDbContext<NigelDbContext>(options =>
             //{
             //    options.UseSqlServer(
-            //        connectionString: configuration.GetConnectionString("NigelDBConnection"),
+            //        connectionString: configuration.GetConnectionString("DefaultDBConnection"),
             //        sqlServerOptionsAction: options =>
             //        {
             //            options.EnableRetryOnFailure();
@@ -32,10 +32,10 @@ namespace XUCore.Net5.Template.Persistence
 
             // mysql
 
-            services.AddDbContext<NigelDbContext>(options =>
+            services.AddDbContext<DefaultDbContext>(options =>
             {
                 options.UseMySql(
-                    connectionString: configuration.GetConnectionString("NigelDBConnection-mysql"),
+                    connectionString: configuration.GetConnectionString("DefaultDBConnection-mysql"),
                     serverVersion: new MySqlServerVersion(new Version(5, 7, 29)),
                     mySqlOptionsAction: options =>
                     {
@@ -50,8 +50,8 @@ namespace XUCore.Net5.Template.Persistence
                 //options.UseLoggerFactory(MyLoggerFactory);
             });
 
-            services.AddScoped(typeof(INigelDbContext), typeof(NigelDbContext));
-            services.AddScoped(typeof(INigelDbRepository), typeof(NigelDbRepository));
+            services.AddScoped(typeof(IDefaultDbContext), typeof(DefaultDbContext));
+            services.AddScoped(typeof(IDefaultDbRepository), typeof(DefaultDbRepository));
 
             return services;
         }
@@ -60,7 +60,7 @@ namespace XUCore.Net5.Template.Persistence
         {
             var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-            var dbContext = scope.ServiceProvider.GetService<NigelDbContext>();
+            var dbContext = scope.ServiceProvider.GetService<DefaultDbContext>();
 
             dbContext.Database.Migrate();
 

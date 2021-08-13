@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace XUCore.Net5.Template.Persistence.Migrations
 {
-    [DbContext(typeof(NigelDbContext))]
+    [DbContext(typeof(DefaultDbContext))]
     [Migration("20210812154821_InitDb")]
     partial class InitDb
     {

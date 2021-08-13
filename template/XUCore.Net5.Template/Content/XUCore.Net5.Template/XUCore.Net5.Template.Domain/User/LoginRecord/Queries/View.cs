@@ -13,7 +13,7 @@ namespace XUCore.Net5.Template.Domain.User.LoginRecord
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-        public static IQueryable<UserLoginRecordViewModel> Create(INigelDbContext db)
+        public static IQueryable<UserLoginRecordViewModel> Create(IDefaultDbContext db)
         {
             return
                 from record in db.UserLoginRecord

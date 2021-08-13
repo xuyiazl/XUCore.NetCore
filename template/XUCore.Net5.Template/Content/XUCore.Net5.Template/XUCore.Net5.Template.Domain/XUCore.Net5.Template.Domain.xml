@@ -517,7 +517,7 @@
             数据状态
             </summary>
         </member>
-        <member name="M:XUCore.Net5.Template.Domain.User.LoginRecord.View.Create(XUCore.Net5.Template.Domain.Core.INigelDbContext)">
+        <member name="M:XUCore.Net5.Template.Domain.User.LoginRecord.View.Create(XUCore.Net5.Template.Domain.Core.IDefaultDbContext)">
             <summary>
             linq 关联查询，关联账号信息
             </summary>

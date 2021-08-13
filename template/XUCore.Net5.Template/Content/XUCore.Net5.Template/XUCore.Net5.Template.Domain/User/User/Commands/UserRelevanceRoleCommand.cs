@@ -37,16 +37,16 @@ namespace XUCore.Net5.Template.Domain.User.User
 
         public class Handler : CommandHandler<UserRelevanceRoleCommand, int>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(INigelDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(INigelDbContext))]
+            [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(UserRelevanceRoleCommand request, CancellationToken cancellationToken)
             {
                 //先清空用户的角色，确保没有冗余的数据

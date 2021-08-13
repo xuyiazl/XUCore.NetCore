@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace XUCore.Net5.Template.Persistence.Migrations
 {
-    [DbContext(typeof(NigelDbContext))]
+    [DbContext(typeof(DefaultDbContext))]
     partial class TaxDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -25,10 +25,10 @@ namespace XUCore.Net5.Template.Domain.Auth.Role
 
         public class Handler : CommandHandler<RoleQueryDetail, RoleDto>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(INigelDbRepository db, IMapper mapper)
+            public Handler(IDefaultDbRepository db, IMapper mapper)
             {
                 this.db = db;
                 this.mapper = mapper;

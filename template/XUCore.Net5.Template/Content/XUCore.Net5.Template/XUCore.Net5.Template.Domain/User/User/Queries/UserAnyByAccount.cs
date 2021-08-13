@@ -42,10 +42,10 @@ namespace XUCore.Net5.Template.Domain.User.User
 
         public class Handler : CommandHandler<UserAnyByAccount, bool>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(INigelDbRepository db, IMapper mapper)
+            public Handler(IDefaultDbRepository db, IMapper mapper)
             {
                 this.db = db;
                 this.mapper = mapper;

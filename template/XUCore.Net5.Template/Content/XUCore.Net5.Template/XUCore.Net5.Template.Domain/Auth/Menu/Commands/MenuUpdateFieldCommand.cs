@@ -39,9 +39,9 @@ namespace XUCore.Net5.Template.Domain.Auth.Menu
 
         public class Handler : CommandHandler<MenuUpdateFieldCommand, int>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
 
-            public Handler(INigelDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
             }

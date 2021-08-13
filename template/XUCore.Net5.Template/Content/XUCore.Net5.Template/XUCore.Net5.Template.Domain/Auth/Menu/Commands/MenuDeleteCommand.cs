@@ -26,14 +26,14 @@ namespace XUCore.Net5.Template.Domain.Auth.Menu
 
         public class Handler : CommandHandler<MenuDeleteCommand, int>
         {
-            private readonly INigelDbRepository db;
+            private readonly IDefaultDbRepository db;
 
-            public Handler(INigelDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
             }
 
-            [UnitOfWork(typeof(INigelDbContext))]
+            [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(MenuDeleteCommand request, CancellationToken cancellationToken)
             {
                 var res = await db.DeleteAsync<MenuEntity>(c => request.Ids.Contains(c.Id));

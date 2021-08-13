@@ -6,7 +6,7 @@ using XUCore.NetCore.Data;
 
 namespace XUCore.Net5.Template.Domain.Core
 {
-    public interface INigelDbContext : IDbContext
+    public interface IDefaultDbContext : IDbContext
     {
         /// <summary>
         /// 事件存储模型
