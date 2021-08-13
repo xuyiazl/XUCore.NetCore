@@ -38,9 +38,9 @@ namespace XUCore.Net5.Template.Domain.Auth.Role
 
         public class Handler : CommandHandler<RoleUpdateFieldCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
 
-            public Handler(ITaxDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(INigelDbRepository db, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
             }

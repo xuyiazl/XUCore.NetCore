@@ -105,16 +105,16 @@ namespace XUCore.Net5.Template.Domain.User.User
 
         public class Handler : CommandHandler<UserCreateCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(ITaxDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
+            public Handler(INigelDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
             {
                 this.db = db;
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(ITaxDbContext))]
+            [UnitOfWork(typeof(INigelDbContext))]
             public override async Task<int> Handle(UserCreateCommand request, CancellationToken cancellationToken)
             {
                 //await bus.PublishEvent(new DomainNotification("", "开始注册...."), cancellationToken);

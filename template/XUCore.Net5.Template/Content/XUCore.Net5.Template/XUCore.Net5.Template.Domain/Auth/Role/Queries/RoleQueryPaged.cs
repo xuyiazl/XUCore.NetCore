@@ -41,10 +41,10 @@ namespace XUCore.Net5.Template.Domain.Auth.Role
 
         public class Handler : CommandHandler<RoleQueryPaged, PagedModel<RoleDto>>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(ITaxDbRepository db, IMapper mapper)
+            public Handler(INigelDbRepository db, IMapper mapper)
             {
                 this.db = db;
                 this.mapper = mapper;

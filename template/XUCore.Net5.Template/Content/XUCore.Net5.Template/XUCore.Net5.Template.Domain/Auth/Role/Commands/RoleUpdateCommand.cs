@@ -54,16 +54,16 @@ namespace XUCore.Net5.Template.Domain.Auth.Role
 
         public class Handler : CommandHandler<RoleUpdateCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(ITaxDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
+            public Handler(INigelDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
             {
                 this.db = db;
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(ITaxDbContext))]
+            [UnitOfWork(typeof(INigelDbContext))]
             public override async Task<int> Handle(RoleUpdateCommand request, CancellationToken cancellationToken)
             {
                 var entity = await db.Context.Role.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);

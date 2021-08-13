@@ -8,9 +8,9 @@ using XUCore.NetCore.Data;
 
 namespace XUCore.Net5.Template.Persistence
 {
-    public class TaxDbContext : DBContextFactory, ITaxDbContext
+    public class NigelDbContext : DBContextFactory, INigelDbContext
     {
-        public TaxDbContext(DbContextOptions<TaxDbContext> options) : base(options)
+        public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options)
         {
 
         }

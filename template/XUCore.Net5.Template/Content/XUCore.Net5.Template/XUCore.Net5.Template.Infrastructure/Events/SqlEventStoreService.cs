@@ -13,9 +13,9 @@ namespace XUCore.Net5.Template.Infrastructure.Events
     /// </summary>
     public class SqlEventStoreService : IEventStoreService
     {
-        private readonly ITaxDbRepository db;
+        private readonly INigelDbRepository db;
         private readonly IServiceProvider serviceProvider;
-        public SqlEventStoreService(IServiceProvider serviceProvider, ITaxDbRepository db)
+        public SqlEventStoreService(IServiceProvider serviceProvider, INigelDbRepository db)
         {
             this.db = db;
             this.serviceProvider = serviceProvider;

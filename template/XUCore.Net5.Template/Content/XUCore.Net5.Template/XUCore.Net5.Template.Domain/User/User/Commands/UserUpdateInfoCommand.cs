@@ -65,16 +65,16 @@ namespace XUCore.Net5.Template.Domain.User.User
 
         public class Handler : CommandHandler<UserUpdateInfoCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(ITaxDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
+            public Handler(INigelDbRepository db, IMediatorHandler bus, IMapper mapper) : base(bus)
             {
                 this.db = db;
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(ITaxDbContext))]
+            [UnitOfWork(typeof(INigelDbContext))]
             public override async Task<int> Handle(UserUpdateInfoCommand request, CancellationToken cancellationToken)
             {
                 var entity = await db.Context.User.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);

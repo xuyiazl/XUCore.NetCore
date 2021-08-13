@@ -4,37 +4,37 @@
         <name>XUCore.Net5.Template.Domain.Core</name>
     </assembly>
     <members>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.StoredEvent">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.StoredEvent">
             <summary>
             事件存储模型
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.User">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.User">
             <summary>
             用户
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.UserRole">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.UserRole">
             <summary>
             用户角色关联
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.UserLoginRecord">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.UserLoginRecord">
             <summary>
             用户登录记录
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.RoleMenu">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.RoleMenu">
             <summary>
             角色菜单关联
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.Role">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.Role">
             <summary>
             角色
             </summary>
         </member>
-        <member name="P:XUCore.Net5.Template.Domain.Core.ITaxDbContext.Menu">
+        <member name="P:XUCore.Net5.Template.Domain.Core.INigelDbContext.Menu">
             <summary>
             菜单
             </summary>

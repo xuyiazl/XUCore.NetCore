@@ -35,10 +35,10 @@ namespace XUCore.Net5.Template.Domain.User.User
 
         public class Handler : CommandHandler<UserUpdatePasswordCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
             private readonly IMapper mapper;
 
-            public Handler(ITaxDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
+            public Handler(INigelDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
                 this.mapper = mapper;

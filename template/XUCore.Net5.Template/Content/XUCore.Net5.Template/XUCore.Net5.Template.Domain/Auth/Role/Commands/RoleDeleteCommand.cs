@@ -26,14 +26,14 @@ namespace XUCore.Net5.Template.Domain.Auth.Role
 
         public class Handler : CommandHandler<RoleDeleteCommand, int>
         {
-            private readonly ITaxDbRepository db;
+            private readonly INigelDbRepository db;
 
-            public Handler(ITaxDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(INigelDbRepository db, IMediatorHandler bus) : base(bus)
             {
                 this.db = db;
             }
 
-            [UnitOfWork(typeof(ITaxDbContext))]
+            [UnitOfWork(typeof(INigelDbContext))]
             public override async Task<int> Handle(RoleDeleteCommand request, CancellationToken cancellationToken)
             {
                 var res = await db.DeleteAsync<RoleEntity>(c => request.Ids.Contains(c.Id));
