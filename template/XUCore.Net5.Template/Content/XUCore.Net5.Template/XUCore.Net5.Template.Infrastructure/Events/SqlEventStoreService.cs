@@ -35,7 +35,7 @@ namespace XUCore.Net5.Template.Infrastructure.Events
             var storedEvent = new StoredEvent(
                 theEvent,
                 serializedData,
-                auth.UserId);
+                auth.UserId ?? "");
 
             db.Add(storedEvent);
         }
