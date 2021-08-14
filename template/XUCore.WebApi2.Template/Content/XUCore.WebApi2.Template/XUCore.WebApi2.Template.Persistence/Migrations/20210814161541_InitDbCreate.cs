@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace XUCore.SimpleApi.Template.Persistence.Migrations
+namespace XUCore.WebApi2.Template.Persistence.Migrations
 {
-    public partial class NigelDbCreate : Migration
+    public partial class InitDbCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,9 +30,9 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                     Weight = table.Column<int>(type: "int(11)", nullable: false),
                     IsExpress = table.Column<ulong>(type: "bit(1)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -49,9 +49,9 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                     Name = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -86,9 +86,9 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                     LoginLastIP = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -129,7 +129,7 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AdminId = table.Column<long>(type: "bigint(20)", nullable: false),
+                    UserID = table.Column<long>(type: "bigint(20)", nullable: false),
                     RoleID = table.Column<long>(type: "bigint(20)", nullable: false)
                 },
                 constraints: table =>
@@ -143,7 +143,7 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AdminUser_AdminAuthUserRole",
-                        column: x => x.AdminId,
+                        column: x => x.UserID,
                         principalTable: "sys_admin_users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -191,9 +191,9 @@ namespace XUCore.SimpleApi.Template.Persistence.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sys_admin_authuserrole_AdminId",
+                name: "IX_sys_admin_authuserrole_UserID",
                 table: "sys_admin_authuserrole",
-                column: "AdminId");
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sys_admin_loginrecord_AdminId",

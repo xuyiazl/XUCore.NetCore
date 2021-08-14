@@ -72,7 +72,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuUpdateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminMenuUpdateCommand>

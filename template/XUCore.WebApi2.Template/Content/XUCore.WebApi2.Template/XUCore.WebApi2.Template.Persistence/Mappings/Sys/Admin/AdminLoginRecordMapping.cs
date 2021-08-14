@@ -5,14 +5,14 @@ using XUCore.NetCore.Data;
 
 namespace XUCore.WebApi2.Template.Persistence.Mappings.Sys.Admin
 {
-    public class AdminLoginRecordMapping : KeyMapping<LoginRecordEntity, long>
+    public class AdminLoginRecordMapping : KeyMapping<AdminLoginRecordEntity, long>
     {
         public AdminLoginRecordMapping() : base("sys_admin_loginrecord", t => t.Id)
         {
 
         }
 
-        public override void Configure(EntityTypeBuilder<LoginRecordEntity> builder)
+        public override void Configure(EntityTypeBuilder<AdminLoginRecordEntity> builder)
         {
             base.Configure(builder);
 

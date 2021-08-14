@@ -8,6 +8,6 @@ namespace XUCore.WebApi2.Template.Core
 {
     public class CacheKey
     {
-        public const string AuthTables = "AuthTables";
+        public const string AuthUser = "AuthUser";
     }
 }

@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Net5.Template.Domain.Core;
-using XUCore.NetCore.AspectCore.Cache;
-using XUCore;
-using System.Collections.Generic;
 using XUCore.Net5.Template.Domain.Core.Entities.Auth;
-using Microsoft.EntityFrameworkCore;
+using XUCore.NetCore.AspectCore.Cache;
 
 namespace XUCore.Net5.Template.Domain.Auth.Permission
 {
@@ -45,7 +44,7 @@ namespace XUCore.Net5.Template.Domain.Auth.Permission
 
                         join menus in db.Context.Menu on roleMenus.MenuId equals menus.Id
 
-                        where userRoles.UserId == request.UserId
+                        where userRoles.UserId == request.UserId && menus.Status == Status.Show
 
                         select menus
                     )

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace XUCore.WebApi2.Template.Persistence.Migrations
+namespace XUCore.WebApi.Template.Persistence.Migrations
 {
-    public partial class NigelDbCreate : Migration
+    public partial class InitDbCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FatherID = table.Column<long>(type: "bigint(20)", nullable: false),
+                    FatherId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     Icon = table.Column<string>(type: "varchar(100)", nullable: true)
@@ -27,12 +27,12 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                     OnlyCode = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     IsMenu = table.Column<ulong>(type: "bit(1)", nullable: false),
-                    Weight = table.Column<int>(type: "int(11)", nullable: false),
+                    Weight = table.Column<int>(type: "int", nullable: false),
                     IsExpress = table.Column<ulong>(type: "bit(1)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -49,9 +49,9 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                     Name = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -81,14 +81,14 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8"),
                     Company = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
-                    LoginCount = table.Column<int>(type: "int(11)", nullable: false),
+                    LoginCount = table.Column<int>(type: "int", nullable: false),
                     LoginLastTime = table.Column<DateTime>(type: "datetime", nullable: false),
-                    LoginLastIP = table.Column<string>(type: "varchar(50)", nullable: false)
+                    LoginLastIp = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
-                    Created_At = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
-                    Updated_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
-                    Deleted_At = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "添加日期"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "最后修改日期"),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true, comment: "删除日期")
                 },
                 constraints: table =>
                 {
@@ -102,21 +102,21 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleID = table.Column<long>(type: "bigint(20)", nullable: false),
-                    MenuID = table.Column<long>(type: "bigint(20)", nullable: false)
+                    RoleId = table.Column<long>(type: "bigint", nullable: false),
+                    MenuId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_sys_admin_authrolemenus", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AdminAuthMenus_AdminAuthRoleMenus",
-                        column: x => x.MenuID,
+                        column: x => x.MenuId,
                         principalTable: "sys_admin_authmenus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AdminAuthRole_AdminAuthRoleMenus",
-                        column: x => x.RoleID,
+                        column: x => x.RoleId,
                         principalTable: "sys_admin_authrole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -129,15 +129,15 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AdminId = table.Column<long>(type: "bigint(20)", nullable: false),
-                    RoleID = table.Column<long>(type: "bigint(20)", nullable: false)
+                    AdminId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_sys_admin_authuserrole", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AdminAuthRole_AdminAuthUserRoles",
-                        column: x => x.RoleID,
+                        column: x => x.RoleId,
                         principalTable: "sys_admin_authrole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -156,11 +156,11 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AdminId = table.Column<long>(type: "bigint(20)", nullable: false),
+                    AdminId = table.Column<long>(type: "bigint", nullable: false),
                     LoginWay = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     LoginTime = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    LoginIP = table.Column<string>(type: "varchar(50)", nullable: false)
+                    LoginIp = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8")
                 },
                 constraints: table =>
@@ -176,24 +176,24 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sys_admin_authrolemenus_MenuID",
+                name: "IX_sys_admin_authrolemenus_MenuId",
                 table: "sys_admin_authrolemenus",
-                column: "MenuID");
+                column: "MenuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sys_admin_authrolemenus_RoleID",
+                name: "IX_sys_admin_authrolemenus_RoleId",
                 table: "sys_admin_authrolemenus",
-                column: "RoleID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_sys_admin_authuserrole_RoleID",
-                table: "sys_admin_authuserrole",
-                column: "RoleID");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sys_admin_authuserrole_AdminId",
                 table: "sys_admin_authuserrole",
                 column: "AdminId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_sys_admin_authuserrole_RoleId",
+                table: "sys_admin_authuserrole",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sys_admin_loginrecord_AdminId",

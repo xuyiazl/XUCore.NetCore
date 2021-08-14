@@ -17,8 +17,7 @@ namespace XUCore.SimpleApi.Template.Persistence.Mappings.Sys.Admin
 
             builder.Property(e => e.FatherId)
                 .IsRequired()
-                .HasColumnType("bigint(20)")
-                .HasColumnName("FatherID");
+                .HasColumnType("bigint");
 
             builder.Property(e => e.Icon)
                 .HasColumnType("varchar(100)")
@@ -47,7 +46,7 @@ namespace XUCore.SimpleApi.Template.Persistence.Mappings.Sys.Admin
                 .HasColumnType("varchar(100)")
                 .HasCharSet("utf8");
 
-            builder.Property(e => e.Weight).HasColumnType("int(11)");
+            builder.Property(e => e.Weight).HasColumnType("int");
 
             
         }

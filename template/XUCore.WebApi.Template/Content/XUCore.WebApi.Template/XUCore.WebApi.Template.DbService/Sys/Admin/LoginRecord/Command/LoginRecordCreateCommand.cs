@@ -9,7 +9,7 @@ using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
 {
-    public class LoginRecordCreateCommand : Command<bool>, IMapFrom<LoginRecordEntity>
+    public class LoginRecordCreateCommand : Command<bool>, IMapFrom<AdminLoginRecordEntity>
     {
         /// <summary>
         /// 管理员id
@@ -32,7 +32,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
         public string LoginIp { get; set; }
 
         public void Mapping(Profile profile) =>
-            profile.CreateMap<LoginRecordCreateCommand, LoginRecordEntity>()
+            profile.CreateMap<LoginRecordCreateCommand, AdminLoginRecordEntity>()
                 .ForMember(c => c.LoginTime, c => c.MapFrom(s => DateTime.Now))
             ;
 

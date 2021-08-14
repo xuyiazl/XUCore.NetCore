@@ -1,20 +1,20 @@
-﻿using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
+﻿using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using XUCore.NetCore.Data;
 
-namespace XUCore.WebApi.Template.Persistence
+namespace XUCore.SimpleApi.Template.Persistence
 {
-    public interface INigelDbRepository : IDbContextRepository<NigelDbContext> { }
+    public interface IDefaultDbRepository : IDbContextRepository<DefaultDbContext> { }
 
-    public class NigelDbRepository : DbContextRepository<NigelDbContext>, INigelDbRepository
+    public class DefaultDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
     {
-        public NigelDbRepository(NigelDbContext context) : base(context) { }
+        public DefaultDbRepository(DefaultDbContext context) : base(context) { }
     }
 
-    public class NigelDbContext : DBContextFactory
+    public class DefaultDbContext : DBContextFactory
     {
-        public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options)
+        public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
         {
 
         }

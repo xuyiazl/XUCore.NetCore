@@ -49,17 +49,17 @@
             数据状态
             </summary>
         </member>
-        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.Created_At">
+        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.CreatedAt">
             <summary>
             创建日期
             </summary>
         </member>
-        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.Updated_At">
+        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.UpdatedAt">
             <summary>
             更新日期
             </summary>
         </member>
-        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.Deleted_At">
+        <member name="P:XUCore.WebApi2.Template.Core.DtoBase`1.DeletedAt">
             <summary>
             删除日期
             </summary>

@@ -9,17 +9,17 @@
             数据状态
             </summary>
         </member>
-        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.Created_At">
+        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.CreatedAt">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.Updated_At">
+        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.UpdatedAt">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.Deleted_At">
+        <member name="P:XUCore.SimpleApi.Template.Persistence.Entities.BaseEntity.DeletedAt">
             <summary>
             删除时间
             </summary>

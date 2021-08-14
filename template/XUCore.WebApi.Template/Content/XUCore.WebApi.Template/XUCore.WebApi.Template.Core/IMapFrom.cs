@@ -47,15 +47,15 @@ namespace XUCore.WebApi.Template.Core
         /// <summary>
         /// 创建日期
         /// </summary>
-        public DateTime Created_At { get; set; }
+        public DateTime CreatedAt { get; set; }
         /// <summary>
         /// 更新日期
         /// </summary>
-        public DateTime? Updated_At { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         /// <summary>
         /// 删除日期
         /// </summary>
-        public DateTime? Deleted_At { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         public virtual void Mapping(Profile profile) => profile.CreateMap(typeof(T), GetType());
     }

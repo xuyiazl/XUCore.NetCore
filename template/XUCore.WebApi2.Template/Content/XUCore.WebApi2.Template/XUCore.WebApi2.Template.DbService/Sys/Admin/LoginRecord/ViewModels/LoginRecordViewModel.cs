@@ -2,7 +2,7 @@
 
 namespace XUCore.WebApi2.Template.DbService.Sys.Admin.LoginRecord
 {
-    public class LoginRecordViewModel : LoginRecordEntity
+    public class LoginRecordViewModel : AdminLoginRecordEntity
     {
         public string Name { get; set; }
         public string Mobile { get; set; }

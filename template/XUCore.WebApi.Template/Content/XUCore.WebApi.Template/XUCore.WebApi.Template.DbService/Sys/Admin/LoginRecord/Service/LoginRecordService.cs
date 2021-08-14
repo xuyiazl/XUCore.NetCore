@@ -14,10 +14,10 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
 {
     public class LoginRecordService : ILoginRecordService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public LoginRecordService(INigelDbRepository db, IMapper mapper)
+        public LoginRecordService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
@@ -25,7 +25,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.LoginRecord
 
         public async Task<int> CreateAsync(LoginRecordCreateCommand request, CancellationToken cancellationToken)
         {
-            var entity = mapper.Map<LoginRecordCreateCommand, LoginRecordEntity>(request);
+            var entity = mapper.Map<LoginRecordCreateCommand, AdminLoginRecordEntity>(request);
 
             var res = await db.AddAsync(entity, cancellationToken: cancellationToken);
 

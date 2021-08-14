@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
-using XUCore.WebApi2.Template.Core;
 using XUCore.WebApi2.Template.Core.Enums;
 using XUCore.WebApi2.Template.Persistence;
 using XUCore.WebApi2.Template.Persistence.Entities.Sys.Admin;
@@ -18,16 +16,15 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminRole
 {
     public class AdminRoleService : IAdminRoleService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public AdminRoleService(INigelDbRepository db, IMapper mapper)
+        public AdminRoleService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> CreateAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
@@ -52,7 +49,6 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminRole
                 return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken)
         {
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -84,35 +80,32 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminRole
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
         {
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));

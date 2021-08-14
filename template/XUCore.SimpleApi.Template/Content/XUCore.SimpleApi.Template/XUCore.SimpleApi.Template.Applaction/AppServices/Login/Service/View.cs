@@ -10,7 +10,7 @@ namespace XUCore.SimpleApi.Template.Applaction.Login
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-        public static IQueryable<LoginRecordViewModel> Create(NigelDbContext db)
+        public static IQueryable<LoginRecordViewModel> Create(DefaultDbContext db)
         {
             return
                 from record in db.AdminLoginRecord

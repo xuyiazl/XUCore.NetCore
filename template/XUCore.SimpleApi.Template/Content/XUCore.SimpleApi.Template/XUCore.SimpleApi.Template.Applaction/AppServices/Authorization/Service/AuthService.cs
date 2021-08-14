@@ -33,13 +33,13 @@ namespace XUCore.SimpleApi.Template.Applaction.Authorization
         private const string loginToken = "_admin_login_";
 
         private readonly IPermissionService permissionService;
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
         private readonly ICacheManager cacheManager;
         public AuthService(IServiceProvider serviceProvider)
         {
             permissionService = serviceProvider.GetService<IPermissionService>();
-            db = serviceProvider.GetService<INigelDbRepository>();
+            db = serviceProvider.GetService<IDefaultDbRepository>();
             mapper = serviceProvider.GetService<IMapper>();
             cacheManager = serviceProvider.GetService<ICacheManager>();
         }

@@ -3,6 +3,7 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Helpers;
 using XUCore.WebApi.Template.Core;
 using XUCore.WebApi.Template.Core.Enums;
@@ -52,6 +53,12 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
         /// </summary>
         public long[] Roles { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator(Web.GetService<IAdminUserService>()).Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminUserCreateCommand, AdminUserEntity>()
                 .ForMember(c => c.Password, c => c.MapFrom(s => Encrypt.Md5By32(s.Password)))
@@ -59,7 +66,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminUserCreateCommand>

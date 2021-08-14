@@ -1,20 +1,20 @@
-﻿using XUCore.SimpleApi.Template.Persistence.Entities.Sys.Admin;
+﻿using XUCore.WebApi.Template.Persistence.Entities.Sys.Admin;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using XUCore.NetCore.Data;
 
-namespace XUCore.SimpleApi.Template.Persistence
+namespace XUCore.WebApi.Template.Persistence
 {
-    public interface INigelDbRepository : IDbContextRepository<NigelDbContext> { }
+    public interface IDefaultDbRepository : IDbContextRepository<DefaultDbContext> { }
 
-    public class NigelDbRepository : DbContextRepository<NigelDbContext>, INigelDbRepository
+    public class NigelDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
     {
-        public NigelDbRepository(NigelDbContext context) : base(context) { }
+        public NigelDbRepository(DefaultDbContext context) : base(context) { }
     }
 
-    public class NigelDbContext : DBContextFactory
+    public class DefaultDbContext : DBContextFactory
     {
-        public NigelDbContext(DbContextOptions<NigelDbContext> options) : base(options)
+        public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
         {
 
         }
@@ -25,7 +25,7 @@ namespace XUCore.SimpleApi.Template.Persistence
 
         public DbSet<AdminUserEntity> AdminUser => Set<AdminUserEntity>();
         public DbSet<AdminUserRoleEntity> AdminAuthUserRole => Set<AdminUserRoleEntity>();
-        public DbSet<LoginRecordEntity> AdminLoginRecord => Set<LoginRecordEntity>();
+        public DbSet<AdminLoginRecordEntity> AdminLoginRecord => Set<AdminLoginRecordEntity>();
         public DbSet<AdminRoleMenuEntity> AdminAuthRoleMenus => Set<AdminRoleMenuEntity>();
         public DbSet<AdminRoleEntity> AdminAuthRole => Set<AdminRoleEntity>();
         public DbSet<AdminMenuEntity> AdminAuthMenus => Set<AdminMenuEntity>();

@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
-using XUCore.WebApi2.Template.Core;
 using XUCore.WebApi2.Template.Core.Enums;
 using XUCore.WebApi2.Template.DbService.Events;
 using XUCore.WebApi2.Template.Persistence;
@@ -22,18 +20,17 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
 {
     public class AdminUserService : IAdminUserService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public AdminUserService(INigelDbRepository db, IMapper mapper, IMediator mediator)
+        public AdminUserService(IDefaultDbRepository db, IMapper mapper, IMediator mediator)
         {
             this.db = db;
             this.mapper = mapper;
             this.mediator = mediator;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
@@ -61,7 +58,6 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
                 return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(AdminUserUpdateInfoCommand request, CancellationToken cancellationToken)
         {
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -80,43 +76,41 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "username":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "mobile":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "password":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), UpdatedAt = DateTime.Now }, cancellationToken);
                 case "position":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "location":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "company":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "picture":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
         {
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -135,7 +129,6 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             return await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
@@ -143,7 +136,7 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             if (res > 0)
             {
                 //删除登录记录
-                await db.DeleteAsync<LoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await db.DeleteAsync<AdminLoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
             }
@@ -151,7 +144,6 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> RelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
         {
             //先清空用户的角色，确保没有冗余的数据
@@ -205,7 +197,7 @@ namespace XUCore.WebApi2.Template.DbService.Sys.Admin.AdminUser
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new LoginRecordEntity
+            user.LoginRecords.Add(new AdminLoginRecordEntity
             {
                 AdminId = user.Id,
                 LoginIp = user.LoginLastIp,

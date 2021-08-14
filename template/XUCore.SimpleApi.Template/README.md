@@ -22,7 +22,7 @@ dotnet new -u XUCore.SimpleApi.Template
 
 ```bash
 
-dotnet new --install XUCore.SimpleApi.Template::2.0.2
+dotnet new --install XUCore.SimpleApi.Template::2.0.3
 
 ```
 

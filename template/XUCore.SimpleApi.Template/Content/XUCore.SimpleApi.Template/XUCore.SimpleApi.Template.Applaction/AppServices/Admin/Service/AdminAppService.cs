@@ -31,13 +31,13 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
     {
         private readonly IMediator mediator;
 
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
         public AdminAppService(IServiceProvider serviceProvider)
         {
             this.mediator = serviceProvider.GetService<IMediator>();
-            this.db = serviceProvider.GetService<INigelDbRepository>();
+            this.db = serviceProvider.GetService<IDefaultDbRepository>();
             this.mapper = serviceProvider.GetService<IMapper>();
         }
 
@@ -50,7 +50,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
@@ -84,7 +83,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
         {
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -134,35 +132,34 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
             switch (field.ToLower())
             {
                 case "name":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "username":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "mobile":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "password":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "position":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "location":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "company":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "picture":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -182,20 +179,19 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserStatusAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
             switch (status)
             {
                 case Status.Show:
-                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.SoldOut:
-                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.Trash:
-                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -214,7 +210,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteUserAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
@@ -403,7 +398,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
@@ -432,7 +426,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -471,14 +464,13 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
             switch (field.ToLower())
             {
                 case "name":
-                    res = await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -498,7 +490,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleStatusAsync([Required] long[] ids, Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -506,13 +497,13 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
             switch (status)
             {
                 case Status.Show:
-                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.SoldOut:
-                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.Trash:
-                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -531,7 +522,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteRoleAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));
@@ -629,7 +619,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminMenuCreateCommand, AdminMenuEntity>(request);
@@ -673,23 +662,22 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateMenuFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
             switch (field.ToLower())
             {
                 case "icon":
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "url":
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Url = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Url = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "onlycode":
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "weight":
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -709,20 +697,19 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateMenuStatusAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
             switch (status)
             {
                 case Status.Show:
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.SoldOut:
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.Trash:
-                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -741,7 +728,6 @@ namespace XUCore.SimpleApi.Template.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteMenuAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminMenuEntity>(c => ids.Contains(c.Id), cancellationToken);

@@ -33,7 +33,7 @@ namespace XUCore.WebApi.Template.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleCreateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminRoleCreateCommand>

@@ -5,26 +5,24 @@ using XUCore.NetCore.Data;
 
 namespace XUCore.WebApi.Template.Persistence.Mappings.Sys.Admin
 {
-    public class AdminLoginRecordMapping : KeyMapping<LoginRecordEntity, long>
+    public class AdminLoginRecordMapping : KeyMapping<AdminLoginRecordEntity, long>
     {
         public AdminLoginRecordMapping() : base("sys_admin_loginrecord", t => t.Id)
         {
 
         }
 
-        public override void Configure(EntityTypeBuilder<LoginRecordEntity> builder)
+        public override void Configure(EntityTypeBuilder<AdminLoginRecordEntity> builder)
         {
             base.Configure(builder);
 
             builder.Property(e => e.AdminId)
                 .IsRequired()
-                .HasColumnType("bigint(20)")
-                .HasColumnName("AdminId");
+                .HasColumnType("bigint");
 
             builder.Property(e => e.LoginIp)
                 .IsRequired()
                 .HasColumnType("varchar(50)")
-                .HasColumnName("LoginIP")
                 .HasCharSet("utf8");
 
             builder.Property(e => e.LoginTime)
