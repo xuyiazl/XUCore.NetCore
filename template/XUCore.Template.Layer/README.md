@@ -1,6 +1,6 @@
 # XUCore.WebApi.Template
 
-XUCore.WebApi.Template（只使用插件化的框架，不使用集成式框架）
+XUCore.WebApi.Template
 
 三层api代码模板。 还原简单清晰的代码。
 
