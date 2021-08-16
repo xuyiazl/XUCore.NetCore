@@ -289,6 +289,11 @@
             工作单元
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.AsQuery``1">
+            <summary>
+            初始化查询表达式
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(``0,System.Boolean)">
             <summary>
             插入一条数据
@@ -537,6 +542,11 @@
             <typeparam name="TDbContext"></typeparam>
             <returns></returns>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.AsQuery">
+            <summary>
+            初始化查询表达式
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
@@ -763,6 +773,11 @@
         <member name="P:XUCore.NetCore.Data.IDbContextRepository`1.UnitOfWork">
             <summary>
             工作单元
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.AsQuery``1">
+            <summary>
+            初始化查询表达式
             </summary>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(``0,System.Boolean)">
@@ -1013,6 +1028,11 @@
             </summary>
             <typeparam name="TDbContext"></typeparam>
             <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.AsQuery">
+            <summary>
+            初始化查询表达式
+            </summary>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(`0,System.Boolean)">
             <summary>

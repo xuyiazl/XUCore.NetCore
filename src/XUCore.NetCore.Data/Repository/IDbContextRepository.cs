@@ -24,6 +24,10 @@ namespace XUCore.NetCore.Data
         /// 工作单元
         /// </summary>
         IUnitOfWork UnitOfWork { get; }
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        Expression<Func<TEntity, bool>> AsQuery<TEntity>();
         //同步操作
 
         /// <summary>

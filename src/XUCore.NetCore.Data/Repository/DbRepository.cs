@@ -45,13 +45,16 @@ namespace XUCore.NetCore.Data
         /// 当前DbSet对象
         /// </summary>
         public DbSet<TEntity> Table => _context.Set<TEntity>();
-
         /// <summary>
         /// 转换上下文
         /// </summary>
         /// <typeparam name="TDbContext"></typeparam>
         /// <returns></returns>
         public TDbContext As<TDbContext>() where TDbContext : IDbContext => _context.As<TDbContext>();
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        public Expression<Func<TEntity, bool>> AsQuery() => c => true;
 
         //同步操作
 

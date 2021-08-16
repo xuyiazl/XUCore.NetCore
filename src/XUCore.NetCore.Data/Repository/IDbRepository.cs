@@ -42,6 +42,10 @@ namespace XUCore.NetCore.Data
         /// <typeparam name="TDbContext"></typeparam>
         /// <returns></returns>
         TDbContext As<TDbContext>() where TDbContext : IDbContext;
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        Expression<Func<TEntity, bool>> AsQuery();
 
         //同步操作
 

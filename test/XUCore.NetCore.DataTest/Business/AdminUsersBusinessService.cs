@@ -57,7 +57,7 @@ namespace XUCore.NetCore.DataTest.Business
             //rep.IsAutoCommit = false;
 
             var list = rep.Context.User.Include(c => c.AdminUserAddress).ToList();
-
+            
             var entity = BuildRecords(1)[0];
 
             var l = new List<AdminUserAddressEntity> { new AdminUserAddressEntity

@@ -32,6 +32,11 @@
             Mediator 消息中介发布请求和通知
             </summary>
         </member>
+        <member name="F:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.NotEventStore">
+            <summary>
+            不需要存储的事件
+            </summary>
+        </member>
         <member name="M:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.PublishEvent``1(``0,System.Threading.CancellationToken)">
             <summary>
             发布事件通知
