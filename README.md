@@ -50,7 +50,25 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Ddd.Domain)				| XUCore.Ddd.Domain					| 基于MediatR的Ddd Domain扩展														|
 
 
-## 🍄 框架脚手架
+## 🍄 框架脚手架（因为命名问题，以下为新脚手架，持续同步更新）
+
+|																																		| 名称								| 下载																																		| 版本																																								| 描述										|
+| ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Ddd)				| XUCore.Template.Ddd				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Ddd.svg)](https://nuget.org/packages/XUCore.Template.Ddd)					| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Ddd.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Ddd)						| Mvc/WebApi 模板（Ddd架构模式）				|
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Layer)			| XUCore.Template.Layer				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Layer.svg)](https://nuget.org/packages/XUCore.Template.Layer)				| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Layer.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Layer)					| Layer 三层快速开发项目模板 (WebApi)						|
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)		| XUCore.Template.EasyLayer			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.EasyLayer.svg)](https://nuget.org/packages/XUCore.Template.EasyLayer)				| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.EasyLayer.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)					| EasyLayer 精简分层快速开发项目模板 (WebApi)						|
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| XUCore.Template.Easy				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Easy.svg)](https://nuget.org/packages/XUCore.Template.Easy)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Easy.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| Easy Api 单层应用模板，适用于简单快速开发的项目（WebApi）					|
+
+
+[如何使用脚手架 XUCore.Template.Ddd](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.Ddd)
+[如何使用脚手架 XUCore.Template.Layer](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.Layer)
+[如何使用脚手架 XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.EasyLayer)
+[如何使用脚手架 XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.Easy)
+
+
+
+
+## 🍄 框架脚手架（【弃用】，因为命名不规范的问题，该命名不再更新，请使用上面脚手架）
 
 |																																		| 名称								| 下载																																		| 版本																																								| 描述										|
 | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
@@ -58,12 +76,3 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.WebApi.Template)			| XUCore.WebApi.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.WebApi.Template.svg)](https://nuget.org/packages/XUCore.WebApi.Template)				| [![nuget](https://img.shields.io/nuget/v/XUCore.WebApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.WebApi.Template)					| WebApi 模板（三层模式）						|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.WebApi2.Template)			| XUCore.WebApi2.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.WebApi2.Template.svg)](https://nuget.org/packages/XUCore.WebApi2.Template)				| [![nuget](https://img.shields.io/nuget/v/XUCore.WebApi2.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.WebApi2.Template)					| WebApi2 模板（精简三层模式）						|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)		| XUCore.SimpleApi.Template			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.SimpleApi.Template.svg)](https://nuget.org/packages/XUCore.SimpleApi.Template)		| [![nuget](https://img.shields.io/nuget/v/XUCore.SimpleApi.Template.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.SimpleApi.Template)				| WebApi 模板（单层快速开发）					|
-
-
-[如何使用脚手架 XUCore.Net5.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Net5.Template)
-
-[如何使用脚手架 XUCore.WebApi.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.WebApi.Template)
-
-[如何使用脚手架 XUCore.WebApi2.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.WebApi2.Template)
-
-[如何使用脚手架 XUCore.SimpleApi.Template](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.SimpleApi.Template)
