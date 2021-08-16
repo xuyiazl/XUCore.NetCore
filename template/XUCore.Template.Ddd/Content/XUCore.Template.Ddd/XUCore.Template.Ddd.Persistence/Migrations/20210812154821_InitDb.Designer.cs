@@ -84,7 +84,7 @@ namespace XUCore.Template.Ddd.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("Weight")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -218,7 +218,7 @@ namespace XUCore.Template.Ddd.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("LoginCount")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginLastIp")
                         .IsRequired()

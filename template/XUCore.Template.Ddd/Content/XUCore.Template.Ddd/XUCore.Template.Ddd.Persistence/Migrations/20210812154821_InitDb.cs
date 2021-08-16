@@ -27,7 +27,7 @@ namespace XUCore.Template.Ddd.Persistence.Migrations
                     OnlyCode = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
                     IsMenu = table.Column<ulong>(type: "bit(1)", nullable: false),
-                    Weight = table.Column<int>(type: "int(11)", nullable: false),
+                    Weight = table.Column<int>(type: "int", nullable: false),
                     IsExpress = table.Column<ulong>(type: "bit(1)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false, comment: "数据状态（1、正常 2、不显示 3、已删除）"),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, comment: "创建时间"),
@@ -115,7 +115,7 @@ namespace XUCore.Template.Ddd.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8"),
                     Company = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),
-                    LoginCount = table.Column<int>(type: "int(11)", nullable: false),
+                    LoginCount = table.Column<int>(type: "int", nullable: false),
                     LoginLastTime = table.Column<DateTime>(type: "datetime", nullable: false),
                     LoginLastIp = table.Column<string>(type: "varchar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8"),

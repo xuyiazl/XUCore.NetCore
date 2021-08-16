@@ -46,7 +46,7 @@ namespace XUCore.Template.Ddd.Persistence.Mappings.Auth
                 .HasColumnType("varchar(100)")
                 .HasCharSet("utf8");
 
-            builder.Property(e => e.Weight).HasColumnType("int(11)");
+            builder.Property(e => e.Weight).HasColumnType("int");
 
             
         }
