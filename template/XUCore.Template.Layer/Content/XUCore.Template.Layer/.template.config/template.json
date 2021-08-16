@@ -5,7 +5,7 @@
   "name": "XUCore Template Layer",
   "identity": "XUCore.Template.Layer",
   "groupIdentity": "XUCore.Template.Layer",
-  "shortName": "XUCore-Template-Layer",
+  "shortName": "XUCore.Template.Layer",
   "tags": {
     "language": "C#",
     "type": "project"

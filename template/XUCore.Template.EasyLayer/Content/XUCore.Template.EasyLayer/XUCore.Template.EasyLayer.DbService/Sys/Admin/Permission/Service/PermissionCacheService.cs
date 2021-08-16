@@ -1,36 +1,47 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Template.EasyLayer.Core;
-using XUCore.Template.EasyLayer.Core.Enums;
 using XUCore.Template.EasyLayer.Persistence;
+using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.Permission
 {
     public class PermissionCacheService : IPermissionCacheService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public PermissionCacheService(INigelDbRepository db, IMapper mapper)
+        public PermissionCacheService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        [CacheMethod(Key = CacheKey.AuthTables, Seconds = CacheTime.Day1)]
-        public async Task<PermissionViewModel> GetAllAsync(CancellationToken cancellationToken)
+        [CacheMethod(Key = CacheKey.AuthUser, ParamterKey = "{0}", Seconds = CacheTime.Min5)]
+        public async Task<IList<AdminMenuEntity>> GetAllAsync(long adminId, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            var res =
+                    await
+                    (
+                        from userRoles in db.Context.AdminAuthUserRole
 
-            return new PermissionViewModel
-            {
-                Menus = db.Context.AdminAuthMenus.Where(c => c.Status == Status.Show).ToList(),
-                RoleMenus = db.Context.AdminAuthRoleMenus.ToList(),
-                UserRoles = db.Context.AdminAuthUserRole.ToList()
-            };
+                        join roleMenus in db.Context.AdminAuthRoleMenus on userRoles.RoleId equals roleMenus.RoleId
+
+                        join menus in db.Context.AdminAuthMenus on roleMenus.MenuId equals menus.Id
+
+                        where userRoles.AdminId == adminId
+
+                        select menus
+                    )
+                    .Distinct()
+                    .ToListAsync(cancellationToken);
+
+            return res;
         }
     }
 }

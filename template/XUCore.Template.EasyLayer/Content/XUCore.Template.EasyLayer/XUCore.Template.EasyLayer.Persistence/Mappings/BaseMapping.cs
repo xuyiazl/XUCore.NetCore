@@ -24,17 +24,14 @@ namespace XUCore.Template.EasyLayer.Persistence.Mappings
 
             builder.Property(e => e.Created_At)
                 .HasColumnType("datetime")
-                .HasColumnName("Created_At")
                 .HasComment("添加日期");
 
             builder.Property(e => e.Updated_At)
                 .HasColumnType("datetime")
-                .HasColumnName("Updated_At")
                 .HasComment("最后修改日期");
 
             builder.Property(e => e.Deleted_At)
                 .HasColumnType("datetime")
-                .HasColumnName("Deleted_At")
                 .HasComment("删除日期");
 
             #endregion

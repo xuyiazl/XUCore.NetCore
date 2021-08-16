@@ -31,12 +31,12 @@ namespace XUCore.Template.Easy.Applaction.Authorization
         private const string userName = "_admin_username_";
 
         private readonly IPermissionService permissionService;
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
         public AuthService(IServiceProvider serviceProvider)
         {
             permissionService = serviceProvider.GetService<IPermissionService>();
-            this.db = serviceProvider.GetService<INigelDbRepository>();
+            this.db = serviceProvider.GetService<IDefaultDbRepository>();
             this.mapper = serviceProvider.GetService<IMapper>();
         }
 

@@ -3,6 +3,7 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Helpers;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.Core.Enums;
@@ -52,6 +53,13 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
         /// </summary>
         public long[] Roles { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator(Web.GetService<IAdminUserService>()).Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
+
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminUserCreateCommand, AdminUserEntity>()
                 .ForMember(c => c.Password, c => c.MapFrom(s => Encrypt.Md5By32(s.Password)))
@@ -87,9 +95,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
                     .WithMessage(c => $"该手机号码已存在。");
 
                 RuleFor(x => x.Password).NotEmpty().MaximumLength(30).WithName("密码");
-                RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
-                RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
-                RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
             }
         }

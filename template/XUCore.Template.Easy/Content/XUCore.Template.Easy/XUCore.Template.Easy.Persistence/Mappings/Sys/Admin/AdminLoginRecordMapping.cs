@@ -18,13 +18,11 @@ namespace XUCore.Template.Easy.Persistence.Mappings.Sys.Admin
 
             builder.Property(e => e.AdminId)
                 .IsRequired()
-                .HasColumnType("bigint(20)")
-                .HasColumnName("AdminId");
+                .HasColumnType("bigint");
 
             builder.Property(e => e.LoginIp)
                 .IsRequired()
                 .HasColumnType("varchar(50)")
-                .HasColumnName("LoginIP")
                 .HasCharSet("utf8");
 
             builder.Property(e => e.LoginTime)

@@ -18,16 +18,15 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 {
     public class AdminRoleService : IAdminRoleService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public AdminRoleService(INigelDbRepository db, IMapper mapper)
+        public AdminRoleService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> CreateAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
@@ -52,7 +51,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
                 return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken)
         {
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -84,7 +82,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
             switch (field.ToLower())
@@ -96,7 +93,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
         {
             switch (status)
@@ -112,7 +108,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));

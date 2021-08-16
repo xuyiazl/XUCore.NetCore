@@ -272,6 +272,18 @@
             管理员登录接口
             </summary>
         </member>
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.LoginController.CreateInitAccountAsync(System.Threading.CancellationToken)">
+            <summary>
+            创建初始账号
+            </summary>
+            <remarks>
+            初始账号密码：
+                <para>username : admin</para>
+                <para>password : admin</para>
+            </remarks>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.Layer.WebApi.Controller.LoginController.LoginAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
             管理员登录

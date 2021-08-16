@@ -22,18 +22,17 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 {
     public class AdminUserService : IAdminUserService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public AdminUserService(INigelDbRepository db, IMapper mapper, IMediator mediator)
+        public AdminUserService(IDefaultDbRepository db, IMapper mapper, IMediator mediator)
         {
             this.db = db;
             this.mapper = mapper;
             this.mediator = mediator;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
@@ -61,7 +60,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(AdminUserUpdateInfoCommand request, CancellationToken cancellationToken)
         {
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -80,7 +78,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
             switch (field.ToLower())
@@ -106,7 +103,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
         {
             switch (status)
@@ -135,7 +131,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
@@ -151,7 +146,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> RelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
         {
             //先清空用户的角色，确保没有冗余的数据

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>XUCore.Template.Easy</id>
-		<version>1.0.0</version>
+		<version>1.0.2</version>
 		<description>Easy Api 单层应用模板，适用于简单快速开发的WebApi项目</description>
 		<authors>XUCore</authors>
 		<copyright>Copyright © XUCore 2020</copyright>

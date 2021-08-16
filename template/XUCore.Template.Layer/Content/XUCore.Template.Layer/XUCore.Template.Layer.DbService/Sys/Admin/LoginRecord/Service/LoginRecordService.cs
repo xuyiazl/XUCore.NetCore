@@ -14,10 +14,10 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.LoginRecord
 {
     public class LoginRecordService : ILoginRecordService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public LoginRecordService(INigelDbRepository db, IMapper mapper)
+        public LoginRecordService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;

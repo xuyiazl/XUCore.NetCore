@@ -1,6 +1,6 @@
-# XUCore.WebApi.Template
+# XUCore.Template.Layer
 
-XUCore.WebApi.Template
+XUCore.Template.Layer
 
 三层api代码模板。 还原简单清晰的代码。
 
@@ -14,7 +14,7 @@ XUCore.WebApi.Template
 
 ```bash
 
-dotnet new -u XUCore.WebApi.Template
+dotnet new -u XUCore.Template.Layer
 
 ```
 
@@ -22,7 +22,7 @@ dotnet new -u XUCore.WebApi.Template
 
 ```bash
 
-dotnet new --install XUCore.WebApi.Template::2.0.4
+dotnet new --install XUCore.Template.Layer::1.0.2
 
 ```
 
@@ -34,7 +34,7 @@ dotnet new --install XUCore.WebApi.Template::2.0.4
 
 那么先切换到该目录
 
-```bash
+```XUCore.Template.Layer
 
 cd E:\demo
 
@@ -44,11 +44,11 @@ cd E:\demo
 
 ```bash
 
-dotnet new XUCore-WebApi-Template -n MyTest -o .
+dotnet new XUCore.Template.Layer -n MyTest -o .
 
 ```
 
-这里的 `XUCore-WebApi-Template` 是使用模板短名称。
+这里的 `XUCore.Template.Layer` 是使用模板短名称。
 
 `MyTest` 为新创建的项目名称。
 

@@ -8,6 +8,6 @@ namespace XUCore.Template.Layer.Core
 {
     public class CacheKey
     {
-        public const string AuthTables = "AuthTables";
+        public const string AuthUser = "AuthUser";
     }
 }

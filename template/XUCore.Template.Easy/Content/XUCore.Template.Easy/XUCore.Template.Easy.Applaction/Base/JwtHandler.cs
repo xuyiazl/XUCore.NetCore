@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using XUCore;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
@@ -62,7 +63,7 @@ namespace XUCore.Template.Easy.Applaction
         private static bool CheckAuthorzie(DefaultHttpContext httpContext)
         {
             // 获取权限特性
-            var securityDefineAttribute = httpContext.GetEndpoint()?.Metadata?.GetMetadata<SecurityDefineAttribute>();
+            var securityDefineAttribute = httpContext.GetMetadata<SecurityDefineAttribute>();
             if (securityDefineAttribute == null) return true;
 
             // 解析服务

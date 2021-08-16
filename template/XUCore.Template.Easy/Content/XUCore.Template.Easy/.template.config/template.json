@@ -5,7 +5,7 @@
   "name": "XUCore Template Easy",
   "identity": "XUCore.Template.Easy",
   "groupIdentity": "XUCore.Template.Easy",
-  "shortName": "XUCore-Template-Easy",
+  "shortName": "XUCore.Template.Easy",
   "tags": {
     "language": "C#",
     "type": "project"

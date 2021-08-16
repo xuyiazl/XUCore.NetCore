@@ -1164,6 +1164,18 @@
             登录接口
             </summary>
         </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Login.LoginAppService.CreateInitAccountAsync(System.Threading.CancellationToken)">
+            <summary>
+            创建初始账号
+            </summary>
+            <remarks>
+            初始账号密码：
+                <para>username : admin</para>
+                <para>password : admin</para>
+            </remarks>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.Easy.Applaction.Login.LoginAppService.LoginAsync(XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
             管理员登录
@@ -1221,7 +1233,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Login.View.Create(XUCore.Template.Easy.Persistence.NigelDbContext)">
+        <member name="M:XUCore.Template.Easy.Applaction.Login.View.Create(XUCore.Template.Easy.Persistence.DefaultDbContext)">
             <summary>
             linq 关联查询，关联账号信息
             </summary>
@@ -1262,14 +1274,6 @@
             <summary>
             子集导航
             </summary>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Permission.View.Create(XUCore.Template.Easy.Applaction.Permission.PermissionViewModel,System.Int64)">
-            <summary>
-            获取当前账号的权限导航列表
-            </summary>
-            <param name="model"></param>
-            <param name="AdminID"></param>
-            <returns></returns>
         </member>
         <member name="T:XUCore.Template.Easy.Applaction.Upload.IUploadAppService">
             <summary>

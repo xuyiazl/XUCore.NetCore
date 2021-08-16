@@ -14,6 +14,7 @@ using XUCore.Extensions;
 using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.Serializer;
+using XUCore.Template.Easy.Applaction.Admin;
 using XUCore.Template.Easy.Applaction.Authorization;
 using XUCore.Template.Easy.Applaction.Permission;
 using XUCore.Template.Easy.Core;
@@ -29,21 +30,52 @@ namespace XUCore.Template.Easy.Applaction.Login
     {
         private readonly IPermissionService permissionService;
         private readonly IAuthService authService;
+        private readonly IAdminAppService adminAppService;
 
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.authService = serviceProvider.GetService<IAuthService>();
+            this.adminAppService = serviceProvider.GetService<IAdminAppService>();
 
-            this.db = serviceProvider.GetService<INigelDbRepository>();
+            this.db = serviceProvider.GetService<IDefaultDbRepository>();
             this.mapper = serviceProvider.GetService<IMapper>();
         }
 
         #region [ 登录 ]
 
+        /// <summary>
+        /// 创建初始账号
+        /// </summary>
+        /// <remarks>
+        /// 初始账号密码：
+        ///     <para>username : admin</para>
+        ///     <para>password : admin</para>
+        /// </remarks>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        {
+            var command = new AdminUserCreateCommand
+            {
+                UserName = "admin",
+                Password = "admin",
+                Company = "",
+                Location = "",
+                Mobile = "13500000000",
+                Name = "admin",
+                Position = ""
+            };
+
+            command.IsVaild();
+
+            return await adminAppService.CreateUserAsync(command, cancellationToken);
+        }
         /// <summary>
         /// 管理员登录
         /// </summary>

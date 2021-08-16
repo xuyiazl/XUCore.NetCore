@@ -1,11 +1,12 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Template.Easy.Applaction;
+using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Permission
 {
     public interface IPermissionCacheService : IAppService
     {
-        Task<PermissionViewModel> GetAllAsync(CancellationToken cancellationToken);
+        Task<IList<AdminMenuEntity>> GetAllAsync(long adminId, CancellationToken cancellationToken);
     }
 }

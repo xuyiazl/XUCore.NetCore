@@ -31,7 +31,7 @@ namespace XUCore.Template.Easy.Persistence
 
             // mysql
 
-            services.AddDbContext<NigelDbContext>(options =>
+            services.AddDbContext<DefaultDbContext>(options =>
             {
                 options.UseMySql(
                     connectionString: configuration.GetConnectionString("NigelDBConnection-mysql"),
@@ -49,7 +49,7 @@ namespace XUCore.Template.Easy.Persistence
                 //options.UseLoggerFactory(MyLoggerFactory);
             });
 
-            services.AddScoped(typeof(INigelDbRepository), typeof(NigelDbRepository));
+            services.AddScoped(typeof(IDefaultDbRepository), typeof(DefaultDbRepository));
 
             return services;
         }
@@ -58,7 +58,7 @@ namespace XUCore.Template.Easy.Persistence
         {
             var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-            var dbContext = scope.ServiceProvider.GetService<NigelDbContext>();
+            var dbContext = scope.ServiceProvider.GetService<DefaultDbContext>();
 
             dbContext.Database.Migrate();
 

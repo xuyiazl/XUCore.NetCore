@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.Serializer;
+using XUCore.Template.EasyLayer.Applaction.Admin;
 using XUCore.Template.EasyLayer.Applaction.Authorization;
 using XUCore.Template.EasyLayer.Core;
 using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser;
@@ -26,16 +27,47 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
         private readonly IPermissionService permissionService;
         private readonly ILoginRecordService loginRecordService;
         private readonly IAuthService authService;
+        private readonly IAdminAppService adminAppService;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.loginRecordService = serviceProvider.GetService<ILoginRecordService>();
             this.authService = serviceProvider.GetService<IAuthService>();
+            this.adminAppService = serviceProvider.GetService<IAdminAppService>();
         }
 
         #region [ 登录 ]
 
+        /// <summary>
+        /// 创建初始账号
+        /// </summary>
+        /// <remarks>
+        /// 初始账号密码：
+        ///     <para>username : admin</para>
+        ///     <para>password : admin</para>
+        /// </remarks>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        {
+            var command = new AdminUserCreateCommand
+            {
+                UserName = "admin",
+                Password = "admin",
+                Company = "",
+                Location = "",
+                Mobile = "13500000000",
+                Name = "admin",
+                Position = ""
+            };
+
+            command.IsVaild();
+
+            return await adminAppService.CreateUserAsync(command, cancellationToken);
+        }
         /// <summary>
         /// 管理员登录
         /// </summary>

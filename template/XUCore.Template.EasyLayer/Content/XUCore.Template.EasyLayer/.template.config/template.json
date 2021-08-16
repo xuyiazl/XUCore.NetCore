@@ -5,7 +5,7 @@
   "name": "XUCore Template EasyLayer",
   "identity": "XUCore.Template.EasyLayer",
   "groupIdentity": "XUCore.Template.EasyLayer",
-  "shortName": "XUCore-Template-EasyLayer",
+  "shortName": "XUCore.Template.EasyLayer",
   "tags": {
     "language": "C#",
     "type": "project"

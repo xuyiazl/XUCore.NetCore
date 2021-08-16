@@ -31,13 +31,13 @@ namespace XUCore.Template.Easy.Applaction.Admin
     {
         private readonly IMediator mediator;
 
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
         public AdminAppService(IServiceProvider serviceProvider)
         {
             this.mediator = serviceProvider.GetService<IMediator>();
-            this.db = serviceProvider.GetService<INigelDbRepository>();
+            this.db = serviceProvider.GetService<IDefaultDbRepository>();
             this.mapper = serviceProvider.GetService<IMapper>();
         }
 
@@ -50,7 +50,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
@@ -84,7 +83,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserAsync([Required][FromBody] AdminUserUpdateInfoCommand request, CancellationToken cancellationToken = default)
         {
             var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -134,7 +132,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -182,7 +179,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateUserStatusAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -214,7 +210,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteUserAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
@@ -403,7 +398,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
@@ -432,7 +426,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -471,7 +464,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -498,7 +490,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateRoleStatusAsync([Required] long[] ids, Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -531,7 +522,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteRoleAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));
@@ -629,7 +619,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
             var entity = mapper.Map<AdminMenuCreateCommand, AdminMenuEntity>(request);
@@ -673,7 +662,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Field")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateMenuFieldAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -709,7 +697,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Status")]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> UpdateMenuStatusAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
         {
             var res = 0;
@@ -741,7 +728,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<Result<int>> DeleteMenuAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await db.DeleteAsync<AdminMenuEntity>(c => ids.Contains(c.Id), cancellationToken);

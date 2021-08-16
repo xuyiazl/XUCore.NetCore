@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace XUCore.Template.EasyLayer.Persistence.Migrations
 {
-    [DbContext(typeof(NigelDbContext))]
+    [DbContext(typeof(DefaultDbContext))]
     [Migration("20210609084436_NigelDbCreate")]
     partial class NigelDbCreate
     {
@@ -36,7 +36,7 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasComment("删除日期");
 
                     b.Property<long>("FatherId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("FatherID");
 
                     b.Property<string>("Icon")
@@ -74,7 +74,7 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("Weight")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -123,11 +123,11 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("MenuId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("MenuID");
 
                     b.Property<long>("RoleId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
                     b.HasKey("Id");
@@ -166,7 +166,7 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("LoginCount")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginLastIp")
                         .IsRequired()
@@ -227,11 +227,11 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("RoleId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("UserID");
 
                     b.HasKey("Id");
@@ -250,7 +250,7 @@ namespace XUCore.Template.EasyLayer.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("AdminId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("AdminId");
 
                     b.Property<string>("LoginIp")

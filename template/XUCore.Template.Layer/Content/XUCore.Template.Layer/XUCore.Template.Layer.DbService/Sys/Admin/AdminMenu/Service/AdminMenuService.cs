@@ -17,16 +17,15 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
 {
     public class AdminMenuService : IAdminMenuService
     {
-        private readonly INigelDbRepository db;
+        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
-        public AdminMenuService(INigelDbRepository db, IMapper mapper)
+        public AdminMenuService(IDefaultDbRepository db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> CreateAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminMenuCreateCommand, AdminMenuEntity>(request);
@@ -41,7 +40,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
                 return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(AdminMenuUpdateCommand request, CancellationToken cancellationToken)
         {
             var entity = await db.Context.AdminAuthMenus.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
@@ -60,7 +58,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             return res;
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
             switch (field.ToLower())
@@ -78,7 +75,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
         {
             switch (status)
@@ -94,7 +90,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             }
         }
 
-        [CacheRemove(Key = CacheKey.AuthTables)]
         public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminMenuEntity>(c => ids.Contains(c.Id), cancellationToken);
