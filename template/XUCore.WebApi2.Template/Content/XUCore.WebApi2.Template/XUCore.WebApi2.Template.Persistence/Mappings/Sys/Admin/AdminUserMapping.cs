@@ -28,12 +28,11 @@ namespace XUCore.WebApi2.Template.Persistence.Mappings.Sys.Admin
 
             builder.Property(e => e.LoginCount)
                 .IsRequired()
-                .HasColumnType("int(11)");
+                .HasColumnType("int");
 
             builder.Property(e => e.LoginLastIp)
                 .IsRequired()
                 .HasColumnType("varchar(50)")
-                .HasColumnName("LoginLastIP")
                 .HasCharSet("utf8");
 
             builder.Property(e => e.LoginLastTime).HasColumnType("datetime");

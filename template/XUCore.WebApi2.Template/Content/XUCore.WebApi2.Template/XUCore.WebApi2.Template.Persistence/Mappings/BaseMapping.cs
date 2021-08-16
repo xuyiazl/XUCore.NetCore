@@ -24,17 +24,14 @@ namespace XUCore.WebApi2.Template.Persistence.Mappings
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
-                .HasColumnName("CreatedAt")
                 .HasComment("添加日期");
 
             builder.Property(e => e.UpdatedAt)
                 .HasColumnType("datetime")
-                .HasColumnName("UpdatedAt")
                 .HasComment("最后修改日期");
 
             builder.Property(e => e.DeletedAt)
                 .HasColumnType("datetime")
-                .HasColumnName("DeletedAt")
                 .HasComment("删除日期");
 
             #endregion

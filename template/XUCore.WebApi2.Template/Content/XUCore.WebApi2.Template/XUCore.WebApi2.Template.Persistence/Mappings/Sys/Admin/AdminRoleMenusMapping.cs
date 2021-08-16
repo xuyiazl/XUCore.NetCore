@@ -17,13 +17,11 @@ namespace XUCore.WebApi2.Template.Persistence.Mappings.Sys.Admin
 
             builder.Property(e => e.MenuId)
                 .IsRequired()
-                .HasColumnType("bigint(20)")
-                .HasColumnName("MenuID");
+                .HasColumnType("bigint");
 
             builder.Property(e => e.RoleId)
                 .IsRequired()
-                .HasColumnType("bigint(20)")
-                .HasColumnName("RoleID");
+                .HasColumnType("bigint");
 
             builder.HasOne(d => d.Role)
               .WithMany(p => p.RoleMenus)

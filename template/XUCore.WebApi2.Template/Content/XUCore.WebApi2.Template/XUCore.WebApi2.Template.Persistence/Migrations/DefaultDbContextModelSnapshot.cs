@@ -24,7 +24,7 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("AdminId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("AdminId");
 
                     b.Property<string>("LoginIp")
@@ -67,7 +67,7 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasComment("删除日期");
 
                     b.Property<long>("FatherId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("FatherID");
 
                     b.Property<string>("Icon")
@@ -105,7 +105,7 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("Weight")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -154,11 +154,11 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("MenuId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("MenuID");
 
                     b.Property<long>("RoleId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
                     b.HasKey("Id");
@@ -197,7 +197,7 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasCharSet("utf8");
 
                     b.Property<int>("LoginCount")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginLastIp")
                         .IsRequired()
@@ -258,11 +258,11 @@ namespace XUCore.WebApi2.Template.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("AdminId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("UserID");
 
                     b.Property<long>("RoleId")
-                        .HasColumnType("bigint(20)")
+                        .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
                     b.HasKey("Id");
