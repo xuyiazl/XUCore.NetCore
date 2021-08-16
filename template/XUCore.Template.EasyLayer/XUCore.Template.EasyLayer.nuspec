@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>XUCore.Template.EasyLayer</id>
+		<version>1.0.0</version>
+		<description>EasyLayer 精简分层快速开发项目模板，生成WebApi项目，还原简单清晰的代码。</description>
+		<authors>XUCore</authors>
+		<copyright>Copyright © XUCore 2020</copyright>
+		<projectUrl>https://github.com/xuyiazl/XUCore.NetCore</projectUrl>
+		<iconUrl>http://www.3624091.com/favicon.ico</iconUrl>
+		<packageTypes>
+			<packageType name="Template" />
+		</packageTypes>
+	</metadata>
+</package>

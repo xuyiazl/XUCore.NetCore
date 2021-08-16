@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.Template.Easy.Applaction.xml</DocumentationFile>
+	</PropertyGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\XUCore.Template.Easy.Core\XUCore.Template.Easy.Core.csproj" />
+	  <ProjectReference Include="..\XUCore.Template.Easy.Persistence\XUCore.Template.Easy.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

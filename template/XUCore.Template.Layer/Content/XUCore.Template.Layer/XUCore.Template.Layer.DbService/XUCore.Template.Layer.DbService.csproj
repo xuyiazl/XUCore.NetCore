@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.Template.Layer.DbService.xml</DocumentationFile>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore.Template.Layer.Core\XUCore.Template.Layer.Core.csproj" />
+		<ProjectReference Include="..\XUCore.Template.Layer.Persistence\XUCore.Template.Layer.Persistence.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Update="XUCore.Template.Layer.DbService.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.Template.EasyLayer.DbService.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore.Template.EasyLayer.Core\XUCore.Template.EasyLayer.Core.csproj" />
+		<ProjectReference Include="..\XUCore.Template.EasyLayer.Persistence\XUCore.Template.EasyLayer.Persistence.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="XUCore.Template.EasyLayer.DbService.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>

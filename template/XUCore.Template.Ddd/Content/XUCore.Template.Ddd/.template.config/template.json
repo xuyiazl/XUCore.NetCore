@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "XUCore",
+  "classifications": [ "XUCore.Template.Ddd" ],
+  "name": "XUCore Template Ddd",
+  "identity": "XUCore.Template.Ddd",
+  "groupIdentity": "XUCore.Template.Ddd",
+  "shortName": "XUCore.Template.Ddd",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "XUCore.Template.Ddd",
+  "preferNameDirectory": true
+}
