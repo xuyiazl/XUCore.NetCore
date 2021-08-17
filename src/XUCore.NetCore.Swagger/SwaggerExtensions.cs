@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using StackExchange.Profiling;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using XUCore.Extensions;
 using XUCore.NetCore.Signature;
 
@@ -209,17 +208,67 @@ namespace XUCore.NetCore.Swagger
             httpContextAccessor.HttpContext.SignoutToSwagger();
         }
         /// <summary>
-        /// 注入 MiniProfiler 插件（自动登录）
+        /// 注册Swagger生成器，定义一个和多个Swagger 文档
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="injectMiniProfiler"></param>
-        public static void AddMiniProfiler(this SwaggerUIOptions options, bool injectMiniProfiler = false)
+        /// <param name="services"></param>
+        /// <param name="swaggerGenAction"></param>
+        /// <param name="miniProfilerAction"></param>
+        public static void AddMiniSwagger(this IServiceCollection services, Action<SwaggerGenOptions> swaggerGenAction = null, Action<MiniProfilerOptions> miniProfilerAction = null)
         {
-            var thisType = typeof(SwaggerExtensions);
-            var thisAssembly = thisType.Assembly;
+            services.AddSwaggerGen(options =>
+            {
+                swaggerGenAction?.Invoke(options);
+            });
 
-            // 自定义 Swagger 首页
-            options.IndexStream = () => thisAssembly.GetManifestResourceStream($"{thisType.Namespace}.Assets.{(injectMiniProfiler != true ? "index" : "index-mini-profiler")}.html");
+            services.AddMiniProfiler(options =>
+            {
+                options.RouteBasePath = "/index-mini-profiler";
+                options.EnableMvcFilterProfiling = false;
+                options.EnableMvcViewProfiling = false;
+
+                miniProfilerAction?.Invoke(options);
+            })
+            .AddEntityFramework();
+        }
+        /// <summary>
+        /// 启用中间件服务生成Swagger
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="swaggerAction"></param>
+        /// <param name="swaggerUIAction"></param>
+        public static void UseMiniSwagger(this IApplicationBuilder app, Action<SwaggerOptions> swaggerAction = null, Action<SwaggerUIOptions> swaggerUIAction = null)
+        {
+            //启用中间件服务生成Swagger作为JSON终结点
+            app.UseSwagger(options =>
+            {
+                //如果使用了 大于 5.6.3 版本，新功能Servers和反向代理的支持问题，
+                //issues https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1953
+
+                //由于使用了反向代理需要运维支持转发X-Forwarded-* headers的一些工作，所以太麻烦。故干脆清理掉算了。等官方直接解决了该问题再使用
+                //options.PreSerializeFilters.Add((swaggerDoc, _) =>
+                //{
+                //    swaggerDoc.Servers.Clear();
+                //});
+
+                swaggerAction?.Invoke(options);
+            });
+            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
+            app.UseSwaggerUI(c =>
+            {
+                var injectMiniProfiler = true;
+
+                var thisType = typeof(SwaggerExtensions);
+                var thisAssembly = thisType.Assembly;
+
+                // 自定义 Swagger 首页
+                c.IndexStream = () => thisAssembly.GetManifestResourceStream($"{thisType.Namespace}.Assets.{(injectMiniProfiler != true ? "index" : "index-mini-profiler")}.html");
+
+                c.DocExpansion(DocExpansion.None);
+
+                swaggerUIAction?.Invoke(c);
+            });
+
+            app.UseMiniProfiler();
         }
     }
 }

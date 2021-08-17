@@ -76,7 +76,8 @@ namespace XUCore.ApiTests
                 })
                 .AddFluentValidation(opt =>
                 {
-                    opt.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                    opt.ValidatorOptions.CascadeMode = FluentValidation.CascadeMode.Stop;
+                    opt.DisableDataAnnotationsValidation = false;
                     opt.RegisterValidatorsFromAssemblyContaining(typeof(Program));
                 });
             //.AddNewtonsoftJson(options =>
@@ -119,25 +120,23 @@ namespace XUCore.ApiTests
                     };
                 };
             });
-            //注册Swagger生成器，定义一个和多个Swagger 文档
-            services.AddSwaggerGen(options =>
+            services.AddMiniSwagger(swaggerGenAction: (opt) =>
             {
-                options.SwaggerDoc("test", new OpenApiInfo
+                opt.SwaggerDoc("test", new OpenApiInfo
                 {
                     Version = "v1.0.0",
                     Title = $"test",
                     Description = "test"
                 });
 
-                options.AddJwtBearerDoc();
-                options.AddHttpSignDoc(services);
-                options.AddFiledDoc();
-                options.AddHiddenApi();
-                options.AddDescriptions(typeof(Program), "XUCore.NetCore.ApiTests.xml");
+                opt.AddJwtBearerDoc();
+                opt.AddHttpSignDoc(services);
+                opt.AddFiledDoc();
+                opt.AddHiddenApi();
+                opt.AddDescriptions(typeof(Program), "XUCore.NetCore.ApiTests.xml");
 
                 // TODO:一定要返回true！
-                options.DocInclusionPredicate((docName, description) => true);
-
+                opt.DocInclusionPredicate((docName, description) => true);
             });
 
             services.AddDynamicWebApi(opt =>
@@ -206,31 +205,9 @@ namespace XUCore.ApiTests
 
             app.UseAuthentication();
 
-            //启用中间件服务生成Swagger作为JSON终结点
-            app.UseSwagger(options =>
+            app.UseMiniSwagger(swaggerUIAction: (opt) =>
             {
-                //如果使用了 大于 5.6.3 版本，新功能Servers和反向代理的支持问题，
-                //issues https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/1953
-
-                //由于使用了反向代理需要运维支持转发X-Forwarded-* headers的一些工作，所以太麻烦。故干脆清理掉算了。等官方直接解决了该问题再使用
-
-                options.PreSerializeFilters.Add((swaggerDoc, _) =>
-                {
-                    swaggerDoc.Servers.Clear();
-                });
-                //options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
-                //{
-                //    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host}" } };
-                //});
-            });
-            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"/swagger/test/swagger.json", "test API");
-
-                c.AddMiniProfiler();
-
-                c.DocExpansion(DocExpansion.None);
+                opt.SwaggerEndpoint($"/swagger/test/swagger.json", "test API");
             });
 
             app.UseEndpoints(endpoints =>

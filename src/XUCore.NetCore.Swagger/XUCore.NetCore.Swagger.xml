@@ -122,12 +122,21 @@
             </summary>
             <param name="httpContextAccessor"></param>
         </member>
-        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.AddMiniProfiler(Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions,System.Boolean)">
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.AddMiniSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions},System.Action{StackExchange.Profiling.MiniProfilerOptions})">
             <summary>
-            注入 MiniProfiler 插件（自动登录）
+            注册Swagger生成器，定义一个和多个Swagger 文档
             </summary>
-            <param name="options"></param>
-            <param name="injectMiniProfiler"></param>
+            <param name="services"></param>
+            <param name="swaggerGenAction"></param>
+            <param name="miniProfilerAction"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Swagger.SwaggerExtensions.UseMiniSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Swashbuckle.AspNetCore.Swagger.SwaggerOptions},System.Action{Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions})">
+            <summary>
+            启用中间件服务生成Swagger
+            </summary>
+            <param name="app"></param>
+            <param name="swaggerAction"></param>
+            <param name="swaggerUIAction"></param>
         </member>
     </members>
 </doc>

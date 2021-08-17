@@ -75,20 +75,19 @@ namespace XUCore.NetCore.MessageApiTest
             services.AddHttpService();
             services.AddHttpService("msgpack", "http://localhost:5000");
 
-            //注册Swagger生成器，定义一个和多个Swagger 文档
-            services.AddSwaggerGen(options =>
+            services.AddMiniSwagger(swaggerGenAction: (opt) =>
             {
-                options.SwaggerDoc("api", new OpenApiInfo
+                opt.SwaggerDoc("api", new OpenApiInfo
                 {
                     Version = "v1.0.0",
                     Title = $"Test Api",
                     Description = "Test API"
                 });
-                options.AddJwtBearerDoc();
+                opt.AddJwtBearerDoc();
                 //options.AddHttpSignDoc(services);
                 //options.AddFiledDoc();
 
-                options.AddDescriptions(typeof(Program),
+                opt.AddDescriptions(typeof(Program),
                     "XUCore.NetCore.MessageApiTest.xml"
                 );
 
@@ -117,26 +116,9 @@ namespace XUCore.NetCore.MessageApiTest
                 endpoints.MapControllers();
             });
 
-            //启用中间件服务生成Swagger作为JSON终结点
-            app.UseSwagger(options =>
+            app.UseMiniSwagger(swaggerUIAction: (opt) =>
             {
-                options.PreSerializeFilters.Add((swaggerDoc, _) =>
-                {
-                    swaggerDoc.Servers.Clear();
-                });
-                //options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
-                //{
-                //    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host}" } };
-                //});
-            });
-            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
-            app.UseSwaggerUI(c =>
-            {
-                c.AddMiniProfiler();
-
-                c.SwaggerEndpoint($"/swagger/api/swagger.json", "Test API");
-
-                c.DocExpansion(DocExpansion.None);
+                opt.SwaggerEndpoint($"/swagger/api/swagger.json", "Test API");
             });
         }
     }
