@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text.Encodings.Web;
@@ -20,6 +21,7 @@ using XUCore.NetCore.Oss;
 using XUCore.Serializer;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.DbService;
+using XUCore.NetCore.Swagger;
 
 namespace XUCore.Template.Layer.Applaction
 {
@@ -135,6 +137,41 @@ namespace XUCore.Template.Layer.Applaction
                     )
                 );
 
+            var env = services.BuildServiceProvider().GetService<IWebHostEnvironment>();
+
+            services.AddMiniSwagger(swaggerGenAction: opt =>
+            {
+                opt.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
+                {
+                    Version = ApiGroup.Admin,
+                    Title = $"管理员后台API - {env.EnvironmentName}",
+                    Description = "管理员后台API"
+                });
+                opt.SwaggerDoc(ApiGroup.Login, new OpenApiInfo
+                {
+                    Version = ApiGroup.Login,
+                    Title = $"登录相关API - {env.EnvironmentName}",
+                    Description = "登录相关API"
+                });
+                opt.SwaggerDoc(ApiGroup.File, new OpenApiInfo
+                {
+                    Version = ApiGroup.File,
+                    Title = $"文件操作相关API - {env.EnvironmentName}",
+                    Description = "文件操作相关API"
+                });
+
+                opt.AddJwtBearerDoc();
+
+                opt.AddDescriptions(typeof(DependencyInjection),
+                        "XUCore.Template.Layer.WebApi.xml",
+                        "XUCore.Template.Layer.Applaction.xml",
+                        "XUCore.Template.Layer.Persistence.xml",
+                        "XUCore.Template.Layer.Core.xml");
+
+                // TODO:一定要返回true！true 分组无效 注释掉 必须有分组才能出现api
+                //opt.DocInclusionPredicate((docName, description) => true);
+            });
+
             return services;
         }
 
@@ -158,6 +195,13 @@ namespace XUCore.Template.Layer.Applaction
 
             app.UseStaticHttpContext();
             app.UseStaticFiles();
+
+            app.UseMiniSwagger(swaggerUIAction: (opt) =>
+            {
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Login}/swagger.json", $"登录相关 API");
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.File}/swagger.json", $"文件操作相关 API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

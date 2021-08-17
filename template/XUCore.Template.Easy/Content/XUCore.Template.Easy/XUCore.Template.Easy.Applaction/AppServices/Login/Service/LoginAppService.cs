@@ -82,7 +82,7 @@ namespace XUCore.Template.Easy.Applaction.Login
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {

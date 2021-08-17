@@ -1,17 +1,17 @@
-﻿using XUCore.Template.Ddd.Applaction;
-using XUCore.Template.Ddd.Applaction.Common;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Helpers;
-using XUCore.Template.Ddd.Domain.Core;
 using XUCore.NetCore;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Uploads;
 using XUCore.NetCore.Uploads.Params;
+using XUCore.Template.Ddd.Applaction.Common;
+using XUCore.Template.Ddd.Domain.Core;
+using XUCore.Template.Ddd.Infrastructure;
 
 namespace XUCore.Template.Ddd.Applaction.AppServices.Upload
 {

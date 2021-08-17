@@ -10,10 +10,6 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.Ddd.Domain;
 using XUCore.Ddd.Domain.Bus;
-using XUCore.Template.Ddd.Domain.Core.Mappings;
-using XUCore.Template.Ddd.Domain.Notifications;
-using XUCore.Template.Ddd.Infrastructure.Authorization;
-using XUCore.Template.Ddd.Infrastructure.Events;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
@@ -22,6 +18,10 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Redis;
 using XUCore.Serializer;
+using XUCore.Template.Ddd.Domain.Core.Mappings;
+using XUCore.Template.Ddd.Domain.Notifications;
+using XUCore.Template.Ddd.Infrastructure.Authorization;
+using XUCore.Template.Ddd.Infrastructure.Events;
 
 namespace XUCore.Template.Ddd.Infrastructure
 {
@@ -101,6 +101,8 @@ namespace XUCore.Template.Ddd.Infrastructure
                         */
                     })
                 );
+
+                services.AddSwagger(environment);
             }
             else
             {
@@ -180,6 +182,8 @@ namespace XUCore.Template.Ddd.Infrastructure
 
             if (project == "api")
             {
+                app.UseSwagger(env);
+
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();

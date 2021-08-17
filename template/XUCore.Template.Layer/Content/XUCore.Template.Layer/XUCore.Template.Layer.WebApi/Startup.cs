@@ -22,14 +22,12 @@ namespace XUCore.Template.Layer.WebApi
         {
             services.AddDbContext(Configuration);
             services.AddApplication(Configuration);
-            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDbContext();
             app.UseApplication(env);
-            app.UseSwagger();
         }
     }
 }

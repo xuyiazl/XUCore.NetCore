@@ -1,16 +1,16 @@
-﻿using XUCore.Template.Ddd.Applaction;
-using XUCore.Template.Ddd.Applaction.Common;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
+using XUCore.NetCore;
+using XUCore.Paging;
+using XUCore.Template.Ddd.Applaction.Common;
 using XUCore.Template.Ddd.Domain.Auth.Menu;
 using XUCore.Template.Ddd.Domain.Auth.Role;
 using XUCore.Template.Ddd.Domain.Core;
 using XUCore.Template.Ddd.Domain.User.User;
-using XUCore.NetCore;
-using XUCore.Paging;
+using XUCore.Template.Ddd.Infrastructure;
 
 namespace XUCore.Template.Ddd.Applaction.AppServices.User
 {

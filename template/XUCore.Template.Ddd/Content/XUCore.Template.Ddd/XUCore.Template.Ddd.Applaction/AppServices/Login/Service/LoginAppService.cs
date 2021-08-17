@@ -1,21 +1,21 @@
-﻿using XUCore.Template.Ddd.Applaction;
-using XUCore.Template.Ddd.Applaction.Common;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Helpers;
-using XUCore.Template.Ddd.Domain.Auth.Permission;
-using XUCore.Template.Ddd.Domain.Core;
-using XUCore.Template.Ddd.Domain.User.LoginRecord;
-using XUCore.Template.Ddd.Domain.User.User;
-using XUCore.Template.Ddd.Infrastructure.Authorization;
 using XUCore.NetCore;
 using XUCore.NetCore.Swagger;
 using XUCore.Paging;
 using XUCore.Serializer;
+using XUCore.Template.Ddd.Applaction.Common;
+using XUCore.Template.Ddd.Domain.Auth.Permission;
+using XUCore.Template.Ddd.Domain.Core;
+using XUCore.Template.Ddd.Domain.User.LoginRecord;
+using XUCore.Template.Ddd.Domain.User.User;
+using XUCore.Template.Ddd.Infrastructure;
+using XUCore.Template.Ddd.Infrastructure.Authorization;
 
 namespace XUCore.Template.Ddd.Applaction.AppServices.Login
 {

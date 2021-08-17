@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.NetCore.Uploads.Params;
+using XUCore.Template.Layer.Applaction;
 using XUCore.Template.Layer.Applaction.Upload;
 
 namespace XUCore.Template.Layer.WebApi.Controller

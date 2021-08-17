@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Template.Layer.WebApi.Controller
+namespace XUCore.Template.Layer.Applaction
 {
     public struct ApiGroup
     {

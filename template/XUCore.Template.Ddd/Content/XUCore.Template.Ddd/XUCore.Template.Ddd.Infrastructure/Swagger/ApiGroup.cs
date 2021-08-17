@@ -1,4 +1,4 @@
-﻿namespace XUCore.Template.Ddd.Applaction
+﻿namespace XUCore.Template.Ddd.Infrastructure
 {
     public struct ApiGroup
     {

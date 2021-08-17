@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
+using XUCore.Template.Layer.Applaction;
 using XUCore.Template.Layer.Applaction.Admin;
 using XUCore.Template.Layer.Core.Enums;
 using XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu;

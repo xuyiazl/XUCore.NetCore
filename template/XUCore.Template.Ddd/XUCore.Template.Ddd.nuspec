@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>XUCore.Template.Ddd</id>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 		<description>Ddd 项目模板，Web MVC和WebApi项目</description>
 		<authors>XUCore</authors>
 		<copyright>Copyright © XUCore 2020</copyright>
