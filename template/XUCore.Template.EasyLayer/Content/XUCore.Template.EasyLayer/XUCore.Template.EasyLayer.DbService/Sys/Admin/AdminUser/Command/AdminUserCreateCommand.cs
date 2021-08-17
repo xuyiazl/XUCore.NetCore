@@ -96,9 +96,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 
                 RuleFor(x => x.Password).NotEmpty().MaximumLength(30).WithName("密码");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
-                RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
-                RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");
-                RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
             }
         }
     }
