@@ -2,8 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
-using XUCore.Paging;
-using XUCore.Template.Easy.Applaction.Admin;
 using XUCore.Template.Easy.Applaction.Permission;
 
 namespace XUCore.Template.Easy.Applaction.Login
@@ -63,25 +61,6 @@ namespace XUCore.Template.Easy.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync(long adminId, CancellationToken cancellationToken = default);
-
-        #endregion
-
-        #region [ 登录记录 ]
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="adminId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<Result<IList<LoginRecordDto>>> GetRecordListAsync(int limit, long adminId, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync(LoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default);
 
         #endregion
     }

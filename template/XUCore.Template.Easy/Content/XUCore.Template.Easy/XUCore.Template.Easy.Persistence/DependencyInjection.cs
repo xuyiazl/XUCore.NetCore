@@ -15,7 +15,7 @@ namespace XUCore.Template.Easy.Persistence
             //services.AddDbContext<NigelDbContext>(options =>
             //{
             //    options.UseSqlServer(
-            //        connectionString: configuration.GetConnectionString("NigelDBConnection"),
+            //        connectionString: configuration.GetConnectionString("DBConnection-Mssql"),
             //        sqlServerOptionsAction: options =>
             //        {
             //            options.EnableRetryOnFailure();
@@ -34,7 +34,7 @@ namespace XUCore.Template.Easy.Persistence
             services.AddDbContext<DefaultDbContext>(options =>
             {
                 options.UseMySql(
-                    connectionString: configuration.GetConnectionString("NigelDBConnection-mysql"),
+                    connectionString: configuration.GetConnectionString("DBConnection-Mysql"),
                     serverVersion: new MySqlServerVersion(new Version(5, 7, 29)),
                     mySqlOptionsAction: options =>
                     {
@@ -60,7 +60,9 @@ namespace XUCore.Template.Easy.Persistence
 
             var dbContext = scope.ServiceProvider.GetService<DefaultDbContext>();
 
+#if !DEBUG
             dbContext.Database.Migrate();
+#endif
 
             return app;
         }
