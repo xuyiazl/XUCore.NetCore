@@ -32,7 +32,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleUpdateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandIdValidator<AdminRoleUpdateCommand, bool, long>

@@ -4,7 +4,7 @@ using XUCore.Template.EasyLayer.Core.Enums;
 
 namespace XUCore.Template.EasyLayer.Persistence.Entities
 {
-    public class BaseEntity : Entity<long>, IAggregateRoot
+    public class BaseEntity<TKey> : Entity<TKey>, IAggregateRoot
     {
         /// <summary>
         /// 数据状态

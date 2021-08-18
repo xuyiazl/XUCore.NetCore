@@ -7,7 +7,7 @@ namespace XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin
     /// <summary>
     /// 管理员表
     /// </summary>
-    public partial class AdminUserEntity : BaseEntity
+    public partial class AdminUserEntity : BaseEntity<long>
     {
         public AdminUserEntity()
         {

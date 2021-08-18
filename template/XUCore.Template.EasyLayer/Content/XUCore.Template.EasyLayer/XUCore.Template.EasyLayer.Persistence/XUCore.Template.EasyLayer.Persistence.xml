@@ -4,22 +4,22 @@
         <name>XUCore.Template.EasyLayer.Persistence</name>
     </assembly>
     <members>
-        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity.Status">
+        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity`1.Status">
             <summary>
             数据状态
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity.Created_At">
+        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity`1.Created_At">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity.Updated_At">
+        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity`1.Updated_At">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity.Deleted_At">
+        <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity`1.Deleted_At">
             <summary>
             删除时间
             </summary>

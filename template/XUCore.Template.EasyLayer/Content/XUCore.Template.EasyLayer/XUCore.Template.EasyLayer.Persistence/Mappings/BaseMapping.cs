@@ -8,7 +8,7 @@ using XUCore.NetCore.Data;
 namespace XUCore.Template.EasyLayer.Persistence.Mappings
 {
     public abstract class BaseMapping<TEntity> : KeyMapping<TEntity, long>
-         where TEntity : BaseEntity, new()
+         where TEntity : BaseEntity<long>, new()
     {
         public BaseMapping(string tableName, Expression<Func<TEntity, object>> primaryKey) : base(tableName, primaryKey) { }
 

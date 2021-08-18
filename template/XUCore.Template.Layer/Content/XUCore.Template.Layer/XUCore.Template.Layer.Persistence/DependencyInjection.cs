@@ -15,13 +15,13 @@ namespace XUCore.Template.Layer.Persistence
             //services.AddDbContext<NigelDbContext>(options =>
             //{
             //    options.UseSqlServer(
-            //        connectionString: configuration.GetConnectionString("NigelDBConnection"),
+            //        connectionString: configuration.GetConnectionString("DBConnection-Mssql"),
             //        sqlServerOptionsAction: options =>
             //        {
             //            options.EnableRetryOnFailure();
             //            //options.ExecutionStrategy(c => new MySqlRetryingExecutionStrategy(c.CurrentContext.Context));
             //            //options.ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c.CurrentContext.Context));
-            //            options.MigrationsAssembly("XUCore.Template.Layer.Persistence");
+            //            options.MigrationsAssembly("XUCore.Template.EasyLayer.Persistence");
             //        }
             //        )
             //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -34,7 +34,7 @@ namespace XUCore.Template.Layer.Persistence
             services.AddDbContext<DefaultDbContext>(options =>
             {
                 options.UseMySql(
-                    connectionString: configuration.GetConnectionString("NigelDBConnection-mysql"),
+                    connectionString: configuration.GetConnectionString("DBConnection-Mysql"),
                     serverVersion: new MySqlServerVersion(new Version(5, 7, 29)),
                     mySqlOptionsAction: options =>
                     {

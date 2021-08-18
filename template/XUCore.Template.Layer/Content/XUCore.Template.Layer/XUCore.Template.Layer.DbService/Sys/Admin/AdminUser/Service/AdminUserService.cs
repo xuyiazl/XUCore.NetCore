@@ -83,21 +83,21 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "username":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "mobile":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "password":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), UpdatedAt = DateTime.Now }, cancellationToken);
                 case "position":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "location":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "company":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "picture":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -108,11 +108,11 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }

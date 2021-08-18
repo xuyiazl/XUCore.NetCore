@@ -63,13 +63,13 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             switch (field.ToLower())
             {
                 case "icon":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "url":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Url = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Url = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "onlycode":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "weight":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -80,11 +80,11 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }

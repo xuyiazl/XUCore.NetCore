@@ -87,7 +87,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -98,11 +98,11 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
