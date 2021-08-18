@@ -225,6 +225,37 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
 
         #endregion
 
+        #region [ 登录记录 ]
+
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("/api/[controller]/Record/List")]
+        public async Task<Result<IList<AdminUserLoginRecordDto>>> GetRecordListAsync([Required][FromQuery] AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordListAsync(request, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("/api/[controller]/Record/Page")]
+        public async Task<Result<PagedModel<AdminUserLoginRecordDto>>> GetRecordPageListAsync([Required][FromQuery] AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordPageListAsync(request, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+
+        #endregion
+
         #region [ 角色管理 ]
 
         /// <summary>

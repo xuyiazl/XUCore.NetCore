@@ -495,6 +495,11 @@
             角色id集合
             </summary>
         </member>
+        <member name="T:XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryCommand">
+            <summary>
+            查询命令
+            </summary>
+        </member>
         <member name="T:XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryPagedCommand">
             <summary>
             查询命令
@@ -752,6 +757,22 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.IAdminUserAppService.GetRecordListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取最近登录记录
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.IAdminUserAppService.GetRecordPageListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取所有登录记录分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService">
             <summary>
             管理员
@@ -831,6 +852,22 @@
             获取账号关联的角色id集合
             </summary>
             <param name="adminId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.GetRecordListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取最近登录记录
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.GetRecordPageListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取所有登录记录分页
+            </summary>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

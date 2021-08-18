@@ -15,7 +15,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 创建角色命令
     /// </summary>
-    public class AdminRoleCreateCommand : Command<bool>, IMapFrom<AdminRoleEntity>
+    public class AdminRoleCreateCommand : CreateCommand, IMapFrom<AdminRoleEntity>
     {
         /// <summary>
         /// 角色名
@@ -41,7 +41,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleCreateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminRoleCreateCommand>

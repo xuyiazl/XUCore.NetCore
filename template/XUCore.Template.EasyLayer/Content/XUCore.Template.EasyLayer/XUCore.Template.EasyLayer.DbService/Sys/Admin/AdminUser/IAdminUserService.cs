@@ -21,5 +21,9 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
         Task<int> UpdateAsync(AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken);
         Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken);
         Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken);
+
+        Task<IList<AdminUserLoginRecordDto>> GetRecordListAsync(AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken);
+
+        Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPageListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken);
     }
 }

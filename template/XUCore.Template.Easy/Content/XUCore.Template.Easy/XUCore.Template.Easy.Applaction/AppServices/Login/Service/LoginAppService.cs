@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
+using XUCore.Paging;
 using XUCore.Serializer;
 using XUCore.Template.Easy.Applaction.Admin;
 using XUCore.Template.Easy.Applaction.Authorization;
@@ -25,19 +26,13 @@ namespace XUCore.Template.Easy.Applaction.Login
     {
         private readonly IPermissionService permissionService;
         private readonly IAuthService authService;
-        private readonly IAdminUserAppService adminAppService;
-
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
+        private readonly IAdminUserAppService  adminUserAppService;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.authService = serviceProvider.GetService<IAuthService>();
-            this.adminAppService = serviceProvider.GetService<IAdminUserAppService>();
-
-            this.db = serviceProvider.GetService<IDefaultDbRepository>();
-            this.mapper = serviceProvider.GetService<IMapper>();
+            this.adminUserAppService = serviceProvider.GetService<IAdminUserAppService>();
         }
 
         #region [ 登录 ]
@@ -69,7 +64,7 @@ namespace XUCore.Template.Easy.Applaction.Login
 
             command.IsVaild();
 
-            return await adminAppService.CreateAsync(command, cancellationToken);
+            return await adminUserAppService.CreateAsync(command, cancellationToken);
         }
         /// <summary>
         /// 管理员登录

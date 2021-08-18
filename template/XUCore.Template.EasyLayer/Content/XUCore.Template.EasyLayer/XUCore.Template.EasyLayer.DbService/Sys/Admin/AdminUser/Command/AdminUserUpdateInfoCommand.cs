@@ -13,7 +13,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 用户信息修改命令
     /// </summary>
-    public class AdminUserUpdateInfoCommand : CommandId<bool, long>, IMapFrom<AdminUserEntity>
+    public class AdminUserUpdateInfoCommand : UpdateCommand<long>, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 名字

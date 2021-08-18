@@ -22,15 +22,15 @@ namespace XUCore.Template.EasyLayer.Persistence.Mappings
                 .HasColumnType("int")
                 .HasComment("数据状态（1、正常 2、不显示 3、已删除）");
 
-            builder.Property(e => e.Created_At)
+            builder.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasComment("添加日期");
 
-            builder.Property(e => e.Updated_At)
+            builder.Property(e => e.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasComment("最后修改日期");
 
-            builder.Property(e => e.Deleted_At)
+            builder.Property(e => e.DeletedAt)
                 .HasColumnType("datetime")
                 .HasComment("删除日期");
 

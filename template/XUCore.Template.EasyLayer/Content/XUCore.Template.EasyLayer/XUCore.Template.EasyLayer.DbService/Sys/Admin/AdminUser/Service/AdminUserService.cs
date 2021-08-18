@@ -83,21 +83,21 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "username":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "mobile":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "password":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), UpdatedAt = DateTime.Now }, cancellationToken);
                 case "position":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "location":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "company":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "picture":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -108,11 +108,11 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             switch (status)
             {
                 case Status.Show:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.SoldOut:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                 case Status.Trash:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -138,7 +138,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             if (res > 0)
             {
                 //删除登录记录
-                await db.DeleteAsync<LoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await db.DeleteAsync<AdminUserLoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
             }
@@ -199,7 +199,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new LoginRecordEntity
+            user.LoginRecords.Add(new AdminUserLoginRecordEntity
             {
                 AdminId = user.Id,
                 LoginIp = user.LoginLastIp,
@@ -294,6 +294,35 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 .Where(c => c.AdminId == adminId)
                 .Select(c => c.RoleId)
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IList<AdminUserLoginRecordDto>> GetRecordListAsync(AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .Where(c => c.AdminId == request.AdminId)
+
+                .OrderByDescending(c => c.LoginTime)
+                .Take(request.Limit)
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+
+            return res;
+        }
+
+        public async Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPageListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
+
+                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
+                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+
+            return res.ToModel();
         }
     }
 }

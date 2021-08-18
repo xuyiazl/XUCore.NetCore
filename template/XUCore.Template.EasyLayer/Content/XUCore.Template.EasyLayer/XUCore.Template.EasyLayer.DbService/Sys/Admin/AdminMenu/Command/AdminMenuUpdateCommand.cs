@@ -14,7 +14,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
     /// <summary>
     /// 导航更新命令
     /// </summary>
-    public class AdminMenuUpdateCommand : CommandId<bool, long>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuUpdateCommand : UpdateCommand<long>, IMapFrom<AdminMenuEntity>
     {
         /// <summary>
         /// 导航父级id
@@ -67,7 +67,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuUpdateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandIdValidator<AdminMenuUpdateCommand, bool, long>

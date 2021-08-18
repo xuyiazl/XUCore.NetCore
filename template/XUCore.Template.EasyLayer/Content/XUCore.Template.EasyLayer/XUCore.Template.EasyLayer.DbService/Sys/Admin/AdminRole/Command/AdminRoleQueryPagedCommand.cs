@@ -9,7 +9,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 角色查询命令
     /// </summary>
-    public class AdminRoleQueryPagedCommand : CommandPage<bool>
+    public class AdminRoleQueryPagedCommand : PageCommand
     {
         /// <summary>
         /// 搜索关键字

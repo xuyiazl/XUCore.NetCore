@@ -14,7 +14,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 创建管理员命令
     /// </summary>
-    public class AdminUserCreateCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserCreateCommand : CreateCommand, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 账号
@@ -67,7 +67,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminUserCreateCommand>

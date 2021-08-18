@@ -14,7 +14,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 角色修改命令
     /// </summary>
-    public class AdminRoleUpdateCommand : CommandId<bool, long>, IMapFrom<AdminRoleEntity>
+    public class AdminRoleUpdateCommand : UpdateCommand<long>, IMapFrom<AdminRoleEntity>
     {
         /// <summary>
         /// 角色名
@@ -40,7 +40,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleUpdateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
+                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandIdValidator<AdminRoleUpdateCommand, bool, long>

@@ -311,5 +311,44 @@ namespace XUCore.Template.Easy.Applaction.Admin
         }
 
         #endregion
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IList<AdminUserLoginRecordDto>> GetRecordListAsync(AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .Where(c => c.AdminId == request.AdminId)
+
+                .OrderByDescending(c => c.LoginTime)
+                .Take(request.Limit)
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+
+            return res;
+        }
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPageListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
+
+                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
+                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+
+            return res.ToModel();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace XUCore.Template.EasyLayer.Persistence
 
         public DbSet<AdminUserEntity> AdminUser => Set<AdminUserEntity>();
         public DbSet<AdminUserRoleEntity> AdminAuthUserRole => Set<AdminUserRoleEntity>();
-        public DbSet<LoginRecordEntity> AdminLoginRecord => Set<LoginRecordEntity>();
+        public DbSet<AdminUserLoginRecordEntity> AdminLoginRecord => Set<AdminUserLoginRecordEntity>();
         public DbSet<AdminRoleMenuEntity> AdminAuthRoleMenus => Set<AdminRoleMenuEntity>();
         public DbSet<AdminRoleEntity> AdminAuthRole => Set<AdminRoleEntity>();
         public DbSet<AdminMenuEntity> AdminAuthMenus => Set<AdminMenuEntity>();

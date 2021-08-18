@@ -358,6 +358,22 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRecordListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取最近登录记录
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRecordPageListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取所有登录记录分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.CreateRoleAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建角色
@@ -581,23 +597,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Login.ILoginAppService.GetRecordListAsync(System.Int32,System.Int64,System.Threading.CancellationToken)">
-            <summary>
-            获取最近登录记录
-            </summary>
-            <param name="limit"></param>
-            <param name="adminId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Login.ILoginAppService.GetRecordPageAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
-            <summary>
-            获取所有登录记录分页
-            </summary>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.Template.EasyLayer.Applaction.Login.LoginAppService">
             <summary>
             管理员登录接口
@@ -659,23 +658,6 @@
             查询权限导航（快捷导航）
             </summary>
             <param name="adminId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Login.LoginAppService.GetRecordListAsync(System.Int32,System.Int64,System.Threading.CancellationToken)">
-            <summary>
-            获取最近登录记录
-            </summary>
-            <param name="limit"></param>
-            <param name="adminId"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Login.LoginAppService.GetRecordPageAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
-            <summary>
-            获取所有登录记录分页
-            </summary>
-            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

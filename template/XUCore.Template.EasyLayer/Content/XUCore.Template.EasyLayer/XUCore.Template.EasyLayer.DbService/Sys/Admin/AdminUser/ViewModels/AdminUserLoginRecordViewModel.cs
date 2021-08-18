@@ -2,7 +2,7 @@
 
 namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 {
-    public class AdminUserLoginRecordViewModel : LoginRecordEntity
+    public class AdminUserLoginRecordViewModel : AdminUserLoginRecordEntity
     {
         public string Name { get; set; }
         public string Mobile { get; set; }
