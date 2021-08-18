@@ -9,34 +9,16 @@ namespace XUCore.Template.Easy.Applaction.Admin
     /// <summary>
     /// 管理员查询分页
     /// </summary>
-    public class AdminUserQueryPagedCommand : Command<bool>
+    public class AdminUserQueryPagedCommand : CommandPage<bool>
     {
-        /// <summary>
-        /// 当前页码
-        /// </summary>
-        [Required]
-        public int CurrentPage { get; set; }
-        /// <summary>
-        /// 分页大小
-        /// </summary>
-        [Required]
-        public int PageSize { get; set; }
-        /// <summary>
-        /// 搜索字段
-        /// </summary>
-        public string Field { get; set; }
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        public string Search { get; set; }
+        public string Keyword { get; set; }
         /// <summary>
-        /// 排序字段
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp：“asc or desc”
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
@@ -50,12 +32,11 @@ namespace XUCore.Template.Easy.Applaction.Admin
             return ValidationResult.ThrowValidation();
         }
 
-        public class Validator : CommandValidator<AdminUserQueryPagedCommand>
+        public class Validator : CommandPageValidator<AdminUserQueryPagedCommand, bool>
         {
             public Validator()
             {
-                RuleFor(x => x.CurrentPage).NotEmpty().GreaterThan(0).WithName("CurrentPage");
-                RuleFor(x => x.PageSize).NotEmpty().GreaterThan(0).LessThanOrEqualTo(100).WithName("PageSize");
+                AddPageVaildator();
             }
         }
     }

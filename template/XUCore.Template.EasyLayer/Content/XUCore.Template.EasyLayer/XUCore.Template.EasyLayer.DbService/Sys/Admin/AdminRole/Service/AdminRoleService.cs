@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
-using XUCore.Template.EasyLayer.Core;
 using XUCore.Template.EasyLayer.Core.Enums;
 using XUCore.Template.EasyLayer.Persistence;
 using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
@@ -157,9 +155,9 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
             var res = await db.Context.AdminAuthRole
 
                 .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c => c.Name.Contains(request.Search), !request.Search.IsEmpty())
+                .WhereIf(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty())
 
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                .OrderByBatch(request.OrderBy, !request.OrderBy.IsEmpty())
 
                 .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

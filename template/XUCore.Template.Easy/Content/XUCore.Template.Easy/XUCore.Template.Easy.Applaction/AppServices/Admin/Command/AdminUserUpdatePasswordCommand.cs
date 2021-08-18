@@ -9,13 +9,8 @@ namespace XUCore.Template.Easy.Applaction.Admin
     /// <summary>
     /// 密码修改命令
     /// </summary>
-    public class AdminUserUpdatePasswordCommand : Command<bool>
+    public class AdminUserUpdatePasswordCommand : CommandId<bool, long>
     {
-        /// <summary>
-        /// 主键Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// <summary>
         /// 旧密码
@@ -35,11 +30,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
             return ValidationResult.ThrowValidation();
         }
 
-        public class Validator : CommandValidator<AdminUserUpdatePasswordCommand>
+        public class Validator : CommandIdValidator<AdminUserUpdatePasswordCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().WithName("id");
+                AddIdValidator();
+
                 RuleFor(x => x.OldPassword).NotEmpty().MaximumLength(30).WithName("旧密码");
                 RuleFor(x => x.NewPassword).NotEmpty().MaximumLength(30).WithName("新密码").NotEqual(c => c.OldPassword).WithName("新密码不能和旧密码相同");
             }

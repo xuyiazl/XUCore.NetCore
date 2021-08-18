@@ -56,9 +56,9 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord
         {
             var res = await View.Create(db.Context)
 
-                .WhereIf(c => c.Name.Contains(request.Search) || c.Mobile.Contains(request.Search) || c.UserName.Contains(request.Search), !string.IsNullOrEmpty(request.Search))
+                .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                .OrderByBatch(request.OrderBy,  request.OrderBy.NotEmpty())
 
                 .ProjectTo<LoginRecordDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

@@ -14,13 +14,8 @@ namespace XUCore.Template.Easy.Applaction.Admin
     /// <summary>
     /// 导航更新命令
     /// </summary>
-    public class AdminMenuUpdateCommand : Command<bool>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuUpdateCommand : CommandId<bool, long>, IMapFrom<AdminMenuEntity>
     {
-        /// <summary>
-        /// 主键Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 导航父级id
         /// </summary>
@@ -75,11 +70,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
-        public class Validator : CommandValidator<AdminMenuUpdateCommand>
+        public class Validator : CommandIdValidator<AdminMenuUpdateCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().WithName("id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("菜单名");
                 RuleFor(x => x.Url).NotEmpty().MaximumLength(50).WithName("Url");
                 RuleFor(x => x.OnlyCode).NotEmpty().MaximumLength(50).WithName("唯一代码");

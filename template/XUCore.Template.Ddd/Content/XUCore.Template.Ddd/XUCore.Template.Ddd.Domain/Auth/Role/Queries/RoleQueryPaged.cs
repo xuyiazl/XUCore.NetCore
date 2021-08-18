@@ -17,15 +17,11 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        public string Search { get; set; }
+        public string Keyword { get; set; }
         /// <summary>
-        /// 排序字段
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp：“asc or desc”
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
@@ -55,9 +51,9 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
                 var res = await db.Context.Role
 
                     .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                    .WhereIf(c => c.Name.Contains(request.Search), !request.Search.IsEmpty())
+                    .WhereIf(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                    .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                    .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
 
                     .ProjectTo<RoleDto>(mapper.ConfigurationProvider)
                     .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

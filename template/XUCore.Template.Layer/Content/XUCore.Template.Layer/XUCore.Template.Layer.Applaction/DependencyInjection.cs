@@ -166,6 +166,7 @@ namespace XUCore.Template.Layer.Applaction
                         "XUCore.Template.Layer.WebApi.xml",
                         "XUCore.Template.Layer.Applaction.xml",
                         "XUCore.Template.Layer.Persistence.xml",
+                        "XUCore.Template.Layer.DbService.xml",
                         "XUCore.Template.Layer.Core.xml");
 
                 // TODO:一定要返回true！true 分组无效 注释掉 必须有分组才能出现api

@@ -328,11 +328,11 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
                    .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
                    .WhereIf(c =>
-                               c.Name.Contains(request.Search) ||
-                               c.Mobile.Contains(request.Search) ||
-                               c.UserName.Contains(request.Search), !request.Search.IsEmpty())
+                               c.Name.Contains(request.Keyword) ||
+                               c.Mobile.Contains(request.Keyword) ||
+                               c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                   .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                   .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
 
                    .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                    .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
@@ -581,9 +581,9 @@ namespace XUCore.Template.Easy.Applaction.Admin
             var res = await db.Context.AdminAuthRole
 
                 .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c => c.Name.Contains(request.Search), !request.Search.IsEmpty())
+                .WhereIf(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
 
                 .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

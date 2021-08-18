@@ -13,13 +13,8 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 用户信息修改命令
     /// </summary>
-    public class AdminUserUpdateInfoCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserUpdateInfoCommand : CommandId<bool, long>, IMapFrom<AdminUserEntity>
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 名字
         /// </summary>
@@ -55,11 +50,12 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.Company, c => c.MapFrom(s => s.Company.SafeString()))
             ;
 
-        public class Validator : CommandValidator<AdminUserUpdateInfoCommand>
+        public class Validator : CommandIdValidator<AdminUserUpdateInfoCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(30).WithName("名字");
                 RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
                 RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");

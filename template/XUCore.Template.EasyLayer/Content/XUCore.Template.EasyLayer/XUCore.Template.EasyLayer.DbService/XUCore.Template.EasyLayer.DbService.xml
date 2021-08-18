@@ -77,11 +77,6 @@
             导航更新命令
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand.FatherId">
             <summary>
             导航父级id
@@ -202,34 +197,14 @@
             角色查询命令
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.CurrentPage">
-            <summary>
-            当前页码
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.PageSize">
-            <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Field">
-            <summary>
-            搜索字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Search">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Sort">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.OrderBy">
             <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Status">
@@ -240,11 +215,6 @@
         <member name="T:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand">
             <summary>
             角色修改命令
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand.Id">
-            <summary>
-            Id
             </summary>
         </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand.Name">
@@ -337,34 +307,14 @@
             管理员查询分页
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.CurrentPage">
-            <summary>
-            当前页码
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.PageSize">
-            <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Field">
-            <summary>
-            搜索字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Search">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Sort">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.OrderBy">
             <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Status">
@@ -392,11 +342,6 @@
             用户信息修改命令
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand.Name">
             <summary>
             名字
@@ -420,11 +365,6 @@
         <member name="T:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand">
             <summary>
             密码修改命令
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand.Id">
-            <summary>
-            Id
             </summary>
         </member>
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand.OldPassword">
@@ -502,34 +442,14 @@
             查询命令
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.CurrentPage">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Keyword">
             <summary>
-            当前页码
+            搜索关键字
             </summary>
         </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.PageSize">
+        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.OrderBy">
             <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Field">
-            <summary>
-            查询字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Search">
-            <summary>
-            搜索关键词
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Sort">
-            <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp:"asc or desc"
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="T:XUCore.Template.EasyLayer.DbService.Sys.Admin.LoginRecord.LoginRecordDto">

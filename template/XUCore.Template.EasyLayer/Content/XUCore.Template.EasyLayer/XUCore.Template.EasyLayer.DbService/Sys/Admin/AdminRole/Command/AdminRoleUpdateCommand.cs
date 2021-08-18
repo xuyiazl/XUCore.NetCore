@@ -14,13 +14,8 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 角色修改命令
     /// </summary>
-    public class AdminRoleUpdateCommand : Command<bool>, IMapFrom<AdminRoleEntity>
+    public class AdminRoleUpdateCommand : CommandId<bool, long>, IMapFrom<AdminRoleEntity>
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 角色名
         /// </summary>
@@ -48,11 +43,12 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
                 .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
-        public class Validator : CommandValidator<AdminRoleUpdateCommand>
+        public class Validator : CommandIdValidator<AdminRoleUpdateCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("角色名");
                 RuleFor(x => x.Status).IsInEnum().NotEqual(Status.Default).WithName("数据状态");
             }

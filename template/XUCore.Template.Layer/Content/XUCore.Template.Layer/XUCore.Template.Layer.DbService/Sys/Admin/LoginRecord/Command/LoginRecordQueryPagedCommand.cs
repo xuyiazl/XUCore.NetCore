@@ -8,41 +8,22 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.LoginRecord
     /// <summary>
     /// 查询命令
     /// </summary>
-    public class LoginRecordQueryPagedCommand : Command<bool>
+    public class LoginRecordQueryPagedCommand : CommandPage<bool>
     {
         /// <summary>
-        /// 当前页码
+        /// 搜索关键字
         /// </summary>
-        [Required]
-        public int CurrentPage { get; set; } = 1;
+        public string Keyword { get; set; }
         /// <summary>
-        /// 分页大小
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        [Required]
-        public int PageSize { get; set; } = 10;
-        /// <summary>
-        /// 查询字段
-        /// </summary>
-        public string Field { get; set; }
-        /// <summary>
-        /// 搜索关键词
-        /// </summary>
-        public string Search { get; set; }
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp:"asc or desc"
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
 
-        public class Validator : CommandValidator<LoginRecordQueryPagedCommand>
+        public class Validator : CommandPageValidator<LoginRecordQueryPagedCommand, bool>
         {
             public Validator()
             {
-                RuleFor(x => x.CurrentPage).NotEmpty().GreaterThan(0).WithName("页码");
-                RuleFor(x => x.PageSize).NotEmpty().GreaterThan(0).LessThanOrEqualTo(100).WithName("分页大小");
+                AddPageVaildator();
             }
         }
     }

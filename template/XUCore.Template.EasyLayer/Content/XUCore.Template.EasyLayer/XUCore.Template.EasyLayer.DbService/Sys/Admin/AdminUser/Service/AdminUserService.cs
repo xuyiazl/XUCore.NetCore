@@ -276,11 +276,11 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 
                 .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
                 .WhereIf(c =>
-                            c.Name.Contains(request.Search) ||
-                            c.Mobile.Contains(request.Search) ||
-                            c.UserName.Contains(request.Search), !request.Search.IsEmpty())
+                            c.Name.Contains(request.Keyword) ||
+                            c.Mobile.Contains(request.Keyword) ||
+                            c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty())
 
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                .OrderByBatch(request.OrderBy, !request.OrderBy.IsEmpty())
 
                 .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

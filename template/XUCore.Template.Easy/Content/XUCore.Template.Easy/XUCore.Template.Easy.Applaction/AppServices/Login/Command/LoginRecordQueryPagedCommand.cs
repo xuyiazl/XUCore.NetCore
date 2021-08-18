@@ -8,34 +8,16 @@ namespace XUCore.Template.Easy.Applaction.Login
     /// <summary>
     /// 查询命令
     /// </summary>
-    public class LoginRecordQueryPagedCommand : Command<bool>
+    public class LoginRecordQueryPagedCommand : CommandPage<bool>
     {
         /// <summary>
-        /// 当前页码
+        /// 搜索关键字
         /// </summary>
-        [Required]
-        public int CurrentPage { get; set; }
+        public string Keyword { get; set; }
         /// <summary>
-        /// 分页大小
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        [Required]
-        public int PageSize { get; set; }
-        /// <summary>
-        /// 查询字段
-        /// </summary>
-        public string Field { get; set; }
-        /// <summary>
-        /// 搜索关键词
-        /// </summary>
-        public string Search { get; set; }
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp:"asc or desc"
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
 
         public override bool IsVaild()
         {
@@ -44,7 +26,7 @@ namespace XUCore.Template.Easy.Applaction.Login
             return ValidationResult.ThrowValidation();
         }
 
-        public class Validator : CommandValidator<LoginRecordQueryPagedCommand>
+        public class Validator : CommandPageValidator<LoginRecordQueryPagedCommand, bool>
         {
             public Validator()
             {
