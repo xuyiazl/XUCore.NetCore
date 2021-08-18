@@ -15,6 +15,11 @@ namespace XUCore.Template.Easy.Applaction
     /// </summary>
     public class JwtHandler : AppAuthorizeHandler
     {
+        private readonly IAuthService authService;
+        public JwtHandler(IAuthService authService)
+        {
+            this.authService = authService;
+        }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑
         /// </summary>
@@ -35,6 +40,13 @@ namespace XUCore.Template.Easy.Applaction
             }
             else
             {
+#if !DEBUG
+                // 验证登录保存的token，如果不一致则是被其他人踢掉，或者退出登录了，需要重新登录
+                var token = JWTEncryption.GetJwtBearerToken(context.GetCurrentHttpContext());
+
+                if (!authService.VaildLoginToken(token))
+                    context.Fail();
+#endif
                 // 自动刷新 token
                 if (JWTEncryption.AutoRefreshToken(context, context.GetCurrentHttpContext()))
                     await AuthorizeHandleAsync(context);

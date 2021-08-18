@@ -107,6 +107,16 @@ namespace XUCore.Template.Easy.Applaction.Login
                 authService.AdminName
             }.ToJson());
         }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/Out")]
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await authService.LoginOutAsync(cancellationToken);
+        }
 
         #endregion
 

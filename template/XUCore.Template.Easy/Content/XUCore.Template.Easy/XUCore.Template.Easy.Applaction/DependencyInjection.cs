@@ -55,6 +55,8 @@ namespace XUCore.Template.Easy.Applaction
 
             // 注入缓存拦截器（内存缓存）
             services.AddCacheService<MemoryCacheService>();
+            // 注入内存缓存
+            services.AddCacheManager();
 
             //添加跨域配置
             services.AddCors(options =>

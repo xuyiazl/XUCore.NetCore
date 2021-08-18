@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Cache;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
@@ -29,6 +30,8 @@ namespace XUCore.Template.Easy.Applaction.Authorization
     {
         private const string userId = "_admin_userid_";
         private const string userName = "_admin_username_";
+        private const string loginToken = "__login_token__";
+        private readonly ICacheManager cacheManager;
 
         private readonly IPermissionService permissionService;
         private readonly IDefaultDbRepository db;
@@ -38,6 +41,7 @@ namespace XUCore.Template.Easy.Applaction.Authorization
             permissionService = serviceProvider.GetService<IPermissionService>();
             this.db = serviceProvider.GetService<IDefaultDbRepository>();
             this.mapper = serviceProvider.GetService<IMapper>();
+            this.cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
         public async Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default)
@@ -100,12 +104,44 @@ namespace XUCore.Template.Easy.Applaction.Authorization
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
+            SetLoginToken(user.Id, accessToken);
+
             return (accessToken, refreshToken);
         }
 
-        public async Task LoginOutAsync()
+        public async Task LoginOutAsync(CancellationToken cancellationToken = default)
         {
+            RemoveLoginToken();
+
             await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="token"></param>
+        private void SetLoginToken(long userId, string token)
+        {
+            cacheManager.Set($"{loginToken}{userId}", token);
+        }
+        /// <summary>
+        /// 删除登录标记，模拟退出
+        /// </summary>
+        private void RemoveLoginToken()
+        {
+            cacheManager.Remove($"{loginToken}{AdminId}");
+        }
+        /// <summary>
+        /// 验证token是否一致
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool VaildLoginToken(string token)
+        {
+            var cacheToken = cacheManager.Get<string>($"{loginToken}{AdminId}");
+
+            return token == cacheToken;
         }
 
         public bool IsCanAccess(string accessKey)
