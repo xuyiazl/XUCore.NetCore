@@ -41,7 +41,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleCreateCommand, AdminRoleEntity>()
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminRoleCreateCommand>

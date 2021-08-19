@@ -40,7 +40,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleUpdateCommand, AdminRoleEntity>()
-                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandIdValidator<AdminRoleUpdateCommand, bool, long>

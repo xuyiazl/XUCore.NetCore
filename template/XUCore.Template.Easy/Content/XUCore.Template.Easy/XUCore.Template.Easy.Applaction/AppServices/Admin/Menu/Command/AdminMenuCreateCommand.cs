@@ -67,7 +67,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuCreateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminMenuCreateCommand>

@@ -67,7 +67,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuUpdateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandIdValidator<AdminMenuUpdateCommand, bool, long>
