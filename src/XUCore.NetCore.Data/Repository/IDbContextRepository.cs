@@ -43,7 +43,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Add<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class;
+        int Add<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class;
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
@@ -57,7 +57,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Update<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class;
+        int Update<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class;
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -71,7 +71,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        int Delete<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class;
+        int Delete<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class;
 
         //异步操作
 
@@ -90,7 +90,7 @@ namespace XUCore.NetCore.Data
         /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class;
+        Task<int> AddAsync<TEntity>(IList<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class;
         //同步查询
 
         /// <summary>

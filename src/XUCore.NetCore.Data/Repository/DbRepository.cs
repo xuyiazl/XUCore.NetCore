@@ -81,7 +81,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Add(IEnumerable<TEntity> entities, bool commit = true)
+        public virtual int Add(IList<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -117,7 +117,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Update(IEnumerable<TEntity> entities, bool commit = true)
+        public virtual int Update(IList<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -153,7 +153,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public virtual int Delete(IEnumerable<TEntity> entities, bool commit = true)
+        public virtual int Delete(IList<TEntity> entities, bool commit = true)
         {
             if (entities == null)
             {
@@ -194,7 +194,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default)
+        public virtual async Task<int> AddAsync(IList<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default)
         {
             if (entities == null)
             {

@@ -302,7 +302,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(System.Collections.Generic.IList{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -318,7 +318,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XUCore.NetCore.Data.DbContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)" -->
+        <!-- Badly formed XML comment ignored for member "M:XUCore.NetCore.Data.DbContextRepository`1.Update``1(System.Collections.Generic.IList{``0},System.Boolean)" -->
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(``0,System.Boolean)">
             <summary>
             删除一条数据
@@ -327,7 +327,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(System.Collections.Generic.IList{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -344,7 +344,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.AddAsync``1(System.Collections.Generic.IList{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -554,7 +554,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -568,7 +568,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -582,7 +582,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -597,7 +597,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -788,7 +788,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(System.Collections.Generic.IList{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -804,7 +804,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Update``1(System.Collections.Generic.IList{``0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -820,7 +820,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Delete``1(System.Collections.Generic.IList{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -837,7 +837,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.AddAsync``1(System.Collections.Generic.IList{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -1041,7 +1041,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -1055,7 +1055,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1069,7 +1069,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -1084,7 +1084,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -1280,7 +1280,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -1294,7 +1294,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1308,7 +1308,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -1323,7 +1323,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
@@ -1519,7 +1519,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -1533,7 +1533,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -1547,7 +1547,7 @@
             <param name="entity"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -1562,7 +1562,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>

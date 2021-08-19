@@ -77,7 +77,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Add<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class
+        public virtual int Add<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
         {
             if (entities == null)
             {
@@ -111,7 +111,7 @@ namespace XUCore.NetCore.Data
         }
         /// <summary>
         /// 批量更新数据（全量更新）
-        public virtual int Update<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class
+        public virtual int Update<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
         {
             if (entities == null)
             {
@@ -149,7 +149,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Delete<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class
+        public virtual int Delete<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
         {
             if (entities == null)
             {
@@ -192,7 +192,7 @@ namespace XUCore.NetCore.Data
         /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<int> AddAsync<TEntity>(IList<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class
         {
             if (entities == null)
             {
