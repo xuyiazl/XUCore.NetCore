@@ -42,12 +42,12 @@ namespace XUCore.Template.Ddd.Domain.User.User
         public class Handler : CommandHandler<UserUpdateFieldCommand, int>
         {
             private readonly IDefaultDbRepository db;
-            private readonly IMapper mapper;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
-                this.mapper = mapper;
+                this.loginInfo = loginInfo;
             }
 
 
@@ -56,21 +56,21 @@ namespace XUCore.Template.Ddd.Domain.User.User
                 switch (request.Field.ToLower())
                 {
                     case "name":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Name = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Name = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "username":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { UserName = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { UserName = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "mobile":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Mobile = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Mobile = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "password":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Password = Encrypt.Md5By32(request.Value), UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Password = Encrypt.Md5By32(request.Value), UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "position":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Position = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Position = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "location":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Location = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Location = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "company":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Company = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Company = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "picture":
-                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Picture = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity() { Picture = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     default:
                         return 0;
                 }

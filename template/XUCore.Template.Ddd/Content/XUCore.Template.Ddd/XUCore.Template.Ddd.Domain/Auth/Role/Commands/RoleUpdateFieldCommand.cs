@@ -39,19 +39,21 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
         public class Handler : CommandHandler<RoleUpdateFieldCommand, int>
         {
             private readonly IDefaultDbRepository db;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
+                this.loginInfo = loginInfo;
             }
 
-            
+
             public override async Task<int> Handle(RoleUpdateFieldCommand request, CancellationToken cancellationToken)
             {
                 switch (request.Field.ToLower())
                 {
                     case "name":
-                        return await db.UpdateAsync<RoleEntity>(c => c.Id == request.Id, c => new RoleEntity() { Name = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<RoleEntity>(c => c.Id == request.Id, c => new RoleEntity() { Name = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     default:
                         return 0;
                 }

@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using XUCore.Helpers;
 using XUCore.NetCore.Data;
 using XUCore.Template.Ddd.Domain.Core;
 using XUCore.Template.Ddd.Domain.Core.Entities;
@@ -20,6 +21,8 @@ namespace XUCore.Template.Ddd.Persistence
 
         private void DefaultDbContext_SavingChanges(object sender, SavingChangesEventArgs e)
         {
+            var loginInfo = Web.GetService<ILoginInfoService>();
+
             ChangeTracker.Entries().Where(e => e.Entity is BaseEntity).ToList().ForEach(e =>
             {
                 //添加操作
@@ -29,7 +32,7 @@ namespace XUCore.Template.Ddd.Persistence
                     {
                         var entity = e.Entity as BaseEntity;
                         entity.CreatedAt = DateTime.Now;
-                        entity.CreatedAtUserId = LoginInfo.UserId;
+                        entity.CreatedAtUserId = loginInfo.UserId;
                     }
                 }
                 //修改操作
@@ -44,11 +47,11 @@ namespace XUCore.Template.Ddd.Persistence
                             case Status.Show:
                             case Status.SoldOut:
                                 entity.UpdatedAt = DateTime.Now;
-                                entity.UpdatedAtUserId = LoginInfo.UserId;
+                                entity.UpdatedAtUserId = loginInfo.UserId;
                                 break;
                             case Status.Trash:
                                 entity.DeletedAt = DateTime.Now;
-                                entity.DeletedAtUserId = LoginInfo.UserId;
+                                entity.DeletedAtUserId = loginInfo.UserId;
                                 break;
                         }
                     }

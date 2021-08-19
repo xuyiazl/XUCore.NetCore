@@ -1,17 +1,12 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Template.Ddd.Domain.Core;
 using XUCore.Template.Ddd.Domain.User.User;
 
 namespace XUCore.Template.Ddd.Infrastructure.Authorization
 {
-    public interface IAuthService
+    public interface IAuthService: ILoginInfoService
     {
-        string UserId { get; }
-
-        string UserName { get; }
-
-        bool IsAuthenticated { get; }
-
         Task<bool> IsCanAccessAsync(string accessKey);
 
         Task<(string, string)> LoginAsync(UserLoginCommand request, CancellationToken cancellationToken = default);

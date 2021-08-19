@@ -362,11 +362,6 @@
             当前触发时间
             </summary>
         </member>
-        <member name="T:XUCore.Template.Ddd.Domain.Core.LoginInfo">
-            <summary>
-            创建/修改/删除获取用户id记录的临时解决方案
-            </summary>
-        </member>
         <member name="P:XUCore.Template.Ddd.Domain.Core.Mappings.DtoBase`1.Status">
             <summary>
             数据状态

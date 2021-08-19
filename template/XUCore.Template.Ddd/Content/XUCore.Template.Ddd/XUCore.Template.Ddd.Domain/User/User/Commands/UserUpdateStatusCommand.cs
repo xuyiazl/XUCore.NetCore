@@ -35,25 +35,24 @@ namespace XUCore.Template.Ddd.Domain.User.User
         public class Handler : CommandHandler<UserUpdateStatusCommand, int>
         {
             private readonly IDefaultDbRepository db;
-            private readonly IMapper mapper;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
-                this.mapper = mapper;
+                this.loginInfo = loginInfo;
             }
-
 
             public override async Task<int> Handle(UserUpdateStatusCommand request, CancellationToken cancellationToken)
             {
                 switch (request.Status)
                 {
                     case Status.Show:
-                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.Show, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.Show, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case Status.SoldOut:
-                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case Status.Trash:
-                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.Trash, DeletedAt = DateTime.Now, DeletedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<UserEntity>(c => request.Ids.Contains(c.Id), c => new UserEntity { Status = Status.Trash, DeletedAt = DateTime.Now, DeletedAtUserId = loginInfo.UserId });
                     default:
                         return 0;
                 }

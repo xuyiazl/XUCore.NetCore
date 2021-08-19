@@ -18,6 +18,7 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Redis;
 using XUCore.Serializer;
+using XUCore.Template.Ddd.Domain.Core;
 using XUCore.Template.Ddd.Domain.Core.Mappings;
 using XUCore.Template.Ddd.Domain.Notifications;
 using XUCore.Template.Ddd.Infrastructure.Authorization;
@@ -52,7 +53,8 @@ namespace XUCore.Template.Ddd.Infrastructure
             // 注入 基础设施层 - 事件溯源
             services.AddEventStore<SqlEventStoreService>();
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAuthService, AuthService>(); 
+            services.AddScoped<ILoginInfoService, AuthService>(); 
 
             // 注入redis插件
             services.AddRedisService().AddJsonRedisSerializer();

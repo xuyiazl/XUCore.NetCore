@@ -40,25 +40,26 @@ namespace XUCore.Template.Ddd.Domain.Auth.Menu
         public class Handler : CommandHandler<MenuUpdateFieldCommand, int>
         {
             private readonly IDefaultDbRepository db;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
+                this.loginInfo = loginInfo;
             }
 
-            
             public override async Task<int> Handle(MenuUpdateFieldCommand request, CancellationToken cancellationToken)
             {
                 switch (request.Field.ToLower())
                 {
                     case "icon":
-                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Icon = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Icon = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "url":
-                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Url = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Url = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "onlycode":
-                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { OnlyCode = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { OnlyCode = request.Value, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case "weight":
-                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Weight = request.Value.ToInt(), UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<MenuEntity>(c => c.Id == request.Id, c => new MenuEntity() { Weight = request.Value.ToInt(), UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     default:
                         return 0;
                 }
