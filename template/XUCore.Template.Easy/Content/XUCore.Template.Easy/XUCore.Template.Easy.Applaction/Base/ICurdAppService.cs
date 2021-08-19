@@ -65,6 +65,6 @@ namespace XUCore.Template.Easy.Applaction
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<PagedModel<TDto>>> GetPageListAsync(TPageCommand request, CancellationToken cancellationToken);
+        Task<Result<PagedModel<TDto>>> GetPagedListAsync(TPageCommand request, CancellationToken cancellationToken);
     }
 }

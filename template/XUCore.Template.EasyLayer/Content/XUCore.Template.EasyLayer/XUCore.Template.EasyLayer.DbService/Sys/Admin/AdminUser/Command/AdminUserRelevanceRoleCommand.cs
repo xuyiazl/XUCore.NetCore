@@ -10,7 +10,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 关联角色命令
     /// </summary>
-    public class AdminUserRelevanceRoleCommand : Command<bool>
+    public class AdminUserRelevanceRoleCommand : CreateCommand
     {
         /// <summary>
         /// 管理员id

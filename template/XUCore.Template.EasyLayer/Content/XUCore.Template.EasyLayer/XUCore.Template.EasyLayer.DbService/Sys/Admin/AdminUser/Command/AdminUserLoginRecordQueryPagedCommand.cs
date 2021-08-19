@@ -8,7 +8,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 查询命令
     /// </summary>
-    public class AdminUserLoginRecordQueryPagedCommand : CommandPage<bool>
+    public class AdminUserLoginRecordQueryPagedCommand : PageCommand
     {
         /// <summary>
         /// 搜索关键字

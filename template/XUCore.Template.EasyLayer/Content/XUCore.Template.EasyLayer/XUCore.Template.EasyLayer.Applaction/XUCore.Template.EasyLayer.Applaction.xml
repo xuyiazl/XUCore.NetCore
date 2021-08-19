@@ -95,7 +95,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.CreateUserRelevanceRoleAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
             <summary>
             账号关联角色
             </summary>
@@ -103,7 +103,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetUserRelevanceRoleIdsAsync(System.Int64,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetUserRelevanceRoleKeysAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             获取账号关联的角色id集合
             </summary>
@@ -162,10 +162,11 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetRoleAllAsync(System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetRoleListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有角色
             </summary>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -177,7 +178,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetRoleRelevanceMenuIdsAsync(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetRoleRelevanceMenuAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             获取角色关联的所有导航id集合
             </summary>
@@ -243,11 +244,11 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetMenuByWeightAsync(System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.IAdminAppService.GetMenuListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取导航列表
             </summary>
-            <param name="isMenu"></param>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -342,7 +343,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.CreateUserRelevanceRoleAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
             <summary>
             账号关联角色
             </summary>
@@ -350,7 +351,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetUserRelevanceRoleIdsAsync(System.Int64,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetUserRelevanceRoleKeysAsync(System.Int64,System.Threading.CancellationToken)">
             <summary>
             获取账号关联的角色id集合
             </summary>
@@ -366,7 +367,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRecordPageListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRecordPagedListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有登录记录分页
             </summary>
@@ -425,10 +426,11 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRoleAllAsync(System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRoleListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有角色
             </summary>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -440,7 +442,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRoleRelevanceMenuIdsAsync(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetRoleRelevanceMenuAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             获取角色关联的所有导航id集合
             </summary>
@@ -506,11 +508,11 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetMenuByWeightAsync(System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.Applaction.Admin.AdminAppService.GetMenuListAsync(XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取导航列表
             </summary>
-            <param name="isMenu"></param>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>

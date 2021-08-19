@@ -8,7 +8,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 查询命令
     /// </summary>
-    public class AdminUserLoginRecordQueryCommand : CommandLimit<bool>
+    public class AdminUserLoginRecordQueryCommand : ListCommand
     {
         /// <summary>
         /// 管理员id

@@ -7,7 +7,7 @@ using XUCore.Template.EasyLayer.Core.Enums;
 
 namespace XUCore.Template.EasyLayer.DbService
 {
-    public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+    public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>: IDbService
         where TCreateCommand : CreateCommand
         where TUpdateCommand : UpdateCommand<TKey>
         where TListCommand : ListCommand
@@ -62,6 +62,6 @@ namespace XUCore.Template.EasyLayer.DbService
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<PagedModel<TDto>> GetPageListAsync(TPageCommand request, CancellationToken cancellationToken);
+        Task<PagedModel<TDto>> GetPagedListAsync(TPageCommand request, CancellationToken cancellationToken);
     }
 }

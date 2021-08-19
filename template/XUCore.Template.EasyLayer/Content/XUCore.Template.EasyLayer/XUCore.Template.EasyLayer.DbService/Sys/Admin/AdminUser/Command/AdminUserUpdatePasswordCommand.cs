@@ -10,7 +10,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 密码修改命令
     /// </summary>
-    public class AdminUserUpdatePasswordCommand : CommandId<bool, long>
+    public class AdminUserUpdatePasswordCommand : UpdateCommand<long>
     {
         /// <summary>
         /// 旧密码

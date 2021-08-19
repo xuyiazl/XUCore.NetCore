@@ -97,7 +97,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.DbService.CurdService`7.GetPageListAsync(`6,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.DbService.CurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
             <summary>
             获取分页
             </summary>
@@ -154,7 +154,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.DbService.ICurdService`7.GetPageListAsync(`6,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.EasyLayer.DbService.ICurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
             <summary>
             获取分页
             </summary>

@@ -188,7 +188,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<int>> CreateUserRelevanceRoleIdAsync(AdminUserRelevanceRoleCommand command, CancellationToken cancellationToken = default)
         {
-            var res = await adminUserService.RelevanceRoleAsync(command, cancellationToken);
+            var res = await adminUserService.CreateRelevanceRoleAsync(command, cancellationToken);
 
             if (res > 0)
                 return RestFull.Success(data: res);
@@ -204,6 +204,35 @@ namespace XUCore.Template.Layer.Applaction.Admin
         public async Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync(long adminId, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.GetRoleKeysAsync(adminId, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+
+        #endregion
+
+        #region [ 登录记录 ]
+
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<Result<IList<AdminUserLoginRecordDto>>> GetRecordListAsync(AdminUserLoginRecordQueryCommand command, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordListAsync(command, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<Result<PagedModel<AdminUserLoginRecordDto>>> GetRecordPageAsync(AdminUserLoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordPagedListAsync(command, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -305,11 +334,12 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <summary>
         /// 获取所有角色
         /// </summary>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<IList<AdminRoleDto>>> GetRoleAllAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminRoleDto>>> GetRoleListAsync(AdminRoleQueryCommand command, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetAllAsync(cancellationToken);
+            var res = await adminRoleService.GetListAsync(command, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -321,7 +351,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePagedAsync(AdminRoleQueryPagedCommand command, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetPageListAsync(command, cancellationToken);
+            var res = await adminRoleService.GetPagedListAsync(command, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -331,9 +361,9 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <param name="roleId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync(int roleId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<long>>> GetRoleRelevanceMenuAsync(int roleId, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetRelevanceMenuIdsAsync(roleId, cancellationToken);
+            var res = await adminRoleService.GetRelevanceMenuAsync(roleId, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -446,12 +476,12 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <summary>
         /// 获取导航列表
         /// </summary>
-        /// <param name="isMenu"></param>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync(bool isMenu = true, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminMenuDto>>> GetMenuListAsync(AdminMenuQueryCommand command, CancellationToken cancellationToken = default)
         {
-            var res = await adminMenuService.GetListByWeightAsync(isMenu, cancellationToken);
+            var res = await adminMenuService.GetListAsync(command, cancellationToken);
 
             return RestFull.Success(data: res);
         }

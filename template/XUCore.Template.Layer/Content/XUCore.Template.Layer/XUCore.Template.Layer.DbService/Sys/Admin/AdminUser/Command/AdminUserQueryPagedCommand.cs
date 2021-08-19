@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Template.Layer.Core.Enums;
 
 namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
@@ -8,7 +9,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 管理员查询分页
     /// </summary>
-    public class AdminUserQueryPagedCommand : CommandPage<bool>
+    public class AdminUserQueryPagedCommand : PageCommand
     {
         /// <summary>
         /// 搜索关键字
@@ -23,6 +24,12 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
         /// </summary>
         public Status Status { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
 
         public class Validator : CommandPageValidator<AdminUserQueryPagedCommand, bool>
         {

@@ -21,7 +21,7 @@ namespace XUCore.Template.Layer.Persistence
             //            options.EnableRetryOnFailure();
             //            //options.ExecutionStrategy(c => new MySqlRetryingExecutionStrategy(c.CurrentContext.Context));
             //            //options.ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c.CurrentContext.Context));
-            //            options.MigrationsAssembly("XUCore.Template.EasyLayer.Persistence");
+            //            options.MigrationsAssembly("XUCore.Template.Layer.Persistence");
             //        }
             //        )
             //    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -60,8 +60,9 @@ namespace XUCore.Template.Layer.Persistence
 
             var dbContext = scope.ServiceProvider.GetService<DefaultDbContext>();
 
+#if !DEBUG
             dbContext.Database.Migrate();
-
+#endif
             return app;
         }
     }

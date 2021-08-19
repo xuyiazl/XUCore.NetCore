@@ -147,18 +147,6 @@ namespace XUCore.Template.Layer.Applaction
                     Title = $"管理员后台API - {env.EnvironmentName}",
                     Description = "管理员后台API"
                 });
-                opt.SwaggerDoc(ApiGroup.Login, new OpenApiInfo
-                {
-                    Version = ApiGroup.Login,
-                    Title = $"登录相关API - {env.EnvironmentName}",
-                    Description = "登录相关API"
-                });
-                opt.SwaggerDoc(ApiGroup.File, new OpenApiInfo
-                {
-                    Version = ApiGroup.File,
-                    Title = $"文件操作相关API - {env.EnvironmentName}",
-                    Description = "文件操作相关API"
-                });
 
                 opt.AddJwtBearerDoc();
 
@@ -200,8 +188,6 @@ namespace XUCore.Template.Layer.Applaction
             app.UseMiniSwagger(swaggerUIAction: (opt) =>
             {
                 opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
-                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Login}/swagger.json", $"登录相关 API");
-                opt.SwaggerEndpoint($"/swagger/{ApiGroup.File}/swagger.json", $"文件操作相关 API");
             });
 
             app.UseEndpoints(endpoints =>

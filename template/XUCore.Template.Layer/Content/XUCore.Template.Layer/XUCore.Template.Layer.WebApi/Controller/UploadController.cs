@@ -14,7 +14,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
     /// <summary>
     /// 文件上传
     /// </summary>
-    [ApiExplorerSettings(GroupName = ApiGroup.File)]
+    [ApiExplorerSettings(GroupName = ApiGroup.Admin)]
     public class UploadController : ApiControllerBase
     {
         private readonly IUploadAppService uploadAppService;

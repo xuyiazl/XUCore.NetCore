@@ -3,6 +3,7 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.Core.Enums;
@@ -14,7 +15,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
     /// <summary>
     /// 创建导航命令
     /// </summary>
-    public class AdminMenuCreateCommand : Command<bool>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuCreateCommand : CreateCommand, IMapFrom<AdminMenuEntity>
     {
         /// <summary>
         /// 导航父级id
@@ -56,6 +57,13 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
         /// </summary>
         [Required]
         public Status Status { get; set; }
+
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuCreateCommand, AdminMenuEntity>()

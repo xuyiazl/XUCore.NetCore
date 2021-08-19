@@ -2,18 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Template.EasyLayer.Core.Enums;
+using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
 {
-    public interface IAdminMenuService : IDbService
+    public interface IAdminMenuService : ICurdService<long, AdminMenuEntity, AdminMenuDto, AdminMenuCreateCommand, AdminMenuUpdateCommand, AdminMenuQueryCommand, AdminMenuQueryPagedCommand>
     {
-        Task<int> CreateAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken);
-        Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken);
-        Task<AdminMenuDto> GetByIdAsync(long id, CancellationToken cancellationToken);
         Task<IList<AdminMenuTreeDto>> GetListByTreeAsync(CancellationToken cancellationToken);
-        Task<IList<AdminMenuDto>> GetListByWeightAsync(bool isMenu, CancellationToken cancellationToken);
-        Task<int> UpdateAsync(AdminMenuUpdateCommand request, CancellationToken cancellationToken);
         Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken);
-        Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken);
     }
 }

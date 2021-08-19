@@ -9,7 +9,7 @@ namespace XUCore.Template.Easy.Applaction.Login
     /// <summary>
     /// 登录命令
     /// </summary>
-    public class AdminUserLoginCommand : Command<bool>
+    public class AdminUserLoginCommand : CreateCommand
     {
         /// <summary>
         /// 登录账号

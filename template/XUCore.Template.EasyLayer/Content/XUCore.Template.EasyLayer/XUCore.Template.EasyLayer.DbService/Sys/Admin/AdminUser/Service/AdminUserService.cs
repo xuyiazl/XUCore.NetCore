@@ -20,20 +20,18 @@ using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 {
-    public class AdminUserService : IAdminUserService
+    public class AdminUserService : CurdService<long, AdminUserEntity, AdminUserDto, AdminUserCreateCommand, AdminUserUpdateInfoCommand, AdminUserQueryCommand, AdminUserQueryPagedCommand>,
+        IAdminUserService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-        private readonly IMediator mediator;
-
-        public AdminUserService(IDefaultDbRepository db, IMapper mapper, IMediator mediator)
+        public AdminUserService(IDefaultDbRepository db, IMapper mapper, IMediator mediator) : base(db, mapper)
         {
-            this.db = db;
-            this.mapper = mapper;
-            this.mediator = mediator;
+            CreatedAction = async (entity) =>
+            {
+                await mediator.Publish(new AdminUserCreateEvent(entity.Id, entity));
+            };
         }
 
-        public async Task<int> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
+        public override async Task<int> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
 
@@ -52,7 +50,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
 
             if (res > 0)
             {
-                await mediator.Publish(new AdminUserCreateEvent(entity.Id, entity), cancellationToken);
+                CreatedAction?.Invoke(entity);
 
                 return res;
             }
@@ -60,22 +58,17 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 return res;
         }
 
-        public async Task<int> UpdateAsync(AdminUserUpdateInfoCommand request, CancellationToken cancellationToken)
+        public async Task<int> UpdateAsync(AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken)
         {
-            var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var admin = await db.Context.AdminUser.FindAsync(request.Id);
 
-            if (entity == null)
-                return 0;
+            request.NewPassword = Encrypt.Md5By32(request.NewPassword);
+            request.OldPassword = Encrypt.Md5By32(request.OldPassword);
 
-            entity = mapper.Map(request, entity);
+            if (!admin.Password.Equals(request.OldPassword))
+                Failure.Error("旧密码错误");
 
-            var res = db.Update(entity);
-
-            if (res > 0)
-            {
-                return res;
-            }
-            return res;
+            return await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
         }
 
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
@@ -103,35 +96,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             }
         }
 
-        public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
-        {
-            switch (status)
-            {
-                case Status.Show:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
-                case Status.SoldOut:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
-                case Status.Trash:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
-                default:
-                    return 0;
-            }
-        }
-
-        public async Task<int> UpdateAsync(AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken)
-        {
-            var admin = await db.Context.AdminUser.FindAsync(request.Id);
-
-            request.NewPassword = Encrypt.Md5By32(request.NewPassword);
-            request.OldPassword = Encrypt.Md5By32(request.OldPassword);
-
-            if (!admin.Password.Equals(request.OldPassword))
-                Failure.Error("旧密码错误");
-
-            return await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
-        }
-
-        public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
+        public override async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
 
@@ -141,27 +106,11 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 await db.DeleteAsync<AdminUserLoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+
+                DeletedAction?.Invoke(ids);
             }
 
             return res;
-        }
-
-        public async Task<int> RelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
-        {
-            //先清空用户的角色，确保没有冗余的数据
-            await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
-
-            var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
-            {
-                RoleId = roleid,
-                AdminId = request.AdminId
-            });
-
-            //添加角色
-            if (userRoles.Length > 0)
-                return await db.AddAsync(userRoles, cancellationToken: cancellationToken);
-
-            return 1;
         }
 
         public async Task<AdminUserDto> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken)
@@ -212,16 +161,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return mapper.Map<AdminUserDto>(user);
         }
 
-        public async Task<AdminUserDto> GetByIdAsync(long id, CancellationToken cancellationToken)
-        {
-            var res = await db.Context.AdminUser
-                .Where(c => c.Id == id)
-                .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            return res;
-        }
-
         public async Task<bool> AnyByAccountAsync(AccountMode accountMode, string account, long notId, CancellationToken cancellationToken)
         {
             if (notId > 0)
@@ -270,7 +209,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return null;
         }
 
-        public async Task<PagedModel<AdminUserDto>> GetPagedListAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
+        public override async Task<PagedModel<AdminUserDto>> GetPagedListAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
         {
             var res = await db.Context.AdminUser
 
@@ -286,6 +225,24 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
+        }
+
+        public async Task<int> CreateRelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
+        {
+            //先清空用户的角色，确保没有冗余的数据
+            await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
+
+            var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
+            {
+                RoleId = roleid,
+                AdminId = request.AdminId
+            });
+
+            //添加角色
+            if (userRoles.Length > 0)
+                return await db.AddAsync(userRoles, cancellationToken: cancellationToken);
+
+            return 1;
         }
 
         public async Task<IList<long>> GetRoleKeysAsync(long adminId, CancellationToken cancellationToken)
@@ -311,7 +268,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
             return res;
         }
 
-        public async Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPageListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken)
+        public async Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPagedListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken)
         {
             var res = await View.Create(db.Context)
 

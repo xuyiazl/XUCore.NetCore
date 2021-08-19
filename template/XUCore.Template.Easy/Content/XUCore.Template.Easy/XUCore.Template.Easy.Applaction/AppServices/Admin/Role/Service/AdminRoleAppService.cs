@@ -180,7 +180,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task<Result<PagedModel<AdminRoleDto>>> GetPageListAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
+        public override async Task<Result<PagedModel<AdminRoleDto>>> GetPagedListAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
             var res = await db.Context.AdminAuthRole
 

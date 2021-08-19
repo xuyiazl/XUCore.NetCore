@@ -44,26 +44,6 @@
             主键Id
             </summary>
         </member>
-        <member name="P:XUCore.Template.Easy.Core.DtoBase`1.Status">
-            <summary>
-            数据状态
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Core.DtoBase`1.CreatedAt">
-            <summary>
-            创建日期
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Core.DtoBase`1.UpdatedAt">
-            <summary>
-            更新日期
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Core.DtoBase`1.DeletedAt">
-            <summary>
-            删除日期
-            </summary>
-        </member>
         <member name="P:XUCore.Template.Easy.Core.DtoKeyBase`1.Id">
             <summary>
             主键Id

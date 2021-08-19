@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
-using XUCore.Template.Easy.Applaction.Permission;
 using XUCore.Template.Easy.Core.Enums;
 using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
 
@@ -71,6 +70,8 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
         #endregion
 
+        #region [ 登录记录 ]
+
         /// <summary>
         /// 获取最近登录记录
         /// </summary>
@@ -86,5 +87,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPageListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken);
 
+        #endregion
     }
 }

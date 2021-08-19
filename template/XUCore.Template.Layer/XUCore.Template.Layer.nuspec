@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>XUCore.Template.Layer</id>
-		<version>1.0.3</version>
+		<version>1.0.4</version>
 		<description>Layer 三层快速开发项目模板，WebApi项目</description>
 		<authors>XUCore</authors>
 		<copyright>Copyright © XUCore 2020</copyright>

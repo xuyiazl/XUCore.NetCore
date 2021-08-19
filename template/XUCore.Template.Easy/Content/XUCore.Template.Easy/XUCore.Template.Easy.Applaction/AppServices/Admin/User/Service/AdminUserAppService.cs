@@ -247,7 +247,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task<Result<PagedModel<AdminUserDto>>> GetPageListAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
+        public override async Task<Result<PagedModel<AdminUserDto>>> GetPagedListAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
         {
             var res = await db.Context.AdminUser
 
@@ -268,6 +268,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         #endregion
 
         #region [ 账号&角色 关联操作 ]
+
 
         /// <summary>
         /// 账号关联角色
@@ -311,6 +312,9 @@ namespace XUCore.Template.Easy.Applaction.Admin
         }
 
         #endregion
+
+        #region [ 登录记录 ]
+
         /// <summary>
         /// 获取最近登录记录
         /// </summary>
@@ -350,5 +354,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
             return res.ToModel();
         }
+
+        #endregion
     }
 }

@@ -7,55 +7,17 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore.Cache;
-using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.Core.Enums;
 using XUCore.Template.Layer.Persistence;
 using XUCore.Template.Layer.Persistence.Entities.Sys.Admin;
 
 namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
 {
-    public class AdminMenuService : IAdminMenuService
+    public class AdminMenuService : CurdService<long, AdminMenuEntity, AdminMenuDto, AdminMenuCreateCommand, AdminMenuUpdateCommand, AdminMenuQueryCommand, AdminMenuQueryPagedCommand>,
+        IAdminMenuService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-
-        public AdminMenuService(IDefaultDbRepository db, IMapper mapper)
+        public AdminMenuService(IDefaultDbRepository db, IMapper mapper) : base(db, mapper)
         {
-            this.db = db;
-            this.mapper = mapper;
-        }
-
-        public async Task<int> CreateAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken)
-        {
-            var entity = mapper.Map<AdminMenuCreateCommand, AdminMenuEntity>(request);
-
-            var res = await db.AddAsync(entity, cancellationToken: cancellationToken);
-
-            if (res > 0)
-            {
-                return res;
-            }
-            else
-                return res;
-        }
-
-        public async Task<int> UpdateAsync(AdminMenuUpdateCommand request, CancellationToken cancellationToken)
-        {
-            var entity = await db.Context.AdminAuthMenus.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
-
-            if (entity == null)
-                return 0;
-
-            entity = mapper.Map(request, entity);
-
-            var res = db.Update(entity);
-
-            if (res > 0)
-            {
-                return res;
-            }
-            return res;
         }
 
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
@@ -75,47 +37,25 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
             }
         }
 
-        public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
-        {
-            switch (status)
-            {
-                case Status.Show:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
-                case Status.SoldOut:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
-                case Status.Trash:
-                    return await db.UpdateAsync<AdminMenuEntity>(c => ids.Contains(c.Id), c => new AdminMenuEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
-                default:
-                    return 0;
-            }
-        }
-
-        public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
+        public override async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
             var res = await db.DeleteAsync<AdminMenuEntity>(c => ids.Contains(c.Id), cancellationToken);
 
             if (res > 0)
             {
                 await db.DeleteAsync<AdminRoleMenuEntity>(c => ids.Contains(c.MenuId), cancellationToken);
+
+                DeletedAction?.Invoke(ids);
             }
 
             return res;
         }
 
-        public async Task<AdminMenuDto> GetByIdAsync(long id, CancellationToken cancellationToken)
+        public override async Task<IList<AdminMenuDto>> GetListAsync(AdminMenuQueryCommand request, CancellationToken cancellationToken)
         {
             var res = await db.Context.AdminAuthMenus
-                .Where(c => c.Id == id)
-                .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            return res;
-        }
-
-        public async Task<IList<AdminMenuDto>> GetListByWeightAsync(bool isMenu, CancellationToken cancellationToken)
-        {
-            var res = await db.Context.AdminAuthMenus
-                .Where(c => c.IsMenu == isMenu)
+                .Where(c => c.IsMenu == request.IsMenu)
+                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
                 .OrderByDescending(c => c.Weight)
                 .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);

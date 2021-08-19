@@ -2,6 +2,7 @@
 using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.Persistence.Entities.Sys.Admin;
@@ -12,7 +13,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 用户信息修改命令
     /// </summary>
-    public class AdminUserUpdateInfoCommand : CommandId<bool, long>, IMapFrom<AdminUserEntity>
+    public class AdminUserUpdateInfoCommand : UpdateCommand<long>, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 名字
@@ -34,6 +35,13 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
         /// </summary>
         [Required]
         public string Company { get; set; }
+
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminUserUpdateInfoCommand, AdminUserEntity>()

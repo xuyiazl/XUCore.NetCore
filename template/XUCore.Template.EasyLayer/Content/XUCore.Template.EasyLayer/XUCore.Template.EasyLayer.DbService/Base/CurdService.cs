@@ -26,7 +26,7 @@ namespace XUCore.Template.EasyLayer.DbService
     /// <typeparam name="TListCommand">查询列表命令</typeparam>
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-        : ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+        : ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>, IDbService
             where TEntity : BaseEntity<TKey>, new()
             where TCreateCommand : CreateCommand
             where TUpdateCommand : UpdateCommand<TKey>
@@ -169,7 +169,7 @@ namespace XUCore.Template.EasyLayer.DbService
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedModel<TDto>> GetPageListAsync(TPageCommand request, CancellationToken cancellationToken)
+        public virtual async Task<PagedModel<TDto>> GetPagedListAsync(TPageCommand request, CancellationToken cancellationToken)
         {
             var res = await db.Context.Set<TEntity>()
                 .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())

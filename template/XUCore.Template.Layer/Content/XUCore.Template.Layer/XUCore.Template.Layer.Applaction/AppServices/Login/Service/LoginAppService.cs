@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
-using XUCore.Paging;
 using XUCore.Serializer;
 using XUCore.Template.Layer.Applaction.Authorization;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.Layer.DbService.Sys.Admin.LoginRecord;
 using XUCore.Template.Layer.DbService.Sys.Admin.Permission;
 
 namespace XUCore.Template.Layer.Applaction.Login
@@ -20,13 +18,11 @@ namespace XUCore.Template.Layer.Applaction.Login
     public class LoginAppService : AppService, ILoginAppService
     {
         private readonly IPermissionService permissionService;
-        private readonly ILoginRecordService loginRecordService;
         private readonly IAuthService authService;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
-            this.loginRecordService = serviceProvider.GetService<ILoginRecordService>();
             this.authService = serviceProvider.GetService<IAuthService>();
         }
 
@@ -108,36 +104,6 @@ namespace XUCore.Template.Layer.Applaction.Login
         public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync(long adminId, CancellationToken cancellationToken = default)
         {
             var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
-
-            return RestFull.Success(data: res);
-        }
-
-        #endregion
-
-        #region [ 登录记录 ]
-
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="adminId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync(int limit, long adminId, CancellationToken cancellationToken = default)
-        {
-            var res = await loginRecordService.GetListByAdminIdAsync(limit, adminId, cancellationToken);
-
-            return RestFull.Success(data: res);
-        }
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync(LoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default)
-        {
-            var res = await loginRecordService.GetPageListAsync(command, cancellationToken);
 
             return RestFull.Success(data: res);
         }

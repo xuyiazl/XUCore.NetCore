@@ -60,8 +60,9 @@ namespace XUCore.Template.EasyLayer.Persistence
 
             var dbContext = scope.ServiceProvider.GetService<DefaultDbContext>();
 
+#if !DEBUG
             dbContext.Database.Migrate();
-
+#endif
             return app;
         }
     }

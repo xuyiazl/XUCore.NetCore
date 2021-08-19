@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 
 namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
@@ -8,7 +9,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 登录命令
     /// </summary>
-    public class AdminUserLoginCommand : Command<bool>
+    public class AdminUserLoginCommand : CreateCommand
     {
         /// <summary>
         /// 登录账号
@@ -20,6 +21,13 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
         /// </summary>
         [Required]
         public string Password { get; set; }
+
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
 
         public class Validator : CommandValidator<AdminUserLoginCommand>
         {

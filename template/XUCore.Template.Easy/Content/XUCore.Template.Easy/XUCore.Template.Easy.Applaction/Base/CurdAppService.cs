@@ -197,7 +197,7 @@ namespace XUCore.Template.Easy.Applaction
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<Result<PagedModel<TDto>>> GetPageListAsync([Required][FromQuery] TPageCommand request, CancellationToken cancellationToken)
+        public virtual async Task<Result<PagedModel<TDto>>> GetPagedListAsync([Required][FromQuery] TPageCommand request, CancellationToken cancellationToken)
         {
             var res = await db.Context.Set<TEntity>()
                 .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())

@@ -71,7 +71,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Field")]
-        public async Task<Result<int>> UpdateUserAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateUserAsync(id, field, value, cancellationToken);
         }
@@ -83,7 +83,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Status")]
-        public async Task<Result<int>> UpdateUserAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateUserAsync(ids, status, cancellationToken);
         }
@@ -94,7 +94,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteUserAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteUserAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             return await adminAppService.DeleteUserAsync(ids, cancellationToken);
         }
@@ -167,10 +167,37 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="adminId">管理员id</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("RelevanceRoleIds")]
+        [HttpGet("RelevanceRole")]
         public async Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             return await adminAppService.GetUserRelevanceRoleIdsAsync(adminId, cancellationToken);
+        }
+
+        #endregion
+
+        #region [ 登录记录 ]
+
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("Record/List")]
+        public async Task<Result<IList<AdminUserLoginRecordDto>>> GetRecordListAsync([Required][FromQuery] AdminUserLoginRecordQueryCommand command, CancellationToken cancellationToken = default)
+        {
+            return await adminAppService.GetRecordListAsync(command, cancellationToken);
+        }
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("Record/Page")]
+        public async Task<Result<PagedModel<AdminUserLoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] AdminUserLoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default)
+        {
+            return await adminAppService.GetRecordPageAsync(command, cancellationToken);
         }
 
         #endregion
@@ -208,7 +235,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Role/Field")]
-        public async Task<Result<int>> UpdateRoleAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateRoleAsync(id, field, value, cancellationToken);
         }
@@ -220,7 +247,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Role/Status")]
-        public async Task<Result<int>> UpdateRoleAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateRoleAsync(ids, status, cancellationToken);
         }
@@ -231,7 +258,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete("Role")]
-        public async Task<Result<int>> DeleteRoleAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteRoleAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             return await adminAppService.DeleteRoleAsync(ids, cancellationToken);
         }
@@ -249,12 +276,13 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <summary>
         /// 获取所有角色
         /// </summary>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("Role")]
-        public async Task<Result<IList<AdminRoleDto>>> GetRoleAllAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminRoleDto>>> GetRoleListAsync([Required][FromQuery] AdminRoleQueryCommand command, CancellationToken cancellationToken = default)
         {
-            return await adminAppService.GetRoleAllAsync(cancellationToken);
+            return await adminAppService.GetRoleListAsync(command, cancellationToken);
         }
         /// <summary>
         /// 获取角色分页
@@ -273,10 +301,10 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="roleId">角色id</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("Role/RelevanceMenuIds")]
-        public async Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync([Required] int roleId, CancellationToken cancellationToken = default)
+        [HttpGet("Role/RelevanceMenu")]
+        public async Task<Result<IList<long>>> GetRoleRelevanceMenuAsync([Required] int roleId, CancellationToken cancellationToken = default)
         {
-            return await adminAppService.GetRoleRelevanceMenuIdsAsync(roleId, cancellationToken);
+            return await adminAppService.GetRoleRelevanceMenuAsync(roleId, cancellationToken);
         }
 
         #endregion
@@ -314,7 +342,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Menu/Field")]
-        public async Task<Result<int>> UpdateMenuAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateMenuAsync(id, field, value, cancellationToken);
         }
@@ -326,7 +354,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("Menu/Status")]
-        public async Task<Result<int>> UpdateMenuAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             return await adminAppService.UpdateMenuAsync(ids, status, cancellationToken);
         }
@@ -337,7 +365,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete("Menu")]
-        public async Task<Result<int>> DeleteMenuAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteMenuAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             return await adminAppService.DeleteMenuAsync(ids, cancellationToken);
         }
@@ -365,13 +393,13 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <summary>
         /// 获取导航列表
         /// </summary>
-        /// <param name="isMenu">是否是导航</param>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("Menu/List")]
-        public async Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync([Required] bool isMenu = true, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminMenuDto>>> GetMenuListAsync([Required][FromQuery] AdminMenuQueryCommand command, CancellationToken cancellationToken = default)
         {
-            return await adminAppService.GetMenuByWeightAsync(isMenu, cancellationToken);
+            return await adminAppService.GetMenuListAsync(command, cancellationToken);
         }
 
         #endregion

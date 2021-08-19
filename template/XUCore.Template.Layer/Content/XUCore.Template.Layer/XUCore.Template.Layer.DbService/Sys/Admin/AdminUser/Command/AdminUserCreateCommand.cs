@@ -14,7 +14,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 创建管理员命令
     /// </summary>
-    public class AdminUserCreateCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserCreateCommand : CreateCommand, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 账号
@@ -55,7 +55,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
 
         public override bool IsVaild()
         {
-            ValidationResult = new Validator(Web.GetService<IAdminUserService>()).Validate(this);
+            ValidationResult = new Validator().Validate(this);
 
             return ValidationResult.ThrowValidation();
         }
@@ -72,12 +72,12 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
 
         public class Validator : CommandValidator<AdminUserCreateCommand>
         {
-            public Validator(IAdminUserService adminUserService)
+            public Validator()
             {
                 RuleFor(x => x.UserName).NotEmpty().MaximumLength(20).WithName("账号")
                     .MustAsync(async (account, cancel) =>
                     {
-                        var res = await adminUserService.AnyByAccountAsync(AccountMode.UserName, account, 0, cancel);
+                        var res = await Web.GetService<IAdminUserService>().AnyByAccountAsync(AccountMode.UserName, account, 0, cancel);
 
                         return !res;
                     })

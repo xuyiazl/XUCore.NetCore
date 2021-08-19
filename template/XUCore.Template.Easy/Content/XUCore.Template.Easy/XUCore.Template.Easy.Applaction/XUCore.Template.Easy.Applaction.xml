@@ -434,7 +434,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminRoleAppService.GetPageListAsync(XUCore.Template.Easy.Applaction.Admin.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminRoleAppService.GetPagedListAsync(XUCore.Template.Easy.Applaction.Admin.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取角色分页
             </summary>
@@ -831,7 +831,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.GetPageListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.GetPagedListAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取账号分页
             </summary>
@@ -927,66 +927,6 @@
         <member name="P:XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand.Password">
             <summary>
             密码
-            </summary>
-        </member>
-        <member name="T:XUCore.Template.Easy.Applaction.Login.LoginRecordQueryPagedCommand">
-            <summary>
-            查询命令
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordQueryPagedCommand.Keyword">
-            <summary>
-            搜索关键字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordQueryPagedCommand.OrderBy">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
-            </summary>
-        </member>
-        <member name="T:XUCore.Template.Easy.Applaction.Login.LoginRecordDto">
-            <summary>
-            登录记录
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.AdminId">
-            <summary>
-            管理员id
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.LoginWay">
-            <summary>
-            登录方式
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.LoginTime">
-            <summary>
-            登录时间
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.LoginIp">
-            <summary>
-            登录ip
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.Name">
-            <summary>
-            管理员名字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.Mobile">
-            <summary>
-            管理员手机
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.UserName">
-            <summary>
-            管理员账号
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Login.LoginRecordDto.Picture">
-            <summary>
-            管理员头像
             </summary>
         </member>
         <member name="T:XUCore.Template.Easy.Applaction.Login.ILoginAppService">
@@ -1103,13 +1043,6 @@
             </summary>
             <param name="adminId"></param>
             <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Login.View.Create(XUCore.Template.Easy.Persistence.DefaultDbContext)">
-            <summary>
-            linq 关联查询，关联账号信息
-            </summary>
-            <param name="db"></param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Template.Easy.Applaction.Permission.PermissionMenuDto">
@@ -1279,7 +1212,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.CurdAppService`7.GetPageListAsync(`6,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Easy.Applaction.CurdAppService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
             <summary>
             获取分页
             </summary>
@@ -1347,7 +1280,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.ICurdAppService`7.GetPageListAsync(`6,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Easy.Applaction.ICurdAppService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
             <summary>
             获取分页
             </summary>

@@ -116,6 +116,25 @@ namespace XUCore.Template.Layer.Applaction.Admin
 
         #endregion
 
+        #region [ 登录记录 ]
+
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<Result<IList<AdminUserLoginRecordDto>>> GetRecordListAsync(AdminUserLoginRecordQueryCommand command, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<Result<PagedModel<AdminUserLoginRecordDto>>> GetRecordPageAsync(AdminUserLoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default);
+
+        #endregion
+
         #region [ 角色管理 ]
 
         /// <summary>
@@ -166,9 +185,10 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <summary>
         /// 获取所有角色
         /// </summary>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<AdminRoleDto>>> GetRoleAllAsync(CancellationToken cancellationToken = default);
+        Task<Result<IList<AdminRoleDto>>> GetRoleListAsync(AdminRoleQueryCommand command,CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取角色分页
         /// </summary>
@@ -182,7 +202,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <param name="roleId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync(int roleId, CancellationToken cancellationToken = default);
+        Task<Result<IList<long>>> GetRoleRelevanceMenuAsync(int roleId, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -242,10 +262,10 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <summary>
         /// 获取导航列表
         /// </summary>
-        /// <param name="isMenu"></param>
+        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync(bool isMenu = true, CancellationToken cancellationToken = default);
+        Task<Result<IList<AdminMenuDto>>> GetMenuListAsync(AdminMenuQueryCommand command, CancellationToken cancellationToken = default);
 
         #endregion
     }

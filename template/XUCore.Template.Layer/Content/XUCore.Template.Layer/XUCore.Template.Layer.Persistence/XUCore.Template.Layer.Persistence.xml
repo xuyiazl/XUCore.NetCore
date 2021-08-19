@@ -189,6 +189,36 @@
             对应登录记录关联
             </summary>
         </member>
+        <member name="T:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity">
+            <summary>
+            登录记录表
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginWay">
+            <summary>
+            登录方式
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginIp">
+            <summary>
+            登录ip
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminUser">
+            <summary>
+            对应管理员
+            </summary>
+        </member>
         <member name="T:XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserRoleEntity">
             <summary>
             管理员角色关联表
