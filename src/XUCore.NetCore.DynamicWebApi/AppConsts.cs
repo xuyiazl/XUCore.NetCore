@@ -32,6 +32,7 @@ namespace XUCore.NetCore.DynamicWebApi
         public static string SplitActionCamelCaseSeparator { get; set; }
 
         public static string VersionSeparator { get; set; }
+        public static bool IsAutoSortAction { get; set; }
 
         public static Dictionary<Assembly, AssemblyDynamicWebApiOptions> AssemblyDynamicWebApiOptions { get; set; }
 
@@ -42,6 +43,8 @@ namespace XUCore.NetCore.DynamicWebApi
                 ["add"] = "POST",
                 ["create"] = "POST",
                 ["post"] = "POST",
+                ["insert"] = "POST",
+                ["submit"] = "POST",
 
                 ["get"] = "GET",
                 ["find"] = "GET",
@@ -53,6 +56,7 @@ namespace XUCore.NetCore.DynamicWebApi
 
                 ["delete"] = "DELETE",
                 ["remove"] = "DELETE",
+                ["clear"] = "DELETE",
             };
         }
     }

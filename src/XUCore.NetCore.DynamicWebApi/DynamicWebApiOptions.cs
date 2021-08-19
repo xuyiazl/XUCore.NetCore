@@ -22,6 +22,7 @@ namespace XUCore.NetCore.DynamicWebApi
             SplitControllerCamelCaseSeparator = "-";
             VersionSeparator = "@";
             IsRemoveVerbs = true;
+            IsAutoSortAction = true;
         }
 
         public bool IsRemoveVerbs { get; set; }
@@ -90,6 +91,10 @@ namespace XUCore.NetCore.DynamicWebApi
         /// Specifies the dynamic webapi options for the assembly.
         /// </summary>
         public Dictionary<Assembly, AssemblyDynamicWebApiOptions> AssemblyDynamicWebApiOptions { get; }
+        /// <summary>
+        /// 是否自动排序接口方法
+        /// </summary>
+        public bool IsAutoSortAction { get; set; }
 
         /// <summary>
         /// Verify that all configurations are valid

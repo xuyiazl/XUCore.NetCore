@@ -127,6 +127,11 @@
             Specifies the dynamic webapi options for the assembly.
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.IsAutoSortAction">
+            <summary>
+            是否自动排序接口方法
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.DynamicWebApi.DynamicWebApiOptions.Valid">
             <summary>
             Verify that all configurations are valid

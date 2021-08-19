@@ -42,6 +42,7 @@ namespace XUCore.NetCore.DynamicWebApi
             AppConsts.SplitControllerCamelCase = options.SplitControllerCamelCase;
             AppConsts.SplitControllerCamelCaseSeparator = options.SplitControllerCamelCaseSeparator;
             AppConsts.VersionSeparator = options.VersionSeparator;
+            AppConsts.IsAutoSortAction = options.IsAutoSortAction;
 
             var partManager = services.GetSingletonInstanceOrNull<ApplicationPartManager>();
 
