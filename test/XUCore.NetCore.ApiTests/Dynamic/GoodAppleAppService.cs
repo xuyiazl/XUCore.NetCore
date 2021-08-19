@@ -10,7 +10,7 @@ using XUCore.NetCore.Swagger;
 
 namespace XUCore.NetCore.ApiTests.Dynamic
 {
-    [DynamicWebApi(Name = "Apple", Version = "1.0")]
+    [DynamicWebApi]
     [ApiExplorerSettings(GroupName = "test")]
     public class GoodAppleAppService : IDynamicWebApi
     {
@@ -19,6 +19,28 @@ namespace XUCore.NetCore.ApiTests.Dynamic
             [1] = "Big Apple",
             [2] = "Small Apple"
         };
+        public async Task CreateCAppleAsync(UpdateAppleDto dto)
+        {
+            await Task.Run(() =>
+            {
+                if (Apples.ContainsKey(dto.Id))
+                {
+                    Apples[dto.Id] = dto.Name;
+                }
+            });
+
+        }
+        public async Task UpdateBAppleAsync(UpdateAppleDto dto)
+        {
+            await Task.Run(() =>
+            {
+                if (Apples.ContainsKey(dto.Id))
+                {
+                    Apples[dto.Id] = dto.Name;
+                }
+            });
+
+        }
         public async Task UpdateAppleAsync(UpdateAppleDto dto)
         {
             await Task.Run(() =>
@@ -50,7 +72,7 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        [HiddenApi]
+        //[HiddenApi]
         public string Get(int id)
         {
             if (Apples.ContainsKey(id))
@@ -93,6 +115,14 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         {
             return Apples.Values;
         }
+        /// <summary>
+        /// Get All Apple.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> Create()
+        {
+            return Apples.Values;
+        }
 
         /// <summary>
         /// Get All Apple.
@@ -119,7 +149,6 @@ namespace XUCore.NetCore.ApiTests.Dynamic
         /// Delete Apple
         /// </summary>
         /// <param name="id">Apple Id</param>
-        [HttpDelete("{id:int}")]
         public void Delete(int id)
         {
             if (Apples.ContainsKey(id))

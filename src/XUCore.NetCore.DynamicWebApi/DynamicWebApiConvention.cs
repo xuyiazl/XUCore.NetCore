@@ -190,23 +190,37 @@ namespace XUCore.NetCore.DynamicWebApi
         }
         private void ConfigureSelector(ControllerModel controller, DynamicWebApiAttribute controllerAttr)
         {
-
             if (controller.Selectors.Any(selector => selector.AttributeRouteModel != null))
-            {
                 return;
-            }
 
             var areaName = string.Empty;
 
             if (controllerAttr != null)
-            {
                 areaName = controllerAttr.Module;
-            }
+
+            var dict = new Dictionary<string, List<ActionModel>>();
+            dict["POST"] = new List<ActionModel>();
+            dict["PUT"] = new List<ActionModel>();
+            dict["DELETE"] = new List<ActionModel>();
+            dict["GET"] = new List<ActionModel>();
 
             foreach (var action in controller.Actions)
             {
+                var verb = GetHttpVerb(action).ToUpper();
+
                 if (!CheckNoMapMethod(action))
                     ConfigureSelector(areaName, controller.ControllerName, action);
+
+                if (dict.ContainsKey(verb))
+                    dict[verb].Add(action);
+            }
+            
+            controller.Actions.Clear();
+
+            foreach (var item in dict)
+            {
+                foreach (var action in item.Value.OrderBy(c => c.ActionName))
+                    controller.Actions.Add(action);
             }
         }
 

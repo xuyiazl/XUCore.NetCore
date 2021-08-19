@@ -141,9 +141,9 @@ namespace XUCore.ApiTests
 
             services.AddDynamicWebApi(opt =>
             {
-                opt.IsRemoveVerbs = false;
-                opt.SplitActionCamelCase = true;
-                opt.SplitActionCamelCaseSeparator = "-";
+                //opt.IsRemoveVerbs = false;
+                //opt.SplitActionCamelCase = true;
+                //opt.SplitActionCamelCaseSeparator = "-";
             });
 
             // ◊‘∂®“Â≈‰÷√

@@ -81,6 +81,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.Create">
+            <summary>
+            Get All Apple.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.ApiTests.Dynamic.GoodAppleAppService.GetBigApple">
             <summary>
             Get All Apple.
