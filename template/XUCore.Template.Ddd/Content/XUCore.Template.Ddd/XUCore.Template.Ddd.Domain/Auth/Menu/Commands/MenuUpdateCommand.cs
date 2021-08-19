@@ -65,8 +65,6 @@ namespace XUCore.Template.Ddd.Domain.Auth.Menu
         public void Mapping(Profile profile) =>
             profile.CreateMap<MenuUpdateCommand, MenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.UpdatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : CommandIdValidator<MenuUpdateCommand, int, string>

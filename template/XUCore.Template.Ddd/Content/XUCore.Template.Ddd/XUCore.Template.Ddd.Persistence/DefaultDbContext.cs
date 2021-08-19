@@ -1,10 +1,13 @@
-﻿using XUCore.Template.Ddd.Domain.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Reflection;
+using XUCore.NetCore.Data;
+using XUCore.Template.Ddd.Domain.Core;
+using XUCore.Template.Ddd.Domain.Core.Entities;
 using XUCore.Template.Ddd.Domain.Core.Entities.Auth;
 using XUCore.Template.Ddd.Domain.Core.Entities.User;
 using XUCore.Template.Ddd.Domain.Core.Events;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using XUCore.NetCore.Data;
 
 namespace XUCore.Template.Ddd.Persistence
 {
@@ -12,7 +15,45 @@ namespace XUCore.Template.Ddd.Persistence
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
         {
+            SavingChanges += DefaultDbContext_SavingChanges;
+        }
 
+        private void DefaultDbContext_SavingChanges(object sender, SavingChangesEventArgs e)
+        {
+            ChangeTracker.Entries().Where(e => e.Entity is BaseEntity).ToList().ForEach(e =>
+            {
+                //添加操作
+                if (e.State == EntityState.Added)
+                {
+                    if (e.Entity is BaseEntity)
+                    {
+                        var entity = e.Entity as BaseEntity;
+                        entity.CreatedAt = DateTime.Now;
+                        entity.CreatedAtUserId = LoginInfo.UserId;
+                    }
+                }
+                //修改操作
+                if (e.State == EntityState.Modified)
+                {
+                    if (e.Entity is BaseEntity)
+                    {
+                        var entity = e.Entity as BaseEntity;
+                        switch (entity.Status)
+                        {
+                            case Status.Default:
+                            case Status.Show:
+                            case Status.SoldOut:
+                                entity.UpdatedAt = DateTime.Now;
+                                entity.UpdatedAtUserId = LoginInfo.UserId;
+                                break;
+                            case Status.Trash:
+                                entity.DeletedAt = DateTime.Now;
+                                entity.DeletedAtUserId = LoginInfo.UserId;
+                                break;
+                        }
+                    }
+                }
+            });
         }
 
         public override Assembly[] Assemblies => new Assembly[] { Assembly.GetExecutingAssembly() };

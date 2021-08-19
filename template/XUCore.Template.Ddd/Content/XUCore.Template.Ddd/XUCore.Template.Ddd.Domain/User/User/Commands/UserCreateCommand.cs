@@ -65,8 +65,6 @@ namespace XUCore.Template.Ddd.Domain.User.User
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.CreatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : AbstractValidator<UserCreateCommand>

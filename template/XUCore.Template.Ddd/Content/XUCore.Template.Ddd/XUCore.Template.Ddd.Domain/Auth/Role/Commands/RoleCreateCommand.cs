@@ -36,8 +36,6 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<RoleCreateCommand, RoleEntity>()
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.CreatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : CommandValidator<RoleCreateCommand>
