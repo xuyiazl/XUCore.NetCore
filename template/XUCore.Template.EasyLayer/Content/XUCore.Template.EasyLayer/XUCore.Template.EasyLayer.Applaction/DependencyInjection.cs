@@ -99,7 +99,10 @@ namespace XUCore.Template.EasyLayer.Applaction
                 });
 
             // 注入动态API
-            services.AddDynamicWebApi();
+            services.AddDynamicWebApi(opt =>
+            {
+                opt.IsAutoSortAction = false;
+            });
 
             // 注册上传服务
             services.AddUploadService();

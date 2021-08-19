@@ -80,10 +80,9 @@ namespace XUCore.Template.Ddd.Infrastructure
             {
                 mvcBuilder = services.AddControllers();
 
-                services.AddDynamicWebApi(options =>
+                services.AddDynamicWebApi(opt =>
                 {
-                    // 指定全局默认的 api 前缀
-                    options.DefaultApiPrefix = "api";
+                    opt.IsAutoSortAction = false;
                 });
 
                 //添加跨域配置，加载进来，启用的话需要使用Configure
