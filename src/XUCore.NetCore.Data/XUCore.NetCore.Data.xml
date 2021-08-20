@@ -279,6 +279,13 @@
             </summary>
             <param name="context"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.#ctor(`0,AutoMapper.IMapper)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
         <member name="P:XUCore.NetCore.Data.DbContextRepository`1.Context">
             <summary>
             当前上下文
@@ -302,7 +309,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(System.Collections.Generic.IList{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -318,7 +325,15 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XUCore.NetCore.Data.DbContextRepository`1.Update``1(System.Collections.Generic.IList{``0},System.Boolean)" -->
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(``0,System.Boolean)">
             <summary>
             删除一条数据
@@ -327,7 +342,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(System.Collections.Generic.IList{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -344,9 +359,46 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.AddAsync``1(System.Collections.Generic.IList{``0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.UpdateAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.UpdateAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.DeleteAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.DeleteAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
             </summary>
             <param name="entities"></param>
             <param name="commit">马上提交</param>
@@ -379,6 +431,41 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetById``2(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetFirst``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetList``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetPagedList``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
             获取分页数据
             </summary>
@@ -431,6 +518,47 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetByIdAsync``2(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetFirstAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetListAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.GetPagedListAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             获取分页数据
             </summary>
@@ -520,6 +648,13 @@
             </summary>
             <param name="context"></param>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.#ctor(XUCore.NetCore.Data.IDbContext,AutoMapper.IMapper)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="context"></param>
+            <param name="mapper"></param>
+        </member>
         <member name="P:XUCore.NetCore.Data.DbRepository`1.Context">
             <summary>
             当前上下文
@@ -552,13 +687,15 @@
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.Update(`0,System.Boolean)">
@@ -566,13 +703,15 @@
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.Delete(`0,System.Boolean)">
@@ -580,13 +719,15 @@
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
@@ -594,14 +735,52 @@
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbRepository`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.UpdateAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.DeleteAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -631,6 +810,41 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
             获取分页数据
             </summary>
@@ -683,6 +897,46 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             获取分页数据
             </summary>
@@ -788,7 +1042,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(System.Collections.Generic.IList{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
@@ -804,7 +1058,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Update``1(System.Collections.Generic.IList{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Update``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
@@ -820,7 +1074,7 @@
             <param name="commit">马上提交</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Delete``1(System.Collections.Generic.IList{``0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Delete``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
@@ -837,9 +1091,45 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.AddAsync``1(System.Collections.Generic.IList{``0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.AddAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.UpdateAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.UpdateAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.DeleteAsync``1(``0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit">马上提交</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.DeleteAsync``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
             </summary>
             <param name="entities"></param>
             <param name="commit">马上提交</param>
@@ -872,6 +1162,41 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetById``2(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetFirst``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetList``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetPagedList``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
             获取分页数据
             </summary>
@@ -927,6 +1252,53 @@
             <summary>
             获取分页数据
             </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetByIdAsync``2(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetFirstAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetListAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.GetPagedListAsync``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
             <param name="currentPage">页码（最小为1）</param>
@@ -1039,13 +1411,15 @@
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.Update(`0,System.Boolean)">
@@ -1053,13 +1427,15 @@
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.Delete(`0,System.Boolean)">
@@ -1067,13 +1443,15 @@
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
@@ -1081,14 +1459,52 @@
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbRepository`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.UpdateAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.DeleteAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1118,6 +1534,41 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
             <summary>
             获取分页数据
             </summary>
@@ -1170,6 +1621,46 @@
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
             获取分页数据
             </summary>
@@ -1278,13 +1769,15 @@
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Update(`0,System.Boolean)">
@@ -1292,13 +1785,15 @@
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Delete(`0,System.Boolean)">
@@ -1306,13 +1801,15 @@
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
@@ -1320,14 +1817,52 @@
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.UpdateAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.DeleteAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1363,6 +1898,41 @@
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
             <param name="pageNumber">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <returns></returns>
         </member>
@@ -1414,7 +1984,47 @@
             </summary>
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
-            <param name="pageNumber">页码（最小为1）</param>
+            <param name="currentPage">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.DbServiceProvider`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -1517,13 +2127,15 @@
             插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Add(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Add(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量插入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Update(`0,System.Boolean)">
@@ -1531,13 +2143,15 @@
             更新一条数据（全量更新）
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Update(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Update(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量更新数据（全量更新）
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Delete(`0,System.Boolean)">
@@ -1545,13 +2159,15 @@
             删除一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Delete(System.Collections.Generic.IList{`0},System.Boolean)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.Delete(System.Collections.Generic.IEnumerable{`0},System.Boolean)">
             <summary>
             批量删除数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.AddAsync(`0,System.Boolean,System.Threading.CancellationToken)">
@@ -1559,14 +2175,52 @@
             异步插入一条数据
             </summary>
             <param name="entity"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.AddAsync(System.Collections.Generic.IList{`0},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.AddAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             批量写入数据
             </summary>
             <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.UpdateAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            更新一条数据（全量更新）
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.UpdateAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量更新数据（全量更新）
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.DeleteAsync(`0,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            删除一条数据
+            </summary>
+            <param name="entity"></param>
+            <param name="commit"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            批量删除数据
+            </summary>
+            <param name="entities"></param>
+            <param name="commit"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -1602,6 +2256,41 @@
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
             <param name="pageNumber">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetById``1(System.Object)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetFirst``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <returns></returns>
         </member>
@@ -1654,6 +2343,46 @@
             <param name="selector"></param>
             <param name="orderby">exp:“Id desc,CreateTime desc”</param>
             <param name="pageNumber">页码（最小为1）</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetByIdAsync``1(System.Object,System.Threading.CancellationToken)">
+            <summary>
+            根据主键获取一条数据
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetFirstAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Threading.CancellationToken)">
+            <summary>
+            根据条件获取一条数据
+            </summary>
+            <typeparam name="TDto"></typeparam>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+            <param name="limit">记录数（默认为0，不设置）</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbServiceProvider`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="selector"></param>
+            <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+            <param name="currentPage">页码（最小为1）</param>
             <param name="pageSize">分页大小</param>
             <param name="cancellationToken"></param>
             <returns></returns>

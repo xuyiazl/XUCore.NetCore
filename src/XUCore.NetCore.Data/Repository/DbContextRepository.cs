@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -26,6 +28,7 @@ namespace XUCore.NetCore.Data
         protected string _connectionString { get; set; } = "";
         protected readonly TDbContext _context;
         protected readonly IUnitOfWork unitOfWork;
+        protected readonly IMapper _mapper;
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -34,6 +37,18 @@ namespace XUCore.NetCore.Data
         {
             _connectionString = context.ConnectionStrings;
             _context = context;
+            unitOfWork = new UnitOfWorkService(context);
+        }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="mapper"></param>
+        public DbContextRepository(TDbContext context, IMapper mapper) : base(context)
+        {
+            _connectionString = context.ConnectionStrings;
+            _context = context;
+            _mapper = mapper;
             unitOfWork = new UnitOfWorkService(context);
         }
         /// <summary>
@@ -58,7 +73,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entity"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Add<TEntity>(TEntity entity, bool commit = true) where TEntity : class
+        public virtual int Add<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new()
         {
             if (entity == null)
             {
@@ -77,7 +92,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Add<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
+        public virtual int Add<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new()
         {
             if (entities == null)
             {
@@ -96,7 +111,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entity"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Update<TEntity>(TEntity entity, bool commit = true) where TEntity : class
+        public virtual int Update<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new()
         {
             if (entity == null)
             {
@@ -111,7 +126,12 @@ namespace XUCore.NetCore.Data
         }
         /// <summary>
         /// 批量更新数据（全量更新）
-        public virtual int Update<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entities"></param>
+        /// <param name="commit"></param>
+        /// <returns></returns>
+        public virtual int Update<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new()
         {
             if (entities == null)
             {
@@ -130,7 +150,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entity"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Delete<TEntity>(TEntity entity, bool commit = true) where TEntity : class
+        public virtual int Delete<TEntity>(TEntity entity, bool commit = true) where TEntity : class, new()
         {
             if (entity == null)
             {
@@ -149,7 +169,7 @@ namespace XUCore.NetCore.Data
         /// <param name="entities"></param>
         /// <param name="commit">马上提交</param>
         /// <returns></returns>
-        public virtual int Delete<TEntity>(IList<TEntity> entities, bool commit = true) where TEntity : class
+        public virtual int Delete<TEntity>(IEnumerable<TEntity> entities, bool commit = true) where TEntity : class, new()
         {
             if (entities == null)
             {
@@ -172,7 +192,7 @@ namespace XUCore.NetCore.Data
         /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync<TEntity>(TEntity entity, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<int> AddAsync<TEntity>(TEntity entity, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             if (entity == null)
             {
@@ -192,7 +212,7 @@ namespace XUCore.NetCore.Data
         /// <param name="commit">马上提交</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> AddAsync<TEntity>(IList<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<int> AddAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             if (entities == null)
             {
@@ -200,6 +220,95 @@ namespace XUCore.NetCore.Data
             }
 
             await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
+
+            if (commit)
+                return unitOfWork.Commit();
+            return 0;
+        }
+        /// <summary>
+        /// 更新一条数据（全量更新）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> UpdateAsync<TEntity>(TEntity entity, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            await Task.CompletedTask;
+
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            _context.Set<TEntity>().Update(entity);
+
+            if (commit)
+                return unitOfWork.Commit();
+            return 0;
+        }
+        /// <summary>
+        /// 批量更新数据（全量更新）
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entities"></param>
+        /// <param name="commit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> UpdateAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            await Task.CompletedTask;
+
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            _context.Set<TEntity>().UpdateRange(entities);
+
+            if (commit)
+                return unitOfWork.Commit();
+            return 0;
+        }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="commit">马上提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> DeleteAsync<TEntity>(TEntity entity, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            await Task.CompletedTask;
+
+            if (entity == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            _context.Set<TEntity>().Remove(entity);
+
+            if (commit)
+                return unitOfWork.Commit();
+            return 0;
+        }
+        /// <summary>
+        /// 批量删除数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="commit">马上提交</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<int> DeleteAsync<TEntity>(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default) where TEntity : class, new()
+        {
+            await Task.CompletedTask;
+
+            if (entities == null)
+            {
+                throw new ArgumentException($"{typeof(TEntity)} is Null");
+            }
+
+            _context.Set<TEntity>().RemoveRange(entities);
 
             if (commit)
                 return unitOfWork.Commit();
@@ -213,7 +322,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual TEntity GetById<TEntity>(object id) where TEntity : class
+        public virtual TEntity GetById<TEntity>(object id) where TEntity : class, new()
         {
             return this._context.Set<TEntity>().Find(id);
         }
@@ -223,9 +332,9 @@ namespace XUCore.NetCore.Data
         /// <param name="selector"></param>
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <returns></returns>
-        public virtual TEntity GetFirst<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class
+        public virtual TEntity GetFirst<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TEntity : class, new()
         {
-            var query = _context.Set<TEntity>().AsQueryable();
+            var query = _context.Set<TEntity>().AsNoTracking();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -233,7 +342,7 @@ namespace XUCore.NetCore.Data
             if (!string.IsNullOrEmpty(orderby))
                 query = query.OrderByBatch(orderby);
 
-            return query.AsNoTracking().FirstOrDefault();
+            return query.FirstOrDefault();
         }
         /// <summary>
         /// 获取数据
@@ -243,9 +352,9 @@ namespace XUCore.NetCore.Data
         /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
         /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <returns></returns>
-        public virtual List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0) where TEntity : class
+        public virtual List<TEntity> GetList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0) where TEntity : class, new()
         {
-            var query = _context.Set<TEntity>().AsQueryable();
+            var query = _context.Set<TEntity>().AsNoTracking();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -259,7 +368,7 @@ namespace XUCore.NetCore.Data
             if (limit > 0)
                 query = query.Take(limit);
 
-            return query.AsNoTracking().ToList();
+            return query.ToList();
         }
         /// <summary>
         /// 获取分页数据
@@ -269,7 +378,7 @@ namespace XUCore.NetCore.Data
         /// <param name="currentPage">页码（最小为1）</param>
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
-        public virtual PagedList<TEntity> GetPagedList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10) where TEntity : class
+        public virtual PagedList<TEntity> GetPagedList<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10) where TEntity : class, new()
         {
             var totalCount = GetCount(selector);
 
@@ -277,12 +386,99 @@ namespace XUCore.NetCore.Data
 
             return new PagedList<TEntity>(list, totalCount, currentPage, pageSize);
         }
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual TDto GetById<TEntity, TDto>(object id) 
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var res = this._context.Set<TEntity>().Find(id);
+
+            return _mapper.Map<TEntity, TDto>(res);
+        }
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <returns></returns>
+        public virtual TDto GetFirst<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "")
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var query = _context.Set<TEntity>().AsNoTracking();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return query.ProjectTo<TDto>(_mapper.ConfigurationProvider).FirstOrDefault();
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
+        /// <returns></returns>
+        public virtual IList<TDto> GetList<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var query = _context.Set<TEntity>().AsNoTracking();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return query.ProjectTo<TDto>(_mapper.ConfigurationProvider).ToList();
+        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <returns></returns>
+        public virtual PagedList<TDto> GetPagedList<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            var totalCount = GetCount(selector);
+
+            var list = GetList<TEntity, TDto>(selector, orderby, (currentPage - 1) * pageSize, pageSize);
+
+            return new PagedList<TDto>(list, totalCount, currentPage, pageSize);
+        }
+
         /// <summary>
         /// Any数据检测
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual bool Any<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class
+        public virtual bool Any<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new()
         {
             if (selector == null)
                 return _context.Set<TEntity>().AsNoTracking().Any();
@@ -294,7 +490,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual long GetCount<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class
+        public virtual long GetCount<TEntity>(Expression<Func<TEntity, bool>> selector = null) where TEntity : class, new()
         {
             if (selector == null)
                 return _context.Set<TEntity>().AsNoTracking().Count();
@@ -310,7 +506,7 @@ namespace XUCore.NetCore.Data
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<TEntity> GetByIdAsync<TEntity>(object id, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<TEntity> GetByIdAsync<TEntity>(object id, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             return await this._context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken: cancellationToken);
         }
@@ -322,9 +518,9 @@ namespace XUCore.NetCore.Data
         /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<TEntity> GetFirstAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<TEntity> GetFirstAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TEntity : class, new()
         {
-            var query = _context.Set<TEntity>().AsQueryable();
+            var query = _context.Set<TEntity>().AsNoTracking();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -332,7 +528,7 @@ namespace XUCore.NetCore.Data
             if (!string.IsNullOrEmpty(orderby))
                 query = query.OrderByBatch(orderby);
 
-            return await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
+            return await query.FirstOrDefaultAsync(cancellationToken);
         }
         /// <summary>
         /// 获取数据
@@ -343,9 +539,9 @@ namespace XUCore.NetCore.Data
         /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<List<TEntity>> GetListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<List<TEntity>> GetListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
-            var query = _context.Set<TEntity>().AsQueryable();
+            var query = _context.Set<TEntity>().AsNoTracking();
 
             if (selector != null)
                 query = query.Where(selector);
@@ -359,7 +555,7 @@ namespace XUCore.NetCore.Data
             if (limit > 0)
                 query = query.Take(limit);
 
-            return await query.AsNoTracking().ToListAsync(cancellationToken);
+            return await query.ToListAsync(cancellationToken);
         }
         /// <summary>
         /// 获取分页数据
@@ -370,7 +566,7 @@ namespace XUCore.NetCore.Data
         /// <param name="pageSize">分页大小</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<PagedList<TEntity>> GetPagedListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<PagedList<TEntity>> GetPagedListAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             var totalCount = await GetCountAsync(selector, cancellationToken);
 
@@ -378,18 +574,114 @@ namespace XUCore.NetCore.Data
 
             return new PagedList<TEntity>(list, totalCount, currentPage, pageSize);
         }
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<TDto> GetByIdAsync<TEntity, TDto>(object id, CancellationToken cancellationToken = default)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var res = await this._context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken: cancellationToken);
+
+            return _mapper.Map<TEntity, TDto>(res);
+        }
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TDto"></typeparam>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<TDto> GetFirstAsync<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var query = _context.Set<TEntity>().AsNoTracking();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            return await query.ProjectTo<TDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<IList<TDto>> GetListAsync<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var query = _context.Set<TEntity>().AsNoTracking();
+
+            if (selector != null)
+                query = query.Where(selector);
+
+            if (!string.IsNullOrEmpty(orderby))
+                query = query.OrderByBatch(orderby);
+
+            if (skip > -1)
+                query = query.Skip(skip);
+
+            if (limit > 0)
+                query = query.Take(limit);
+
+            return await query.ProjectTo<TDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+        }
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<PagedList<TDto>> GetPagedListAsync<TEntity, TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+            where TEntity : class, new()
+            where TDto : class, new()
+        {
+            _mapper.CheckNull(nameof(IMapper));
+
+            var totalCount = await GetCountAsync(selector, cancellationToken);
+
+            var list = await GetListAsync<TEntity, TDto>(selector, orderby, (currentPage - 1) * pageSize, pageSize, cancellationToken);
+
+            return new PagedList<TDto>(list, totalCount, currentPage, pageSize);
+        }
+
+
         /// <summary>
         /// Any数据检测
         /// </summary>
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             if (selector == null)
                 return await _context.Set<TEntity>().AsNoTracking().AnyAsync(cancellationToken);
 
-            return await _context.Set<TEntity>().AnyAsync(selector, cancellationToken);
+            return await _context.Set<TEntity>().AsNoTracking().AnyAsync(selector, cancellationToken);
         }
         /// <summary>
         /// 获取记录数
@@ -397,7 +689,7 @@ namespace XUCore.NetCore.Data
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<long> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<long> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> selector = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             if (selector == null)
                 return await _context.Set<TEntity>().AsNoTracking().CountAsync(cancellationToken);
@@ -426,7 +718,7 @@ namespace XUCore.NetCore.Data
         /// <param name="selector">查询条件</param>
         /// <param name="Update">更新的新数据数据</param>
         /// <returns></returns>
-        public virtual int Update<TEntity>(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update) where TEntity : class
+        public virtual int Update<TEntity>(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update) where TEntity : class, new()
         {
             return _context.Set<TEntity>().Where(selector).BatchUpdate(Update);
         }
@@ -435,7 +727,7 @@ namespace XUCore.NetCore.Data
         /// </summary>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public virtual int Delete<TEntity>(Expression<Func<TEntity, bool>> selector) where TEntity : class
+        public virtual int Delete<TEntity>(Expression<Func<TEntity, bool>> selector) where TEntity : class, new()
         {
             return _context.Set<TEntity>().Where(selector).BatchDelete();
         }
@@ -461,7 +753,7 @@ namespace XUCore.NetCore.Data
         /// <param name="Update">更新的新数据数据</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> UpdateAsync<TEntity>(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<int> UpdateAsync<TEntity>(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             return await _context.Set<TEntity>().Where(selector).BatchUpdateAsync(Update, cancellationToken);
         }
@@ -471,140 +763,140 @@ namespace XUCore.NetCore.Data
         /// <param name="selector"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> DeleteAsync<TEntity>(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default) where TEntity : class
+        public virtual async Task<int> DeleteAsync<TEntity>(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default) where TEntity : class, new()
         {
             return await _context.Set<TEntity>().Where(selector).BatchDeleteAsync(cancellationToken);
         }
 
 
-        //public virtual void BulkAdd<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAdd<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsert(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkAdd<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAdd<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsert<TEntity>(entities, bulkAction, progress);
         //}
 
-        //public virtual void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAddOrUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsertOrUpdate(entities, bulkAction, progress);
         //}
 
-        //public virtual void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkAddOrUpdateOrDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkInsertOrUpdateOrDelete(entities, bulkAction, progress);
         //}
 
-        //public virtual void BulkUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkUpdate<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkUpdate(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkUpdate<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkUpdate(entities, bulkAction, progress);
         //}
 
-        //public virtual void BulkDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkDelete<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkDelete(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkDelete<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkDelete(entities, bulkAction, progress);
         //}
 
-        //public virtual void BulkRead<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkRead<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkRead(entities, bulkConfig, progress);
         //}
 
-        //public virtual void BulkRead<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class
+        //public virtual void BulkRead<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null) where TEntity : class, new()
         //{
         //    _context.As<DbContext>().BulkRead(entities, bulkAction, progress);
         //}
 
-        //public virtual void Truncate<TEntity>() where TEntity : class
+        //public virtual void Truncate<TEntity>() where TEntity : class, new()
         //{
         //    _context.As<DbContext>().Truncate<TEntity>();
         //}
 
         //// Async methods
 
-        //public virtual Task BulkAddAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkAddAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddOrUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertOrUpdateAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkAddOrUpdateOrDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkInsertOrUpdateOrDeleteAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkUpdateAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkUpdateAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkUpdateAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkDeleteAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkDeleteAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkDeleteAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkReadAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkReadAsync<TEntity>(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkReadAsync(entities, bulkConfig, progress, cancellationToken);
         //}
 
-        //public virtual Task BulkReadAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task BulkReadAsync<TEntity>(IList<TEntity> entities, Action<BulkConfig> bulkAction, Action<decimal> progress = null, CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().BulkReadAsync(entities, bulkAction, progress, cancellationToken);
         //}
 
-        //public virtual Task TruncateAsync<TEntity>(CancellationToken cancellationToken = default) where TEntity : class
+        //public virtual Task TruncateAsync<TEntity>(CancellationToken cancellationToken = default) where TEntity : class, new()
         //{
         //    return _context.As<DbContext>().TruncateAsync<TEntity>(cancellationToken);
         //}

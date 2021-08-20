@@ -53,38 +53,44 @@ namespace XUCore.NetCore.Data
         /// 插入一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
         int Add(TEntity entity, bool commit = true);
         /// <summary>
         /// 批量插入数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
-        int Add(IList<TEntity> entities, bool commit = true);
+        int Add(IEnumerable<TEntity> entities, bool commit = true);
         /// <summary>
         /// 更新一条数据（全量更新）
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
         int Update(TEntity entity, bool commit = true);
         /// <summary>
         /// 批量更新数据（全量更新）
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
-        int Update(IList<TEntity> entities, bool commit = true);
+        int Update(IEnumerable<TEntity> entities, bool commit = true);
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
         int Delete(TEntity entity, bool commit = true);
         /// <summary>
         /// 批量删除数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit"></param>
         /// <returns></returns>
-        int Delete(IList<TEntity> entities, bool commit = true);
+        int Delete(IEnumerable<TEntity> entities, bool commit = true);
 
         //异步操作
 
@@ -92,6 +98,7 @@ namespace XUCore.NetCore.Data
         /// 异步插入一条数据
         /// </summary>
         /// <param name="entity"></param>
+        /// <param name="commit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<int> AddAsync(TEntity entity, bool commit = true, CancellationToken cancellationToken = default);
@@ -99,9 +106,42 @@ namespace XUCore.NetCore.Data
         /// 批量写入数据
         /// </summary>
         /// <param name="entities"></param>
+        /// <param name="commit"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> AddAsync(IList<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default);
+        Task<int> AddAsync(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 更新一条数据（全量更新）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="commit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> UpdateAsync(TEntity entity, bool commit = true, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 批量更新数据（全量更新）
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="commit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> UpdateAsync(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="commit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> DeleteAsync(TEntity entity, bool commit = true, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 批量删除数据
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="commit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> DeleteAsync(IEnumerable<TEntity> entities, bool commit = true, CancellationToken cancellationToken = default);
 
         //同步查询
 
@@ -126,7 +166,7 @@ namespace XUCore.NetCore.Data
         /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
         /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0);
+        IList<TEntity> GetList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0);
         /// <summary>
         /// 获取分页数据
         /// </summary>
@@ -136,6 +176,39 @@ namespace XUCore.NetCore.Data
         /// <param name="pageSize">分页大小</param>
         /// <returns></returns>
         PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10);
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        TDto GetById<TDto>(object id) where TDto : class, new();
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <returns></returns>
+        TDto GetFirst<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "") where TDto : class, new();
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
+        /// <returns></returns>
+        IList<TDto> GetList<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0) where TDto : class, new();
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <returns></returns>
+        PagedList<TDto> GetPagedList<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10) where TDto : class, new();
+
         /// <summary>
         /// Any数据检测
         /// </summary>
@@ -175,7 +248,7 @@ namespace XUCore.NetCore.Data
         /// <param name="limit">记录数（默认为0，不设置）</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default);
+        Task<IList<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取分页数据
         /// </summary>
@@ -186,6 +259,44 @@ namespace XUCore.NetCore.Data
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<PagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 根据主键获取一条数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<TDto> GetByIdAsync<TDto>(object id, CancellationToken cancellationToken = default) where TDto : class, new();
+        /// <summary>
+        /// 根据条件获取一条数据
+        /// </summary>
+        /// <typeparam name="TDto"></typeparam>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<TDto> GetFirstAsync<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", CancellationToken cancellationToken = default) where TDto : class, new();
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="skip">起始位置（默认为-1，不设置 一般从0开始）</param>
+        /// <param name="limit">记录数（默认为0，不设置）</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IList<TDto>> GetListAsync<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int skip = -1, int limit = 0, CancellationToken cancellationToken = default) where TDto : class, new();
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="orderby">exp:“Id desc,CreateTime desc”</param>
+        /// <param name="currentPage">页码（最小为1）</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<PagedList<TDto>> GetPagedListAsync<TDto>(Expression<Func<TEntity, bool>> selector = null, string orderby = "", int currentPage = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TDto : class, new();
+
         /// <summary>
         /// Any数据检测
         /// </summary>
