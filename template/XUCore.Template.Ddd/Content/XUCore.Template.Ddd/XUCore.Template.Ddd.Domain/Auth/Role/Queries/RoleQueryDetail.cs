@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Template.Ddd.Domain.Core;
+using XUCore.Template.Ddd.Domain.Core.Entities.Auth;
 
 namespace XUCore.Template.Ddd.Domain.Auth.Role
 {
@@ -36,10 +37,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
 
             public override async Task<RoleDto> Handle(RoleQueryDetail request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.Role
-                    .Where(c => c.Id == request.Id)
-                    .ProjectTo<RoleDto>(mapper.ConfigurationProvider)
-                    .FirstOrDefaultAsync(cancellationToken);
+                var res = await db.GetByIdAsync<RoleEntity, RoleDto>(request.Id, cancellationToken);
 
                 return res;
             }

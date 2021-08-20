@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,11 @@ using XUCore.Template.Ddd.Domain.Core.Events;
 
 namespace XUCore.Template.Ddd.Persistence
 {
+    public class DefaultDbRepository : DbContextRepository<IDefaultDbContext>, IDefaultDbRepository
+    {
+        public DefaultDbRepository(IDefaultDbContext context, IMapper mapper) : base(context, mapper) { }
+    }
+
     public class DefaultDbContext : DBContextFactory, IDefaultDbContext
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)

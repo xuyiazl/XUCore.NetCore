@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
+using XUCore.Template.Ddd.Domain.Core.Entities.User;
 
 namespace XUCore.Template.Ddd.Domain.User.User
 {
@@ -54,17 +55,11 @@ namespace XUCore.Template.Ddd.Domain.User.User
                 {
                     case AccountMode.UserName:
 
-                        return await db.Context.User
-                            .Where(c => c.UserName.Equals(request.Account))
-                            .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-                            .FirstOrDefaultAsync(cancellationToken);
+                        return await db.GetFirstAsync<UserEntity, UserDto>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
 
                     case AccountMode.Mobile:
 
-                        return await db.Context.User
-                            .Where(c => c.Mobile.Equals(request.Account))
-                            .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-                            .FirstOrDefaultAsync(cancellationToken);
+                        return await db.GetFirstAsync<UserEntity, UserDto>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                 }
 
                 return null;

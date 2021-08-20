@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.Paging;
+using XUCore.Template.Ddd.Domain.Core.Entities.User;
 
 namespace XUCore.Template.Ddd.Domain.User.User
 {
@@ -48,18 +49,15 @@ namespace XUCore.Template.Ddd.Domain.User.User
 
             public override async Task<PagedModel<UserDto>> Handle(UserQueryPaged request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.User
+                var selector = db.AsQuery<UserEntity>()
 
-                    .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                    .WhereIf(c =>
+                    .And(c => c.Status == request.Status, request.Status != Status.Default)
+                    .And(c =>
                                 c.Name.Contains(request.Keyword) ||
                                 c.Mobile.Contains(request.Keyword) ||
-                                c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
+                                c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty());
 
-                    .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
-
-                    .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-                    .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+                var res = await db.GetPagedListAsync<UserEntity, UserDto>(selector, request.OrderBy, request.CurrentPage, request.PageSize, cancellationToken);
 
                 return res.ToModel();
             }

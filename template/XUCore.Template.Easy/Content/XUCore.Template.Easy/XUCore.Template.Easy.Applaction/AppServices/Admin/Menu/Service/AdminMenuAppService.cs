@@ -94,15 +94,14 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<IList<AdminMenuDto>>> GetListAsync([Required][FromQuery] AdminMenuQueryCommand request, CancellationToken cancellationToken = default)
         {
-            var res = await db.Context.AdminAuthMenus
-                .Where(c => c.IsMenu == request.IsMenu)
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .Take(request.Limit, request.Limit > 0)
-                .OrderByDescending(c => c.Weight)
-                .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var selector = db.AsQuery<AdminMenuEntity>()
 
-            return RestFull.Success(data: res.As<IList<AdminMenuDto>>());
+                .And(c => c.IsMenu == request.IsMenu)
+                .And(c => c.Status == request.Status, request.Status != Status.Default);
+
+            var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, request.Orderby, limit: request.Limit, cancellationToken: cancellationToken);
+
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取导航树形结构
@@ -112,9 +111,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         [HttpGet("/api/[controller]/Tree")]
         public async Task<Result<IList<AdminMenuTreeDto>>> GetListByTreeAsync(CancellationToken cancellationToken = default)
         {
-            var list = await db.Context.AdminAuthMenus
-                 .OrderByDescending(c => c.Weight)
-                 .ToListAsync(cancellationToken);
+            var list = await db.GetListAsync<AdminMenuEntity>(orderby: "Weight desc", cancellationToken: cancellationToken);
 
             var res = AuthMenuTree(list, 0);
 

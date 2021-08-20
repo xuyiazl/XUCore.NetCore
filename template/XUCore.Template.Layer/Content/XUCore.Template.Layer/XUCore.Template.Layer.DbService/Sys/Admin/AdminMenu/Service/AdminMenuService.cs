@@ -53,21 +53,19 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu
 
         public override async Task<IList<AdminMenuDto>> GetListAsync(AdminMenuQueryCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthMenus
-                .Where(c => c.IsMenu == request.IsMenu)
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .OrderByDescending(c => c.Weight)
-                .ProjectTo<AdminMenuDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var selector = db.AsQuery<AdminMenuEntity>()
+
+                .And(c => c.IsMenu == request.IsMenu)
+                .And(c => c.Status == request.Status, request.Status != Status.Default);
+
+            var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, request.Orderby, limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
         }
 
         public async Task<IList<AdminMenuTreeDto>> GetListByTreeAsync(CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthMenus
-                .OrderByDescending(c => c.Weight)
-                .ToListAsync(cancellationToken);
+            var res = await db.GetListAsync<AdminMenuEntity>(orderby: "Weight desc", cancellationToken: cancellationToken);
 
             return AuthMenuTree(res, 0);
         }

@@ -103,13 +103,12 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public override async Task<IList<AdminRoleDto>> GetListAsync(AdminRoleQueryCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthRole
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
-                .Take(request.Limit, request.Limit > 0)
-                .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var selector = db.AsQuery<AdminRoleEntity>()
+
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
+
+            var res = await db.GetListAsync<AdminRoleEntity, AdminRoleDto>(selector, request.Orderby, limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
         }
@@ -125,15 +124,12 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public override async Task<PagedModel<AdminRoleDto>> GetPagedListAsync(AdminRoleQueryPagedCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthRole
+            var selector = db.AsQuery<AdminRoleEntity>()
 
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty())
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-                .OrderByBatch(request.OrderBy, !request.OrderBy.IsEmpty())
-
-                .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
-                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminRoleEntity, AdminRoleDto>(selector, request.Orderby, request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }

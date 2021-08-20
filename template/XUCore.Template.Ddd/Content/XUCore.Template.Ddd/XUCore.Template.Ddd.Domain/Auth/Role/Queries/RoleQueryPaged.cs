@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.Paging;
+using XUCore.Template.Ddd.Domain.Core.Entities.Auth;
 
 namespace XUCore.Template.Ddd.Domain.Auth.Role
 {
@@ -48,15 +49,12 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
 
             public override async Task<PagedModel<RoleDto>> Handle(RoleQueryPaged request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.Role
+                var selector = db.AsQuery<RoleEntity>()
 
-                    .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                    .WhereIf(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
+                    .And(c => c.Status == request.Status, request.Status != Status.Default)
+                    .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
 
-                    .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
-
-                    .ProjectTo<RoleDto>(mapper.ConfigurationProvider)
-                    .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+                var res = await db.GetPagedListAsync<RoleEntity, RoleDto>(selector, request.OrderBy, request.CurrentPage, request.PageSize, cancellationToken);
 
                 return res.ToModel();
             }

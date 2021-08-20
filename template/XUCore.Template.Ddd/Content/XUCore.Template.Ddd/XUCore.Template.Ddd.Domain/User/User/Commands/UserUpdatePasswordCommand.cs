@@ -46,7 +46,7 @@ namespace XUCore.Template.Ddd.Domain.User.User
 
             public override async Task<int> Handle(UserUpdatePasswordCommand request, CancellationToken cancellationToken)
             {
-                var user = await db.Context.User.FindAsync(request.Id);
+                var user = await db.GetByIdAsync<UserEntity>(request.Id, cancellationToken);
 
                 request.NewPassword = Encrypt.Md5By32(request.NewPassword);
                 request.OldPassword = Encrypt.Md5By32(request.OldPassword);
@@ -54,7 +54,12 @@ namespace XUCore.Template.Ddd.Domain.User.User
                 if (!user.Password.Equals(request.OldPassword))
                     throw new Exception("旧密码错误");
 
-                return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity { Password = request.NewPassword, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
+                return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity
+                {
+                    Password = request.NewPassword,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedAtUserId = loginInfo.UserId
+                });
             }
         }
     }

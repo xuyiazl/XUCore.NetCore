@@ -84,7 +84,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<int>> UpdatePasswordAsync([Required][FromBody] AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken)
         {
-            var admin = await db.Context.AdminUser.FindAsync(request.Id);
+            var admin = await db.GetByIdAsync<AdminUserEntity>(request.Id, cancellationToken);
 
             request.NewPassword = Encrypt.Md5By32(request.NewPassword);
             request.OldPassword = Encrypt.Md5By32(request.OldPassword);
@@ -114,15 +114,6 @@ namespace XUCore.Template.Easy.Applaction.Admin
             {
                 case "name":
                     res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
-                    break;
-                case "username":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, UpdatedAt = DateTime.Now }, cancellationToken);
-                    break;
-                case "mobile":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, UpdatedAt = DateTime.Now }, cancellationToken);
-                    break;
-                case "password":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "position":
                     res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
@@ -183,19 +174,13 @@ namespace XUCore.Template.Easy.Applaction.Admin
             {
                 case AccountMode.UserName:
 
-                    var res = await db.Context.AdminUser
-                        .Where(c => c.UserName.Equals(account))
-                        .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync(cancellationToken);
+                    var res = await db.GetFirstAsync<AdminUserEntity, AdminUserDto>(c => c.UserName.Equals(account), cancellationToken: cancellationToken);
 
                     return RestFull.Success(data: res);
 
                 case AccountMode.Mobile:
 
-                    res = await db.Context.AdminUser
-                        .Where(c => c.Mobile.Equals(account))
-                        .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync(cancellationToken);
+                    res = await db.GetFirstAsync<AdminUserEntity, AdminUserDto>(c => c.Mobile.Equals(account), cancellationToken: cancellationToken);
 
                     return RestFull.Success(data: res);
             }
@@ -219,10 +204,10 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        res = await db.Context.AdminUser.AnyAsync(c => c.Id != notId && c.UserName == account, cancellationToken);
+                        res = await db.AnyAsync<AdminUserEntity>(c => c.Id != notId && c.UserName == account, cancellationToken);
                         break;
                     case AccountMode.Mobile:
-                        res = await db.Context.AdminUser.AnyAsync(c => c.Id != notId && c.Mobile == account, cancellationToken);
+                        res = await db.AnyAsync<AdminUserEntity>(c => c.Id != notId && c.Mobile == account, cancellationToken);
                         break;
                 }
             }
@@ -231,10 +216,10 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        res = await db.Context.AdminUser.AnyAsync(c => c.UserName == account, cancellationToken);
+                        res = await db.AnyAsync<AdminUserEntity>(c => c.UserName == account, cancellationToken);
                         break;
                     case AccountMode.Mobile:
-                        res = await db.Context.AdminUser.AnyAsync(c => c.Mobile == account, cancellationToken);
+                        res = await db.AnyAsync<AdminUserEntity>(c => c.Mobile == account, cancellationToken);
                         break;
                 }
             }
@@ -249,18 +234,15 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<PagedModel<AdminUserDto>>> GetPagedListAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminUser
+            var selector = db.AsQuery<AdminUserEntity>()
 
-                   .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                   .WhereIf(c =>
-                               c.Name.Contains(request.Keyword) ||
-                               c.Mobile.Contains(request.Keyword) ||
-                               c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c =>
+                            c.Name.Contains(request.Keyword) ||
+                            c.Mobile.Contains(request.Keyword) ||
+                            c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-                   .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
-
-                   .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                   .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminUserEntity, AdminUserDto>(selector, request.Orderby, request.CurrentPage, request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }

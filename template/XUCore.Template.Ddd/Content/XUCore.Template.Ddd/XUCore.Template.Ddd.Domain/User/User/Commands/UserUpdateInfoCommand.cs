@@ -75,7 +75,7 @@ namespace XUCore.Template.Ddd.Domain.User.User
             [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(UserUpdateInfoCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Context.User.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                var entity = await db.GetByIdAsync<UserEntity>(request.Id, cancellationToken);
 
                 if (entity == null)
                     return 0;

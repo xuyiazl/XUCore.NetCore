@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
+using XUCore.Template.Ddd.Domain.Core.Entities.User;
 
 namespace XUCore.Template.Ddd.Domain.User.User
 {
@@ -58,9 +59,9 @@ namespace XUCore.Template.Ddd.Domain.User.User
                     switch (request.AccountMode)
                     {
                         case AccountMode.UserName:
-                            return await db.Context.User.AnyAsync(c => c.Id != request.NotId && c.UserName == request.Account, cancellationToken);
+                            return await db.AnyAsync<UserEntity>(c => c.Id != request.NotId && c.UserName == request.Account, cancellationToken);
                         case AccountMode.Mobile:
-                            return await db.Context.User.AnyAsync(c => c.Id != request.NotId && c.Mobile == request.Account, cancellationToken);
+                            return await db.AnyAsync<UserEntity>(c => c.Id != request.NotId && c.Mobile == request.Account, cancellationToken);
                     }
                 }
                 else
@@ -68,9 +69,9 @@ namespace XUCore.Template.Ddd.Domain.User.User
                     switch (request.AccountMode)
                     {
                         case AccountMode.UserName:
-                            return await db.Context.User.AnyAsync(c => c.UserName == request.Account, cancellationToken);
+                            return await db.AnyAsync<UserEntity>(c => c.UserName == request.Account, cancellationToken);
                         case AccountMode.Mobile:
-                            return await db.Context.User.AnyAsync(c => c.Mobile == request.Account, cancellationToken);
+                            return await db.AnyAsync<UserEntity>(c => c.Mobile == request.Account, cancellationToken);
                     }
                 }
 

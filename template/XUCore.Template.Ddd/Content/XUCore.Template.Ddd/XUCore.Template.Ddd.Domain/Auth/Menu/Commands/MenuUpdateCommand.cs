@@ -94,7 +94,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Menu
             [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(MenuUpdateCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Context.Menu.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                var entity = await db.GetByIdAsync<MenuEntity>(request.Id, cancellationToken);
 
                 if (entity == null)
                     return 0;
