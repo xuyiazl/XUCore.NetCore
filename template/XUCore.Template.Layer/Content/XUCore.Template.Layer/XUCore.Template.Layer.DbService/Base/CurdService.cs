@@ -27,6 +27,7 @@ namespace XUCore.Template.Layer.DbService
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
         : ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>, IDbService
+            where TDto : class, new()
             where TEntity : BaseEntity<TKey>, new()
             where TCreateCommand : CreateCommand
             where TUpdateCommand : UpdateCommand<TKey>
@@ -140,10 +141,7 @@ namespace XUCore.Template.Layer.DbService
         /// <returns></returns>
         public virtual async Task<TDto> GetByIdAsync(TKey id, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .Where(c => c.Id.Equals(id))
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+            var res = await db.GetByIdAsync<TEntity, TDto>(id, cancellationToken);
 
             return res;
         }
@@ -155,11 +153,9 @@ namespace XUCore.Template.Layer.DbService
         /// <returns></returns>
         public virtual async Task<IList<TDto>> GetListAsync(TListCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .Take(request.Limit, request.Limit > 0)
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var selector = db.AsQuery<TEntity>();
+
+            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, skip: -1, limit: request.Limit, cancellationToken);
 
             return res;
         }
@@ -171,10 +167,9 @@ namespace XUCore.Template.Layer.DbService
         /// <returns></returns>
         public virtual async Task<PagedModel<TDto>> GetPagedListAsync(TPageCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            var selector = db.AsQuery<TEntity>();
+
+            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken);
 
             return res.ToModel();
         }

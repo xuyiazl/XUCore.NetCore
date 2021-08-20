@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.NetCore;
-using XUCore.Template.Easy.Applaction.Permission;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
 using XUCore.Template.Easy.Persistence;

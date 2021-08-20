@@ -31,6 +31,7 @@ namespace XUCore.Template.Easy.Applaction
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdAppService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
         : AppService, ICurdAppService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+            where TDto : class, new()
             where TEntity : BaseEntity<TKey>, new()
             where TCreateCommand : CreateCommand
             where TUpdateCommand : UpdateCommand<TKey>
@@ -168,10 +169,7 @@ namespace XUCore.Template.Easy.Applaction
         [Route("/api/[controller]/{id}")]
         public virtual async Task<Result<TDto>> GetByIdAsync([Required] TKey id, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .Where(c => c.Id.Equals(id))
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+            var res = await db.GetByIdAsync<TEntity, TDto>(id, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -183,13 +181,11 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<IList<TDto>>> GetListAsync([Required][FromQuery] TListCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .Take(request.Limit, request.Limit > 0)
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var selector = db.AsQuery<TEntity>();
 
-            return RestFull.Success(data: res.As<IList<TDto>>());
+            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, skip: -1, limit: request.Limit, cancellationToken);
+
+            return RestFull.Success(data: res);
         }
         /// <summary>
         /// 获取分页
@@ -199,10 +195,9 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<PagedModel<TDto>>> GetPagedListAsync([Required][FromQuery] TPageCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.Set<TEntity>()
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
-                .ProjectTo<TDto>(mapper.ConfigurationProvider)
-                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            var selector = db.AsQuery<TEntity>();
+
+            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }

@@ -14,6 +14,7 @@ using XUCore.Helpers;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Swagger;
+using XUCore.Template.Easy.Applaction.Admin;
 using XUCore.Template.Easy.Applaction.Login;
 using XUCore.Template.Easy.Applaction.Permission;
 using XUCore.Template.Easy.Core.Enums;
@@ -54,19 +55,19 @@ namespace XUCore.Template.Easy.Applaction.Authorization
 
             if (!Valid.IsMobileNumberSimple(request.Account))
             {
-                user = await db.Context.AdminUser.Where(c => c.UserName.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await db.GetFirstAsync<AdminUserEntity>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("账号不存在");
 
-                loginWay = "Mobile";
+                loginWay = "UserName";
             }
             else
             {
-                user = await db.Context.AdminUser.Where(c => c.Mobile.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await db.GetFirstAsync<AdminUserEntity>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("手机号码不存在");
 
-                loginWay = "UserName";
+                loginWay = "Mobile";
             }
 
             if (!user.Password.Equals(request.Password))

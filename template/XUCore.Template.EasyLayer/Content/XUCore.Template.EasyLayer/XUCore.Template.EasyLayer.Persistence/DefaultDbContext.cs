@@ -6,6 +6,7 @@ using System.Linq;
 using XUCore.Template.EasyLayer.Persistence.Entities;
 using XUCore.Template.EasyLayer.Core.Enums;
 using System;
+using AutoMapper;
 
 namespace XUCore.Template.EasyLayer.Persistence
 {
@@ -13,7 +14,7 @@ namespace XUCore.Template.EasyLayer.Persistence
 
     public class DefaultDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
     {
-        public DefaultDbRepository(DefaultDbContext context) : base(context) { }
+        public DefaultDbRepository(DefaultDbContext context, IMapper mapper) : base(context, mapper) { }
     }
 
     public class DefaultDbContext : DBContextFactory

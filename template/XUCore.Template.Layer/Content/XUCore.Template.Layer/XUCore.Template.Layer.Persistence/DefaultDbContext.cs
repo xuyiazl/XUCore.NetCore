@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -13,7 +14,7 @@ namespace XUCore.Template.Layer.Persistence
 
     public class DefaultDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
     {
-        public DefaultDbRepository(DefaultDbContext context) : base(context) { }
+        public DefaultDbRepository(DefaultDbContext context, IMapper mapper) : base(context, mapper) { }
     }
 
     public class DefaultDbContext : DBContextFactory

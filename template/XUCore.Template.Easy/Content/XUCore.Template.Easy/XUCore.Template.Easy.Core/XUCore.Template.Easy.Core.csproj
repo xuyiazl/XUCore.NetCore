@@ -10,7 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Scrutor" Version="3.3.0" />
-		<PackageReference Include="XUCoreApp" Version="5.3.0" />
+		<PackageReference Include="XUCoreApp" Version="5.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
