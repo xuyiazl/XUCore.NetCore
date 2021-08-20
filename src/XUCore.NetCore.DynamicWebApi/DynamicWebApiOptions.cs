@@ -22,7 +22,7 @@ namespace XUCore.NetCore.DynamicWebApi
             SplitControllerCamelCaseSeparator = "-";
             VersionSeparator = "@";
             IsRemoveVerbs = true;
-            IsAutoSortAction = true;
+            IsAutoSortAction = false;
         }
 
         public bool IsRemoveVerbs { get; set; }
