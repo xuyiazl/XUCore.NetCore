@@ -22,7 +22,7 @@ dotnet new -u XUCore.Template.Easy
 
 ```bash
 
-dotnet new --install XUCore.Template.Easy::1.1.0
+dotnet new --install XUCore.Template.Easy::1.1.1
 
 ```
 
