@@ -70,6 +70,11 @@ namespace XUCore.NetCore.Data
         /// 初始化查询表达式
         /// </summary>
         public Expression<Func<TEntity, bool>> AsQuery() => c => true;
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        /// <returns></returns>
+        public Expression<Func<TEntity, bool>> BuildFilter() => c => true;
 
         //同步操作
 

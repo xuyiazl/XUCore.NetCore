@@ -64,6 +64,12 @@ namespace XUCore.NetCore.Data
         /// 初始化查询表达式
         /// </summary>
         public Expression<Func<TEntity, bool>> AsQuery<TEntity>() => c => true;
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns></returns>
+        public Expression<Func<TEntity, bool>> BuildFilter<TEntity>() => c => true;
 
         //同步操作
 

@@ -1,6 +1,4 @@
 ﻿using XUCore.Helpers;
-using XUCore.Tests;
-using XUCore.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 

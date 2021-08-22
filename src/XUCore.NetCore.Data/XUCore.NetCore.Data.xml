@@ -301,6 +301,13 @@
             初始化查询表达式
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbContextRepository`1.BuildFilter``1">
+            <summary>
+            初始化查询表达式
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbContextRepository`1.Add``1(``0,System.Boolean)">
             <summary>
             插入一条数据
@@ -682,6 +689,12 @@
             初始化查询表达式
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Data.DbRepository`1.BuildFilter">
+            <summary>
+            初始化查询表达式
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.NetCore.Data.DbRepository`1.Add(`0,System.Boolean)">
             <summary>
             插入一条数据
@@ -1033,6 +1046,13 @@
             <summary>
             初始化查询表达式
             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.BuildFilter``1">
+            <summary>
+            初始化查询表达式
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbContextRepository`1.Add``1(``0,System.Boolean)">
             <summary>
@@ -1405,6 +1425,12 @@
             <summary>
             初始化查询表达式
             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.IDbRepository`1.BuildFilter">
+            <summary>
+            初始化查询表达式
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.IDbRepository`1.Add(`0,System.Boolean)">
             <summary>

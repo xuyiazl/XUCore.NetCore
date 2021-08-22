@@ -45,7 +45,13 @@ namespace XUCore.NetCore.Data
         /// <summary>
         /// 初始化查询表达式
         /// </summary>
+        [Obsolete("命名已更改，请使用BuildFilter，将在下一版本删除")]
         Expression<Func<TEntity, bool>> AsQuery();
+        /// <summary>
+        /// 初始化查询表达式
+        /// </summary>
+        /// <returns></returns>
+        Expression<Func<TEntity, bool>> BuildFilter();
 
         //同步操作
 
