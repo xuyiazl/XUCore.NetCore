@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
+using XUCore.Paging;
 using XUCore.Template.EasyLayer.Core.Enums;
 using XUCore.Template.EasyLayer.Persistence;
 using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
@@ -61,6 +62,18 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
             var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
+        }
+
+        public override async Task<PagedModel<AdminMenuDto>> GetPagedListAsync(AdminMenuQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var selector = db.AsQuery<AdminMenuEntity>()
+
+                .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
+                .And(c => c.Status == request.Status, request.Status != Status.Default);
+
+            var res = await db.GetPagedListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
+
+            return res.ToModel();
         }
 
         public async Task<IList<AdminMenuTreeDto>> GetListByTreeAsync(CancellationToken cancellationToken)

@@ -226,6 +226,20 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
             return RestFull.Success(data: res);
         }
+        public override async Task<Result<IList<AdminUserDto>>> GetListAsync([FromQuery, Required] AdminUserQueryCommand request, CancellationToken cancellationToken)
+        {
+            var selector = db.AsQuery<AdminUserEntity>()
+
+                   .And(c => c.Status == request.Status, request.Status != Status.Default)
+                   .And(c =>
+                               c.Name.Contains(request.Keyword) ||
+                               c.Mobile.Contains(request.Keyword) ||
+                               c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
+
+            var res = await db.GetListAsync<AdminUserEntity, AdminUserDto>(selector: selector, orderby: $"{nameof(AdminUserEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
         /// <summary>
         /// 获取账号分页
         /// </summary>

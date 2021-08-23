@@ -16,10 +16,6 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
         /// </summary>
         public string Keyword { get; set; }
         /// <summary>
-        /// 排序方式 exp：“Id asc or Id desc”
-        /// </summary>
-        public string OrderBy { get; set; }
-        /// <summary>
         /// 数据状态
         /// </summary>
         public Status Status { get; set; }

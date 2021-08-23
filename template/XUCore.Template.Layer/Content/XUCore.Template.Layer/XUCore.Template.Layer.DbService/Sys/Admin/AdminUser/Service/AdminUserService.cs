@@ -195,6 +195,21 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
             return null;
         }
 
+        public override async Task<IList<AdminUserDto>> GetListAsync(AdminUserQueryCommand request, CancellationToken cancellationToken)
+        {
+            var selector = db.AsQuery<AdminUserEntity>()
+
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c =>
+                            c.Name.Contains(request.Keyword) ||
+                            c.Mobile.Contains(request.Keyword) ||
+                            c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
+
+            var res = await db.GetListAsync<AdminUserEntity, AdminUserDto>(selector: selector, orderby: $"{nameof(AdminUserEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
+
+            return res;
+        }
+
         public override async Task<PagedModel<AdminUserDto>> GetPagedListAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
         {
             var selector = db.AsQuery<AdminUserEntity>()

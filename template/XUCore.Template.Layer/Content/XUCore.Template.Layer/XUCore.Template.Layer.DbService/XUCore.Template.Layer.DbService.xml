@@ -525,11 +525,6 @@
             搜索关键字
             </summary>
         </member>
-        <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand.Orderby">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
-            </summary>
-        </member>
         <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand.Status">
             <summary>
             数据状态
@@ -543,11 +538,6 @@
         <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.OrderBy">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Status">

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.NetCore;
+using XUCore.Paging;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
 using XUCore.Template.Easy.Persistence;
@@ -103,6 +104,24 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
             return RestFull.Success(data: res);
         }
+        /// <summary>
+        /// 获取导航分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public override async Task<Result<PagedModel<AdminMenuDto>>> GetPagedListAsync(AdminMenuQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var selector = db.AsQuery<AdminMenuEntity>()
+
+                .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
+                .And(c => c.Status == request.Status, request.Status != Status.Default);
+
+            var res = await db.GetPagedListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
+
+            return RestFull.Success(data: res.ToModel());
+        }
+
         /// <summary>
         /// 获取导航树形结构
         /// </summary>

@@ -183,7 +183,7 @@ namespace XUCore.Template.Easy.Applaction
         {
             var selector = db.AsQuery<TEntity>();
 
-            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", skip: -1, limit: request.Limit, cancellationToken);
+            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", skip: -1, limit: request.Limit, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -197,7 +197,7 @@ namespace XUCore.Template.Easy.Applaction
         {
             var selector = db.AsQuery<TEntity>();
 
-            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }
