@@ -4,6 +4,21 @@
         <name>XUCore.Template.Layer.Persistence</name>
     </assembly>
     <members>
+        <member name="T:XUCore.Template.Layer.Persistence.IDefaultDbRepository">
+            <summary>
+            数据仓储
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.Layer.Persistence.DefaultDbRepository">
+            <summary>
+            数据仓储
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.Layer.Persistence.DefaultDbContext">
+            <summary>
+            上下文
+            </summary>
+        </member>
         <member name="P:XUCore.Template.Layer.Persistence.Entities.BaseEntity`1.Status">
             <summary>
             数据状态

@@ -4,6 +4,33 @@
         <name>XUCore.Template.EasyLayer.Persistence</name>
     </assembly>
     <members>
+        <member name="T:XUCore.Template.EasyLayer.Persistence.IDefaultDbRepository`1">
+            <summary>
+            数据仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbRepository`1">
+            <summary>
+            数据仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:XUCore.Template.EasyLayer.Persistence.IDefaultDbContextRepository">
+            <summary>
+            上下文仓储
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbContextRepository">
+            <summary>
+            上下文仓储
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbContext">
+            <summary>
+            上下文
+            </summary>
+        </member>
         <member name="P:XUCore.Template.EasyLayer.Persistence.Entities.BaseEntity`1.Status">
             <summary>
             数据状态

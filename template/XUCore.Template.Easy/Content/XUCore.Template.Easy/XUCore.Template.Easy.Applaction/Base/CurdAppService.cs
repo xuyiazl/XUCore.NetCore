@@ -91,7 +91,7 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<int>> UpdateAsync([Required][FromBody] TUpdateCommand request, CancellationToken cancellationToken)
         {
-            var entity = await db.GetFirstAsync<TEntity>(c => c.Id.Equals(request.Id), cancellationToken: cancellationToken);
+            var entity = await db.GetByIdAsync<TEntity>(request.Id, cancellationToken);
 
             if (entity == null)
                 return RestFull.Fail(data: 0);
@@ -183,7 +183,7 @@ namespace XUCore.Template.Easy.Applaction
         {
             var selector = db.AsQuery<TEntity>();
 
-            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, skip: -1, limit: request.Limit, cancellationToken);
+            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", skip: -1, limit: request.Limit, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -197,7 +197,7 @@ namespace XUCore.Template.Easy.Applaction
         {
             var selector = db.AsQuery<TEntity>();
 
-            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: request.Orderby, currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }

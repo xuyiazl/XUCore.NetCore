@@ -4,16 +4,6 @@
         <name>XUCore.Template.Layer.DbService</name>
     </assembly>
     <members>
-        <member name="P:XUCore.Template.Layer.DbService.ListCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Layer.DbService.PageCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
         <member name="T:XUCore.Template.Layer.DbService.CurdService`7">
             <summary>
             CURD服务
@@ -523,11 +513,6 @@
         <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand.Orderby">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="T:XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand">

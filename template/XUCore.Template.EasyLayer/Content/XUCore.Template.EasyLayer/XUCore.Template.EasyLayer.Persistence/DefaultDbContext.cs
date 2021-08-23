@@ -10,13 +10,20 @@ using AutoMapper;
 
 namespace XUCore.Template.EasyLayer.Persistence
 {
+    /// <summary>
+    /// 数据仓储
+    /// </summary>
     public interface IDefaultDbRepository : IDbContextRepository<DefaultDbContext> { }
-
+    /// <summary>
+    /// 数据仓储
+    /// </summary>
     public class DefaultDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
     {
         public DefaultDbRepository(DefaultDbContext context, IMapper mapper) : base(context, mapper) { }
     }
-
+    /// <summary>
+    /// 上下文
+    /// </summary>
     public class DefaultDbContext : DBContextFactory
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)

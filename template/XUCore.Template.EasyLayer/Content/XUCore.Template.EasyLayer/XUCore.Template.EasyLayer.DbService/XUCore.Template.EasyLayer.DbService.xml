@@ -4,16 +4,6 @@
         <name>XUCore.Template.EasyLayer.DbService</name>
     </assembly>
     <members>
-        <member name="P:XUCore.Template.EasyLayer.DbService.ListCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.PageCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
         <member name="T:XUCore.Template.EasyLayer.DbService.CurdService`7">
             <summary>
             CURD服务
@@ -41,7 +31,7 @@
             删除事件
             </summary>
         </member>
-        <member name="M:XUCore.Template.EasyLayer.DbService.CurdService`7.#ctor(XUCore.Template.EasyLayer.Persistence.IDefaultDbRepository,AutoMapper.IMapper)">
+        <member name="M:XUCore.Template.EasyLayer.DbService.CurdService`7.#ctor(XUCore.Template.EasyLayer.Persistence.IDefaultDbContextRepository,AutoMapper.IMapper)">
             <summary>
             CURD服务
             </summary>
@@ -523,11 +513,6 @@
         <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand.Orderby">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="T:XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand">

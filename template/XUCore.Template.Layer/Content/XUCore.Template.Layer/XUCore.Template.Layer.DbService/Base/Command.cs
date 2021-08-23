@@ -21,17 +21,11 @@ namespace XUCore.Template.Layer.DbService
 
     public abstract class ListCommand : CommandLimit<bool>
     {
-        /// <summary>
-        /// 排序，exp：“Id desc,CreatedAt desc”
-        /// </summary>
-        public string Orderby { get; set; }
+
     }
 
     public abstract class PageCommand : CommandPage<bool>
     {
-        /// <summary>
-        /// 排序，exp：“Id desc,CreatedAt desc”
-        /// </summary>
-        public string Orderby { get; set; }
+
     }
 }

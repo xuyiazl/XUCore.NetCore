@@ -1119,16 +1119,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="P:XUCore.Template.Easy.Applaction.ListCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.PageCommand.Orderby">
-            <summary>
-            排序，exp：“Id desc,CreatedAt desc”
-            </summary>
-        </member>
         <member name="T:XUCore.Template.Easy.Applaction.CurdAppService`7">
             <summary>
             CURD服务

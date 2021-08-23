@@ -58,7 +58,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
                 .And(c => c.IsMenu == request.IsMenu)
                 .And(c => c.Status == request.Status, request.Status != Status.Default);
 
-            var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, request.Orderby, limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
         }

@@ -205,7 +205,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
                             c.Mobile.Contains(request.Keyword) ||
                             c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-            var res = await db.GetPagedListAsync<AdminUserEntity, AdminUserDto>(selector, request.Orderby, request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminUserEntity, AdminUserDto>(selector, $"{nameof(AdminUserEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }
@@ -257,7 +257,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
 
                 .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                .OrderByBatch(request.Orderby, request.Orderby.NotEmpty())
+                .OrderByBatch($"{nameof(AdminUserLoginRecordEntity.Id)} asc")
 
                 .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

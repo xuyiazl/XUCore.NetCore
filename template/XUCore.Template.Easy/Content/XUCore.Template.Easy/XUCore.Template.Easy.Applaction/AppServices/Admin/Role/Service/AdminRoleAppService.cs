@@ -75,7 +75,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<int>> UpdateAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            var entity = await db.Context.AdminRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var entity = await db.GetByIdAsync<AdminRoleEntity>(request.Id, cancellationToken);
 
             if (entity == null)
                 return RestFull.Fail(data: 0);
@@ -169,7 +169,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 .And(c => c.Status == request.Status, request.Status != Status.Default)
                 .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
 
-            var res = await db.GetListAsync<AdminRoleEntity, AdminRoleDto>(selector, request.Orderby, limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<AdminRoleEntity, AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res.As<IList<AdminRoleDto>>());
         }
@@ -186,7 +186,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 .And(c => c.Status == request.Status, request.Status != Status.Default)
                 .And(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-            var res = await db.GetPagedListAsync<AdminRoleEntity, AdminRoleDto>(selector, request.Orderby, request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminRoleEntity, AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }
