@@ -45,7 +45,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public override async Task<int> UpdateAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken)
         {
-            var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var entity = await db.Context.AdminRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
                 return 0;
@@ -115,7 +115,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
 
         public async Task<IList<long>> GetRelevanceMenuAsync(int roleId, CancellationToken cancellationToken)
         {
-            return await db.Context.AdminAuthRoleMenus
+            return await db.Context.AdminRoleMenu
                 .Where(c => c.RoleId == roleId)
                 .OrderBy(c => c.MenuId)
                 .Select(c => c.MenuId)

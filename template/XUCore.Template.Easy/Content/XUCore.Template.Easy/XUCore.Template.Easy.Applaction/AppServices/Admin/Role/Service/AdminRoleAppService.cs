@@ -75,7 +75,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<int>> UpdateAsync([Required][FromBody] AdminRoleUpdateCommand request, CancellationToken cancellationToken = default)
         {
-            var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var entity = await db.Context.AdminRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
                 return RestFull.Fail(data: 0);
@@ -198,7 +198,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<IList<long>>> GetRelevanceMenuAsync([Required] int roleId, CancellationToken cancellationToken = default)
         {
-            var res = await db.Context.AdminAuthRoleMenus
+            var res = await db.Context.AdminRoleMenu
                           .Where(c => c.RoleId == roleId)
                           .OrderBy(c => c.MenuId)
                           .Select(c => c.MenuId)

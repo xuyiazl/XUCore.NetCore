@@ -30,11 +30,11 @@ namespace XUCore.Template.Easy.Applaction.Permission
             var res =
                     await
                     (
-                        from userRoles in db.Context.AdminAuthUserRole
+                        from userRoles in db.Context.AdminUserRole
 
-                        join roleMenus in db.Context.AdminAuthRoleMenus on userRoles.RoleId equals roleMenus.RoleId
+                        join roleMenus in db.Context.AdminRoleMenu on userRoles.RoleId equals roleMenus.RoleId
 
-                        join menus in db.Context.AdminAuthMenus on roleMenus.MenuId equals menus.Id
+                        join menus in db.Context.AdminMenu on roleMenus.MenuId equals menus.Id
 
                         where userRoles.AdminId == adminId
 

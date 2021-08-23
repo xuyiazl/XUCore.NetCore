@@ -2,7 +2,7 @@
 
 namespace XUCore.Template.Easy.Applaction.Admin
 {
-    public class AdminUserLoginRecordViewModel : LoginRecordEntity
+    public class AdminUserLoginRecordViewModel : AdminUserLoginRecordEntity
     {
         public string Name { get; set; }
         public string Mobile { get; set; }

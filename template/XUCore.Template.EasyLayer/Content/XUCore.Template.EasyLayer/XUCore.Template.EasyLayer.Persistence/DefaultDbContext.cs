@@ -64,11 +64,11 @@ namespace XUCore.Template.EasyLayer.Persistence
         #region [ 系统 ]
 
         public DbSet<AdminUserEntity> AdminUser => Set<AdminUserEntity>();
-        public DbSet<AdminUserRoleEntity> AdminAuthUserRole => Set<AdminUserRoleEntity>();
-        public DbSet<AdminUserLoginRecordEntity> AdminLoginRecord => Set<AdminUserLoginRecordEntity>();
-        public DbSet<AdminRoleMenuEntity> AdminAuthRoleMenus => Set<AdminRoleMenuEntity>();
-        public DbSet<AdminRoleEntity> AdminAuthRole => Set<AdminRoleEntity>();
-        public DbSet<AdminMenuEntity> AdminAuthMenus => Set<AdminMenuEntity>();
+        public DbSet<AdminUserRoleEntity> AdminUserRole => Set<AdminUserRoleEntity>();
+        public DbSet<AdminUserLoginRecordEntity> AdminUserLoginRecord => Set<AdminUserLoginRecordEntity>();
+        public DbSet<AdminRoleMenuEntity> AdminRoleMenu => Set<AdminRoleMenuEntity>();
+        public DbSet<AdminRoleEntity> AdminRole => Set<AdminRoleEntity>();
+        public DbSet<AdminMenuEntity> AdminMenu => Set<AdminMenuEntity>();
 
         #endregion
     }

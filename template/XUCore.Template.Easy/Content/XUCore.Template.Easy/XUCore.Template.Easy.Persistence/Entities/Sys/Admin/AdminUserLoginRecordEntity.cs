@@ -1,12 +1,12 @@
 ﻿using System;
 using XUCore.Ddd.Domain;
 
-namespace XUCore.Template.Layer.Persistence.Entities.Sys.Admin
+namespace XUCore.Template.Easy.Persistence.Entities.Sys.Admin
 {
     /// <summary>
     /// 登录记录表
     /// </summary>
-    public partial class LoginRecordEntity : Entity<long>, IAggregateRoot
+    public partial class AdminUserLoginRecordEntity : Entity<long>, IAggregateRoot
     {
         /// <summary>
         /// 管理员id

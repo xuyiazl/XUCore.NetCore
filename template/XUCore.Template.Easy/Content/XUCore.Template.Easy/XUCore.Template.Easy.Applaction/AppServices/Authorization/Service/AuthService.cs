@@ -80,7 +80,7 @@ namespace XUCore.Template.Easy.Applaction.Authorization
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new LoginRecordEntity
+            user.LoginRecords.Add(new AdminUserLoginRecordEntity
             {
                 AdminId = user.Id,
                 LoginIp = user.LoginLastIp,

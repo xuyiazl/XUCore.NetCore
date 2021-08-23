@@ -13,7 +13,7 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser
         public static IQueryable<AdminUserLoginRecordViewModel> Create(DefaultDbContext db)
         {
             return
-                from record in db.AdminLoginRecord
+                from record in db.AdminUserLoginRecord
                     //关联账号，获取发布人信息
                 join __admin__ in db.AdminUser on record.AdminId equals __admin__.Id into __tmp__admin__
                 from admin in __tmp__admin__.DefaultIfEmpty()

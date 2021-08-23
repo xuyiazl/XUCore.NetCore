@@ -230,7 +230,7 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser
 
         public async Task<IList<long>> GetRoleKeysAsync(long adminId, CancellationToken cancellationToken)
         {
-            return await db.Context.AdminAuthUserRole
+            return await db.Context.AdminUserRole
                 .Where(c => c.AdminId == adminId)
                 .Select(c => c.RoleId)
                 .ToListAsync(cancellationToken);

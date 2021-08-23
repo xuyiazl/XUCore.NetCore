@@ -12,7 +12,7 @@ namespace XUCore.Template.Easy.Persistence.Entities.Sys.Admin
         public AdminUserEntity()
         {
             UserRoles = new List<AdminUserRoleEntity>();
-            LoginRecords = new List<LoginRecordEntity>();
+            LoginRecords = new List<AdminUserLoginRecordEntity>();
         }
         /// <summary>
         /// 用户名
@@ -65,6 +65,6 @@ namespace XUCore.Template.Easy.Persistence.Entities.Sys.Admin
         /// <summary>
         /// 对应登录记录关联
         /// </summary>
-        public ICollection<LoginRecordEntity> LoginRecords;
+        public ICollection<AdminUserLoginRecordEntity> LoginRecords;
     }
 }

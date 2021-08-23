@@ -150,7 +150,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
             if (res > 0)
             {
                 //删除登录记录
-                await db.DeleteAsync<LoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await db.DeleteAsync<AdminUserLoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
                 await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
 
@@ -285,7 +285,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<IList<long>>> GetRelevanceRoleAsync([Required] long adminId, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthUserRole
+            var res = await db.Context.AdminUserRole
                 .Where(c => c.AdminId == adminId)
                 .Select(c => c.RoleId)
                 .ToListAsync(cancellationToken);
