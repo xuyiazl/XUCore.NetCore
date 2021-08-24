@@ -1764,6 +1764,88 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.Data.CurdServiceProvider`7">
+            <summary>
+            CURD服务
+            </summary>
+            <typeparam name="TKey">主键类型</typeparam>
+            <typeparam name="TEntity">数据库实体</typeparam>
+            <typeparam name="TDto">输出dto</typeparam>
+            <typeparam name="TCreateCommand">创建命令</typeparam>
+            <typeparam name="TUpdateCommand">修改命令</typeparam>
+            <typeparam name="TListCommand">查询列表命令</typeparam>
+            <typeparam name="TPageCommand">分页命令</typeparam>
+        </member>
+        <member name="P:XUCore.NetCore.Data.CurdServiceProvider`7.CreatedAction">
+            <summary>
+            创建事件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.CurdServiceProvider`7.UpdatedAction">
+            <summary>
+            修改事件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.CurdServiceProvider`7.DeletedAction">
+            <summary>
+            删除事件
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.#ctor(XUCore.NetCore.Data.IDbRepository{`1},AutoMapper.IMapper)">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="db"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.DeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.GetByIdAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.CurdServiceProvider`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Data.DbServiceProvider`1">
             <summary>
             数据库领域操作的基础对象
@@ -2119,6 +2201,54 @@
             根据条件批量删除
             </summary>
             <param name="selector"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.DeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.GetByIdAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.Data.ICurdServiceProvider`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
