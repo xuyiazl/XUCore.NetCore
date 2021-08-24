@@ -41,7 +41,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.CreateAsync(request, cancellationToken);
 
@@ -265,7 +265,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.CreateAsync(request, cancellationToken);
 
@@ -405,7 +405,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.CreateAsync(request, cancellationToken);
 

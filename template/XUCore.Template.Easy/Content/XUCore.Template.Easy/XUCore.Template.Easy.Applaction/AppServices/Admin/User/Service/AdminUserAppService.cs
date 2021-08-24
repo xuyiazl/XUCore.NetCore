@@ -30,11 +30,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
         , IAdminUserAppService
     {
         private readonly IMediator mediator;
-
-
-        public AdminUserAppService(IServiceProvider serviceProvider, IDefaultDbRepository db, IMapper mapper) : base(db, mapper)
+        private readonly IDefaultDbRepository<AdminUserRoleEntity> userRole;
+        private readonly IDefaultDbRepository<AdminUserLoginRecordEntity> userLoginRecord;
+        public AdminUserAppService(IServiceProvider serviceProvider, IDefaultDbRepository<AdminUserEntity> db, IMapper mapper) : base(db, mapper)
         {
-            this.mediator = serviceProvider.GetService<IMediator>();
+            userRole = serviceProvider.GetService<IDefaultDbRepository<AdminUserRoleEntity>>();
+            userLoginRecord = serviceProvider.GetService<IDefaultDbRepository<AdminUserLoginRecordEntity>>();
 
             CreatedAction = async (entity) =>
             {
@@ -92,7 +93,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
             if (!admin.Password.Equals(request.OldPassword))
                 Failure.Error("旧密码错误");
 
-            var res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
+            var res = await db.UpdateAsync(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
 
             if (res > 0)
                 return RestFull.Success(data: res);
@@ -113,19 +114,19 @@ namespace XUCore.Template.Easy.Applaction.Admin
             switch (field.ToLower())
             {
                 case "name":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "position":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "location":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "company":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case "picture":
-                    res = await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -145,14 +146,14 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<int>> DeleteAsync([Required] long[] ids, CancellationToken cancellationToken)
         {
-            var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id), cancellationToken);
 
             if (res > 0)
             {
                 //删除登录记录
-                await db.DeleteAsync<AdminUserLoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await userLoginRecord.DeleteAsync(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
-                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await userRole.DeleteAsync(c => ids.Contains(c.AdminId), cancellationToken);
 
                 DeletedAction?.Invoke(ids);
 
@@ -174,13 +175,13 @@ namespace XUCore.Template.Easy.Applaction.Admin
             {
                 case AccountMode.UserName:
 
-                    var res = await db.GetFirstAsync<AdminUserEntity, AdminUserDto>(c => c.UserName.Equals(account), cancellationToken: cancellationToken);
+                    var res = await db.GetFirstAsync<AdminUserDto>(c => c.UserName.Equals(account), cancellationToken: cancellationToken);
 
                     return RestFull.Success(data: res);
 
                 case AccountMode.Mobile:
 
-                    res = await db.GetFirstAsync<AdminUserEntity, AdminUserDto>(c => c.Mobile.Equals(account), cancellationToken: cancellationToken);
+                    res = await db.GetFirstAsync<AdminUserDto>(c => c.Mobile.Equals(account), cancellationToken: cancellationToken);
 
                     return RestFull.Success(data: res);
             }
@@ -204,10 +205,10 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        res = await db.AnyAsync<AdminUserEntity>(c => c.Id != notId && c.UserName == account, cancellationToken);
+                        res = await db.AnyAsync(c => c.Id != notId && c.UserName == account, cancellationToken);
                         break;
                     case AccountMode.Mobile:
-                        res = await db.AnyAsync<AdminUserEntity>(c => c.Id != notId && c.Mobile == account, cancellationToken);
+                        res = await db.AnyAsync(c => c.Id != notId && c.Mobile == account, cancellationToken);
                         break;
                 }
             }
@@ -216,10 +217,10 @@ namespace XUCore.Template.Easy.Applaction.Admin
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        res = await db.AnyAsync<AdminUserEntity>(c => c.UserName == account, cancellationToken);
+                        res = await db.AnyAsync(c => c.UserName == account, cancellationToken);
                         break;
                     case AccountMode.Mobile:
-                        res = await db.AnyAsync<AdminUserEntity>(c => c.Mobile == account, cancellationToken);
+                        res = await db.AnyAsync(c => c.Mobile == account, cancellationToken);
                         break;
                 }
             }
@@ -228,7 +229,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         }
         public override async Task<Result<IList<AdminUserDto>>> GetListAsync([FromQuery, Required] AdminUserQueryCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<AdminUserEntity>()
+            var selector = db.BuildFilter()
 
                    .And(c => c.Status == request.Status, request.Status != Status.Default)
                    .And(c =>
@@ -236,7 +237,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
                                c.Mobile.Contains(request.Keyword) ||
                                c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-            var res = await db.GetListAsync<AdminUserEntity, AdminUserDto>(selector: selector, orderby: $"{nameof(AdminUserEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<AdminUserDto>(selector: selector, orderby: $"{nameof(AdminUserEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -248,7 +249,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<PagedModel<AdminUserDto>>> GetPagedListAsync([Required][FromQuery] AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<AdminUserEntity>()
+            var selector = db.BuildFilter()
 
                 .And(c => c.Status == request.Status, request.Status != Status.Default)
                 .And(c =>
@@ -256,7 +257,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
                             c.Mobile.Contains(request.Keyword) ||
                             c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-            var res = await db.GetPagedListAsync<AdminUserEntity, AdminUserDto>(selector, $"{nameof(AdminUserEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminUserDto>(selector, $"{nameof(AdminUserEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }
@@ -275,7 +276,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         public async Task<Result<int>> CreateRelevanceRoleAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
         {
             //先清空用户的角色，确保没有冗余的数据
-            await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
+            await userRole.DeleteAsync(c => c.AdminId == request.AdminId, cancellationToken);
 
             var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
             {
@@ -286,7 +287,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
             //添加角色
             if (userRoles.Length > 0)
             {
-                var res = await db.AddAsync(userRoles, cancellationToken: cancellationToken);
+                var res = await userRole.AddAsync(userRoles, cancellationToken: cancellationToken);
             }
 
             return RestFull.Success(data: 1);
@@ -299,10 +300,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<IList<long>>> GetRelevanceRoleAsync([Required] long adminId, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminUserRole
-                .Where(c => c.AdminId == adminId)
-                .Select(c => c.RoleId)
-                .ToListAsync(cancellationToken);
+            var res = await userRole.Table.Where(c => c.AdminId == adminId).Select(c => c.RoleId).ToListAsync(cancellationToken);
 
             return RestFull.Success(data: res.As<IList<long>>());
         }

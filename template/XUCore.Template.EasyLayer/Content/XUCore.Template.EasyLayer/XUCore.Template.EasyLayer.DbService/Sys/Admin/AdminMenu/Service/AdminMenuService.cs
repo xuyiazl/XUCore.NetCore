@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,10 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
     public class AdminMenuService : CurdService<long, AdminMenuEntity, AdminMenuDto, AdminMenuCreateCommand, AdminMenuUpdateCommand, AdminMenuQueryCommand, AdminMenuQueryPagedCommand>,
         IAdminMenuService
     {
-        public AdminMenuService(IDefaultDbRepository db, IMapper mapper) : base(db, mapper)
+        private readonly IDefaultDbRepository<AdminRoleMenuEntity> roleMenu;
+        public AdminMenuService(IServiceProvider serviceProvider, IDefaultDbRepository<AdminMenuEntity> db, IMapper mapper) : base(db, mapper)
         {
+            roleMenu = serviceProvider.GetService<IDefaultDbRepository<AdminRoleMenuEntity>>();
         }
 
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
@@ -26,13 +29,13 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
             switch (field.ToLower())
             {
                 case "icon":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminMenuEntity() { Icon = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "url":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Url = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminMenuEntity() { Url = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "onlycode":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminMenuEntity() { OnlyCode = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 case "weight":
-                    return await db.UpdateAsync<AdminMenuEntity>(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), UpdatedAt = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminMenuEntity() { Weight = value.ToInt(), UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
@@ -40,11 +43,11 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
 
         public override async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
-            var res = await db.DeleteAsync<AdminMenuEntity>(c => ids.Contains(c.Id), cancellationToken);
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id), cancellationToken);
 
             if (res > 0)
             {
-                await db.DeleteAsync<AdminRoleMenuEntity>(c => ids.Contains(c.MenuId), cancellationToken);
+                await roleMenu.DeleteAsync(c => ids.Contains(c.MenuId), cancellationToken);
 
                 DeletedAction?.Invoke(ids);
             }
@@ -54,31 +57,31 @@ namespace XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu
 
         public override async Task<IList<AdminMenuDto>> GetListAsync(AdminMenuQueryCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<AdminMenuEntity>()
+            var selector = db.BuildFilter()
 
                 .And(c => c.IsMenu == request.IsMenu)
                 .And(c => c.Status == request.Status, request.Status != Status.Default);
 
-            var res = await db.GetListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
         }
 
         public override async Task<PagedModel<AdminMenuDto>> GetPagedListAsync(AdminMenuQueryPagedCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<AdminMenuEntity>()
+            var selector = db.BuildFilter()
 
                 .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty())
                 .And(c => c.Status == request.Status, request.Status != Status.Default);
 
-            var res = await db.GetPagedListAsync<AdminMenuEntity, AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminMenuDto>(selector, $"{nameof(AdminMenuEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }
 
         public async Task<IList<AdminMenuTreeDto>> GetListByTreeAsync(CancellationToken cancellationToken)
         {
-            var res = await db.GetListAsync<AdminMenuEntity>(orderby: "Weight desc", cancellationToken: cancellationToken);
+            var res = await db.GetListAsync(orderby: "Weight desc", cancellationToken: cancellationToken);
 
             return AuthMenuTree(res, 0);
         }

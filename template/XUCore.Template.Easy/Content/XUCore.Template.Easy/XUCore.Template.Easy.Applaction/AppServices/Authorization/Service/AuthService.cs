@@ -35,13 +35,11 @@ namespace XUCore.Template.Easy.Applaction.Authorization
         private readonly ICacheManager cacheManager;
 
         private readonly IPermissionService permissionService;
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
+        private readonly IDefaultDbRepository<AdminUserEntity> user;
         public AuthService(IServiceProvider serviceProvider)
         {
             permissionService = serviceProvider.GetService<IPermissionService>();
-            this.db = serviceProvider.GetService<IDefaultDbRepository>();
-            this.mapper = serviceProvider.GetService<IMapper>();
+            this.user = serviceProvider.GetService<IDefaultDbRepository<AdminUserEntity>>();
             this.cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
@@ -55,7 +53,7 @@ namespace XUCore.Template.Easy.Applaction.Authorization
 
             if (!Valid.IsMobileNumberSimple(request.Account))
             {
-                user = await db.GetFirstAsync<AdminUserEntity>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
+                user = await this.user.GetFirstAsync<AdminUserEntity>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("账号不存在");
 
@@ -63,7 +61,7 @@ namespace XUCore.Template.Easy.Applaction.Authorization
             }
             else
             {
-                user = await db.GetFirstAsync<AdminUserEntity>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
+                user = await this.user.GetFirstAsync<AdminUserEntity>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("手机号码不存在");
 
@@ -88,7 +86,7 @@ namespace XUCore.Template.Easy.Applaction.Authorization
                 LoginWay = loginWay
             });
 
-            db.Update(user);
+            this.user.Update(user);
 
             // 生成 token
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>

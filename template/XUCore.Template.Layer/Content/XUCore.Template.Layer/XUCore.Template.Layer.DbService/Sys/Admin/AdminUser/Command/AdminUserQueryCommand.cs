@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
+using XUCore.NetCore.Data;
 using XUCore.Template.Layer.Core.Enums;
 
 namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminUser

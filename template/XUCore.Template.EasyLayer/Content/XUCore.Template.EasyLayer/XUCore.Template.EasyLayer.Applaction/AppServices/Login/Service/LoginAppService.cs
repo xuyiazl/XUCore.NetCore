@@ -50,7 +50,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
         {
             var command = new AdminUserCreateCommand
             {

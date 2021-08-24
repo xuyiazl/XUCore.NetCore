@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
+using XUCore.NetCore.Data;
 using XUCore.Template.Easy.Core.Enums;
 
 namespace XUCore.Template.Easy.Applaction.Admin

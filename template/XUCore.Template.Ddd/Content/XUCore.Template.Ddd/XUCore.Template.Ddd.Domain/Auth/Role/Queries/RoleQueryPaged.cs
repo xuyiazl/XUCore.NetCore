@@ -49,7 +49,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
 
             public override async Task<PagedModel<RoleDto>> Handle(RoleQueryPaged request, CancellationToken cancellationToken)
             {
-                var selector = db.AsQuery<RoleEntity>()
+                var selector = db.BuildFilter<RoleEntity>()
 
                     .And(c => c.Status == request.Status, request.Status != Status.Default)
                     .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());

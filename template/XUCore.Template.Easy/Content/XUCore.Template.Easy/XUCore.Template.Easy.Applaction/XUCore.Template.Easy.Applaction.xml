@@ -277,6 +277,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminMenuAppService.GetPagedListAsync(XUCore.Template.Easy.Applaction.Admin.AdminMenuQueryPagedCommand,System.Threading.CancellationToken)">
+            <summary>
+            获取导航分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminMenuAppService.GetListByTreeAsync(System.Threading.CancellationToken)">
             <summary>
             获取导航树形结构
@@ -533,11 +541,6 @@
         <member name="P:XUCore.Template.Easy.Applaction.Admin.AdminUserQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.Easy.Applaction.Admin.AdminUserQueryPagedCommand.OrderBy">
-            <summary>
-            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:XUCore.Template.Easy.Applaction.Admin.AdminUserQueryPagedCommand.Status">
@@ -871,7 +874,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Admin.View.Create(XUCore.Template.Easy.Persistence.DefaultDbContext)">
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.View.Create(XUCore.NetCore.Data.IDbContext)">
             <summary>
             linq 关联查询，关联账号信息
             </summary>
@@ -1146,7 +1149,7 @@
             删除事件
             </summary>
         </member>
-        <member name="M:XUCore.Template.Easy.Applaction.CurdAppService`7.#ctor(XUCore.Template.Easy.Persistence.IDefaultDbRepository,AutoMapper.IMapper)">
+        <member name="M:XUCore.Template.Easy.Applaction.CurdAppService`7.#ctor(XUCore.Template.Easy.Persistence.IDefaultDbRepository{`1},AutoMapper.IMapper)">
             <summary>
             CURD服务
             </summary>

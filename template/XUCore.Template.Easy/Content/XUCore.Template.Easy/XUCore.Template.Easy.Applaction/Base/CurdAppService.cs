@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.NetCore;
+using XUCore.NetCore.Data;
 using XUCore.Paging;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
@@ -38,7 +37,7 @@ namespace XUCore.Template.Easy.Applaction
             where TListCommand : ListCommand
             where TPageCommand : PageCommand
     {
-        protected readonly IDefaultDbRepository db;
+        protected readonly IDefaultDbRepository<TEntity> db;
         protected readonly IMapper mapper;
         /// <summary>
         /// 创建事件
@@ -57,7 +56,7 @@ namespace XUCore.Template.Easy.Applaction
         /// </summary>
         /// <param name="db"></param>
         /// <param name="mapper"></param>
-        public CurdAppService(IDefaultDbRepository db, IMapper mapper)
+        public CurdAppService(IDefaultDbRepository<TEntity> db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
@@ -123,13 +122,13 @@ namespace XUCore.Template.Easy.Applaction
             switch (status)
             {
                 case Status.Show:
-                    res = await db.UpdateAsync<TEntity>(c => ids.Contains(c.Id), c => new TEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => ids.Contains(c.Id), c => new TEntity { Status = Status.Show, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.SoldOut:
-                    res = await db.UpdateAsync<TEntity>(c => ids.Contains(c.Id), c => new TEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => ids.Contains(c.Id), c => new TEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 case Status.Trash:
-                    res = await db.UpdateAsync<TEntity>(c => ids.Contains(c.Id), c => new TEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => ids.Contains(c.Id), c => new TEntity { Status = Status.Trash, DeletedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -149,7 +148,7 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<int>> DeleteAsync([Required] TKey[] ids, CancellationToken cancellationToken)
         {
-            var res = await db.DeleteAsync<TEntity>(c => ids.Contains(c.Id), cancellationToken);
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id), cancellationToken);
 
             if (res > 0)
             {
@@ -169,7 +168,7 @@ namespace XUCore.Template.Easy.Applaction
         [Route("/api/[controller]/{id}")]
         public virtual async Task<Result<TDto>> GetByIdAsync([Required] TKey id, CancellationToken cancellationToken)
         {
-            var res = await db.GetByIdAsync<TEntity, TDto>(id, cancellationToken);
+            var res = await db.GetByIdAsync<TDto>(id, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -181,9 +180,9 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<IList<TDto>>> GetListAsync([Required][FromQuery] TListCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<TEntity>();
+            var selector = db.BuildFilter();
 
-            var res = await db.GetListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", skip: -1, limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", skip: -1, limit: request.Limit, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -195,9 +194,9 @@ namespace XUCore.Template.Easy.Applaction
         /// <returns></returns>
         public virtual async Task<Result<PagedModel<TDto>>> GetPagedListAsync([Required][FromQuery] TPageCommand request, CancellationToken cancellationToken)
         {
-            var selector = db.AsQuery<TEntity>();
+            var selector = db.BuildFilter();
 
-            var res = await db.GetPagedListAsync<TEntity, TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken: cancellationToken);
+            var res = await db.GetPagedListAsync<TDto>(selector: selector, orderby: $"{nameof(BaseEntity<TKey>.Id)} asc", currentPage: request.CurrentPage, pageSize: request.PageSize, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }

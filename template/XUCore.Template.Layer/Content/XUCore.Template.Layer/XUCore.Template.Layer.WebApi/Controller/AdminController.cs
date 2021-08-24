@@ -36,7 +36,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand command, CancellationToken cancellationToken = default)
         {
             return await adminAppService.CreateUserAsync(command, cancellationToken);
         }
@@ -211,7 +211,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("Role")]
-        public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand command, CancellationToken cancellationToken = default)
         {
             return await adminAppService.CreateRoleAsync(command, cancellationToken);
         }
@@ -318,7 +318,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("Menu")]
-        public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand command, CancellationToken cancellationToken = default)
         {
             return await adminAppService.CreateMenuAsync(command, cancellationToken);
         }

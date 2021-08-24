@@ -46,7 +46,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Menu
 
             public override async Task<IList<MenuDto>> Handle(MenuQueryByWeight request, CancellationToken cancellationToken)
             {
-                var selector = db.AsQuery<MenuEntity>()
+                var selector = db.BuildFilter<MenuEntity>()
                     .And(c => c.IsMenu == request.IsMenu);
 
                 var res = await db.GetListAsync<MenuEntity, MenuDto>(selector, orderby: "Weight desc", cancellationToken: cancellationToken);

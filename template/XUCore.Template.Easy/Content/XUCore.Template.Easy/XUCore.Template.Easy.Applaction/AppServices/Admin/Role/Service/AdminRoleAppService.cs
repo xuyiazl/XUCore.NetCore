@@ -31,9 +31,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
     public class AdminRoleAppService : CurdAppService<long, AdminRoleEntity, AdminRoleDto, AdminRoleCreateCommand, AdminRoleUpdateCommand, AdminRoleQueryCommand, AdminRoleQueryPagedCommand>,
         IAdminRoleAppService
     {
-        public AdminRoleAppService(IDefaultDbRepository db, IMapper mapper) : base(db, mapper)
+        private readonly IDefaultDbRepository<AdminUserRoleEntity> userRole;
+        private readonly IDefaultDbRepository<AdminRoleMenuEntity> roleMenu;
+        public AdminRoleAppService(IServiceProvider serviceProvider, IDefaultDbRepository<AdminRoleEntity> db, IMapper mapper) : base(db, mapper)
         {
-
+            userRole = serviceProvider.GetService<IDefaultDbRepository<AdminUserRoleEntity>>();
+            roleMenu = serviceProvider.GetService<IDefaultDbRepository<AdminRoleMenuEntity>>();
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
             entity = mapper.Map(request, entity);
 
             //先清空导航集合，确保没有冗余信息
-            await db.DeleteAsync<AdminRoleMenuEntity>(c => c.RoleId == entity.Id);
+            await roleMenu.DeleteAsync(c => c.RoleId == entity.Id);
 
             //保存关联导航
             if (request.MenuIds != null && request.MenuIds.Length > 0)
@@ -120,7 +123,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
             switch (field.ToLower())
             {
                 case "name":
-                    res = await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                    res = await db.UpdateAsync(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                     break;
                 default:
                     res = 0;
@@ -140,14 +143,14 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<int>> DeleteAsync([Required] long[] ids, CancellationToken cancellationToken = default)
         {
-            var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id));
 
             if (res > 0)
             {
                 //删除关联的导航
-                await db.DeleteAsync<AdminRoleMenuEntity>(c => ids.Contains(c.RoleId));
+                await roleMenu.DeleteAsync(c => ids.Contains(c.RoleId));
                 //删除用户关联的角色
-                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.RoleId));
+                await userRole.DeleteAsync(c => ids.Contains(c.RoleId));
 
                 DeletedAction?.Invoke(ids);
 
@@ -164,12 +167,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<IList<AdminRoleDto>>> GetListAsync([Required][FromQuery] AdminRoleQueryCommand request, CancellationToken cancellationToken = default)
         {
-            var selector = db.AsQuery<AdminRoleEntity>()
+            var selector = db.BuildFilter()
 
                 .And(c => c.Status == request.Status, request.Status != Status.Default)
                 .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
 
-            var res = await db.GetListAsync<AdminRoleEntity, AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
+            var res = await db.GetListAsync<AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return RestFull.Success(data: res.As<IList<AdminRoleDto>>());
         }
@@ -181,12 +184,12 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public override async Task<Result<PagedModel<AdminRoleDto>>> GetPagedListAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            var selector = db.AsQuery<AdminRoleEntity>()
+            var selector = db.BuildFilter()
 
                 .And(c => c.Status == request.Status, request.Status != Status.Default)
                 .And(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-            var res = await db.GetPagedListAsync<AdminRoleEntity, AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return RestFull.Success(data: res.ToModel());
         }
@@ -198,11 +201,7 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <returns></returns>
         public async Task<Result<IList<long>>> GetRelevanceMenuAsync([Required] int roleId, CancellationToken cancellationToken = default)
         {
-            var res = await db.Context.AdminRoleMenu
-                          .Where(c => c.RoleId == roleId)
-                          .OrderBy(c => c.MenuId)
-                          .Select(c => c.MenuId)
-                          .ToListAsync();
+            var res = await roleMenu.Table.Where(c => c.RoleId == roleId).OrderBy(c => c.MenuId).Select(c => c.MenuId).ToListAsync(cancellationToken);
 
             return RestFull.Success(data: res.As<IList<long>>());
         }

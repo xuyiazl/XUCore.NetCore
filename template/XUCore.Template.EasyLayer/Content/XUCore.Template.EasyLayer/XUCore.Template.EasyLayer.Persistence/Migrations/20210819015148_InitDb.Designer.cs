@@ -9,7 +9,7 @@ using XUCore.Template.EasyLayer.Persistence;
 namespace XUCore.Template.EasyLayer.Persistence.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210819005006_InitDb")]
+    [Migration("20210819015148_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

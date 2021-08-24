@@ -37,7 +37,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<int>> CreateUserAsync(AdminUserCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateUserAsync(AdminUserCreateCommand command, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.CreateAsync(command, cancellationToken);
 
@@ -247,7 +247,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<int>> CreateRoleAsync(AdminRoleCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateRoleAsync(AdminRoleCreateCommand command, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.CreateAsync(command, cancellationToken);
 
@@ -378,7 +378,7 @@ namespace XUCore.Template.Layer.Applaction.Admin
         /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Result<int>> CreateMenuAsync(AdminMenuCreateCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateMenuAsync(AdminMenuCreateCommand command, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.CreateAsync(command, cancellationToken);
 

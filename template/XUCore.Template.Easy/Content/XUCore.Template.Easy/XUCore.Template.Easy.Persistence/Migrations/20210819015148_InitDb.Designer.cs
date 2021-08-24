@@ -9,7 +9,7 @@ using XUCore.Template.Easy.Persistence;
 namespace XUCore.Template.Easy.Persistence.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210818164435_InitDb")]
+    [Migration("20210819015148_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,28 +207,7 @@ namespace XUCore.Template.Easy.Persistence.Migrations
                     b.ToTable("sys_admin_users");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserRoleEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("AdminId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("sys_admin_authuserrole");
-                });
-
-            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,6 +238,27 @@ namespace XUCore.Template.Easy.Persistence.Migrations
                     b.ToTable("sys_admin_loginrecord");
                 });
 
+            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserRoleEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("AdminId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("sys_admin_authuserrole");
+                });
+
             modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity", b =>
                 {
                     b.HasOne("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminMenuEntity", "Menus")
@@ -278,6 +278,17 @@ namespace XUCore.Template.Easy.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity", b =>
+                {
+                    b.HasOne("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
+                        .WithMany("LoginRecords")
+                        .HasForeignKey("AdminId")
+                        .HasConstraintName("FK_AdminUser_AdminLoginRecord")
+                        .IsRequired();
+
+                    b.Navigation("AdminUser");
+                });
+
             modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserRoleEntity", b =>
                 {
                     b.HasOne("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
@@ -295,17 +306,6 @@ namespace XUCore.Template.Easy.Persistence.Migrations
                     b.Navigation("AdminUser");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity", b =>
-                {
-                    b.HasOne("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
-                        .WithMany("LoginRecords")
-                        .HasForeignKey("AdminId")
-                        .HasConstraintName("FK_AdminUser_AdminLoginRecord")
-                        .IsRequired();
-
-                    b.Navigation("AdminUser");
                 });
 
             modelBuilder.Entity("XUCore.Template.Easy.Persistence.Entities.Sys.Admin.AdminMenuEntity", b =>

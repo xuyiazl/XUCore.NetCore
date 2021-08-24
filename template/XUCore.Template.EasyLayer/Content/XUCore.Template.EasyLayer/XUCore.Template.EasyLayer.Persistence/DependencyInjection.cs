@@ -49,7 +49,7 @@ namespace XUCore.Template.EasyLayer.Persistence
                 //options.UseLoggerFactory(MyLoggerFactory);
             });
 
-            services.AddScoped(typeof(IDefaultDbRepository), typeof(DefaultDbRepository));
+            services.AddScoped(typeof(IDefaultDbRepository<>), typeof(DefaultDbRepository<>));
 
             return services;
         }

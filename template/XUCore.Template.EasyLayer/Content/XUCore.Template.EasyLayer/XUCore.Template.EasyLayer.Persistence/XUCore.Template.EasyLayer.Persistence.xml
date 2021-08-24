@@ -4,15 +4,17 @@
         <name>XUCore.Template.EasyLayer.Persistence</name>
     </assembly>
     <members>
-        <member name="T:XUCore.Template.EasyLayer.Persistence.IDefaultDbRepository">
+        <member name="T:XUCore.Template.EasyLayer.Persistence.IDefaultDbRepository`1">
             <summary>
             数据仓储
             </summary>
+            <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbRepository">
+        <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbRepository`1">
             <summary>
             数据仓储
             </summary>
+            <typeparam name="TEntity"></typeparam>
         </member>
         <member name="T:XUCore.Template.EasyLayer.Persistence.DefaultDbContext">
             <summary>

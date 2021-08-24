@@ -49,7 +49,7 @@ namespace XUCore.Template.Ddd.Domain.User.User
 
             public override async Task<PagedModel<UserDto>> Handle(UserQueryPaged request, CancellationToken cancellationToken)
             {
-                var selector = db.AsQuery<UserEntity>()
+                var selector = db.BuildFilter<UserEntity>()
 
                     .And(c => c.Status == request.Status, request.Status != Status.Default)
                     .And(c =>

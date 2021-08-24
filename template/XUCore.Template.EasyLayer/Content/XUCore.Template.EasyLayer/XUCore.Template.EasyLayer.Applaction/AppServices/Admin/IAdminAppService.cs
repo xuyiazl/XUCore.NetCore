@@ -24,7 +24,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateUserAsync(AdminUserCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateUserAsync(AdminUserCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新账号信息
         /// </summary>
@@ -124,7 +124,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateRoleAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateRoleAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新角色信息
         /// </summary>
@@ -195,7 +195,7 @@ namespace XUCore.Template.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateMenuAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateMenuAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新导航信息
         /// </summary>

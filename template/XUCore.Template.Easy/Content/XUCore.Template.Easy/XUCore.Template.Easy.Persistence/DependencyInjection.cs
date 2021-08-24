@@ -49,7 +49,7 @@ namespace XUCore.Template.Easy.Persistence
                 //options.UseLoggerFactory(MyLoggerFactory);
             });
 
-            services.AddScoped(typeof(IDefaultDbRepository), typeof(DefaultDbRepository));
+            services.AddScoped(typeof(IDefaultDbRepository<>), typeof(DefaultDbRepository<>));
 
             return services;
         }
@@ -63,7 +63,6 @@ namespace XUCore.Template.Easy.Persistence
 #if !DEBUG
             dbContext.Database.Migrate();
 #endif
-
             return app;
         }
     }

@@ -42,7 +42,7 @@ namespace XUCore.Template.Layer.WebApi.Controller
         /// <returns></returns>
         [HttpPost("/api/[controller]/InitAccount")]
         [AllowAnonymous]
-        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
         {
             var command = new AdminUserCreateCommand
             {

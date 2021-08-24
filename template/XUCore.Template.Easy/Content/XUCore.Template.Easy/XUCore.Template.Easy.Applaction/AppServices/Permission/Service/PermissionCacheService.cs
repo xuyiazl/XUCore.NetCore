@@ -15,13 +15,10 @@ namespace XUCore.Template.Easy.Applaction.Permission
     [NonDynamicWebApi]
     public class PermissionCacheService : IPermissionCacheService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-
-        public PermissionCacheService(IDefaultDbRepository db, IMapper mapper)
+        private readonly IDefaultDbRepository<AdminMenuEntity> db;
+        public PermissionCacheService(IDefaultDbRepository<AdminMenuEntity> db)
         {
             this.db = db;
-            this.mapper = mapper;
         }
 
         [CacheMethod(Key = CacheKey.AuthUser, ParamterKey = "{0}", Seconds = CacheTime.Min5)]
@@ -30,11 +27,11 @@ namespace XUCore.Template.Easy.Applaction.Permission
             var res =
                     await
                     (
-                        from userRoles in db.Context.AdminUserRole
+                        from userRoles in db.Context.Set<AdminUserRoleEntity>()
 
-                        join roleMenus in db.Context.AdminRoleMenu on userRoles.RoleId equals roleMenus.RoleId
+                        join roleMenus in db.Context.Set<AdminRoleMenuEntity>() on userRoles.RoleId equals roleMenus.RoleId
 
-                        join menus in db.Context.AdminMenu on roleMenus.MenuId equals menus.Id
+                        join menus in db.Context.Set<AdminMenuEntity>() on roleMenus.MenuId equals menus.Id
 
                         where userRoles.AdminId == adminId
 

@@ -1,23 +1,24 @@
-﻿using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Reflection;
 using XUCore.NetCore.Data;
-using System.Linq;
-using XUCore.Template.EasyLayer.Persistence.Entities;
 using XUCore.Template.EasyLayer.Core.Enums;
-using System;
-using AutoMapper;
+using XUCore.Template.EasyLayer.Persistence.Entities;
 
 namespace XUCore.Template.EasyLayer.Persistence
 {
     /// <summary>
     /// 数据仓储
     /// </summary>
-    public interface IDefaultDbRepository : IDbContextRepository<DefaultDbContext> { }
+    /// <typeparam name="TEntity"></typeparam>
+    public interface IDefaultDbRepository<TEntity> : IDbRepository<TEntity> where TEntity : class, new() { }
     /// <summary>
     /// 数据仓储
     /// </summary>
-    public class DefaultDbRepository : DbContextRepository<DefaultDbContext>, IDefaultDbRepository
+    /// <typeparam name="TEntity"></typeparam>
+    public class DefaultDbRepository<TEntity> : DbRepository<TEntity>, IDefaultDbRepository<TEntity> where TEntity : class, new()
     {
         public DefaultDbRepository(DefaultDbContext context, IMapper mapper) : base(context, mapper) { }
     }
@@ -67,16 +68,5 @@ namespace XUCore.Template.EasyLayer.Persistence
         }
 
         public override Assembly[] Assemblies => new Assembly[] { Assembly.GetExecutingAssembly() };
-
-        #region [ 系统 ]
-
-        public DbSet<AdminUserEntity> AdminUser => Set<AdminUserEntity>();
-        public DbSet<AdminUserRoleEntity> AdminUserRole => Set<AdminUserRoleEntity>();
-        public DbSet<AdminUserLoginRecordEntity> AdminUserLoginRecord => Set<AdminUserLoginRecordEntity>();
-        public DbSet<AdminRoleMenuEntity> AdminRoleMenu => Set<AdminRoleMenuEntity>();
-        public DbSet<AdminRoleEntity> AdminRole => Set<AdminRoleEntity>();
-        public DbSet<AdminMenuEntity> AdminMenu => Set<AdminMenuEntity>();
-
-        #endregion
     }
 }

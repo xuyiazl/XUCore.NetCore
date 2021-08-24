@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using XUCore.Template.EasyLayer.Core;
 using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
 

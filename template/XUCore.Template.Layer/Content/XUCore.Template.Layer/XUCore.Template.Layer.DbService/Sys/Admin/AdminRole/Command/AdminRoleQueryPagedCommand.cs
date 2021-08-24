@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
+using XUCore.NetCore.Data;
 using XUCore.Template.Layer.Core.Enums;
 
 namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
@@ -15,10 +16,6 @@ namespace XUCore.Template.Layer.DbService.Sys.Admin.AdminRole
         /// 搜索关键字
         /// </summary>
         public string Keyword { get; set; }
-        /// <summary>
-        /// 排序方式 exp：“Id asc or Id desc”
-        /// </summary>
-        public string OrderBy { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
