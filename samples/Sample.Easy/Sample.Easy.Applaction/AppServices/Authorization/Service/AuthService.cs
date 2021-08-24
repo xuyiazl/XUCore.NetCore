@@ -7,12 +7,14 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Cache;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Swagger;
+using Sample.Easy.Applaction.Admin;
 using Sample.Easy.Applaction.Login;
 using Sample.Easy.Applaction.Permission;
 using Sample.Easy.Core.Enums;
@@ -29,15 +31,16 @@ namespace Sample.Easy.Applaction.Authorization
     {
         private const string userId = "_admin_userid_";
         private const string userName = "_admin_username_";
+        private const string loginToken = "__login_token__";
+        private readonly ICacheManager cacheManager;
 
         private readonly IPermissionService permissionService;
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
+        private readonly IDefaultDbRepository<AdminUserEntity> user;
         public AuthService(IServiceProvider serviceProvider)
         {
             permissionService = serviceProvider.GetService<IPermissionService>();
-            this.db = serviceProvider.GetService<IDefaultDbRepository>();
-            this.mapper = serviceProvider.GetService<IMapper>();
+            this.user = serviceProvider.GetService<IDefaultDbRepository<AdminUserEntity>>();
+            this.cacheManager = serviceProvider.GetService<ICacheManager>();
         }
 
         public async Task<(string, string)> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default)
@@ -50,19 +53,19 @@ namespace Sample.Easy.Applaction.Authorization
 
             if (!Valid.IsMobileNumberSimple(request.Account))
             {
-                user = await db.Context.AdminUser.Where(c => c.UserName.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await this.user.GetFirstAsync<AdminUserEntity>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("账号不存在");
 
-                loginWay = "Mobile";
+                loginWay = "UserName";
             }
             else
             {
-                user = await db.Context.AdminUser.Where(c => c.Mobile.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await this.user.GetFirstAsync<AdminUserEntity>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("手机号码不存在");
 
-                loginWay = "UserName";
+                loginWay = "Mobile";
             }
 
             if (!user.Password.Equals(request.Password))
@@ -75,7 +78,7 @@ namespace Sample.Easy.Applaction.Authorization
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new LoginRecordEntity
+            user.LoginRecords.Add(new AdminUserLoginRecordEntity
             {
                 AdminId = user.Id,
                 LoginIp = user.LoginLastIp,
@@ -83,7 +86,7 @@ namespace Sample.Easy.Applaction.Authorization
                 LoginWay = loginWay
             });
 
-            db.Update(user);
+            this.user.Update(user);
 
             // 生成 token
             var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
@@ -100,12 +103,44 @@ namespace Sample.Easy.Applaction.Authorization
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
+            SetLoginToken(user.Id, accessToken);
+
             return (accessToken, refreshToken);
         }
 
-        public async Task LoginOutAsync()
+        public async Task LoginOutAsync(CancellationToken cancellationToken = default)
         {
+            RemoveLoginToken();
+
             await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="token"></param>
+        private void SetLoginToken(long userId, string token)
+        {
+            cacheManager.Set($"{loginToken}{userId}", token);
+        }
+        /// <summary>
+        /// 删除登录标记，模拟退出
+        /// </summary>
+        private void RemoveLoginToken()
+        {
+            cacheManager.Remove($"{loginToken}{AdminId}");
+        }
+        /// <summary>
+        /// 验证token是否一致
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool VaildLoginToken(string token)
+        {
+            var cacheToken = cacheManager.Get<string>($"{loginToken}{AdminId}");
+
+            return token == cacheToken;
         }
 
         public bool IsCanAccess(string accessKey)

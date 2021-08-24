@@ -4,7 +4,7 @@ using Sample.Easy.Core.Enums;
 
 namespace Sample.Easy.Persistence.Entities
 {
-    public class BaseEntity : Entity<long>, IAggregateRoot
+    public class BaseEntity<TKey> : Entity<TKey>, IAggregateRoot
     {
         /// <summary>
         /// 数据状态
@@ -13,15 +13,15 @@ namespace Sample.Easy.Persistence.Entities
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime Created_At { get; set; }
+        public DateTime CreatedAt { get; set; }
         /// <summary>
         /// 最后更新时间
         /// </summary>
-        public DateTime? Updated_At { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         /// <summary>
         /// 删除时间
         /// </summary>
-        public DateTime? Deleted_At { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 
 }

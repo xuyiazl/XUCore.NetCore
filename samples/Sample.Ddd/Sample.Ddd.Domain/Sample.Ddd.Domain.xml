@@ -372,19 +372,14 @@
             角色查询命令
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.Search">
+        <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.Keyword">
             <summary>
             搜索关键字
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.Sort">
+        <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.OrderBy">
             <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:Sample.Ddd.Domain.Auth.Role.RoleQueryPaged.Status">
@@ -497,19 +492,14 @@
             登录记录查询分页
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.Search">
+        <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.Keyword">
             <summary>
             搜索关键字
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.Sort">
+        <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.OrderBy">
             <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:Sample.Ddd.Domain.User.LoginRecord.UserLoginRecordQueryPaged.Status">
@@ -793,19 +783,14 @@
             用户查询分页
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.Search">
+        <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.Keyword">
             <summary>
             搜索关键字
             </summary>
         </member>
-        <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.Sort">
+        <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.OrderBy">
             <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
+            排序方式 exp：“Id asc or Id desc”
             </summary>
         </member>
         <member name="P:Sample.Ddd.Domain.User.User.UserQueryPaged.Status">

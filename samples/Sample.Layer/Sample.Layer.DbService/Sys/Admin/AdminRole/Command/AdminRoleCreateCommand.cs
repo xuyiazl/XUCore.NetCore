@@ -3,7 +3,9 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.Layer.Core;
 using Sample.Layer.Core.Enums;
 using Sample.Layer.Persistence.Entities.Sys.Admin;
@@ -14,7 +16,7 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 创建角色命令
     /// </summary>
-    public class AdminRoleCreateCommand : Command<bool>, IMapFrom<AdminRoleEntity>
+    public class AdminRoleCreateCommand : CreateCommand, IMapFrom<AdminRoleEntity>
     {
         /// <summary>
         /// 角色名
@@ -31,9 +33,15 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminRole
         [Required]
         public Status Status { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
+
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleCreateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminRoleCreateCommand>

@@ -6,11 +6,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
-using XUCore.Paging;
+using Sample.Layer.Applaction;
 using Sample.Layer.Applaction.Admin;
 using Sample.Layer.Applaction.Login;
 using Sample.Layer.DbService.Sys.Admin.AdminUser;
-using Sample.Layer.DbService.Sys.Admin.LoginRecord;
 using Sample.Layer.DbService.Sys.Admin.Permission;
 
 namespace Sample.Layer.WebApi.Controller
@@ -18,7 +17,7 @@ namespace Sample.Layer.WebApi.Controller
     /// <summary>
     /// 管理员登录接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = ApiGroup.Login)]
+    [ApiExplorerSettings(GroupName = ApiGroup.Admin)]
     public class LoginController : ApiControllerBase
     {
         private readonly ILoginAppService loginAppService;
@@ -43,7 +42,7 @@ namespace Sample.Layer.WebApi.Controller
         /// <returns></returns>
         [HttpPost("/api/[controller]/InitAccount")]
         [AllowAnonymous]
-        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
         {
             var command = new AdminUserCreateCommand
             {
@@ -131,34 +130,6 @@ namespace Sample.Layer.WebApi.Controller
         public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             return await loginAppService.GetPermissionMenuExpressAsync(adminId, cancellationToken);
-        }
-
-        #endregion
-
-        #region [ 登录记录 ]
-
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit">记录数</param>
-        /// <param name="adminId">管理员id</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("Record/List")]
-        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync([Required] int limit, [Required] long adminId, CancellationToken cancellationToken = default)
-        {
-            return await loginAppService.GetRecordListAsync(limit, adminId, cancellationToken);
-        }
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("Record/Page")]
-        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default)
-        {
-            return await loginAppService.GetRecordPageAsync(command, cancellationToken);
         }
 
         #endregion

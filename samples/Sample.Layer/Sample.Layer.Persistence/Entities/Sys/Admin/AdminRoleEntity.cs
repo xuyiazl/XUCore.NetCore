@@ -7,7 +7,7 @@ namespace Sample.Layer.Persistence.Entities.Sys.Admin
     /// <summary>
     /// 角色表
     /// </summary>
-    public partial class AdminRoleEntity : BaseEntity
+    public partial class AdminRoleEntity : BaseEntity<long>
     {
         public AdminRoleEntity()
         {

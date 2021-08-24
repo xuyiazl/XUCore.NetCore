@@ -12,14 +12,12 @@ namespace Sample.Easy.Applaction.Permission
     [NonDynamicWebApi]
     public class PermissionService : IPermissionService
     {
-        private readonly IDefaultDbRepository db;
         private readonly IMapper mapper;
 
         private readonly IPermissionCacheService permissionCacheService;
 
-        public PermissionService(IDefaultDbRepository db, IMapper mapper, IPermissionCacheService permissionCacheService)
+        public PermissionService(IMapper mapper, IPermissionCacheService permissionCacheService)
         {
-            this.db = db;
             this.mapper = mapper;
             this.permissionCacheService = permissionCacheService;
         }

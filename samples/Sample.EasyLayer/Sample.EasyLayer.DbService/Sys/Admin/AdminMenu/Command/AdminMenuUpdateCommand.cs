@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.EasyLayer.Core;
 using Sample.EasyLayer.Core.Enums;
 using Sample.EasyLayer.Persistence.Entities.Sys.Admin;
@@ -14,13 +14,8 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminMenu
     /// <summary>
     /// 导航更新命令
     /// </summary>
-    public class AdminMenuUpdateCommand : Command<bool>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuUpdateCommand : UpdateCommand<long>, IMapFrom<AdminMenuEntity>
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 导航父级id
         /// </summary>
@@ -72,14 +67,14 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminMenu
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuUpdateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
-        public class Validator : CommandValidator<AdminMenuUpdateCommand>
+        public class Validator : CommandIdValidator<AdminMenuUpdateCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("菜单名");
                 RuleFor(x => x.Url).NotEmpty().MaximumLength(50).WithName("Url");
                 RuleFor(x => x.OnlyCode).NotEmpty().MaximumLength(50).WithName("唯一代码");

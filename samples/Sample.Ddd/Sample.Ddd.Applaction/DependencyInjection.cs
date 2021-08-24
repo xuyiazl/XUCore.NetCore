@@ -16,21 +16,11 @@ namespace Sample.Ddd.Applaction
                 .WithScopedLifetime()
             );
 
-            if (project == "api")
-            {
-                services.AddSwagger(environment);
-            }
-
             return services;
         }
 
         public static IApplicationBuilder UseApplication(this IApplicationBuilder app, IWebHostEnvironment environment, string project = "api")
         {
-            if (project == "api")
-            {
-                app.UseSwagger(environment);
-            }
-
             return app;
         }
     }

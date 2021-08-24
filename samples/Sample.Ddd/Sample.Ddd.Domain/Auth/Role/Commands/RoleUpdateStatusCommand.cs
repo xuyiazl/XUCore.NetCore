@@ -34,10 +34,12 @@ namespace Sample.Ddd.Domain.Auth.Role
         public class Handler : CommandHandler<RoleUpdateStatusCommand, int>
         {
             private readonly IDefaultDbRepository db;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
+                this.loginInfo = loginInfo;
             }
 
 
@@ -46,11 +48,11 @@ namespace Sample.Ddd.Domain.Auth.Role
                 switch (request.Status)
                 {
                     case Status.Show:
-                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.Show, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.Show, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case Status.SoldOut:
-                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.SoldOut, UpdatedAt = DateTime.Now, UpdatedAtUserId = loginInfo.UserId });
                     case Status.Trash:
-                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.Trash, DeletedAt = DateTime.Now, DeletedAtUserId = LoginInfo.UserId });
+                        return await db.UpdateAsync<RoleEntity>(c => request.Ids.Contains(c.Id), c => new RoleEntity { Status = Status.Trash, DeletedAt = DateTime.Now, DeletedAtUserId = loginInfo.UserId });
                     default:
                         return 0;
                 }

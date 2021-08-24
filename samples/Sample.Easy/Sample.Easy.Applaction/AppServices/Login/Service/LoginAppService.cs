@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Extensions;
 using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.Serializer;
@@ -30,19 +26,13 @@ namespace Sample.Easy.Applaction.Login
     {
         private readonly IPermissionService permissionService;
         private readonly IAuthService authService;
-        private readonly IAdminAppService adminAppService;
-
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
+        private readonly IAdminUserAppService  adminUserAppService;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.authService = serviceProvider.GetService<IAuthService>();
-            this.adminAppService = serviceProvider.GetService<IAdminAppService>();
-
-            this.db = serviceProvider.GetService<IDefaultDbRepository>();
-            this.mapper = serviceProvider.GetService<IMapper>();
+            this.adminUserAppService = serviceProvider.GetService<IAdminUserAppService>();
         }
 
         #region [ 登录 ]
@@ -74,7 +64,7 @@ namespace Sample.Easy.Applaction.Login
 
             command.IsVaild();
 
-            return await adminAppService.CreateUserAsync(command, cancellationToken);
+            return await adminUserAppService.CreateAsync(command, cancellationToken);
         }
         /// <summary>
         /// 管理员登录
@@ -82,7 +72,7 @@ namespace Sample.Easy.Applaction.Login
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/api/[controller]")]
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
@@ -106,6 +96,16 @@ namespace Sample.Easy.Applaction.Login
                 authService.AdminId,
                 authService.AdminName
             }.ToJson());
+        }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/Out")]
+        public async Task LoginOutAsync(CancellationToken cancellationToken)
+        {
+            await authService.LoginOutAsync(cancellationToken);
         }
 
         #endregion
@@ -155,51 +155,5 @@ namespace Sample.Easy.Applaction.Login
 
         #endregion
 
-        #region [ 登录记录 ]
-
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="adminId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("/api/[controller]/Record/List")]
-        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync([Required] int limit, [Required] long adminId, CancellationToken cancellationToken = default)
-        {
-            var res = await View.Create(db.Context)
-
-                 .Where(c => c.AdminId == adminId)
-
-                 .OrderByDescending(c => c.LoginTime)
-                 .Take(limit)
-
-                 .ProjectTo<LoginRecordDto>(mapper.ConfigurationProvider)
-                 .ToListAsync(cancellationToken);
-
-            return RestFull.Success(data: res.As<IList<LoginRecordDto>>());
-        }
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("/api/[controller]/Record/Page")]
-        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
-        {
-            var res = await View.Create(db.Context)
-
-                 .WhereIf(c => c.Name.Contains(request.Search) || c.Mobile.Contains(request.Search) || c.UserName.Contains(request.Search), !string.IsNullOrEmpty(request.Search))
-
-                 .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
-
-                 .ProjectTo<LoginRecordDto>(mapper.ConfigurationProvider)
-                 .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
-
-            return RestFull.Success(data: res.ToModel());
-        }
-
-        #endregion
     }
 }

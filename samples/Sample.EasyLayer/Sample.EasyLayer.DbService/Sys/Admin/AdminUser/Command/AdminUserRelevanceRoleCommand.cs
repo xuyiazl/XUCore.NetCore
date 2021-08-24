@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
-
+using XUCore.NetCore.Data;
 
 namespace Sample.EasyLayer.DbService.Sys.Admin.AdminUser
 {
     /// <summary>
     /// 关联角色命令
     /// </summary>
-    public class AdminUserRelevanceRoleCommand : Command<bool>
+    public class AdminUserRelevanceRoleCommand : CreateCommand
     {
         /// <summary>
         /// 管理员id

@@ -24,7 +24,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateUserAsync(AdminUserCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateUserAsync(AdminUserCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新账号信息
         /// </summary>
@@ -105,14 +105,14 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateUserRelevanceRoleIdAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default);
+        Task<Result<int>> CreateUserRelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取账号关联的角色id集合
         /// </summary>
         /// <param name="adminId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync(long adminId, CancellationToken cancellationToken = default);
+        Task<Result<IList<long>>> GetUserRelevanceRoleKeysAsync(long adminId, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -124,7 +124,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateRoleAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateRoleAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新角色信息
         /// </summary>
@@ -166,9 +166,10 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <summary>
         /// 获取所有角色
         /// </summary>
+        /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<AdminRoleDto>>> GetRoleAllAsync(CancellationToken cancellationToken = default);
+        Task<Result<IList<AdminRoleDto>>> GetRoleListAsync(AdminRoleQueryCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取角色分页
         /// </summary>
@@ -182,7 +183,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="roleId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync(int roleId, CancellationToken cancellationToken = default);
+        Task<Result<IList<long>>> GetRoleRelevanceMenuAsync(int roleId, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -194,7 +195,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<int>> CreateMenuAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken = default);
+        Task<Result<long>> CreateMenuAsync(AdminMenuCreateCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 更新导航信息
         /// </summary>
@@ -242,10 +243,10 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <summary>
         /// 获取导航列表
         /// </summary>
-        /// <param name="isMenu"></param>
+        /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync(bool isMenu = true, CancellationToken cancellationToken = default);
+        Task<Result<IList<AdminMenuDto>>> GetMenuListAsync(AdminMenuQueryCommand request, CancellationToken cancellationToken = default);
 
         #endregion
     }

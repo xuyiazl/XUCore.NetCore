@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.NetCore.Uploads.Params;
+using Sample.Layer.Applaction;
 using Sample.Layer.Applaction.Upload;
 
 namespace Sample.Layer.WebApi.Controller
@@ -13,7 +14,7 @@ namespace Sample.Layer.WebApi.Controller
     /// <summary>
     /// 文件上传
     /// </summary>
-    [ApiExplorerSettings(GroupName = ApiGroup.File)]
+    [ApiExplorerSettings(GroupName = ApiGroup.Admin)]
     public class UploadController : ApiControllerBase
     {
         private readonly IUploadAppService uploadAppService;

@@ -37,9 +37,7 @@ namespace Sample.Ddd.Domain.Auth.Menu
 
             public override async Task<IList<MenuTreeDto>> Handle(MenuQueryByTree request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.Menu
-                    .OrderByDescending(c => c.Weight)
-                    .ToListAsync(cancellationToken);
+                var res = await db.GetListAsync<MenuEntity>(orderby: "Weight desc", cancellationToken: cancellationToken);
 
                 return AuthMenuTree(res, "");
             }

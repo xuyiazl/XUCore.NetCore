@@ -2,8 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
-using XUCore.Paging;
-using Sample.Easy.Applaction.Admin;
 using Sample.Easy.Applaction.Permission;
 
 namespace Sample.Easy.Applaction.Login
@@ -29,6 +27,13 @@ namespace Sample.Easy.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<string>> VerifyTokenAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task LoginOutAsync(CancellationToken cancellationToken);
 
         #endregion
 
@@ -56,25 +61,6 @@ namespace Sample.Easy.Applaction.Login
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync(long adminId, CancellationToken cancellationToken = default);
-
-        #endregion
-
-        #region [ 登录记录 ]
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="adminId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<Result<IList<LoginRecordDto>>> GetRecordListAsync(int limit, long adminId, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync(LoginRecordQueryPagedCommand command, CancellationToken cancellationToken = default);
 
         #endregion
     }

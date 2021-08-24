@@ -3,7 +3,9 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.Layer.Core;
 using Sample.Layer.Core.Enums;
 using Sample.Layer.Persistence.Entities.Sys.Admin;
@@ -14,7 +16,7 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminMenu
     /// <summary>
     /// 创建导航命令
     /// </summary>
-    public class AdminMenuCreateCommand : Command<bool>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuCreateCommand : CreateCommand, IMapFrom<AdminMenuEntity>
     {
         /// <summary>
         /// 导航父级id
@@ -57,10 +59,16 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminMenu
         [Required]
         public Status Status { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
+
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuCreateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminMenuCreateCommand>

@@ -28,7 +28,7 @@ namespace Sample.Ddd.Persistence.Mappings.User
 
             builder.Property(e => e.LoginCount)
                 .IsRequired()
-                .HasColumnType("int(11)");
+                .HasColumnType("int");
 
             builder.Property(e => e.LoginLastIp)
                 .IsRequired()

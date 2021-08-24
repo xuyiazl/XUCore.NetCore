@@ -10,10 +10,6 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.Ddd.Domain;
 using XUCore.Ddd.Domain.Bus;
-using Sample.Ddd.Domain.Core.Mappings;
-using Sample.Ddd.Domain.Notifications;
-using Sample.Ddd.Infrastructure.Authorization;
-using Sample.Ddd.Infrastructure.Events;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
@@ -22,6 +18,11 @@ using XUCore.NetCore.MessagePack;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Redis;
 using XUCore.Serializer;
+using Sample.Ddd.Domain.Core;
+using Sample.Ddd.Domain.Core.Mappings;
+using Sample.Ddd.Domain.Notifications;
+using Sample.Ddd.Infrastructure.Authorization;
+using Sample.Ddd.Infrastructure.Events;
 
 namespace Sample.Ddd.Infrastructure
 {
@@ -52,7 +53,8 @@ namespace Sample.Ddd.Infrastructure
             // 注入 基础设施层 - 事件溯源
             services.AddEventStore<SqlEventStoreService>();
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAuthService, AuthService>(); 
+            services.AddScoped<ILoginInfoService, AuthService>(); 
 
             // 注入redis插件
             services.AddRedisService().AddJsonRedisSerializer();
@@ -78,10 +80,9 @@ namespace Sample.Ddd.Infrastructure
             {
                 mvcBuilder = services.AddControllers();
 
-                services.AddDynamicWebApi(options =>
+                services.AddDynamicWebApi(opt =>
                 {
-                    // 指定全局默认的 api 前缀
-                    options.DefaultApiPrefix = "api";
+                    opt.IsAutoSortAction = false;
                 });
 
                 //添加跨域配置，加载进来，启用的话需要使用Configure
@@ -101,6 +102,8 @@ namespace Sample.Ddd.Infrastructure
                         */
                     })
                 );
+
+                services.AddSwagger(environment);
             }
             else
             {
@@ -180,6 +183,8 @@ namespace Sample.Ddd.Infrastructure
 
             if (project == "api")
             {
+                app.UseSwagger(env);
+
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();

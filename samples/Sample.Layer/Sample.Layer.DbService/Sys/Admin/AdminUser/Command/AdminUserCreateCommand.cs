@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Helpers;
+using XUCore.NetCore.Data;
 using Sample.Layer.Core;
 using Sample.Layer.Core.Enums;
 using Sample.Layer.Persistence.Entities.Sys.Admin;
@@ -14,7 +15,7 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 创建管理员命令
     /// </summary>
-    public class AdminUserCreateCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserCreateCommand : CreateCommand, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 账号
@@ -55,7 +56,7 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
 
         public override bool IsVaild()
         {
-            ValidationResult = new Validator(Web.GetService<IAdminUserService>()).Validate(this);
+            ValidationResult = new Validator().Validate(this);
 
             return ValidationResult.ThrowValidation();
         }
@@ -67,17 +68,16 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminUserCreateCommand>
         {
-            public Validator(IAdminUserService adminUserService)
+            public Validator()
             {
                 RuleFor(x => x.UserName).NotEmpty().MaximumLength(20).WithName("账号")
                     .MustAsync(async (account, cancel) =>
                     {
-                        var res = await adminUserService.AnyByAccountAsync(AccountMode.UserName, account, 0, cancel);
+                        var res = await Web.GetService<IAdminUserService>().AnyByAccountAsync(AccountMode.UserName, account, 0, cancel);
 
                         return !res;
                     })

@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Sample.Ddd.Domain.Core;
-using XUCore.Ddd.Domain.Commands;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.Paging;
+using Sample.Ddd.Domain.Core;
 
 namespace Sample.Ddd.Domain.User.LoginRecord
 {
@@ -22,15 +18,11 @@ namespace Sample.Ddd.Domain.User.LoginRecord
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        public string Search { get; set; }
+        public string Keyword { get; set; }
         /// <summary>
-        /// 排序字段
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp：“asc or desc”
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
@@ -58,9 +50,9 @@ namespace Sample.Ddd.Domain.User.LoginRecord
             {
                 var res = await View.Create(db.Context)
 
-                    .WhereIf(c => c.Name.Contains(request.Search) || c.Mobile.Contains(request.Search) || c.UserName.Contains(request.Search), !string.IsNullOrEmpty(request.Search))
+                    .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
 
-                    .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+                    .OrderByBatch(request.OrderBy, request.OrderBy.NotEmpty())
 
                     .ProjectTo<UserLoginRecordDto>(mapper.ConfigurationProvider)
                     .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);

@@ -15,10 +15,16 @@ namespace Sample.Easy.Applaction.Authorization
 
         bool IsAuthenticated { get; }
 
-        bool IsCanAccess(string accessKey);
-
+        bool IsCanAccess(string accessKey); 
         Task<(string, string)> LoginAsync(AdminUserLoginCommand command, CancellationToken cancellationToken = default);
 
-        Task LoginOutAsync();
+        Task LoginOutAsync(CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 验证token是否一致
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        bool VaildLoginToken(string token);
+
     }
 }

@@ -4,6 +4,43 @@
         <name>Sample.Layer.DbService</name>
     </assembly>
     <members>
+        <member name="T:Sample.Layer.DbService.CurdService`7">
+            <summary>
+            CURD服务
+            </summary>
+            <typeparam name="TKey">主键类型</typeparam>
+            <typeparam name="TEntity">数据库实体</typeparam>
+            <typeparam name="TDto">输出dto</typeparam>
+            <typeparam name="TCreateCommand">创建命令</typeparam>
+            <typeparam name="TUpdateCommand">修改命令</typeparam>
+            <typeparam name="TListCommand">查询列表命令</typeparam>
+            <typeparam name="TPageCommand">分页命令</typeparam>
+        </member>
+        <member name="M:Sample.Layer.DbService.CurdService`7.#ctor(XUCore.NetCore.Data.IDbRepository{`1},AutoMapper.IMapper)">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="db"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Sample.Layer.DbService.CurdService`7.UpdateAsync(`0[],Sample.Layer.Core.Enums.Status,System.Threading.CancellationToken)">
+            <summary>
+            更新状态
+            </summary>
+            <param name="ids"></param>
+            <param name="status"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sample.Layer.DbService.ICurdService`7.UpdateAsync(`0[],Sample.Layer.Core.Enums.Status,System.Threading.CancellationToken)">
+            <summary>
+            更新状态
+            </summary>
+            <param name="ids"></param>
+            <param name="status"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:Sample.Layer.DbService.Events.AdminUserCreateEvent">
             <summary>
             管理员账号创建事件
@@ -72,14 +109,39 @@
             数据状态
             </summary>
         </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand">
+            <summary>
+            菜单查询命令
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand.IsMenu">
+            <summary>
+            是否是导航
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryPagedCommand">
+            <summary>
+            菜单查询命令
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryPagedCommand.Keyword">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryPagedCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
         <member name="T:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand">
             <summary>
             导航更新命令
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand.Id">
-            <summary>
-            Id
             </summary>
         </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand.FatherId">
@@ -197,39 +259,29 @@
             数据状态
             </summary>
         </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand">
+            <summary>
+            角色查询命令
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand.Keyword">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
         <member name="T:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand">
             <summary>
             角色查询命令
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.CurrentPage">
-            <summary>
-            当前页码
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.PageSize">
-            <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Field">
-            <summary>
-            搜索字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Search">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Sort">
-            <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
             </summary>
         </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand.Status">
@@ -240,11 +292,6 @@
         <member name="T:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand">
             <summary>
             角色修改命令
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand.Id">
-            <summary>
-            Id
             </summary>
         </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand.Name">
@@ -332,39 +379,49 @@
             密码
             </summary>
         </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand">
+            <summary>
+            查询命令
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand">
+            <summary>
+            查询命令
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand.Keyword">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand">
+            <summary>
+            管理员查询
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand.Keyword">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryCommand.Status">
+            <summary>
+            数据状态
+            </summary>
+        </member>
         <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand">
             <summary>
             管理员查询分页
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.CurrentPage">
-            <summary>
-            当前页码
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.PageSize">
-            <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Field">
-            <summary>
-            搜索字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Search">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Keyword">
             <summary>
             搜索关键字
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Sort">
-            <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp：“asc or desc”
             </summary>
         </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand.Status">
@@ -392,11 +449,6 @@
             用户信息修改命令
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand.Name">
             <summary>
             名字
@@ -420,11 +472,6 @@
         <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand">
             <summary>
             密码修改命令
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand.Id">
-            <summary>
-            Id
             </summary>
         </member>
         <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand.OldPassword">
@@ -477,107 +524,52 @@
             头像
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordCreateCommand.AdminId">
-            <summary>
-            管理员id
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordCreateCommand.LoginWay">
-            <summary>
-            登录方式
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordCreateCommand.LoginTime">
-            <summary>
-            登录时间
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordCreateCommand.LoginIp">
-            <summary>
-            登录ip
-            </summary>
-        </member>
-        <member name="T:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand">
-            <summary>
-            查询命令
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.CurrentPage">
-            <summary>
-            当前页码
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.PageSize">
-            <summary>
-            分页大小
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Field">
-            <summary>
-            查询字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Search">
-            <summary>
-            搜索关键词
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Sort">
-            <summary>
-            排序字段
-            </summary>
-        </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordQueryPagedCommand.Order">
-            <summary>
-            排序方式 exp:"asc or desc"
-            </summary>
-        </member>
-        <member name="T:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto">
+        <member name="T:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto">
             <summary>
             登录记录
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.AdminId">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.AdminId">
             <summary>
             管理员id
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.LoginWay">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.LoginWay">
             <summary>
             登录方式
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.LoginTime">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.LoginTime">
             <summary>
             登录时间
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.LoginIp">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.LoginIp">
             <summary>
             登录ip
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.Name">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.Name">
             <summary>
             管理员名字
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.Mobile">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.Mobile">
             <summary>
             管理员手机
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.UserName">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.UserName">
             <summary>
             管理员账号
             </summary>
         </member>
-        <member name="P:Sample.Layer.DbService.Sys.Admin.LoginRecord.LoginRecordDto.Picture">
+        <member name="P:Sample.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordDto.Picture">
             <summary>
             管理员头像
             </summary>
         </member>
-        <member name="M:Sample.Layer.DbService.Sys.Admin.LoginRecord.View.Create(Sample.Layer.Persistence.DefaultDbContext)">
+        <member name="M:Sample.Layer.DbService.Sys.Admin.AdminUser.View.Create(XUCore.NetCore.Data.IDbContext)">
             <summary>
             linq 关联查询，关联账号信息
             </summary>

@@ -65,8 +65,6 @@ namespace Sample.Ddd.Domain.User.User
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.CreatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : AbstractValidator<UserCreateCommand>
@@ -96,9 +94,6 @@ namespace Sample.Ddd.Domain.User.User
                     .WithMessage(c => $"该手机号码已存在。");
 
                 RuleFor(x => x.Password).NotEmpty().MaximumLength(30).WithName("密码");
-                RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
-                RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
-                RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
             }
         }

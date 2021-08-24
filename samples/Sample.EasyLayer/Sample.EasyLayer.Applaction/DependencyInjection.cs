@@ -99,7 +99,10 @@ namespace Sample.EasyLayer.Applaction
                 });
 
             // 注入动态API
-            services.AddDynamicWebApi();
+            services.AddDynamicWebApi(opt =>
+            {
+                opt.IsAutoSortAction = false;
+            });
 
             // 注册上传服务
             services.AddUploadService();
@@ -118,33 +121,28 @@ namespace Sample.EasyLayer.Applaction
                     )
                 );
 
-            #region [ Swagger ]
-
             var env = services.BuildServiceProvider().GetService<IWebHostEnvironment>();
 
-            //注册Swagger生成器，定义一个和多个Swagger 文档
-            services.AddSwaggerGen(options =>
+            services.AddMiniSwagger(swaggerGenAction: opt =>
             {
-                options.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
+                opt.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
                 {
                     Version = ApiGroup.Admin,
                     Title = $"管理员后台API - {env.EnvironmentName}",
                     Description = "管理员后台API"
                 });
 
-                options.AddJwtBearerDoc();
+                opt.AddJwtBearerDoc();
 
-                options.AddDescriptions(typeof(DependencyInjection),
-                        "Sample.EasyLayer.Applaction.xml",
-                        "Sample.EasyLayer.Persistence.xml",
-                        "Sample.EasyLayer.DbService.xml",
-                        "Sample.EasyLayer.Core.xml");
+                opt.AddDescriptions(typeof(DependencyInjection),
+                    "Sample.EasyLayer.Applaction.xml",
+                    "Sample.EasyLayer.Persistence.xml",
+                    "Sample.EasyLayer.DbService.xml",
+                    "Sample.EasyLayer.Core.xml");
 
                 // TODO:一定要返回true！true 分组无效 注释掉 必须有分组才能出现api
                 //options.DocInclusionPredicate((docName, description) => true);
             });
-
-            #endregion
 
             return services;
         }
@@ -170,26 +168,10 @@ namespace Sample.EasyLayer.Applaction
             app.UseStaticHttpContext();
             app.UseStaticFiles();
 
-            #region [ Swagger ]
-
-            app.UseSwagger(options =>
+            app.UseMiniSwagger(swaggerUIAction: (opt) =>
             {
-                options.PreSerializeFilters.Add((swaggerDoc, _) =>
-                {
-                    swaggerDoc.Servers.Clear();
-                });
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
             });
-
-            app.UseSwaggerUI(c =>
-            {
-                c.AddMiniProfiler();
-
-                c.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
-
-                c.DocExpansion(DocExpansion.None);
-            });
-
-            #endregion
 
             app.UseEndpoints(endpoints =>
             {

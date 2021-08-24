@@ -36,17 +36,17 @@ namespace Sample.Ddd.Domain.User.User
         public class Handler : CommandHandler<UserUpdatePasswordCommand, int>
         {
             private readonly IDefaultDbRepository db;
-            private readonly IMapper mapper;
+            private readonly ILoginInfoService loginInfo;
 
-            public Handler(IDefaultDbRepository db, IMapper mapper, IMediatorHandler bus) : base(bus)
+            public Handler(IDefaultDbRepository db, IMediatorHandler bus, ILoginInfoService loginInfo) : base(bus)
             {
                 this.db = db;
-                this.mapper = mapper;
+                this.loginInfo = loginInfo;
             }
 
             public override async Task<int> Handle(UserUpdatePasswordCommand request, CancellationToken cancellationToken)
             {
-                var user = await db.Context.User.FindAsync(request.Id);
+                var user = await db.GetByIdAsync<UserEntity>(request.Id, cancellationToken);
 
                 request.NewPassword = Encrypt.Md5By32(request.NewPassword);
                 request.OldPassword = Encrypt.Md5By32(request.OldPassword);
@@ -54,7 +54,12 @@ namespace Sample.Ddd.Domain.User.User
                 if (!user.Password.Equals(request.OldPassword))
                     throw new Exception("旧密码错误");
 
-                return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity { Password = request.NewPassword, UpdatedAt = DateTime.Now, UpdatedAtUserId = LoginInfo.UserId });
+                return await db.UpdateAsync<UserEntity>(c => c.Id == request.Id, c => new UserEntity
+                {
+                    Password = request.NewPassword,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedAtUserId = loginInfo.UserId
+                });
             }
         }
     }

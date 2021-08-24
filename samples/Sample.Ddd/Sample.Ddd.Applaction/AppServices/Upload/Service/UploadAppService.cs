@@ -1,17 +1,17 @@
-﻿using Sample.Ddd.Applaction;
-using Sample.Ddd.Applaction.Common;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Bus;
 using XUCore.Helpers;
-using Sample.Ddd.Domain.Core;
 using XUCore.NetCore;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Uploads;
 using XUCore.NetCore.Uploads.Params;
+using Sample.Ddd.Applaction.Common;
+using Sample.Ddd.Domain.Core;
+using Sample.Ddd.Infrastructure;
 
 namespace Sample.Ddd.Applaction.AppServices.Upload
 {

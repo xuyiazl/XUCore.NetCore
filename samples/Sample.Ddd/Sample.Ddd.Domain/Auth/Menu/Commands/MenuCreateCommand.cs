@@ -63,8 +63,6 @@ namespace Sample.Ddd.Domain.Auth.Menu
         public void Mapping(Profile profile) =>
             profile.CreateMap<MenuCreateCommand, MenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.CreatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.CreatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : CommandValidator<MenuCreateCommand>

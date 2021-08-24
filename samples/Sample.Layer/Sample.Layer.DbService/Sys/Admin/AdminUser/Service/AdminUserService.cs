@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,7 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
-using Sample.Layer.Core;
 using Sample.Layer.Core.Enums;
 using Sample.Layer.DbService.Events;
 using Sample.Layer.Persistence;
@@ -20,20 +19,23 @@ using Sample.Layer.Persistence.Entities.Sys.Admin;
 
 namespace Sample.Layer.DbService.Sys.Admin.AdminUser
 {
-    public class AdminUserService : IAdminUserService
+    public class AdminUserService : CurdService<long, AdminUserEntity, AdminUserDto, AdminUserCreateCommand, AdminUserUpdateInfoCommand, AdminUserQueryCommand, AdminUserQueryPagedCommand>,
+        IAdminUserService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-        private readonly IMediator mediator;
-
-        public AdminUserService(IDefaultDbRepository db, IMapper mapper, IMediator mediator)
+        private readonly IDefaultDbRepository<AdminUserRoleEntity> userRole;
+        private readonly IDefaultDbRepository<AdminUserLoginRecordEntity> userLoginRecord;
+        public AdminUserService(IServiceProvider serviceProvider, IDefaultDbRepository<AdminUserEntity> db, IMapper mapper, IMediator mediator) : base(db, mapper)
         {
-            this.db = db;
-            this.mapper = mapper;
-            this.mediator = mediator;
+            userRole = serviceProvider.GetService<IDefaultDbRepository<AdminUserRoleEntity>>();
+            userLoginRecord = serviceProvider.GetService<IDefaultDbRepository<AdminUserLoginRecordEntity>>();
+
+            CreatedAction = async (entity) =>
+            {
+                await mediator.Publish(new AdminUserCreateEvent(entity.Id, entity));
+            };
         }
 
-        public async Task<int> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
+        public override async Task<long> CreateAsync(AdminUserCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminUserCreateCommand, AdminUserEntity>(request);
 
@@ -52,75 +54,17 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
 
             if (res > 0)
             {
-                await mediator.Publish(new AdminUserCreateEvent(entity.Id, entity), cancellationToken);
+                CreatedAction?.Invoke(entity);
 
-                return res;
+                return entity.Id;
             }
             else
-                return res;
-        }
-
-        public async Task<int> UpdateAsync(AdminUserUpdateInfoCommand request, CancellationToken cancellationToken)
-        {
-            var entity = await db.Context.AdminUser.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
-
-            if (entity == null)
                 return 0;
-
-            entity = mapper.Map(request, entity);
-
-            var res = db.Update(entity);
-
-            if (res > 0)
-            {
-                return res;
-            }
-            return res;
-        }
-
-        public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
-        {
-            switch (field.ToLower())
-            {
-                case "name":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "username":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { UserName = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "mobile":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Mobile = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "password":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Password = Encrypt.Md5By32(value), Updated_At = DateTime.Now }, cancellationToken);
-                case "position":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Position = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "location":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Location = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "company":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Company = value, Updated_At = DateTime.Now }, cancellationToken);
-                case "picture":
-                    return await db.UpdateAsync<AdminUserEntity>(c => c.Id == id, c => new AdminUserEntity() { Picture = value, Updated_At = DateTime.Now }, cancellationToken);
-                default:
-                    return 0;
-            }
-        }
-
-        public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
-        {
-            switch (status)
-            {
-                case Status.Show:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
-                case Status.SoldOut:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
-                case Status.Trash:
-                    return await db.UpdateAsync<AdminUserEntity>(c => ids.Contains(c.Id), c => new AdminUserEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
-                default:
-                    return 0;
-            }
         }
 
         public async Task<int> UpdateAsync(AdminUserUpdatePasswordCommand request, CancellationToken cancellationToken)
         {
-            var admin = await db.Context.AdminUser.FindAsync(request.Id);
+            var admin = await db.GetByIdAsync(request.Id, cancellationToken);
 
             request.NewPassword = Encrypt.Md5By32(request.NewPassword);
             request.OldPassword = Encrypt.Md5By32(request.OldPassword);
@@ -128,40 +72,43 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
             if (!admin.Password.Equals(request.OldPassword))
                 Failure.Error("旧密码错误");
 
-            return await db.UpdateAsync<AdminUserEntity>(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
+            return await db.UpdateAsync(c => c.Id == request.Id, c => new AdminUserEntity { Password = request.NewPassword }, cancellationToken);
         }
 
-        public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
+        public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
-            var res = await db.DeleteAsync<AdminUserEntity>(c => ids.Contains(c.Id), cancellationToken);
+            switch (field.ToLower())
+            {
+                case "name":
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                case "position":
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Position = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                case "location":
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Location = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                case "company":
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Company = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                case "picture":
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminUserEntity() { Picture = value, UpdatedAt = DateTime.Now }, cancellationToken);
+                default:
+                    return 0;
+            }
+        }
+
+        public override async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
+        {
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id), cancellationToken);
 
             if (res > 0)
             {
                 //删除登录记录
-                await db.DeleteAsync<LoginRecordEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await userLoginRecord.DeleteAsync(c => ids.Contains(c.AdminId), cancellationToken);
                 //删除关联的角色
-                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.AdminId), cancellationToken);
+                await userRole.DeleteAsync(c => ids.Contains(c.AdminId), cancellationToken);
+
+                DeletedAction?.Invoke(ids);
             }
 
             return res;
-        }
-
-        public async Task<int> RelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
-        {
-            //先清空用户的角色，确保没有冗余的数据
-            await db.DeleteAsync<AdminUserRoleEntity>(c => c.AdminId == request.AdminId, cancellationToken);
-
-            var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
-            {
-                RoleId = roleid,
-                AdminId = request.AdminId
-            });
-
-            //添加角色
-            if (userRoles.Length > 0)
-                return await db.AddAsync(userRoles, cancellationToken: cancellationToken);
-
-            return 1;
         }
 
         public async Task<AdminUserDto> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken)
@@ -174,19 +121,19 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
 
             if (!Valid.IsMobileNumberSimple(request.Account))
             {
-                user = await db.Context.AdminUser.Where(c => c.UserName.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await db.GetFirstAsync(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("账号不存在");
 
-                loginWay = "Mobile";
+                loginWay = "UserName";
             }
             else
             {
-                user = await db.Context.AdminUser.Where(c => c.Mobile.Equals(request.Account)).FirstOrDefaultAsync(cancellationToken);
+                user = await db.GetFirstAsync(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                 if (user == null)
                     Failure.Error("手机号码不存在");
 
-                loginWay = "UserName";
+                loginWay = "Mobile";
             }
 
             if (!user.Password.Equals(request.Password))
@@ -199,7 +146,7 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new LoginRecordEntity
+            user.LoginRecords.Add(new AdminUserLoginRecordEntity
             {
                 AdminId = user.Id,
                 LoginIp = user.LoginLastIp,
@@ -212,16 +159,6 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
             return mapper.Map<AdminUserDto>(user);
         }
 
-        public async Task<AdminUserDto> GetByIdAsync(long id, CancellationToken cancellationToken)
-        {
-            var res = await db.Context.AdminUser
-                .Where(c => c.Id == id)
-                .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            return res;
-        }
-
         public async Task<bool> AnyByAccountAsync(AccountMode accountMode, string account, long notId, CancellationToken cancellationToken)
         {
             if (notId > 0)
@@ -229,9 +166,9 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        return await db.Context.AdminUser.AnyAsync(c => c.Id != notId && c.UserName == account, cancellationToken);
+                        return await db.AnyAsync(c => c.Id != notId && c.UserName == account, cancellationToken);
                     case AccountMode.Mobile:
-                        return await db.Context.AdminUser.AnyAsync(c => c.Id != notId && c.Mobile == account, cancellationToken);
+                        return await db.AnyAsync(c => c.Id != notId && c.Mobile == account, cancellationToken);
                 }
             }
             else
@@ -239,9 +176,9 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
                 switch (accountMode)
                 {
                     case AccountMode.UserName:
-                        return await db.Context.AdminUser.AnyAsync(c => c.UserName == account, cancellationToken);
+                        return await db.AnyAsync(c => c.UserName == account, cancellationToken);
                     case AccountMode.Mobile:
-                        return await db.Context.AdminUser.AnyAsync(c => c.Mobile == account, cancellationToken);
+                        return await db.AnyAsync(c => c.Mobile == account, cancellationToken);
                 }
             }
 
@@ -253,47 +190,95 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
             switch (accountMode)
             {
                 case AccountMode.UserName:
-
-                    return await db.Context.AdminUser
-                        .Where(c => c.UserName.Equals(account))
-                        .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync(cancellationToken);
+                    return await db.GetFirstAsync<AdminUserDto>(c => c.UserName.Equals(account), cancellationToken: cancellationToken);
 
                 case AccountMode.Mobile:
-
-                    return await db.Context.AdminUser
-                        .Where(c => c.Mobile.Equals(account))
-                        .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                        .FirstOrDefaultAsync(cancellationToken);
+                    return await db.GetFirstAsync<AdminUserDto>(c => c.Mobile.Equals(account), cancellationToken: cancellationToken);
             }
 
             return null;
         }
 
-        public async Task<PagedModel<AdminUserDto>> GetPagedListAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
+        public override async Task<IList<AdminUserDto>> GetListAsync(AdminUserQueryCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminUser
+            var selector = db.BuildFilter()
 
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c =>
-                            c.Name.Contains(request.Search) ||
-                            c.Mobile.Contains(request.Search) ||
-                            c.UserName.Contains(request.Search), !request.Search.IsEmpty())
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c =>
+                            c.Name.Contains(request.Keyword) ||
+                            c.Mobile.Contains(request.Keyword) ||
+                            c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
+            var res = await db.GetListAsync<AdminUserDto>(selector: selector, orderby: $"{nameof(AdminUserEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
-                .ProjectTo<AdminUserDto>(mapper.ConfigurationProvider)
-                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            return res;
+        }
+
+        public override async Task<PagedModel<AdminUserDto>> GetPagedListAsync(AdminUserQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var selector = db.BuildFilter()
+
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c =>
+                            c.Name.Contains(request.Keyword) ||
+                            c.Mobile.Contains(request.Keyword) ||
+                            c.UserName.Contains(request.Keyword), !request.Keyword.IsEmpty());
+
+            var res = await db.GetPagedListAsync<AdminUserDto>(selector, $"{nameof(AdminUserEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }
 
+        public async Task<int> CreateRelevanceRoleAsync(AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken)
+        {
+            //先清空用户的角色，确保没有冗余的数据
+            await userRole.DeleteAsync(c => c.AdminId == request.AdminId, cancellationToken);
+
+            var userRoles = Array.ConvertAll(request.RoleIds, roleid => new AdminUserRoleEntity
+            {
+                RoleId = roleid,
+                AdminId = request.AdminId
+            });
+
+            //添加角色
+            if (userRoles.Length > 0)
+                return await userRole.AddAsync(userRoles, cancellationToken: cancellationToken);
+
+            return 1;
+        }
+
         public async Task<IList<long>> GetRoleKeysAsync(long adminId, CancellationToken cancellationToken)
         {
-            return await db.Context.AdminAuthUserRole
-                .Where(c => c.AdminId == adminId)
-                .Select(c => c.RoleId)
+            return await userRole.Table.Where(c => c.AdminId == adminId).Select(c => c.RoleId).ToListAsync(cancellationToken);
+        }
+
+        public async Task<IList<AdminUserLoginRecordDto>> GetRecordListAsync(AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .Where(c => c.AdminId == request.AdminId)
+
+                .OrderByDescending(c => c.LoginTime)
+                .Take(request.Limit)
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
+
+            return res;
+        }
+
+        public async Task<PagedModel<AdminUserLoginRecordDto>> GetRecordPagedListAsync(AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken)
+        {
+            var res = await View.Create(db.Context)
+
+                .WhereIf(c => c.Name.Contains(request.Keyword) || c.Mobile.Contains(request.Keyword) || c.UserName.Contains(request.Keyword), request.Keyword.NotEmpty())
+
+                .OrderByBatch($"{nameof(AdminUserLoginRecordEntity.Id)} asc")
+
+                .ProjectTo<AdminUserLoginRecordDto>(mapper.ConfigurationProvider)
+                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+
+            return res.ToModel();
         }
     }
 }

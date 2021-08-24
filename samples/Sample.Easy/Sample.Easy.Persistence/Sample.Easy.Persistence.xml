@@ -4,22 +4,39 @@
         <name>Sample.Easy.Persistence</name>
     </assembly>
     <members>
-        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity.Status">
+        <member name="T:Sample.Easy.Persistence.IDefaultDbRepository`1">
+            <summary>
+            数据仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:Sample.Easy.Persistence.DefaultDbRepository`1">
+            <summary>
+            数据仓储
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="T:Sample.Easy.Persistence.DefaultDbContext">
+            <summary>
+            上下文
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity`1.Status">
             <summary>
             数据状态
             </summary>
         </member>
-        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity.Created_At">
+        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity`1.CreatedAt">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity.Updated_At">
+        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity`1.UpdatedAt">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity.Deleted_At">
+        <member name="P:Sample.Easy.Persistence.Entities.BaseEntity`1.DeletedAt">
             <summary>
             删除时间
             </summary>
@@ -189,6 +206,36 @@
             对应登录记录关联
             </summary>
         </member>
+        <member name="T:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity">
+            <summary>
+            登录记录表
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminId">
+            <summary>
+            管理员id
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginWay">
+            <summary>
+            登录方式
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginIp">
+            <summary>
+            登录ip
+            </summary>
+        </member>
+        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminUser">
+            <summary>
+            对应管理员
+            </summary>
+        </member>
         <member name="T:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserRoleEntity">
             <summary>
             管理员角色关联表
@@ -212,36 +259,6 @@
         <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.AdminUserRoleEntity.Role">
             <summary>
             对应角色
-            </summary>
-        </member>
-        <member name="T:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity">
-            <summary>
-            登录记录表
-            </summary>
-        </member>
-        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity.AdminId">
-            <summary>
-            管理员id
-            </summary>
-        </member>
-        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity.LoginWay">
-            <summary>
-            登录方式
-            </summary>
-        </member>
-        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity.LoginTime">
-            <summary>
-            登录时间
-            </summary>
-        </member>
-        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity.LoginIp">
-            <summary>
-            登录ip
-            </summary>
-        </member>
-        <member name="P:Sample.Easy.Persistence.Entities.Sys.Admin.LoginRecordEntity.AdminUser">
-            <summary>
-            对应管理员
             </summary>
         </member>
     </members>

@@ -3,7 +3,9 @@ using FluentValidation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.Layer.Core;
 using Sample.Layer.Core.Enums;
 using Sample.Layer.Persistence.Entities.Sys.Admin;
@@ -13,13 +15,8 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminRole
     /// <summary>
     /// 角色修改命令
     /// </summary>
-    public class AdminRoleUpdateCommand : Command<bool>, IMapFrom<AdminRoleEntity>
+    public class AdminRoleUpdateCommand : UpdateCommand<long>, IMapFrom<AdminRoleEntity>
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 角色名
         /// </summary>
@@ -35,16 +32,23 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminRole
         [Required]
         public Status Status { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
+
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminRoleUpdateCommand, AdminRoleEntity>()
-                .ForMember(c => c.Updated_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
-        public class Validator : CommandValidator<AdminRoleUpdateCommand>
+        public class Validator : CommandIdValidator<AdminRoleUpdateCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("角色名");
                 RuleFor(x => x.Status).IsInEnum().NotEqual(Status.Default).WithName("数据状态");
             }

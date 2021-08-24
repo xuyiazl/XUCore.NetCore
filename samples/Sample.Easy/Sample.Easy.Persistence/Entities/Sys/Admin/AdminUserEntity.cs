@@ -7,12 +7,12 @@ namespace Sample.Easy.Persistence.Entities.Sys.Admin
     /// <summary>
     /// 管理员表
     /// </summary>
-    public partial class AdminUserEntity : BaseEntity
+    public partial class AdminUserEntity : BaseEntity<long>
     {
         public AdminUserEntity()
         {
             UserRoles = new List<AdminUserRoleEntity>();
-            LoginRecords = new List<LoginRecordEntity>();
+            LoginRecords = new List<AdminUserLoginRecordEntity>();
         }
         /// <summary>
         /// 用户名
@@ -65,6 +65,6 @@ namespace Sample.Easy.Persistence.Entities.Sys.Admin
         /// <summary>
         /// 对应登录记录关联
         /// </summary>
-        public ICollection<LoginRecordEntity> LoginRecords;
+        public ICollection<AdminUserLoginRecordEntity> LoginRecords;
     }
 }

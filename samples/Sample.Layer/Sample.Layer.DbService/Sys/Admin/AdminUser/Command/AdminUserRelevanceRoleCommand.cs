@@ -1,15 +1,16 @@
 ﻿using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
-
+using XUCore.NetCore.Data;
 
 namespace Sample.Layer.DbService.Sys.Admin.AdminUser
 {
     /// <summary>
     /// 关联角色命令
     /// </summary>
-    public class AdminUserRelevanceRoleCommand : Command<bool>
+    public class AdminUserRelevanceRoleCommand : CreateCommand
     {
         /// <summary>
         /// 管理员id
@@ -20,6 +21,13 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
         /// 角色id集合
         /// </summary>
         public long[] RoleIds { get; set; }
+
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
 
         public class Validator : CommandValidator<AdminUserRelevanceRoleCommand>
         {

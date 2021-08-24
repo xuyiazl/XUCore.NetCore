@@ -8,7 +8,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Extensions;
 using Sample.Ddd.Domain.Core;
+using Sample.Ddd.Domain.Core.Entities.Auth;
 
 namespace Sample.Ddd.Domain.Auth.Menu
 {
@@ -44,11 +46,10 @@ namespace Sample.Ddd.Domain.Auth.Menu
 
             public override async Task<IList<MenuDto>> Handle(MenuQueryByWeight request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.Menu
-                    .Where(c => c.IsMenu == request.IsMenu)
-                    .OrderByDescending(c => c.Weight)
-                    .ProjectTo<MenuDto>(mapper.ConfigurationProvider)
-                    .ToListAsync(cancellationToken);
+                var selector = db.BuildFilter<MenuEntity>()
+                    .And(c => c.IsMenu == request.IsMenu);
+
+                var res = await db.GetListAsync<MenuEntity, MenuDto>(selector, orderby: "Weight desc", cancellationToken: cancellationToken);
 
                 return res;
             }

@@ -2,7 +2,9 @@
 using FluentValidation;
 using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.Layer.Core;
 using Sample.Layer.Persistence.Entities.Sys.Admin;
 
@@ -12,13 +14,8 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 用户信息修改命令
     /// </summary>
-    public class AdminUserUpdateInfoCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserUpdateInfoCommand : UpdateCommand<long>, IMapFrom<AdminUserEntity>
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [Required]
-        public long Id { get; set; }
         /// <summary>
         /// 名字
         /// </summary>
@@ -40,6 +37,13 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
         [Required]
         public string Company { get; set; }
 
+        public override bool IsVaild()
+        {
+            ValidationResult = new Validator().Validate(this);
+
+            return ValidationResult.ThrowValidation();
+        }
+
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminUserUpdateInfoCommand, AdminUserEntity>()
                 .ForMember(c => c.Location, c => c.MapFrom(s => s.Location.SafeString()))
@@ -47,11 +51,12 @@ namespace Sample.Layer.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.Company, c => c.MapFrom(s => s.Company.SafeString()))
             ;
 
-        public class Validator : CommandValidator<AdminUserUpdateInfoCommand>
+        public class Validator : CommandIdValidator<AdminUserUpdateInfoCommand, bool, long>
         {
             public Validator()
             {
-                RuleFor(x => x.Id).NotEmpty().GreaterThan(0).WithName("Id");
+                AddIdValidator();
+
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(30).WithName("名字");
                 RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
                 RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");

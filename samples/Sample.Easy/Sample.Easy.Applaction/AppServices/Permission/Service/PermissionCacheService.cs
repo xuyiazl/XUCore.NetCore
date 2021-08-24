@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DynamicWebApi;
 using Sample.Easy.Core;
@@ -16,13 +15,10 @@ namespace Sample.Easy.Applaction.Permission
     [NonDynamicWebApi]
     public class PermissionCacheService : IPermissionCacheService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-
-        public PermissionCacheService(IDefaultDbRepository db, IMapper mapper)
+        private readonly IDefaultDbRepository<AdminMenuEntity> db;
+        public PermissionCacheService(IDefaultDbRepository<AdminMenuEntity> db)
         {
             this.db = db;
-            this.mapper = mapper;
         }
 
         [CacheMethod(Key = CacheKey.AuthUser, ParamterKey = "{0}", Seconds = CacheTime.Min5)]
@@ -31,11 +27,11 @@ namespace Sample.Easy.Applaction.Permission
             var res =
                     await
                     (
-                        from userRoles in db.Context.AdminAuthUserRole
+                        from userRoles in db.Context.Set<AdminUserRoleEntity>()
 
-                        join roleMenus in db.Context.AdminAuthRoleMenus on userRoles.RoleId equals roleMenus.RoleId
+                        join roleMenus in db.Context.Set<AdminRoleMenuEntity>() on userRoles.RoleId equals roleMenus.RoleId
 
-                        join menus in db.Context.AdminAuthMenus on roleMenus.MenuId equals menus.Id
+                        join menus in db.Context.Set<AdminMenuEntity>() on roleMenus.MenuId equals menus.Id
 
                         where userRoles.AdminId == adminId
 

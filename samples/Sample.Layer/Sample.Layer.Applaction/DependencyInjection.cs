@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Text.Encodings.Web;
@@ -20,6 +21,7 @@ using XUCore.NetCore.Oss;
 using XUCore.Serializer;
 using Sample.Layer.Core;
 using Sample.Layer.DbService;
+using XUCore.NetCore.Swagger;
 
 namespace Sample.Layer.Applaction
 {
@@ -135,6 +137,30 @@ namespace Sample.Layer.Applaction
                     )
                 );
 
+            var env = services.BuildServiceProvider().GetService<IWebHostEnvironment>();
+
+            services.AddMiniSwagger(swaggerGenAction: opt =>
+            {
+                opt.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
+                {
+                    Version = ApiGroup.Admin,
+                    Title = $"管理员后台API - {env.EnvironmentName}",
+                    Description = "管理员后台API"
+                });
+
+                opt.AddJwtBearerDoc();
+
+                opt.AddDescriptions(typeof(DependencyInjection),
+                        "Sample.Layer.WebApi.xml",
+                        "Sample.Layer.Applaction.xml",
+                        "Sample.Layer.Persistence.xml",
+                        "Sample.Layer.DbService.xml",
+                        "Sample.Layer.Core.xml");
+
+                // TODO:一定要返回true！true 分组无效 注释掉 必须有分组才能出现api
+                //opt.DocInclusionPredicate((docName, description) => true);
+            });
+
             return services;
         }
 
@@ -158,6 +184,11 @@ namespace Sample.Layer.Applaction
 
             app.UseStaticHttpContext();
             app.UseStaticFiles();
+
+            app.UseMiniSwagger(swaggerUIAction: (opt) =>
+            {
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

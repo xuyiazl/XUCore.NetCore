@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
+using Sample.Ddd.Domain.Core.Entities.User;
 
 namespace Sample.Ddd.Domain.User.User
 {
@@ -37,10 +38,7 @@ namespace Sample.Ddd.Domain.User.User
 
             public override async Task<UserDto> Handle(UserQueryDetail request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.User
-                    .Where(c => c.Id == request.Id)
-                    .ProjectTo<UserDto>(mapper.ConfigurationProvider)
-                    .FirstOrDefaultAsync(cancellationToken);
+                var res = await db.GetByIdAsync<UserEntity, UserDto>(request.Id, cancellationToken);
 
                 return res;
             }

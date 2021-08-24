@@ -4,14 +4,8 @@
 		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Sample.Ddd.Domain\Sample.Ddd.Domain.csproj" />

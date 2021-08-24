@@ -61,19 +61,19 @@ namespace Sample.Ddd.Domain.User.User
 
                 if (!Valid.IsMobileNumberSimple(request.Account))
                 {
-                    user = await db.Context.User.Where(c => c.UserName.Equals(request.Account)).FirstOrDefaultAsync();
+                    user = await db.GetFirstAsync<UserEntity>(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
                     if (user == null)
                         Failure.Error("账号不存在");
 
-                    loginWay = "Mobile";
+                    loginWay = "UserName";
                 }
                 else
                 {
-                    user = await db.Context.User.Where(c => c.Mobile.Equals(request.Account)).FirstOrDefaultAsync();
+                    user = await db.GetFirstAsync<UserEntity>(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
                     if (user == null)
                         Failure.Error("手机号码不存在");
 
-                    loginWay = "UserName";
+                    loginWay = "Mobile";
                 }
 
                 if (!user.Password.Equals(request.Password))

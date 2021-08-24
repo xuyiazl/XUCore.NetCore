@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using XUCore.Ddd.Domain.Events;
+using XUCore.Extensions;
+using XUCore.Serializer;
 using Sample.Ddd.Domain.Core;
 using Sample.Ddd.Domain.Core.Events;
 using Sample.Ddd.Infrastructure.Authorization;
-using XUCore.Serializer;
 
 namespace Sample.Ddd.Infrastructure.Events
 {
@@ -35,7 +36,7 @@ namespace Sample.Ddd.Infrastructure.Events
             var storedEvent = new StoredEvent(
                 theEvent,
                 serializedData,
-                auth.UserId);
+                auth.UserId.SafeString());
 
             db.Add(storedEvent);
         }

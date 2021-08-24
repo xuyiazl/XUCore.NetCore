@@ -7,7 +7,7 @@ namespace Sample.Easy.Persistence.Entities.Sys.Admin
     /// <summary>
     /// 权限导航表
     /// </summary>
-    public partial class AdminMenuEntity : BaseEntity
+    public partial class AdminMenuEntity : BaseEntity<long>
     {
         public AdminMenuEntity()
         {

@@ -41,7 +41,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateUserAsync([Required][FromBody] AdminUserCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.CreateAsync(request, cancellationToken);
 
@@ -91,7 +91,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Field")]
-        public async Task<Result<int>> UpdateUserAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -108,7 +108,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/User/Status")]
-        public async Task<Result<int>> UpdateUserAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateUserAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.UpdateAsync(ids, status, cancellationToken);
 
@@ -124,7 +124,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteUserAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteUserAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.DeleteAsync(ids, cancellationToken);
 
@@ -200,9 +200,9 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[controller]/User/RelevancRole")]
-        public async Task<Result<int>> CreateUserRelevanceRoleIdAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> CreateUserRelevanceRoleAsync([Required][FromBody] AdminUserRelevanceRoleCommand request, CancellationToken cancellationToken = default)
         {
-            var res = await adminUserService.RelevanceRoleAsync(request, cancellationToken);
+            var res = await adminUserService.CreateRelevanceRoleAsync(request, cancellationToken);
 
             if (res > 0)
                 return RestFull.Success(data: res);
@@ -215,10 +215,41 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="adminId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("/api/[controller]/User/RelevancRole/{adminId}")]
-        public async Task<Result<IList<long>>> GetUserRelevanceRoleIdsAsync([Required] long adminId, CancellationToken cancellationToken = default)
+        [HttpGet("/api/[controller]/User/RelevancRole")]
+        public async Task<Result<IList<long>>> GetUserRelevanceRoleKeysAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await adminUserService.GetRoleKeysAsync(adminId, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+
+        #endregion
+
+        #region [ 登录记录 ]
+
+        /// <summary>
+        /// 获取最近登录记录
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("/api/[controller]/Record/List")]
+        public async Task<Result<IList<AdminUserLoginRecordDto>>> GetRecordListAsync([Required][FromQuery] AdminUserLoginRecordQueryCommand request, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordListAsync(request, cancellationToken);
+
+            return RestFull.Success(data: res);
+        }
+        /// <summary>
+        /// 获取所有登录记录分页
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("/api/[controller]/Record/Page")]
+        public async Task<Result<PagedModel<AdminUserLoginRecordDto>>> GetRecordPagedListAsync([Required][FromQuery] AdminUserLoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
+        {
+            var res = await adminUserService.GetRecordPagedListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -234,7 +265,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateRoleAsync([Required][FromBody] AdminRoleCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.CreateAsync(request, cancellationToken);
 
@@ -268,7 +299,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Field")]
-        public async Task<Result<int>> UpdateRoleAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -285,7 +316,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Role/Status")]
-        public async Task<Result<int>> UpdateRoleAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateRoleAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.UpdateAsync(ids, status, cancellationToken);
 
@@ -301,7 +332,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteRoleAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteRoleAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminRoleService.DeleteAsync(ids, cancellationToken);
 
@@ -326,12 +357,13 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <summary>
         /// 获取所有角色
         /// </summary>
+        /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("/api/[controller]/Role/All")]
-        public async Task<Result<IList<AdminRoleDto>>> GetRoleAllAsync(CancellationToken cancellationToken = default)
+        [HttpGet("/api/[controller]/Role/List")]
+        public async Task<Result<IList<AdminRoleDto>>> GetRoleListAsync([Required][FromQuery] AdminRoleQueryCommand request, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetAllAsync(cancellationToken);
+            var res = await adminRoleService.GetListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -344,7 +376,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         [HttpGet("/api/[controller]/Role/Page")]
         public async Task<Result<PagedModel<AdminRoleDto>>> GetRolePagedAsync([Required][FromQuery] AdminRoleQueryPagedCommand request, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetPageListAsync(request, cancellationToken);
+            var res = await adminRoleService.GetPagedListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -354,10 +386,10 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="roleId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("/api/[controller]/Role/RelevanceMenu/{roleId}")]
-        public async Task<Result<IList<long>>> GetRoleRelevanceMenuIdsAsync([Required] int roleId, CancellationToken cancellationToken = default)
+        [HttpGet("/api/[controller]/Role/RelevanceMenu")]
+        public async Task<Result<IList<long>>> GetRoleRelevanceMenuAsync([Required] int roleId, CancellationToken cancellationToken = default)
         {
-            var res = await adminRoleService.GetRelevanceMenuIdsAsync(roleId, cancellationToken);
+            var res = await adminRoleService.GetRelevanceMenuAsync(roleId, cancellationToken);
 
             return RestFull.Success(data: res);
         }
@@ -373,7 +405,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Result<int>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateMenuAsync([Required][FromBody] AdminMenuCreateCommand request, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.CreateAsync(request, cancellationToken);
 
@@ -407,7 +439,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Field")]
-        public async Task<Result<int>> UpdateMenuAsync([Required] long id, [Required] string field, string value, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required][FromQuery] long id, [Required][FromQuery] string field, [FromQuery] string value, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.UpdateAsync(id, field, value, cancellationToken);
 
@@ -424,7 +456,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut("/api/[controller]/Menu/Status")]
-        public async Task<Result<int>> UpdateMenuAsync([Required] long[] ids, [Required] Status status, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> UpdateMenuAsync([Required][FromQuery] long[] ids, [Required][FromQuery] Status status, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.UpdateAsync(ids, status, cancellationToken);
 
@@ -440,7 +472,7 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<Result<int>> DeleteMenuAsync([Required] long[] ids, CancellationToken cancellationToken = default)
+        public async Task<Result<int>> DeleteMenuAsync([Required][FromQuery] long[] ids, CancellationToken cancellationToken = default)
         {
             var res = await adminMenuService.DeleteAsync(ids, cancellationToken);
 
@@ -477,13 +509,13 @@ namespace Sample.EasyLayer.Applaction.Admin
         /// <summary>
         /// 获取导航列表
         /// </summary>
-        /// <param name="isMenu"></param>
+        /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Menu/List")]
-        public async Task<Result<IList<AdminMenuDto>>> GetMenuByWeightAsync([Required] bool isMenu = true, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<AdminMenuDto>>> GetMenuListAsync([Required][FromQuery] AdminMenuQueryCommand request, CancellationToken cancellationToken = default)
         {
-            var res = await adminMenuService.GetListByWeightAsync(isMenu, cancellationToken);
+            var res = await adminMenuService.GetListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
         }

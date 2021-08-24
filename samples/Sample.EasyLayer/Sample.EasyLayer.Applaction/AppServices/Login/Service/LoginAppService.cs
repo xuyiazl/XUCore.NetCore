@@ -13,7 +13,6 @@ using Sample.EasyLayer.Applaction.Admin;
 using Sample.EasyLayer.Applaction.Authorization;
 using Sample.EasyLayer.Core;
 using Sample.EasyLayer.DbService.Sys.Admin.AdminUser;
-using Sample.EasyLayer.DbService.Sys.Admin.LoginRecord;
 using Sample.EasyLayer.DbService.Sys.Admin.Permission;
 
 namespace Sample.EasyLayer.Applaction.Login
@@ -25,14 +24,14 @@ namespace Sample.EasyLayer.Applaction.Login
     public class LoginAppService : AppService, ILoginAppService
     {
         private readonly IPermissionService permissionService;
-        private readonly ILoginRecordService loginRecordService;
+        private readonly IAdminUserService adminUserService;
         private readonly IAuthService authService;
         private readonly IAdminAppService adminAppService;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
-            this.loginRecordService = serviceProvider.GetService<ILoginRecordService>();
+            this.adminUserService = serviceProvider.GetService<IAdminUserService>();
             this.authService = serviceProvider.GetService<IAuthService>();
             this.adminAppService = serviceProvider.GetService<IAdminAppService>();
         }
@@ -51,7 +50,7 @@ namespace Sample.EasyLayer.Applaction.Login
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
         {
             var command = new AdminUserCreateCommand
             {
@@ -151,38 +150,6 @@ namespace Sample.EasyLayer.Applaction.Login
         public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync([Required] long adminId, CancellationToken cancellationToken = default)
         {
             var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
-
-            return RestFull.Success(data: res);
-        }
-
-        #endregion
-
-        #region [ 登录记录 ]
-
-        /// <summary>
-        /// 获取最近登录记录
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="adminId"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("/api/[controller]/Record/List")]
-        public async Task<Result<IList<LoginRecordDto>>> GetRecordListAsync([Required] int limit, [Required] long adminId, CancellationToken cancellationToken = default)
-        {
-            var res = await loginRecordService.GetListByAdminIdAsync(limit, adminId, cancellationToken);
-
-            return RestFull.Success(data: res);
-        }
-        /// <summary>
-        /// 获取所有登录记录分页
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpGet("/api/[controller]/Record/Page")]
-        public async Task<Result<PagedModel<LoginRecordDto>>> GetRecordPageAsync([Required][FromQuery] LoginRecordQueryPagedCommand request, CancellationToken cancellationToken = default)
-        {
-            var res = await loginRecordService.GetPageListAsync(request, cancellationToken);
 
             return RestFull.Success(data: res);
         }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Helpers;
+using XUCore.NetCore.Data;
 using Sample.EasyLayer.Core;
 using Sample.EasyLayer.Core.Enums;
 using Sample.EasyLayer.Persistence.Entities.Sys.Admin;
@@ -14,7 +15,7 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminUser
     /// <summary>
     /// 创建管理员命令
     /// </summary>
-    public class AdminUserCreateCommand : Command<bool>, IMapFrom<AdminUserEntity>
+    public class AdminUserCreateCommand : CreateCommand, IMapFrom<AdminUserEntity>
     {
         /// <summary>
         /// 账号
@@ -67,7 +68,6 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminUser
                 .ForMember(c => c.LoginLastIp, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Picture, c => c.MapFrom(s => ""))
                 .ForMember(c => c.Status, c => c.MapFrom(s => Status.Show))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminUserCreateCommand>
@@ -95,9 +95,6 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminUser
                     .WithMessage(c => $"该手机号码已存在。");
 
                 RuleFor(x => x.Password).NotEmpty().MaximumLength(30).WithName("密码");
-                RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
-                RuleFor(x => x.Company).NotEmpty().MaximumLength(30).WithName("公司");
-                RuleFor(x => x.Location).NotEmpty().MaximumLength(30).WithName("位置");
                 RuleFor(x => x.Name).NotEmpty().MaximumLength(20).WithName("名字");
             }
         }

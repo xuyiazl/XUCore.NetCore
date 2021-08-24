@@ -1,33 +1,31 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.Paging;
-using Sample.EasyLayer.Core;
 using Sample.EasyLayer.Core.Enums;
 using Sample.EasyLayer.Persistence;
 using Sample.EasyLayer.Persistence.Entities.Sys.Admin;
 
 namespace Sample.EasyLayer.DbService.Sys.Admin.AdminRole
 {
-    public class AdminRoleService : IAdminRoleService
+    public class AdminRoleService : CurdService<long, AdminRoleEntity, AdminRoleDto, AdminRoleCreateCommand, AdminRoleUpdateCommand, AdminRoleQueryCommand, AdminRoleQueryPagedCommand>,
+        IAdminRoleService
     {
-        private readonly IDefaultDbRepository db;
-        private readonly IMapper mapper;
-
-        public AdminRoleService(IDefaultDbRepository db, IMapper mapper)
+        private readonly IDefaultDbRepository<AdminUserRoleEntity> userRole;
+        private readonly IDefaultDbRepository<AdminRoleMenuEntity> roleMenu;
+        public AdminRoleService(IServiceProvider serviceProvider, IDefaultDbRepository<AdminRoleEntity> db, IMapper mapper) : base(db, mapper)
         {
-            this.db = db;
-            this.mapper = mapper;
+            userRole = serviceProvider.GetService<IDefaultDbRepository<AdminUserRoleEntity>>();
+            roleMenu = serviceProvider.GetService<IDefaultDbRepository<AdminRoleMenuEntity>>();
         }
 
-        public async Task<int> CreateAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken)
+        public override async Task<long> CreateAsync(AdminRoleCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<AdminRoleCreateCommand, AdminRoleEntity>(request);
 
@@ -45,15 +43,17 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminRole
 
             if (res > 0)
             {
-                return res;
+                CreatedAction?.Invoke(entity);
+
+                return entity.Id;
             }
-            else
-                return res;
+
+            return 0;
         }
 
-        public async Task<int> UpdateAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken)
+        public override async Task<int> UpdateAsync(AdminRoleUpdateCommand request, CancellationToken cancellationToken)
         {
-            var entity = await db.Context.AdminAuthRole.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var entity = await db.GetByIdAsync(request.Id, cancellationToken);
 
             if (entity == null)
                 return 0;
@@ -61,7 +61,7 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminRole
             entity = mapper.Map(request, entity);
 
             //先清空导航集合，确保没有冗余信息
-            await db.DeleteAsync<AdminRoleMenuEntity>(c => c.RoleId == entity.Id);
+            await roleMenu.DeleteAsync(c => c.RoleId == entity.Id);
 
             //保存关联导航
             if (request.MenuIds != null && request.MenuIds.Length > 0)
@@ -76,9 +76,8 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminRole
             var res = db.Update(entity);
 
             if (res > 0)
-            {
-                return res;
-            }
+                UpdatedAction?.Invoke(entity);
+
             return res;
         }
 
@@ -87,82 +86,54 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminRole
             switch (field.ToLower())
             {
                 case "name":
-                    return await db.UpdateAsync<AdminRoleEntity>(c => c.Id == id, c => new AdminRoleEntity() { Name = value, Updated_At = DateTime.Now }, cancellationToken);
+                    return await db.UpdateAsync(c => c.Id == id, c => new AdminRoleEntity() { Name = value, UpdatedAt = DateTime.Now }, cancellationToken);
                 default:
                     return 0;
             }
         }
 
-        public async Task<int> UpdateAsync(long[] ids, Status status, CancellationToken cancellationToken)
+        public override async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
         {
-            switch (status)
-            {
-                case Status.Show:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Show, Updated_At = DateTime.Now }, cancellationToken);
-                case Status.SoldOut:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.SoldOut, Updated_At = DateTime.Now }, cancellationToken);
-                case Status.Trash:
-                    return await db.UpdateAsync<AdminRoleEntity>(c => ids.Contains(c.Id), c => new AdminRoleEntity { Status = Status.Trash, Deleted_At = DateTime.Now }, cancellationToken);
-                default:
-                    return 0;
-            }
-        }
-
-        public async Task<int> DeleteAsync(long[] ids, CancellationToken cancellationToken)
-        {
-            var res = await db.DeleteAsync<AdminRoleEntity>(c => ids.Contains(c.Id));
+            var res = await db.DeleteAsync(c => ids.Contains(c.Id));
 
             if (res > 0)
             {
                 //删除关联的导航
-                await db.DeleteAsync<AdminRoleMenuEntity>(c => ids.Contains(c.RoleId));
+                await roleMenu.DeleteAsync(c => ids.Contains(c.RoleId));
                 //删除用户关联的角色
-                await db.DeleteAsync<AdminUserRoleEntity>(c => ids.Contains(c.RoleId));
+                await userRole.DeleteAsync(c => ids.Contains(c.RoleId));
+
+                DeletedAction?.Invoke(ids);
             }
 
             return res;
         }
 
-        public async Task<AdminRoleDto> GetByIdAsync(long id, CancellationToken cancellationToken)
+        public override async Task<IList<AdminRoleDto>> GetListAsync(AdminRoleQueryCommand request, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthRole
-                .Where(c => c.Id == id)
-                .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+            var selector = db.BuildFilter()
+
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
+
+            var res = await db.GetListAsync<AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", limit: request.Limit, cancellationToken: cancellationToken);
 
             return res;
         }
 
-        public async Task<IList<AdminRoleDto>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<IList<long>> GetRelevanceMenuAsync(int roleId, CancellationToken cancellationToken)
         {
-            var res = await db.Context.AdminAuthRole
-                .Where(c => c.Status == Status.Show)
-                .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
-
-            return res;
+            return await roleMenu.Table.Where(c => c.RoleId == roleId).OrderBy(c => c.MenuId).Select(c => c.MenuId).ToListAsync();
         }
 
-        public async Task<IList<long>> GetRelevanceMenuIdsAsync(int roleId, CancellationToken cancellationToken)
+        public override async Task<PagedModel<AdminRoleDto>> GetPagedListAsync(AdminRoleQueryPagedCommand request, CancellationToken cancellationToken)
         {
-            return await db.Context.AdminAuthRoleMenus
-                .Where(c => c.RoleId == roleId)
-                .OrderBy(c => c.MenuId)
-                .Select(c => c.MenuId)
-                .ToListAsync();
-        }
+            var selector = db.BuildFilter()
 
-        public async Task<PagedModel<AdminRoleDto>> GetPageListAsync(AdminRoleQueryPagedCommand request, CancellationToken cancellationToken)
-        {
-            var res = await db.Context.AdminAuthRole
+                .And(c => c.Status == request.Status, request.Status != Status.Default)
+                .And(c => c.Name.Contains(request.Keyword), !request.Keyword.IsEmpty());
 
-                .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                .WhereIf(c => c.Name.Contains(request.Search), !request.Search.IsEmpty())
-
-                .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
-
-                .ProjectTo<AdminRoleDto>(mapper.ConfigurationProvider)
-                .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await db.GetPagedListAsync<AdminRoleDto>(selector, $"{nameof(AdminRoleEntity.Id)} asc", request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }

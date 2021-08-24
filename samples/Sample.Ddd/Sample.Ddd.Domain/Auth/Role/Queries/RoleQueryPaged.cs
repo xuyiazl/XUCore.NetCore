@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.Paging;
+using Sample.Ddd.Domain.Core.Entities.Auth;
 
 namespace Sample.Ddd.Domain.Auth.Role
 {
@@ -17,15 +18,11 @@ namespace Sample.Ddd.Domain.Auth.Role
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        public string Search { get; set; }
+        public string Keyword { get; set; }
         /// <summary>
-        /// 排序字段
+        /// 排序方式 exp：“Id asc or Id desc”
         /// </summary>
-        public string Sort { get; set; }
-        /// <summary>
-        /// 排序方式 exp：“asc or desc”
-        /// </summary>
-        public string Order { get; set; }
+        public string OrderBy { get; set; }
         /// <summary>
         /// 数据状态
         /// </summary>
@@ -52,15 +49,12 @@ namespace Sample.Ddd.Domain.Auth.Role
 
             public override async Task<PagedModel<RoleDto>> Handle(RoleQueryPaged request, CancellationToken cancellationToken)
             {
-                var res = await db.Context.Role
+                var selector = db.BuildFilter<RoleEntity>()
 
-                    .WhereIf(c => c.Status == request.Status, request.Status != Status.Default)
-                    .WhereIf(c => c.Name.Contains(request.Search), !request.Search.IsEmpty())
+                    .And(c => c.Status == request.Status, request.Status != Status.Default)
+                    .And(c => c.Name.Contains(request.Keyword), request.Keyword.NotEmpty());
 
-                    .OrderByBatch($"{request.Sort} {request.Order}", !request.Sort.IsEmpty() && !request.Order.IsEmpty())
-
-                    .ProjectTo<RoleDto>(mapper.ConfigurationProvider)
-                    .ToPagedListAsync(request.CurrentPage, request.PageSize, cancellationToken);
+                var res = await db.GetPagedListAsync<RoleEntity, RoleDto>(selector, request.OrderBy, request.CurrentPage, request.PageSize, cancellationToken);
 
                 return res.ToModel();
             }

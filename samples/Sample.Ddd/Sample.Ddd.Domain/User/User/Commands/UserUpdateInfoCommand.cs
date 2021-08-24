@@ -46,8 +46,6 @@ namespace Sample.Ddd.Domain.User.User
                 .ForMember(c => c.Location, c => c.MapFrom(s => s.Location.SafeString()))
                 .ForMember(c => c.Position, c => c.MapFrom(s => s.Position.SafeString()))
                 .ForMember(c => c.Company, c => c.MapFrom(s => s.Company.SafeString()))
-                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.UpdatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : CommandIdValidator<UserUpdateInfoCommand, int, string>
@@ -77,7 +75,7 @@ namespace Sample.Ddd.Domain.User.User
             [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(UserUpdateInfoCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Context.User.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                var entity = await db.GetByIdAsync<UserEntity>(request.Id, cancellationToken);
 
                 if (entity == null)
                     return 0;

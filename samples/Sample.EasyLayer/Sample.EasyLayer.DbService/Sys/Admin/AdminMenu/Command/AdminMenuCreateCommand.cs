@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.Ddd.Domain.Exceptions;
 using XUCore.Extensions;
+using XUCore.NetCore.Data;
 using Sample.EasyLayer.Core;
 using Sample.EasyLayer.Core.Enums;
 using Sample.EasyLayer.Persistence.Entities.Sys.Admin;
@@ -15,7 +16,7 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminMenu
     /// <summary>
     /// 创建导航命令
     /// </summary>
-    public class AdminMenuCreateCommand : Command<bool>, IMapFrom<AdminMenuEntity>
+    public class AdminMenuCreateCommand : CreateCommand, IMapFrom<AdminMenuEntity>
     {
         /// <summary>
         /// 导航父级id
@@ -68,7 +69,6 @@ namespace Sample.EasyLayer.DbService.Sys.Admin.AdminMenu
         public void Mapping(Profile profile) =>
             profile.CreateMap<AdminMenuCreateCommand, AdminMenuEntity>()
                 .ForMember(c => c.Url, c => c.MapFrom(s => s.Url.IsEmpty() ? "#" : s.Url))
-                .ForMember(c => c.Created_At, c => c.MapFrom(s => DateTime.Now))
             ;
 
         public class Validator : CommandValidator<AdminMenuCreateCommand>

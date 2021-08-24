@@ -37,8 +37,6 @@ namespace Sample.Ddd.Domain.Auth.Role
 
         public void Mapping(Profile profile) =>
             profile.CreateMap<RoleUpdateCommand, RoleEntity>()
-                .ForMember(c => c.UpdatedAt, c => c.MapFrom(s => DateTime.Now))
-                .ForMember(c => c.UpdatedAtUserId, c => c.MapFrom(s => LoginInfo.UserId))
             ;
 
         public class Validator : CommandIdValidator<RoleUpdateCommand, int, string>
@@ -66,7 +64,7 @@ namespace Sample.Ddd.Domain.Auth.Role
             [UnitOfWork(typeof(IDefaultDbContext))]
             public override async Task<int> Handle(RoleUpdateCommand request, CancellationToken cancellationToken)
             {
-                var entity = await db.Context.Role.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                var entity = await db.GetByIdAsync<RoleEntity>(request.Id, cancellationToken);
 
                 if (entity == null)
                     return 0;
