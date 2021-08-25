@@ -18,9 +18,6 @@ namespace XUCore.Template.Layer.Persistence
             //        connectionString: configuration.GetConnectionString("DBConnection-Mssql"),
             //        sqlServerOptionsAction: options =>
             //        {
-            //            options.EnableRetryOnFailure();
-            //            //options.ExecutionStrategy(c => new MySqlRetryingExecutionStrategy(c.CurrentContext.Context));
-            //            //options.ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c.CurrentContext.Context));
             //            options.MigrationsAssembly("XUCore.Template.Layer.Persistence");
             //        }
             //        )
@@ -35,14 +32,7 @@ namespace XUCore.Template.Layer.Persistence
             {
                 options.UseMySql(
                     connectionString: configuration.GetConnectionString("DBConnection-Mysql"),
-                    serverVersion: new MySqlServerVersion(new Version(5, 7, 29)),
-                    mySqlOptionsAction: options =>
-                    {
-                        //options.CharSetBehavior(CharSetBehavior.NeverAppend);
-                        options.EnableRetryOnFailure();
-                        //options.ExecutionStrategy(c => new MySqlRetryingExecutionStrategy(c.CurrentContext.Context));
-                        //options.ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c.CurrentContext.Context));
-                    }
+                    serverVersion: new MySqlServerVersion(new Version(5, 7, 29))
                     )
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 

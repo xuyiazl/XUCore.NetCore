@@ -1,4 +1,6 @@
 ﻿using AspectCore.DynamicProxy;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,8 @@ namespace XUCore.NetCore.Data
     /// <summary>
     /// 工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）
     /// </summary>
-    public class UnitOfWorkAttribute : InterceptorBase
+    [AttributeUsage(AttributeTargets.Method)]
+    public class UnitOfWorkAttribute : InterceptorBase, IActionFilter
     {
         /// <summary>
         /// Type of DbContext
@@ -24,8 +27,11 @@ namespace XUCore.NetCore.Data
         /// <param name="dbType">上下文<see cref="IDbContext"/></param>
         public UnitOfWorkAttribute(Type dbType)
         {
-            DbType = dbType;
+            DbType = dbType ?? typeof(IDbContext);
         }
+
+        IUnitOfWork unitOfWork;
+        IDbContextTransaction tran;
 
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
@@ -33,26 +39,55 @@ namespace XUCore.NetCore.Data
 
             if (dbContext == null) throw new ArgumentNullException("DbType is null");
 
-            IUnitOfWork unitOfWork = new UnitOfWorkService(dbContext);
+            unitOfWork = new UnitOfWorkService(dbContext);
+            try
+            {
+                tran = unitOfWork.BeginTransaction();
 
-            //await next(context);
+                await next(context);
 
-            //await unitOfWork.CommitAsync();
+                tran.Commit();
+            }
+            catch
+            {
+                tran.Rollback();
 
-            await unitOfWork.CreateTransactionAsync(
-                async (tran, cancel) =>
-                {
-                    await next(context);
+                throw;
+            }
+            finally
+            {
+                tran.Dispose();
+            }
+        }
 
-                    await unitOfWork.CommitAsync();
-                },
-                async (tran, error, cancel) =>
-                {
-                    await Task.CompletedTask;
+        public void OnActionExecuting(ActionExecutingContext context) => OnBefore(context.HttpContext.RequestServices.GetService(DbType) as IDbContext);
+        public void OnActionExecuted(ActionExecutedContext context) => OnAfter(context.Exception);
 
-                    throw error;
-                },
-                CancellationToken.None);
+        Task OnBefore(IDbContext dbContext)
+        {
+            if (dbContext == null) throw new ArgumentNullException("DbType is null");
+
+            unitOfWork = new UnitOfWorkService(dbContext);
+
+            tran = unitOfWork.BeginTransaction();
+
+            return Task.FromResult(false);
+        }
+
+        Task OnAfter(Exception ex)
+        {
+            try
+            {
+                if (ex == null)
+                    tran.Commit();
+                else
+                    tran.Rollback();
+            }
+            finally
+            {
+                tran.Dispose();
+            }
+            return Task.FromResult(false);
         }
     }
 }
