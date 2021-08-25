@@ -13,10 +13,7 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Scrutor" Version="3.3.0" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 	  <ProjectReference Include="..\XUCore.Template.Ddd.Domain\XUCore.Template.Ddd.Domain.csproj" />
 	  <ProjectReference Include="..\XUCore.Template.Ddd.Infrastructure\XUCore.Template.Ddd.Infrastructure.csproj" />
