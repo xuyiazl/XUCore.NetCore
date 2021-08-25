@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.NetCore.FreeSql</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.NetCore.FreeSql.ISelectExtensions">
+            <summary>
+            ISelect 扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedList``1(FreeSql.ISelect{``0},System.Int32,System.Int32)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedList``2(FreeSql.ISelect{``0},System.Int32,System.Int32)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedList``2(FreeSql.ISelect{``0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="select"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedListAsync``1(FreeSql.ISelect{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedListAsync``2(FreeSql.ISelect{``0},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.ISelectExtensions.ToPagedListAsync``2(FreeSql.ISelect{``0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Threading.CancellationToken)">
+            <summary>
+            创建分页
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="query">查询条件</param>
+            <param name="currentPage">页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="select"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.MultiFreeSql">
+            <summary>
+            IFreeSql 支持多库操作
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.MultiFreeSql`1">
+            <summary>
+            IFreeSql 支持多库操作
+            </summary>
+            <typeparam name="TDBKey"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.MultiFreeSqlExtensions.Change``1(IFreeSql,``0)">
+            <summary>
+            切换数据库
+            </summary>
+            <typeparam name="TDBKey"></typeparam>
+            <param name="fsql"></param>
+            <param name="dbkey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.MultiFreeSqlExtensions.Register``1(IFreeSql,``0,System.Func{IFreeSql})">
+            <summary>
+            注册数据库
+            </summary>
+            <typeparam name="TDBKey"></typeparam>
+            <param name="fsql"></param>
+            <param name="dbkey"></param>
+            <param name="create"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
