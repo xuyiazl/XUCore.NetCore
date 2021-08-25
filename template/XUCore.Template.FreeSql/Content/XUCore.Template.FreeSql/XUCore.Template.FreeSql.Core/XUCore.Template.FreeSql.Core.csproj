@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>XUCore.Template.FreeSql.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="XUCoreApp" Version="5.3.3" />
+		<PackageReference Include="XUCore.NetCore.FreeSql" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="XUCore.Template.FreeSql.Core.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>

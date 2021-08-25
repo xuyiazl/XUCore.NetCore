@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.Template.FreeSql.DbService.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\XUCore.Template.FreeSql.Core\XUCore.Template.FreeSql.Core.csproj" />
+		<ProjectReference Include="..\XUCore.Template.FreeSql.Persistence\XUCore.Template.FreeSql.Persistence.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="XUCore.Template.FreeSql.DbService.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>
