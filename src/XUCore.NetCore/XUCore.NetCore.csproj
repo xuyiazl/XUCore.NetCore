@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core 项目中间件</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.3.2</Version>
+		<Version>5.3.3</Version>
 		<PackageId>XUCore.NetCore</PackageId>
 		<Product>XUCore.NetCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
