@@ -163,7 +163,15 @@ namespace XUCore.Template.FreeSql.DbService.User.User
                 LoginWay = loginWay
             });
 
-            await repo.UpdateAsync(user, cancellationToken);
+            await freeSql
+                .Update<UserEntity>(user.Id)
+                .Set(c => new UserEntity()
+                {
+                    LoginCount = user.LoginCount,
+                    LoginLastTime = user.LoginLastTime,
+                    LoginLastIp = user.LoginLastIp
+                })
+                .ExecuteAffrowsAsync(cancellationToken);
 
             await freeSql.Insert<UserLoginRecordEntity>(user.LoginRecords).ExecuteAffrowsAsync(cancellationToken);
 

@@ -75,7 +75,7 @@ namespace XUCore.Template.FreeSql.Persistence
                 DbHelper.AuditValue(e, timeOffset, user);
             };
 
-            services.AddSingleton(fsql);
+            services.AddSingleton(new AspectCoreFreeSql { Orm = fsql });
 
             //导入多数据库
             if (!connection.Dbs.IsNull())
@@ -85,7 +85,7 @@ namespace XUCore.Template.FreeSql.Persistence
                     switch (multiDb.Name)
                     {
                         case nameof(MySqlDb):
-                            services.AddSingleton(CreateMultiDbBuilder(multiDb).Build<MySqlDb>());
+                            services.AddSingleton(new AspectCoreFreeSql { Orm = CreateMultiDbBuilder(multiDb).Build<MySqlDb>() });
                             break;
                         default:
                             break;

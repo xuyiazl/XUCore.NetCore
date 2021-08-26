@@ -13,7 +13,7 @@ namespace XUCore.Template.FreeSql.Persistence
     /// <typeparam name="TMark"></typeparam>
     public class MarkUnitOfWorkManager<TMark> : UnitOfWorkManager
     {
-        public MarkUnitOfWorkManager(IFreeSql<TMark> freeSql) : base(freeSql)
+        public MarkUnitOfWorkManager(AspectCoreFreeSql<TMark> aspectCoreFreeSql) : base(aspectCoreFreeSql.Orm)
         {
         }
     }

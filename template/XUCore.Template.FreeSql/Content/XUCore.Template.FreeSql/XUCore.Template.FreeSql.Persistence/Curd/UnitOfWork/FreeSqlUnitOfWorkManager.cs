@@ -12,7 +12,7 @@ namespace XUCore.Template.FreeSql.Persistence
     /// </summary>
     public class FreeSqlUnitOfWorkManager : UnitOfWorkManager
     {
-        public FreeSqlUnitOfWorkManager(IFreeSql freeSql) : base(freeSql)
+        public FreeSqlUnitOfWorkManager(AspectCoreFreeSql aspectCoreFreeSql) : base(aspectCoreFreeSql.Orm)
         {
         }
     }
