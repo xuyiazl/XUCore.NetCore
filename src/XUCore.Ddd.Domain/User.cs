@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using XUCore.Cache;
 using XUCore.Extensions;
 
-namespace XUCore.Template.FreeSql.Core.Auth
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 用户信息
@@ -30,7 +34,7 @@ namespace XUCore.Template.FreeSql.Core.Auth
                 var id = accessor?.HttpContext?.User?.Identity.GetValue<long>(ClaimAttributes.UserId);
                 if (!id.IsNull())
                     return id.Value;
-                return 0;
+                return default(long);
             }
         }
         /// <summary>
@@ -45,27 +49,27 @@ namespace XUCore.Template.FreeSql.Core.Auth
         /// <summary>
         /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="id"></param>
         /// <param name="token"></param>
-        public virtual void SetLoginToken(long userId, string token)
+        public virtual void SetToken(long id, string token)
         {
-            cacheManager.Set($"{ClaimAttributes.UserToken}{userId}", token);
+            cacheManager.Set($"{ClaimAttributes.UserToken}_{Id}", token);
         }
         /// <summary>
         /// 删除登录标记，模拟退出
         /// </summary>
-        public virtual void RemoveLoginToken()
+        public virtual void RemoveToken()
         {
-            cacheManager.Remove($"{ClaimAttributes.UserToken}{Id}");
+            cacheManager.Remove($"{ClaimAttributes.UserToken}_{Id}");
         }
         /// <summary>
         /// 验证token是否一致
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public virtual bool VaildLoginToken(string token)
+        public virtual bool VaildToken(string token)
         {
-            var cacheToken = cacheManager.Get<string>($"{ClaimAttributes.UserToken}{Id}");
+            var cacheToken = cacheManager.Get<string>($"{ClaimAttributes.UserToken}_{Id}");
 
             return token == cacheToken;
         }

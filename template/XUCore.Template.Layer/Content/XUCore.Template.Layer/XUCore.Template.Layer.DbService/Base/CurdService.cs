@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.NetCore.Data;
 using XUCore.Template.Layer.Core.Enums;
@@ -24,6 +25,7 @@ namespace XUCore.Template.Layer.DbService
     public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
         CurdServiceProvider<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>,
         ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>, IDbService
+            where TKey : struct
             where TDto : class, new()
             where TEntity : BaseEntity<TKey>, new()
             where TCreateCommand : CreateCommand

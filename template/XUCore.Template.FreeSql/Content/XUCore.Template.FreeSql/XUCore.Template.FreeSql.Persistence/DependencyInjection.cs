@@ -3,9 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using XUCore.Configs;
+using XUCore.Ddd.Domain;
 using XUCore.Extensions;
+using XUCore.NetCore.FreeSql;
+using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.Persistence.Entities;
 
 namespace XUCore.Template.FreeSql.Persistence
@@ -15,8 +17,7 @@ namespace XUCore.Template.FreeSql.Persistence
         public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             //services.AddScoped<IdleBusUnitOfWorkManager>();
-            services.AddScoped<FreeSqlUnitOfWorkManager>();
-            services.AddScoped(typeof(MarkUnitOfWorkManager<>));
+            services.AddFreeSqlUnitOfWorkManager();
 
             var connection = configuration.GetSection<ConnectionSettings>("ConnectionSettings");
 
@@ -35,7 +36,6 @@ namespace XUCore.Template.FreeSql.Persistence
             {
                 freeSqlBuilder.UseMonitorCommand(cmd => { }, (cmd, traceLog) =>
                 {
-                    //Console.WriteLine($"{cmd.CommandText}\n{traceLog}\r\n");
                     Console.WriteLine($"{cmd.CommandText}\r\n");
                 });
             }

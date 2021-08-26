@@ -1,5 +1,5 @@
 ﻿
-namespace XUCore.Template.FreeSql.Persistence.Entities
+namespace XUCore.NetCore.FreeSql.Entity
 {
     public interface IEntitySoftDelete
     {

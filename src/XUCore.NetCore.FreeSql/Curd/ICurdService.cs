@@ -1,15 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.NetCore.Data;
+using XUCore.Ddd.Domain.Commands;
+using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Paging;
-using XUCore.Template.FreeSql.Persistence.Entities;
 
-namespace XUCore.Template.FreeSql.Persistence
+namespace XUCore.NetCore.FreeSql.Curd
 {
-    public interface ICurdService<TEntity, TKey, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-            where TEntity : EntityFull<TKey>, new()
+    /// <summary>
+    /// CURD服务
+    /// </summary>
+    /// <typeparam name="TKey">主键类型</typeparam>
+    /// <typeparam name="TEntity">数据库实体</typeparam>
+    /// <typeparam name="TDto">输出dto</typeparam>
+    /// <typeparam name="TCreateCommand">创建命令</typeparam>
+    /// <typeparam name="TUpdateCommand">修改命令</typeparam>
+    /// <typeparam name="TListCommand">查询列表命令</typeparam>
+    /// <typeparam name="TPageCommand">分页命令</typeparam>
+    public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
             where TKey : struct
+            where TEntity : EntityFull<TKey>, new()
+            where TDto : class, new()
             where TCreateCommand : CreateCommand
             where TUpdateCommand : UpdateCommand<TKey>
             where TListCommand : ListCommand

@@ -6,7 +6,7 @@
     <members>
         <member name="T:XUCore.NetCore.Data.UnitOfWorkAttribute">
             <summary>
-            工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）
+            工作单元AOP（使用事务执行）
             </summary>
         </member>
         <member name="P:XUCore.NetCore.Data.UnitOfWorkAttribute.DbType">
@@ -14,11 +14,10 @@
             Type of DbContext
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Data.UnitOfWorkAttribute.#ctor(System.Type)">
+        <member name="M:XUCore.NetCore.Data.UnitOfWorkAttribute.#ctor">
             <summary>
             工作单元AOP
             </summary>
-            <param name="dbType">上下文<see cref="T:XUCore.NetCore.Data.IDbContext"/></param>
         </member>
         <member name="M:XUCore.NetCore.Data.BulkExtensions.BatchUtil.GetSqlUpdate``1(System.Linq.IQueryable{``0},Microsoft.EntityFrameworkCore.DbContext,System.Linq.Expressions.Expression{System.Func{``0,``0}})">
             <summary>

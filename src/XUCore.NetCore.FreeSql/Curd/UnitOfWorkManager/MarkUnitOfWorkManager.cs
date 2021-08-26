@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Template.FreeSql.Persistence
+namespace XUCore.NetCore.FreeSql.Curd
 {
     /// <summary>
     /// 多库FreeSql实例

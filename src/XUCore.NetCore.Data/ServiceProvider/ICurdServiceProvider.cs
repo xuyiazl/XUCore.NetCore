@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.Paging;
 
 namespace XUCore.NetCore.Data
 {
     public interface ICurdServiceProvider<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+        where TKey : struct
+        where TDto : class, new()
+        where TEntity : Entity<TKey>, new()
         where TCreateCommand : CreateCommand
         where TUpdateCommand : UpdateCommand<TKey>
         where TListCommand : ListCommand

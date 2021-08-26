@@ -1,5 +1,5 @@
 ﻿using FreeSql.DataAnnotations;
-using XUCore.Ddd.Domain;
+using XUCore.NetCore.FreeSql.Entity;
 
 namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
 {

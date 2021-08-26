@@ -5,24 +5,28 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Extensions;
-using XUCore.NetCore.Data;
-using XUCore.NetCore.FreeSql;
+using XUCore.Ddd.Domain;
+using XUCore.Ddd.Domain.Commands;
+using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Paging;
-using XUCore.Template.FreeSql.Core.Auth;
-using XUCore.Template.FreeSql.Persistence.Entities;
 
-namespace XUCore.Template.FreeSql.Persistence
+namespace XUCore.NetCore.FreeSql.Curd
 {
     /// <summary>
     /// CURD服务
     /// </summary>
     /// <typeparam name="TKey">主键类型</typeparam>
     /// <typeparam name="TEntity">数据库实体</typeparam>
-    public abstract class CurdService<TEntity, TKey, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : BaseRepository<TEntity, TKey>,
-        ICurdService<TEntity, TKey, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-            where TEntity : EntityFull<TKey>, new()
+    /// <typeparam name="TDto">输出dto</typeparam>
+    /// <typeparam name="TCreateCommand">创建命令</typeparam>
+    /// <typeparam name="TUpdateCommand">修改命令</typeparam>
+    /// <typeparam name="TListCommand">查询列表命令</typeparam>
+    /// <typeparam name="TPageCommand">分页命令</typeparam>
+    public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : BaseRepository<TEntity, TKey>,
+        ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
             where TKey : struct
+            where TEntity : EntityFull<TKey>, new()
+            where TDto : class, new()
             where TCreateCommand : CreateCommand
             where TUpdateCommand : UpdateCommand<TKey>
             where TListCommand : ListCommand
@@ -32,6 +36,9 @@ namespace XUCore.Template.FreeSql.Persistence
         protected readonly IBaseRepository<TEntity> repo;
 
         protected readonly IMapper mapper;
+        /// <summary>
+        /// 用户信息
+        /// </summary>
         public IUser User { get; set; }
 
         /// <summary>

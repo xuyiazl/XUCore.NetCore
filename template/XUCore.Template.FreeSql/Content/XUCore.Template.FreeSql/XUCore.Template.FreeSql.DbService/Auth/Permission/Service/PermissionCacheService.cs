@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
 using XUCore.NetCore.AspectCore.Cache;
+using XUCore.NetCore.FreeSql.Curd;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.DbService.Auth.Menu;
-using XUCore.Template.FreeSql.Persistence;
 using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
 
 namespace XUCore.Template.FreeSql.DbService.Auth.Permission
 {
-    public class PermissionCacheService : FreeSqlCurdService<MenuEntity, MenuDto, MenuCreateCommand, MenuUpdateCommand, MenuQueryCommand, MenuQueryPagedCommand>,
+    public class PermissionCacheService : FreeSqlCurdService<long,MenuEntity, MenuDto, MenuCreateCommand, MenuUpdateCommand, MenuQueryCommand, MenuQueryPagedCommand>,
         IPermissionCacheService
     {
         public PermissionCacheService(IServiceProvider serviceProvider, FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user) : base(muowm, mapper, user)

@@ -55,6 +55,56 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.Ddd.Domain.ClaimAttributes">
+            <summary>
+            Claim属性
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.IdentityServerUserId">
+            <summary>
+            认证授权用户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.UserNickName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.UserToken">
+            <summary>
+            用户登录token
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.RefreshExpires">
+            <summary>
+            刷新有效期
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.TenantType">
+            <summary>
+            租户类型
+            </summary>
+        </member>
+        <member name="F:XUCore.Ddd.Domain.ClaimAttributes.DataIsolationType">
+            <summary>
+            数据隔离
+            </summary>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Commands.Command">
             <summary>
             抽象命令基类
@@ -287,6 +337,21 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddUserInfo(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 IUser 用户信息
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddUserInfo``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册 IUser 用户信息
+            </summary>
+            <typeparam name="TUserImpl">用户信息实现方法</typeparam>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.Entity`1">
             <summary>
             定义领域实体基类
@@ -404,6 +469,45 @@
             聚合根
             </summary>
         </member>
+        <member name="T:XUCore.Ddd.Domain.IUser">
+            <summary>
+            用户信息接口
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.IUser.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.IUser.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.IUser.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.IUser.SetToken(System.Int64,System.String)">
+            <summary>
+            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+            </summary>
+            <param name="id"></param>
+            <param name="token"></param>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.IUser.RemoveToken">
+            <summary>
+            删除登录标记，模拟退出
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.IUser.VaildToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Ddd.Domain.RequestOptions">
             <summary>
             Mediator 请求插件启用配置
@@ -423,6 +527,45 @@
             <summary>
             自动验证，<see cref="T:FluentValidation.IValidator"/>异常抛出，需要配合try catch捕获处理
             </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.User">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.User.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XUCore.Ddd.Domain.User.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.User.SetToken(System.Int64,System.String)">
+            <summary>
+            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+            </summary>
+            <param name="id"></param>
+            <param name="token"></param>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.User.RemoveToken">
+            <summary>
+            删除登录标记，模拟退出
+            </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.User.VaildToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

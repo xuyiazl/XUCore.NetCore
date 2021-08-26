@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
 using XUCore.Extensions;
 using XUCore.Helpers;
+using XUCore.NetCore.FreeSql;
+using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Core.Auth;
-using XUCore.Template.FreeSql.Persistence.Entities;
 
 namespace XUCore.Template.FreeSql.Persistence
 {

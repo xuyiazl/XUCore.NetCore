@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Template.FreeSql.Core.Auth
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 用户信息接口
@@ -15,12 +15,10 @@ namespace XUCore.Template.FreeSql.Core.Auth
         /// 主键
         /// </summary>
         long Id { get; }
-
         /// <summary>
         /// 用户名
         /// </summary>
         string UserName { get; }
-
         /// <summary>
         /// 昵称
         /// </summary>
@@ -28,18 +26,18 @@ namespace XUCore.Template.FreeSql.Core.Auth
         /// <summary>
         /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="id"></param>
         /// <param name="token"></param>
-        void SetLoginToken(long userId, string token);
+        void SetToken(long id, string token);
         /// <summary>
         /// 删除登录标记，模拟退出
         /// </summary>
-        void RemoveLoginToken();
+        void RemoveToken();
         /// <summary>
         /// 验证token是否一致
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        bool VaildLoginToken(string token);
+        bool VaildToken(string token);
     }
 }

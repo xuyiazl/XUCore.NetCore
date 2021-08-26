@@ -2,7 +2,7 @@
 
 XUCore.Template.FreeSql
 
-EasyLayer 精简分层快速开发项目模板，生成WebApi项目。还原简单清晰的代码。
+基于FreeSql的精简分层快速开发项目模板，生成WebApi项目
 
 ### 使用模板
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.Paging;
 
 namespace XUCore.NetCore.Data
@@ -22,6 +23,7 @@ namespace XUCore.NetCore.Data
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdServiceProvider<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
         : ICurdServiceProvider<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+            where TKey : struct
             where TDto : class, new()
             where TEntity : Entity<TKey>, new()
             where TCreateCommand : CreateCommand

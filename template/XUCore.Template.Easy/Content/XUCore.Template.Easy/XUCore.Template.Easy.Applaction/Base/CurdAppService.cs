@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 using XUCore.NetCore;
-using XUCore.NetCore.Data;
 using XUCore.Paging;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
@@ -30,6 +30,7 @@ namespace XUCore.Template.Easy.Applaction
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdAppService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
         : AppService, ICurdAppService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
+            where TKey : struct
             where TDto : class, new()
             where TEntity : BaseEntity<TKey>, new()
             where TCreateCommand : CreateCommand

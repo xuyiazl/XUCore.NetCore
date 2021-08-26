@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using XUCore.Ddd.Domain;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
@@ -18,7 +19,6 @@ using XUCore.NetCore.Oss;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.DbService;
 
 namespace XUCore.Template.FreeSql.Applaction
@@ -52,7 +52,7 @@ namespace XUCore.Template.FreeSql.Applaction
             );
 
             // 注册用户信息
-            services.AddSingleton<IUser, Core.Auth.User>();
+            services.AddSingleton<IUser, Ddd.Domain.User>();
 
             // 注入redis插件
             //services.AddRedisService().AddJsonRedisSerializer();

@@ -1,9 +1,9 @@
 ﻿using FreeSql.DataAnnotations;
 using System.ComponentModel;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities
+namespace XUCore.NetCore.FreeSql.Entity
 {
-    public interface IEntity<TKey>
+    public interface IEntity<TKey> where TKey : struct
     {
         /// <summary>
         /// 主键Id
@@ -15,7 +15,7 @@ namespace XUCore.Template.FreeSql.Persistence.Entities
     {
     }
 
-    public class Entity<TKey> : IEntity<TKey>
+    public class Entity<TKey> : IEntity<TKey> where TKey : struct
     {
         /// <summary>
         /// 主键Id

@@ -58,7 +58,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Role
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(IDefaultDbContext))]
+            [UnitOfWork(DbType = typeof(IDefaultDbContext))]
             public override async Task<int> Handle(RoleCreateCommand request, CancellationToken cancellationToken)
             {
                 var entity = mapper.Map<RoleCreateCommand, RoleEntity>(request);

@@ -9,8 +9,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="XUCoreApp" Version="5.3.3" />
-		<PackageReference Include="XUCore.NetCore.FreeSql" Version="5.0.0" />
+		<PackageReference Include="XUCoreApp" Version="5.3.5" />
 	</ItemGroup>
 
 	<ItemGroup>

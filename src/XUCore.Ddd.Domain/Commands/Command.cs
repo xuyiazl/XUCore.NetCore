@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain.Commands;
 
-namespace XUCore.NetCore.Data
+namespace XUCore.Ddd.Domain.Commands
 {
     public abstract class CreateCommand : Command<bool>
     {
 
     }
 
-    public abstract class UpdateCommand<TKey> : CommandId<bool, TKey>
+    public abstract class UpdateCommand<TKey> : CommandId<bool, TKey> where TKey : struct
     {
 
     }

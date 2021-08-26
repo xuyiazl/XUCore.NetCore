@@ -87,7 +87,7 @@ namespace XUCore.Template.Ddd.Domain.Auth.Menu
                 this.mapper = mapper;
             }
 
-            [UnitOfWork(typeof(IDefaultDbContext))]
+            [UnitOfWork(DbType = typeof(IDefaultDbContext))]
             public override async Task<int> Handle(MenuCreateCommand request, CancellationToken cancellationToken)
             {
                 var entity = mapper.Map<MenuCreateCommand, MenuEntity>(request);

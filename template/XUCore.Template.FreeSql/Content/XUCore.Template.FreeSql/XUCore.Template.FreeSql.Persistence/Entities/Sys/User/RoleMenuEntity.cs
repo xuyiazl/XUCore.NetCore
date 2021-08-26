@@ -1,4 +1,5 @@
 ﻿using FreeSql.DataAnnotations;
+using XUCore.NetCore.FreeSql.Entity;
 
 namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
 {

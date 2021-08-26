@@ -1,12 +1,13 @@
 ﻿using FreeSql.DataAnnotations;
 using System.ComponentModel;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities
+namespace XUCore.NetCore.FreeSql.Entity
 {
     /// <summary>
     /// 实体版本
     /// </summary>
     public class EntityVersion<TKey> : Entity<TKey>, IEntityVersion
+         where TKey : struct
     {
         /// <summary>
         /// 版本

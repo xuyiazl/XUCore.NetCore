@@ -12,7 +12,7 @@ using XUCore.NetCore.AspectCore;
 namespace XUCore.NetCore.Data
 {
     /// <summary>
-    /// 工作单元AOP（请求自动启用工作单元模式，要么成功，要么失败。）
+    /// 工作单元AOP（使用事务执行）
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class UnitOfWorkAttribute : InterceptorBase, IActionFilter
@@ -24,10 +24,9 @@ namespace XUCore.NetCore.Data
         /// <summary>
         /// 工作单元AOP
         /// </summary>
-        /// <param name="dbType">上下文<see cref="IDbContext"/></param>
-        public UnitOfWorkAttribute(Type dbType)
+        public UnitOfWorkAttribute()
         {
-            DbType = dbType ?? typeof(IDbContext);
+
         }
 
         IUnitOfWork unitOfWork;
@@ -39,24 +38,19 @@ namespace XUCore.NetCore.Data
 
             if (dbContext == null) throw new ArgumentNullException("DbType is null");
 
-            unitOfWork = new UnitOfWorkService(dbContext);
             try
             {
-                tran = unitOfWork.BeginTransaction();
+                await OnBefore(dbContext);
 
                 await next(context);
 
-                tran.Commit();
+                await OnAfter(null);
             }
-            catch
+            catch (Exception ex)
             {
-                tran.Rollback();
+                await OnAfter(ex);
 
                 throw;
-            }
-            finally
-            {
-                tran.Dispose();
             }
         }
 

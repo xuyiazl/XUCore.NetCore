@@ -4,6 +4,378 @@
         <name>XUCore.NetCore.FreeSql</name>
     </assembly>
     <members>
+        <member name="T:XUCore.NetCore.FreeSql.AspectCoreFreeSql">
+            <summary>
+            解决AspectCore冲突问题，原因：作者表示不支持不带namespace的接口和类的注入
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.AspectCoreFreeSql`1">
+            <summary>
+            解决AspectCore冲突问题，原因：作者表示不支持不带namespace的接口和类的注入
+            </summary>
+            <typeparam name="TMark"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.CurdService`7">
+            <summary>
+            CURD服务
+            </summary>
+            <typeparam name="TKey">主键类型</typeparam>
+            <typeparam name="TEntity">数据库实体</typeparam>
+            <typeparam name="TDto">输出dto</typeparam>
+            <typeparam name="TCreateCommand">创建命令</typeparam>
+            <typeparam name="TUpdateCommand">修改命令</typeparam>
+            <typeparam name="TListCommand">查询列表命令</typeparam>
+            <typeparam name="TPageCommand">分页命令</typeparam>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Curd.CurdService`7.User">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Curd.CurdService`7.CreatedAction">
+            <summary>
+            创建事件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Curd.CurdService`7.UpdatedAction">
+            <summary>
+            修改事件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Curd.CurdService`7.DeletedAction">
+            <summary>
+            删除事件
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper)">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="freeSql"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper,System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Func{System.String,System.String})">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="freeSql"></param>
+            <param name="mapper"></param>
+            <param name="filter"></param>
+            <param name="asTable"></param>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.DeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.SoftDeleteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.SoftDeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.GetByIdAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.FreeSqlCurdService`7">
+            <summary>
+            FreeSql CurdService（单库FreeSql实例）
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <typeparam name="TCreateCommand"></typeparam>
+            <typeparam name="TUpdateCommand"></typeparam>
+            <typeparam name="TListCommand"></typeparam>
+            <typeparam name="TPageCommand"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.ICurdService`7">
+            <summary>
+            CURD服务
+            </summary>
+            <typeparam name="TKey">主键类型</typeparam>
+            <typeparam name="TEntity">数据库实体</typeparam>
+            <typeparam name="TDto">输出dto</typeparam>
+            <typeparam name="TCreateCommand">创建命令</typeparam>
+            <typeparam name="TUpdateCommand">修改命令</typeparam>
+            <typeparam name="TListCommand">查询列表命令</typeparam>
+            <typeparam name="TPageCommand">分页命令</typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.DeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.SoftDeleteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.SoftDeleteAsync(`0[],System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.GetByIdAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.ICurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.MarkCurdService`8">
+            <summary>
+            FreeSql Mark CurdService（多库FreeSql实例）
+            </summary>
+            <typeparam name="TMark"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <typeparam name="TCreateCommand"></typeparam>
+            <typeparam name="TUpdateCommand"></typeparam>
+            <typeparam name="TListCommand"></typeparam>
+            <typeparam name="TPageCommand"></typeparam>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.FreeSqlUnitOfWorkManager">
+            <summary>
+            单库FreeSql实例
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.MarkUnitOfWorkManager`1">
+            <summary>
+            多库FreeSql实例
+            </summary>
+            <typeparam name="TMark"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.DependencyInjection.AddFreeSqlUnitOfWorkManager(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册工作单元管理
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.IEntity`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.Entity`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntityAdd`1">
+            <summary>
+            实体创建
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityAdd`1.CreatedAtUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityAdd`1.CreatedAtUserName">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityAdd`1.CreatedAt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntityFull`1">
+            <summary>
+            实体完整类
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.CreatedAtUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.CreatedAtUserName">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.CreatedAt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.ModifiedAtUserId">
+            <summary>
+            修改者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.ModifiedAtUserName">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityFull`1.ModifiedAt">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntityFull">
+            <summary>
+            实体完整类
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntitySoftDelete`1">
+            <summary>
+            实体软删除
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntitySoftDelete`1.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntityUpdate`1">
+            <summary>
+            实体修改
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityUpdate`1.ModifiedAtUserId">
+            <summary>
+            修改者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityUpdate`1.ModifiedAtUserName">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityUpdate`1.ModifiedAt">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Entity.EntityVersion`1">
+            <summary>
+            实体版本
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.EntityVersion`1.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.IEntitySoftDelete.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.Entity.IEntityVersion.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.FreeSql.ISelectExtensions">
             <summary>
             ISelect 扩展
@@ -107,6 +479,21 @@
             <param name="dbkey"></param>
             <param name="create"></param>
             <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.TransactionAttribute">
+            <summary>
+            使用事务执行
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.TransactionAttribute.UowmType">
+            <summary>
+            Type of UnitOfWorkManage
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.TransactionAttribute.Propagation">
+            <summary>
+            事务传播方式
+            </summary>
         </member>
     </members>
 </doc>

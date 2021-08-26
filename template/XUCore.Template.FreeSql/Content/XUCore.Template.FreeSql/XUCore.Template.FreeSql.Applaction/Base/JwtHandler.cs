@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
+using XUCore.Ddd.Domain;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.DbService.Auth.Permission;
 
 namespace XUCore.Template.FreeSql.Applaction
@@ -48,7 +47,7 @@ namespace XUCore.Template.FreeSql.Applaction
                 // 验证登录保存的token，如果不一致则是被其他人踢掉，或者退出登录了，需要重新登录
                 var token = JWTEncryption.GetJwtBearerToken(context.GetCurrentHttpContext());
 
-                if (!user.VaildLoginToken(token))
+                if (!user.VaildToken(token))
                     context.Fail();
 
                 // 自动刷新 token

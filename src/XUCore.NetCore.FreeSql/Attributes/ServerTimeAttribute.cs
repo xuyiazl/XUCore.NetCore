@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Template.FreeSql.Persistence
+namespace XUCore.NetCore.FreeSql
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class SnowflakeAttribute : Attribute
+    public class ServerTimeAttribute : Attribute
     {
-        public bool Enable { get; set; } = true;
     }
 }

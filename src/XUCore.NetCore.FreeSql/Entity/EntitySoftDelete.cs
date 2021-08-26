@@ -1,12 +1,13 @@
 ﻿using FreeSql.DataAnnotations;
 using System.ComponentModel;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities
+namespace XUCore.NetCore.FreeSql.Entity
 {
     /// <summary>
     /// 实体软删除
     /// </summary>
-    public class EntitySoftDelete<TKey> : Entity<TKey>, IEntitySoftDelete
+    public class EntitySoftDelete<TKey> : Entity<TKey>, IEntitySoftDelete 
+        where TKey : struct
     {
         /// <summary>
         /// 是否删除

@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
 using XUCore.Helpers;
 using XUCore.NetCore;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.DbService.Auth.Permission;
 using XUCore.Template.FreeSql.DbService.User.User;
 
@@ -64,7 +64,7 @@ namespace XUCore.Template.FreeSql.Applaction.Login
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
-            user.SetLoginToken(userDto.Id, accessToken);
+            user.SetToken(userDto.Id, accessToken);
 
             return RestFull.Success(data: new LoginTokenDto
             {
@@ -93,7 +93,7 @@ namespace XUCore.Template.FreeSql.Applaction.Login
         [HttpPost("/api/[controller]/Out")]
         public async Task LoginOutAsync(CancellationToken cancellationToken)
         {
-            user.RemoveLoginToken();
+            user.RemoveToken();
 
             await Task.CompletedTask;
         }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Template.FreeSql.Core.Auth
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// Claim属性
     /// </summary>
-    public static class ClaimAttributes
+    public class ClaimAttributes
     {
         /// <summary>
         /// 用户Id

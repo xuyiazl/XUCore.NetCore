@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities
+namespace XUCore.NetCore.FreeSql.Entity
 {
     /// <summary>
     /// 实体创建

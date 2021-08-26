@@ -91,7 +91,7 @@ namespace XUCore.NetCore.DataTest.Business
             var ss = rep.Context.User.Include(c => c.AdminUserAddress.Take(2)).FirstOrDefault(c => c.Id == entity.Id);
         }
 
-        [UnitOfWork(typeof(NigelDbContext))]
+        [UnitOfWork(DbType = typeof(NigelDbContext))]
         public async Task<AdminUserEntity> TestAspectCore()
         {
             rep.Delete<AdminUserEntity>(c => true);

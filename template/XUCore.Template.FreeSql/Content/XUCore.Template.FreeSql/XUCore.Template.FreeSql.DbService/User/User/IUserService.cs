@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.NetCore.FreeSql.Curd;
 using XUCore.Paging;
 using XUCore.Template.FreeSql.Core.Enums;
-using XUCore.Template.FreeSql.Persistence;
 using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
 
 namespace XUCore.Template.FreeSql.DbService.User.User
 {
-    public interface IUserService : ICurdService<UserEntity, long, UserDto, UserCreateCommand, UserUpdateInfoCommand, UserQueryCommand, UserQueryPagedCommand>, IDbService
+    public interface IUserService : ICurdService<long, UserEntity, UserDto, UserCreateCommand, UserUpdateInfoCommand, UserQueryCommand, UserQueryPagedCommand>, IDbService
     {
         Task<bool> AnyByAccountAsync(AccountMode accountMode, string account, long notId, CancellationToken cancellationToken);
         Task<UserDto> GetByAccountAsync(AccountMode accountMode, string account, CancellationToken cancellationToken);

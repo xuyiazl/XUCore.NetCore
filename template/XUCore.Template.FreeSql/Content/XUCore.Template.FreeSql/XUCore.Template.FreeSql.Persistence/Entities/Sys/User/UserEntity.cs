@@ -2,7 +2,7 @@
 using FreeSql.DataAnnotations;
 using System;
 using System.Collections.Generic;
-using XUCore.Template.FreeSql.Core.Enums;
+using XUCore.NetCore.FreeSql.Entity;
 
 namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
 {

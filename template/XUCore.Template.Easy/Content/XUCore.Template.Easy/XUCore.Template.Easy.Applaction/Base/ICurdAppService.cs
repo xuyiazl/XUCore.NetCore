@@ -1,18 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain.Commands;
 using XUCore.NetCore;
-using XUCore.NetCore.Data;
 using XUCore.Paging;
 using XUCore.Template.Easy.Core.Enums;
+using XUCore.Template.Easy.Persistence.Entities;
 
 namespace XUCore.Template.Easy.Applaction
 {
     public interface ICurdAppService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : IAppService
-       where TCreateCommand : CreateCommand
-       where TUpdateCommand : UpdateCommand<TKey>
-       where TListCommand : ListCommand
-       where TPageCommand : PageCommand
+            where TKey : struct
+            where TDto : class, new()
+            where TEntity : BaseEntity<TKey>, new()
+            where TCreateCommand : CreateCommand
+            where TUpdateCommand : UpdateCommand<TKey>
+            where TListCommand : ListCommand
+            where TPageCommand : PageCommand
     {
         /// <summary>
         /// 添加数据
