@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using XUCore;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.Template.FreeSql.Applaction.Authorization;
+using XUCore.Template.FreeSql.Core.Auth;
+using XUCore.Template.FreeSql.DbService.Auth.Permission;
 
 namespace XUCore.Template.FreeSql.Applaction
 {
@@ -14,10 +18,10 @@ namespace XUCore.Template.FreeSql.Applaction
     /// </summary>
     public class JwtHandler : AppAuthorizeHandler
     {
-        private readonly IAuthService authService;
-        public JwtHandler(IAuthService authService)
+        private readonly IServiceProvider serviceProvider;
+        public JwtHandler(IServiceProvider serviceProvider)
         {
-            this.authService = authService;
+            this.serviceProvider = serviceProvider;
         }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑
@@ -39,10 +43,12 @@ namespace XUCore.Template.FreeSql.Applaction
             }
             else
             {
+                var user = serviceProvider.GetService<IUser>();
+
                 // 验证登录保存的token，如果不一致则是被其他人踢掉，或者退出登录了，需要重新登录
                 var token = JWTEncryption.GetJwtBearerToken(context.GetCurrentHttpContext());
 
-                if (!authService.VaildLoginToken(token))
+                if (!user.VaildLoginToken(token))
                     context.Fail();
 
                 // 自动刷新 token
@@ -65,8 +71,10 @@ namespace XUCore.Template.FreeSql.Applaction
             var securityDefineAttribute = httpContext.GetMetadata<SecurityDefineAttribute>();
             if (securityDefineAttribute == null) return true;
 
+            var permissionService = serviceProvider.GetService<IPermissionService>();
+            var user = serviceProvider.GetService<IUser>();
             // 检查授权
-            return await authService.IsCanAccessAsync(securityDefineAttribute.ResourceId);
+            return await permissionService.ExistsAsync(user.Id, securityDefineAttribute.ResourceId, CancellationToken.None);
         }
     }
 }

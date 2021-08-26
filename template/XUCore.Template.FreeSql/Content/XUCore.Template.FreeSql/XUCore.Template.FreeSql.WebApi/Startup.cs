@@ -24,7 +24,6 @@ namespace XUCore.Template.FreeSql.WebApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDbContext();
             app.UseApplication(env);
         }
     }

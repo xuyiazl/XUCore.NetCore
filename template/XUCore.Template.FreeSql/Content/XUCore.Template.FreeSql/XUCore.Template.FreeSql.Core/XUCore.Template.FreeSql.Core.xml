@@ -4,6 +4,219 @@
         <name>XUCore.Template.FreeSql.Core</name>
     </assembly>
     <members>
+        <member name="T:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes">
+            <summary>
+            Claim属性
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.IdentityServerUserId">
+            <summary>
+            认证授权用户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.UserNickName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.UserToken">
+            <summary>
+            用户登录token
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.RefreshExpires">
+            <summary>
+            刷新有效期
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.TenantType">
+            <summary>
+            租户类型
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Core.Auth.ClaimAttributes.DataIsolationType">
+            <summary>
+            数据隔离
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Core.Auth.IUser">
+            <summary>
+            用户信息接口
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.IUser.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.IUser.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.IUser.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.IUser.SetLoginToken(System.Int64,System.String)">
+            <summary>
+            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+            </summary>
+            <param name="userId"></param>
+            <param name="token"></param>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.IUser.RemoveLoginToken">
+            <summary>
+            删除登录标记，模拟退出
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.IUser.VaildLoginToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Core.Auth.User">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.User.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.Auth.User.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.User.SetLoginToken(System.Int64,System.String)">
+            <summary>
+            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
+            </summary>
+            <param name="userId"></param>
+            <param name="token"></param>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.User.RemoveLoginToken">
+            <summary>
+            删除登录标记，模拟退出
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.Auth.User.VaildLoginToken(System.String)">
+            <summary>
+            验证token是否一致
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Core.ConnectionSettings">
+            <summary>
+            数据库配置
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.Type">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.ConnectionString">
+            <summary>
+            数据库字符串
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.IdleTime">
+            <summary>
+            空闲时间(分)
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.GenerateData">
+            <summary>
+            生成数据
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.SyncStructure">
+            <summary>
+            同步结构
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.SyncData">
+            <summary>
+            同步数据
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.CreateDb">
+            <summary>
+            建库
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.CreateDbConnectionString">
+            <summary>
+            建库连接字符串
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.CreateDbSql">
+            <summary>
+            建库脚本
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.MonitorCommand">
+            <summary>
+            监听所有操作
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.Curd">
+            <summary>
+            监听Curd操作
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.ConnectionSettings.Dbs">
+            <summary>
+            多数据库
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Core.MultiDb">
+            <summary>
+            多数据库
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.MultiDb.Name">
+            <summary>
+            数据库命名
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.MultiDb.Type">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Core.MultiDb.ConnectionString">
+            <summary>
+            数据库字符串
+            </summary>
+        </member>
         <member name="F:XUCore.Template.FreeSql.Core.Enums.AccountMode.UserName">
             <summary>
             用户名
@@ -12,31 +225,6 @@
         <member name="F:XUCore.Template.FreeSql.Core.Enums.AccountMode.Mobile">
             <summary>
             手机号码
-            </summary>
-        </member>
-        <member name="T:XUCore.Template.FreeSql.Core.Enums.Status">
-            <summary>
-            数据状态
-            </summary>
-        </member>
-        <member name="F:XUCore.Template.FreeSql.Core.Enums.Status.Default">
-            <summary>
-            默认状态
-            </summary>
-        </member>
-        <member name="F:XUCore.Template.FreeSql.Core.Enums.Status.Show">
-            <summary>
-            正常显示
-            </summary>
-        </member>
-        <member name="F:XUCore.Template.FreeSql.Core.Enums.Status.SoldOut">
-            <summary>
-            数据下架（隐藏）
-            </summary>
-        </member>
-        <member name="F:XUCore.Template.FreeSql.Core.Enums.Status.Trash">
-            <summary>
-            数据已被删除，非物理删除（回收站）
             </summary>
         </member>
         <member name="P:XUCore.Template.FreeSql.Core.DtoBase`1.Id">
@@ -48,6 +236,18 @@
             <summary>
             主键Id
             </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Core.ListExtensions.ToTree``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean},System.Func{``0,``0,System.Boolean},System.Action{``0,System.Collections.Generic.IEnumerable{``0}},``0)">
+            <summary>
+            将列表转换为树形结构
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="list">数据</param>
+            <param name="rootWhere">根条件</param>
+            <param name="childsWhere">节点条件</param>
+            <param name="addChilds">添加子节点</param>
+            <param name="entity"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Template.FreeSql.Core.SubCode">
             <summary>

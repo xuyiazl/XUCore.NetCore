@@ -6,78 +6,65 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Helpers;
 using XUCore.NetCore;
-using XUCore.Paging;
+using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
-using XUCore.Template.FreeSql.Applaction.Admin;
-using XUCore.Template.FreeSql.Applaction.Authorization;
 using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.FreeSql.DbService.Sys.Admin.Permission;
+using XUCore.Template.FreeSql.Core.Auth;
+using XUCore.Template.FreeSql.DbService.Auth.Permission;
+using XUCore.Template.FreeSql.DbService.User.User;
 
 namespace XUCore.Template.FreeSql.Applaction.Login
 {
     /// <summary>
-    /// 管理员登录接口
+    /// 用户登录接口
     /// </summary>
     [ApiExplorerSettings(GroupName = ApiGroup.Admin)]
     public class LoginAppService : AppService, ILoginAppService
     {
         private readonly IPermissionService permissionService;
-        private readonly IAdminUserService adminUserService;
-        private readonly IAuthService authService;
-        private readonly IAdminAppService adminAppService;
+        private readonly IUserService userService;
+        private readonly IUser user;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
-            this.adminUserService = serviceProvider.GetService<IAdminUserService>();
-            this.authService = serviceProvider.GetService<IAuthService>();
-            this.adminAppService = serviceProvider.GetService<IAdminAppService>();
+            this.userService = serviceProvider.GetService<IUserService>();
+            this.user = serviceProvider.GetService<IUser>();
         }
 
         #region [ 登录 ]
 
         /// <summary>
-        /// 创建初始账号
-        /// </summary>
-        /// <remarks>
-        /// 初始账号密码：
-        ///     <para>username : admin</para>
-        ///     <para>password : admin</para>
-        /// </remarks>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
-        {
-            var command = new AdminUserCreateCommand
-            {
-                UserName = "admin",
-                Password = "admin",
-                Company = "",
-                Location = "",
-                Mobile = "13500000000",
-                Name = "admin",
-                Position = ""
-            };
-
-            command.IsVaild();
-
-            return await adminAppService.CreateUserAsync(command, cancellationToken);
-        }
-        /// <summary>
-        /// 管理员登录
+        /// 用户登录
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("/api/[controller]")]
         [AllowAnonymous]
-        public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
+        public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] UserLoginCommand request, CancellationToken cancellationToken)
         {
-            (var accessToken, var refreshToken) = await authService.LoginAsync(request, cancellationToken);
+            var userDto = await userService.LoginAsync(request, cancellationToken);
+
+            // 生成 token
+            var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
+            {
+                { ClaimAttributes.UserId , userDto.Id },
+                { ClaimAttributes.UserName ,userDto.UserName }
+            });
+
+            // 生成 刷新token
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken);
+
+            // 设置 Swagger 自动登录
+            Web.HttpContext.SigninToSwagger(accessToken);
+            // 设置刷新 token
+            Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
+
+            user.SetLoginToken(userDto.Id, accessToken);
 
             return RestFull.Success(data: new LoginTokenDto
             {
@@ -94,8 +81,8 @@ namespace XUCore.Template.FreeSql.Applaction.Login
         {
             return RestFull.Success(data: new
             {
-                authService.AdminId,
-                authService.AdminName
+                user.Id,
+                user.UserName
             }.ToJson());
         }
         /// <summary>
@@ -106,7 +93,9 @@ namespace XUCore.Template.FreeSql.Applaction.Login
         [HttpPost("/api/[controller]/Out")]
         public async Task LoginOutAsync(CancellationToken cancellationToken)
         {
-            await authService.LoginOutAsync(cancellationToken);
+            user.RemoveLoginToken();
+
+            await Task.CompletedTask;
         }
 
         #endregion
@@ -116,40 +105,40 @@ namespace XUCore.Template.FreeSql.Applaction.Login
         /// <summary>
         /// 查询是否有权限
         /// </summary>
-        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
         /// <param name="onlyCode"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Exists")]
-        public async Task<Result<bool>> GetPermissionExistsAsync([Required] long adminId, [Required] string onlyCode, CancellationToken cancellationToken = default)
+        public async Task<Result<bool>> GetPermissionExistsAsync([Required] long userId, [Required] string onlyCode, CancellationToken cancellationToken = default)
         {
-            var res = await permissionService.ExistsAsync(adminId, onlyCode, cancellationToken);
+            var res = await permissionService.ExistsAsync(userId, onlyCode, cancellationToken);
 
             return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航
         /// </summary>
-        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Menu")]
-        public async Task<Result<IList<PermissionMenuTreeDto>>> GetPermissionMenusAsync([Required] long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<PermissionMenuTreeDto>>> GetPermissionMenusAsync([Required] long userId, CancellationToken cancellationToken = default)
         {
-            var res = await permissionService.GetMenusAsync(adminId, cancellationToken);
+            var res = await permissionService.GetMenusAsync(userId, cancellationToken);
 
             return RestFull.Success(data: res);
         }
         /// <summary>
         /// 查询权限导航（快捷导航）
         /// </summary>
-        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("/api/[controller]/Permission/Express")]
-        public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync([Required] long adminId, CancellationToken cancellationToken = default)
+        public async Task<Result<IList<PermissionMenuDto>>> GetPermissionMenuExpressAsync([Required] long userId, CancellationToken cancellationToken = default)
         {
-            var res = await permissionService.GetMenuExpressAsync(adminId, cancellationToken);
+            var res = await permissionService.GetMenuExpressAsync(userId, cancellationToken);
 
             return RestFull.Success(data: res);
         }

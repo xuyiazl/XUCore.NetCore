@@ -2,15 +2,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Extensions;
 
 namespace XUCore.Template.FreeSql.WebApi
@@ -73,7 +68,7 @@ namespace XUCore.Template.FreeSql.WebApi
                       })
                       .UseStartup<Startup>();
                 })
-                .UseInterceptorHostBuilder()
+                //.UseInterceptorHostBuilder()
                 ;
     }
 }

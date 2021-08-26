@@ -4,259 +4,607 @@
         <name>XUCore.Template.FreeSql.Persistence</name>
     </assembly>
     <members>
-        <member name="T:XUCore.Template.FreeSql.Persistence.IDefaultDbRepository`1">
+        <member name="T:XUCore.Template.FreeSql.Persistence.CurdService`7">
             <summary>
-            数据仓储
+            CURD服务
             </summary>
-            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TKey">主键类型</typeparam>
+            <typeparam name="TEntity">数据库实体</typeparam>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.DefaultDbRepository`1">
+        <member name="P:XUCore.Template.FreeSql.Persistence.CurdService`7.CreatedAction">
             <summary>
-            数据仓储
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-        </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.DefaultDbContext">
-            <summary>
-            上下文
+            创建事件
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.BaseEntity`1.Status">
+        <member name="P:XUCore.Template.FreeSql.Persistence.CurdService`7.UpdatedAction">
             <summary>
-            数据状态
+            修改事件
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.BaseEntity`1.CreatedAt">
+        <member name="P:XUCore.Template.FreeSql.Persistence.CurdService`7.DeletedAction">
+            <summary>
+            删除事件
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper)">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="freeSql"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.String,System.String})">
+            <summary>
+            CURD服务
+            </summary>
+            <param name="freeSql"></param>
+            <param name="mapper"></param>
+            <param name="filter"></param>
+            <param name="asTable"></param>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.DeleteAsync(`1[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.SoftDeleteAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.SoftDeleteAsync(`1[],System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.GetByIdAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.CurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.CreateAsync(`3,System.Threading.CancellationToken)">
+            <summary>
+            添加数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.UpdateAsync(`4,System.Threading.CancellationToken)">
+            <summary>
+            修改数据
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.DeleteAsync(`1[],System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.SoftDeleteAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.SoftDeleteAsync(`1[],System.Threading.CancellationToken)">
+            <summary>
+            软删除
+            </summary>
+            <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.GetByIdAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            根据id获取一条记录
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.GetListAsync(`5,System.Threading.CancellationToken)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.ICurdService`7.GetPagedListAsync(`6,System.Threading.CancellationToken)">
+            <summary>
+            获取分页
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.FreeSqlUnitOfWorkManager">
+            <summary>
+            单库FreeSql实例
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.MarkUnitOfWorkManager`1">
+            <summary>
+            多库FreeSql实例
+            </summary>
+            <typeparam name="TMark"></typeparam>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Persistence.DbHelper.TimeOffset">
+            <summary>
+            偏移时间
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.CreateDatabaseAsync(XUCore.Template.FreeSql.Core.ConnectionSettings)">
+            <summary>
+            创建数据库
+            </summary>
+            <param name="dbConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.GetEntityTypes">
+            <summary>
+            获得指定程序集表实体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.ConfigEntity(IFreeSql)">
+            <summary>
+            配置实体
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.AuditValue(FreeSql.Aop.AuditValueEventArgs,System.TimeSpan,XUCore.Template.FreeSql.Core.Auth.IUser)">
+            <summary>
+            审计数据
+            </summary>
+            <param name="e"></param>
+            <param name="timeOffset"></param>
+            <param name="user"></param>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.SyncStructure(IFreeSql,System.String,XUCore.Template.FreeSql.Core.ConnectionSettings)">
+            <summary>
+            同步结构
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.MySqlDb">
+            <summary>
+            多数据库命名
+            </summary>
+        </member>
+        <member name="M:XUCore.Template.FreeSql.Persistence.DependencyInjection.CreateMultiDbBuilder(XUCore.Template.FreeSql.Core.MultiDb)">
+            <summary>
+            创建多数据库构建器
+            </summary>
+            <param name="multiDb"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.IEntity`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Entity`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntityAdd`1">
+            <summary>
+            实体创建
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityAdd`1.CreatedAtUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityAdd`1.CreatedAtUserName">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityAdd`1.CreatedAt">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.BaseEntity`1.UpdatedAt">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1">
             <summary>
-            最后更新时间
+            实体完整类
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.BaseEntity`1.DeletedAt">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.Version">
             <summary>
-            删除时间
+            版本
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.CreatedAtUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.CreatedAtUserName">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.CreatedAt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.ModifiedAtUserId">
+            <summary>
+            修改者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.ModifiedAtUserName">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityFull`1.ModifiedAt">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntityFull">
+            <summary>
+            实体完整类
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntitySoftDelete`1">
+            <summary>
+            实体软删除
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntitySoftDelete`1.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntityUpdate`1">
+            <summary>
+            实体修改
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityUpdate`1.ModifiedAtUserId">
+            <summary>
+            修改者Id
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityUpdate`1.ModifiedAtUserName">
+            <summary>
+            修改者
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityUpdate`1.ModifiedAt">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.EntityVersion`1">
+            <summary>
+            实体版本
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.EntityVersion`1.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.IEntitySoftDelete.IsDeleted">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.IEntityVersion.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.DualEntity">
+            <summary>
+            系统表，用于查询系统函数
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.DualEntity.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity">
             <summary>
             权限导航表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.FatherId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.ParentId">
             <summary>
             导航父级id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Childs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Name">
             <summary>
             名字
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.Icon">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Icon">
             <summary>
             图标样式
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.Url">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Url">
             <summary>
             链接地址
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.OnlyCode">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.OnlyCode">
             <summary>
             唯一代码（权限使用）
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.IsMenu">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.IsMenu">
             <summary>
             是否是导航
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.Weight">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Sort">
             <summary>
             排序权重
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.IsExpress">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.IsExpress">
             <summary>
             是否是快捷导航
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminMenuEntity.RoleMenus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Enabled">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.RoleMenus">
             <summary>
             角色导航关联列表
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity">
             <summary>
             角色表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Name">
             <summary>
             角色名
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleEntity.RoleMenus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Enabled">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.RoleMenus">
             <summary>
             角色导航关联列表
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleEntity.UserRoles">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.UserRoles">
             <summary>
             用户角色关联列表
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity">
             <summary>
             角色导航关联表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity.RoleId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.RoleId">
             <summary>
             角色id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity.MenuId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.MenuId">
             <summary>
             导航id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity.Menus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.Menus">
             <summary>
             对应关联的导航
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity.Role">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.Role">
             <summary>
             对应关联的角色
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity">
             <summary>
-            管理员表
+            用户表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.UserName">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.UserName">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Mobile">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Mobile">
             <summary>
             手机号
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Password">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Password">
             <summary>
             密码
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Name">
             <summary>
             名字
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Picture">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Picture">
             <summary>
             头像
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Location">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Location">
             <summary>
             所在位置
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Position">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Position">
             <summary>
             职位
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.Company">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Company">
             <summary>
             公司
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.LoginCount">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginCount">
             <summary>
             登录次数
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.LoginLastTime">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginLastTime">
             <summary>
             最后登录时间
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.LoginLastIp">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginLastIp">
             <summary>
             最后登录id
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.UserRoles">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Enabled">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.UserRoles">
             <summary>
             对应用户角色关联
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserEntity.LoginRecords">
+        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginRecords">
             <summary>
             对应登录记录关联
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity">
             <summary>
             登录记录表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.UserId">
             <summary>
-            管理员id
+            用户id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginWay">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.LoginWay">
             <summary>
             登录方式
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginTime">
-            <summary>
-            登录时间
-            </summary>
-        </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.LoginIp">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.LoginIp">
             <summary>
             登录ip
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity.AdminUser">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.User">
             <summary>
-            对应管理员
+            对应用户
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserRoleEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity">
             <summary>
-            管理员角色关联表
+            用户角色关联表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserRoleEntity.AdminId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.UserId">
             <summary>
-            管理员id
+            用户id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserRoleEntity.RoleId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.RoleId">
             <summary>
             角色id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserRoleEntity.AdminUser">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.User">
             <summary>
-            对应管理员
+            对应用户
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.Admin.AdminUserRoleEntity.Role">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.Role">
             <summary>
             对应角色
             </summary>

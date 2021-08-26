@@ -1,19 +1,15 @@
 ﻿using FreeSql;
 using FreeSql.Aop;
 using FreeSql.DataAnnotations;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.IO;
-using XUCore.Serializer;
 using XUCore.Template.FreeSql.Core;
+using XUCore.Template.FreeSql.Core.Auth;
+using XUCore.Template.FreeSql.Persistence.Entities;
 
 namespace XUCore.Template.FreeSql.Persistence
 {
@@ -108,7 +104,7 @@ namespace XUCore.Template.FreeSql.Persistence
         /// <param name="e"></param>
         /// <param name="timeOffset"></param>
         /// <param name="user"></param>
-        public static void AuditValue(AuditValueEventArgs e, TimeSpan timeOffset)
+        public static void AuditValue(AuditValueEventArgs e, TimeSpan timeOffset, IUser user)
         {
             if (e.Property.GetCustomAttribute<ServerTimeAttribute>(false) != null
                    && (e.Column.CsType == typeof(DateTime) || e.Column.CsType == typeof(DateTime?))
@@ -124,42 +120,52 @@ namespace XUCore.Template.FreeSql.Persistence
                 e.Value = Id.SnowflakeId;
             }
 
-            if (user == null || user.Id <= 0)
-            {
-                return;
-            }
 
             if (e.AuditValueType == AuditValueType.Insert)
             {
-                //switch (e.Property.Name)
-                //{
-                //    case "CreatedUserId":
-                //        if (e.Value == null || (long)e.Value == default || (long?)e.Value == default)
-                //        {
-                //            e.Value = user.Id;
-                //        }
-                //        break;
+                switch (e.Property.Name)
+                {
+                    case nameof(EntityAdd.CreatedAtUserId):
+                        if (e.Value == null || (long)e.Value == default || (long?)e.Value == default)
+                        {
+                            e.Value = user?.Id;
+                        }
+                        break;
 
-                //    case "CreatedUserName":
-                //        if (e.Value == null || e.Value.IsNull())
-                //        {
-                //            e.Value = user.Name;
-                //        }
-                //        break;
-                //}
+                    case nameof(EntityAdd.CreatedAtUserName):
+                        if (e.Value == null || e.Value.IsNull())
+                        {
+                            e.Value = user?.UserName;
+                        }
+                        break;
+
+                    case nameof(EntityAdd.CreatedAt):
+                        if (e.Value == null || e.Value.IsNull())
+                        {
+                            e.Value = DateTime.Now.Subtract(timeOffset);
+                        }
+                        break;
+                }
             }
             else if (e.AuditValueType == AuditValueType.Update)
             {
-                //switch (e.Property.Name)
-                //{
-                //    case "ModifiedUserId":
-                //        e.Value = user.Id;
-                //        break;
+                switch (e.Property.Name)
+                {
+                    case nameof(EntityUpdate.ModifiedAtUserId):
+                        e.Value = user?.Id;
+                        break;
 
-                //    case "ModifiedUserName":
-                //        e.Value = user.Name;
-                //        break;
-                //}
+                    case nameof(EntityUpdate.ModifiedAtUserName):
+                        e.Value = user?.UserName;
+                        break;
+
+                    case nameof(EntityUpdate.ModifiedAt):
+                        if (e.Value == null || e.Value.IsNull())
+                        {
+                            e.Value = DateTime.Now.Subtract(timeOffset);
+                        }
+                        break;
+                }
             }
         }
 

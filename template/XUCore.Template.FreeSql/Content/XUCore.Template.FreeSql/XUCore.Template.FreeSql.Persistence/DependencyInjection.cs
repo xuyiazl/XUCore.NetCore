@@ -5,6 +5,7 @@ using System;
 using XUCore.Configs;
 using XUCore.Extensions;
 using XUCore.Template.FreeSql.Core;
+using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.Persistence.Entities;
 
 namespace XUCore.Template.FreeSql.Persistence
@@ -13,6 +14,10 @@ namespace XUCore.Template.FreeSql.Persistence
     {
         public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
+            //services.AddScoped<IdleBusUnitOfWorkManager>();
+            services.AddScoped<FreeSqlUnitOfWorkManager>();
+            services.AddScoped(typeof(MarkUnitOfWorkManager<>));
+
             var connection = configuration.GetSection<ConnectionSettings>("ConnectionSettings");
 
             //创建数据库
@@ -47,7 +52,7 @@ namespace XUCore.Template.FreeSql.Persistence
             }
 
             //全局过滤
-            //fsql.GlobalFilter.Apply<IEntitySoftDelete>("SoftDelete", a => a.IsDeleted == false);
+            fsql.GlobalFilter.Apply<IEntitySoftDelete>("SoftDelete", a => a.IsDeleted == false);
 
             //配置实体
 
@@ -57,8 +62,6 @@ namespace XUCore.Template.FreeSql.Persistence
             if (connection.SyncStructure)
                 DbHelper.SyncStructure(fsql, dbConfig: connection);
 
-            // var user = services.BuildServiceProvider().GetService<IUser>();
-
             //计算服务器时间（时间偏移）
             var serverTime = fsql.Select<DualEntity>().Limit(1).First(a => DateTime.UtcNow);
             var timeOffset = DateTime.UtcNow.Subtract(serverTime);
@@ -67,7 +70,9 @@ namespace XUCore.Template.FreeSql.Persistence
             //审计数据
             fsql.Aop.AuditValue += (s, e) =>
             {
-                DbHelper.AuditValue(e, timeOffset);
+                var user = services.BuildServiceProvider().GetService<IUser>();
+
+                DbHelper.AuditValue(e, timeOffset, user);
             };
 
             services.AddSingleton(fsql);

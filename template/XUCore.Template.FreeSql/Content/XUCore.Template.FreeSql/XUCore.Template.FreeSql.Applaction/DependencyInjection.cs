@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.NetCore.AspectCore.Cache;
@@ -19,6 +18,7 @@ using XUCore.NetCore.Oss;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using XUCore.Template.FreeSql.Core;
+using XUCore.Template.FreeSql.Core.Auth;
 using XUCore.Template.FreeSql.DbService;
 
 namespace XUCore.Template.FreeSql.Applaction
@@ -50,6 +50,9 @@ namespace XUCore.Template.FreeSql.Applaction
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             );
+
+            // 注册用户信息
+            services.AddSingleton<IUser, Core.Auth.User>();
 
             // 注入redis插件
             //services.AddRedisService().AddJsonRedisSerializer();
@@ -99,10 +102,7 @@ namespace XUCore.Template.FreeSql.Applaction
                 });
 
             // 注入动态API
-            services.AddDynamicWebApi(opt =>
-            {
-                opt.IsAutoSortAction = false;
-            });
+            services.AddDynamicWebApi();
 
             // 注册上传服务
             services.AddUploadService();
@@ -128,8 +128,8 @@ namespace XUCore.Template.FreeSql.Applaction
                 opt.SwaggerDoc(ApiGroup.Admin, new OpenApiInfo
                 {
                     Version = ApiGroup.Admin,
-                    Title = $"管理员后台API - {env.EnvironmentName}",
-                    Description = "管理员后台API"
+                    Title = $"用户后台API - {env.EnvironmentName}",
+                    Description = "用户后台API"
                 });
 
                 opt.AddJwtBearerDoc();
@@ -170,7 +170,7 @@ namespace XUCore.Template.FreeSql.Applaction
 
             app.UseMiniSwagger(swaggerUIAction: (opt) =>
             {
-                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"管理员后台 API");
+                opt.SwaggerEndpoint($"/swagger/{ApiGroup.Admin}/swagger.json", $"用户后台 API");
             });
 
             app.UseEndpoints(endpoints =>
