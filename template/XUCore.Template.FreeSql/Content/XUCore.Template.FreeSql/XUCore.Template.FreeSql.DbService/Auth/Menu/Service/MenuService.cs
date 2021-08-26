@@ -25,25 +25,20 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Menu
 
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
-            var entity = new MenuEntity();
-
             switch (field.ToLower())
             {
+                case "name":
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "icon":
-                    entity = new MenuEntity() { Icon = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Icon = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "url":
-                    entity = new MenuEntity() { Url = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Url = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "onlycode":
-                    entity = new MenuEntity() { OnlyCode = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { OnlyCode = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "sort":
-                    entity = new MenuEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
             }
-
-            return await freeSql.Update<MenuEntity>(id).Set(c => entity).ExecuteAffrowsAsync(cancellationToken);
+            return 0;
         }
         /// <summary>
         /// 更新状态

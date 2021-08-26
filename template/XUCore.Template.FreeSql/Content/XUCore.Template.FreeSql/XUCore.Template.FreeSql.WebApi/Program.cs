@@ -6,6 +6,7 @@ using System.IO;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading;
+using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.Extensions;
 
 namespace XUCore.Template.FreeSql.WebApi
@@ -68,7 +69,7 @@ namespace XUCore.Template.FreeSql.WebApi
                       })
                       .UseStartup<Startup>();
                 })
-                //.UseInterceptorHostBuilder()
+                .UseInterceptorHostBuilder()
                 ;
     }
 }

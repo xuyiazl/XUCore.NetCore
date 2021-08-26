@@ -83,19 +83,14 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Role
 
         public async Task<int> UpdateAsync(long id, string field, string value, CancellationToken cancellationToken)
         {
-            var entity = new RoleEntity();
-
             switch (field.ToLower())
             {
                 case "name":
-                    entity = new RoleEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "sort":
-                    entity = new RoleEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName };
-                    break;
+                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
             }
-
-            return await freeSql.Update<RoleEntity>(id).Set(c => entity).ExecuteAffrowsAsync(cancellationToken);
+            return 0;
         }
 
         /// <summary>
