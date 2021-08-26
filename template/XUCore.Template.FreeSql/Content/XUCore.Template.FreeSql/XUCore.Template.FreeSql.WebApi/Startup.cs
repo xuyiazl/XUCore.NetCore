@@ -18,8 +18,8 @@ namespace XUCore.Template.FreeSql.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext(Configuration);
             services.AddApplication(Configuration);
+            services.AddDbContext(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

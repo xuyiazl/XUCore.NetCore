@@ -156,13 +156,6 @@ namespace XUCore.Template.FreeSql.DbService.User.User
             user.LoginLastTime = DateTime.Now;
             user.LoginLastIp = Web.IP;
 
-            user.LoginRecords.Add(new UserLoginRecordEntity
-            {
-                UserId = user.Id,
-                LoginIp = user.LoginLastIp,
-                LoginWay = loginWay
-            });
-
             await freeSql
                 .Update<UserEntity>(user.Id)
                 .Set(c => new UserEntity()
@@ -173,7 +166,14 @@ namespace XUCore.Template.FreeSql.DbService.User.User
                 })
                 .ExecuteAffrowsAsync(cancellationToken);
 
-            await freeSql.Insert<UserLoginRecordEntity>(user.LoginRecords).ExecuteAffrowsAsync(cancellationToken);
+            await freeSql
+                .Insert(new UserLoginRecordEntity
+                {
+                    UserId = user.Id,
+                    LoginIp = user.LoginLastIp,
+                    LoginWay = loginWay
+                })
+                .ExecuteAffrowsAsync(cancellationToken);
 
             return mapper.Map<UserDto>(user);
         }

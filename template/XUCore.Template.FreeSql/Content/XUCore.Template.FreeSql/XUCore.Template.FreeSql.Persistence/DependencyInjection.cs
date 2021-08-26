@@ -67,11 +67,11 @@ namespace XUCore.Template.FreeSql.Persistence
             var timeOffset = DateTime.UtcNow.Subtract(serverTime);
             DbHelper.TimeOffset = timeOffset;
 
+            var user = services.BuildServiceProvider().GetService<IUser>();
+
             //审计数据
             fsql.Aop.AuditValue += (s, e) =>
             {
-                var user = services.BuildServiceProvider().GetService<IUser>();
-
                 DbHelper.AuditValue(e, timeOffset, user);
             };
 
