@@ -42,6 +42,9 @@
 	<ItemGroup>
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.MongoDB" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.MySql" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.Redis" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.SqlServer" Version="4.2.22" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.5" />

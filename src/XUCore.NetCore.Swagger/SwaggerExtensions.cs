@@ -227,7 +227,7 @@ namespace XUCore.NetCore.Swagger
                 options.EnableMvcViewProfiling = false;
 
                 miniProfilerAction?.Invoke(options);
-            })
+            })                
             .AddEntityFramework();
         }
         /// <summary>
