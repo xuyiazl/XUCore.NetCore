@@ -18,9 +18,11 @@ namespace XUCore.Template.FreeSql.Applaction
     public class JwtHandler : AppAuthorizeHandler
     {
         private readonly IServiceProvider serviceProvider;
+        private readonly IUser user;
         public JwtHandler(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
+            this.user = serviceProvider.GetService<IUser>();
         }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑
@@ -42,8 +44,6 @@ namespace XUCore.Template.FreeSql.Applaction
             }
             else
             {
-                var user = serviceProvider.GetService<IUser>();
-
                 // 验证登录保存的token，如果不一致则是被其他人踢掉，或者退出登录了，需要重新登录
                 var token = JWTEncryption.GetJwtBearerToken(context.GetCurrentHttpContext());
 
@@ -71,7 +71,6 @@ namespace XUCore.Template.FreeSql.Applaction
             if (securityDefineAttribute == null) return true;
 
             var permissionService = serviceProvider.GetService<IPermissionService>();
-            var user = serviceProvider.GetService<IUser>();
             // 检查授权
             return await permissionService.ExistsAsync(user.Id, securityDefineAttribute.ResourceId, CancellationToken.None);
         }
