@@ -72,9 +72,14 @@
             导航父级id
             </summary>
         </member>
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Parent">
+            <summary>
+            上级
+            </summary>
+        </member>
         <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Childs">
             <summary>
-            
+            子菜单
             </summary>
         </member>
         <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Name">

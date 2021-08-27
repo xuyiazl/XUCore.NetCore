@@ -22,7 +22,12 @@ namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
         /// </summary>
         public long ParentId { get; set; }
         /// <summary>
-        /// 
+        /// 上级
+        /// </summary>
+        [Navigate(nameof(ParentId))]
+        public MenuEntity Parent { get; set; }
+        /// <summary>
+        /// 子菜单
         /// </summary>
         [Navigate(nameof(ParentId))]
         public List<MenuEntity> Childs { get; set; }

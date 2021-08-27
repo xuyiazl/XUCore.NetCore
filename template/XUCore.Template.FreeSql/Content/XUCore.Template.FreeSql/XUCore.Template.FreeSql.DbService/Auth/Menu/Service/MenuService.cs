@@ -101,16 +101,20 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Menu
 
         public async Task<IList<MenuTreeDto>> GetListByTreeAsync(CancellationToken cancellationToken)
         {
-            var res = await repo.Select.OrderByDescending(c => c.Sort).OrderBy(c => c.CreatedAt).ToListAsync<MenuTreeDto>(cancellationToken);
+            //var res = await repo.Select.OrderByDescending(c => c.Sort).OrderBy(c => c.CreatedAt).ToListAsync<MenuTreeDto>(cancellationToken);
 
-            var tree = res.ToTree(
-                rootWhere: (r, c) => c.ParentId == 0,
-                childsWhere: (r, c) => r.Id == c.ParentId,
-                addChilds: (r, datalist) =>
-                {
-                    r.Child ??= new List<MenuTreeDto>();
-                    r.Child.AddRange(datalist);
-                });
+            //var tree = res.ToTree(
+            //    rootWhere: (r, c) => c.ParentId == 0,
+            //    childsWhere: (r, c) => r.Id == c.ParentId,
+            //    addChilds: (r, datalist) =>
+            //    {
+            //        r.Childs ??= new List<MenuTreeDto>();
+            //        r.Childs.AddRange(datalist);
+            //    });
+
+            var res = repo.Select.OrderByDescending(c => c.Sort).OrderBy(c => c.CreatedAt).OrderBy(c => c.CreatedAt).ToTreeList();
+
+            var tree = mapper.Map<IList<MenuEntity>, IList<MenuTreeDto>>(res);
 
             return tree;
         }

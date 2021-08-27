@@ -7,6 +7,6 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Menu
     /// </summary>
     public class MenuTreeDto : MenuDto
     {
-        public IList<MenuTreeDto> Child { get; set; }
+        public IList<MenuTreeDto> Childs { get; set; }
     }
 }
