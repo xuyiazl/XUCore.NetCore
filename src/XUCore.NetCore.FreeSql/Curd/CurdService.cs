@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain;
 using XUCore.Ddd.Domain.Commands;
+using XUCore.Extensions;
 using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Paging;
 
@@ -146,7 +147,7 @@ namespace XUCore.NetCore.FreeSql.Curd
                  .SetDto(new TEntity
                  {
                      IsDeleted = true,
-                     ModifiedAtUserId = User.Id,
+                     ModifiedAtUserId = User.Id.ToLong(),
                      ModifiedAtUserName = User.UserName
                  })
                  .WhereDynamic(id)
@@ -165,7 +166,7 @@ namespace XUCore.NetCore.FreeSql.Curd
                 .SetDto(new TEntity
                 {
                     IsDeleted = true,
-                    ModifiedAtUserId = User.Id,
+                    ModifiedAtUserId = User.Id.ToLong(),
                     ModifiedAtUserName = User.UserName
                 })
                 .WhereDynamic(ids)

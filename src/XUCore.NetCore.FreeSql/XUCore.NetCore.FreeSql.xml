@@ -15,6 +15,38 @@
             </summary>
             <typeparam name="TMark"></typeparam>
         </member>
+        <member name="T:XUCore.NetCore.FreeSql.AspectCoreIdleBus">
+            <summary>
+            解决AspectCore冲突问题，原因：作者表示不支持不带namespace的接口和类的注入
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.FreeSql.AspectCoreIdleBus.IBus">
+            <summary>
+            容器管理器
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.AspectCoreIdleBus.GetOrCreateFreeSql(System.IServiceProvider)">
+            <summary>
+            从容器管理中，获取FreeSql实例，此处需要重写容器创建和获取逻辑
+            </summary>
+            <param name="serviceProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.SequentialGuidAttribute">
+            <summary>
+            生成有序Guid
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.ServerTimeAttribute">
+            <summary>
+            服务器时间
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.SnowflakeAttribute">
+            <summary>
+            生成雪花id
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.CurdService`7">
             <summary>
             CURD服务
@@ -215,6 +247,18 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.IdleBusCurdService`7">
+            <summary>
+            IdleBus FreeSql CurdService（租户FreeSql实例）
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TDto"></typeparam>
+            <typeparam name="TCreateCommand"></typeparam>
+            <typeparam name="TUpdateCommand"></typeparam>
+            <typeparam name="TListCommand"></typeparam>
+            <typeparam name="TPageCommand"></typeparam>
+        </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.MarkCurdService`8">
             <summary>
             FreeSql Mark CurdService（多库FreeSql实例）
@@ -231,6 +275,11 @@
         <member name="T:XUCore.NetCore.FreeSql.Curd.FreeSqlUnitOfWorkManager">
             <summary>
             单库FreeSql实例
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.FreeSql.Curd.IdleBusUnitOfWorkManager">
+            <summary>
+            空闲管理工作单元，用于动态创建多租户的FreeSql实例
             </summary>
         </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.MarkUnitOfWorkManager`1">

@@ -489,7 +489,7 @@
             昵称
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.IUser.SetToken(System.Int64,System.String)">
+        <member name="M:XUCore.Ddd.Domain.IUser.SetToken(System.String,System.String)">
             <summary>
             将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
             </summary>
@@ -533,6 +533,11 @@
             用户信息
             </summary>
         </member>
+        <member name="P:XUCore.Ddd.Domain.User.Identity">
+            <summary>
+            IIdentity
+            </summary>
+        </member>
         <member name="P:XUCore.Ddd.Domain.User.Id">
             <summary>
             用户Id
@@ -548,7 +553,7 @@
             昵称
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.User.SetToken(System.Int64,System.String)">
+        <member name="M:XUCore.Ddd.Domain.User.SetToken(System.String,System.String)">
             <summary>
             将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
             </summary>

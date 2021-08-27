@@ -18,7 +18,7 @@ namespace XUCore.NetCore.FreeSql
         /// <returns></returns>
         public static IServiceCollection AddFreeSqlUnitOfWorkManager(this IServiceCollection services)
         {
-            //services.AddScoped<IdleBusUnitOfWorkManager>();
+            services.AddScoped<IdleBusUnitOfWorkManager>();
             services.AddScoped<FreeSqlUnitOfWorkManager>();
             services.AddScoped(typeof(MarkUnitOfWorkManager<>));
 

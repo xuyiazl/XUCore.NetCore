@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using XUCore.Cache;
@@ -23,35 +24,29 @@ namespace XUCore.Ddd.Domain
             accessor = serviceProvider.GetService<IHttpContextAccessor>();
             cacheManager = serviceProvider.GetService<ICacheManager>();
         }
-
+        /// <summary>
+        /// IIdentity
+        /// </summary>
+        protected IIdentity Identity => accessor?.HttpContext?.User?.Identity;
         /// <summary>
         /// 用户Id
         /// </summary>
-        public virtual long Id
-        {
-            get
-            {
-                var id = accessor?.HttpContext?.User?.Identity.GetValue<long>(ClaimAttributes.UserId);
-                if (!id.IsNull())
-                    return id.Value;
-                return default(long);
-            }
-        }
+        public virtual string Id => Identity?.GetValue<string>(ClaimAttributes.UserId);
         /// <summary>
         /// 用户名
         /// </summary>
-        public virtual string UserName => accessor?.HttpContext?.User?.Identity.GetValue<string>(ClaimAttributes.UserName);
+        public virtual string UserName => Identity?.GetValue<string>(ClaimAttributes.UserName);
         /// <summary>
         /// 昵称
         /// </summary>
-        public virtual string NickName => accessor?.HttpContext?.User?.Identity.GetValue<string>(ClaimAttributes.UserNickName);
+        public virtual string NickName => Identity?.GetValue<string>(ClaimAttributes.UserNickName);
 
         /// <summary>
         /// 将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
         /// </summary>
         /// <param name="id"></param>
         /// <param name="token"></param>
-        public virtual void SetToken(long id, string token)
+        public virtual void SetToken(string id, string token)
         {
             cacheManager.Set($"{ClaimAttributes.UserToken}_{Id}", token);
         }

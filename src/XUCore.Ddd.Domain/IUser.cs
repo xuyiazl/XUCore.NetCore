@@ -14,7 +14,7 @@ namespace XUCore.Ddd.Domain
         /// <summary>
         /// 主键
         /// </summary>
-        long Id { get; }
+        string Id { get; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -28,7 +28,7 @@ namespace XUCore.Ddd.Domain
         /// </summary>
         /// <param name="id"></param>
         /// <param name="token"></param>
-        void SetToken(long id, string token);
+        void SetToken(string id, string token);
         /// <summary>
         /// 删除登录标记，模拟退出
         /// </summary>

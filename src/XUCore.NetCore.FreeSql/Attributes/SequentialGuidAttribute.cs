@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace XUCore.NetCore.FreeSql
 {
     /// <summary>
-    /// 服务器时间
+    /// 生成有序Guid
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class ServerTimeAttribute : Attribute
+    public class SequentialGuidAttribute : Attribute
     {
+        public bool Enable { get; set; } = true;
     }
 }
