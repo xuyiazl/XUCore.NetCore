@@ -337,21 +337,6 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddUserInfo(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注册 IUser 用户信息
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddUserInfo``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            注册 IUser 用户信息
-            </summary>
-            <typeparam name="TUserImpl">用户信息实现方法</typeparam>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.Ddd.Domain.Entity`1">
             <summary>
             定义领域实体基类
@@ -479,6 +464,13 @@
             主键
             </summary>
         </member>
+        <member name="M:XUCore.Ddd.Domain.IUser.GetId``1">
+            <summary>
+            用户Id转换类型
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <returns></returns>
+        </member>
         <member name="P:XUCore.Ddd.Domain.IUser.UserName">
             <summary>
             用户名
@@ -542,6 +534,13 @@
             <summary>
             用户Id
             </summary>
+        </member>
+        <member name="M:XUCore.Ddd.Domain.User.GetId``1">
+            <summary>
+            用户Id转换类型
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <returns></returns>
         </member>
         <member name="P:XUCore.Ddd.Domain.User.UserName">
             <summary>

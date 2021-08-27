@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using XUCore.Ddd.Domain;
@@ -52,7 +53,7 @@ namespace XUCore.Template.FreeSql.Applaction
             );
 
             // 注册用户信息
-            services.AddSingleton<IUser, Ddd.Domain.User>();
+            services.AddSingleton<IUserInfo, UserInfo>();
 
             // 注入redis插件
             //services.AddRedisService().AddJsonRedisSerializer();

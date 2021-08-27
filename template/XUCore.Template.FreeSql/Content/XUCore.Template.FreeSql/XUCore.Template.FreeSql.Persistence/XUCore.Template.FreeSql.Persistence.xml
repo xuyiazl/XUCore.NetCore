@@ -27,7 +27,7 @@
             配置实体
             </summary>
         </member>
-        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.AuditValue(FreeSql.Aop.AuditValueEventArgs,System.TimeSpan,XUCore.Ddd.Domain.IUser)">
+        <member name="M:XUCore.Template.FreeSql.Persistence.DbHelper.AuditValue(FreeSql.Aop.AuditValueEventArgs,System.TimeSpan,XUCore.Template.FreeSql.Core.IUserInfo)">
             <summary>
             审计数据
             </summary>

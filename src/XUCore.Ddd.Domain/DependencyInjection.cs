@@ -63,29 +63,5 @@ namespace XUCore.Ddd.Domain
 
             return services;
         }
-        /// <summary>
-        /// 注册 IUser 用户信息
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddUserInfo(this IServiceCollection services)
-        {
-            services.AddSingleton<IUser, User>();
-
-            return services;
-        }
-        /// <summary>
-        /// 注册 IUser 用户信息
-        /// </summary>
-        /// <typeparam name="TUserImpl">用户信息实现方法</typeparam>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddUserInfo<TUserImpl>(this IServiceCollection services)
-            where TUserImpl : class, IUser
-        {
-            services.AddSingleton<IUser, TUserImpl>();
-
-            return services;
-        }
     }
 }

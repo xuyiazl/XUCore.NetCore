@@ -26,13 +26,13 @@ namespace XUCore.Template.FreeSql.Applaction.Login
     {
         private readonly IPermissionService permissionService;
         private readonly IUserService userService;
-        private readonly IUser user;
+        private readonly IUserInfo user;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.userService = serviceProvider.GetService<IUserService>();
-            this.user = serviceProvider.GetService<IUser>();
+            this.user = serviceProvider.GetService<IUserInfo>();
         }
 
         #region [ 登录 ]

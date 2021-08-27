@@ -4,10 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Domain;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.Template.FreeSql.Core;
 using XUCore.Template.FreeSql.DbService.Auth.Permission;
 
 namespace XUCore.Template.FreeSql.Applaction
@@ -18,11 +18,11 @@ namespace XUCore.Template.FreeSql.Applaction
     public class JwtHandler : AppAuthorizeHandler
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly IUser user;
+        private readonly IUserInfo user;
         public JwtHandler(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            this.user = serviceProvider.GetService<IUser>();
+            this.user = serviceProvider.GetService<IUserInfo>();
         }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑

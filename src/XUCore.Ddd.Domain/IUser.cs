@@ -16,6 +16,12 @@ namespace XUCore.Ddd.Domain
         /// </summary>
         string Id { get; }
         /// <summary>
+        /// 用户Id转换类型
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <returns></returns>
+        TKey GetId<TKey>();
+        /// <summary>
         /// 用户名
         /// </summary>
         string UserName { get; }

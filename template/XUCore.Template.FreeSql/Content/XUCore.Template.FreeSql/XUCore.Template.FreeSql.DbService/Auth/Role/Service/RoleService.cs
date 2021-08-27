@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Domain;
 using XUCore.Extensions;
 using XUCore.NetCore.FreeSql;
 using XUCore.NetCore.FreeSql.Curd;
 using XUCore.Paging;
+using XUCore.Template.FreeSql.Core;
 using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
 
 namespace XUCore.Template.FreeSql.DbService.Auth.Role
@@ -17,7 +17,7 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Role
     public class RoleService : FreeSqlCurdService<long, RoleEntity, RoleDto, RoleCreateCommand, RoleUpdateCommand, RoleQueryCommand, RoleQueryPagedCommand>,
         IRoleService
     {
-        public RoleService(IServiceProvider serviceProvider, FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user) : base(muowm, mapper, user)
+        public RoleService(IServiceProvider serviceProvider, FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUserInfo user) : base(muowm, mapper, user)
         {
 
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XUCore.Cache;
 using XUCore.Extensions;
+using XUCore.Helpers;
 
 namespace XUCore.Ddd.Domain
 {
@@ -32,6 +33,12 @@ namespace XUCore.Ddd.Domain
         /// 用户Id
         /// </summary>
         public virtual string Id => Identity?.GetValue<string>(ClaimAttributes.UserId);
+        /// <summary>
+        /// 用户Id转换类型
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <returns></returns>
+        public virtual TKey GetId<TKey>() => Conv.To<TKey>(Id);
         /// <summary>
         /// 用户名
         /// </summary>

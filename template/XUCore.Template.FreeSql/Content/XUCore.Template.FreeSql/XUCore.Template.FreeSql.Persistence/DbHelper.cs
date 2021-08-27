@@ -105,7 +105,7 @@ namespace XUCore.Template.FreeSql.Persistence
         /// <param name="e"></param>
         /// <param name="timeOffset"></param>
         /// <param name="user"></param>
-        public static void AuditValue(AuditValueEventArgs e, TimeSpan timeOffset, IUser user)
+        public static void AuditValue(AuditValueEventArgs e, TimeSpan timeOffset, IUserInfo user)
         {
             if (e.Property.GetCustomAttribute<ServerTimeAttribute>(false) != null
                    && (e.Column.CsType == typeof(DateTime) || e.Column.CsType == typeof(DateTime?))
