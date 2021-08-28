@@ -64,7 +64,7 @@ namespace XUCore.Template.FreeSql.Applaction.Login
             // 设置刷新 token
             Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
 
-            user.SetToken(userDto.Id, accessToken);
+            user.SetToken(userDto.Id.ToString(), accessToken);
 
             return RestFull.Success(data: new LoginTokenDto
             {

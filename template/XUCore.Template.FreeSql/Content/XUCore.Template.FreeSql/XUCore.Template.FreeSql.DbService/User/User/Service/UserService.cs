@@ -72,15 +72,15 @@ namespace XUCore.Template.FreeSql.DbService.User.User
             switch (field.ToLower())
             {
                 case "name":
-                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Name = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "position":
-                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Position = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Position = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "location":
-                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Location = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Location = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "company":
-                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Company = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Company = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "picture":
-                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Picture = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<UserEntity>(id).Set(c => new UserEntity() { Picture = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
             }
             return 0;
         }
@@ -98,7 +98,7 @@ namespace XUCore.Template.FreeSql.DbService.User.User
                 .Set(c => new UserEntity()
                 {
                     Enabled = enabled,
-                    ModifiedAtUserId = User.Id,
+                    ModifiedAtUserId = User.GetId<long>(),
                     ModifiedAtUserName = User.UserName
                 })
                 .ExecuteAffrowsAsync(cancellationToken);
@@ -169,7 +169,7 @@ namespace XUCore.Template.FreeSql.DbService.User.User
             await freeSql
                 .Insert(new UserLoginRecordEntity
                 {
-                    UserId = user.Id,
+                    UserId = User.GetId<long>(),
                     LoginIp = user.LoginLastIp,
                     LoginWay = loginWay
                 })

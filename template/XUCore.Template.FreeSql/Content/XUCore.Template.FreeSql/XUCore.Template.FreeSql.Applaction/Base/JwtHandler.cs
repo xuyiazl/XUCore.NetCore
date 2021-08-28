@@ -72,7 +72,7 @@ namespace XUCore.Template.FreeSql.Applaction
 
             var permissionService = serviceProvider.GetService<IPermissionService>();
             // 检查授权
-            return await permissionService.ExistsAsync(user.Id, securityDefineAttribute.ResourceId, CancellationToken.None);
+            return await permissionService.ExistsAsync(user.GetId<long>(), securityDefineAttribute.ResourceId, CancellationToken.None);
         }
     }
 }

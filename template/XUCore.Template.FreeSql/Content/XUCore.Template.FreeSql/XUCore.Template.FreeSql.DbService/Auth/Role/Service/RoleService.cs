@@ -86,9 +86,9 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Role
             switch (field.ToLower())
             {
                 case "name":
-                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Name = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "sort":
-                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<RoleEntity>(id).Set(c => new RoleEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
             }
             return 0;
         }
@@ -107,7 +107,7 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Role
                 .Set(c => new RoleEntity()
                 {
                     Enabled = enabled,
-                    ModifiedAtUserId = User.Id,
+                    ModifiedAtUserId = User.GetId<long>(),
                     ModifiedAtUserName = User.UserName
                 })
                 .ExecuteAffrowsAsync(cancellationToken);

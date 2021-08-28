@@ -27,15 +27,15 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Menu
             switch (field.ToLower())
             {
                 case "name":
-                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Name = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Name = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "icon":
-                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Icon = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Icon = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "url":
-                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Url = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Url = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "onlycode":
-                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { OnlyCode = value, ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { OnlyCode = value, ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
                 case "sort":
-                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.Id, ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
+                    return await freeSql.Update<MenuEntity>(id).Set(c => new MenuEntity() { Sort = value.ToInt(), ModifiedAtUserId = User.GetId<long>(), ModifiedAtUserName = User.UserName }).ExecuteAffrowsAsync(cancellationToken);
             }
             return 0;
         }
@@ -53,7 +53,7 @@ namespace XUCore.Template.FreeSql.DbService.Auth.Menu
                 .Set(c => new MenuEntity()
                 {
                     Enabled = enabled,
-                    ModifiedAtUserId = User.Id,
+                    ModifiedAtUserId = User.GetId<long>(),
                     ModifiedAtUserName = User.UserName
                 })
                 .ExecuteAffrowsAsync(cancellationToken);
