@@ -3,7 +3,7 @@ using System;
 using XUCore.Ddd.Domain;
 using XUCore.NetCore.FreeSql.Entity;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
+namespace XUCore.Template.FreeSql.Persistence.Entities.User
 {
     /// <summary>
     /// 登录记录表

@@ -7,7 +7,7 @@ using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.FreeSql.Curd;
 using XUCore.Template.FreeSql.Core;
 using XUCore.Template.FreeSql.DbService.Auth.Menu;
-using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
+using XUCore.Template.FreeSql.Persistence.Entities.User;
 
 namespace XUCore.Template.FreeSql.DbService.Auth.Permission
 {

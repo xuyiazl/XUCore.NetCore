@@ -1,5 +1,5 @@
 ﻿using XUCore.Template.FreeSql.Core;
-using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
+using XUCore.Template.FreeSql.Persistence.Entities.User;
 
 namespace XUCore.Template.FreeSql.DbService.User.User
 {

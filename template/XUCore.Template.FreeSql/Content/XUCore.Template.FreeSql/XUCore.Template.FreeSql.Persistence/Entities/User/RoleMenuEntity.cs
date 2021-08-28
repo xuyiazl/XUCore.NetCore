@@ -1,7 +1,7 @@
 ﻿using FreeSql.DataAnnotations;
 using XUCore.NetCore.FreeSql.Entity;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
+namespace XUCore.Template.FreeSql.Persistence.Entities.User
 {
     /// <summary>
     /// 角色导航关联表

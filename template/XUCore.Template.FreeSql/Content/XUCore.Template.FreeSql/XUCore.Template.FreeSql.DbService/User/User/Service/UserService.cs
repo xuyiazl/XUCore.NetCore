@@ -13,7 +13,7 @@ using XUCore.NetCore.FreeSql.Curd;
 using XUCore.Paging;
 using XUCore.Template.FreeSql.Core;
 using XUCore.Template.FreeSql.Core.Enums;
-using XUCore.Template.FreeSql.Persistence.Entities.Sys.User;
+using XUCore.Template.FreeSql.Persistence.Entities.User;
 
 namespace XUCore.Template.FreeSql.DbService.User.User
 {

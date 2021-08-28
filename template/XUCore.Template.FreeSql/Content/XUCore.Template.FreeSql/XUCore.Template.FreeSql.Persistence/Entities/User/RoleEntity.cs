@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using XUCore.NetCore.FreeSql.Entity;
 
-namespace XUCore.Template.FreeSql.Persistence.Entities.Sys.User
+namespace XUCore.Template.FreeSql.Persistence.Entities.User
 {
     /// <summary>
     /// 角色表

@@ -62,247 +62,247 @@
             主键Id
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity">
             <summary>
             权限导航表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.ParentId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.ParentId">
             <summary>
             导航父级id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Parent">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Parent">
             <summary>
             上级
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Childs">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Childs">
             <summary>
             子菜单
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Name">
             <summary>
             名字
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Icon">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Icon">
             <summary>
             图标样式
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Url">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Url">
             <summary>
             链接地址
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.OnlyCode">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.OnlyCode">
             <summary>
             唯一代码（权限使用）
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.IsMenu">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.IsMenu">
             <summary>
             是否是导航
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Sort">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Sort">
             <summary>
             排序权重
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.IsExpress">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.IsExpress">
             <summary>
             是否是快捷导航
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.Enabled">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.Enabled">
             <summary>
             启用
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.MenuEntity.RoleMenus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.MenuEntity.RoleMenus">
             <summary>
             角色导航关联列表
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity">
             <summary>
             角色表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity.Name">
             <summary>
             角色名
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Enabled">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity.Enabled">
             <summary>
             启用
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.Sort">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity.Sort">
             <summary>
             排序
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.RoleMenus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity.RoleMenus">
             <summary>
             角色导航关联列表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleEntity.UserRoles">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleEntity.UserRoles">
             <summary>
             用户角色关联列表
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.RoleMenuEntity">
             <summary>
             角色导航关联表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.RoleId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleMenuEntity.RoleId">
             <summary>
             角色id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.MenuId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleMenuEntity.MenuId">
             <summary>
             导航id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.Menus">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleMenuEntity.Menus">
             <summary>
             对应关联的导航
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.RoleMenuEntity.Role">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.RoleMenuEntity.Role">
             <summary>
             对应关联的角色
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity">
             <summary>
             用户表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.UserName">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.UserName">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Mobile">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Mobile">
             <summary>
             手机号
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Password">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Password">
             <summary>
             密码
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Name">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Name">
             <summary>
             名字
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Picture">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Picture">
             <summary>
             头像
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Location">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Location">
             <summary>
             所在位置
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Position">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Position">
             <summary>
             职位
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Company">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Company">
             <summary>
             公司
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginCount">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.LoginCount">
             <summary>
             登录次数
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginLastTime">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.LoginLastTime">
             <summary>
             最后登录时间
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginLastIp">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.LoginLastIp">
             <summary>
             最后登录id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.Enabled">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.Enabled">
             <summary>
             启用
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.UserRoles">
+        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.UserRoles">
             <summary>
             对应用户角色关联
             </summary>
         </member>
-        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserEntity.LoginRecords">
+        <member name="F:XUCore.Template.FreeSql.Persistence.Entities.User.UserEntity.LoginRecords">
             <summary>
             对应登录记录关联
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.UserLoginRecordEntity">
             <summary>
             登录记录表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.UserId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserLoginRecordEntity.UserId">
             <summary>
             用户id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.LoginWay">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserLoginRecordEntity.LoginWay">
             <summary>
             登录方式
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.LoginIp">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserLoginRecordEntity.LoginIp">
             <summary>
             登录ip
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserLoginRecordEntity.User">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserLoginRecordEntity.User">
             <summary>
             对应用户
             </summary>
         </member>
-        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity">
+        <member name="T:XUCore.Template.FreeSql.Persistence.Entities.User.UserRoleEntity">
             <summary>
             用户角色关联表
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.UserId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserRoleEntity.UserId">
             <summary>
             用户id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.RoleId">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserRoleEntity.RoleId">
             <summary>
             角色id
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.User">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserRoleEntity.User">
             <summary>
             对应用户
             </summary>
         </member>
-        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.Sys.User.UserRoleEntity.Role">
+        <member name="P:XUCore.Template.FreeSql.Persistence.Entities.User.UserRoleEntity.Role">
             <summary>
             对应角色
             </summary>
