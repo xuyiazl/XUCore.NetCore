@@ -71,4 +71,4 @@
 
 [如何使用脚手架 XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.Easy)
 
-[如何使用脚手架 XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.FreeSql)
+[如何使用脚手架 XUCore.Template.FreeSql](https://github.com/xuyiazl/XUCore.NetCore/tree/master/template/XUCore.Template.FreeSql)
