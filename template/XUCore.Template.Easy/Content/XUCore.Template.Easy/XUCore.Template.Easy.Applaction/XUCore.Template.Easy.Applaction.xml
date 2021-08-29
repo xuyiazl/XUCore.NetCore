@@ -725,6 +725,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.IAdminUserAppService.LoginAsync(XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand,System.Threading.CancellationToken)">
+            <summary>
+            登录
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.Easy.Applaction.Admin.IAdminUserAppService.GetAccountAsync(XUCore.Template.Easy.Core.Enums.AccountMode,System.String,System.Threading.CancellationToken)">
             <summary>
             获取账号信息（根据账号或手机号码）
@@ -781,6 +789,18 @@
             管理员
             </summary>
         </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.CreateInitAccountAsync(System.Threading.CancellationToken)">
+            <summary>
+            创建初始账号
+            </summary>
+            <remarks>
+            初始账号密码：
+                <para>username : admin</para>
+                <para>password : admin</para>
+            </remarks>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.CreateAsync(XUCore.Template.Easy.Applaction.Admin.AdminUserCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建管理员账号
@@ -812,6 +832,14 @@
             删除账号（物理删除）
             </summary>
             <param name="ids"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.Easy.Applaction.Admin.AdminUserAppService.LoginAsync(XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand,System.Threading.CancellationToken)">
+            <summary>
+            登录
+            </summary>
+            <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
@@ -879,42 +907,6 @@
             linq 关联查询，关联账号信息
             </summary>
             <param name="db"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.Template.Easy.Applaction.Authorization.IAuthService">
-            <summary>
-            身份认证
-            </summary>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Authorization.IAuthService.VaildLoginToken(System.String)">
-            <summary>
-            验证token是否一致
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.Template.Easy.Applaction.Authorization.AuthService">
-            <summary>
-            身份认证
-            </summary>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Authorization.AuthService.SetLoginToken(System.Int64,System.String)">
-            <summary>
-            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
-            </summary>
-            <param name="userId"></param>
-            <param name="token"></param>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Authorization.AuthService.RemoveLoginToken">
-            <summary>
-            删除登录标记，模拟退出
-            </summary>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Authorization.AuthService.VaildLoginToken(System.String)">
-            <summary>
-            验证token是否一致
-            </summary>
-            <param name="token"></param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand">
@@ -988,18 +980,6 @@
             <summary>
             登录接口
             </summary>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.Login.LoginAppService.CreateInitAccountAsync(System.Threading.CancellationToken)">
-            <summary>
-            创建初始账号
-            </summary>
-            <remarks>
-            初始账号密码：
-                <para>username : admin</para>
-                <para>password : admin</para>
-            </remarks>
-            <param name="cancellationToken"></param>
-            <returns></returns>
         </member>
         <member name="M:XUCore.Template.Easy.Applaction.Login.LoginAppService.LoginAsync(XUCore.Template.Easy.Applaction.Login.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
@@ -1298,13 +1278,6 @@
             验证管道
             </summary>
             <param name="context"></param>
-            <param name="httpContext"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.Easy.Applaction.JwtHandler.CheckAuthorzie(Microsoft.AspNetCore.Http.DefaultHttpContext)">
-            <summary>
-            检查权限
-            </summary>
             <param name="httpContext"></param>
             <returns></returns>
         </member>

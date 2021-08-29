@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +16,11 @@ using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.NetCore;
 using XUCore.Paging;
+using XUCore.Template.Easy.Applaction.Login;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
 using XUCore.Template.Easy.Persistence;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Admin
 {
@@ -45,6 +47,35 @@ namespace XUCore.Template.Easy.Applaction.Admin
 
         #region [ 账号管理 ]
 
+        /// <summary>
+        /// 创建初始账号
+        /// </summary>
+        /// <remarks>
+        /// 初始账号密码：
+        ///     <para>username : admin</para>
+        ///     <para>password : admin</para>
+        /// </remarks>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<Result<int>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        {
+            var command = new AdminUserCreateCommand
+            {
+                UserName = "admin",
+                Password = "admin",
+                Company = "",
+                Location = "",
+                Mobile = "13500000000",
+                Name = "admin",
+                Position = ""
+            };
+
+            command.IsVaild();
+
+            return await CreateAsync(command, cancellationToken);
+        }
         /// <summary>
         /// 创建管理员账号
         /// </summary>
@@ -161,6 +192,59 @@ namespace XUCore.Template.Easy.Applaction.Admin
             }
             else
                 return RestFull.Fail(data: res);
+        }
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<AdminUserDto> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default)
+        {
+            var user = default(AdminUserEntity);
+
+            request.Password = Encrypt.Md5By32(request.Password);
+
+            var loginWay = "";
+
+            if (!Valid.IsMobileNumberSimple(request.Account))
+            {
+                user = await db.GetFirstAsync(c => c.UserName.Equals(request.Account), cancellationToken: cancellationToken);
+                if (user == null)
+                    Failure.Error("账号不存在");
+
+                loginWay = "UserName";
+            }
+            else
+            {
+                user = await db.GetFirstAsync(c => c.Mobile.Equals(request.Account), cancellationToken: cancellationToken);
+                if (user == null)
+                    Failure.Error("手机号码不存在");
+
+                loginWay = "Mobile";
+            }
+
+            if (!user.Password.Equals(request.Password))
+                Failure.Error("密码错误");
+            if (user.Status != Status.Show)
+                Failure.Error("您的帐号禁止登录,请与管理员联系!");
+
+
+            user.LoginCount += 1;
+            user.LoginLastTime = DateTime.Now;
+            user.LoginLastIp = Web.IP;
+
+            user.LoginRecords.Add(new AdminUserLoginRecordEntity
+            {
+                AdminId = user.Id,
+                LoginIp = user.LoginLastIp,
+                LoginTime = user.LoginLastTime,
+                LoginWay = loginWay
+            });
+
+            db.Update(user);
+
+            return mapper.Map<AdminUserDto>(user);
         }
         /// <summary>
         /// 获取账号信息（根据账号或手机号码）

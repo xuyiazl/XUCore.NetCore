@@ -8,7 +8,7 @@ using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Persistence;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Permission
 {

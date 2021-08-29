@@ -33,7 +33,7 @@ namespace XUCore.Template.EasyLayer.Persistence
                 options.UseMySql(
                     connectionString: configuration.GetConnectionString("DBConnection-Mysql"),
                     serverVersion: new MySqlServerVersion(new Version(5, 7, 29))
-                    )
+                )
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
                 //options.UseLoggerFactory(MyLoggerFactory);

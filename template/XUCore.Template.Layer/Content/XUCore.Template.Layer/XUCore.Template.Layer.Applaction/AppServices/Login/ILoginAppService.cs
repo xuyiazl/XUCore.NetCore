@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.Layer.DbService.Sys.Admin.Permission;
+using XUCore.Template.Layer.DbService.Admin.AdminUser;
+using XUCore.Template.Layer.DbService.Admin.Permission;
 
 namespace XUCore.Template.Layer.Applaction.Login
 {

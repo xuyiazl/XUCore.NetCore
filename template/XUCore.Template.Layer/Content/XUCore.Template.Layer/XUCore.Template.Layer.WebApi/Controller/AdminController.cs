@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,9 +10,9 @@ using XUCore.Paging;
 using XUCore.Template.Layer.Applaction;
 using XUCore.Template.Layer.Applaction.Admin;
 using XUCore.Template.Layer.Core.Enums;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminRole;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
+using XUCore.Template.Layer.DbService.Admin.AdminMenu;
+using XUCore.Template.Layer.DbService.Admin.AdminRole;
+using XUCore.Template.Layer.DbService.Admin.AdminUser;
 
 namespace XUCore.Template.Layer.WebApi.Controller
 {
@@ -29,6 +30,35 @@ namespace XUCore.Template.Layer.WebApi.Controller
 
         #region [ 账号管理 ]
 
+        /// <summary>
+        /// 创建初始账号
+        /// </summary>
+        /// <remarks>
+        /// 初始账号密码：
+        ///     <para>username : admin</para>
+        ///     <para>password : admin</para>
+        /// </remarks>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPost("/api/[controller]/InitAccount")]
+        [AllowAnonymous]
+        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
+        {
+            var command = new AdminUserCreateCommand
+            {
+                UserName = "admin",
+                Password = "admin",
+                Company = "",
+                Location = "",
+                Mobile = "13500000000",
+                Name = "admin",
+                Position = ""
+            };
+
+            command.IsVaild();
+
+            return await adminAppService.CreateUserAsync(command, cancellationToken);
+        }
         /// <summary>
         /// 创建管理员账号
         /// </summary>

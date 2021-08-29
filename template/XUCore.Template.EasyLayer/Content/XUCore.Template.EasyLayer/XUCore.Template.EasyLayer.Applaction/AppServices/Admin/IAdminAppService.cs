@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.Template.EasyLayer.Core.Enums;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminMenu;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminRole;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser;
+using XUCore.Template.EasyLayer.DbService.Admin.AdminMenu;
+using XUCore.Template.EasyLayer.DbService.Admin.AdminRole;
+using XUCore.Template.EasyLayer.DbService.Admin.AdminUser;
 
 namespace XUCore.Template.EasyLayer.Applaction.Admin
 {

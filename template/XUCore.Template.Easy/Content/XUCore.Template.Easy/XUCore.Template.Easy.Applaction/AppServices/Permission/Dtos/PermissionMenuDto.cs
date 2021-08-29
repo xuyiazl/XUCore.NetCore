@@ -1,5 +1,5 @@
 ﻿using XUCore.Template.Easy.Core;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Permission
 {

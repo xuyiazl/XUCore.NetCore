@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.Template.EasyLayer.Applaction.Authorization;
+using XUCore.Template.EasyLayer.Core;
+using XUCore.Template.EasyLayer.DbService.Admin.Permission;
 
 namespace XUCore.Template.EasyLayer.Applaction
 {
@@ -14,10 +17,14 @@ namespace XUCore.Template.EasyLayer.Applaction
     /// </summary>
     public class JwtHandler : AppAuthorizeHandler
     {
-        private readonly IAuthService authService;
-        public JwtHandler(IAuthService authService)
+        private readonly IServiceProvider serviceProvider;
+        private readonly IUserInfo user;
+        private readonly IPermissionService permissionService;
+        public JwtHandler(IServiceProvider serviceProvider)
         {
-            this.authService = authService;
+            this.serviceProvider = serviceProvider;
+            this.user = serviceProvider.GetService<IUserInfo>();
+            this.permissionService = serviceProvider.GetService<IPermissionService>();
         }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑
@@ -68,7 +75,7 @@ namespace XUCore.Template.EasyLayer.Applaction
             if (securityDefineAttribute == null) return true;
 
             // 检查授权
-            return await authService.IsCanAccessAsync(securityDefineAttribute.ResourceId);
+            return await permissionService.ExistsAsync(user.GetId<long>(), securityDefineAttribute.ResourceId, CancellationToken.None);
         }
     }
 }

@@ -51,6 +51,9 @@ namespace XUCore.Template.EasyLayer.Applaction
                 .WithScopedLifetime()
             );
 
+            // 注册用户信息
+            services.AddSingleton<IUserInfo, UserInfo>();
+
             // 注入redis插件
             //services.AddRedisService().AddJsonRedisSerializer();
 

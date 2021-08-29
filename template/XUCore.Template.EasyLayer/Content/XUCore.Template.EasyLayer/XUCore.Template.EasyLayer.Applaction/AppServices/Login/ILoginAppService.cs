@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.Permission;
+using XUCore.Template.EasyLayer.DbService.Admin.AdminUser;
+using XUCore.Template.EasyLayer.DbService.Admin.Permission;
 
 namespace XUCore.Template.EasyLayer.Applaction.Login
 {
