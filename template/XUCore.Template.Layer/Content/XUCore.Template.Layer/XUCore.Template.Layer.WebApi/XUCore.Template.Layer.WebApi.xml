@@ -9,7 +9,19 @@
             管理员管理
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateInitAccountAsync(System.Threading.CancellationToken)">
+            <summary>
+            创建初始账号
+            </summary>
+            <remarks>
+            初始账号密码：
+                <para>username : admin</para>
+                <para>password : admin</para>
+            </remarks>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建管理员账号
             </summary>
@@ -17,7 +29,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
             <summary>
             更新账号信息
             </summary>
@@ -25,7 +37,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
             <summary>
             更新密码
             </summary>
@@ -87,7 +99,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetUserPagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetUserPagedAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取账号分页
             </summary>
@@ -95,7 +107,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
             <summary>
             账号关联角色
             </summary>
@@ -111,7 +123,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRecordListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRecordListAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取最近登录记录
             </summary>
@@ -119,7 +131,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRecordPageAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRecordPageAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有登录记录分页
             </summary>
@@ -127,7 +139,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建角色
             </summary>
@@ -135,7 +147,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新角色信息
             </summary>
@@ -178,7 +190,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRoleListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRoleListAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有角色
             </summary>
@@ -186,7 +198,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRolePagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetRolePagedAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取角色分页
             </summary>
@@ -202,7 +214,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.CreateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建导航
             </summary>
@@ -210,7 +222,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.UpdateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新导航信息
             </summary>
@@ -260,7 +272,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetMenuListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.AdminController.GetMenuListAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取导航列表
             </summary>
@@ -289,19 +301,7 @@
             管理员登录接口
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.LoginController.CreateInitAccountAsync(System.Threading.CancellationToken)">
-            <summary>
-            创建初始账号
-            </summary>
-            <remarks>
-            初始账号密码：
-                <para>username : admin</para>
-                <para>password : admin</para>
-            </remarks>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Template.Layer.WebApi.Controller.LoginController.LoginAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.WebApi.Controller.LoginController.LoginAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
             管理员登录
             </summary>

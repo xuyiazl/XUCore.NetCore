@@ -9,7 +9,7 @@
             管理员管理
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建管理员账号
             </summary>
@@ -17,7 +17,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
             <summary>
             更新账号信息
             </summary>
@@ -25,7 +25,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
             <summary>
             更新密码
             </summary>
@@ -87,7 +87,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetUserPagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetUserPagedAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取账号分页
             </summary>
@@ -95,7 +95,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
             <summary>
             账号关联角色
             </summary>
@@ -111,7 +111,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRecordListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRecordListAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取最近登录记录
             </summary>
@@ -119,7 +119,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRecordPageAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRecordPageAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有登录记录分页
             </summary>
@@ -127,7 +127,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建角色
             </summary>
@@ -135,7 +135,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新角色信息
             </summary>
@@ -178,7 +178,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRoleListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRoleListAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有角色
             </summary>
@@ -186,7 +186,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRolePagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetRolePagedAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取角色分页
             </summary>
@@ -202,7 +202,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.CreateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建导航
             </summary>
@@ -210,7 +210,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.UpdateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新导航信息
             </summary>
@@ -260,7 +260,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetMenuListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.IAdminAppService.GetMenuListAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取导航列表
             </summary>
@@ -273,7 +273,7 @@
             管理员管理
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建管理员账号
             </summary>
@@ -281,7 +281,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdateInfoCommand,System.Threading.CancellationToken)">
             <summary>
             更新账号信息
             </summary>
@@ -289,7 +289,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateUserAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserUpdatePasswordCommand,System.Threading.CancellationToken)">
             <summary>
             更新密码
             </summary>
@@ -351,7 +351,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetUserPagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetUserPagedAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取账号分页
             </summary>
@@ -359,7 +359,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateUserRelevanceRoleIdAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserRelevanceRoleCommand,System.Threading.CancellationToken)">
             <summary>
             账号关联角色
             </summary>
@@ -375,7 +375,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRecordListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRecordListAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取最近登录记录
             </summary>
@@ -383,7 +383,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRecordPageAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRecordPageAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginRecordQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有登录记录分页
             </summary>
@@ -391,7 +391,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建角色
             </summary>
@@ -399,7 +399,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateRoleAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateRoleAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新角色信息
             </summary>
@@ -442,7 +442,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRoleListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRoleListAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取所有角色
             </summary>
@@ -450,7 +450,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRolePagedAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetRolePagedAsync(XUCore.Template.Layer.DbService.Admin.AdminRole.AdminRoleQueryPagedCommand,System.Threading.CancellationToken)">
             <summary>
             获取角色分页
             </summary>
@@ -466,7 +466,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.CreateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuCreateCommand,System.Threading.CancellationToken)">
             <summary>
             创建导航
             </summary>
@@ -474,7 +474,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateMenuAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.UpdateMenuAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuUpdateCommand,System.Threading.CancellationToken)">
             <summary>
             更新导航信息
             </summary>
@@ -524,7 +524,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetMenuListAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Admin.AdminAppService.GetMenuListAsync(XUCore.Template.Layer.DbService.Admin.AdminMenu.AdminMenuQueryCommand,System.Threading.CancellationToken)">
             <summary>
             获取导航列表
             </summary>
@@ -532,43 +532,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Authorization.IAuthService.VaildLoginToken(System.String)">
-            <summary>
-            验证token是否一致
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.Template.Layer.Applaction.Authorization.AuthService">
-            <summary>
-            管理员服务
-            </summary>
-        </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Authorization.AuthService.SetLoginToken(System.Int64,System.String)">
-            <summary>
-            将登录的用户写入内存作为标记，处理强制重新获取jwt，模拟退出登录（可以使用redis）
-            </summary>
-            <param name="adminId"></param>
-            <param name="token"></param>
-        </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Authorization.AuthService.RemoveLoginToken">
-            <summary>
-            删除登录标记，模拟退出
-            </summary>
-        </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Authorization.AuthService.VaildLoginToken(System.String)">
-            <summary>
-            验证token是否一致
-            </summary>
-            <param name="token"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.Template.Layer.Applaction.Login.ILoginAppService">
             <summary>
             管理员登录接口
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Login.ILoginAppService.LoginAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Login.ILoginAppService.LoginAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
             管理员登录
             </summary>
@@ -620,7 +589,7 @@
             管理员登录接口
             </summary>
         </member>
-        <member name="M:XUCore.Template.Layer.Applaction.Login.LoginAppService.LoginAsync(XUCore.Template.Layer.DbService.Sys.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Template.Layer.Applaction.Login.LoginAppService.LoginAsync(XUCore.Template.Layer.DbService.Admin.AdminUser.AdminUserLoginCommand,System.Threading.CancellationToken)">
             <summary>
             管理员登录
             </summary>

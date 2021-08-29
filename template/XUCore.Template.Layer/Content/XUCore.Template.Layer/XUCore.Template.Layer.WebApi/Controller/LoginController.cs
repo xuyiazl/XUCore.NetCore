@@ -7,10 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Template.Layer.Applaction;
-using XUCore.Template.Layer.Applaction.Admin;
 using XUCore.Template.Layer.Applaction.Login;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.Layer.DbService.Sys.Admin.Permission;
+using XUCore.Template.Layer.DbService.Admin.AdminUser;
+using XUCore.Template.Layer.DbService.Admin.Permission;
 
 namespace XUCore.Template.Layer.WebApi.Controller
 {
@@ -21,44 +20,13 @@ namespace XUCore.Template.Layer.WebApi.Controller
     public class LoginController : ApiControllerBase
     {
         private readonly ILoginAppService loginAppService;
-        private readonly IAdminAppService adminAppService;  
-        public LoginController(ILogger<LoginController> logger, ILoginAppService loginAppService, IAdminAppService adminAppService) : base(logger)
+        public LoginController(ILogger<LoginController> logger, ILoginAppService loginAppService) : base(logger)
         {
             this.loginAppService = loginAppService;
-            this.adminAppService = adminAppService;
         }
 
         #region [ 登录 ]
 
-        /// <summary>
-        /// 创建初始账号
-        /// </summary>
-        /// <remarks>
-        /// 初始账号密码：
-        ///     <para>username : admin</para>
-        ///     <para>password : admin</para>
-        /// </remarks>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpPost("/api/[controller]/InitAccount")]
-        [AllowAnonymous]
-        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
-        {
-            var command = new AdminUserCreateCommand
-            {
-                UserName = "admin",
-                Password = "admin",
-                Company = "",
-                Location = "",
-                Mobile = "13500000000",
-                Name = "admin",
-                Position = ""
-            };
-
-            command.IsVaild();
-
-            return await adminAppService.CreateUserAsync(command, cancellationToken);
-        }
         /// <summary>
         /// 管理员登录
         /// </summary>

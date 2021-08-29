@@ -8,7 +8,7 @@ using XUCore.Helpers;
 using XUCore.NetCore.Data;
 using XUCore.Template.Easy.Core;
 using XUCore.Template.Easy.Core.Enums;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Admin
 {

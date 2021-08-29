@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Template.EasyLayer.Persistence.Entities.Sys.Admin;
+using XUCore.Template.EasyLayer.Persistence.Entities.Admin;
 
 namespace XUCore.Template.EasyLayer.DbService.Events
 {

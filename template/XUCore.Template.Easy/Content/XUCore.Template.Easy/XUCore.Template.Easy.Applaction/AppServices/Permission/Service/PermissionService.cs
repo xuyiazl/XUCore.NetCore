@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.Template.Easy.Persistence;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Permission
 {

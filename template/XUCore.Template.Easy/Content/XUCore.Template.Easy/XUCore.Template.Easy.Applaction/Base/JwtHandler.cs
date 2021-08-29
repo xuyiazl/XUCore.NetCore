@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
-using XUCore;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Authorization.JwtBearer;
-using XUCore.Template.Easy.Applaction.Authorization;
+using XUCore.Template.Easy.Applaction.Permission;
+using XUCore.Template.Easy.Core;
 
 namespace XUCore.Template.Easy.Applaction
 {
@@ -15,10 +17,13 @@ namespace XUCore.Template.Easy.Applaction
     /// </summary>
     public class JwtHandler : AppAuthorizeHandler
     {
-        private readonly IAuthService authService;
-        public JwtHandler(IAuthService authService)
+        private readonly IServiceProvider serviceProvider;
+        private readonly IUserInfo user;
+        private readonly IPermissionService permissionService;
+        public JwtHandler(IServiceProvider serviceProvider)
         {
-            this.authService = authService;
+            this.user = serviceProvider.GetService<IUserInfo>();
+            this.permissionService = serviceProvider.GetService<IPermissionService>();
         }
         /// <summary>
         /// 重写 Handler 添加自动刷新收取逻辑
@@ -61,28 +66,14 @@ namespace XUCore.Template.Easy.Applaction
         /// <param name="context"></param>
         /// <param name="httpContext"></param>
         /// <returns></returns>
-        public override Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
-        {
-            // 检查权限，如果方法时异步的就不用 Task.FromResult 包裹，直接使用 async/await 即可
-            return Task.FromResult(CheckAuthorzie(httpContext));
-        }
-
-        /// <summary>
-        /// 检查权限
-        /// </summary>
-        /// <param name="httpContext"></param>
-        /// <returns></returns>
-        private static bool CheckAuthorzie(DefaultHttpContext httpContext)
+        public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
         {
             // 获取权限特性
             var securityDefineAttribute = httpContext.GetMetadata<SecurityDefineAttribute>();
             if (securityDefineAttribute == null) return true;
 
-            // 解析服务
-            var authService = httpContext.RequestServices.GetService<IAuthService>();
-
             // 检查授权
-            return authService.IsCanAccess(securityDefineAttribute.ResourceId);
+            return await permissionService.ExistsAsync(user.GetId<long>(), securityDefineAttribute.ResourceId, CancellationToken.None);
         }
     }
 }

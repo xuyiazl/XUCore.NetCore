@@ -1,4 +1,4 @@
-﻿using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+﻿using XUCore.Template.Easy.Persistence.Entities.Admin;
 using System.Collections.Generic;
 
 namespace XUCore.Template.Easy.Applaction.Permission

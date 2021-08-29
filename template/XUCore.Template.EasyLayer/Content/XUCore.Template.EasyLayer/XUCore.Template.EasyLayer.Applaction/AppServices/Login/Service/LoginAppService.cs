@@ -6,14 +6,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
+using XUCore.Helpers;
 using XUCore.NetCore;
-using XUCore.Paging;
+using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 using XUCore.Template.EasyLayer.Applaction.Admin;
-using XUCore.Template.EasyLayer.Applaction.Authorization;
 using XUCore.Template.EasyLayer.Core;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.EasyLayer.DbService.Sys.Admin.Permission;
+using XUCore.Template.EasyLayer.DbService.Admin.AdminUser;
+using XUCore.Template.EasyLayer.DbService.Admin.Permission;
 
 namespace XUCore.Template.EasyLayer.Applaction.Login
 {
@@ -25,48 +27,17 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
     {
         private readonly IPermissionService permissionService;
         private readonly IAdminUserService adminUserService;
-        private readonly IAuthService authService;
-        private readonly IAdminAppService adminAppService;
+        private readonly IUserInfo user;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
             this.adminUserService = serviceProvider.GetService<IAdminUserService>();
-            this.authService = serviceProvider.GetService<IAuthService>();
-            this.adminAppService = serviceProvider.GetService<IAdminAppService>();
+            this.user = serviceProvider.GetService<IUserInfo>();
         }
 
         #region [ 登录 ]
 
-        /// <summary>
-        /// 创建初始账号
-        /// </summary>
-        /// <remarks>
-        /// 初始账号密码：
-        ///     <para>username : admin</para>
-        ///     <para>password : admin</para>
-        /// </remarks>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<Result<long>> CreateInitAccountAsync(CancellationToken cancellationToken = default)
-        {
-            var command = new AdminUserCreateCommand
-            {
-                UserName = "admin",
-                Password = "admin",
-                Company = "",
-                Location = "",
-                Mobile = "13500000000",
-                Name = "admin",
-                Position = ""
-            };
-
-            command.IsVaild();
-
-            return await adminAppService.CreateUserAsync(command, cancellationToken);
-        }
         /// <summary>
         /// 管理员登录
         /// </summary>
@@ -77,7 +48,24 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
         [AllowAnonymous]
         public async Task<Result<LoginTokenDto>> LoginAsync([Required][FromBody] AdminUserLoginCommand request, CancellationToken cancellationToken)
         {
-            (var accessToken, var refreshToken) = await authService.LoginAsync(request, cancellationToken);
+            var userDto = await adminUserService.LoginAsync(request, cancellationToken);
+
+            // 生成 token
+            var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
+            {
+                { ClaimAttributes.UserId , userDto.Id },
+                { ClaimAttributes.UserName ,userDto.UserName }
+            });
+
+            // 生成 刷新token
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken);
+
+            // 设置 Swagger 自动登录
+            Web.HttpContext.SigninToSwagger(accessToken);
+            // 设置刷新 token
+            Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
+
+            user.SetToken(userDto.Id.ToString(), accessToken);
 
             return RestFull.Success(data: new LoginTokenDto
             {
@@ -94,8 +82,8 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
         {
             return RestFull.Success(data: new
             {
-                authService.AdminId,
-                authService.AdminName
+                user.Id,
+                user.UserName
             }.ToJson());
         }
         /// <summary>
@@ -106,7 +94,9 @@ namespace XUCore.Template.EasyLayer.Applaction.Login
         [HttpPost("/api/[controller]/Out")]
         public async Task LoginOutAsync(CancellationToken cancellationToken)
         {
-            await authService.LoginOutAsync(cancellationToken);
+            user.RemoveToken();
+
+            await Task.CompletedTask;
         }
 
         #endregion

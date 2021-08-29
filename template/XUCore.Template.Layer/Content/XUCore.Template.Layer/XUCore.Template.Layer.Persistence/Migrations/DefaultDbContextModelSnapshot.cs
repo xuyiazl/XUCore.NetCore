@@ -17,7 +17,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.8");
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminMenuEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminMenuEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_authmenus");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_authrole");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleMenuEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,7 +128,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_authrolemenus");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +205,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_users");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserLoginRecordEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_loginrecord");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserRoleEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserRoleEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,15 +257,15 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.ToTable("sys_admin_authuserrole");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleMenuEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleMenuEntity", b =>
                 {
-                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminMenuEntity", "Menus")
+                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Admin.AdminMenuEntity", "Menus")
                         .WithMany("RoleMenus")
                         .HasForeignKey("MenuId")
                         .HasConstraintName("FK_AdminAuthMenus_AdminAuthRoleMenus")
                         .IsRequired();
 
-                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleEntity", "Role")
+                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleEntity", "Role")
                         .WithMany("RoleMenus")
                         .HasForeignKey("RoleId")
                         .HasConstraintName("FK_AdminAuthRole_AdminAuthRoleMenus")
@@ -276,9 +276,9 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserLoginRecordEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserLoginRecordEntity", b =>
                 {
-                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
+                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserEntity", "AdminUser")
                         .WithMany("LoginRecords")
                         .HasForeignKey("AdminId")
                         .HasConstraintName("FK_AdminUser_AdminLoginRecord")
@@ -287,15 +287,15 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.Navigation("AdminUser");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserRoleEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserRoleEntity", b =>
                 {
-                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserEntity", "AdminUser")
+                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserEntity", "AdminUser")
                         .WithMany("UserRoles")
                         .HasForeignKey("AdminId")
                         .HasConstraintName("FK_AdminUser_AdminAuthUserRole")
                         .IsRequired();
 
-                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleEntity", "Role")
+                    b.HasOne("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleEntity", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .HasConstraintName("FK_AdminAuthRole_AdminAuthUserRoles")
@@ -306,19 +306,19 @@ namespace XUCore.Template.Layer.Persistence.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminMenuEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminMenuEntity", b =>
                 {
                     b.Navigation("RoleMenus");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminRoleEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminRoleEntity", b =>
                 {
                     b.Navigation("RoleMenus");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Sys.Admin.AdminUserEntity", b =>
+            modelBuilder.Entity("XUCore.Template.Layer.Persistence.Entities.Admin.AdminUserEntity", b =>
                 {
                     b.Navigation("LoginRecords");
 

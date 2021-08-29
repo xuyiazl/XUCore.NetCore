@@ -3,8 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.NetCore;
 using XUCore.Paging;
+using XUCore.Template.Easy.Applaction.Login;
 using XUCore.Template.Easy.Core.Enums;
-using XUCore.Template.Easy.Persistence.Entities.Sys.Admin;
+using XUCore.Template.Easy.Persistence.Entities.Admin;
 
 namespace XUCore.Template.Easy.Applaction.Admin
 {
@@ -31,6 +32,13 @@ namespace XUCore.Template.Easy.Applaction.Admin
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<Result<int>> UpdateFieldAsync(long id, string field, string value, CancellationToken cancellationToken);
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<AdminUserDto> LoginAsync(AdminUserLoginCommand request, CancellationToken cancellationToken = default);
         /// <summary>
         /// 获取账号信息（根据账号或手机号码）
         /// </summary>

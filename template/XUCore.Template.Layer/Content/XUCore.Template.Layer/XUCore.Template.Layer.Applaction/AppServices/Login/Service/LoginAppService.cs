@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
+using XUCore.Helpers;
 using XUCore.NetCore;
+using XUCore.NetCore.Authorization.JwtBearer;
+using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
-using XUCore.Template.Layer.Applaction.Authorization;
 using XUCore.Template.Layer.Core;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
-using XUCore.Template.Layer.DbService.Sys.Admin.Permission;
+using XUCore.Template.Layer.DbService.Admin.AdminUser;
+using XUCore.Template.Layer.DbService.Admin.Permission;
 
 namespace XUCore.Template.Layer.Applaction.Login
 {
@@ -18,12 +21,14 @@ namespace XUCore.Template.Layer.Applaction.Login
     public class LoginAppService : AppService, ILoginAppService
     {
         private readonly IPermissionService permissionService;
-        private readonly IAuthService authService;
+        private readonly IAdminUserService adminUserService;
+        private readonly IUserInfo user;
 
         public LoginAppService(IServiceProvider serviceProvider)
         {
             this.permissionService = serviceProvider.GetService<IPermissionService>();
-            this.authService = serviceProvider.GetService<IAuthService>();
+            this.adminUserService = serviceProvider.GetService<IAdminUserService>();
+            this.user = serviceProvider.GetService<IUserInfo>();
         }
 
         #region [ 登录 ]
@@ -36,7 +41,24 @@ namespace XUCore.Template.Layer.Applaction.Login
         /// <returns></returns>
         public async Task<Result<LoginTokenDto>> LoginAsync(AdminUserLoginCommand command, CancellationToken cancellationToken)
         {
-            (var accessToken, var refreshToken) = await authService.LoginAsync(command, cancellationToken);
+            var userDto = await adminUserService.LoginAsync(command, cancellationToken);
+
+            // 生成 token
+            var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
+            {
+                { ClaimAttributes.UserId , userDto.Id },
+                { ClaimAttributes.UserName ,userDto.UserName }
+            });
+
+            // 生成 刷新token
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken);
+
+            // 设置 Swagger 自动登录
+            Web.HttpContext.SigninToSwagger(accessToken);
+            // 设置刷新 token
+            Web.HttpContext.Response.Headers["x-access-token"] = refreshToken;
+
+            user.SetToken(userDto.Id.ToString(), accessToken);
 
             return RestFull.Success(data: new LoginTokenDto
             {
@@ -52,8 +74,8 @@ namespace XUCore.Template.Layer.Applaction.Login
         {
             return RestFull.Success(data: new
             {
-                authService.AdminId,
-                authService.AdminName
+                user.Id,
+                user.UserName
             }.ToJson());
         }
         /// <summary>
@@ -63,7 +85,9 @@ namespace XUCore.Template.Layer.Applaction.Login
         /// <returns></returns>
         public async Task LoginOutAsync(CancellationToken cancellationToken)
         {
-            await authService.LoginOutAsync(cancellationToken);
+            user.RemoveToken();
+
+            await Task.CompletedTask;
         }
 
         #endregion

@@ -7,9 +7,9 @@ using XUCore.NetCore;
 using XUCore.Paging;
 using XUCore.Template.Layer.Core;
 using XUCore.Template.Layer.Core.Enums;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminMenu;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminRole;
-using XUCore.Template.Layer.DbService.Sys.Admin.AdminUser;
+using XUCore.Template.Layer.DbService.Admin.AdminMenu;
+using XUCore.Template.Layer.DbService.Admin.AdminRole;
+using XUCore.Template.Layer.DbService.Admin.AdminUser;
 
 namespace XUCore.Template.Layer.Applaction.Admin
 {
