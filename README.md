@@ -71,7 +71,7 @@
 
 建议使用，基于EFCore的简单分层应用（传统Controller+业务+EFCore的数据层），没有使用动态Controller，独立业务，数据持久化
 
-### XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer) 
+### [XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer) 
 
 建议使用，基于EFCore的简单分层应用（动态API+业务+EFCore的数据层），缩减了Controller，独立业务，数据持久化
 
