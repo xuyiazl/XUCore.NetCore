@@ -66,9 +66,13 @@
 [如何使用脚手架 XUCore.Template.Ddd](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Ddd)
 
 [如何使用脚手架 XUCore.Template.Layer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Layer)
+建议使用，基于EFCore的简单分层应用（传统Controller+业务+EFCore的数据层），没有使用动态Controller，独立业务，数据持久化
 
-[如何使用脚手架 XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer)
+[如何使用脚手架 XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer) 
+建议使用，基于EFCore的简单分层应用（动态API+业务+EFCore的数据层），缩减了Controller，独立业务，数据持久化
 
-[如何使用脚手架 XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Easy)
+[如何使用脚手架 XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Easy) 
+不太建议使用，毕竟单层（动态API+业务+数据）集合在一起。
 
 [如何使用脚手架 XUCore.Template.FreeSql](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.FreeSql)
+建议使用，基于FreeSql的简单分层应用（动态API+业务+FreeSql的数据层），缩减了Controller，独立业务，数据持久化（FreeSql的性能上优于EFCore，但EFCore毕竟是官方出品）
