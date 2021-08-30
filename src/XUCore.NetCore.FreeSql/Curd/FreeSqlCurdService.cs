@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System;
+using System.Linq.Expressions;
 using XUCore.Ddd.Domain;
 using XUCore.Ddd.Domain.Commands;
 using XUCore.NetCore.FreeSql.Entity;
@@ -26,6 +28,14 @@ namespace XUCore.NetCore.FreeSql.Curd
         where TPageCommand : PageCommand
     {
         protected FreeSqlCurdService(FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
+        {
+            muowm.Binding(this);
+
+            User = user;
+        }
+
+        protected FreeSqlCurdService(FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user, Expression<Func<TEntity, bool>> filter, Func<string, string> asTable = null) :
+            base(muowm.Orm, mapper, filter, asTable)
         {
             muowm.Binding(this);
 
