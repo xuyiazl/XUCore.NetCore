@@ -1,0 +1,4256 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XUCore.Script</name>
+    </assembly>
+    <members>
+        <member name="T:XUCore.Script.ILoop">
+            <summary>
+            Interface for a loop
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ILoop.Continue">
+            <summary>
+            Continue to next iteration.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ILoop.Break">
+            <summary>
+            Break the loop.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.IParameterExpression">
+            <summary>
+            Interface for expression that uses parameters. right now "new" and "function".
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Operator">
+            <summary>
+            Token for the language.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Add">
+            <summary>
+            +
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Subtract">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Multiply">
+            <summary>
+            * 
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Divide">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Modulus">
+            <summary>
+            %
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LessThan">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LessThanEqual">
+            <summary>
+            &lt;=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.MoreThan">
+            <summary>
+            >
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.MoreThanEqual">
+            <summary>
+            >=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Equal">
+            <summary>
+            =
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.EqualEqual">
+            <summary>
+            ==
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.NotEqual">
+            <summary>
+            !=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.And">
+            <summary>
+            and
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Or">
+            <summary>
+            ||
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.PlusPlus">
+            <summary>
+            ++
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.MinusMinus">
+            <summary>
+            --
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.PlusEqual">
+            <summary>
+            += 
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.MinusEqual">
+            <summary>
+            -=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.MultEqual">
+            <summary>
+            *=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.DivEqual">
+            <summary>
+            /=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LeftParenthesis">
+            <summary>
+            (
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LeftBrace">
+            <summary>
+            {
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LeftBracket">
+            <summary>
+            [
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.RightParenthesis">
+            <summary>
+            )
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.RightBracket">
+            <summary>
+            ]
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.RightBrace">
+            <summary>
+            }
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Comma">
+            <summary>
+            ,
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.LogicalNot">
+            <summary>
+            !
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Operator.Dot">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Terminators">
+            <summary>
+            Terminators used for parsing expressions/statements.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpSemicolonEnd">
+            <summary>
+            Used for end of expression;
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpVarDeclarationEnd">
+            <summary>
+            Used for end of expression;
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpParenthesisEnd">
+            <summary>
+            Used for end of ( ) in if
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpBracketEnd">
+            <summary>
+            Used for end of array index ]
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpArrayDeclareEnd">
+            <summary>
+            Used for end of parsing expressions in array
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpMapDeclareEnd">
+            <summary>
+            Used for end of parsing expressions in array
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpFuncExpEnd">
+            <summary>
+            Used to terminate parsing for function call.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpPartEnd">
+            <summary>
+            Use in separating expressions using and/or.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Terminators.ExpMathShuntingYard">
+            <summary>
+            Used for Math precedence shunting yard algorithm.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LArray">
+            <summary>
+            Array datatype
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LArray.#cctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LArray.MapMethod(System.String)">
+            <summary>
+            Map method name from an alias to actual method
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.#ctor(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="val">Value of the string</param>
+        </member>
+        <member name="M:XUCore.Script.LArray.#ctor(XUCore.Script.Context,System.Collections.Generic.List{System.Object})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="context">Context for the script</param>
+            <param name="val">Value of the string</param>
+        </member>
+        <member name="F:XUCore.Script.LArray.Raw">
+            <summary>
+            Raw value
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LArray.ToStr">
+            <summary>
+            Get string value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.HasMethod(System.String)">
+            <summary>
+            Whether or not this type supports the supplied method
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.HasProperty(System.String)">
+            <summary>
+            Whether or not this type supports the supplied property
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Calls the method
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.LArray.Length">
+            <summary>
+            Lenght of the array.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LArray.Item(System.Int32)">
+            <summary>
+            Get / set value by index.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Concat(System.Object[])">
+            <summary>
+            Joins two or more arrays, and returns a copy of the joined arrays
+            </summary>
+            <param name="arrays">Array of arrays to add</param>
+            <returns>A copy of joined array</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Join(System.String)">
+            <summary>
+            Joins all elements of an array into a string
+            </summary>
+            <param name="separator">The separator to use for joining the elements.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Pop">
+            <summary>
+            Removes the last element of an array, and returns that element
+            </summary>
+            <returns>The removed element</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Push(System.Object[])">
+            <summary>
+            Adds new elements to the end of an array, and returns the new length
+            </summary>
+            <param name="elements">The elements to add</param>
+            <returns>The new length</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Reverse">
+            <summary>
+            Reverses the order of the elements in an array
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Shift">
+            <summary>
+            Removes the first element of an array, and returns that element
+            </summary>
+            <returns>The first element</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Slice(System.Int32,System.Int32)">
+            <summary>
+            Selects a part of an array, and returns the new array
+            </summary>
+            <param name="start">The start of the selection</param>
+            <param name="end">The end of the selection, if not supplied, selects all elements from start to end of the array</param>
+            <returns>A new array</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.Splice(System.Int32,System.Int32,System.Object[])">
+            <summary>
+            Adds/Removes elements from an array
+            </summary>
+            <param name="index">The index position to add/remove</param>
+            <param name="howmany">How many elements to remove, if 0 no elements are removed</param>
+            <param name="elements">Optional: The elements to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.UnShift(System.Object[])">
+            <summary>
+            Adds new elements to the beginning of an array, and returns the new length
+            </summary>
+            <param name="elements">The elements to add.</param>
+            <returns>The new length</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.GetByIndex(System.Int32)">
+            <summary>
+            Gets the element at the specified position
+            </summary>
+            <param name="ndx">The index position to get</param>
+            <returns>Element at position</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.SetByIndex(System.Int32,System.Object)">
+            <summary>
+            Sets the element at the specified position
+            </summary>
+            <param name="ndx">The index position to set</param>
+            <param name="val">The value to set</param>
+            <returns>The object being set</returns>
+        </member>
+        <member name="M:XUCore.Script.LArray.ToString">
+            <summary>
+            Converts an array into a string and returns the string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LBaseType">
+            <summary>
+            Base class for datatypes.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LBaseType._context">
+            <summary>
+            Context of the script
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LBaseType._varName">
+            <summary>
+            Name of the variable
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LBaseType._value">
+            <summary>
+            Value of the type.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LBaseType._supportsIndexer">
+            <summary>
+            Whether or not indexer support is available.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LBaseType.SupportsIndexer">
+            <summary>
+            Whether or not indexer is supported
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LBaseType.HasMethod(System.String)">
+            <summary>
+            Whether or not this type supports the supplied method
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LBaseType.HasProperty(System.String)">
+            <summary>
+            whether or not this type support the supplied property
+            </summary>
+            <param name="propName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LBaseType.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Calls the method
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.LBaseType.Item(System.Int32)">
+            <summary>
+            Support for get/set value by int indexer
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LBool">
+            <summary>
+            Boolean datatype.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LBool.ToBool">
+            <summary>
+            Get boolean value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LDate">
+            <summary>
+            Array type.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LDate.#cctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LDate.#ctor(XUCore.Script.Context,System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="context"></param>
+            <param name="varName"></param>
+        </member>
+        <member name="M:XUCore.Script.LDate.#ctor(XUCore.Script.Context,System.String,System.DateTime)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="context">Context of the script</param>
+            <param name="varName">Name of the variable.</param>
+            <param name="date">Date value</param>
+        </member>
+        <member name="F:XUCore.Script.LDate.Raw">
+            <summary>
+            The raw datetime.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LDate.HasProperty(System.String)">
+            <summary>
+            Whether or not this type supports the supplied property
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LDate.HasMethod(System.String)">
+            <summary>
+            Whether or not this type supports the supplied method
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LDate.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Calls the method
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.LError.name">
+            <summary>
+            Name of the message
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LError.message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LError.Source">
+            <summary>
+            The source script that caused the error.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LError.LineNumber">
+            <summary>
+            Line number that caused the error.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LError.StackTrace">
+            <summary>
+            Information about the stack trace.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LError.Inner">
+            <summary>
+            Inner excpetion.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LError.FromException(System.Exception)">
+            <summary>
+            Converts from a LangException to LError datatype
+            </summary>
+            <param name="exc">The exception to convert to an LError</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LFunction">
+            <summary>
+            function in script
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LFunction.HasMethod(System.String)">
+            <summary>
+            Whether or not the function has the method supplied
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LFunction.HasProperty(System.String)">
+            <summary>
+            Whether or not this function has the property supplied.
+            </summary>
+            <param name="propName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LFunction.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Executes the method.
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LMap">
+            <summary>
+            Datatype for map
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LMap.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="val">Values of the map</param>
+        </member>
+        <member name="M:XUCore.Script.LMap.#ctor(XUCore.Script.Context,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="context">Context for the script</param>
+            <param name="val">Values of the map</param>
+        </member>
+        <member name="F:XUCore.Script.LMap.Raw">
+            <summary>
+            Raw value
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LMap.HasMethod(System.String)">
+            <summary>
+            Whether or not this type supports the supplied method
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LMap.HasProperty(System.String)">
+            <summary>
+            Whether or not this type supports the supplied property
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LMap.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Calls the method
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LMap.GetValue(System.String)">
+            <summary>
+            Get the value of a property.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LMap.GetValueAs``1(System.String)">
+            <summary>
+            Get the value of a property.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LMap.SetValue(System.String,System.Object)">
+            <summary>
+            Get the value of a property.
+            </summary>
+            <param name="name">The name of the property to set</param>
+            <param name="value">The value to set</param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.LMap.Length">
+            <summary>
+            Number of items.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LNull">
+            <summary>
+            Class to represent null
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LNull.Instance">
+            <summary>
+            Singleton instance.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LNumber">
+            <summary>
+            Boolean datatype.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LNumber.ToDouble">
+            <summary>
+            Get boolean value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LObject">
+            <summary>
+            Base type for all data types.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LObject._value">
+            <summary>
+            Object value.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LObject.DataType">
+            <summary>
+            The datatype.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LObject.Value">
+            <summary>
+            Value of the type.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LString">
+            <summary>
+            Boolean datatype.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LString.#cctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LString.#ctor(XUCore.Script.Context,System.String,System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="context">Context for the script</param>
+            <param name="val">Value of the string</param>
+            <param name="varName">Name of the variable</param>
+        </member>
+        <member name="F:XUCore.Script.LString.Raw">
+            <summary>
+            Raw value
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LString.ToStr">
+            <summary>
+            Get string value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.HasMethod(System.String)">
+            <summary>
+            Whether or not this type supports the supplied method
+            </summary>
+            <param name="methodname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.HasProperty(System.String)">
+            <summary>
+            Whether or not this type supports the supplied property
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.ExecuteMethod(System.String,System.Object[])">
+            <summary>
+            Calls the method
+            </summary>
+            <param name="methodname"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.CharAt(XUCore.Script.ArgsFetcher)">
+            <summary>
+            Returns the character at the specified index
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.Concat(System.Object[])">
+            <summary>
+            Joins two or more strings, and returns a copy of the joined strings
+            </summary>
+            <param name="strings">The list of strings to join</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.IndexOf(System.String,System.Int32)">
+            <summary>
+            Returns the position of the first found occurrence of a specified value in a string
+            </summary>
+            <param name="searchString">The string to search for</param>
+            <param name="start">The starting position to start the search.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.LastIndexOf(System.String,System.Int32)">
+            <summary>
+            Returns the position of the last found occurrence of a specified value in a string
+            </summary>
+            <param name="searchString">The text to search for</param>
+            <param name="start">The position to start search</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.Substr(System.Int32,System.Int32)">
+            <summary>
+            Extracts the characters from a string, beginning at a specified start position, and through the specified number of character
+            </summary>
+            <param name="from">Index where to start extraction</param>
+            <param name="length">The number of characters to extract. If omitted, it extracts the rest of the string</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.Substring(System.Int32,System.Int32)">
+            <summary>
+            Extracts the characters from a string, between two specified indices
+            </summary>
+            <param name="from">Index where to start extraction</param>
+            <param name="to">The index where to stop the extraction. If omitted, it extracts the rest of the string</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.Replace(System.String,System.String)">
+            <summary>
+            Searches for a match between a substring (or regular expression) and a string, and replaces the matched substring with a new substring
+            </summary>
+            <param name="substring">Required. A substring or a regular expression.</param>
+            <param name="newString">Required. The string to replace the found value in parameter 1</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.Search(System.String)">
+            <summary>
+            Searches for a match between a regular expression and a string, and returns the position of the match
+            </summary>
+            <param name="regExp">Required. A regular expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.ToUpperCase">
+            <summary>
+            Converts a string to uppercase letters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LString.ToLowerCase">
+            <summary>
+            Converts a string to lowercase letters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.AssignmentExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.AssignmentExpression.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.AssignmentExpression.#ctor(System.String,XUCore.Script.Expression,XUCore.Script.Scope)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="scope">Scope containing objects</param>
+            <param name="exp">Expression to evaluate for value of variable</param>
+            <param name="name">Variable name</param>
+        </member>
+        <member name="M:XUCore.Script.AssignmentExpression.Evaluate">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.BinaryExpression">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.BinaryExpression.#ctor(XUCore.Script.Expression,XUCore.Script.Operator,XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="left">Left hand expression</param>
+            <param name="op">Operator</param>
+            <param name="right">Right expression</param>
+        </member>
+        <member name="F:XUCore.Script.BinaryExpression.Left">
+            <summary>
+            Left hand expression
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.BinaryExpression.Op">
+            <summary>
+            Operator * - / + % 
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.BinaryExpression.Right">
+            <summary>
+            Right hand expression
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.BinaryExpression.Evaluate">
+            <summary>
+            Evaluate * / + - % 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.CompareExpression">
+            <summary>
+            Condition expression less, less than equal, more, more than equal etc.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.CompareExpression.#ctor(XUCore.Script.Expression,XUCore.Script.Operator,XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="left">Left hand expression</param>
+            <param name="op">Operator</param>
+            <param name="right">Right expression</param>
+        </member>
+        <member name="F:XUCore.Script.CompareExpression.Left">
+            <summary>
+            Left hand expression
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.CompareExpression.Op">
+            <summary>
+            Operator > >= == != less less than
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.CompareExpression.Right">
+            <summary>
+            Right hand expression
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.CompareExpression.Evaluate">
+            <summary>
+            Evaluate > >= != == less less than
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ConditionExpression">
+            <summary>
+            Condition expression less, less than equal, more, more than equal etc.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ConditionExpression.#ctor(XUCore.Script.Expression,XUCore.Script.Operator,XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="left">Left hand expression</param>
+            <param name="op">Operator</param>
+            <param name="right">Right expression</param>
+        </member>
+        <member name="F:XUCore.Script.ConditionExpression.Left">
+            <summary>
+            Left hand expression
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ConditionExpression.Op">
+            <summary>
+            Operator > >= == != less less than
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ConditionExpression.Right">
+            <summary>
+            Right hand expression
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ConditionExpression.Evaluate">
+            <summary>
+            Evaluate > >= != == less less than
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ConstantExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ConstantExpression.#ctor(System.Object)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:XUCore.Script.ConstantExpression.Evaluate">
+            <summary>
+            Evaluate value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.DataTypeExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.DataTypeExpression.#ctor(System.Collections.Generic.List{XUCore.Script.Expression})">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.DataTypeExpression.#ctor(System.Collections.Generic.List{System.Tuple{System.String,XUCore.Script.Expression}})">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.DataTypeExpression.Evaluate">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.DataTypeExpression.EvaluateAs``1">
+            <summary>
+            Evaluate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.EvaluatableExpression">
+            <summary>
+            Evaluatable expression
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Expression">
+            <summary>
+            Base class for Expressions
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Expression.Evaluate">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Expression.EvaluateAs``1">
+            <summary>
+            Evaluate and return as datatype T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ForLoopExpression">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.Variable">
+            <summary>
+            Name of the variable
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.StartExpression">
+            <summary>
+            Expression representing the start value.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.CheckOp">
+            <summary>
+            Operator for condition check in loop ndx >= 4
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.CheckExpression">
+            <summary>
+            Expression representing the bound value ndx > = 4 
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.IncrementOp">
+            <summary>
+            The operator to increment by ++ or +=
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopExpression.IncrementExpression">
+            <summary>
+            The expression if not ++ but += then the number after +=
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ForLoopExpression.Evaluate">
+            <summary>
+            Execute each expression.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.FunctionCallExpression">
+            <summary>
+            Function call expression data.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionCallExpression.#ctor">
+            <summary>
+            Function call expression
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionCallExpression.#ctor(XUCore.Script.Scope,System.Boolean,System.String,System.String,System.Collections.Generic.List{System.Object})">
+            <summary>
+            Handle method calls.
+            </summary>
+            <param name="scope">Variable scope of the script</param>
+            <param name="isScopeVariable">Whether or not the variable name is a scope variable.</param>
+            <param name="name">Name of the variable</param>
+            <param name="method">Name of the method on the variable to call</param>
+            <param name="args">Arguments to the method</param>
+        </member>
+        <member name="F:XUCore.Script.FunctionCallExpression.NameExp">
+            <summary>
+            Expression represnting the name of the function call.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionCallExpression.ParamListExpressions">
+            <summary>
+            List of expressions.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionCallExpression.ParamList">
+            <summary>
+            List of arguments.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionCallExpression.ParamMap">
+            <summary>
+            Arguments to the function.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionCallExpression.Scope">
+            <summary>
+            Scope of variables.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionCallExpression.IsScopeVariable">
+            <summary>
+            Whether or not this is a method call or a member access.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionCallExpression.Evaluate">
+            <summary>
+            Evauate and run the function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.FunctionCallExpression.Name">
+            <summary>
+            Get the name of the function.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.IndexExpression">
+            <summary>
+            Member access expressions for "." property or "." method.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IndexExpression.#ctor(XUCore.Script.Expression,XUCore.Script.Expression,System.Boolean)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="variableExp">The variable expression to use instead of passing in name of variable.</param>
+            <param name="indexExp">The expression representing the index value to get</param>
+            <param name="isAssignment">Whether or not this is part of an assigment</param>
+        </member>
+        <member name="F:XUCore.Script.IndexExpression.IndexExp">
+            <summary>
+            Expression representing the index
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.IndexExpression.VariableExp">
+            <summary>
+            The variable expression representing the list.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.IndexExpression.ListObject">
+            <summary>
+            The object to get the index value from. Used if ObjectName is null or empty.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.IndexExpression.IsAssignment">
+            <summary>
+            Whether or not this member access is part of an assignment.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IndexExpression.Evaluate">
+            <summary>
+            Evaluate object[index]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.InterpolatedExpression">
+            <summary>
+            Expression to handle string interpolations such as "${username}'s email is ${email}".
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.InterpolatedExpression.Add(XUCore.Script.Expression)">
+            <summary>
+            Adds an expression to be interpolated.
+            </summary>
+            <param name="exp"></param>
+        </member>
+        <member name="M:XUCore.Script.InterpolatedExpression.Clear">
+            <summary>
+            Clears the expression.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.InterpolatedExpression.Evaluate">
+            <summary>
+            Evaluates the expression by appending all the sub-expressions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.MemberAccessExpression">
+            <summary>
+            Member access expressions for "." property or "." method.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.MemberAccessExpression.#ctor(XUCore.Script.Expression,System.String,System.Boolean)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="variableExp">The variable expression to use instead of passing in name of variable.</param>
+            <param name="memberName">Name of member, this could be a property or a method name.</param>
+            <param name="isAssignment">Whether or not this is part of an assigment</param>
+        </member>
+        <member name="F:XUCore.Script.MemberAccessExpression.VariableExp">
+            <summary>
+            The variable expression representing the list.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.MemberAccessExpression.MemberName">
+            <summary>
+            The name of the member.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.MemberAccessExpression.IsAssignment">
+            <summary>
+            Whether or not this member access is part of an assignment.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.MemberAccessExpression.Evaluate">
+            <summary>
+            Either external function or member name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.NewExpression">
+            <summary>
+            New instance creation.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.NewExpression.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.NewExpression.TypeName">
+            <summary>
+            Name of 
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.NewExpression.ParamListExpressions">
+            <summary>
+            List of expressions.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.NewExpression.ParamList">
+            <summary>
+            List of arguments.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.NewExpression.Evaluate">
+            <summary>
+            Creates new instance of the type.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.UnaryExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.UnaryExpression.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.UnaryExpression.#ctor(System.String,System.Double,XUCore.Script.Operator,XUCore.Script.Context)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="incValue">Value to increment</param>
+            <param name="op">The unary operator</param>
+            <param name="name">Variable name</param>
+            <param name="ctx">Context of the script</param>
+        </member>
+        <member name="M:XUCore.Script.UnaryExpression.#ctor(System.String,XUCore.Script.Expression,XUCore.Script.Operator,XUCore.Script.Context)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="exp">Expression representing value to increment by</param>
+            <param name="op">The unary operator</param>
+            <param name="name">Variable name</param>
+            <param name="ctx">Context of the script</param>
+        </member>
+        <member name="M:XUCore.Script.UnaryExpression.Evaluate">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ValueExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ValueExpression.Name">
+            <summary>
+            Name of the variable.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ValueExpression.DataType">
+            <summary>
+            Datatype of the variable.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ValueExpression.Value">
+            <summary>
+            Value of the variable.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.VariableExpression">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.VariableExpression.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.VariableExpression.#ctor(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="name">Variable name</param>
+        </member>
+        <member name="M:XUCore.Script.VariableExpression.Evaluate">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.VariableExpression.EvaluateAs``1">
+            <summary>
+            Evaluate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ArgsFetcher">
+            <summary>
+            Helps to get argument values ( from array )
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ArgsFetcher.#ctor(System.Object[])">
+            <summary>
+            Initialize with arguments.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="P:XUCore.Script.ArgsFetcher.Args">
+            <summary>
+            Arguments
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ArgsFetcher.Get``1(System.Int32)">
+            <summary>
+            Get value of type T at index position supplied.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ndx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ArgsFetcher.Get``1(System.Int32,``0)">
+            <summary>
+            Get the default value if ndx outof bounds
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ndx"></param>
+            <param name="defaultVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.IsInternalOrExternalFunction(XUCore.Script.Context,System.String,System.String)">
+            <summary>
+            Whether or not the name/member combination supplied is a script level function or an external C# function
+            </summary>
+            <param name="ctx">Context of script</param>
+            <param name="name">Object name "Log"</param>
+            <param name="member">Member name "Info" as in "Log.Info"</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.Call(XUCore.Script.Context,System.String,XUCore.Script.FunctionCallExpression)">
+            <summary>
+            Call internal/external script.
+            </summary>
+            <param name="ctx"></param>
+            <param name="name"></param>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.MethodCall(XUCore.Script.Context,System.Object,System.Type,System.Reflection.MethodInfo,System.Collections.Generic.List{XUCore.Script.Expression},System.Collections.Generic.List{System.Object},System.Boolean)">
+            <summary>
+            Dynamically invokes a method call.
+            </summary>
+            <param name="ctx">Context of the script</param>
+            <param name="obj">Instance of the object for which the method call is being applied.</param>
+            <param name="datatype">The datatype of the object.</param>
+            <param name="methodInfo">The method to call.</param>
+            <param name="paramListExpressions">List of expressions representing parameters for the method call</param>
+            <param name="paramList">The list of values(evaluated from expressions) to call.</param>
+            <param name="resolveParams">Whether or not to resolve the parameters from expressions to values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.Call(XUCore.Script.Context,System.Tuple{System.Object,System.String,System.String,System.Reflection.MethodInfo},System.Collections.Generic.List{XUCore.Script.Expression},System.Collections.Generic.List{System.Object})">
+            <summary>
+            Call the method.
+            </summary>
+            <param name="ctx">The context of the script.</param>
+            <param name="info">The name of the method</param>
+            <param name="paramListExpressions">The expressions to resolve as parameters</param>
+            <param name="paramList">The list of parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.Call(XUCore.Script.Context,System.Object,System.String,System.String,System.Reflection.MethodInfo,System.Collections.Generic.List{XUCore.Script.Expression},System.Collections.Generic.List{System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="ctx">The context of the script</param>
+            <param name="varname">The name of the variable</param>
+            <param name="obj">The object to call the method on</param>
+            <param name="memberName">The name of the member/method to call</param>
+            <param name="methodInfo">The methodinfo(not needed for built in types )</param>
+            <param name="paramListExpressions">The expressions to resolve as parameters</param>
+            <param name="paramList">The list of parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.ResolveParameters(System.Collections.Generic.List{XUCore.Script.Expression},System.Collections.Generic.List{System.Object})">
+            <summary>
+            Resolve the parameters in the function call.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.Print(XUCore.Script.LangSettings,XUCore.Script.FunctionCallExpression,System.Boolean)">
+            <summary>
+            Prints to the console.
+            </summary>
+            /// <param name="settings">Settings for interpreter</param>
+            <param name="exp">The functiona call expression</param>
+            <param name="printline">Whether to print with line or no line</param>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.Log(XUCore.Script.LangSettings,XUCore.Script.FunctionCallExpression)">
+            <summary>
+            Logs severity to console.
+            </summary>
+            <param name="settings">Settings for interpreter</param>
+            <param name="exp">The functiona call expression</param>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.BuildMessage(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Builds a single message from multiple arguments
+            If there are 2 or more arguments, the 1st is a format, then rest are the args to the format.
+            </summary>
+            <param name="paramList">The list of parameters</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.ConvertArgs(System.Collections.Generic.List{System.Object},System.Reflection.MethodInfo)">
+            <summary>
+            Converts arguments from one type to another type that is required by the method call.
+            </summary>
+            <param name="args"></param>
+            <param name="method">The method for which the parameters need to be converted</param>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.ConvertToTypedList(System.Collections.Generic.IList{System.Object},System.Type)">
+            <summary>
+            Converts the source to the target list type by creating a new instance of the list and populating it.
+            </summary>
+            <param name="source"></param>
+            <param name="targetListType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionHelper.ConvertToTypedDictionary(System.Collections.Generic.IDictionary{System.String,System.Object},System.Type)">
+            <summary>
+            Converts the source to the target list type by creating a new instance of the list and populating it.
+            </summary>
+            <param name="source"></param>
+            <param name="targetListType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.LangHelper">
+            <summary>
+            Helper class
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangHelper.IsBasicType(System.Object)">
+            <summary>
+            Whether or not the type supplied is a basic type.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.LangHelper.Execute(System.Collections.Generic.List{XUCore.Script.Statement},XUCore.Script.Statement)">
+            <summary>
+            Executes the statements.
+            </summary>
+            <param name="statements"></param>
+            <param name="parent"></param>
+        </member>
+        <member name="T:XUCore.Script.ExternalFunctions">
+            <summary>
+            Helper class for calling functions
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ExternalFunctions.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ExternalFunctions.Register(System.String,System.Func{XUCore.Script.FunctionCallExpression,System.Object})">
+            <summary>
+            Registers a custom function callback.
+            </summary>
+            <param name="pattern"></param>
+            <param name="callback">The custom callback</param>
+        </member>
+        <member name="M:XUCore.Script.ExternalFunctions.Contains(System.String)">
+            <summary>
+            Whether or not the function call supplied is a custom function callback that is 
+            outside of the script.
+            </summary>
+            <param name="name">Name of the function</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ExternalFunctions.GetByName(System.String)">
+            <summary>
+            Get the custom function callback
+            </summary>
+            <param name="name">Name of the function</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ExternalFunctions.Call(System.String,XUCore.Script.FunctionCallExpression)">
+            <summary>
+            Calls the custom function.
+            </summary>
+            <param name="name">Name of the function</param>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.RegisteredFunctions">
+            <summary>
+            Helper class for calling functions
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.RegisteredFunctions.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.RegisteredFunctions.Register(System.String,XUCore.Script.FunctionStatement)">
+            <summary>
+            Registers a custom function callback.
+            </summary>
+            <param name="pattern"></param>
+            <param name="stmt">The function</param>
+        </member>
+        <member name="M:XUCore.Script.RegisteredFunctions.Contains(System.String)">
+            <summary>
+            Whether or not the function call supplied is a custom function callback that is 
+            outside of the script.
+            </summary>
+            <param name="name">Name of the function</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.RegisteredFunctions.GetByName(System.String)">
+            <summary>
+            Get the custom function callback
+            </summary>
+            <param name="name">Name of the function</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.RegisteredFunctions.Call(XUCore.Script.FunctionCallExpression)">
+            <summary>
+            Calls the custom function.
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.RegisteredTypes">
+            <summary>
+            Helper class for calling functions
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RegisteredTypes.RegisteredType.IsBasicType">
+            <summary>
+            Whether or not this is a basic type ( double, string, date, bool )
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RegisteredTypes.RegisteredType.FullName">
+            <summary>
+            Full name of the type.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RegisteredTypes.RegisteredType.Name">
+            <summary>
+            Short name of the type.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RegisteredTypes.RegisteredType.DataType">
+            <summary>
+            DataType
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RegisteredTypes.RegisteredType.Creator">
+            <summary>
+            Instance creator.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.RegisteredTypes.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.RegisteredTypes.Register(System.Type,System.Func{System.Object})">
+            <summary>
+            Register a custom type into the interpreter( for calling c# from the language ).
+            </summary>
+            <param name="type"></param>
+            <param name="creator"></param>
+        </member>
+        <member name="M:XUCore.Script.RegisteredTypes.Contains(System.String)">
+            <summary>
+            Whether or not the typename supplied exists in the registered types
+            </summary>
+            <param name="nameOrFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.RegisteredTypes.Get(System.String)">
+            <summary>
+            Whether or not the typename supplied exists in the registered types
+            </summary>
+            <param name="nameOrFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.RegisteredTypes.Create(System.String,System.Object[])">
+            <summary>
+            Create new instance of typename.
+            </summary>
+            <param name="nameOrFullName"></param>
+            <param name="args">The arguments for a constructor</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Interpreter">
+            <summary>
+            Light version of javascript with some "sandbox" features coming up.
+            </summary>
+            <remarks>
+            Provides high-level functionality for parsing/executing scripts.
+            
+            Features include:
+            1. Convert script into a list of tokens ( Using Lexer ) - prints out line numbers and char positions of each token
+            2. Convert script into a sequence of expressions/statements (Using Parser ) - prints out line numbers and char positions of exp/stmts.
+            3. Only parse without executing
+            4. Parse and execute.
+            5. Provides benchmark capabilities of executing each statement.
+            </remarks>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Interpreter.Scope">
+            <summary>
+            Scope of the script
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Interpreter.Context">
+            <summary>
+            Context for the script.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Interpreter.Result">
+            <summary>
+            Run result
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.SetFunctionCallback(System.String,System.Func{XUCore.Script.FunctionCallExpression,System.Object})">
+            <summary>
+            Register the callback for custom functions
+            </summary>
+            <param name="funcCallPattern">Pattern for the function e.g. "CreateUser", or "Blog.*"</param>
+            <param name="callback">The callback to call</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.ParseFile(System.String)">
+            <summary>
+            Parses the script but does not execute it.
+            </summary>
+            <param name="scriptPath">Path to the script</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.Parse(System.String)">
+            <summary>
+            Parses the script but does not execute it.
+            </summary>
+            <param name="script"></param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.ExecuteFile(System.String)">
+            <summary>
+            Executes the file.
+            </summary>
+            <param name="scriptPath">Path to the script</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.Execute(System.String)">
+            <summary>
+            Executes the script
+            </summary>
+            <param name="script">Script text</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.LexReplace(System.String,System.String)">
+            <summary>
+            Replaces a token with another token.
+            </summary>
+            <param name="text">The text to replace</param>
+            <param name="newValue">The replacement text</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.LexRemove(System.String)">
+            <summary>
+            Removes a token during the lexing process.
+            </summary>
+            <param name="text">The text to remove</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.LexInsert(System.Boolean,System.String,System.String)">
+            <summary>
+            Adds a token during the lexing process.
+            </summary>
+            <param name="before">whether to insert before or after</param>
+            <param name="text">The text to check for inserting before/after</param>
+            <param name="newValue">The new value to insert before/after</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.ToTokens(System.String,System.Boolean)">
+            <summary>
+            Convert the script to a series of tokens.
+            </summary>
+            <param name="script">The script content or file name</param>
+            <param name="isFile">Whether or not the script supplied is a filename or actual script content</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.ToStatements(System.String,System.Boolean)">
+            <summary>
+            Convert the script to a series of tokens.
+            </summary>
+            <param name="script">The script content or file name</param>
+            <param name="isFile">Whether or not the script supplied is a filename or actual script content</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.PrintTokens(System.String,System.String)">
+            <summary>
+            Prints tokens to file supplied, if file is not supplied, prints to console.
+            </summary>
+            <param name="scriptFile">The source script file</param>
+            <param name="toFile">The file to write the token info to.</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.PrintStatements(System.String,System.String)">
+            <summary>
+            Prints tokens to file supplied, if file is not supplied, prints to console.
+            </summary>
+            <param name="scriptFile">The source script file</param>
+            <param name="toFile">The file to write the statement info to.</param>
+        </member>
+        <member name="M:XUCore.Script.Interpreter.PrintRunResult(System.String)">
+            <summary>
+            Prints the run result to the file path specified.
+            </summary>
+            <param name="toFile"></param>
+        </member>
+        <member name="T:XUCore.Script.Lexer">
+            <summary>
+            Converts script from a series of characters into a series of tokens.
+            Main method is NextToken();
+            A script can be broken down into a sequence of tokens.
+            e.g.
+            
+            1. var name = "kishore";
+            Tokens:
+            
+             TOKEN VALUE:         TOKEN TYPE:
+             var         keyword
+             ""          literal ( whitespace )
+             name        id
+             ""          literal ( whitespace )
+             =           operator
+             ""          literal ( whitespace )
+             "kishore"   literal
+             ;           operator
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Lexer.#ctor(XUCore.Script.Scanner)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="scanner"></param>
+        </member>
+        <member name="P:XUCore.Script.Lexer.LineNumber">
+            <summary>
+            The current line number.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Lexer.LineCharPos">
+            <summary>
+            The char position on the current line.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Lexer.SetReplacement(System.String,System.String)">
+            <summary>
+            Replaces a token with another token.
+            </summary>
+            <param name="text">The text to replace</param>
+            <param name="newValue">The replacement text</param>
+        </member>
+        <member name="M:XUCore.Script.Lexer.SetRemoval(System.String)">
+            <summary>
+            Removes a token during the lexing process.
+            </summary>        
+            <param name="text">The text to remove</param>
+        </member>
+        <member name="M:XUCore.Script.Lexer.SetInsert(System.Boolean,System.String,System.String)">
+            <summary>
+            Adds a token during the lexing process.
+            </summary>
+            <param name="before">whether to insert before or after</param>
+            <param name="text">The text to check for inserting before/after</param>
+            <param name="newValue">The new value to insert before/after</param>
+        </member>
+        <member name="P:XUCore.Script.Lexer.LastToken">
+            <summary>
+            The current token.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Lexer.Scanner">
+            <summary>
+            The scanner used for parsing.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Lexer.Tokenize">
+            <summary>
+            Returns a list of tokens of the entire script.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Lexer.NextToken">
+            <summary>
+            Reads the next token from the reader.
+            </summary>
+            <returns> A token, or <c>null</c> if there are no more tokens. </returns>
+        </member>
+        <member name="M:XUCore.Script.Lexer.ReadWord">
+            <summary>
+            Read word
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Lexer.ReadNumber">
+            <summary>
+            Read number
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Lexer.ReadOperator">
+            <summary>
+            Read an operator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Lexer.ReadString(System.Boolean)">
+            <summary>
+            Reads a string either in quote or double quote format.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Parser">
+            <summary>
+            Uses the Lexer to parse script in terms of sequences of Statements and Expressions;
+            Each statement and expression is a sequence of Tokens( see Lexer )
+            Main method is Parse(script) and ParseStatement();
+            
+            1. var name = "kishore";
+            2. if ( name == "kishore" ) print("true");
+            
+            Statements:
+            
+            VALUE:         TYPE:
+            1. AssignmentStatement ( "var name = "kishore"; )
+            2. IfStatement ( "if (name == "kishore" ) { print ("true"); }
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Parser.Parse(System.String,XUCore.Script.Scope)">
+            <summary>
+            Parses the script into statements and expressions.
+            </summary>
+            <param name="script">Script text</param>
+            <param name="scope">Scope object</param>
+        </member>
+        <member name="M:XUCore.Script.Parser.Execute">
+            <summary>
+            Executes all the statements in the script.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseVar">
+            <summary>
+            // 1. var name;
+            2. var age = 21;
+            3. var canDrink = age >= 21;
+            4. var canVote = CanVote(age);
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseAssignment(System.Boolean,System.Boolean,XUCore.Script.Expression)">
+            <summary>
+            1. var name;
+            2. var age = 21;
+            3. canDrink = age >= 21;
+            4. canVote = CanVote(age);
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseWhile">
+            <summary>
+            Parses a while statment.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseIdBasedStatement">
+            <summary>
+            Parses an id based statement.
+            - user = 'john';
+            - activateuser();
+            - ndx++;
+            
+            Complex:
+                - users[0] = new User();
+                - user.name = 'john';
+                - getuser().name = 'john';
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseRunStatement">
+            <summary>
+            Handles running of functions using syntax 
+            1. "run" function "functioname"(parameter_list);
+            2. "run "functionname"(parameter_list);
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseRunExpressionName">
+            <summary>
+            Handles running of functions using syntax 
+            1. "run" function "functioname"(parameter_list);
+            2. "run "functionname"(parameter_list);
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseUnary(System.String,System.Boolean)">
+            <summary>
+            Parses unary
+            1. ndx++
+            2. ndx--
+            3. ndx += 2 
+            4. ndx -= 2
+            5. ndx *= 2
+            6. ndx /= 2
+            </summary>
+            <param name="name"></param>
+            <param name="useSemicolonAsTerminator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseExpression(System.Collections.Generic.IDictionary{XUCore.Script.Token,System.Boolean},System.Boolean)">
+            <summary>
+            Parses a sequence of expressions
+            1. expression AND expression
+            2. expression OR  expression
+            3. expression
+            </summary>
+            <param name="endTokens"></param>
+            <param name="combineEndTokensWithExpPartEndTokens"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseExpressionPart(System.Collections.Generic.IDictionary{XUCore.Script.Token,System.Boolean},System.Boolean)">
+            <summary>
+            Parses an expression.
+            </summary>
+            <param name="endTokens"></param>
+            <param name="resetExpressionCount">Whether or not the reset the expression count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseExpressionPart2(System.Collections.Generic.IDictionary{XUCore.Script.Token,System.Boolean},System.Boolean,System.Boolean)">
+            <summary>
+            Parses the following type of expressions:
+            
+            1. constant : 21, true, false, 'user01', null, 34.56
+            2. id       : currentUser
+            3. array    : [
+            4. map      : {
+            5. oper     : + - * / > >= == != ! etc.
+            6. new      : new 
+            </summary>
+            <param name="endTokens"></param>
+            <param name="handleMathOperator">Whether or not to handle the mathematical expressions.</param>
+            <param name="handleSingleExpression">Whether or not to handle only 1 expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseExpressionsWithPrecedence(System.Collections.Generic.IDictionary{XUCore.Script.Token,System.Boolean},XUCore.Script.Expression)">
+            <summary>
+            This is an implementation of the Shunting Yard Algorithm to handle expressions
+            with operator precedence.
+            </summary>
+            <param name="endTokens"></param>
+            <param name="initial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseArray">
+            <summary>
+            [ "user01", true, false, 123, 45.6, 'company.com']
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseMap">
+            <summary>
+            { Name: "user01", IsActive: true, IsAdmin: false, Id: 123, Sales: 45.6, Company: 'company.com' }
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseFuncExpression(XUCore.Script.Expression)">
+            <summary>
+            Parses function expression :
+            1. getAdminUser()
+            2. getUser(1)
+            3. getUserByNameOrEmail("user01", "kishore@company.com")
+            </summary>
+            <param name="nameExp">Expression representing the function name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseNewExpression">
+            <summary>
+            Handles the parsing of "new" expressions to create new instances of some object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Parser.ParseIdExpression(System.String)">
+            <summary>
+            Parses an Id based expression:
+            1. user         : variable
+            2. getUser()    : function call
+            3. users[       : index expression
+            4. user.name    : member access
+            
+            ASSIGNMENT:						EXPRESSION:						
+            result = 2;						result					-> variableexpression				
+            items[0] = 'kishore';			items[0]				-> indexexpression( variableexpression  | name)
+            getuser();					    getuser()				-> functionexpression()
+            user.age = 30;					user.age				-> memberexpression( variableexpression | name/member )
+            items[0].name = 'kishore';		items[0].name			-> memberexpression( indexexpression( variableexpression ) )
+            getuser()[0] = 0;				getuser()[0]			-> indexexpression( functionexpression )
+            user.name.last = 'kishore';		user.name.last			-> memberexpression( memberexpression )
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ParserBase">
+            <summary>
+            Base class for the parser
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._scope">
+            <summary>
+            Scope of the script
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._context">
+            <summary>
+            Context information about the script.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._scanner">
+            <summary>
+            Scanner to parse characters
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._lexer">
+            <summary>
+            Lexer to parse tokens.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._script">
+            <summary>
+            The script as text.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._scriptPath">
+            <summary>
+            The path to the script if script was provided as a file path instead of text
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._statements">
+            <summary>
+            The parsed statements from interpreting the tokens.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._state">
+            <summary>
+            The state of the parser .. used in certain cases.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._settings">
+            <summary>
+            Settings of the lanaguage interpreter.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserBase._tokenIt">
+            <summary>
+            Token iterator.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserBase.Scope">
+            <summary>
+            Get the scope
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserBase.Context">
+            <summary>
+            Get/Set the context of the script.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserBase.ScriptName">
+            <summary>
+            Name of the current script being parsed.
+            Set from the Interpreter object.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserBase.Lexer">
+            <summary>
+            Get the lexer.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserBase.Settings">
+            <summary>
+            Settings
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.Init(System.String,XUCore.Script.Scope)">
+            <summary>
+            Intialize.
+            </summary>
+            <param name="script"></param>
+            <param name="scope"></param>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.AdvanceAndExpect(XUCore.Script.Token)">
+            <summary>
+            Advance to the next token and expect the token supplied.
+            </summary>
+            <param name="expectedToken"></param>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.Expect(XUCore.Script.Token,System.Boolean)">
+            <summary>
+            Expect the token supplied and advance to next token
+            </summary>
+            <param name="token"></param>
+            <param name="advance">Whether or not to advance to the next token after expecting token</param>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.ExpectMany(XUCore.Script.Token,XUCore.Script.Token,XUCore.Script.Token,System.Boolean)">
+            <summary>
+            Expect the token supplied and advance to next token
+            </summary>
+            <param name="token1">The 1st token to expect</param>
+            <param name="token2">The 2nd token to expect</param>
+            <param name="token3">The 3rd token to expect</param>
+            <param name="advance">Whether or not to advance to the next token after expecting token</param>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.ExpectId(System.Boolean,System.Boolean)">
+            <summary>
+            Expect identifier
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.Tokenize">
+            <summary>
+            Convert the script into a series of tokens.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.BuildSyntaxExpectedTokenException(System.String)">
+            <summary>
+            Build a language exception due to the current token being invalid.
+            </summary>
+            <param name="expected"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.BuildSyntaxUnexpectedTokenException">
+            <summary>
+            Build a language exception due to the current token being invalid.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.BuildLimitException(System.String,System.Int32,System.String)">
+            <summary>
+            Builds a language exception due to a specific limit being reached.
+            </summary>
+            <param name="error">Error message</param>
+            <param name="limittype">FuncParameters</param>
+            <param name="limit">Limit number</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.BuildEndOfScriptException">
+            <summary>
+            Builds a language exception due to the unexpected end of script.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.IsEndOfStatementOrEndOfScript(XUCore.Script.Token)">
+            <summary>
+            End of statement script.
+            </summary>
+            <param name="endOfStatementToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.IsEndOfStatement(XUCore.Script.Token)">
+            <summary>
+            Whether at end of statement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.IsEndOfScript">
+            <summary>
+            Whether at end of script
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.ParseNames">
+            <summary>
+            Parses a sequence of names/identifiers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.ParserBase.SetScriptPosition(XUCore.Script.AstNode,XUCore.Script.TokenData)">
+            <summary>
+            Sets the script position of the node.
+            </summary>
+            <param name="node"></param>
+            <param name="token"></param>
+        </member>
+        <member name="T:XUCore.Script.ParserState">
+            <summary>
+            Used to hold the state of the parser.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.LastStmt">
+            <summary>
+            The last statement.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.LastExpPart">
+            <summary>
+            Last expression
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.MemberAccess">
+            <summary>
+            Number of times a member access is performed during parsing.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.StatementNested">
+            <summary>
+            Nested statement.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.IndexExp">
+            <summary>
+            Stack count for parsing currently being inside a index expression.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.FunctionCall">
+            <summary>
+            Stack count for parsing currently being inside a function call expression.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.Conditional">
+            <summary>
+            Stack count for parsing currently being inside a conditional e.g. parenthesis (condition)
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.ExpressionCount">
+            <summary>
+            Used to keep track of number of consequetive expressions.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ParserState.ParenthesisCount">
+            <summary>
+            Number of parenthesis.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserState.IsInFunctionCall">
+            <summary>
+            Whether or not in function call.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserState.IsInConditional">
+            <summary>
+            Whether or not in conditional call.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.ParserState.IsInIndex">
+            <summary>
+            Whether or not in index exp.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.TokenIterator">
+            <summary>
+            Iterates over a series of tokens.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TokenIterator.TokenList">
+            <summary>
+            The parsed tokens from the script
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TokenIterator.CurrentIndex">
+            <summary>
+            The index position of the currrent token being processed
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TokenIterator.LastToken">
+            <summary>
+            Last token parsed.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TokenIterator.NextToken">
+            <summary>
+            The next token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.TokenIterator.Init(System.Collections.Generic.List{XUCore.Script.TokenData},System.Int32,System.Int32)">
+            <summary>
+            Initialize.
+            </summary>
+            <param name="tokens">The list of tokens</param>
+            <param name="lastLineNumber">Last line number of script</param>
+            <param name="lastCharPos">Last char position of script.</param>
+        </member>
+        <member name="M:XUCore.Script.TokenIterator.Advance">
+            <summary>
+            Advance to the next token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.TokenIterator.Peek(System.Int32)">
+            <summary>
+            Peek into and get the token ahead of the current token.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ScannerSettings">
+            <summary>
+            Settings for the token reader class.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScannerSettings.EscapeChar">
+            <summary>
+            Char used to escape.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScannerSettings.Tokens">
+            <summary>
+            Tokens
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScannerSettings.WhiteSpaceTokens">
+            <summary>
+            White space tokens.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.ScanTokenResult">
+            <summary>
+            The result of a scan for a specific token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ScanTokenResult.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="success"></param>
+            <param name="text"></param>
+        </member>
+        <member name="F:XUCore.Script.ScanTokenResult.Success">
+            <summary>
+            Whether or not the token was properly present
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScanTokenResult.Text">
+            <summary>
+            The text of the token.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScanTokenResult.Lines">
+            <summary>
+            Number of lines parsed.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Scanner">
+            <summary>
+            This class implements a token reader.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.#ctor">
+            <summary>
+            Initialize this instance with defaults.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.#ctor(System.String)">
+            <summary>
+            Initialize with text to parse.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.#ctor(System.String,System.Char[])">
+            <summary>
+            Initialize with text to parse.
+            </summary>
+            <param name="text">The text to scan</param>
+            <param name="reservedChars">Reserved chars</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.#ctor(System.String,System.Char,System.Char[],System.Char[])">
+            <summary>
+            Initialize this instance with supplied parameters.
+            </summary>
+            <param name="text">Text to use.</param>
+            <param name="escapeChar">Escape character.</param>
+            <param name="tokenChars">Special characters</param>
+            <param name="whiteSpaceTokens">Array with whitespace tokens.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.Init(System.String)">
+            <summary>
+            Initialize using settings.
+            </summary>
+            <param name="text">Text to use.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.Init(System.String,XUCore.Script.ScannerSettings)">
+            <summary>
+            Initialize using settings.
+            </summary>
+            <param name="text">Text to use.</param>
+            <param name="settings">Instance with token reader settings.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.Init(System.String,System.Char,System.Char[],System.Char[])">
+            <summary>
+            Initialize using the supplied parameters.
+            </summary>
+            <param name="text">Text to read.</param>
+            <param name="escapeChar">Escape character.</param>
+            <param name="tokens">Array with tokens.</param>
+            <param name="whiteSpaceTokens">Array with whitespace tokens.</param>
+        </member>
+        <member name="P:XUCore.Script.Scanner.Position">
+            <summary>
+            The current position.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Scanner.Text">
+            <summary>
+            The text being scanned.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.RegisterWhiteSpace(System.Collections.Generic.IDictionary{System.Char,System.Char})">
+            <summary>
+            Store the white space chars.
+            </summary>
+            <param name="whitespaceChars">Dictionary with whitespace characters.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.Reset">
+            <summary>
+            Reset reader for parsing again.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.PeekChar">
+            <summary>
+            Returns the char at current position + 1.
+            </summary>
+            <returns>Next char or string.empty if end of text.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.PeekChars(System.Int32)">
+            <summary>
+            Returns the chars starting at current position + 1 and
+            including the <paramref name="count"/> number of characters.
+            </summary>
+            <param name="count">Number of characters.</param>
+            <returns>Range of chars as string or string.empty if end of text.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.PeekChar(System.Int32)">
+            <summary>
+            Returns the nth char from the current char index
+            </summary>
+            <param name="countFromCurrentCharIndex">Number of characters from the current char index</param>
+            <returns>Single char as string</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.PeekNextChar">
+            <summary>
+            Peeks at the next character from the current char index.
+            </summary>
+            <returns>Single char</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsEscapedQuote">
+            <summary>
+            Whether of not the current character is an escaped quote.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.PeekLine">
+            <summary>
+            Peeks at the string all the way until the end of line.
+            </summary>
+            <returns>Current line.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeChar">
+            <summary>
+            Advance and consume the current current char without storing 
+            the char in the additional buffer for undo.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeChars(System.Int32)">
+            <summary>
+            Consume the next <paramref name="count"/> chars without
+            storing them in the additional buffer for undo.
+            </summary>
+            <param name="count">Number of characters to consume.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeWhiteSpace">
+            <summary>
+            Consume the whitespace without reading anything.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeWhiteSpace(System.Boolean)">
+            <summary>
+            Consume all white space.
+            This works by checking the next char against
+            the chars in the dictionary of chars supplied during initialization.
+            </summary>
+            <param name="readFirst">True to read a character
+            before consuming the whitespace.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeWhiteSpace(System.Boolean,System.Boolean)">
+            <summary>
+            Consume all white space.
+            This works by checking the next char against
+            the chars in the dictionary of chars supplied during initialization.
+            </summary>
+            <param name="readFirst">True to read a character
+            before consuming the whitepsace.</param>
+            <param name="setPosAfterWhiteSpace">True to move position to after whitespace</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeNewLine">
+            <summary>
+            Consume new line.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeToNewLine(System.Boolean)">
+            <summary>
+            Read text up to the eol.
+            </summary>
+            <returns>String read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeUntil(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Consume until the chars found.
+            </summary>
+            <param name="pattern">The pattern to consume chars to.</param>
+            <param name="includePatternInConsumption">Wether or not to consume the pattern as well.</param>
+            <param name="movePastEndOfPattern">Whether or not to move to the ending position of the pattern</param>
+            <param name="moveToStartOfPattern">Whether or not to move to the starting position of the pattern</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ConsumeNewLines">
+            <summary>
+            Consume New Lines.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.MoveChars(System.Int32)">
+            <summary>
+            Moves forward by count chars.
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadBackChar">
+            <summary>
+            Read back the last char and reset
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadBackChar(System.Int32)">
+            <summary>
+            Unwinds the reader by <paramref name="count"/> chars.
+            </summary>
+            <param name="count">Number of characters to read.</param>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadChar">
+            <summary>
+            Read the next char.
+            </summary>
+            <returns>Character read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadChars(System.Int32)">
+            <summary>
+            Read the next <paramref name="count"/> number of chars.
+            </summary>
+            <param name="count">Number of characters to read.</param>
+            <returns>Characters read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadToEol">
+            <summary>
+            Read text up to the eol.
+            </summary>
+            <returns>String read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadTokenUntil(System.Char[],System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            ReadToken until one of the endchars is found
+            </summary>
+            <param name="endChars">List of possible end chars which halts reading further.</param>
+            <param name="includeEndChar">True to include end character.</param>
+            <param name="advanceFirst">True to advance before reading.</param>
+            <param name="readPastEndChar">True to read past the end character.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadToken(System.Char,System.Char,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Read a token.
+            </summary>
+            <param name="endChar">Ending character.</param>
+            <param name="escapeChar">Escape character.</param>
+            <param name="includeEndChar">True to include end character.</param>
+            <param name="advanceFirst">True to advance before reading.</param>
+            <param name="expectEndChar">True to expect an end charachter.</param>
+            <param name="readPastEndChar">True to read past the end character.</param>
+            <returns>Contens of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadString(System.Char,System.Char,System.Boolean,System.Boolean)">
+            <summary>
+            Read token until endchar
+            </summary>
+            <param name="quoteChar">char representing quote ' or "</param>
+            <param name="escapeChar">Escape character for quote within string.</param>
+            <param name="advanceFirst">True to advance position first before reading string.</param>
+            <param name="setPosAfterToken">True to move position to end quote, otherwise past end quote.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadCodeString(System.Char,System.Char,System.Boolean,System.Boolean)">
+            <summary>
+            Read token until endchar
+            </summary>
+            <param name="quoteChar">char representing quote ' or "</param>
+            <param name="escapeChar">Escape character for quote within string.</param>
+            <param name="advanceFirst">True to advance position first before reading string.</param>
+            <param name="setPosAfterToken">True to move position to end quote, otherwise past end quote.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadWord(System.Boolean,System.Boolean)">
+            <summary>
+            Reads a word which must not have space in it and must have space/tab before and after
+            </summary>
+            <param name="advanceFirst">Whether or not to advance position first</param>
+            <param name="setPosAfterToken">True to move position to end space, otherwise past end space.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadId(System.Boolean,System.Boolean)">
+            <summary>
+            Reads an identifier where legal chars for the identifier are [$ . _ a-z A-Z 0-9]
+            </summary>
+            <param name="advanceFirst"></param>
+            <param name="setPosAfterToken">True to move position to after id, otherwise 2 chars past</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadNumber(System.Boolean,System.Boolean)">
+            <summary>
+            Reads a number +/-?[0-9]*.?[0-9]*
+            </summary>
+            <param name="advanceFirst">Whether or not to advance position first</param>
+            <param name="setPosAfterToken">True to move position to end space, otherwise past end space.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadLine(System.Boolean,System.Boolean)">
+            <summary>
+            Reads entire line from curr position
+            </summary>
+            <param name="advanceFirst">Whether or not to advance curr position first </param>
+            <param name="setPosAfterToken">Whether or not to move curr position to starting of new line or after</param>
+            <returns>String read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadUntilChars(System.Boolean,System.Char,System.Char,System.Boolean)">
+            <summary>
+            Reads until the 2 chars are reached.
+            </summary>
+            <param name="advanceFirst">Whether or not to advance curr position first </param>
+            <param name="first">The first char expected</param>
+            <param name="second">The second char expected</param>
+            <param name="setPosAfterToken">Whether or not to advance to position after chars</param>
+            <returns>String read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadLinesUntilChars(System.Boolean,System.Char,System.Char,System.Boolean)">
+            <summary>
+            Reads until the 2 chars are reached.
+            </summary>
+            <param name="advanceFirst">Whether or not to advance curr position first </param>
+            <param name="first">The first char expected</param>
+            <param name="second">The second char expected</param>
+            <param name="moveToEndChar">Whether or not to advance to last end char ( second char ) or move past it</param>
+            <returns>String read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadTokenUntil(System.Char,System.Char,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Read token until endchar
+            </summary>
+            <param name="endChar">Ending character.</param>
+            <param name="escapeChar">Escape character.</param>
+            <param name="advanceFirst">True to advance before reading.</param>
+            <param name="expectEndChar">True to expect an end charachter.</param>
+            <param name="includeEndChar">True to include an end character.</param>
+            <param name="moveToEndChar">True to move to the end character.</param>
+            <param name="readPastEndChar">True to read past the end character.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.Expect(System.Char)">
+            <summary>
+            Determines whether the current character is the expected one.
+            </summary>
+            <param name="charToExpect">Character to expect.</param>
+            <returns>True if the current character is the expected one.</returns>
+        </member>
+        <member name="P:XUCore.Script.Scanner.CurrentChar">
+            <summary>
+            Current char.
+            </summary>
+            <returns>Current character.</returns>
+        </member>
+        <member name="P:XUCore.Script.Scanner.PreviousChar">
+            <summary>
+            Get the previous char that was read in.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Scanner.PreviousCharAny">
+            <summary>
+            Get the previous char that is part of the input and which may be an escape char.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scanner.CurrentCharIndex">
+            <summary>
+            Current position in text.
+            </summary>
+            <returns>Current character index.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsToken">
+            <summary>
+            Determine if current char is token.
+            </summary>
+            <returns>True if the current char is a token.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsToken(System.String,System.Boolean)">
+            <summary>
+            Whether or not the current sequence of chars matches the token supplied.
+            </summary>
+            <param name="token"></param>
+            <param name="ignoreCase">Whether or not to check against case.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsEscape">
+            <summary>
+            Determine if current char is escape char.
+            </summary>
+            <returns>True if the current char is an escape char.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsEnd">
+            <summary>
+            Determine if the end of the text input has been reached.
+            </summary>
+            <returns>True if the end of the stream has been reached.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsAtEnd">
+            <summary>
+            Determine if at last char.
+            </summary>
+            <returns>True if the last character is the current character.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsEol">
+            <summary>
+            Determine if current char is EOL.
+            </summary>
+            <returns>True if the current character is an eol.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsWhiteSpace(System.Collections.IDictionary)">
+            <summary>
+            Determine if current char is whitespace.
+            </summary>
+            <param name="whitespaceChars">Dictionary with whitespace chars.</param>
+            <returns>True if the current character is a whitespace.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.IsWhiteSpace">
+            <summary>
+            Determine if current char is whitespace.
+            </summary>
+            <returns>True if the current character is a whitespace.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadChars(System.Func{System.Boolean},System.Boolean,System.Boolean)">
+            <summary>
+            Reads a word which must not have space in it and must have space/tab before and after
+            </summary>
+            <param name="continueReadCheck">Callback function to determine whether or not to continue reading</param>
+            <param name="advanceFirst">Whether or not to advance position first</param>
+            <param name="setPosAfterToken">True to move position to end space, otherwise past end space.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ReadChars(System.Collections.Generic.IDictionary{System.Char,System.Boolean},System.Boolean,System.Boolean)">
+            <summary>
+            Reads a word which must not have space in it and must have space/tab before and after
+            </summary>
+            <param name="validChars">Dictionary to check against valid chars.</param>
+            <param name="advanceFirst">Whether or not to advance position first</param>
+            <param name="setPosAfterToken">True to move position to end space, otherwise past end space.</param>
+            <returns>Contents of token read.</returns>
+        </member>
+        <member name="M:XUCore.Script.Scanner.ToDictionary``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Check if all of the items in the collection satisfied by the condition.
+            </summary>
+            <typeparam name="T">Type of items.</typeparam>
+            <param name="items">List of items.</param>
+            <returns>Dictionary of items.</returns>
+        </member>
+        <member name="T:XUCore.Script.AssignmentStatement">
+            <summary>
+            Variable expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.AssignmentStatement.#ctor(System.Boolean,System.String,XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="isDeclaration">Whether or not the variable is being declared in addition to assignment.</param>
+            <param name="name">Name of the variable</param>
+            <param name="valueExp">Expression representing the value to set variable to.</param>
+        </member>
+        <member name="M:XUCore.Script.AssignmentStatement.#ctor(System.Boolean,XUCore.Script.Expression,XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="isDeclaration">Whether or not the variable is being declared in addition to assignment.</param>
+            <param name="varExp">Expression representing the variable name to set</param>
+            <param name="valueExp">Expression representing the value to set variable to.</param>
+        </member>
+        <member name="M:XUCore.Script.AssignmentStatement.#ctor(System.Boolean,System.Collections.Generic.List{System.Tuple{XUCore.Script.Expression,XUCore.Script.Expression}})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="isDeclaration">Whether or not the variable is being declared in addition to assignment.</param>
+            <param name="declarations"></param>        
+        </member>
+        <member name="M:XUCore.Script.AssignmentStatement.Execute">
+            <summary>
+            Evaluate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.BlockStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.BlockStatement._statements">
+            <summary>
+            List of statements
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.BlockStatement.Statements">
+            <summary>
+            Public access to statments.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.BlockStatement.Execute">
+            <summary>
+            Execute the statements.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.BlockStatement.AsString(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            String representation
+            </summary>
+            <param name="tab">Tab to use for nested statements in blocks</param>
+            <param name="incrementTab">Whether or not to add another tab</param>
+            <param name="includeNewLine">Whether or not to include a new line.</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ConditionalBlockStatement">
+            <summary>
+            Conditional based block statement used in ifs/elses/while
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ConditionalBlockStatement.#ctor(XUCore.Script.Expression,System.Collections.Generic.List{XUCore.Script.Statement})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="condition"></param>
+            <param name="statements"></param>
+        </member>
+        <member name="F:XUCore.Script.ConditionalBlockStatement.Condition">
+            <summary>
+            The condition to check.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.BreakStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.BreakStatement.Execute">
+            <summary>
+            Execute the statement.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.ContinueStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ContinueStatement.Execute">
+            <summary>
+            Execute the statement.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.ForEachStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ForEachStatement.#ctor(System.String,System.String)">
+            <summary>
+            Initialize using the variable names.
+            </summary>
+            <param name="varname">Name of the variable in the loop</param>
+            <param name="sourceName">Name of the variable containing the items to loop through.</param>
+        </member>
+        <member name="M:XUCore.Script.ForEachStatement.Execute">
+            <summary>
+            Execute each expression.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ForLoopStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ForLoopStatement.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ForLoopStatement.#ctor(XUCore.Script.Statement,XUCore.Script.Expression,XUCore.Script.Statement)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="start">start expression</param>
+            <param name="condition">condition for loop</param>
+            <param name="inc">increment expression</param>
+        </member>
+        <member name="M:XUCore.Script.ForLoopStatement.Init(XUCore.Script.Statement,XUCore.Script.Expression,XUCore.Script.Statement)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="start">start expression</param>
+            <param name="condition">condition for loop</param>
+            <param name="inc">increment expression</param>
+        </member>
+        <member name="F:XUCore.Script.ForLoopStatement.Start">
+            <summary>
+            Start statement.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ForLoopStatement.Increment">
+            <summary>
+            Increment statement.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ForLoopStatement.Execute">
+            <summary>
+            Execute each expression.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.FunctionCallStatement">
+            <summary>
+            Function call statement.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionCallStatement.Exp">
+            <summary>
+            The function call expression.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionCallStatement.#ctor(XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="exp"></param>
+        </member>
+        <member name="M:XUCore.Script.FunctionCallStatement.Execute">
+            <summary>
+            Execute the function.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.FunctionDeclarationStatement">
+            <summary>
+            Represents a function declaration
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionDeclarationStatement.Function">
+            <summary>
+            Function 
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionDeclarationStatement.Execute">
+            <summary>
+            Execute the function statement.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionDeclarationStatement.AsString(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            String representation
+            </summary>
+            <param name="tab"></param>
+            <param name="incrementTab"></param>
+            <param name="includeNewLine"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.FunctionStatement">
+            <summary>
+            Represents a function declaration
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionStatement.#ctor">
+            <summary>
+            Create new instance.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionStatement.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Create new instance with function name and argument names.
+            </summary>
+            <param name="name"></param>
+            <param name="argumentNames"></param>
+        </member>
+        <member name="M:XUCore.Script.FunctionStatement.Init(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="name">name of function</param>
+            <param name="argumentNames">names of the arguments.</param>
+        </member>
+        <member name="F:XUCore.Script.FunctionStatement.Name">
+            <summary>
+            Function declaration
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionStatement.Arguments">
+            <summary>
+            List of arguments
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionStatement.ArgumentValues">
+            <summary>
+            Values passed to the function.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.FunctionStatement.Caller">
+            <summary>
+            The caller of the this function.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionStatement.HasArguments">
+            <summary>
+            Whether or not this function has arguments.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionStatement.HasReturnValue">
+            <summary>
+            Whether or not this function has a return value.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.FunctionStatement.ReturnValue">
+            <summary>
+            The return value;
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.FunctionStatement.Execute">
+            <summary>
+            Evaluate the function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.FunctionStatement.Return(System.Object,System.Boolean)">
+            <summary>
+            set the return value.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.IfStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IfStatement.#ctor">
+            <summary>
+            Create new instance
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IfStatement.#ctor(XUCore.Script.Expression)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="condition"></param>
+        </member>
+        <member name="F:XUCore.Script.IfStatement.Else">
+            <summary>
+            Else statement.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IfStatement.Execute">
+            <summary>
+            Execute
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LoopStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LoopStatement._breakLoop">
+            <summary>
+            Whether or not the break the loop
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LoopStatement._continueLoop">
+            <summary>
+            Whether or not to continue the loop
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LoopStatement._continueRunning">
+            <summary>
+            Whether or not to continue running the loop
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LoopStatement.#ctor">
+            <summary>
+            Create new instance/
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LoopStatement.#ctor(XUCore.Script.Expression)">
+            <summary>
+            Create new instance with condition
+            </summary>
+            <param name="condition"></param>
+        </member>
+        <member name="M:XUCore.Script.LoopStatement.Execute">
+            <summary>
+            Execute
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LoopStatement.Break">
+            <summary>
+            Break loop
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LoopStatement.Continue">
+            <summary>
+            Continue loop
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.ReturnStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ReturnStatement.Exp">
+            <summary>
+            Return value.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ReturnStatement.Execute">
+            <summary>
+            Execute the statement.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Statement">
+            <summary>
+            Base class for statements.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Statement.Parent">
+            <summary>
+            Parent of this statement
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Statement.Execute">
+            <summary>
+            Executes the statement.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Statement.FindParent``1">
+            <summary>
+            Finds the first parent that is of type T.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Statement.AsString(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            String representation of statement.
+            </summary>
+            <param name="tab">Tab to use</param>
+            <param name="incrementTab">Whether or not to add another tab</param>
+            <param name="includeNewLine">Whether or not to include a new line.</param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.ThrowStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ThrowStatement.#ctor">
+            <summary>
+            Create new instance
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ThrowStatement.Exp">
+            <summary>
+            Name for the error in the catch clause.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ThrowStatement.Execute">
+            <summary>
+            Execute
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.TryCatchStatement">
+            <summary>
+            For loop Expression data
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.TryCatchStatement.#ctor">
+            <summary>
+            Create new instance
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TryCatchStatement.ErrorName">
+            <summary>
+            Name for the error in the catch clause.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TryCatchStatement.Catch">
+            <summary>
+            Else statement.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.TryCatchStatement.Execute">
+            <summary>
+            Execute
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Templating.ITemplateEngine">
+            <summary>
+            Interface for a Template engine.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.ITemplateEngine.Init(System.String)">
+            <summary>
+            Initialize with the script.
+            </summary>
+            <param name="script"></param>
+        </member>
+        <member name="M:XUCore.Script.Templating.ITemplateEngine.Render">
+            <summary>
+            Render the script initialized with.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.ITemplateEngine.Render(System.String)">
+            <summary>
+            Render the script supplied.
+            </summary>
+            <param name="script"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Templating.TemplateEngineDefault">
+            <summary>
+            Templating class for the javascript like language.
+            Syntax similar to jquery templates/python-django templates.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Templating.TemplateEngineDefault.State">
+            <summary>
+            State of parsing.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Templating.TemplateEngineDefault.CodeBlock">
+            <summary>
+            Codeblock
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Templating.TemplateEngineDefault.CodeBlock.TextType">
+            <summary>
+            What type of text html, expression, codeblock, comment etc.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Templating.TemplateEngineDefault.CodeBlock.Content">
+            <summary>
+            Content of the codeblock.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.CodeBlock.#ctor(XUCore.Script.Templating.TemplateEngineDefault.State,System.String)">
+            <summary>
+            Initialize.
+            </summary>
+            <param name="type"></param>
+            <param name="content"></param>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.#ctor(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="script"></param>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.Init(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="script"></param>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.Render(System.String)">
+            <summary>
+            Render using rules similar to Razor.
+            </summary>
+            <param name="script">the script</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.Render">
+            <summary>
+            Render using rules similar to Razor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.HandleHtml">
+            <summary>
+            Handles reading of %-  comments and setting the current state.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.HandleComment">
+            <summary>
+            Handles reading of %-  comments and setting the current state.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.HandleCodeBlock">
+            <summary>
+            Handles reading of % %>
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.HandleCodeExpression">
+            <summary>
+            Handles the expression.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.ReadUntil(System.Char,System.Char,System.Boolean,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Reads until char supplied is found.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.ReadCodeBlock(System.Char,System.Char,System.Boolean,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Reads a code block
+            </summary>
+            <param name="expected1">%</param>
+            <param name="expected2">></param>
+            <param name="advanceFirst">Whether or not to advance the position first</param>
+            <param name="advanceCount">How many characthers to advance if advancing position</param>
+            <param name="readToEndOfExpected">Whether or not to set the char pos to the end of the expected chars if found.</param>
+            <param name="excludeBeginningSpace">Whether or not to exclude the beginning white space.</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.TemplateEngineDefault.ReadHtml(System.Boolean,System.Int32)">
+            <summary>
+            Reads until char supplied is found.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Templating.Templater">
+            <summary>
+            Templating class for the javascript like language.
+            Syntax similar to jquery templates/python-django templates.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Templating.Templater.RegisterEngine(System.String,System.Func{XUCore.Script.Templating.ITemplateEngine})">
+            <summary>
+            Registers a custom template engine.
+            </summary>
+            <param name="type"></param>
+            <param name="engine"></param>
+        </member>
+        <member name="M:XUCore.Script.Templating.Templater.Render(System.String)">
+            <summary>
+            Render using default template engine similar to webforms.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Templating.Templater.Render(System.String,System.String)">
+            <summary>
+            Render using custom template engine.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.IdToken">
+            <summary>
+            Operator as token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.IdToken.#ctor(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="op"></param>
+        </member>
+        <member name="T:XUCore.Script.KeywordToken">
+            <summary>
+            Operator as token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.KeywordToken.#ctor(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="op"></param>
+        </member>
+        <member name="T:XUCore.Script.LiteralToken">
+            <summary>
+            String, number, bool(true/false), null
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LiteralToken.#ctor(System.String,System.Object,System.Boolean)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="text">The raw text value</param>
+            <param name="value">The actual value of the literal</param>
+            <param name="isKeyword">Whether this is a keyword</param>
+        </member>
+        <member name="P:XUCore.Script.LiteralToken.Value">
+            <summary>
+            Value of the literal
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.SymbolToken">
+            <summary>
+            Operator as token
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.SymbolToken.#ctor(System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="op"></param>
+        </member>
+        <member name="T:XUCore.Script.Token">
+            <summary>
+            Token class
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Token._text">
+            <summary>
+            Text of the token
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Token._isKeyword">
+            <summary>
+            Whether or not this a keyword.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Token.Text">
+            <summary>
+            Text of the token
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Token.Value">
+            <summary>
+            Value of the token.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Token.IsKeyWord">
+            <summary>
+            Whether or not this ia keyword in the lang
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Token.Replace(System.String)">
+            <summary>
+            Replace the 
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="T:XUCore.Script.Tokens">
+            <summary>
+            List of all tokens.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsLiteral(System.String)">
+            <summary>
+            Determines if the text supplied is a literal token
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.ToLiteral(System.String)">
+            <summary>
+            Get the literal token from the string
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.ToOperator(System.String)">
+            <summary>
+            Get the keyword token from the string
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.ToOp(System.String)">
+            <summary>
+            Get the operator as an enum
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsKeyword(System.String)">
+            <summary>
+            Gets whether or not this is a keyword
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.ToKeyWord(System.String)">
+            <summary>
+            Get the keyword token from the string
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsTokenType``1(System.String)">
+            <summary>
+            Determines if the text supplied is a literal token
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsMath(XUCore.Script.Token)">
+            <summary>
+            Checks if the token supplied is a math op ( * / + - % )
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsMath(XUCore.Script.Operator)">
+            <summary>
+            Checks if the operator supplied is a binary op ( * / + - % )
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsOp(System.String)">
+            <summary>
+            Whether or not this following text is an operator that has precedence value.
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsConditional(XUCore.Script.Operator)">
+            <summary>
+            Checks if the operator is a conditional 
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsCompare(XUCore.Script.Token)">
+            <summary>
+            Checks if the token is a comparison token ( less lessthan more morethan equal not equal ).
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsCompare(XUCore.Script.Operator)">
+            <summary>
+            Checks if the operator is a comparison operator ( less lessthan more morethan equal not equal ).
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsIncrement(XUCore.Script.Operator)">
+            <summary>
+            Checks if the operator supplied is a binary op ( * / + - % )
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.IsLogical(XUCore.Script.Operator)">
+            <summary>
+            Checks if the operator supplied is a binary op ( * / + - % )
+            </summary>
+            <param name="op"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Tokens.Precedence(System.String)">
+            <summary>
+            Gets the operator precendence.
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Alias">
+            <summary>
+            Alias that maps one text to another text or series of texts
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Alias.Name">
+            <summary>
+            Name of the alias
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Alias.IsEmptyAlias">
+            <summary>
+            Whether this alias is empty ( doesn't refer to anything ).
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Alias.Reference">
+            <summary>
+            The actual text this alias refers to.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Alias.Tokens">
+            <summary>
+            The tokenized form of the reference.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.AstNode">
+            <summary>
+            Abstract syntax tree node.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.AstNode.Ref">
+            <summary>
+            Reference to the script.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.AstNode.Ctx">
+            <summary>
+            Context information of the script.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.CallStack">
+            <summary>
+            The call stack
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.CallStack.#ctor(System.Action{XUCore.Script.AstNode,System.Int32})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="limitCheck"></param>
+        </member>
+        <member name="M:XUCore.Script.CallStack.Push(System.String,XUCore.Script.FunctionCallExpression)">
+            <summary>
+            Push the function expression on the call stack
+            </summary>
+            <param name="qualifiedName">Name of function call</param>
+            <param name="exp">Function Call expression</param>
+        </member>
+        <member name="M:XUCore.Script.CallStack.Pop">
+            <summary>
+            Pop the function expression from the call stack.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.CallStack.Count">
+            <summary>
+            Total item in the call stack.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.CallStack.Item(System.Int32)">
+            <summary>
+            Get by index.
+            </summary>
+            <param name="ndx"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Context">
+            <summary>
+            Context information for the script.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Context.#ctor">
+            <summary>
+            Creates new instance with default Functions/Types/Scope.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.ExternalFunctions">
+            <summary>
+            Registered custom functions outside of script
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.Functions">
+            <summary>
+            Script functions
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.Types">
+            <summary>
+            Registered custom types
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.Scope">
+            <summary>
+            Scope of the script.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.Settings">
+            <summary>
+            Settings.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.State">
+            <summary>
+            State of the language.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Context.Limits">
+            <summary>
+            Limits for 
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LangException">
+            <summary>
+            Exception used in script parsing
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangException.LineNumber">
+            <summary>
+            Line number of exception
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangException.CharPostion">
+            <summary>
+            Char position of the error.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangException.ScriptPath">
+            <summary>
+            The path to the script that caused the exception
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangException.Name">
+            <summary>
+            THe type of error.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangException.ErrorType">
+            <summary>
+            Type of the error.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangException.#ctor(System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="errorType">Type of the error. "Syntax Error"</param>
+            <param name="error">Error message</param>
+            <param name="scriptpath">Path of the script</param>
+            <param name="lineNumber">Line number of the error.</param>
+            <param name="charPos">The char position of the error.</param>
+        </member>
+        <member name="T:XUCore.Script.LangLimitException">
+            <summary>
+            Exception used in script for sandbox/limits functionality. e.g. loop/callstack limits.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangLimitException.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="error">Error message</param>
+            <param name="scriptpath">Script where error occurred.</param>
+            <param name="lineNumber">Line number where error occurred.</param>
+        </member>
+        <member name="T:XUCore.Script.LangSettings">
+            <summary>
+            Settings for the interpreter
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangSettings.#ctor">
+            <summary>
+            Intialize instances with default values.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangSettings.DefaultLimits">
+            <summary>
+            Sets the limits to the defaults.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.EnablePrinting">
+            <summary>
+            Whether or not to enable printing via print/println function.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.EnableLogging">
+            <summary>
+            Whether or not to enable logging via the log.* methods.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.EnableFunctionCallCallBacks">
+            <summary>
+            Whether or not to enable callbacks for external function calls.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.LogCallback">
+            <summary>
+            The callback to use log functions, default uses the console.writeline.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxStringLength">
+            <summary>
+            Limits the maximimum number of characters for a string.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxConsequetiveMemberAccess">
+            <summary>
+            Limits the maximum number of consequetive member access.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxConsequetiveExpressions">
+            <summary>
+            Limits the maximum number of consequetive expressions
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxScopeVariables">
+            <summary>
+            Maximum number of variables in scope.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxScopeStringVariablesLength">
+            <summary>
+            Maximum length of all string variables in scope.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxLoopLimit">
+            <summary>
+            Limits the maximum number of loops. This is to prevent infinite loops.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxStatements">
+            <summary>
+            Limits the maximum number of statements allowed.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxStatementsNested">
+            <summary>
+            Number of maximum nested statements.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxCallStack">
+            <summary>
+            Limits the number of recursive function calls.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxExceptions">
+            <summary>
+            Limits the number of exceptions that can occur.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxFuncParams">
+            <summary>
+            Limits the number of function parameters.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxFuncCallNested">
+            <summary>
+            Limits the number of function calls as parameters.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.MaxScriptLength">
+            <summary>
+            Limits the length of the script to run.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangSettings.EnableFluentMode">
+            <summary>
+            Whether or not to enable fluent mode for javascript.
+            This allows several variations on syntax for method calls.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LangSettings.HasMaxLoopLimit">
+            <summary>
+            Whether there is a maximum loop limit.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.LangState">
+            <summary>
+            State of the language. e.g. loop limits, recursion limits.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangState.#ctor(XUCore.Script.CallStack)">
+            <summary>
+            Intiailize
+            </summary>
+            <param name="stack"></param>
+        </member>
+        <member name="F:XUCore.Script.LangState.StatementCount">
+            <summary>
+            Number of statements
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangState.LoopCount">
+            <summary>
+            Number of times a loop has been done.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangState.RecursionCount">
+            <summary>
+            Number of times a recusive call has been made.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangState.ExceptionCount">
+            <summary>
+            Total number of exceptions.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.LangState.StringAppendCount">
+            <summary>
+            How many times string are appended.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.LangState.Stack">
+            <summary>
+            The call stack for function calls.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.LangState.Reset">
+            <summary>
+            Resets the state.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Limits.Init">
+            <summary>
+            Reset the limit.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckScriptLength(System.String)">
+            <summary>
+            Checks the length of the script.
+            </summary>
+            <param name="script"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckStringLength(XUCore.Script.AstNode,System.Object)">
+            <summary>
+            Check the lenght of the string.
+            </summary>
+            <param name="node">The ast node associated with the operation.</param>
+            <param name="val"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckStringLength(XUCore.Script.AstNode,System.String,System.String)">
+            <summary>
+            Checks that the string is with in limits.
+            </summary>
+            <param name="node">The ast node associated with the operation.</param>
+            <param name="left"></param>
+            <param name="right"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckExceptions(XUCore.Script.AstNode,System.Boolean)">
+            <summary>
+            Check the maximum number of exceptions that can occurr
+            </summary>
+            <param name="node">The ast node associated with the string operation.</param>
+            <param name="incrementFirst"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckCallStack(XUCore.Script.AstNode,System.Int32)">
+            <summary>
+            Check the call stack limit.
+            </summary>
+            <param name="node">The ast node associated with the operation.</param>
+            <param name="lastIndex">The current call stack index</param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckLoop(XUCore.Script.AstNode)">
+            <summary>
+            Checks the loop limit.
+            </summary>        
+            <param name="node">The ast node associated with the operation.</param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckScopeCount(XUCore.Script.AstNode)">
+            <summary>
+            Checks the limit of number of scope variables
+            </summary>        
+            <param name="node">The ast node associated with the operation.</param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckScopeStringLength(XUCore.Script.AstNode)">
+            <summary>
+            Checks the limit of the total length of all string variables.
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserStatement(XUCore.Script.AstNode)">
+            <summary>
+            Checks the number of statements.
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserStatementNested(XUCore.Script.TokenData,System.Int32)">
+            <summary>
+            Checks the nested statement depth.
+            </summary>
+            <param name="token"></param>
+            <param name="statementNestedCount">The number of nested statements</param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserFuncCallNested(XUCore.Script.TokenData,System.Int32)">
+            <summary>
+            Checks the nested statement depth.
+            </summary>
+            <param name="token"></param>
+            <param name="functionCallCount">The number of nested statements</param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserExpression(XUCore.Script.AstNode,System.Int32)">
+            <summary>
+            Check the number of continous expressions.
+            </summary>
+            <param name="node"></param>
+            <param name="expressionCount"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserMemberAccess(XUCore.Script.AstNode,System.Int32)">
+            <summary>
+            Check the number of member access expressions.
+            </summary>
+            <param name="node"></param>
+            <param name="memberAccessCount"></param>
+        </member>
+        <member name="M:XUCore.Script.Limits.CheckParserFunctionParams(XUCore.Script.AstNode,System.Int32)">
+            <summary>
+            Checks the number of function parameters.
+            </summary>
+            <param name="node"></param>
+            <param name="paramCount"></param>
+        </member>
+        <member name="T:XUCore.Script.RunResult">
+            <summary>
+            Result of a script action.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.StartTime">
+            <summary>
+            The starttime of an action
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.EndTime">
+            <summary>
+            The end time of an action.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.Success">
+            <summary>
+            Whether or not the result of the action was succcessful
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.Message">
+            <summary>
+            A message representing the result of the action.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.Duration">
+            <summary>
+            Duration between start and endtime.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.Item">
+            <summary>
+            A object that can be return from the result.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.RunResult.Ex">
+            <summary>
+            The exception from running script.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.RunResult.#ctor(System.DateTime,System.DateTime,System.Boolean,System.String)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="started">Start time of script</param>
+            <param name="ended">End time of script.</param>
+            <param name="success">Whether or not the script execution was successful</param>
+            <param name="message">A combined message of all the errors.</param>
+        </member>
+        <member name="M:XUCore.Script.RunResult.ToString">
+            <summary>
+            string representation of run result
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Block">
+            <summary>
+            Block scope.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Block.Get``1(System.String)">
+            <summary>
+            Get the variable value associated with name from the scope
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">Name of the varibale to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Block.SetValue(System.String,System.Object,System.Boolean)">
+            <summary>
+            Sets a value into the current scope.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="val">The value of the variable.</param>
+            <param name="declare">Whether or not this variable is being declared and initialized.
+            This is used in cases where a variable is declared with the same name as a variable
+            in an outer scope. In this case, we should not search for the variable name.</param>
+        </member>
+        <member name="P:XUCore.Script.Block.TotalStringSize">
+            <summary>
+            Get the size of the total length of all string variables in this block.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.Scope">
+            <summary>
+            Used to store local variables.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scope.#ctor">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scope.Contains(System.String)">
+            <summary>
+            Whether or not the scope contains the supplied variable name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Script.Scope.Item(System.String)">
+            <summary>
+            Get the variable from the current scope.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scope.Get``1(System.String)">
+            <summary>
+            Get the variable value associated with name from the scope
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">Name of the varibale to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scope.SetValue(System.String,System.Object,System.Boolean)">
+            <summary>
+            Sets a value into the current scope.
+            </summary>
+            <param name="name">The name of the variable.</param>
+            <param name="val">The value of the variable.</param>
+            <param name="declare">Whether or not this variable is being declared and initialized.
+            This is used in cases where a variable is declared with the same name as a variable
+            in an outer scope. In this case, we should not search for the variable name.</param>
+        </member>
+        <member name="M:XUCore.Script.Scope.Find(System.String)">
+            <summary>
+            Finds the index of the scope where the variable provided resides.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Script.Scope.Push">
+            <summary>
+            Push another scope into the script.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scope.Pop">
+            <summary>
+            Remove the current scope from the script.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.Scope.Remove(System.String)">
+            <summary>
+            Remove variable from the current stack index
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:XUCore.Script.Scope.Total">
+            <summary>
+            Get the total number of items in scope.
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.Scope.TotalStringLength">
+            <summary>
+            Total lenght of all string variables.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.ScriptRef">
+            <summary>
+            References to the script name, line number, char position.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.ScriptRef.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="name"></param>
+            <param name="line"></param>
+            <param name="charPos"></param>
+        </member>
+        <member name="F:XUCore.Script.ScriptRef.ScriptName">
+            <summary>
+            Script info.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScriptRef.LineNumber">
+            <summary>
+            Line number in the script.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.ScriptRef.CharPosition">
+            <summary>
+            Char position in the line in the script.
+            </summary>
+        </member>
+        <member name="T:XUCore.Script.TokenData">
+            <summary>
+            Wraps a token with contextual information about it's script location.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.TokenData.Token">
+            <summary>
+            The token
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.TokenData.Line">
+            <summary>
+            Line number of the token
+            </summary>
+        </member>
+        <member name="P:XUCore.Script.TokenData.CharPos">
+            <summary>
+            Char position in the line of the token.
+            </summary>
+        </member>
+        <member name="M:XUCore.Script.TokenData.ToString">
+            <summary>
+            String representation of tokendata.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.Script.Variable">
+            <summary>
+            Represents a variable in the script
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Variable.Name">
+            <summary>
+            Name of the variable.
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Variable.Value">
+            <summary>
+            Value of the variable
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Variable.DataType">
+            <summary>
+            Type of the variable
+            </summary>
+        </member>
+        <member name="F:XUCore.Script.Variable.IsInitialized">
+            <summary>
+            Whether or not the variable is initialized.
+            </summary>
+        </member>
+    </members>
+</doc>
