@@ -63,6 +63,10 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)		| XUCore.Template.EasyLayer			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.EasyLayer.svg)](https://nuget.org/packages/XUCore.Template.EasyLayer)				| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.EasyLayer.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)					| EasyLayer 精简分层模板 (WebApi)						|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| XUCore.Template.Easy				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Easy.svg)](https://nuget.org/packages/XUCore.Template.Easy)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Easy.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| Easy Api 单层应用模板（WebApi）					|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.FreeSql)				| XUCore.Template.FreeSql				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.FreeSql.svg)](https://nuget.org/packages/XUCore.Template.FreeSql)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.FreeSql.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.FreeSql)				| 基于FreeSql的 Api 分层应用模板（WebApi）					|
+| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.EasyFreeSql)				| XUCore.Template.EasyFreeSql				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.EasyFreeSql.svg)](https://nuget.org/packages/XUCore.Template.EasyFreeSql)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.EasyFreeSql.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.EasyFreeSql)				| 基于FreeSql的 Api 单层应用模板（WebApi）					|
+
+
+
 
 
 ## 如何使用脚手架 
@@ -84,3 +88,8 @@
 ### [XUCore.Template.FreeSql](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.FreeSql)
 
 建议使用，基于FreeSql的简单分层应用（动态API+业务+FreeSql的数据层），缩减了Controller，独立业务，数据持久化（FreeSql的性能上优于EFCore，但EFCore毕竟是官方出品）
+
+
+### [XUCore.Template.EasyFreeSql](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyFreeSql)
+
+建议使用，基于FreeSql的单层应用（动态API+业务+FreeSql的结合），缩减了开发时间
