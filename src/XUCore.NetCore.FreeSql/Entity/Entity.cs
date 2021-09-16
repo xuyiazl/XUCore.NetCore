@@ -21,8 +21,7 @@ namespace XUCore.NetCore.FreeSql.Entity
         /// 主键Id
         /// </summary>
         [Description("主键Id")]
-        [Snowflake]
-        [Column(Position = 1, IsIdentity = false, IsPrimary = true)]
+        [Column(Position = 1, IsIdentity = true, IsPrimary = true)]
         public virtual TKey Id { get; set; }
     }
 
