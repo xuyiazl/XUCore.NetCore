@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Base.Utils.Files
+namespace XUCore.Files
 {
     enum _CharType
     {
