@@ -8,7 +8,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     /// <summary>
     /// 实体修改
     /// </summary>
-    public class EntityUpdate<TKey> : Entity<TKey>, IEntityUpdate<TKey> where TKey : struct
+    public class EntityUpdate<TKey> : Entity<TKey>, IEntityUpdate<TKey>
     {
         /// <summary>
         /// 修改者Id

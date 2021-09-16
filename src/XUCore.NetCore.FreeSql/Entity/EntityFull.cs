@@ -8,7 +8,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     /// <summary>
     /// 实体完整类
     /// </summary>
-    public class EntityFull<TKey> : Entity<TKey>, IEntityVersion, IEntitySoftDelete, IEntityAdd<TKey>, IEntityUpdate<TKey> where TKey : struct
+    public class EntityFull<TKey> : Entity<TKey>, IEntityVersion, IEntitySoftDelete, IEntityAdd<TKey>, IEntityUpdate<TKey>
     {
         /// <summary>
         /// 版本

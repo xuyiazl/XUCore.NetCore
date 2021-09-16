@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace XUCore.NetCore.FreeSql.Entity
 {
-    public interface IEntity<TKey> where TKey : struct
+    public interface IEntity<TKey>
     {
         /// <summary>
         /// 主键Id
@@ -15,7 +15,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     {
     }
 
-    public class Entity<TKey> : IEntity<TKey> where TKey : struct
+    public class Entity<TKey> : IEntity<TKey>
     {
         /// <summary>
         /// 主键Id

@@ -3,7 +3,7 @@
 
 namespace XUCore.NetCore.FreeSql.Entity
 {
-    public interface IEntityUpdate<TKey> where TKey : struct
+    public interface IEntityUpdate<TKey>
     {
         long? ModifiedAtUserId { get; set; }
         string ModifiedAtUserName { get; set; }

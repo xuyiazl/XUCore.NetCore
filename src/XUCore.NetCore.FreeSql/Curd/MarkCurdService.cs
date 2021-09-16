@@ -20,7 +20,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TPageCommand"></typeparam>
     public class MarkCurdService<TMark, TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
         CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-        where TKey : struct
+       
         where TEntity : EntityFull<TKey>, new()
         where TDto : class, new()
         where TCreateCommand : CreateCommand

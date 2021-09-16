@@ -7,7 +7,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     /// 实体软删除
     /// </summary>
     public class EntitySoftDelete<TKey> : Entity<TKey>, IEntitySoftDelete 
-        where TKey : struct
+       
     {
         /// <summary>
         /// 是否删除

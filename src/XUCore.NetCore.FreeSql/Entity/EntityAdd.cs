@@ -8,7 +8,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     /// <summary>
     /// 实体创建
     /// </summary>
-    public class EntityAdd<TKey> : Entity<TKey>, IEntityAdd<TKey> where TKey : struct
+    public class EntityAdd<TKey> : Entity<TKey>, IEntityAdd<TKey>
     {
         /// <summary>
         /// 创建者Id

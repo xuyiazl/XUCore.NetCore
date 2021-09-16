@@ -12,7 +12,7 @@ namespace XUCore.Ddd.Domain.Commands
 
     }
 
-    public abstract class UpdateCommand<TKey> : CommandId<bool, TKey> where TKey : struct
+    public abstract class UpdateCommand<TKey> : CommandId<bool, TKey>
     {
 
     }

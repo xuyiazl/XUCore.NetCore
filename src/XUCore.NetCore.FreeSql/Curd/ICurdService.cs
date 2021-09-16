@@ -18,7 +18,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TListCommand">查询列表命令</typeparam>
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-            where TKey : struct
+           
             where TEntity : EntityFull<TKey>, new()
             where TDto : class, new()
             where TCreateCommand : CreateCommand

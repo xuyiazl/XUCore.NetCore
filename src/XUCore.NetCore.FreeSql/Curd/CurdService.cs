@@ -25,7 +25,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : BaseRepository<TEntity, TKey>,
         ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-            where TKey : struct
+           
             where TEntity : EntityFull<TKey>, new()
             where TDto : class, new()
             where TCreateCommand : CreateCommand

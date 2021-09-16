@@ -7,7 +7,7 @@ namespace XUCore.NetCore.FreeSql.Entity
     /// 实体版本
     /// </summary>
     public class EntityVersion<TKey> : Entity<TKey>, IEntityVersion
-         where TKey : struct
+        
     {
         /// <summary>
         /// 版本
