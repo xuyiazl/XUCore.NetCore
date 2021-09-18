@@ -3,25 +3,22 @@
 
 源码来自  https://github.com/ChrisHodges/XUCore.Excel
 
-修改了在读取数据的时候，去掉了原作者的hash存储。避免了hash造成的内存溢出的问题
+读取过程中会临时存储位置和内容，所以如果文件过大，请勿用该方式。会造成内存溢出
 
 
 ```csharp
 
-    using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\1.xlsx", FileMode.Open))
+    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\1.xlsx");
+    using var sheetReader = excelReader[0];
+
+    for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
     {
-        var excelReader = new ExcelReader(fileSteam);
-        var sheetReader = excelReader["sheet2"];
-
-        for (var ndx = 2; ndx <= sheetReader.MaxRow; ndx++)
-        {
-            var row = sheetReader.Row(ndx).ToArray();
-
-        }
-
+        var row = sheetReader.Row(ndx).ToArray();
     }
 
 ```
+
+在大文件读取中，请使用下面的方法
 
 有时候在读取excel的时候（非wps或office工具编辑保存后），会读不到内容。
 
@@ -31,22 +28,12 @@
 
 ```csharp
 
-    using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\1.xlsx", FileMode.Open))
-    {
-        var list = new List<object>();
+    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\1.xlsx");
+    using var sheetReader = excelReader[0];
 
-        var rowCount = 0;
-        
-        //逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
-        sheetReader.ReadNextInRow(1, 2, out rowCount, (index, row) =>
-        {
-            list.Add(row);
-        });
-        
-        //正常情况下的读取
-        for (var ndx = 2; ndx <= sheetReader.MaxRow; ndx++)
-        {
-            var row = sheetReader.Row(ndx).ToArray();
-        }
-    }
+    sheetReader.ReadNextInRow(1, 63, out int rowCount, (index, row) =>
+    {
+
+    });
+
 ```
