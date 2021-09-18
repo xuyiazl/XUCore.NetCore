@@ -43,10 +43,10 @@ namespace XUCore.ConsoleTests
         {
             {
                 {
-                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210917_11783720.xlsx");
+                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210903_11324755.xls");
                     using var sheetReader = excelReader[0];
 
-                    sheetReader.ReadNextInRow(1, 63, out int rowCount, (index, row) =>
+                    sheetReader.ReadNextInRow(1, 3, out int rowCount, (index, row) =>
                     {
 
                     });
