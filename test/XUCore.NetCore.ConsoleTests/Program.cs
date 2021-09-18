@@ -111,30 +111,30 @@ namespace XUCore.ConsoleTests
 
                         });
                     }
-                    {
+                    //{
 
-                        var list = new List<CustomerEntity>();
+                    //    var list = new List<CustomerEntity>();
 
-                        for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
-                        {
-                            var row = sheetReader.Row(ndx).ToArray();
+                    //    for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
+                    //    {
+                    //        var row = sheetReader.Row(ndx).ToArray();
 
-                            //CustomerEntity customer = new CustomerEntity();
-                            //customer.UserId = 0;
+                    //        //CustomerEntity customer = new CustomerEntity();
+                    //        //customer.UserId = 0;
 
-                            //customer.VendorName = row[0].SafeString();
-                            //customer.SalesMan = row[1].SafeString();
-                            //customer.VendorNumber = row[2].SafeString().ToLong();
-                            //customer.Source = row[3].SafeString();
-                            //customer.Verify = row[4].SafeString();
-                            //customer.UpdateMan = row[5].SafeString();
+                    //        //customer.VendorName = row[0].SafeString();
+                    //        //customer.SalesMan = row[1].SafeString();
+                    //        //customer.VendorNumber = row[2].SafeString().ToLong();
+                    //        //customer.Source = row[3].SafeString();
+                    //        //customer.Verify = row[4].SafeString();
+                    //        //customer.UpdateMan = row[5].SafeString();
 
-                            //var any = list.Any(c => c.VendorName == customer.VendorName);
+                    //        //var any = list.Any(c => c.VendorName == customer.VendorName);
 
-                            //if (!any)
-                            //    list.Add(customer);
-                        }
-                    }
+                    //        //if (!any)
+                    //        //    list.Add(customer);
+                    //    }
+                    //}
                 }
             }
 
