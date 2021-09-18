@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\XUCore.Drawing\XUCore.Drawing.csproj" />
+		<ProjectReference Include="..\..\src\XUCore.Excel\XUCore.Excel.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
 		<ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
 	</ItemGroup>

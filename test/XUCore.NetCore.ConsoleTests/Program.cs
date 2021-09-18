@@ -4,11 +4,13 @@ using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using XUCore.Configs;
 using XUCore.Drawing;
+using XUCore.Excel;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.IdGenerators.Core;
@@ -45,6 +47,23 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
+            {
+                using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\1.xlsx", FileMode.Open))
+                {
+                    var excelReader = new ExcelReader(fileSteam);
+                    var sheetReader = excelReader["sheet2"];
+
+                    for (var ndx = 2; ndx <= sheetReader.MaxRow; ndx++)
+                    {
+                        var row = sheetReader.Row(ndx).ToArray();
+
+                    }
+
+                }
+            }
+
+            Console.WriteLine("done");
+            Console.Read();
             {
                 var file = @"C:\Users\Nigel\Downloads\1.jpg";
 

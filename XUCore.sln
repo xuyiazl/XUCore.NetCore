@@ -63,7 +63,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCoreApp", "src\XUCoreApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.NetCore.FreeSql", "src\XUCore.NetCore.FreeSql\XUCore.NetCore.FreeSql.csproj", "{9EEFFC32-4AFC-4D9C-967E-AE6EF47922DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.Script", "src\XUCore.Script\XUCore.Script.csproj", "{6003DE59-3D99-4224-84CF-C1BBADF416F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUCore.Script", "src\XUCore.Script\XUCore.Script.csproj", "{6003DE59-3D99-4224-84CF-C1BBADF416F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.Excel", "src\XUCore.Excel\XUCore.Excel.csproj", "{363A2133-C5BC-47AE-8E0A-063FDA919216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,6 +177,10 @@ Global
 		{6003DE59-3D99-4224-84CF-C1BBADF416F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6003DE59-3D99-4224-84CF-C1BBADF416F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6003DE59-3D99-4224-84CF-C1BBADF416F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +215,7 @@ Global
 		{0F7F2985-DED8-4360-A86B-AD02270C4C76} = {9032613A-31BC-4FCE-8097-6145D574A8AF}
 		{9EEFFC32-4AFC-4D9C-967E-AE6EF47922DB} = {B9D8B0C9-3B02-4385-B04F-8B1CCEE4A1BF}
 		{6003DE59-3D99-4224-84CF-C1BBADF416F2} = {9032613A-31BC-4FCE-8097-6145D574A8AF}
+		{363A2133-C5BC-47AE-8E0A-063FDA919216} = {9032613A-31BC-4FCE-8097-6145D574A8AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C60367-AD3A-442A-A79A-F9D652E5089F}

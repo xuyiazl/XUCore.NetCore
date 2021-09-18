@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Authors>xuyi</Authors>
+		<Company>personal</Company>
+		<Description>.NET Core ExcelReader Excel大文件读取</Description>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<Version>0.0.1</Version>
+		<PackageId>XUCore.Excel</PackageId>
+		<Product>XUCore.Excel</Product>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\release\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ExcelNumberFormat" Version="1.1.0" />
+		<PackageReference Include="SpreadsheetCellRef" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="XUCore.Excel.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
