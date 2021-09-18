@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using XUCore.Excel.Exceptions;
 
 namespace XUCore.Excel
 {
-    internal class ZippedXlsxFile : IZippedXlsxFile
+    public class ZippedXlsxFile : IZippedXslxFile
     {
         private ZipArchive _archive;
         private readonly Stream _fileStream;
@@ -48,9 +49,7 @@ namespace XUCore.Excel
 
             if (_worksheetEntries.Length <= i)
             {
-                //throw new ArgumentOutOfRangeException(nameof(i),$"Sheet with zero-based index {i} was not found in the workbook. Workbook contains {_worksheetEntries.Length} sheets.");
-
-                return null;
+                throw new ExcelSheetNotFoundException(i, _worksheetEntries.Length);
             }
 
             _openWorksheetStreams.Add(i, _worksheetEntries[i].Open());

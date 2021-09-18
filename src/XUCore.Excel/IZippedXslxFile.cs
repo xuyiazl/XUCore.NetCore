@@ -3,7 +3,7 @@ using System.IO;
 
 namespace XUCore.Excel
 {
-    internal interface IZippedXlsxFile : IDisposable
+    public interface IZippedXslxFile : IDisposable
     {
         Stream WorkbookXml { get; }
         XslxSharedStringsStream SharedStringsStream { get; }

@@ -9,7 +9,7 @@ using ExcelNumberFormat;
 namespace XUCore.Excel
 {
 
-    internal class XslxIsDateTimeStream : IDictionary<int, bool>, IEnumerator<KeyValuePair<int, bool>>
+    public class XslxIsDateTimeStream : IDictionary<int, bool>, IEnumerator<KeyValuePair<int, bool>>
     {
         public void Reset()
         {

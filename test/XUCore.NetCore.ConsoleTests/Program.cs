@@ -2,7 +2,6 @@
 using RedLockNet;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
-using SpreadsheetCellRef;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,31 +41,100 @@ namespace XUCore.ConsoleTests
         public string Picture { get; set; }
     }
 
+    public partial class CustomerEntity
+    {
+        public CustomerEntity()
+        {
 
+        }
+        /// <summary>
+        /// 关联用户id
+        /// </summary>
+        public long UserId { get; set; }
+        /// <summary>
+        /// 业务员
+        /// </summary>
+        public string SalesMan { get; set; }
+        /// <summary>
+        /// 商家名
+        /// </summary>
+        public string VendorName { get; set; }
+        /// <summary>
+        /// 商家编号
+        /// </summary>
+        public long VendorNumber { get; set; }
+        /// <summary>
+        /// 来源
+        /// </summary>
+        public string Source { get; set; }
+        /// <summary>
+        /// 审核状态
+        /// </summary>
+        public string Verify { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
+        public string UpdateMan { get; set; }
+    }
     class Program
     {
         static void Main(string[] args)
         {
             {
-                using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\异常运单(关联无效)-2021-8.xls", FileMode.Open))
+                using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\66部客户店铺明细9.17-整理.xlsx", FileMode.Open))
                 {
                     var excelReader = new ExcelReader(fileSteam);
                     var sheetReader = excelReader[0];
 
-                    var list = new List<object>();
-
                     var rowCount = 0;
-
-                    sheetReader.ReadNextInRow(1, 2, out rowCount, (index, row) =>
                     {
-                        list.Add(row);
-                    });
+                        var list = new List<CustomerEntity>();
 
-                    for (var ndx = 2; ndx <= sheetReader.MaxRow; ndx++)
-                    {
-                        var row = sheetReader.Row(ndx).ToArray();
+                        sheetReader.ReadNextInRow(1, 6, out rowCount, (index, row) =>
+                        {
+                            if (index == 1) return;
+
+                            CustomerEntity customer = new CustomerEntity();
+                            customer.UserId = 0;
+
+                            customer.VendorName = row[0].SafeString();
+                            customer.SalesMan = row[1].SafeString();
+                            customer.VendorNumber = row[2].SafeString().ToLong();
+                            customer.Source = row[3].SafeString();
+                            customer.Verify = row[4].SafeString();
+                            customer.UpdateMan = row[5].SafeString();
+
+                            var any = list.Any(c => c.VendorName == customer.VendorName);
+
+                            if (!any)
+                                list.Add(customer);
+
+                        });
                     }
+                    {
 
+                        var list = new List<CustomerEntity>();
+
+                        for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
+                        {
+                            var row = sheetReader.Row(ndx).ToArray();
+
+                            //CustomerEntity customer = new CustomerEntity();
+                            //customer.UserId = 0;
+
+                            //customer.VendorName = row[0].SafeString();
+                            //customer.SalesMan = row[1].SafeString();
+                            //customer.VendorNumber = row[2].SafeString().ToLong();
+                            //customer.Source = row[3].SafeString();
+                            //customer.Verify = row[4].SafeString();
+                            //customer.UpdateMan = row[5].SafeString();
+
+                            //var any = list.Any(c => c.VendorName == customer.VendorName);
+
+                            //if (!any)
+                            //    list.Add(customer);
+                        }
+                    }
                 }
             }
 

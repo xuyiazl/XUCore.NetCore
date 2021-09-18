@@ -6,12 +6,12 @@ using System.Xml;
 
 namespace XUCore.Excel
 {
-    internal class XslxSharedStringsStream : IDictionary<int, string>
+    public class XslxSharedStringsStream : IDictionary<int, string>
     {
         private readonly XmlReader _xmlReader;
         private int _readIndex = -1;
 
-        internal XslxSharedStringsStream(Stream xmlStream)
+        public XslxSharedStringsStream(Stream xmlStream)
         {
             _xmlReader = XmlReader.Create(xmlStream,
                 new XmlReaderSettings {ConformanceLevel = ConformanceLevel.Fragment});

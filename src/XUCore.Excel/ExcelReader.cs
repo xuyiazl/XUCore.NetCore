@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Xml;
+using XUCore.Excel.Exceptions;
 
 namespace XUCore.Excel
 {
@@ -33,11 +33,12 @@ namespace XUCore.Excel
         /// Construct an ExcelReader from a Stream
         /// </summary>
         /// <param name="stream">A stream pointing towards an xlsx format workbook</param>
+
         public ExcelReader(Stream stream)
         {
             _zippedXlsxFile = new ZippedXlsxFile(stream);
         }
-
+        
         /// <summary>
         /// Get a SheetReader instance representing the worksheet at the given zero-based index
         /// </summary>
@@ -61,11 +62,8 @@ namespace XUCore.Excel
                     _zippedXlsxFile = new ZippedXlsxFile(_filePath);
                 }
 
-                var stream = _zippedXlsxFile.GetWorksheetStream(sheetNumber);
-                if (stream == null) return null;
-
-                var sheetReader = new SheetReader(stream,
-                    _zippedXlsxFile.SharedStringsStream, _zippedXlsxFile.IsDateTimeStream, ReadNextBehaviour);
+                var sheetReader = new SheetReader(_zippedXlsxFile.GetWorksheetStream(sheetNumber),
+                    _zippedXlsxFile.SharedStringsStream, _zippedXlsxFile.IsDateTimeStream);
                 _sheetReadersByInteger.Add(sheetNumber, sheetReader);
                 return sheetReader;
             }
@@ -107,8 +105,7 @@ namespace XUCore.Excel
 
                 if (!sheetNumber.HasValue)
                 {
-                    return null;
-                    //throw new ArgumentOutOfRangeException(nameof(sheetName), $"Sheet with name '{sheetName}' was not found in the workbook");
+                    throw new ExcelSheetNotFoundException(sheetName);
                 }
 
                 if (_sheetReadersByInteger.ContainsKey(sheetNumber.Value))
@@ -117,21 +114,12 @@ namespace XUCore.Excel
                     return existingSheet;
                 }
 
-                var stream = _zippedXlsxFile.GetWorksheetStream(sheetNumber.Value);
-                if (stream == null) return null;
-
-                var sheetReader = new SheetReader(stream,
-                    _zippedXlsxFile.SharedStringsStream, _zippedXlsxFile.IsDateTimeStream, ReadNextBehaviour);
+                var sheetReader = new SheetReader(_zippedXlsxFile.GetWorksheetStream(sheetNumber.Value),
+                    _zippedXlsxFile.SharedStringsStream, _zippedXlsxFile.IsDateTimeStream);
                 _sheetReadersByInteger.Add(sheetNumber.Value, sheetReader);
                 return sheetReader;
             }
         }
-
-        /// <summary>
-        /// Defines how the reader will handle null cells when using <c>SheetReader.ReadNext()</c>
-        /// and <c>SheetReader.ReadNextInRow()</c>
-        /// </summary>
-        public ReadNextBehaviour ReadNextBehaviour { get; set; }
 
         private int? ReadSheetNumberFromXml(string sheetName)
         {
@@ -167,9 +155,7 @@ namespace XUCore.Excel
             return null;
         }
 
-#pragma warning disable 1591
         public int? GetFirstDateTimeStyle()
-#pragma warning restore 1591
         {
             return _zippedXlsxFile.IsDateTimeStream.GetFirstDateTimeStyle();
         }

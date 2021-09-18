@@ -8,7 +8,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core ExcelReader Excel大文件读取</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<PackageId>XUCore.Excel</PackageId>
 		<Product>XUCore.Excel</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -25,6 +25,10 @@
 		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="SheetReader.cs1" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="ExcelNumberFormat" Version="1.1.0" />

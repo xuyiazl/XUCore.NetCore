@@ -5,70 +5,54 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
-using SpreadsheetCellRef;
 
 namespace XUCore.Excel
 {
-    /// <summary>
-    /// Reads values from a spreadsheet
-    /// </summary>
-    /// <example>
-    /// <code>
-    /// var workbookReader = new ExcelReader("Path/To/Workbook");
-    /// var sheetReader = workbookReader["Sheet1"];
-    /// var cellA1 = sheetReader["A1"];
-    /// </code>
-    /// </example>
     public class SheetReader
     {
-        private static Regex _digitsRegex = new Regex(@"[0-9]");
-        //private readonly Dictionary<string, object> _values;
+        private readonly Dictionary<string, object> _values;
         private readonly XslxIsDateTimeStream _xlsxIsDateTimeStream;
         private readonly XslxSharedStringsStream _xlsxSharedStringsStream;
         private readonly XmlReader _xmlReader;
-        private ReadNextBehaviour _readNextBehaviour;
-        internal CellRef? AddressCelRef;
-        internal CellRef? NextPopulatedCellRef;
-        internal object NextPopulatedCellValue;
 
-        internal SheetReader(Stream sheetXmlStream, XslxSharedStringsStream xlsxSharedStringsStream,
-            XslxIsDateTimeStream xlsxIsDateTimeStream, ReadNextBehaviour readNextBehaviour)
+        public SheetReader(Stream sheetXmlStream, XslxSharedStringsStream xlsxSharedStringsStream,
+            XslxIsDateTimeStream xlsxIsDateTimeStream)
         {
             _xlsxSharedStringsStream = xlsxSharedStringsStream;
             _xlsxIsDateTimeStream = xlsxIsDateTimeStream;
-            //_values = new Dictionary<string, object>();
+            _values = new Dictionary<string, object>();
             _xmlReader = XmlReader.Create(sheetXmlStream);
-            _readNextBehaviour = readNextBehaviour;
             GetDimension();
         }
 
         /// <summary>
-        ///     Indexer. Returns the value of the cell at the given address, e.g. sheetReader["C3"] returns the value
-        ///     of the cell at C3, if present, or null if the cell is empty.
+        ///     Returns the value of the cell at the given address, e.g. sheetReader["C3"] returns the value
+        ///     of the cell at C3, if present, or null if the cell is empty
         /// </summary>
         /// <param name="cellAddress">
-        ///     The address of the cell.
+        ///     The address of the cell
         /// </param>
         /// <exception cref="IndexOutOfRangeException">
         ///     Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
-        ///     WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
+        ///     WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties
         /// </exception>
         public object this[string cellAddress]
         {
             get
             {
-                //if (_values.ContainsKey(cellAddress))
-                //{
-                //    return _values[cellAddress];
-                //}
+                if (_values.ContainsKey(cellAddress))
+                {
+                    return _values[cellAddress];
+                }
 
-                //var cellRef = new CellRef(cellAddress);
+                var cellRef = new CellRef(cellAddress);
+                if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
+                    cellRef.Row > WorksheetDimension.BottomRight.Row)
+                {
+                    //throw new IndexOutOfRangeException();
 
-                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                //{
-                //    throw new IndexOutOfRangeException();
-                //}
+                    return null;
+                }
 
                 var value = GetValue(cellAddress);
                 return value;
@@ -76,111 +60,10 @@ namespace XUCore.Excel
         }
 
         /// <summary>
-        ///     Indexer. Returns the value of the cell at the given CellRef, e.g. sheetReader[new CellRef("C3")] returns the value
-        ///     of the cell at C3, if present, or null if the cell is empty.
-        /// </summary>
-        /// <param name="cellRef"></param>
-        /// <exception cref="IndexOutOfRangeException">
-        ///     Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
-        ///     WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
-        /// </exception>
-        public object this[CellRef cellRef]
-        {
-            get
-            {
-                var cellRefString = cellRef.ToString();
-
-                //if (_values.ContainsKey(cellRefString))
-                //{
-                //    return _values[cellRefString];
-                //}
-
-                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                //{
-                //    throw new IndexOutOfRangeException();
-                //}
-
-                var value = GetValue(cellRefString);
-                return value;
-            }
-        }
-
-        /// <summary>
-        ///     Indexer. Returns the value of the cell at the given string column and 1-based integer row values, e.g. sheetReader["C",7] returns the value
-        ///     of the cell at C7, or null if the cell is empty.
-        /// </summary>
-        /// <param name="column"></param>
-        /// <param name="row"></param>
-        /// <exception cref="IndexOutOfRangeException">
-        ///     Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
-        ///     WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
-        /// </exception>
-        public object this[string column, int row]
-        {
-            get
-            {
-                var cellRef = new CellRef(row, CellRef.ColumnNameToNumber(column));
-                var cellRefString = cellRef.ToString();
-
-                //if (_values.ContainsKey(cellRefString))
-                //{
-                //    return _values[cellRefString];
-                //}
-
-                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                //{
-                //    throw new IndexOutOfRangeException();
-                //}
-
-                var value = GetValue(cellRefString);
-                return value;
-            }
-        }
-
-        /// <summary>
-        ///     Indexer. Returns the value of the cell at the given 1-based row and column values, e.g. sheetReader[5,6] returns the value
-        ///     of the cell at row 5, column 6, or null if the cell is empty.
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
-        /// <exception cref="IndexOutOfRangeException">
-        ///     Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
-        ///     WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
-        /// </exception>
-        public object this[int row, int column]
-        {
-            get
-            {
-                var cellRef = new CellRef(row, column);
-                var cellRefString = cellRef.ToString();
-                //if (_values.ContainsKey(cellRefString))
-                //{
-                //    return _values[cellRefString];
-                //}
-
-                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                //{
-                //    throw new IndexOutOfRangeException();
-                //}
-
-                var value = GetValue(cellRefString);
-                return value;
-            }
-        }
-
-        /// <summary>
-        ///     Get a list of cell values covered by the range in the index, e.g. sheetReader["A1","B2"] will return a list of four
+        ///     Get a list of cell values covered by the range in the index, e.g. sheetReader["A1","C3"] will return a list of nine
         ///     values,
-        ///     going left-to-right and then top-to-bottom, from the cells A1, B1, A2, B2.
+        ///     going left-to-right and then top-to-bottom, of the values A1, A2, A3, B1, B2, B3, C1, C2, C3
         /// </summary>
-        /// <example>
-        /// <code>
-        /// var range = sheetReader["A1","B2"];
-        /// </code>
-        /// </example>
         /// <param name="topLeft">The top left cell of the required range</param>
         /// <param name="bottomRight">The bottom right cell of the required range</param>
         public IEnumerable<object> this[string topLeft, string bottomRight]
@@ -194,7 +77,7 @@ namespace XUCore.Excel
         }
 
         /// <summary>
-        ///     A <see cref="WorksheetDimension"/> representing the used range of the worksheet
+        ///     A WorksheetDimension object representing the used range of the worksheet
         /// </summary>
         public WorksheetDimension WorksheetDimension { get; private set; }
 
@@ -232,7 +115,7 @@ namespace XUCore.Excel
         public object Value { get; private set; }
 
         /// <summary>
-        ///     The 1-based row number of the most recently read cell. This will be null if the spreadsheet has not yet been read.
+        ///     The row number of the most recently read cell. This will be null if the spreadsheet has not yet been read.
         /// </summary>
         public int? CurrentRowNumber { get; private set; }
 
@@ -247,21 +130,11 @@ namespace XUCore.Excel
             object value;
             if (sType != null && _xlsxIsDateTimeStream[int.Parse(sType)])
             {
-                value = DateTime.FromOADate(double.Parse(_xmlReader.Value, CultureInfo.InvariantCulture));
+                value = DateTime.FromOADate(double.Parse(_xmlReader.Value));
             }
             else
             {
-                try
-                {
-                    value = double.Parse(_xmlReader.Value, CultureInfo.InvariantCulture);
-                }
-                catch (FormatException)
-                {
-                    //If we're here it means that the cell is of type number, but the value is a string. This happens
-                    //when Excel returns an non-numeric result of a calculation, typically an Excel error string, e.g. #N/A, Err:522, etc
-                    //If this occurs we just return the string value of the cell.
-                    value = _xmlReader.Value;
-                }
+                value = double.Parse(_xmlReader.Value, CultureInfo.InvariantCulture);
             }
 
             return value;
@@ -274,7 +147,6 @@ namespace XUCore.Excel
             {
                 return null;
             }
-
             switch (nodeType)
             {
                 case "d":
@@ -297,87 +169,32 @@ namespace XUCore.Excel
             return value;
         }
 
-        private KeyValuePair<string, object> ReadNextCell()
+        private void GetCellAttributesAndReadValue()
         {
             var sType = _xmlReader.GetAttribute("s");
             var nodeType = _xmlReader.GetAttribute("t");
-            var address = _xmlReader.GetAttribute("r");
-            var newValue = ReadValue(nodeType, sType);
-            return new KeyValuePair<string, object>(address, newValue);
-        }
-
-        private void GetCellAttributesAndReadValue()
-        {
-            var nextCell = ReadNextCell();
-            switch (_readNextBehaviour)
-            {
-                case ReadNextBehaviour.SkipNulls:
-                    Address = nextCell.Key;
-                    Value = nextCell.Value;
-                    break;
-                case ReadNextBehaviour.ReadAllNulls:
-                    //If first cell read:
-                    if (!AddressCelRef.HasValue)
-                    {
-                        Address = nextCell.Key;
-                        Value = nextCell.Value;
-                        AddressCelRef = new CellRef(Address);
-                    }
-                    else
-                    {
-                        var nextCellRef = new CellRef(nextCell.Key);
-                        //If not first cell read bit adjacent to first cell
-                        if (nextCellRef.IsNextAdjacentTo(AddressCelRef))
-                        {
-                            Address = nextCell.Key;
-                            Value = nextCell.Value;
-                            AddressCelRef = nextCellRef;
-                        }
-                        //If not first cell read and not adjacent to first cell
-                        else
-                        {
-                            var nextAdjacent =
-                                AddressCelRef.Value.GetNextAdjacent(WorksheetDimension.BottomRight.ColumnNumber);
-                            Address = nextAdjacent.ToString();
-                            Value = null;
-                            AddressCelRef = nextAdjacent;
-                            NextPopulatedCellRef = nextCellRef;
-                            NextPopulatedCellValue = nextCell.Value;
-                        }
-                    }
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private object ReadValue(string nodeType, string sType)
-        {
-            object newValue = null;
-            while (ReadNextXmlElementAndLogRowNumber())
+            Address = _xmlReader.GetAttribute("r");
+            while (ReadAndLogRowNumber())
             {
                 if (_xmlReader.IsStartOfElement("v"))
                 {
-                    ReadNextXmlElementAndLogRowNumber();
-                    newValue = GetValueFromCell(nodeType, sType);
+                    ReadAndLogRowNumber();
+                    Value = GetValueFromCell(nodeType, sType);
                 }
 
                 if (_xmlReader.IsStartOfElement("t"))
                 {
-                    ReadNextXmlElementAndLogRowNumber();
-                    newValue = _xmlReader.Value;
+                    ReadAndLogRowNumber();
+                    Value = _xmlReader.Value;
                 }
-
                 if (_xmlReader.IsEndOfElement("c"))
                 {
                     break;
                 }
             }
-
-            return newValue;
         }
 
-        private bool ReadNextXmlElementAndLogRowNumber()
+        private bool ReadAndLogRowNumber()
         {
             var result = _xmlReader.Read();
             if (_xmlReader.IsStartOfElement("row"))
@@ -389,45 +206,23 @@ namespace XUCore.Excel
             return result;
         }
 
-        private void SetCursorsToCurrentNullValue(string address)
-        {
-            //_values[address] = null;
-            AddressCelRef = new CellRef(address);
-            Address = address;
-            Value = null;
-            NextPopulatedCellRef = null;
-            NextPopulatedCellValue = null;
-        }
-
         private object GetValue(string address)
         {
             var cellRef = new CellRef(address);
-            while (ReadNextXmlElementAndLogRowNumber())
+            while (ReadAndLogRowNumber())
             {
                 if (_xmlReader.IsStartOfElement("c") && !_xmlReader.IsEmptyElement)
                 {
                     GetCellAttributesAndReadValue();
-                    //_values[Address] = Value;
+                    _values[Address] = Value;
                     if (Address == address)
                     {
                         return Value;
                     }
-
-                    if (CurrentRowNumber == cellRef.Row)
-                    {
-                        var columnLetter = _digitsRegex.Replace(Address, "");
-                        var currentColumnNumber = CellRef.ColumnNameToNumber(columnLetter);
-                        if (currentColumnNumber > cellRef.ColumnNumber)
-                        {
-                            SetCursorsToCurrentNullValue(address);
-                            return null;
-                        }
-                    }
                 }
 
-                if (_xmlReader.IsStartOfElement("row") && CurrentRowNumber > cellRef.Row)
+                if (_xmlReader.IsStartOfElement("row") && int.Parse(_xmlReader.GetAttribute("r")) > cellRef.Row)
                 {
-                    SetCursorsToCurrentNullValue(address);
                     return null;
                 }
             }
@@ -441,39 +236,12 @@ namespace XUCore.Excel
         /// <returns>False if all cells have been read, true otherwise</returns>
         public bool ReadNext()
         {
-            if (NextPopulatedCellRef.HasValue)
-            {
-                var nextAdjacentCellRef =
-                    AddressCelRef.Value.GetNextAdjacent(WorksheetDimension.BottomRight.ColumnNumber);
-                if (nextAdjacentCellRef == NextPopulatedCellRef)
-                {
-                    AddressCelRef = NextPopulatedCellRef;
-                    Address = NextPopulatedCellRef.ToString();
-                    Value = NextPopulatedCellValue;
-                    NextPopulatedCellRef = null;
-                    NextPopulatedCellValue = null;
-                }
-                else
-                {
-                    Address = nextAdjacentCellRef.ToString();
-                    AddressCelRef = new CellRef(Address);
-                    Value = null;
-                }
-
-                return true;
-            }
-
-            while (ReadNextXmlElementAndLogRowNumber())
+            while (ReadAndLogRowNumber())
             {
                 if (_xmlReader.IsStartOfElement("c") && !_xmlReader.IsEmptyElement)
                 {
                     GetCellAttributesAndReadValue();
-                    if (Value == null && _readNextBehaviour == ReadNextBehaviour.SkipNulls)
-                    {
-                        return ReadNext();
-                    }
-
-                    //_values[Address] = Value;
+                    _values[Address] = Value;
                     return true;
                 }
 
@@ -492,7 +260,7 @@ namespace XUCore.Excel
 
         private void GetDimension()
         {
-            while (ReadNextXmlElementAndLogRowNumber())
+            while (ReadAndLogRowNumber())
             {
                 if (_xmlReader.IsStartOfElement("dimension"))
                 {
@@ -505,7 +273,7 @@ namespace XUCore.Excel
                     var bottomRight = bottomRightRange != ""
                         ? new CellRef(bottomRightRange)
                         : new CellRef(topLeftRange);
-                    WorksheetDimension = new WorksheetDimension { TopLeft = topLeft, BottomRight = bottomRight };
+                    WorksheetDimension = new WorksheetDimension {TopLeft = topLeft, BottomRight = bottomRight};
                     MinRow = topLeft.Row;
                     MaxRow = bottomRight.Row;
                     MinColumnNumber = topLeft.ColumnNumber;
@@ -545,7 +313,7 @@ namespace XUCore.Excel
         /// <summary>
         /// Gets a list of all the cell values in the specified row
         /// </summary>
-        /// <param name="row">The 1-based row index</param>
+        /// <param name="row">The row index</param>
         /// <returns>An enumerable of objects representing the values of cells in the row</returns>
         public IEnumerable<object> Row(int row)
         {
@@ -565,7 +333,7 @@ namespace XUCore.Excel
                 if (_xmlReader.IsStartOfElement("c") && !_xmlReader.IsEmptyElement)
                 {
                     GetCellAttributesAndReadValue();
-                    //_values[Address] = Value;
+                    _values[Address] = Value;
                     return true;
                 }
 
@@ -573,23 +341,18 @@ namespace XUCore.Excel
                 {
                     break;
                 }
-            } while (ReadNextXmlElementAndLogRowNumber());
+            } while (ReadAndLogRowNumber());
 
             Address = null;
             Value = null;
             return false;
         }
 
-        /// <summary>
-        /// Returns <c>true</c> if the specified cell contains a non-null value.
-        /// </summary>
-        /// <param name="cellRefString"></param>
-        /// <returns></returns>
         public bool ContainsKey(string cellRefString)
         {
             var cellRef = new CellRef(cellRefString);
             if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                cellRef.Row > WorksheetDimension.BottomRight.Row)
+                    cellRef.Row > WorksheetDimension.BottomRight.Row)
             {
                 return false;
             }
@@ -602,7 +365,6 @@ namespace XUCore.Excel
 
             return true;
         }
-
         /// <summary>
         /// 逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
         /// </summary>

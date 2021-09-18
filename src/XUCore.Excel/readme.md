@@ -1,7 +1,7 @@
 ﻿
 ### excel 大文件读取（逐行读取）
 
-源码来自  https://github.com/ChrisHodges/LightweightExcelReader
+源码来自  https://github.com/ChrisHodges/XUCore.Excel
 
 修改了在读取数据的时候，去掉了原作者的hash存储。避免了hash造成的内存溢出的问题
 

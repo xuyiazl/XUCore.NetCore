@@ -2,7 +2,7 @@ using System.Xml;
 
 namespace XUCore.Excel
 {
-    internal static class XmlReaderExtensionMethods
+    public static class XmlReaderExtensionMethods
     {
         public static bool IsStartOfElement(this XmlReader xmlReader, string elementName)
         {
