@@ -620,7 +620,7 @@ namespace XUCore.Excel
                 var bottomRight = new CellRef(index, columnEnd);
                 try
                 {
-                    var row = this[topLeft.ToString(), bottomRight.ToString()].ToArray();
+                    var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x => x.ToString()).Select(x => GetValue(x)).ToArray();
 
                     rowAction.Invoke(index, row);
 
@@ -628,7 +628,7 @@ namespace XUCore.Excel
 
                     index++;
                 }
-                catch
+                catch (Exception ex)
                 {
                     index--;
 
