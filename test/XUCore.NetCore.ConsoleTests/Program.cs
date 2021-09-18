@@ -2,6 +2,7 @@
 using RedLockNet;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
+using SpreadsheetCellRef;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,6 @@ using XUCore.Drawing;
 using XUCore.Excel;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using XUCore.IdGenerators.Core;
 using XUCore.NetCore.Redis;
 
 namespace XUCore.ConsoleTests
@@ -48,15 +48,23 @@ namespace XUCore.ConsoleTests
         static void Main(string[] args)
         {
             {
-                using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\1.xlsx", FileMode.Open))
+                using (var fileSteam = File.Open(@"C:\Users\Nigel\Downloads\异常运单(关联无效)-2021-8.xls", FileMode.Open))
                 {
                     var excelReader = new ExcelReader(fileSteam);
-                    var sheetReader = excelReader["sheet2"];
+                    var sheetReader = excelReader[0];
+
+                    var list = new List<object>();
+
+                    var rowCount = 0;
+
+                    sheetReader.ReadNextInRow(1, 2, out rowCount, (index, row) =>
+                    {
+                        list.Add(row);
+                    });
 
                     for (var ndx = 2; ndx <= sheetReader.MaxRow; ndx++)
                     {
                         var row = sheetReader.Row(ndx).ToArray();
-
                     }
 
                 }
@@ -154,10 +162,10 @@ namespace XUCore.ConsoleTests
                         // waitTime 等待时间,相同的 resource 如果当前的锁被其他线程占用,最多等待时间
                         // retryTime 等待时间内，多久尝试获取一次
                         using (var redLock = await _distributedLockFactory.CreateLockAsync(
-                                resource: key,
-                                expiryTime: TimeSpan.FromSeconds(5),
-                                waitTime: TimeSpan.FromSeconds(1),
-                                retryTime: TimeSpan.FromMilliseconds(20)))
+                                        resource: key,
+                                        expiryTime: TimeSpan.FromSeconds(5),
+                                        waitTime: TimeSpan.FromSeconds(1),
+                                        retryTime: TimeSpan.FromMilliseconds(20)))
                         {
                             if (redLock.IsAcquired)
                             {

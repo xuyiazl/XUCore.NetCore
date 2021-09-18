@@ -62,12 +62,13 @@ namespace XUCore.Excel
                 //    return _values[cellAddress];
                 //}
 
-                var cellRef = new CellRef(cellAddress);
-                if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                {
-                    throw new IndexOutOfRangeException();
-                }
+                //var cellRef = new CellRef(cellAddress);
+
+                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
+                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
+                //{
+                //    throw new IndexOutOfRangeException();
+                //}
 
                 var value = GetValue(cellAddress);
                 return value;
@@ -88,16 +89,17 @@ namespace XUCore.Excel
             get
             {
                 var cellRefString = cellRef.ToString();
+
                 //if (_values.ContainsKey(cellRefString))
                 //{
                 //    return _values[cellRefString];
                 //}
-                
-                if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                {
-                    throw new IndexOutOfRangeException();
-                }
+
+                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
+                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
+                //{
+                //    throw new IndexOutOfRangeException();
+                //}
 
                 var value = GetValue(cellRefString);
                 return value;
@@ -120,22 +122,23 @@ namespace XUCore.Excel
             {
                 var cellRef = new CellRef(row, CellRef.ColumnNameToNumber(column));
                 var cellRefString = cellRef.ToString();
+
                 //if (_values.ContainsKey(cellRefString))
                 //{
                 //    return _values[cellRefString];
                 //}
-                
-                if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                {
-                    throw new IndexOutOfRangeException();
-                }
+
+                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
+                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
+                //{
+                //    throw new IndexOutOfRangeException();
+                //}
 
                 var value = GetValue(cellRefString);
                 return value;
             }
         }
-        
+
         /// <summary>
         ///     Indexer. Returns the value of the cell at the given 1-based row and column values, e.g. sheetReader[5,6] returns the value
         ///     of the cell at row 5, column 6, or null if the cell is empty.
@@ -156,12 +159,12 @@ namespace XUCore.Excel
                 //{
                 //    return _values[cellRefString];
                 //}
-                
-                if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
-                    cellRef.Row > WorksheetDimension.BottomRight.Row)
-                {
-                    throw new IndexOutOfRangeException();
-                }
+
+                //if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
+                //    cellRef.Row > WorksheetDimension.BottomRight.Row)
+                //{
+                //    throw new IndexOutOfRangeException();
+                //}
 
                 var value = GetValue(cellRefString);
                 return value;
@@ -502,7 +505,7 @@ namespace XUCore.Excel
                     var bottomRight = bottomRightRange != ""
                         ? new CellRef(bottomRightRange)
                         : new CellRef(topLeftRange);
-                    WorksheetDimension = new WorksheetDimension {TopLeft = topLeft, BottomRight = bottomRight};
+                    WorksheetDimension = new WorksheetDimension { TopLeft = topLeft, BottomRight = bottomRight };
                     MinRow = topLeft.Row;
                     MaxRow = bottomRight.Row;
                     MinColumnNumber = topLeft.ColumnNumber;
@@ -598,6 +601,36 @@ namespace XUCore.Excel
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// 逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+        /// </summary>
+        /// <param name="columnStart">开始列位置，从1开始</param>
+        /// <param name="columnEnd">结束列位置，不能超过已知的大小</param>
+        /// <param name="rowCount">输出总行数</param>
+        /// <param name="rowAction"></param>
+        public void ReadNextInRow(int columnStart, int columnEnd, out int rowCount, Action<int, object[]> rowAction)
+        {
+            var i = 1;
+
+            while (true)
+            {
+                var topLeft = new CellRef(i, columnStart);
+                var bottomRight = new CellRef(i, columnEnd);
+                var row = this[topLeft.ToString(), bottomRight.ToString()].ToArray();
+
+                var maxNull = row.Where(c => c == null).Count();
+
+                if (maxNull > columnEnd - columnStart)
+                    break;
+
+                rowAction.Invoke(i, row);
+
+                i++;
+            }
+
+            rowCount = i;
         }
     }
 }
