@@ -603,38 +603,55 @@ namespace XUCore.Excel
 
             return true;
         }
+
         /// <summary>
         /// 针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
         /// </summary>
-        /// <param name="columnStart">开始列位置，从1开始</param>
-        /// <param name="columnEnd">结束列位置，不能超过已知的大小</param>
+        /// <param name="minColumnRefString">当前表格列的第一个位置，如A1，则是第1列</param>
+        /// <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
         /// <param name="rowCount">输出总行数</param>
         /// <param name="rowAction"></param>
-        public void ReadNextInRow(int columnStart, int columnEnd, out int rowCount, Action<int, object[]> rowAction)
+        public void ReadNextInRow(string minColumnRefString, string maxColumnRefString, out int rowCount, Action<int, object[]> rowAction)
+            => ReadNextInRow(new CellRef(minColumnRefString).ColumnNumber, new CellRef(maxColumnRefString).ColumnNumber, out rowCount, rowAction);
+        /// <summary>
+        /// 针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+        /// </summary>
+        /// <param name="minColumnNubmer">当前表格列的第一个位置</param>
+        /// <param name="maxColumnNumber">当前表格列的最后位置</param>
+        /// <param name="rowCount">输出总行数</param>
+        /// <param name="rowAction"></param>
+        public void ReadNextInRow(int minColumnNubmer, int maxColumnNumber, out int rowCount, Action<int, object[]> rowAction)
         {
-            var index = 1;
+            var rowNumber = 1;
 
             while (true)
             {
-                var topLeft = new CellRef(index, columnStart);
-                var bottomRight = new CellRef(index, columnEnd);
+                var topLeft = new CellRef(rowNumber, minColumnNubmer);
+                var bottomRight = new CellRef(rowNumber, maxColumnNumber);
 
-                var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x => GetValue(x.ToString())).ToArray();
+                var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x =>
+                {
+                    var address = x.ToString();
+                    if (_values.ContainsKey(address))
+                        return _values[address];
+                    else
+                        return GetValue(address);
+                }).ToArray();
 
                 if (row.Count(c => c == null) >= row.Length)
                 {
-                    index--;
+                    rowNumber--;
                     break;
                 }
 
-                rowAction.Invoke(index, row);
+                rowAction.Invoke(rowNumber, row);
 
                 _values.Clear();
 
-                index++;
+                rowNumber++;
             }
 
-            rowCount = index;
+            rowCount = rowNumber;
         }
 
         public void Dispose()

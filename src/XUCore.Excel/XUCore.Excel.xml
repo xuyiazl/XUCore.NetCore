@@ -227,12 +227,21 @@
             <param name="cellRefString"></param>
             <returns></returns>
         </member>
+        <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]})">
+            <summary>
+            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            </summary>
+            <param name="minColumnRefString">当前表格列的第一个位置，如A1，则是第1列</param>
+            <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
+            <param name="rowCount">输出总行数</param>
+            <param name="rowAction"></param>
+        </member>
         <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]})">
             <summary>
             针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
             </summary>
-            <param name="columnStart">开始列位置，从1开始</param>
-            <param name="columnEnd">结束列位置，不能超过已知的大小</param>
+            <param name="minColumnNubmer">当前表格列的第一个位置</param>
+            <param name="maxColumnNumber">当前表格列的最后位置</param>
             <param name="rowCount">输出总行数</param>
             <param name="rowAction"></param>
         </member>

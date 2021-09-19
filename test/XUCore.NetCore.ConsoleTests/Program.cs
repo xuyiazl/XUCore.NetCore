@@ -43,7 +43,7 @@ namespace XUCore.ConsoleTests
         {
             {
                 {
-                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210903_11324755.xls");
+                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210917_11783720.xlsx");
                     using var sheetReader = excelReader[0];
 
                     sheetReader.ReadNextInRow(1, 63, out int rowCount, (index, row) =>
@@ -51,15 +51,15 @@ namespace XUCore.ConsoleTests
 
                     });
                 }
-                //{
-                //    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\1.xlsx");
-                //    using var sheetReader = excelReader[0];
+                {
+                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\66部客户店铺明细9.17-整理.xlsx");
+                    using var sheetReader = excelReader[0];
 
-                //    for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
-                //    {
-                //        var row = sheetReader.Row(ndx).ToArray();
-                //    }
-                //}
+                    for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
+                    {
+                        var row = sheetReader.Row(ndx).ToArray();
+                    }
+                }
 
                 Console.WriteLine("done");
                 Console.Read();
