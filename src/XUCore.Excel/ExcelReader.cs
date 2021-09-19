@@ -182,7 +182,7 @@ namespace XUCore.Excel
             _zippedXlsxFile.Dispose();
             _sheetnameLookup = null;
             _sheetReadersByInteger = null;
-
+            GC.Collect();
         }
     }
 }

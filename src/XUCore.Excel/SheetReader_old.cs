@@ -19,10 +19,10 @@ namespace XUCore.Excel
     /// var cellA1 = sheetReader["A1"];
     /// </code>
     /// </example>
-    public class SheetReader : IDisposable
+    public class SheetReader_old : IDisposable
     {
         private static Regex _digitsRegex = new Regex(@"[0-9]");
-        private readonly DictionaryContainer _value;
+        private readonly Dictionary<string, object> _values;
         private readonly XslxIsDateTimeStream _xlsxIsDateTimeStream;
         private readonly XslxSharedStringsStream _xlsxSharedStringsStream;
         private readonly XmlReader _xmlReader;
@@ -31,12 +31,12 @@ namespace XUCore.Excel
         internal CellRef? NextPopulatedCellRef;
         internal object NextPopulatedCellValue;
 
-        internal SheetReader(Stream sheetXmlStream, XslxSharedStringsStream xlsxSharedStringsStream,
+        internal SheetReader_old(Stream sheetXmlStream, XslxSharedStringsStream xlsxSharedStringsStream,
             XslxIsDateTimeStream xlsxIsDateTimeStream, ReadNextBehaviour readNextBehaviour)
         {
             _xlsxSharedStringsStream = xlsxSharedStringsStream;
             _xlsxIsDateTimeStream = xlsxIsDateTimeStream;
-            _value = new DictionaryContainer();
+            _values = new Dictionary<string, object>();
             _xmlReader = XmlReader.Create(sheetXmlStream);
             _readNextBehaviour = readNextBehaviour;
             GetDimension();
@@ -57,9 +57,9 @@ namespace XUCore.Excel
         {
             get
             {
-                if (_value.ContainsKey(cellAddress))
+                if (_values.ContainsKey(cellAddress))
                 {
-                    return _value[cellAddress];
+                    return _values[cellAddress];
                 }
 
                 var cellRef = new CellRef(cellAddress);
@@ -88,10 +88,9 @@ namespace XUCore.Excel
             get
             {
                 var cellRefString = cellRef.ToString();
-
-                if (_value.ContainsKey(cellRefString))
+                if (_values.ContainsKey(cellRefString))
                 {
-                    return _value[cellRefString];
+                    return _values[cellRefString];
                 }
 
                 if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
@@ -121,10 +120,9 @@ namespace XUCore.Excel
             {
                 var cellRef = new CellRef(row, CellRef.ColumnNameToNumber(column));
                 var cellRefString = cellRef.ToString();
-
-                if (_value.ContainsKey(cellRefString))
+                if (_values.ContainsKey(cellRefString))
                 {
-                    return _value[cellRefString];
+                    return _values[cellRefString];
                 }
 
                 if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
@@ -154,11 +152,11 @@ namespace XUCore.Excel
             {
                 var cellRef = new CellRef(row, column);
                 var cellRefString = cellRef.ToString();
-
-                if (_value.ContainsKey(cellRefString))
+                if (_values.ContainsKey(cellRefString))
                 {
-                    return _value[cellRefString];
+                    return _values[cellRefString];
                 }
+
                 if (cellRef.ColumnNumber > WorksheetDimension.BottomRight.ColumnNumber ||
                     cellRef.Row > WorksheetDimension.BottomRight.Row)
                 {
@@ -390,7 +388,7 @@ namespace XUCore.Excel
 
         private void SetCursorsToCurrentNullValue(string address)
         {
-            _value[address] = null;
+            _values[address] = null;
             AddressCelRef = new CellRef(address);
             Address = address;
             Value = null;
@@ -406,7 +404,7 @@ namespace XUCore.Excel
                 if (_xmlReader.IsStartOfElement("c") && !_xmlReader.IsEmptyElement)
                 {
                     GetCellAttributesAndReadValue();
-                    _value[Address] = Value;
+                    _values[Address] = Value;
                     if (Address == address)
                     {
                         return Value;
@@ -472,7 +470,7 @@ namespace XUCore.Excel
                         return ReadNext();
                     }
 
-                    _value[Address] = Value;
+                    _values[Address] = Value;
                     return true;
                 }
 
@@ -568,7 +566,7 @@ namespace XUCore.Excel
                 if (_xmlReader.IsStartOfElement("c") && !_xmlReader.IsEmptyElement)
                 {
                     GetCellAttributesAndReadValue();
-                    _value[Address] = Value;
+                    _values[Address] = Value;
                     return true;
                 }
 
@@ -613,9 +611,8 @@ namespace XUCore.Excel
         /// <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
         /// <param name="rowCount">输出总行数</param>
         /// <param name="rowAction"></param>
-        /// <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
-        public void ReadNextInRow(string minColumnRefString, string maxColumnRefString, out int rowCount, Action<int, object[]> rowAction, int clearMemory = 4000000)
-            => ReadNextInRow(new CellRef(minColumnRefString).ColumnNumber, new CellRef(maxColumnRefString).ColumnNumber, out rowCount, rowAction, clearMemory);
+        public void ReadNextInRow(string minColumnRefString, string maxColumnRefString, out int rowCount, Action<int, object[]> rowAction)
+            => ReadNextInRow(new CellRef(minColumnRefString).ColumnNumber, new CellRef(maxColumnRefString).ColumnNumber, out rowCount, rowAction);
         /// <summary>
         /// 针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
         /// </summary>
@@ -623,8 +620,7 @@ namespace XUCore.Excel
         /// <param name="maxColumnNumber">当前表格列的最后位置</param>
         /// <param name="rowCount">输出总行数</param>
         /// <param name="rowAction"></param>
-        /// <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
-        public void ReadNextInRow(int minColumnNubmer, int maxColumnNumber, out int rowCount, Action<int, object[]> rowAction, int clearMemory = 4000000)
+        public void ReadNextInRow(int minColumnNubmer, int maxColumnNumber, out int rowCount, Action<int, object[]> rowAction)
         {
             var rowNumber = 1;
 
@@ -636,8 +632,8 @@ namespace XUCore.Excel
                 var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x =>
                 {
                     var address = x.ToString();
-                    if (_value.ContainsKey(address))
-                        return _value[address];
+                    if (_values.ContainsKey(address))
+                        return _values[address];
                     else
                         return GetValue(address);
                 }).ToArray();
@@ -650,8 +646,7 @@ namespace XUCore.Excel
 
                 rowAction.Invoke(rowNumber, row);
 
-                if (clearMemory > 0 && _value.Count > clearMemory)
-                    _value.Clear();
+                _values.Clear();
 
                 rowNumber++;
             }
@@ -661,10 +656,9 @@ namespace XUCore.Excel
 
         public void Dispose()
         {
-            _value.Dispose();
+            _values.Clear();
             _xlsxIsDateTimeStream.Dispose();
             _xmlReader.Dispose();
-            GC.Collect();
         }
     }
 }

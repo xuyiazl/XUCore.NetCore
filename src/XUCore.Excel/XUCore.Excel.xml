@@ -4,6 +4,56 @@
         <name>XUCore.Excel</name>
     </assembly>
     <members>
+        <member name="T:XUCore.Excel.DictionaryContainer">
+            <summary>
+            字典容器（解决单个对象超过2G大小限制，以及字典自动扩容造成的翻倍占据内存的问题）
+            </summary>
+        </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="cap">最大长度设置</param>
+        </member>
+        <member name="P:XUCore.Excel.DictionaryContainer.Count">
+            <summary>
+            统计列表总长度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.Add(System.String,System.Object)">
+            <summary>
+            添加新数据，会自动创建新的Dictionary对象
+            </summary>
+            <param name="key"></param>
+            <param name="p"></param>
+        </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.ContainsKey(System.String)">
+            <summary>
+            查询是否包含某个数据
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:XUCore.Excel.DictionaryContainer.Item(System.String)">
+            <summary>
+            获取某个数据的值
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.GetValue(System.String)">
+            <summary>
+            获取某个数据的值
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.Clear">
+            <summary>
+            清空容器
+            </summary>
+        </member>
         <member name="T:XUCore.Excel.ExcelReader">
             <summary>
             A reader for the entire workbook. Access an individual worksheet by the worksheet name indexer,
@@ -227,7 +277,190 @@
             <param name="cellRefString"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]})">
+        <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]},System.Int32)">
+            <summary>
+            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            </summary>
+            <param name="minColumnRefString">当前表格列的第一个位置，如A1，则是第1列</param>
+            <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
+            <param name="rowCount">输出总行数</param>
+            <param name="rowAction"></param>
+            <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]},System.Int32)">
+            <summary>
+            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            </summary>
+            <param name="minColumnNubmer">当前表格列的第一个位置</param>
+            <param name="maxColumnNumber">当前表格列的最后位置</param>
+            <param name="rowCount">输出总行数</param>
+            <param name="rowAction"></param>
+            <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
+        </member>
+        <member name="T:XUCore.Excel.SheetReader_old">
+            <summary>
+            Reads values from a spreadsheet
+            </summary>
+            <example>
+            <code>
+            var workbookReader = new ExcelReader("Path/To/Workbook");
+            var sheetReader = workbookReader["Sheet1"];
+            var cellA1 = sheetReader["A1"];
+            </code>
+            </example>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Item(System.String)">
+            <summary>
+                Indexer. Returns the value of the cell at the given address, e.g. sheetReader["C3"] returns the value
+                of the cell at C3, if present, or null if the cell is empty.
+            </summary>
+            <param name="cellAddress">
+                The address of the cell.
+            </param>
+            <exception cref="T:System.IndexOutOfRangeException">
+                Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
+                WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
+            </exception>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Item(SpreadsheetCellRef.CellRef)">
+            <summary>
+                Indexer. Returns the value of the cell at the given CellRef, e.g. sheetReader[new CellRef("C3")] returns the value
+                of the cell at C3, if present, or null if the cell is empty.
+            </summary>
+            <param name="cellRef"></param>
+            <exception cref="T:System.IndexOutOfRangeException">
+                Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
+                WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
+            </exception>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Item(System.String,System.Int32)">
+            <summary>
+                Indexer. Returns the value of the cell at the given string column and 1-based integer row values, e.g. sheetReader["C",7] returns the value
+                of the cell at C7, or null if the cell is empty.
+            </summary>
+            <param name="column"></param>
+            <param name="row"></param>
+            <exception cref="T:System.IndexOutOfRangeException">
+                Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
+                WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
+            </exception>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Item(System.Int32,System.Int32)">
+            <summary>
+                Indexer. Returns the value of the cell at the given 1-based row and column values, e.g. sheetReader[5,6] returns the value
+                of the cell at row 5, column 6, or null if the cell is empty.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <exception cref="T:System.IndexOutOfRangeException">
+                Will throw if the requested index is beyond the used range of the workbook. Avoid this exception by checking the
+                WorksheetDimension or Max/MinRow and Max/MinColumnNumber properties.
+            </exception>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Item(System.String,System.String)">
+            <summary>
+                Get a list of cell values covered by the range in the index, e.g. sheetReader["A1","B2"] will return a list of four
+                values,
+                going left-to-right and then top-to-bottom, from the cells A1, B1, A2, B2.
+            </summary>
+            <example>
+            <code>
+            var range = sheetReader["A1","B2"];
+            </code>
+            </example>
+            <param name="topLeft">The top left cell of the required range</param>
+            <param name="bottomRight">The bottom right cell of the required range</param>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.WorksheetDimension">
+            <summary>
+                A <see cref="P:XUCore.Excel.SheetReader_old.WorksheetDimension"/> representing the used range of the worksheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Address">
+            <summary>
+                The cell address of the most recently read cell of the spreadsheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.MaxColumnNumber">
+            <summary>
+                The largest column number used by the spreadsheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.MinColumnNumber">
+            <summary>
+                The smallest column number used by the spreadsheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.MaxRow">
+            <summary>
+                The largest row number used by the spreadsheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.MinRow">
+            <summary>
+                The smallest row number used by the spreadsheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.Value">
+            <summary>
+                The value of the last cell read by the reader. This will be null if:
+                - The sheet has not yet been read
+                - The ReadNextInRow() method read to the end of the row
+                - The ReadNext() method read to the end of the sheet
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.CurrentRowNumber">
+            <summary>
+                The 1-based row number of the most recently read cell. This will be null if the spreadsheet has not yet been read.
+            </summary>
+        </member>
+        <member name="P:XUCore.Excel.SheetReader_old.PreviousRowNumber">
+            <summary>
+                The number of the penultimate row read by the reader. This will be null if the reader has read zero or one rows.
+                This property is useful when checking for blank rows.
+            </summary>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.ReadNext">
+            <summary>
+            Reads the next cell in the spreadsheet, updating the readers value and address properties.
+            </summary>
+            <returns>False if all cells have been read, true otherwise</returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.Column(System.String)">
+            <summary>
+            Gets a list of all the cell values within the specified column.
+            </summary>
+            <param name="column">The string representation of the column, e.g. A, C, AAZ, etc. </param>
+            <returns>An enumerable of objects representing the values of cells in the column</returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.Column(System.Int32)">
+            <summary>
+            Gets a list of all the cell values at the specified ordinal column index.
+            </summary>
+            <param name="column">The column index </param>
+            <returns>An enumerable of objects representing the values of cells in the column</returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.Row(System.Int32)">
+            <summary>
+            Gets a list of all the cell values in the specified row
+            </summary>
+            <param name="row">The 1-based row index</param>
+            <returns>An enumerable of objects representing the values of cells in the row</returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.ReadNextInRow">
+            <summary>
+            Reads the next cell in the row and updates the reader's value and address properties
+            </summary>
+            <returns>False if there are no more cells in the row, true otherwise</returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.ContainsKey(System.String)">
+            <summary>
+            Returns <c>true</c> if the specified cell contains a non-null value.
+            </summary>
+            <param name="cellRefString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]})">
             <summary>
             针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
             </summary>
@@ -236,7 +469,7 @@
             <param name="rowCount">输出总行数</param>
             <param name="rowAction"></param>
         </member>
-        <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]})">
+        <member name="M:XUCore.Excel.SheetReader_old.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]})">
             <summary>
             针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
             </summary>

@@ -52,7 +52,7 @@ namespace XUCore.ConsoleTests
                     });
                 }
                 {
-                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\66部客户店铺明细9.17-整理.xlsx");
+                    using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210917_11783720 - 副本.xlsx");
                     using var sheetReader = excelReader[0];
 
                     for (var ndx = 1; ndx <= sheetReader.MaxRow; ndx++)
