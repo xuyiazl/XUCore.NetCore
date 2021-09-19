@@ -618,28 +618,20 @@ namespace XUCore.Excel
             {
                 var topLeft = new CellRef(index, columnStart);
                 var bottomRight = new CellRef(index, columnEnd);
-                try
-                {
-                    var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x => x.ToString()).Select(x => GetValue(x)).ToArray();
 
-                    if (row.Count(c => c == null) >= row.Length)
-                    {
-                        index--;
-                        break;
-                    }
+                var row = CellRef.Range(topLeft.ToString(), bottomRight.ToString()).Select(x => GetValue(x.ToString())).ToArray();
 
-                    rowAction.Invoke(index, row);
-
-                    _values.Clear();
-
-                    index++;
-                }
-                catch (Exception ex)
+                if (row.Count(c => c == null) >= row.Length)
                 {
                     index--;
-
                     break;
                 }
+
+                rowAction.Invoke(index, row);
+
+                _values.Clear();
+
+                index++;
             }
 
             rowCount = index;
