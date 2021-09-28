@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XUCore.Ddd.Domain;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DataTest.Business;
 using XUCore.NetCore.DataTest.DbRepository;
@@ -25,19 +26,7 @@ namespace XUCore.NetCore.DataTest
             services.AddReadDbContext();
             services.AddWriteDbContext();
 
-            services.Scan(scan =>
-                scan.FromAssemblyOf<IDbServiceProvider>()
-                .AddClasses(impl => impl.AssignableTo(typeof(IDbServiceProvider)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime()
-            );
-
-            services.Scan(scan =>
-                scan.FromAssemblyOf<IServiceDependency>()
-                .AddClasses(impl => impl.AssignableTo(typeof(IServiceDependency)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime()
-            );
+            services.AddScanLifetime();
 
             //添加redis插件，支持拦截器缓存
             services.AddRedisService().AddJsonRedisSerializer();

@@ -7784,13 +7784,6 @@
             <param name="className">类名，包括命名空间,如果类型不处于当前执行程序集中，需要包含程序集名，范例：Test.Core.Test2,Test.Core</param>
             <param name="parameters">传递给构造函数的参数</param>
         </member>
-        <member name="M:XUCore.Helpers.Reflection.GetAssembly(System.String)">
-            <summary>
-            获取程序集
-            </summary>
-            <param name="assemblyName">程序集名称</param>
-            <returns></returns>
-        </member>
         <member name="M:XUCore.Helpers.Reflection.GetAssemblies(System.String)">
             <summary>
             从目录获取所有程序集
@@ -7971,6 +7964,85 @@
             </summary>
             <param name="genericType">泛型类型</param>
             <param name="type">指定类型</param>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetAssemblies(System.Func{System.Reflection.Assembly,System.Boolean})">
+            <summary>
+            获取应用有效程序集
+            </summary>
+            <param name="predicate">指定查询程序集</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetEntryAssembly">
+            <summary>
+            获取入口程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetAssembly(System.String)">
+            <summary>
+            根据程序集名称获取运行时程序集
+            </summary>
+            <param name="assemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.LoadAssembly(System.String)">
+            <summary>
+            根据路径加载程序集
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.LoadAssembly(System.IO.MemoryStream)">
+            <summary>
+            通过流加载程序集
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetType(System.String,System.String)">
+            <summary>
+            根据程序集名称、类型完整限定名获取运行时类型
+            </summary>
+            <param name="assemblyName"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetType(System.Reflection.Assembly,System.String)">
+            <summary>
+            根据程序集和类型完全限定名获取运行时类型
+            </summary>
+            <param name="assembly"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetType(System.IO.MemoryStream,System.String)">
+            <summary>
+            根据程序集和类型完全限定名获取运行时类型
+            </summary>
+            <param name="assembly"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetAssemblyName(System.Reflection.Assembly)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetAssemblyName(System.Type)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Helpers.Reflection.GetAssemblyName(System.Reflection.TypeInfo)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="typeInfo"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Helpers.Regexs">
             <summary>

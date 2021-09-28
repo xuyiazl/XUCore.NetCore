@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using XUCore.Ddd.Domain;
 using XUCore.NetCore.AspectCore.Cache;
 using XUCore.NetCore.DataTest.Entities;
 
 namespace XUCore.NetCore.DataTest.Business
 {
-    public interface IAdminUsersBusinessService : IServiceDependency
+    public interface IAdminUsersBusinessService : IScoped
     {
         Task TestQueryAsync();
         Task TestDbAsync();

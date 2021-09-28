@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using XUCore.Configs;
+using XUCore.Ddd.Domain;
 using XUCore.Drawing;
 using XUCore.Excel;
 using XUCore.Extensions;

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,32 @@ namespace XUCore.Ddd.Domain
             where TEventStore : class, IEventStoreService
         {
             services.AddScoped<IEventStoreService, TEventStore>();
+
+            return services;
+        }
+        /// <summary>
+        /// 扫描注册生命周期对象
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddScanLifetime(this IServiceCollection services)
+        {
+            services.Scan(scan =>
+                scan
+                    .FromDependencyContext(DependencyContext.Default)
+                    //扫描单例
+                    .AddClasses(impl => impl.AssignableTo<ISingleton>())
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime()
+                    //扫描作用域
+                    .AddClasses(impl => impl.AssignableTo<IScoped>())
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+                    //扫描新实例
+                    .AddClasses(impl => impl.AssignableTo<ITransient>())
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime()
+            );
 
             return services;
         }

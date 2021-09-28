@@ -271,16 +271,16 @@ namespace XUCore.Helpers
 
         #endregion CreateInstance(动态创建实例)
 
-        #region GetAssembly(获取程序集)
+        //#region GetAssembly(获取程序集)
 
-        /// <summary>
-        /// 获取程序集
-        /// </summary>
-        /// <param name="assemblyName">程序集名称</param>
-        /// <returns></returns>
-        public static Assembly GetAssembly(string assemblyName) => Assembly.Load(new AssemblyName(assemblyName));
+        ///// <summary>
+        ///// 获取程序集
+        ///// </summary>
+        ///// <param name="assemblyName">程序集名称</param>
+        ///// <returns></returns>
+        //public static Assembly GetAssembly(string assemblyName) => Assembly.Load(new AssemblyName(assemblyName));
 
-        #endregion GetAssembly(获取程序集)
+        //#endregion GetAssembly(获取程序集)
 
         #region GetAssemblies(从目录获取所有程序集)
 
@@ -801,5 +801,130 @@ namespace XUCore.Helpers
         }
 
         #endregion IsGenericAssignableFrom(判断当前泛型类型是否可由指定类型的实例填充)
+
+        /// <summary>
+        /// 获取应用有效程序集
+        /// </summary>
+        /// <param name="predicate">指定查询程序集</param>
+        /// <returns>IEnumerable</returns>
+        public static IEnumerable<Assembly> GetAssemblies(Func<Assembly, bool> predicate)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                 .Where(assembly =>
+                     !assembly.FullName.StartsWith("System") &&
+                     !assembly.FullName.StartsWith("Microsoft") &&
+                     !assembly.FullName.StartsWith("netstandard") &&
+                     !assembly.FullName.StartsWith("Pomelo")
+                 );
+
+            if (predicate != null)
+                assemblies = assemblies.Where(predicate);
+
+            return assemblies;
+        }
+
+        /// <summary>
+        /// 获取入口程序集
+        /// </summary>
+        /// <returns></returns>
+        public static Assembly GetEntryAssembly()
+        {
+            return Assembly.GetEntryAssembly();
+        }
+
+        /// <summary>
+        /// 根据程序集名称获取运行时程序集
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <returns></returns>
+        public static Assembly GetAssembly(string assemblyName)
+        {
+            // 加载程序集
+            return AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(assemblyName));
+        }
+
+        /// <summary>
+        /// 根据路径加载程序集
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Assembly LoadAssembly(string path)
+        {
+            if (!File.Exists(path)) return default;
+            return AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
+        }
+
+        /// <summary>
+        /// 通过流加载程序集
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static Assembly LoadAssembly(MemoryStream assembly)
+        {
+            return Assembly.Load(assembly.ToArray());
+        }
+
+        /// <summary>
+        /// 根据程序集名称、类型完整限定名获取运行时类型
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <param name="typeFullName"></param>
+        /// <returns></returns>
+        public static Type GetType(string assemblyName, string typeFullName)
+        {
+            return GetAssembly(assemblyName).GetType(typeFullName);
+        }
+
+        /// <summary>
+        /// 根据程序集和类型完全限定名获取运行时类型
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="typeFullName"></param>
+        /// <returns></returns>
+        public static Type GetType(Assembly assembly, string typeFullName)
+        {
+            return assembly.GetType(typeFullName);
+        }
+
+        /// <summary>
+        /// 根据程序集和类型完全限定名获取运行时类型
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="typeFullName"></param>
+        /// <returns></returns>
+        public static Type GetType(MemoryStream assembly, string typeFullName)
+        {
+            return LoadAssembly(assembly).GetType(typeFullName);
+        }
+
+        /// <summary>
+        /// 获取程序集名称
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static string GetAssemblyName(Assembly assembly)
+        {
+            return assembly.GetName().Name;
+        }
+
+        /// <summary>
+        /// 获取程序集名称
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string GetAssemblyName(Type type)
+        {
+            return GetAssemblyName(type.GetTypeInfo());
+        }
+
+        /// <summary>
+        /// 获取程序集名称
+        /// </summary>
+        /// <param name="typeInfo"></param>
+        /// <returns></returns>
+        public static string GetAssemblyName(TypeInfo typeInfo)
+        {
+            return GetAssemblyName(typeInfo.Assembly);
+        }
     }
 }
