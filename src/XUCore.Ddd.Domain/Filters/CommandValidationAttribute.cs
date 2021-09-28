@@ -15,4 +15,20 @@ namespace XUCore.Ddd.Domain.Filters
             base.OnActionExecuting(context);
         }
     }
+
+    /// <summary>
+    /// FluentValidation 验证拦截（因使用动态API，自动验证失效，导致需要手工操作。）
+    /// </summary>
+    public class CommandValidationActionFilter : IActionFilter
+    {
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
+
+        }
+
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
+            context.ActionArguments?.ForEach(c => (c.Value as Command)?.IsVaild());
+        }
+    }
 }

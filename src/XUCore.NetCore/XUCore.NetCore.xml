@@ -975,6 +975,11 @@
             <param name="pageName"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeActionFilter">
+            <summary>
+            API查询时间
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.Filters.ApiElapsedTimeAttribute">
             <summary>
             API查询时间
