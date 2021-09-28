@@ -76,15 +76,18 @@ namespace XUCore.Ddd.Domain
                     .FromDependencyContext(DependencyContext.Default)
                     //扫描单例
                     .AddClasses(impl => impl.AssignableTo<ISingleton>())
-                    .AsImplementedInterfaces()
+                    //.AsImplementedInterfaces()
+                    .AsSelfWithInterfaces()
                     .WithSingletonLifetime()
                     //扫描作用域
                     .AddClasses(impl => impl.AssignableTo<IScoped>())
-                    .AsImplementedInterfaces()
+                    //.AsImplementedInterfaces()
+                    .AsSelfWithInterfaces()
                     .WithScopedLifetime()
                     //扫描新实例
                     .AddClasses(impl => impl.AssignableTo<ITransient>())
-                    .AsImplementedInterfaces()
+                    //.AsImplementedInterfaces()
+                    .AsSelfWithInterfaces()
                     .WithTransientLifetime()
             );
 

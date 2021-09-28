@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Mongo 操作封装</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.3.8</Version>
+		<Version>5.3.9</Version>
 		<PackageId>XUCore.NetCore.Mongo</PackageId>
 		<Product>XUCore.NetCore.Mongo</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
