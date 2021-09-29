@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Common 基础集合库</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.3.10</Version>
+		<Version>5.4.0</Version>
 		<PackageId>XUCoreApp</PackageId>
 		<Product>XUCoreApp</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -34,7 +34,6 @@
 		<ProjectReference Include="..\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\XUCore.Drawing\XUCore.Drawing.csproj" />
 		<ProjectReference Include="..\XUCore.Ddd.Domain\XUCore.Ddd.Domain.csproj" />
-		<ProjectReference Include="..\XUCore.NetCore.AccessControl\XUCore.NetCore.AccessControl.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.DynamicWebApi\XUCore.NetCore.DynamicWebApi.csproj" />
