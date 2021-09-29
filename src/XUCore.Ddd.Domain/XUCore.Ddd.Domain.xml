@@ -337,28 +337,6 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.DependencyInjection.AddScanLifetime(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            扫描注册生命周期对象
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.Ddd.Domain.IScoped">
-            <summary>
-            作用域
-            </summary>
-        </member>
-        <member name="T:XUCore.Ddd.Domain.ISingleton">
-            <summary>
-            单例
-            </summary>
-        </member>
-        <member name="T:XUCore.Ddd.Domain.ITransient">
-            <summary>
-            每次创建新实例
-            </summary>
-        </member>
         <member name="T:XUCore.Ddd.Domain.Entity`1">
             <summary>
             定义领域实体基类

@@ -422,6 +422,33 @@
             WebApi的区域控制器基类
             </summary>
         </member>
+        <member name="T:XUCore.NetCore.DependencyInjection">
+            <summary>
+            服务扩展
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.DependencyInjection.AddScanLifetime(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            扫描注册生命周期对象
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.IScoped">
+            <summary>
+            作用域
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.ISingleton">
+            <summary>
+            单例
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.ITransient">
+            <summary>
+            每次创建新实例
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.EasyQuartz.CronCommon.SecondInterval(System.Int32)">
             <summary>
             秒级间隔

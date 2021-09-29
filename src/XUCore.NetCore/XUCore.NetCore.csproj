@@ -42,6 +42,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
 		<PackageReference Include="log4net" Version="2.0.12" />
 		<PackageReference Include="Quartz" Version="3.3.3" />
+		<PackageReference Include="Scrutor" Version="3.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>

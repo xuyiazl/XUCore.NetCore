@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Domain
+namespace XUCore.NetCore
 {
     /// <summary>
-    /// 单例
+    /// 作用域
     /// </summary>
-    public interface ISingleton
+    public interface IScoped
     {
     }
 }

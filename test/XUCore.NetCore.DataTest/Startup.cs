@@ -1,15 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using XUCore.Ddd.Domain;
 using XUCore.NetCore.AspectCore.Cache;
-using XUCore.NetCore.DataTest.Business;
 using XUCore.NetCore.DataTest.DbRepository;
-using XUCore.NetCore.DataTest.DbService;
 using XUCore.NetCore.Redis;
 
 namespace XUCore.NetCore.DataTest
