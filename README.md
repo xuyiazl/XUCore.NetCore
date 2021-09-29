@@ -72,6 +72,8 @@
 
 ## 如何使用脚手架 
 
+所有脚手架在模板中默认形态是支持WebApi（因为目前都是前后端分离），但是底层是相通的，所以只需自行创建对应的web工程即可。
+
 ### [XUCore.Template.Ddd](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Ddd)
 
 ### [XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer) 
