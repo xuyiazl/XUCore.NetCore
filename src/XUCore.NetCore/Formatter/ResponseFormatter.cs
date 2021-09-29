@@ -6,18 +6,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.MessagePack
+namespace XUCore.NetCore.Formatter
 {
     public interface IMessagePackResponseFormatter
     {
-        Task WriteAsync(OutputFormatterWriteContext context, MessagePackFormatterOptions options);
+        Task WriteAsync(OutputFormatterWriteContext context, FormatterOptions options);
     }
 
     public class JsonResponseFormatter : IMessagePackResponseFormatter
     {
-        public async Task WriteAsync(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
+        public async Task WriteAsync(OutputFormatterWriteContext context, FormatterOptions options)
         {
-            MessagePackUtils.FormatterJsonOptions(context, options);
+            Utils.FormatterJsonOptions(context, options);
 
             var res = JsonConvert.SerializeObject(context.Object, options.JsonSerializerSettings);
 
@@ -31,7 +31,7 @@ namespace XUCore.NetCore.MessagePack
 
     public class MsgPackResponseFormatter : IMessagePackResponseFormatter
     {
-        public async Task WriteAsync(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
+        public async Task WriteAsync(OutputFormatterWriteContext context, FormatterOptions options)
         {
             context.HttpContext.Response.ContentType = "application/octet-stream";
 
@@ -41,7 +41,7 @@ namespace XUCore.NetCore.MessagePack
 
     public class JacksonResponseFormatter : IMessagePackResponseFormatter
     {
-        public async Task WriteAsync(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
+        public async Task WriteAsync(OutputFormatterWriteContext context, FormatterOptions options)
         {
             var res = MessagePackSerializer.SerializeToJson(context.Object, options.Options);
 

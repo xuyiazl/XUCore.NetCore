@@ -12,13 +12,13 @@ using System.Text;
 using XUCore.Extensions;
 using Newtonsoft.Json;
 
-namespace XUCore.NetCore.MessagePack
+namespace XUCore.NetCore.Formatter
 {
-    public class MessagePackOutputFormatter : OutputFormatter
+    internal class OutputFormatter : Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
     {
-        private readonly MessagePackFormatterOptions _options;
+        private readonly FormatterOptions _options;
 
-        public MessagePackOutputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
+        public OutputFormatter(FormatterOptions messagePackFormatterOptions)
         {
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
             foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)

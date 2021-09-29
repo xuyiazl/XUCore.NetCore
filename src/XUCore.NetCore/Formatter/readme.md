@@ -1,44 +1,37 @@
 ﻿
 
-[TOC]
+旧版命名 XUCore.NetCore.MessagePack  更改为 XUCore.NetCore.Formatter
 
+###MessagePack API输出（注入即可，如果要使用Messagepack，则需要模型打下标）
 
-###MessagePack API输出
-
-Startup注入MessagePackFormatters
+Startup注入AddFormatters
 
 ```csharp
 
-services.AddControllers(options =>
-{
-    options.MaxModelValidationErrors = 50;
-})
-//注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
-.AddMessagePackFormatters(options =>
-{
-    options.JsonSerializerSettings = new JsonSerializerSettings()
+services
+    .AddControllers()
+    //注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
+    .AddFormatters(options =>
     {
-        //统一设置JSON格式输出为utc
-        DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-        //统一设置JSON为小驼峰格式
-        ContractResolver = new CamelCasePropertyNamesContractResolver()
-    };
-    //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
-    //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
-    options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
-    options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
-});
+        options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+        options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
+
+        //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
+        //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
+        options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
+        options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+    });
 
 ```
 
-在控制器头部添加MessagePackProduces标签
+在控制器头部添加MessagePackProduces标签（可选）
 
 ```csharp
 
 [Route("api/[controller]/[Action]")]
 [ApiController]
-[MessagePackRequestContentType("application/json")]
-[MessagePackResponseContentType]
+[RequestContentType]
+[ResponseContentType]
 public class MessagePackController : ControllerBase
 {
     [HttpGet]
@@ -46,7 +39,6 @@ public class MessagePackController : ControllerBase
     {
         return new User { Id = 1, Name = "test", CreateTime = DateTime.Now };
     }
-
 
     [HttpPost]
     public User Add([FromBody] User user)
@@ -181,7 +173,7 @@ else
 
 ##### 1、自定义输出字段
 
-> 决模型不一致的问题，直接改善了客户端对接各种API导致模型不一致的问题，也可以按需索取，减少不需可解决模型不一致的问题，直接改善了客户端对接各种API导致模型不一致的问题，也可以按需索取，减少不需要的字段输出，避免加大网络的传输
+> 解决模型不一致的问题，也可以按需索取减少不需要的字段输出，避免加大网络的传输，间接减少服务端重复的开发
 
 ##### 2、对输出的字段重命名
 
@@ -199,7 +191,7 @@ else
 当然我们需要引用：
 
 ```csharp
-<PackageReference Include="Bailun.NetCore.Common" Version="1.1.1" />
+<PackageReference Include="XUCore.NetCore" Version="5.3.10" />
 ```
 
 然后需要在注册`MessagePack`的时候配置`ContractResolver`即可`LimitPropsCamelCaseContractResolver`
@@ -207,20 +199,19 @@ else
 如下配置代码：:arrow_down:
 
 ```csharp
-//注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
-.AddMessagePackFormatters(options =>
-{
-    options.JsonSerializerSettings = new JsonSerializerSettings()
+services
+    .AddControllers()
+    //注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
+    .AddFormatters(options =>
     {
-        DateTimeZoneHandling = DateTimeZoneHandling.Local,
-		//自定义JSON输出
-        ContractResolver = new LimitPropsCamelCaseContractResolver()
-    };
-    //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
-    //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
-    options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
-    options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
-});
+        options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+        options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
+
+        //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
+        //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
+        options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;
+        options.Options = MessagePackSerializerResolver.UnixDateTimeOptions;
+    });
 ```
 
 ------------

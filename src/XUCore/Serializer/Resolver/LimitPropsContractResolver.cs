@@ -39,7 +39,9 @@ namespace XUCore.Serializer
         /// </summary>
         CamelCase
     }
-
+    /// <summary>
+    /// 自定义输出格式
+    /// </summary>
     public class LimitPropsContractResolver : DefaultContractResolver
     {
         /// <summary>
@@ -58,7 +60,9 @@ namespace XUCore.Serializer
         /// 是否返回驼峰
         /// </summary>
         public ResolverMode Resolver { get; set; }
-
+        /// <summary>
+        /// 自定义输出格式
+        /// </summary>
         public LimitPropsContractResolver()
         {
 

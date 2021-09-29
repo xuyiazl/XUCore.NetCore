@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using XUCore.NetCore;
 using XUCore.NetCore.ApiTests;
 using XUCore.NetCore.Controllers;
-using XUCore.NetCore.MessagePack;
+using XUCore.NetCore.Formatter;
 using XUCore.NetCore.Signature;
 using XUCore.NetCore.Swagger;
 
@@ -17,7 +17,7 @@ namespace XUCore.ApiTests.Controllers
     /// <summary>
     /// XML注释
     /// </summary>
-    [MessagePackResponseContentType]
+    [ResponseContentType]
     public class MessagePackController : ApiControllerBase
     {
         public MessagePackController(ILogger<MessagePackController> logger)

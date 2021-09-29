@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.MessagePack
+namespace XUCore.NetCore.Formatter
 {
-    public class MessagePackFormatterOptions
+    public class FormatterOptions
     {
         public JsonSerializerSettings JsonSerializerSettings { get; set; } = new JsonSerializerSettings()
         {

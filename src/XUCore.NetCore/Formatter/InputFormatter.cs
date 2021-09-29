@@ -14,13 +14,13 @@ using XUCore.Extensions;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace XUCore.NetCore.MessagePack
+namespace XUCore.NetCore.Formatter
 {
-    public class MessagePackInputFormatter : InputFormatter
+    internal class InputFormatter : Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
     {
-        private readonly MessagePackFormatterOptions _options;
+        private readonly FormatterOptions _options;
 
-        public MessagePackInputFormatter(MessagePackFormatterOptions messagePackFormatterOptions)
+        public InputFormatter(FormatterOptions messagePackFormatterOptions)
         {
             _options = messagePackFormatterOptions ?? throw new ArgumentNullException(nameof(messagePackFormatterOptions));
             foreach (var contentType in messagePackFormatterOptions.SupportedResponseFormatters.Keys)

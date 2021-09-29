@@ -6,13 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using System.Linq;
 using XUCore.Extensions;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.Extensions;
-using XUCore.NetCore.MessagePack;
+using XUCore.NetCore.Formatter;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
 
@@ -37,22 +36,11 @@ namespace XUCore.NetCore.MessageApiTest
                 options.MaxModelValidationErrors = 50;
             })
             //注册API MessagePack输出格式。 输入JSON/MessagePack  输出 JSON/MessagePack/MessagePack-Jackson
-            .AddMessagePackFormatters(options =>
+            .AddFormatters(options =>
             {
-                var reProps = new Dictionary<string, string> { { "code", "_code" },
-                    { "subCode", "_subCode" },
-                    { "bodyMessage", "data" },
-                    { "TemperatureC", "c" },
-                    { "Summary", "s" } };
+                options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();
 
-                var props = new string[] { "_code", "_subCode", "data", "c", "s" };
-
-                options.JsonSerializerSettings = new JsonSerializerSettings()
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Local,
-                    //ContractResolver = new LimitPropsCamelCaseContractResolver(props, LimitPropsType.Contains, reProps)
-                    ContractResolver = new LimitPropsContractResolver()
-                };
                 //默认设置MessageagePack的日期序列化格式为时间戳，对外输出一致为时间戳的日期，不需要我们自己去序列化，自动操作。
                 //C#实体内仍旧保持DateTime。跨语言MessageagePack没有DateTime类型。
                 options.FormatterResolver = MessagePackSerializerResolver.UnixDateTimeFormatter;

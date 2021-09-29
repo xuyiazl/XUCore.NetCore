@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Linq;
 using System.Net;
@@ -21,7 +20,7 @@ using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.Logging.Log4Net;
-using XUCore.NetCore.MessagePack;
+using XUCore.NetCore.Formatter;
 using XUCore.NetCore.Signature;
 using XUCore.NetCore.Swagger;
 using XUCore.Serializer;
@@ -63,7 +62,7 @@ namespace XUCore.ApiTests
             services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);//enableGlobalAuthorize: true
 
             services.AddControllers()
-                .AddMessagePackFormatters(options =>
+                .AddFormatters(options =>
                 {
                     options.JsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
                     options.JsonSerializerSettings.ContractResolver = new LimitPropsContractResolver();

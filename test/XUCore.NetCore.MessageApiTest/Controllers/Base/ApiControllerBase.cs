@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using XUCore.NetCore.Filters;
-using XUCore.NetCore.MessagePack;
+using XUCore.NetCore.Formatter;
 
 namespace XUCore.NetCore.MessageApiTest
 {
@@ -12,8 +12,8 @@ namespace XUCore.NetCore.MessageApiTest
     [Route("api/[controller]/[action]")]
     [ApiTrace(Ignore = true)] //忽略API请求业务跟踪
     [ApiElapsedTime]
-    [MessagePackRequestContentType("application/json")]
-    [MessagePackResponseContentType]
+    [RequestContentType("application/json")]
+    [ResponseContentType]
     public class ApiControllerBase : ControllerBase
     {
         public ApiControllerBase(ILogger logger)

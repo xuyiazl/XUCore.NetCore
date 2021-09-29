@@ -6,12 +6,12 @@ using XUCore.Extensions;
 using XUCore.Serializer;
 using XUCore.Serializer.Converters;
 
-namespace XUCore.NetCore.MessagePack
+namespace XUCore.NetCore.Formatter
 {
 
-    public static class MessagePackUtils
+    internal static class Utils
     {
-        public static void FormatterJsonOptions(OutputFormatterWriteContext context, MessagePackFormatterOptions options)
+        public static void FormatterJsonOptions(OutputFormatterWriteContext context, FormatterOptions options)
         {
             if (options.JsonSerializerSettings != null && options.JsonSerializerSettings.ContractResolver?.GetType() == typeof(LimitPropsContractResolver))
             {
@@ -29,14 +29,14 @@ namespace XUCore.NetCore.MessagePack
                 var dateFormat = headers["limit-date-format"].SafeString();
                 var dateUnix = headers["limit-date-unix"].SafeString().ToLower();
 
-                if (!dateFormat.IsEmpty())
+                if (dateFormat.NotEmpty())
                     options.JsonSerializerSettings.DateFormatString = dateFormat;
                 else
                     options.JsonSerializerSettings.DateFormatString = string.Empty;
 
                 options.JsonSerializerSettings.Converters.Clear();
 
-                if (!dateUnix.IsEmpty() && dateUnix.Equals("true"))
+                if (dateUnix.NotEmpty() && dateUnix.Equals("true"))
                 {
                     options.JsonSerializerSettings.Converters.Add(new DateTimeToUnixConverter());
                     options.JsonSerializerSettings.Converters.Add(new DateTimeNullToUnixConverter());

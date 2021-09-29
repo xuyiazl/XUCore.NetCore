@@ -16832,6 +16832,11 @@
             小驼峰
             </summary>
         </member>
+        <member name="T:XUCore.Serializer.LimitPropsContractResolver">
+            <summary>
+            自定义输出格式
+            </summary>
+        </member>
         <member name="P:XUCore.Serializer.LimitPropsContractResolver.Props">
             <summary>
             指定要序列化属性的清单
@@ -16850,6 +16855,11 @@
         <member name="P:XUCore.Serializer.LimitPropsContractResolver.Resolver">
             <summary>
             是否返回驼峰
+            </summary>
+        </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.#ctor">
+            <summary>
+            自定义输出格式
             </summary>
         </member>
         <member name="M:XUCore.Serializer.LimitPropsContractResolver.#ctor(System.String[],XUCore.Serializer.LimitPropsMode,System.Collections.Generic.IDictionary{System.String,System.String},XUCore.Serializer.ResolverMode)">
