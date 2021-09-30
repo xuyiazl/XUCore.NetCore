@@ -12,12 +12,12 @@ namespace XUCore.NetCore
     public static partial class DependencyInjection
     {
         /// <summary>
-        /// 指定扫描方式，扫描生命周期，效率较高。
+        /// 指定扫描方式，扫描对象。
         /// </summary>
         /// <param name="services"></param>
         /// <param name="fromAssembly">当指定为null，则默认从DependencyContext中扫描</param>
         /// <returns></returns>
-        public static IServiceCollection AddScanLifetime(this IServiceCollection services, Func<IAssemblySelector, IImplementationTypeSelector> fromAssembly = null)
+        public static IServiceCollection AddScanLifetime(this IServiceCollection services, Func<ITypeSourceSelector, IImplementationTypeSelector> fromAssembly = null)
         {
             services.Scan(scan =>
                     (fromAssembly == null ? scan.FromDependencyContext(DependencyContext.Default) : fromAssembly(scan))
