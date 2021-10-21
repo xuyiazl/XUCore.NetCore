@@ -25,7 +25,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TPageCommand">分页命令</typeparam>
     public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : BaseRepository<TEntity, TKey>,
         ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-           
+
             where TEntity : EntityFull<TKey>, new()
             where TDto : class, new()
             where TCreateCommand : CreateCommand
@@ -54,6 +54,10 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// 删除事件
         /// </summary>
         protected Action<IList<TKey>> DeletedAction { get; set; }
+        /// <summary>
+        /// 软删除事件
+        /// </summary>
+        protected Action<IList<TKey>> SoftDeletedAction { get; set; }
         /// <summary>
         /// CURD服务
         /// </summary>
@@ -124,6 +128,20 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <summary>
         /// 删除数据
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public override async Task<int> DeleteAsync(TKey id, CancellationToken cancellationToken)
+        {
+            var res = await base.DeleteAsync(id, cancellationToken);
+
+            if (res > 0)
+                DeletedAction?.Invoke(new TKey[] { id });
+            return res;
+        }
+        /// <summary>
+        /// 删除数据
+        /// </summary>
         /// <param name="ids"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -141,19 +159,7 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> SoftDeleteAsync(TKey id, CancellationToken cancellationToken)
-        {
-            var res = await repo.UpdateDiy
-                 .SetDto(new TEntity
-                 {
-                     IsDeleted = true,
-                     ModifiedAtUserId = User.Id.ToLong(),
-                     ModifiedAtUserName = User.UserName
-                 })
-                 .WhereDynamic(id)
-                 .ExecuteAffrowsAsync(cancellationToken);
-            return res;
-        }
+        public virtual async Task<int> SoftDeleteAsync(TKey id, CancellationToken cancellationToken) => await SoftDeleteAsync(new TKey[] { id }, cancellationToken);
         /// <summary>
         /// 软删除
         /// </summary>
@@ -171,6 +177,9 @@ namespace XUCore.NetCore.FreeSql.Curd
                 })
                 .WhereDynamic(ids)
                 .ExecuteAffrowsAsync(cancellationToken);
+
+            if (res > 0)
+                SoftDeletedAction?.Invoke(ids);
             return res;
         }
         /// <summary>
@@ -208,7 +217,7 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <returns></returns>
         public virtual async Task<PagedModel<TDto>> GetPagedListAsync(TPageCommand request, CancellationToken cancellationToken)
         {
-            var res = await repo.Select.OrderBy(c => c.Id).ToPagedListAsync<TEntity, TDto>(request.CurrentPage, request.PageSize, cancellationToken);
+            var res = await repo.Select.OrderBy(c => c.CreatedAt).ToPagedListAsync<TEntity, TDto>(request.CurrentPage, request.PageSize, cancellationToken);
 
             return res.ToModel();
         }

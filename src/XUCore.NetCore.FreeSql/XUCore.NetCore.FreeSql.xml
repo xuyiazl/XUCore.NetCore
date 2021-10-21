@@ -79,6 +79,11 @@
             删除事件
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.FreeSql.Curd.CurdService`7.SoftDeletedAction">
+            <summary>
+            软删除事件
+            </summary>
+        </member>
         <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper)">
             <summary>
             CURD服务
@@ -108,6 +113,14 @@
             修改数据
             </summary>
             <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.DeleteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="id"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
