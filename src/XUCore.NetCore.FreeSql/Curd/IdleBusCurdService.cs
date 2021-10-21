@@ -10,6 +10,17 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <summary>
     /// IdleBus FreeSql CurdService（租户FreeSql实例）
     /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    public class IdleBusCurdService<TKey, TEntity> : CurdService<TKey, TEntity> where TEntity : EntityFull<TKey>, new()
+    {
+        protected IdleBusCurdService(IdleBusUnitOfWorkManager muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
+        {
+            muowm.Binding(repo);
+        }
+    }
+    /// <summary>
+    /// IdleBus FreeSql CurdService（租户FreeSql实例）
+    /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TDto"></typeparam>
@@ -19,7 +30,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TPageCommand"></typeparam>
     public class IdleBusCurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
         CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-       
+
         where TEntity : EntityFull<TKey>, new()
         where TDto : class, new()
         where TCreateCommand : CreateCommand

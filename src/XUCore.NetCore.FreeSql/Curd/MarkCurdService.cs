@@ -13,6 +13,19 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TMark"></typeparam>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
+    public class MarkCurdService<TMark, TKey, TEntity> : CurdService<TKey, TEntity> where TEntity : EntityFull<TKey>, new()
+    {
+        protected MarkCurdService(MarkUnitOfWorkManager<TMark> muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
+        {
+            muowm.Binding(repo);
+        }
+    }
+    /// <summary>
+    /// FreeSql Mark CurdService（多库FreeSql实例）
+    /// </summary>
+    /// <typeparam name="TMark"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TDto"></typeparam>
     /// <typeparam name="TCreateCommand"></typeparam>
     /// <typeparam name="TUpdateCommand"></typeparam>
@@ -20,7 +33,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TPageCommand"></typeparam>
     public class MarkCurdService<TMark, TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
         CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-       
+
         where TEntity : EntityFull<TKey>, new()
         where TDto : class, new()
         where TCreateCommand : CreateCommand

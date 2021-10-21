@@ -10,6 +10,16 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <summary>
     /// CURD服务
     /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TEntity">数据库实体</typeparam>
+    public interface ICurdService<TKey, TEntity>
+
+            where TEntity : class, new()
+    {
+    }
+    /// <summary>
+    /// CURD服务
+    /// </summary>
     /// <typeparam name="TKey">主键类型</typeparam>
     /// <typeparam name="TEntity">数据库实体</typeparam>
     /// <typeparam name="TDto">输出dto</typeparam>
@@ -17,14 +27,14 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TUpdateCommand">修改命令</typeparam>
     /// <typeparam name="TListCommand">查询列表命令</typeparam>
     /// <typeparam name="TPageCommand">分页命令</typeparam>
-    public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
-           
-            where TEntity : EntityFull<TKey>, new()
-            where TDto : class, new()
-            where TCreateCommand : CreateCommand
-            where TUpdateCommand : UpdateCommand<TKey>
-            where TListCommand : ListCommand
-            where TPageCommand : PageCommand
+    public interface ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : ICurdService<TKey, TEntity>
+
+        where TEntity : EntityFull<TKey>, new()
+        where TDto : class, new()
+        where TCreateCommand : CreateCommand
+        where TUpdateCommand : UpdateCommand<TKey>
+        where TListCommand : ListCommand
+        where TPageCommand : PageCommand
     {
         /// <summary>
         /// 添加数据
@@ -32,7 +42,7 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TKey> CreateAsync(TCreateCommand request, CancellationToken cancellationToken);
+        Task<TEntity> CreateAsync(TCreateCommand request, CancellationToken cancellationToken);
         /// <summary>
         /// 修改数据
         /// </summary>
@@ -40,6 +50,13 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<int> UpdateAsync(TUpdateCommand request, CancellationToken cancellationToken);
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> DeleteAsync(TKey id, CancellationToken cancellationToken);
         /// <summary>
         /// 删除数据
         /// </summary>

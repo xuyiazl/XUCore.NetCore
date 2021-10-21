@@ -16,6 +16,26 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <summary>
     /// CURD服务
     /// </summary>
+    public abstract class CurdService<TKey, TEntity> : ICurdService<TKey, TEntity> where TEntity : EntityFull<TKey>, new()
+    {
+        protected readonly IFreeSql freeSql;
+        protected readonly IBaseRepository<TEntity> repo;
+        protected readonly IMapper mapper;
+        /// <summary>
+        /// CURD服务
+        /// </summary>
+        /// <param name="freeSql"></param>
+        /// <param name="mapper"></param>
+        public CurdService(IFreeSql freeSql, IMapper mapper)
+        {
+            this.freeSql = freeSql;
+            this.mapper = mapper;
+            this.repo = freeSql.GetRepository<TEntity>();
+        }
+    }
+    /// <summary>
+    /// CURD服务
+    /// </summary>
     /// <typeparam name="TKey">主键类型</typeparam>
     /// <typeparam name="TEntity">数据库实体</typeparam>
     /// <typeparam name="TDto">输出dto</typeparam>
@@ -23,7 +43,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TUpdateCommand">修改命令</typeparam>
     /// <typeparam name="TListCommand">查询列表命令</typeparam>
     /// <typeparam name="TPageCommand">分页命令</typeparam>
-    public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
+    public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : CurdService<TKey, TEntity>,
         ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
 
             where TEntity : EntityFull<TKey>, new()
@@ -33,14 +53,6 @@ namespace XUCore.NetCore.FreeSql.Curd
             where TListCommand : ListCommand
             where TPageCommand : PageCommand
     {
-        protected readonly IFreeSql freeSql;
-        protected readonly IBaseRepository<TEntity> repo;
-
-        protected readonly IMapper mapper;
-        /// <summary>
-        /// 用户信息
-        /// </summary>
-        public IUser User { get; set; }
 
         /// <summary>
         /// 创建事件
@@ -59,15 +71,16 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// </summary>
         protected Action<IList<TKey>> SoftDeletedAction { get; set; }
         /// <summary>
+        /// 用户信息
+        /// </summary>
+        public IUser User { get; set; }
+        /// <summary>
         /// CURD服务
         /// </summary>
         /// <param name="freeSql"></param>
         /// <param name="mapper"></param>
-        public CurdService(IFreeSql freeSql, IMapper mapper)
+        public CurdService(IFreeSql freeSql, IMapper mapper) : base(freeSql, mapper)
         {
-            this.freeSql = freeSql;
-            this.mapper = mapper;
-            this.repo = freeSql.GetRepository<TEntity>();
         }
         ///// <summary>
         ///// CURD服务
@@ -88,20 +101,20 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<TKey> CreateAsync(TCreateCommand request, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> CreateAsync(TCreateCommand request, CancellationToken cancellationToken)
         {
             var entity = mapper.Map<TCreateCommand, TEntity>(request);
 
             var res = await repo.InsertAsync(entity, cancellationToken);
-            
+
             if (res != null)
             {
                 CreatedAction?.Invoke(res);
 
-                return res.Id;
+                return res;
             }
 
-            return default(TKey);
+            return default(TEntity);
         }
         /// <summary>
         /// 修改数据
@@ -159,7 +172,8 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<int> SoftDeleteAsync(TKey id, CancellationToken cancellationToken) => await SoftDeleteAsync(new TKey[] { id }, cancellationToken);
+        public virtual async Task<int> SoftDeleteAsync(TKey id, CancellationToken cancellationToken)
+            => await SoftDeleteAsync(new TKey[] { id }, cancellationToken);
         /// <summary>
         /// 软删除
         /// </summary>
@@ -172,8 +186,8 @@ namespace XUCore.NetCore.FreeSql.Curd
                 .SetDto(new TEntity
                 {
                     IsDeleted = true,
-                    ModifiedAtUserId = User.Id.ToLong(),
-                    ModifiedAtUserName = User.UserName
+                    ModifiedAtUserId = User?.Id.ToLong(),
+                    ModifiedAtUserName = User?.UserName
                 })
                 .WhereDynamic(ids)
                 .ExecuteAffrowsAsync(cancellationToken);
