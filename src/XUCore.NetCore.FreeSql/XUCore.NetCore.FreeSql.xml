@@ -91,15 +91,6 @@
             <param name="freeSql"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.#ctor(IFreeSql,AutoMapper.IMapper,System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Func{System.String,System.String})">
-            <summary>
-            CURD服务
-            </summary>
-            <param name="freeSql"></param>
-            <param name="mapper"></param>
-            <param name="filter"></param>
-            <param name="asTable"></param>
-        </member>
         <member name="M:XUCore.NetCore.FreeSql.Curd.CurdService`7.CreateAsync(`3,System.Threading.CancellationToken)">
             <summary>
             添加数据

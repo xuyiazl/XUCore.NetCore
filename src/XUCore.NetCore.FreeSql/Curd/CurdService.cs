@@ -23,7 +23,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TUpdateCommand">修改命令</typeparam>
     /// <typeparam name="TListCommand">查询列表命令</typeparam>
     /// <typeparam name="TPageCommand">分页命令</typeparam>
-    public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> : BaseRepository<TEntity, TKey>,
+    public abstract class CurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand> :
         ICurdService<TKey, TEntity, TDto, TCreateCommand, TUpdateCommand, TListCommand, TPageCommand>
 
             where TEntity : EntityFull<TKey>, new()
@@ -63,25 +63,25 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// </summary>
         /// <param name="freeSql"></param>
         /// <param name="mapper"></param>
-        public CurdService(IFreeSql freeSql, IMapper mapper) : base(freeSql, null, null)
+        public CurdService(IFreeSql freeSql, IMapper mapper)
         {
             this.freeSql = freeSql;
             this.mapper = mapper;
             this.repo = freeSql.GetRepository<TEntity>();
         }
-        /// <summary>
-        /// CURD服务
-        /// </summary>
-        /// <param name="freeSql"></param>
-        /// <param name="mapper"></param>
-        /// <param name="filter"></param>
-        /// <param name="asTable"></param>
-        public CurdService(IFreeSql freeSql, IMapper mapper, Expression<Func<TEntity, bool>> filter, Func<string, string> asTable = null) : base(freeSql, filter, asTable)
-        {
-            this.freeSql = freeSql;
-            this.mapper = mapper;
-            this.repo = freeSql.GetRepository<TEntity>();
-        }
+        ///// <summary>
+        ///// CURD服务
+        ///// </summary>
+        ///// <param name="freeSql"></param>
+        ///// <param name="mapper"></param>
+        ///// <param name="filter"></param>
+        ///// <param name="asTable"></param>
+        //public CurdService(IFreeSql freeSql, IMapper mapper, Expression<Func<TEntity, bool>> filter, Func<string, string> asTable = null) : base(freeSql, filter, asTable)
+        //{
+        //    this.freeSql = freeSql;
+        //    this.mapper = mapper;
+        //    this.repo = freeSql.GetRepository<TEntity>();
+        //}
         /// <summary>
         /// 添加数据
         /// </summary>
@@ -93,7 +93,7 @@ namespace XUCore.NetCore.FreeSql.Curd
             var entity = mapper.Map<TCreateCommand, TEntity>(request);
 
             var res = await repo.InsertAsync(entity, cancellationToken);
-
+            
             if (res != null)
             {
                 CreatedAction?.Invoke(res);
@@ -111,7 +111,7 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(TUpdateCommand request, CancellationToken cancellationToken)
         {
-            var entity = await repo.Select.WhereDynamic(request.Id).ToOneAsync<TEntity>(cancellationToken);
+            var entity = await repo.Select.WhereDynamic(request.Id).ToOneAsync(cancellationToken);
 
             if (entity == null)
                 return 0;
@@ -131,9 +131,9 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task<int> DeleteAsync(TKey id, CancellationToken cancellationToken)
+        public virtual async Task<int> DeleteAsync(TKey id, CancellationToken cancellationToken)
         {
-            var res = await base.DeleteAsync(id, cancellationToken);
+            var res = await repo.Select.WhereDynamic(id).ToDelete().ExecuteAffrowsAsync(cancellationToken);
 
             if (res > 0)
                 DeletedAction?.Invoke(new TKey[] { id });
@@ -147,7 +147,7 @@ namespace XUCore.NetCore.FreeSql.Curd
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(TKey[] ids, CancellationToken cancellationToken)
         {
-            var res = await freeSql.Delete<TEntity>(ids).ExecuteAffrowsAsync(cancellationToken);
+            var res = await repo.Select.WhereDynamic(ids).ToDelete().ExecuteAffrowsAsync(cancellationToken);
 
             if (res > 0)
                 DeletedAction?.Invoke(ids);

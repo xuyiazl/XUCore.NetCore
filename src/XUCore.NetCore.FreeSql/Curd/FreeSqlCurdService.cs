@@ -29,17 +29,17 @@ namespace XUCore.NetCore.FreeSql.Curd
     {
         protected FreeSqlCurdService(FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
         {
-            muowm.Binding(this);
+            muowm.Binding(repo);
 
             User = user;
         }
 
-        protected FreeSqlCurdService(FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user, Expression<Func<TEntity, bool>> filter, Func<string, string> asTable = null) :
-            base(muowm.Orm, mapper, filter, asTable)
-        {
-            muowm.Binding(this);
+        //protected FreeSqlCurdService(FreeSqlUnitOfWorkManager muowm, IMapper mapper, IUser user, Expression<Func<TEntity, bool>> filter, Func<string, string> asTable = null) :
+        //    base(muowm.Orm, mapper, filter, asTable)
+        //{
+        //    muowm.Binding(this);
 
-            User = user;
-        }
+        //    User = user;
+        //}
     }
 }
