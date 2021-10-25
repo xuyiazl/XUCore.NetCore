@@ -33,7 +33,7 @@ namespace XUCore.NetCore.EasyQuartz
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("QuartzHostedService is Running ...");
+            //_logger.LogInformation("QuartzHostedService is Running ...");
             Scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
             Scheduler.JobFactory = _jobFactory;
             foreach (var jobSchedule in _jobSchedules)

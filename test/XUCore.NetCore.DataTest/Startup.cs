@@ -24,9 +24,9 @@ namespace XUCore.NetCore.DataTest
             services.AddRedisService().AddJsonRedisSerializer();
 
             //注册缓存服务，暂时只提供内存缓存，后面会增加Redis，需要视情况而定
-            //services.AddCacheService<MemoryCacheService>();
-            services.AddCacheService<RedisCacheService>((option) =>
+            services.AddCacheInterceptor((option) =>
             {
+                option.CacheMode = CacheMode.Redis;
                 option.RedisRead = "cache-read";
                 option.RedisWrite = "cache-write";
             });

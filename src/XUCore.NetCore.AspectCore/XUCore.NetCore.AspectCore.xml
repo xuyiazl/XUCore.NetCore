@@ -9,17 +9,12 @@
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Prefix">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.HashKey">
             <summary>
-            缓存前缀
+            HashKey
             </summary>
         </member>
         <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Key">
-            <summary>
-            缓存key
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.ParamterKey">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
             支持属性参数的替换，{Id}-{Name} 等于 1-test
@@ -40,6 +35,11 @@
             缓存拦截器
             </summary>
         </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheOptions.CacheMode">
+            <summary>
+            启用缓存类型
+            </summary>
+        </member>
         <member name="P:XUCore.NetCore.AspectCore.Cache.CacheOptions.RedisRead">
             <summary>
             只读链接地址
@@ -50,22 +50,27 @@
             只写链接地址
             </summary>
         </member>
+        <member name="F:XUCore.NetCore.AspectCore.Cache.CacheMode.Memory">
+            <summary>
+            内存缓存
+            </summary>
+        </member>
+        <member name="F:XUCore.NetCore.AspectCore.Cache.CacheMode.Redis">
+            <summary>
+            redis缓存
+            </summary>
+        </member>
         <member name="T:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute">
             <summary>
             缓存拦截器（删除缓存）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Prefix">
-            <summary>
-            缓存前缀
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.HashKey">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Key">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序，（不支持模型）
             支持属性参数的替换，{Id}-{Name} 等于 1-test
@@ -76,7 +81,7 @@
             缓存拦截器
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.NetCore.AspectCore.Cache.CacheOptions})">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheInterceptor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.NetCore.AspectCore.Cache.CacheOptions})">
             <summary>
             注册缓存拦截服务
             </summary>
@@ -107,17 +112,12 @@
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Prefix">
-            <summary>
-            缓存前缀
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.HashKey">
             <summary>
             缓存key
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.ParamterKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Key">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
             支持属性参数的替换，{Id}-{Name} 等于 1-test
@@ -227,58 +227,6 @@
         <member name="M:XUCore.NetCore.AspectCore.Cache.QuartzService.Stop">
             <summary>
             停止服务
-            </summary>
-        </member>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute">
-            <summary>
-            缓存拦截器
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.HashKey">
-            <summary>
-            HashKey
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.Key">
-            <summary>
-            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
-            支持属性参数的替换，{Id}-{Name} 等于 1-test
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.Seconds">
-            <summary>
-            缓存时间（秒）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.IsOpen">
-            <summary>
-            是否开启缓存
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.RedisCacheMethodAttribute.#ctor">
-            <summary>
-            缓存拦截器
-            </summary>
-        </member>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute">
-            <summary>
-            缓存拦截器（删除缓存）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.HashKey">
-            <summary>
-            HashKey
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.Key">
-            <summary>
-            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
-            支持属性参数的替换，{Id}-{Name} 等于 1-test
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.RedisCacheRemoveAttribute.#ctor">
-            <summary>
-            缓存拦截器
             </summary>
         </member>
         <member name="T:XUCore.NetCore.AspectCore.IgnoreAttribute">

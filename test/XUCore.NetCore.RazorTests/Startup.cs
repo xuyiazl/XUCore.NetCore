@@ -37,7 +37,7 @@ namespace XUCore.RazorTests
 
             services.AddMvcAction();
 
-            services.AddCacheService<MemoryCacheService>();
+            services.AddCacheInterceptor();
 
             services.AddScoped<ICacheTest, CacheTest>();
 

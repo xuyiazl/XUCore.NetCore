@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,21 +17,31 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// 注册缓存拦截服务
         /// </summary>
         /// <param name="services"></param>
-        public static IServiceCollection AddCacheService<TCacheServiceImpl>(this IServiceCollection services, Action<CacheOptions> options = null)
-            where TCacheServiceImpl : class, ICacheService
+        public static IServiceCollection AddCacheInterceptor(this IServiceCollection services, Action<CacheOptions> options = null)
         {
-            services.AddMemoryCache();
-            services.TryAddSingleton<ICacheService, TCacheServiceImpl>();
-            services.TryAddTransient<QuartzRefreshJob>();
-            services.TryAddSingleton<QuartzService>();
-
             options ??= new Action<CacheOptions>((option) =>
             {
+                option.CacheMode = CacheMode.Memory;
                 option.RedisRead = "cache-read";
                 option.RedisWrite = "cache-write";
             });
 
             services.Configure<CacheOptions>(options);
+
+            var opt = services.BuildServiceProvider().GetService<IOptions<CacheOptions>>();
+
+            if (opt.Value.CacheMode == CacheMode.Memory)
+            {
+                services.AddMemoryCache();
+                services.TryAddSingleton<ICacheService, MemoryCacheService>();
+            }
+            else
+            {
+                services.TryAddSingleton<ICacheService, RedisCacheService>();
+            }
+
+            services.TryAddTransient<QuartzRefreshJob>();
+            services.TryAddSingleton<QuartzService>();
 
             services.AddInterceptor();
 

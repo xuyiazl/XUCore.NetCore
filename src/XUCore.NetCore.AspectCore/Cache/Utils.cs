@@ -10,9 +10,9 @@ namespace XUCore.NetCore.AspectCore.Cache
 {
     internal static class Utils
     {
-        public static string GetParamterKey(string Prefix, string Key, string ParamterKey, object[] paramters)
+        public static string GetParamterKey(string Key, string ParamterKey, object[] paramters)
         {
-            string key = $"{Prefix}{Key}";
+            string key = $"{Key}";
 
             if (string.IsNullOrEmpty(ParamterKey) || paramters == null)
                 return key;
@@ -68,7 +68,7 @@ namespace XUCore.NetCore.AspectCore.Cache
             if (paramList.Count > 0)
                 key += $"{string.Format(ParamterKey, paramList.ToArray())}";
             else
-                key += ParamterKey;
+                key += $"{ParamterKey}";
 
             return key;
         }

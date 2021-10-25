@@ -36,14 +36,14 @@ namespace XUCore.NetCore.AspectCore.Cache
             {
                 var job = taskService.CacheContainer[jobKey];
 
-                job.Invoke();
+                await job.Invoke();
             }
             catch (Exception ex)
             {
                 logger.LogError($"{DateTime.Now}，执行缓存同步：{jobKey}，异常：{ex.FormatMessage()}");
             }
 
-            Console.WriteLine($"{DateTime.Now}，执行缓存同步：{jobKey}");
+            logger.LogInformation($"{DateTime.Now}，执行缓存同步：{jobKey}");
         }
 
         public void Dispose()

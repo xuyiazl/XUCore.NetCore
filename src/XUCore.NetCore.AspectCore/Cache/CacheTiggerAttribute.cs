@@ -13,18 +13,14 @@ namespace XUCore.NetCore.AspectCore.Cache
     public class CacheTiggerAttribute : InterceptorBase
     {
         /// <summary>
-        /// 缓存前缀
-        /// </summary>
-        public string Prefix { get; set; } = "_cachePrefix_";
-        /// <summary>
         /// 缓存key
         /// </summary>
-        public string Key { get; set; }
+        public string HashKey { get; set; }
         /// <summary>
         /// 缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
         /// 支持属性参数的替换，{Id}-{Name} 等于 1-test
         /// </summary>
-        public string ParamterKey { get; set; }
+        public string Key { get; set; }
         /// <summary>
         /// 刷新时间（秒）
         /// </summary>
@@ -53,7 +49,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 Type returnType = context.GetReturnType();
 
-                string key = Utils.GetParamterKey(Prefix, Key, ParamterKey, context.Parameters);
+                string key = Utils.GetParamterKey(HashKey, Key, context.Parameters);
 
                 var result = cacheService.Get(key, returnType);
 
@@ -70,7 +66,7 @@ namespace XUCore.NetCore.AspectCore.Cache
             {
                 var logger = context.ServiceProvider.GetService<ILogger<CacheTiggerAttribute>>();
 
-                logger.LogError($"CacheInterceptor：Key：{Key}，ParamterKey：{ParamterKey} {ex.FormatMessage()}");
+                logger.LogError($"CacheInterceptor：Key：{HashKey}，ParamterKey：{Key} {ex.FormatMessage()}");
 
                 await next(context);
             }
