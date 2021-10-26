@@ -26,7 +26,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         public async Task Execute(IJobExecutionContext context)
         {
             var jobKey = context.JobDetail.JobDataMap.GetString("JobKey");
-            var jobIdentity = context.JobDetail.JobDataMap.GetString("JobIdentity");
+            //var jobIdentity = context.JobDetail.JobDataMap.GetString("JobIdentity");
 
             var taskService = serviceProvider.GetService<QuartzService>();
 
@@ -37,13 +37,14 @@ namespace XUCore.NetCore.AspectCore.Cache
                 var job = taskService.CacheContainer[jobKey];
 
                 await job.Invoke();
+
+                logger.LogInformation($"{DateTime.Now}，执行缓存同步：{jobKey}");
             }
             catch (Exception ex)
             {
                 logger.LogError($"{DateTime.Now}，执行缓存同步：{jobKey}，异常：{ex.FormatMessage()}");
             }
 
-            logger.LogInformation($"{DateTime.Now}，执行缓存同步：{jobKey}");
         }
 
         public void Dispose()

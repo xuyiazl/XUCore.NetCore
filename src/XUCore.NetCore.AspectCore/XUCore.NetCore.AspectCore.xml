@@ -4,33 +4,85 @@
         <name>XUCore.NetCore.AspectCore</name>
     </assembly>
     <members>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute">
+        <member name="T:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute">
             <summary>
             缓存拦截器
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.HashKey">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute.HashKey">
             <summary>
             HashKey
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Key">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute.Key">
             <summary>
             缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序。
             支持属性参数的替换，{Id}-{Name} 等于 1-test
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.Seconds">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute.Seconds">
             <summary>
             缓存时间（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.IsOpen">
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute.IsOpen">
             <summary>
             是否开启缓存
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheMethodAttribute.#ctor">
+        <member name="M:XUCore.NetCore.AspectCore.Cache.AspectCacheAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute">
+            <summary>
+            缓存拦截器（主动拉取器）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute.HashKey">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute.Key">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
+            支持属性参数的替换，{Id}-{Name} 等于 1-test
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute.RefreshSeconds">
+            <summary>
+            刷新时间（秒）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute.IsOpen">
+            <summary>
+            是否开启缓存
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.AspectCachePullAttribute.#ctor">
+            <summary>
+            缓存拦截器
+            </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Cache.AspectCacheRemoveAttribute">
+            <summary>
+            缓存拦截器（删除缓存）
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheRemoveAttribute.HashKey">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.AspectCore.Cache.AspectCacheRemoveAttribute.Key">
+            <summary>
+            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序，（不支持模型）
+            支持属性参数的替换，{Id}-{Name} 等于 1-test
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.AspectCacheRemoveAttribute.#ctor">
             <summary>
             缓存拦截器
             </summary>
@@ -60,27 +112,6 @@
             redis缓存
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute">
-            <summary>
-            缓存拦截器（删除缓存）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.HashKey">
-            <summary>
-            缓存key
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.Key">
-            <summary>
-            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序，（不支持模型）
-            支持属性参数的替换，{Id}-{Name} 等于 1-test
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheRemoveAttribute.#ctor">
-            <summary>
-            缓存拦截器
-            </summary>
-        </member>
         <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.AddCacheInterceptor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{XUCore.NetCore.AspectCore.Cache.CacheOptions})">
             <summary>
             注册缓存拦截服务
@@ -106,71 +137,6 @@
             </summary>
             <param name="hostBuilder"></param>
             <returns></returns>
-        </member>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute">
-            <summary>
-            缓存拦截器
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.HashKey">
-            <summary>
-            缓存key
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Key">
-            <summary>
-            缓存key（参数组成部分，如果不需要则不填写），参考string.Format的参数顺序
-            支持属性参数的替换，{Id}-{Name} 等于 1-test
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.Seconds">
-            <summary>
-            刷新时间（秒）
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.IsOpen">
-            <summary>
-            是否开启缓存
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.CacheTiggerAttribute.#ctor">
-            <summary>
-            缓存拦截器
-            </summary>
-        </member>
-        <member name="T:XUCore.NetCore.AspectCore.Cache.ICacheService">
-            <summary>
-            缓存服务
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Get(System.String,System.Type)">
-            <summary>
-            获取缓存
-            </summary>
-            <param name="key"></param>
-            <param name="returnType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.Object)">
-            <summary>
-            写入缓存
-            </summary>
-            <param name="key"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.TimeSpan,System.Object)">
-            <summary>
-            写入缓存
-            </summary>
-            <param name="key"></param>
-            <param name="expirationTime"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Remove(System.String)">
-            <summary>
-            删除缓存
-            </summary>
-            <param name="key"></param>
         </member>
         <member name="T:XUCore.NetCore.AspectCore.Cache.QuartzJobFactory">
             <summary>
@@ -228,6 +194,40 @@
             <summary>
             停止服务
             </summary>
+        </member>
+        <member name="T:XUCore.NetCore.AspectCore.Cache.ICacheService">
+            <summary>
+            缓存服务
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Get(System.String,System.Type)">
+            <summary>
+            获取缓存
+            </summary>
+            <param name="key"></param>
+            <param name="returnType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.Object)">
+            <summary>
+            写入缓存
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Set(System.String,System.TimeSpan,System.Object)">
+            <summary>
+            写入缓存
+            </summary>
+            <param name="key"></param>
+            <param name="expirationTime"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:XUCore.NetCore.AspectCore.Cache.ICacheService.Remove(System.String)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key"></param>
         </member>
         <member name="T:XUCore.NetCore.AspectCore.IgnoreAttribute">
             <summary>

@@ -8,9 +8,9 @@ using XUCore.Extensions;
 namespace XUCore.NetCore.AspectCore.Cache
 {
     /// <summary>
-    /// 缓存拦截器
+    /// 缓存拦截器（主动拉取器）
     /// </summary>
-    public class CacheTiggerAttribute : InterceptorBase
+    public class AspectCachePullAttribute : InterceptorBase
     {
         /// <summary>
         /// 缓存key
@@ -24,7 +24,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// <summary>
         /// 刷新时间（秒）
         /// </summary>
-        public int Seconds { get; set; } = 60;
+        public int RefreshSeconds { get; set; } = 60;
         /// <summary>
         /// 是否开启缓存
         /// </summary>
@@ -32,7 +32,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// <summary>
         /// 缓存拦截器
         /// </summary>
-        public CacheTiggerAttribute() { }
+        public AspectCachePullAttribute() { }
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
@@ -64,9 +64,9 @@ namespace XUCore.NetCore.AspectCore.Cache
             }
             catch (Exception ex)
             {
-                var logger = context.ServiceProvider.GetService<ILogger<CacheTiggerAttribute>>();
+                var logger = context.ServiceProvider.GetService<ILogger<AspectCachePullAttribute>>();
 
-                logger.LogError($"CacheInterceptor：Key：{HashKey}，ParamterKey：{Key} {ex.FormatMessage()}");
+                logger.LogError($"AspectCachePull：HashKey：{HashKey}，Key：{Key} {ex.FormatMessage()}");
 
                 await next(context);
             }
@@ -88,7 +88,7 @@ namespace XUCore.NetCore.AspectCore.Cache
                         cacheService.Set(key, value);
                 });
 
-                scheduler.JoinJobAsync(key, TimeSpan.FromSeconds(Seconds)).Wait();
+                scheduler.JoinJobAsync(key, TimeSpan.FromSeconds(RefreshSeconds)).Wait();
             }
 
             await next(context);

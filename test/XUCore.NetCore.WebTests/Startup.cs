@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using XUCore.NetCore.Extensions;
 using XUCore.NetCore.HttpFactory;
-using XUCore.NetCore.Logging.Log4Net;
+//using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
 using XUCore.NetCore.Data;
 using System;
@@ -109,7 +109,7 @@ namespace XUCore.WebTests
             }
 
             //注册log4net日志
-            loggerFactory.AddLog4Net();
+            //loggerFactory.AddLog4Net();
             //注册真实IP中间件
             app.UseRealIp();
             //启用静态请求上下文

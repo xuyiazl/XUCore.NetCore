@@ -5,7 +5,7 @@ using XUCore.Extensions;
 
 namespace XUCore.NetCore.AspectCore.Cache
 {
-    public class MemoryCacheService : ICacheService
+    internal class MemoryCacheService : ICacheService
     {
         private readonly IMemoryCache memoryCache;
 

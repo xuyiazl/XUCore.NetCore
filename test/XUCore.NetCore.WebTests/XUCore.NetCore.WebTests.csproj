@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.11" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 		<PackageReference Include="Scrutor" Version="3.3.0" />
@@ -15,7 +15,6 @@
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
-		<ProjectReference Include="..\..\src\XUCore.Drawing\XUCore.Drawing.csproj" />
 		<ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
 	</ItemGroup>
 

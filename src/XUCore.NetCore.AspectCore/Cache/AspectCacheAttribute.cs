@@ -13,7 +13,7 @@ namespace XUCore.NetCore.AspectCore.Cache
     /// <summary>
     /// 缓存拦截器
     /// </summary>
-    public class CacheMethodAttribute : InterceptorBase
+    public class AspectCacheAttribute : InterceptorBase
     {
         /// <summary>
         /// HashKey
@@ -35,7 +35,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// <summary>
         /// 缓存拦截器
         /// </summary>
-        public CacheMethodAttribute() { }
+        public AspectCacheAttribute() { }
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {
@@ -113,9 +113,9 @@ namespace XUCore.NetCore.AspectCore.Cache
             }
             catch (Exception ex)
             {
-                var logger = context.ServiceProvider.GetService<ILogger<CacheMethodAttribute>>();
+                var logger = context.ServiceProvider.GetService<ILogger<AspectCacheAttribute>>();
 
-                logger.LogError($"CacheMethod：Key：{Key} {ex.FormatMessage()}");
+                logger.LogError($"AspectCache：HashKey：{HashKey}，Key：{Key} {ex.FormatMessage()}");
 
                 await next(context);
             }

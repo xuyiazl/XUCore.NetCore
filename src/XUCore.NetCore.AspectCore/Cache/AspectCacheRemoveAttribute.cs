@@ -9,7 +9,7 @@ namespace XUCore.NetCore.AspectCore.Cache
     /// <summary>
     /// 缓存拦截器（删除缓存）
     /// </summary>
-    public class CacheRemoveAttribute : InterceptorBase
+    public class AspectCacheRemoveAttribute : InterceptorBase
     {
         /// <summary>
         /// 缓存key
@@ -23,7 +23,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// <summary>
         /// 缓存拦截器
         /// </summary>
-        public CacheRemoveAttribute() { }
+        public AspectCacheRemoveAttribute() { }
 
         public async override Task Invoke(AspectContext context, AspectDelegate next)
         {

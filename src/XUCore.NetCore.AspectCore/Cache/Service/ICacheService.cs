@@ -5,7 +5,7 @@ namespace XUCore.NetCore.AspectCore.Cache
     /// <summary>
     /// 缓存服务
     /// </summary>
-    public interface ICacheService
+    internal interface ICacheService
     {
         /// <summary>
         /// 获取缓存

@@ -241,7 +241,8 @@ namespace XUCore.NetCore.Data.BulkExtensions
             sqlBulkCopy.DestinationTableName = InsertToTempTable ? FullTempTableName : FullTableName;
             sqlBulkCopy.BatchSize = BulkConfig.BatchSize;
             sqlBulkCopy.NotifyAfter = BulkConfig.NotifyAfter ?? BulkConfig.BatchSize;
-            sqlBulkCopy.SqlRowsCopied += (sender, e) => {
+            sqlBulkCopy.SqlRowsCopied += (sender, e) =>
+            {
                 progress?.Invoke(SqlBulkOperation.GetProgress(entities.Count, e.RowsCopied)); // round to 4 decimal places
             };
             sqlBulkCopy.BulkCopyTimeout = BulkConfig.BulkCopyTimeout ?? sqlBulkCopy.BulkCopyTimeout;
@@ -406,7 +407,10 @@ namespace XUCore.NetCore.Data.BulkExtensions
 
         protected int GetNumberUpdated(DbContext context)
         {
-            var resultParameter = new SqlParameter("@result", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(Microsoft.Data.SqlClient.SqlParameter));
+            resultParameter.ParameterName = "@result";
+            resultParameter.DbType = DbType.Int32;
+            resultParameter.Direction = ParameterDirection.Output;
             string sqlQueryCount = SqlQueryBuilder.SelectCountIsUpdateFromOutputTable(this);
             context.Database.ExecuteSqlRaw($"SET @result = ({sqlQueryCount});", resultParameter);
             return (int)resultParameter.Value;
@@ -414,10 +418,13 @@ namespace XUCore.NetCore.Data.BulkExtensions
 
         protected async Task<int> GetNumberUpdatedAsync(DbContext context, CancellationToken cancellationToken)
         {
-            var resultParameters = new List<SqlParameter> { new SqlParameter("@result", SqlDbType.Int) { Direction = ParameterDirection.Output } };
+            var resultParameter = (IDbDataParameter)Activator.CreateInstance(typeof(Microsoft.Data.SqlClient.SqlParameter));
+            resultParameter.ParameterName = "@result";
+            resultParameter.DbType = DbType.Int32;
+            resultParameter.Direction = ParameterDirection.Output;
             string sqlQueryCount = SqlQueryBuilder.SelectCountIsUpdateFromOutputTable(this);
-            await context.Database.ExecuteSqlRawAsync($"SET @result = ({sqlQueryCount});", resultParameters, cancellationToken).ConfigureAwait(false); // TODO cancellationToken if Not
-            return (int)resultParameters.FirstOrDefault().Value;
+            await context.Database.ExecuteSqlRawAsync($"SET @result = ({sqlQueryCount});", new object[] { resultParameter }, cancellationToken).ConfigureAwait(false); // TODO cancellationToken if Not
+            return (int)resultParameter.Value;
         }
 
         #endregion

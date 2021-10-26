@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core 项目中间件</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.4.1</Version>
+		<Version>5.5.0</Version>
 		<PackageId>XUCore.NetCore</PackageId>
 		<Product>XUCore.NetCore</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -29,8 +29,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aliyun.OSS.SDK.NetCore" Version="2.13.0" />
-		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.12" />
+	  <Compile Remove="Logging\**" />
+	  <EmbeddedResource Remove="Logging\**" />
+	  <None Remove="Logging\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Swagger\Assets\index-mini-profiler.html" />
+	  <None Remove="Swagger\Assets\index.html" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Swagger\Assets\index-mini-profiler.html" />
+	  <EmbeddedResource Include="Swagger\Assets\index.html" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.13" />
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -39,14 +54,29 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
 		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
-		<PackageReference Include="log4net" Version="2.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
+		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.MongoDB" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.MySql" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.Redis" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.SqlServer" Version="4.2.22" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
+		<PackageReference Include="Aliyun.OSS.SDK.NetCore" Version="2.13.0" />
+		<!--<PackageReference Include="log4net" Version="2.0.12" />-->
 		<PackageReference Include="Quartz" Version="3.3.3" />
 		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<PackageReference Include="FluentValidation" Version="10.3.4" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\XUCore.Drawing\XUCore.Drawing.csproj" />
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
 

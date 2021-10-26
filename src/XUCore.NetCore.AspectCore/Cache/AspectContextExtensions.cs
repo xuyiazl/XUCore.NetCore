@@ -44,11 +44,11 @@ namespace XUCore.NetCore.AspectCore.Cache
         {
             if (isAsync)
             {
-                return TypeofTaskResultMethod
-                    .GetOrAdd(returnType, t => typeof(Task)
-                    .GetMethods()
-                    .First(p => p.Name == "FromResult" && p.ContainsGenericParameters)
-                    .MakeGenericMethod(returnType))
+                return TypeofTaskResultMethod.GetOrAdd(returnType, t => typeof(Task)
+                         .GetMethods()
+                         .First(p => p.Name == "FromResult" && p.ContainsGenericParameters)
+                         .MakeGenericMethod(returnType)
+                    )
                     .Invoke(null, new object[] { result });
             }
             else

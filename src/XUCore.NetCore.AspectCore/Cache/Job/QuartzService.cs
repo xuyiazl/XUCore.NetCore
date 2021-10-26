@@ -69,7 +69,6 @@ namespace XUCore.NetCore.AspectCore.Cache
 
                 //await _scheduler.TriggerJob(new JobKey(key));
             }
-
         }
         /// <summary>
         /// 停止服务
@@ -82,6 +81,4 @@ namespace XUCore.NetCore.AspectCore.Cache
                 _scheduler = null;
         }
     }
-
-
 }

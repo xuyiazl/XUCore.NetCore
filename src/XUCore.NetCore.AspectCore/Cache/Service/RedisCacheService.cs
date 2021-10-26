@@ -9,7 +9,7 @@ using XUCore.NetCore.Redis;
 
 namespace XUCore.NetCore.AspectCore.Cache
 {
-    public class RedisCacheService : ICacheService
+    internal class RedisCacheService : ICacheService
     {
         private readonly IRedisService redisService;
         private readonly ILogger<RedisCacheService> logger;
@@ -76,7 +76,7 @@ namespace XUCore.NetCore.AspectCore.Cache
 
         public void Remove(string key)
         {
-            redisService.KeyDelete(key, connectionName: "cache-write");
+            redisService.KeyDelete(key, connectionName: option.Value.RedisWrite);
         }
     }
 }

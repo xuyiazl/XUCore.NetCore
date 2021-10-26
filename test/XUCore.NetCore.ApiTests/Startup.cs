@@ -19,7 +19,7 @@ using XUCore.NetCore.ApiTests;
 using XUCore.NetCore.Authorization.JwtBearer;
 using XUCore.NetCore.DynamicWebApi;
 using XUCore.NetCore.Extensions;
-using XUCore.NetCore.Logging.Log4Net;
+//using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Formatter;
 using XUCore.NetCore.Signature;
 using XUCore.NetCore.Swagger;
@@ -190,7 +190,7 @@ namespace XUCore.ApiTests
             }
 
             //注册log4net日志
-            loggerFactory.AddLog4Net();
+            //loggerFactory.AddLog4Net();
             //注册真实IP中间件
             app.UseRealIp();
             //启用静态请求上下文

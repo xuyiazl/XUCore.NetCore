@@ -91,19 +91,19 @@ namespace XUCore.NetCore.DataTest.Business
             var ss = rep.Context.User.Include(c => c.AdminUserAddress.Take(2)).FirstOrDefault(c => c.Id == entity.Id);
         }
 
-        [CacheRemove(HashKey = "Cache_Test", Key = "{Id}_{Name}_{UserName}_{0}")]
+        [AspectCacheRemove(HashKey = "Cache_Test", Key = "{Id}_{Name}_{UserName}_{0}")]
         public async Task TestCacheRemove(int id, AdminUserEntity entity, AdminUserEntity o)
         {
             await Task.CompletedTask;
         }
 
-        [CacheRemove(HashKey = "mytest", Key = "{0}")]
+        [AspectCacheRemove(HashKey = "mytest", Key = "{0}")]
         public async Task TestCacheRemove(int id)
         {
             await Task.CompletedTask;
         }
 
-        [CacheMethod(HashKey = "mytest", Key = "{Id}")]
+        [AspectCache(HashKey = "mytest", Key = "{Id}")]
         public async Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity)
         {
             return entity;
