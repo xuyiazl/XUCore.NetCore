@@ -89,68 +89,69 @@
 
 建议使用，基于FreeSql的单层应用（动态API+业务+FreeSql的结合），缩减了开发时间
 
+## 功能概览
 
-## XUCore 功能概览
+#### XUCore 
 
-1、基础类型的扩展以及各种Helper操作类（内容太多，主要在Base目录下）
-2、缓存，IMemoryCache的管理
-3、集合封装，二叉树、优先级队列等集合操作
-4、Config封装，XML配置以及json配置
-5、连接池
-6、工具类，控制台进度条、代码性能、运行时间、流量控制、重试、单元测试等
-7、绘图工具，Image的扩展包括对图片的灰度处理、图片压缩、切图缩放、图片验证码等
-8、Id生成器，包括Guid（有序Guid，二进制、字符串、末位排序等）、雪花、时间戳
-9、分页插件以及分页扩展，Web页码生成器、PagedList、PagedModel、PagedTools等
-10、队列
-11、随机数生成器
-12、序列化组件。JSON、MessagePack、转换器
-13、线程锁，同步锁、异步锁
-14、时间扩展以及范围操作
-15、WebClient、Cookie、Url构造器
+- 基础类型的扩展以及各种Helper操作类（内容太多，主要在Base目录下）
+- 缓存，IMemoryCache的管理
+- 集合封装，二叉树、优先级队列等集合操作
+- Config封装，XML配置以及json配置
+- 连接池
+- 工具类，控制台进度条、代码性能、运行时间、流量控制、重试、单元测试等
+- 绘图工具，Image的扩展包括对图片的灰度处理、图片压缩、切图缩放、图片验证码等
+- Id生成器，包括Guid（有序Guid，二进制、字符串、末位排序等）、雪花、时间戳
+- 分页插件以及分页扩展，Web页码生成器、PagedList、PagedModel、PagedTools等
+- 队列
+- 随机数生成器
+- 序列化组件。JSON、MessagePack、转换器
+- 线程锁，同步锁、异步锁
+- 时间扩展以及范围操作
+- WebClient、Cookie、Url构造器
 
-## XUCore.Excel 功能概览
+#### XUCore.Excel
 
-Excel大文件读取操作，已经针对内存进行了优化。有效控制内存溢出问题
+- Excel大文件读取操作，已经针对内存进行了优化。有效控制内存溢出问题
 
-## XUCore.Script 功能概览
+#### XUCore.Script
 
-动态执行JS脚本语言库，有效的执行动态公式等操作。具体自行设计程序。
+- 动态执行JS脚本语言库，有效的执行动态公式等操作。具体自行设计程序。
 
-## XUCore.NetCore 功能概览
+#### XUCore.NetCore
 
-1、AccessControl，资源权限管理
-2、Authorization、Jwt权限
-3、Ddd、Ddd Domain模式公用库
-4、Dependency、生命周期扫描器（Scoped、Singleton、Transient）
-5、DynamicWebApi、动态Api（减少Controller的开发）
-6、EasyQuartz、Quartz封装（简化计划任务的操作）
-7、Filters、过滤器封装
-8、Formatter、Api输出数据规范和控制（支持MessagePack，支持由客户端决定大小写等数据格式以及输出内容）
-9、HttpFactory、HttpFactory封装（非注解方式）
-10、Middlewares、部分常用中间件（真实IP、跨域、IP控制）
-11、Oss、Oss上传和大文件上传
-12、Razors、Razors静态化处理
-13、Signature、Api安全签名
-14、Swagger、Swagger封装（包括Swagger登录）
-15、Uploads、上传组件（图片、文件、Base64）
-16、Api RestFull规范
+- AccessControl，资源权限管理
+- Authorization、Jwt权限
+- Ddd、Ddd Domain模式公用库
+- Dependency、生命周期扫描器（Scoped、Singleton、Transient）
+- DynamicWebApi、动态Api（减少Controller的开发）
+- EasyQuartz、Quartz封装（简化计划任务的操作）
+- Filters、过滤器封装
+- Formatter、Api输出数据规范和控制（支持MessagePack，支持由客户端决定大小写等数据格式以及输出内容）
+- HttpFactory、HttpFactory封装（非注解方式）
+- Middlewares、部分常用中间件（真实IP、跨域、IP控制）
+- Oss、Oss上传和大文件上传
+- Razors、Razors静态化处理
+- Signature、Api安全签名
+- Swagger、Swagger封装（包括Swagger登录）
+- Uploads、上传组件（图片、文件、Base64）
+- Api RestFull规范
 
-## XUCore.NetCore.Data 功能概览
+#### XUCore.NetCore.Data
 
-基于EFCore的数据仓储服务
+- 基于EFCore的数据仓储服务
 
-## XUCore.NetCore.FreeSql 功能概览
+#### XUCore.NetCore.FreeSql
 
-基于FreeSql的数据仓储服务
+- 基于FreeSql的数据仓储服务
 
-## XUCore.NetCore.Mongo 功能概览
+#### XUCore.NetCore.Mongo
 
-基于Mongo的数据仓储服务
+- 基于Mongo的数据仓储服务
 
-## XUCore.NetCore.Redis 功能概览
+#### XUCore.NetCore.Redis
 
-基于Redis的数据仓储服务
+- 基于Redis的数据仓储服务
 
-## XUCore.NetCore.AspectCore 功能概览
+#### XUCore.NetCore.AspectCore
 
-基于Aspect的AOP插件扩展，主要包含缓存的主动和被动处理
+- 基于Aspect的AOP插件扩展，主要包含缓存的主动和被动处理
