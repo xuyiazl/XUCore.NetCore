@@ -2333,6 +2333,17 @@
             字典(<see cref="T:System.Collections.Generic.IDictionary`2"/>) 扩展
             </summary>
         </member>
+        <member name="M:XUCore.Extensions.DictionaryExtensions.GetOrDefault``2(System.Collections.Generic.IDictionary{``0,System.Object},``0,``1)">
+            <summary>
+            获取指定Key对应的Value，若未找到则返回默认值
+            </summary>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="dictionary">字典</param>
+            <param name="key">键</param>
+            <param name="defaultValue">默认值</param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Extensions.DictionaryExtensions.GetOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
             <summary>
             获取指定Key对应的Value，若未找到则返回默认值

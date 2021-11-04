@@ -25,6 +25,21 @@ namespace XUCore.Extensions
         /// <param name="key">键</param>
         /// <param name="defaultValue">默认值</param>
         /// <returns></returns>
+        public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, object> dictionary, TKey key,
+            TValue defaultValue = default(TValue))
+        {
+            return dictionary.TryGetValue(key, out var obj) ? Conv.To<TValue>(obj) : defaultValue;
+        }
+
+        /// <summary>
+        /// 获取指定Key对应的Value，若未找到则返回默认值
+        /// </summary>
+        /// <typeparam name="TKey">键类型</typeparam>
+        /// <typeparam name="TValue">值类型</typeparam>
+        /// <param name="dictionary">字典</param>
+        /// <param name="key">键</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns></returns>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue = default(TValue))
         {
