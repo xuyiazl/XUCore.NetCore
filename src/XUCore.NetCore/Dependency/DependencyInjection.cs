@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyModel;
 using Scrutor;
 using System;
-using System.Reflection;
+using XUCore.Helpers;
 
 namespace XUCore.NetCore
 {
@@ -11,6 +11,14 @@ namespace XUCore.NetCore
     /// </summary>
     public static partial class DependencyInjection
     {
+        /// <summary>
+        /// 指定扫描方式，扫描对象。
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="assemblyFilter">指定当前项目需要扫描的程序集名，“Demo.dll”中的Demo</param>
+        /// <returns></returns>
+        public static IServiceCollection AddScanLifetime(this IServiceCollection services, string assemblyFilter)
+            => AddScanLifetime(services, scan => scan.FromAssemblies(Reflection.GetCurrentProjectAssemblies(assemblyFilter)));
         /// <summary>
         /// 指定扫描方式，扫描对象。
         /// </summary>
