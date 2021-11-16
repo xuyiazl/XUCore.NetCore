@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<Description>
 			Redis封装服务，基础类库 StackExchange.Redis,JSON、MessageagePack、RedisValue数据格式自由切换。
 		</Description>
@@ -11,7 +11,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Redis 封装服务</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>5.5.1</Version>
+		<Version>6.0.0</Version>
 		<PackageId>XUCore.NetCore.Redis</PackageId>
 		<Product>XUCore.NetCore.Redis</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -30,12 +30,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
-		<PackageReference Include="StackExchange.Redis" Version="2.2.79" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.2.88" />
 	</ItemGroup>
 
 	<ItemGroup>

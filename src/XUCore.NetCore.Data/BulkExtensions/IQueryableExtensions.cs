@@ -34,7 +34,7 @@ namespace XUCore.NetCore.Data.BulkExtensions
                 IList<MySqlParameter> parameters;
                 if (relationalCommandCache != null)
                 {
-                    var command = relationalCommandCache.GetRelationalCommand(parameterValues);
+                    var command = relationalCommandCache.GetRelationalCommandTemplate(parameterValues);
                     var parameterNames = new HashSet<string>(command.Parameters.Select(p => p.InvariantName));
                     sql = command.CommandText;
                     parameters = parameterValues.Where(pv => parameterNames.Contains(pv.Key)).Select(pv => new MySqlParameter("@" + pv.Key, pv.Value)).ToList();
@@ -58,7 +58,7 @@ namespace XUCore.NetCore.Data.BulkExtensions
                 IList<SqlParameter> parameters;
                 if (relationalCommandCache != null)
                 {
-                    var command = relationalCommandCache.GetRelationalCommand(parameterValues);
+                    var command = relationalCommandCache.GetRelationalCommandTemplate(parameterValues);
                     var parameterNames = new HashSet<string>(command.Parameters.Select(p => p.InvariantName));
                     sql = command.CommandText;
                     parameters = parameterValues.Where(pv => parameterNames.Contains(pv.Key)).Select(pv => new SqlParameter("@" + pv.Key, pv.Value)).ToList();
