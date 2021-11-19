@@ -31,7 +31,7 @@ namespace XUCore.NetCore.Redis
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
-                if (value != null) return 0;
+                if (value == null || value.Count == 0) return 0;
                 RedisValue[] values = new RedisValue[value.Count];
 
                 for (int i = 0; i < value.Count; i++)
@@ -86,7 +86,7 @@ namespace XUCore.NetCore.Redis
 
             return ExecuteCommand(ConnectTypeEnum.Write, connectionName, (db) =>
             {
-                if (value != null) return 0;
+                if (value == null || value.Count == 0) return 0;
                 RedisValue[] values = new RedisValue[value.Count];
                 for (int i = 0; i < value.Count; i++)
                 {
