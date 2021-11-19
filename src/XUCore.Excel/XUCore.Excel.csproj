@@ -8,7 +8,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core ExcelReader Excel大文件读取</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.0</Version>
+		<Version>6.0.1</Version>
 		<PackageId>XUCore.Excel</PackageId>
 		<Product>XUCore.Excel</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
