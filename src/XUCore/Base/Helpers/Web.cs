@@ -49,7 +49,7 @@ namespace XUCore.Helpers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T GetService<T>() => HttpContext.RequestServices.GetService<T>();
+        public static T GetService<T>() => HttpContext.RequestServices.GetRequiredService<T>();
 
         #endregion IServiceProvider(Http上下文中获取服务)
 

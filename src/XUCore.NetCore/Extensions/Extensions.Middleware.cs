@@ -38,7 +38,7 @@ namespace XUCore.NetCore.Extensions
         public static IApplicationBuilder UseStaticHttpContext(this IApplicationBuilder builder)
         {
             Web.HttpContextAccessor = builder.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
-            Web.Environment = builder.ApplicationServices.GetService<IHostingEnvironment>();
+            Web.Environment = builder.ApplicationServices.GetRequiredService<IHostingEnvironment>();
             return builder;
         }
 

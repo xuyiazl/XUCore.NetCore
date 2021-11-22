@@ -34,7 +34,7 @@ namespace XUCore.NetCore.EasyQuartz
                 string cron;
                 if (jobType.BaseType == typeof(EasyQuartzJob))
                 {
-                    var jobService = services.BuildServiceProvider().GetService(jobType);
+                    var jobService = services.BuildServiceProvider().GetRequiredService(jobType);
                     cron = ((EasyQuartzJob)jobService).Cron;
                 }
                 else

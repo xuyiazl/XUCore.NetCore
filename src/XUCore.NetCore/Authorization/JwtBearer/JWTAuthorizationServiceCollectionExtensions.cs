@@ -36,7 +36,7 @@ namespace XUCore.NetCore.Authorization.JwtBearer
 
             // 获取配置选项
             using var serviceProvider = services.BuildServiceProvider();
-            var jwtSettings = serviceProvider.GetService<IOptions<JWTSettingsOptions>>().Value;
+            var jwtSettings = serviceProvider.GetRequiredService<IOptions<JWTSettingsOptions>>().Value;
 
             // 添加授权
             authenticationBuilder.AddJwtBearer(options =>
@@ -74,7 +74,7 @@ namespace XUCore.NetCore.Authorization.JwtBearer
 
             // 获取配置选项
             using var serviceProvider = services.BuildServiceProvider();
-            var jwtSettings = serviceProvider.GetService<IOptions<JWTSettingsOptions>>().Value;
+            var jwtSettings = serviceProvider.GetRequiredService<IOptions<JWTSettingsOptions>>().Value;
 
             // 添加默认授权
             return services.AddAuthentication(options =>
@@ -121,7 +121,7 @@ namespace XUCore.NetCore.Authorization.JwtBearer
             using var serviceProvider = services.BuildServiceProvider();
 
             // 获取配置节点
-            var jwtSettingsConfiguration = serviceProvider.GetService<IConfiguration>()
+            var jwtSettingsConfiguration = serviceProvider.GetRequiredService<IConfiguration>()
                                                                            .GetSection("JWTSettings");
 
             // 配置验证

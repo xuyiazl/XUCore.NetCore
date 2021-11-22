@@ -4,6 +4,11 @@
         <name>XUCore</name>
     </assembly>
     <members>
+        <member name="T:XUCore.CacheTime">
+            <summary>
+            缓存时间常量
+            </summary>
+        </member>
         <member name="F:XUCore.CacheTime.None">
             <summary>
             none

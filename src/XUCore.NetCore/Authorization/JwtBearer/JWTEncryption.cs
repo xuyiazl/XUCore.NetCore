@@ -108,7 +108,7 @@ namespace XUCore.NetCore.Authorization.JwtBearer
 
             // 判断这个刷新Token 是否已刷新过
             var blacklistRefreshKey = "BLACKLIST_REFRESH_TOKEN:" + refreshToken;
-            var distributedCache = Web.HttpContext?.RequestServices?.GetService<IDistributedCache>();
+            var distributedCache = Web.HttpContext?.RequestServices?.GetRequiredService<IDistributedCache>();
 
             // 处理token并发容错问题
             var nowTime = DateTimeOffset.Now;
@@ -289,7 +289,7 @@ namespace XUCore.NetCore.Authorization.JwtBearer
         /// <returns></returns>
         public static JWTSettingsOptions GetJWTSettings()
         {
-            return Web.HttpContext?.RequestServices?.GetService<IOptions<JWTSettingsOptions>>()?.Value ?? SetDefaultJwtSettings(new JWTSettingsOptions());
+            return Web.HttpContext?.RequestServices?.GetRequiredService<IOptions<JWTSettingsOptions>>()?.Value ?? SetDefaultJwtSettings(new JWTSettingsOptions());
         }
 
         /// <summary>

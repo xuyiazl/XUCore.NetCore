@@ -22,8 +22,8 @@ namespace XUCore.Ddd.Domain
 
         public User(IServiceProvider serviceProvider)
         {
-            accessor = serviceProvider.GetService<IHttpContextAccessor>();
-            cacheManager = serviceProvider.GetService<ICacheManager>();
+            accessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+            cacheManager = serviceProvider.GetRequiredService<ICacheManager>();
         }
         /// <summary>
         /// IIdentity

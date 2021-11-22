@@ -72,8 +72,8 @@ namespace XUCore.NetCore.Extensions
 
             using (var sw = new StringWriter())
             {
-                IRazorViewEngine _razorViewEngine = pageModel.HttpContext.RequestServices.GetService(typeof(IRazorViewEngine)) as IRazorViewEngine;
-                IRazorPageActivator _activator = pageModel.HttpContext.RequestServices.GetService(typeof(IRazorPageActivator)) as IRazorPageActivator;
+                IRazorViewEngine _razorViewEngine = pageModel.HttpContext.RequestServices.GetRequiredService(typeof(IRazorViewEngine)) as IRazorViewEngine;
+                IRazorPageActivator _activator = pageModel.HttpContext.RequestServices.GetRequiredService(typeof(IRazorPageActivator)) as IRazorPageActivator;
 
                 var result = _razorViewEngine.FindPage(actionContext, pageName);
 

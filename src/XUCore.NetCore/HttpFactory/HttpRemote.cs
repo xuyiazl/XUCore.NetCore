@@ -19,7 +19,7 @@ namespace XUCore.NetCore.HttpFactory
         {
             get
             {
-                var httpService = ServiceProvider.GetService<IHttpService>();
+                var httpService = ServiceProvider.GetRequiredService<IHttpService>();
 
                 if (httpService == null)
                     throw new ArgumentNullException($"请注入{nameof(IHttpService)}服务，services.HttpService(clientname, [servser])。");

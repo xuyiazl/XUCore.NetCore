@@ -4,6 +4,9 @@ using System.Text;
 
 namespace XUCore
 {
+    /// <summary>
+    /// 缓存时间常量
+    /// </summary>
     public class CacheTime
     {
         /// <summary>
