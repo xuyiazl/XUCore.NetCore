@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
-using XUCore.NetCore.Authorization.JwtBearer;
 
 namespace XUCore.NetCore.ApiTests
 {

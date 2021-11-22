@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using XUCore.NetCore.Uploads.Params;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

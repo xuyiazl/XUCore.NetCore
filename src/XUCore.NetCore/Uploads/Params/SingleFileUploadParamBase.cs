@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IO;
 
-namespace XUCore.NetCore.Uploads.Params
+namespace XUCore.NetCore.Uploads
 {
     /// <summary>
     /// 单文件上传参数

@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Linq.Expressions;
 using XUCore.Ddd.Domain;
-using XUCore.Ddd.Domain.Commands;
 using XUCore.NetCore.FreeSql.Entity;
 
 namespace XUCore.NetCore.FreeSql.Curd
@@ -15,6 +12,12 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <typeparam name="TEntity"></typeparam>
     public class MarkCurdService<TMark, TKey, TEntity> : CurdService<TKey, TEntity> where TEntity : EntityFull<TKey>, new()
     {
+        /// <summary>
+        /// FreeSql Mark CurdService（多库FreeSql实例）
+        /// </summary>
+        /// <param name="muowm"></param>
+        /// <param name="mapper"></param>
+        /// <param name="user"></param>
         protected MarkCurdService(MarkUnitOfWorkManager<TMark> muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
         {
             muowm.Binding(repo);
@@ -41,6 +44,12 @@ namespace XUCore.NetCore.FreeSql.Curd
         where TListCommand : ListCommand
         where TPageCommand : PageCommand
     {
+        /// <summary>
+        /// FreeSql Mark CurdService（多库FreeSql实例）
+        /// </summary>
+        /// <param name="muowm"></param>
+        /// <param name="mapper"></param>
+        /// <param name="user"></param>
         protected MarkCurdService(MarkUnitOfWorkManager<TMark> muowm, IMapper mapper, IUser user) : base(muowm.Orm, mapper)
         {
             muowm.Binding(repo);

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Text;
-using XUCore.NetCore.Extensions;
+using XUCore.NetCore;
 
 namespace XUCore.ApiTests
 {

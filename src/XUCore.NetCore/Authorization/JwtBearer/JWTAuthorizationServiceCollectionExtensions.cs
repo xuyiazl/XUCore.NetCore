@@ -12,7 +12,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace XUCore.NetCore.Authorization.JwtBearer
+namespace XUCore.NetCore.Authorization
 {
     /// <summary>
     /// JWT 授权服务拓展类

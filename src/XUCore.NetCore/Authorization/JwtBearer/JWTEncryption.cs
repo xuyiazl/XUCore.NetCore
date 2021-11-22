@@ -15,7 +15,7 @@ using System.Text;
 using System.Text.Json;
 using XUCore.Helpers;
 
-namespace XUCore.NetCore.Authorization.JwtBearer
+namespace XUCore.NetCore.Authorization
 {
     /// <summary>
     /// JWT 加解密

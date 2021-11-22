@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.Authorization.JwtBearer
+namespace XUCore.NetCore.Authorization
 {
     /// <summary>
     /// Jwt 配置

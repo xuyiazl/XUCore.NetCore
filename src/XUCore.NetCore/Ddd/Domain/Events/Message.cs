@@ -1,11 +1,4 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XUCore.Ddd.Domain.Events
+﻿namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 抽象类Message，用来获取我们事件执行过程中的类名

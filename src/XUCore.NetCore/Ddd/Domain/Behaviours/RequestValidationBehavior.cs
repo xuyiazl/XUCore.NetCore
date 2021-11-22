@@ -1,14 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ValidationException = XUCore.Ddd.Domain.Exceptions.ValidationException;
 
-namespace XUCore.Ddd.Domain.Behaviours
+namespace XUCore.Ddd.Domain
 {
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

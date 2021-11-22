@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Ddd.Domain;
-using XUCore.Ddd.Domain.Commands;
 using XUCore.Paging;
 
 namespace XUCore.NetCore.Data

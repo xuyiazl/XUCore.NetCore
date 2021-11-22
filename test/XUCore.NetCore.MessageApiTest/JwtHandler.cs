@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using XUCore.Helpers;
 using XUCore.NetCore.Authorization;
-using XUCore.NetCore.Authorization.JwtBearer;
 
 namespace XUCore.NetCore.MessageApiTest
 {

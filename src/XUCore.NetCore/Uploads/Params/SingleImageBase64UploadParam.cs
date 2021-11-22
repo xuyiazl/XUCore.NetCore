@@ -1,7 +1,7 @@
 ﻿using XUCore.Drawing;
 using System.Collections.Generic;
 
-namespace XUCore.NetCore.Uploads.Params
+namespace XUCore.NetCore.Uploads
 {
     public class SingleImageBase64UploadParam : SingleFileUploadParamBase
     {

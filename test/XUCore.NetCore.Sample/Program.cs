@@ -2,15 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using XUCore.Develops.ShellProgressBar;
-using XUCore.NetCore;
-using XUCore.NetCore.Extensions;
 
 namespace XUCore.NetCore.Sample
 {

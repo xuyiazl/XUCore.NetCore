@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FluentValidation;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Results;
-using MediatR;
-using XUCore.Ddd.Domain.Events;
 
-namespace XUCore.Ddd.Domain.Commands
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 抽象命令基类

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace XUCore.Ddd.Domain.Commands
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 命令验证抽象基类

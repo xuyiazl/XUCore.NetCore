@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using XUCore.NetCore.Extensions;
 using XUCore.NetCore.Properties;
 using XUCore.Extensions;
 using System;
@@ -13,7 +12,10 @@ namespace XUCore.NetCore.Filters
     public class ExceptionHandlerAttribute : ExceptionFilterAttribute
     {
         private readonly ILogger<ExceptionHandlerAttribute> _logger;
-
+        /// <summary>
+        /// 异常处理过滤器
+        /// </summary>
+        /// <param name="logger"></param>
         public ExceptionHandlerAttribute(ILogger<ExceptionHandlerAttribute> logger)
         {
             _logger = logger;

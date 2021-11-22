@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using XUCore.NetCore.Uploads.Params;
 using XUCore.Drawing;
 using XUCore.Extensions;
 using XUCore.Files;

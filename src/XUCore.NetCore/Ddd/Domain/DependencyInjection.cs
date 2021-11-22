@@ -1,15 +1,7 @@
 ﻿using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XUCore.Ddd.Domain.Behaviours;
-using XUCore.Ddd.Domain.Bus;
-using XUCore.Ddd.Domain.Events;
 
 namespace XUCore.Ddd.Domain
 {

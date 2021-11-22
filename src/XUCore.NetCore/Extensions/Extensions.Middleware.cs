@@ -6,7 +6,7 @@ using XUCore.NetCore.Middlewares;
 using XUCore.Helpers;
 using System;
 
-namespace XUCore.NetCore.Extensions
+namespace XUCore.NetCore
 {
     /// <summary>
     /// 中间件扩展

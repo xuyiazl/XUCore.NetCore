@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Linq.Expressions;
 using XUCore.Ddd.Domain;
-using XUCore.Ddd.Domain.Commands;
 using XUCore.NetCore.FreeSql.Entity;
 
 namespace XUCore.NetCore.FreeSql.Curd

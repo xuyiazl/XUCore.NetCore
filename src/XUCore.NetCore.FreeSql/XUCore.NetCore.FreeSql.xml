@@ -291,6 +291,14 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.IdleBusCurdService`2.#ctor(XUCore.NetCore.FreeSql.Curd.IdleBusUnitOfWorkManager,AutoMapper.IMapper,XUCore.Ddd.Domain.IUser)">
+            <summary>
+            IdleBus FreeSql CurdService（租户FreeSql实例）
+            </summary>
+            <param name="muowm"></param>
+            <param name="mapper"></param>
+            <param name="user"></param>
+        </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.IdleBusCurdService`7">
             <summary>
             IdleBus FreeSql CurdService（租户FreeSql实例）
@@ -303,6 +311,14 @@
             <typeparam name="TListCommand"></typeparam>
             <typeparam name="TPageCommand"></typeparam>
         </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.IdleBusCurdService`7.#ctor(XUCore.NetCore.FreeSql.Curd.IdleBusUnitOfWorkManager,AutoMapper.IMapper,XUCore.Ddd.Domain.IUser)">
+            <summary>
+            IdleBus FreeSql CurdService（租户FreeSql实例）
+            </summary>
+            <param name="muowm"></param>
+            <param name="mapper"></param>
+            <param name="user"></param>
+        </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.MarkCurdService`3">
             <summary>
             FreeSql Mark CurdService（多库FreeSql实例）
@@ -310,6 +326,14 @@
             <typeparam name="TMark"></typeparam>
             <typeparam name="TKey"></typeparam>
             <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.MarkCurdService`3.#ctor(XUCore.NetCore.FreeSql.Curd.MarkUnitOfWorkManager{`0},AutoMapper.IMapper,XUCore.Ddd.Domain.IUser)">
+            <summary>
+            FreeSql Mark CurdService（多库FreeSql实例）
+            </summary>
+            <param name="muowm"></param>
+            <param name="mapper"></param>
+            <param name="user"></param>
         </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.MarkCurdService`8">
             <summary>
@@ -323,6 +347,14 @@
             <typeparam name="TUpdateCommand"></typeparam>
             <typeparam name="TListCommand"></typeparam>
             <typeparam name="TPageCommand"></typeparam>
+        </member>
+        <member name="M:XUCore.NetCore.FreeSql.Curd.MarkCurdService`8.#ctor(XUCore.NetCore.FreeSql.Curd.MarkUnitOfWorkManager{`0},AutoMapper.IMapper,XUCore.Ddd.Domain.IUser)">
+            <summary>
+            FreeSql Mark CurdService（多库FreeSql实例）
+            </summary>
+            <param name="muowm"></param>
+            <param name="mapper"></param>
+            <param name="user"></param>
         </member>
         <member name="T:XUCore.NetCore.FreeSql.Curd.FreeSqlUnitOfWorkManager">
             <summary>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Domain.Exceptions
+namespace XUCore.Ddd.Domain
 {
     public class ValidationException : Exception
     {

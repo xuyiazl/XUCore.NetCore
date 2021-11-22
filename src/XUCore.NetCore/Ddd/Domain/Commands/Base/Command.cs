@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
 
-namespace XUCore.Ddd.Domain.Commands
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 抽象命令基类

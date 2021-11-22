@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace XUCore.NetCore.Uploads.Params
+namespace XUCore.NetCore.Uploads
 {
     /// <summary>
     /// 多文件上传参数

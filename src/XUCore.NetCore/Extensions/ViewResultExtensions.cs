@@ -16,7 +16,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace XUCore.NetCore.Extensions
+namespace XUCore.NetCore
 {
     /// <summary>
     /// 视图结果 扩展

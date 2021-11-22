@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Routing;
 using XUCore.Extensions;
 
-namespace XUCore.NetCore.Extensions
+namespace XUCore.NetCore
 {
     /// <summary>
     /// 操作上下文(<see cref="ActionContext"/>) 扩展

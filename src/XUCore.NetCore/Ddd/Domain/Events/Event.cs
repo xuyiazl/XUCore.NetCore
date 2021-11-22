@@ -1,11 +1,7 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace XUCore.Ddd.Domain.Events
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 事件基类

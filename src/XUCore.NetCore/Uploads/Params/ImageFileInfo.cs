@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FileInfo = XUCore.Files.FileInfo;
 
-namespace XUCore.NetCore.Uploads.Params
+namespace XUCore.NetCore.Uploads
 {
     public class ImageFileInfo : FileInfo
     {

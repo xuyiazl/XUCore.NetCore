@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.IO;
-using XUCore.NetCore.Extensions;
 
 namespace XUCore.NetCore.Razors
 {

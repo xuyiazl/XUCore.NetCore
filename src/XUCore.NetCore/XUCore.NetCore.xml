@@ -216,12 +216,12 @@
             <param name="enableGlobalAuthorize">是否启用全局授权</param>
             <returns>服务集合</returns>
         </member>
-        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions">
+        <member name="T:XUCore.NetCore.Authorization.JWTAuthorizationServiceCollectionExtensions">
             <summary>
             JWT 授权服务拓展类
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
+        <member name="M:XUCore.NetCore.Authorization.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
             <summary>
             添加 JWT 授权
             </summary>
@@ -231,7 +231,7 @@
             <param name="enableGlobalAuthorize">启动全局授权</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})">
+        <member name="M:XUCore.NetCore.Authorization.JWTAuthorizationServiceCollectionExtensions.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})">
             <summary>
             添加 JWT 授权
             </summary>
@@ -241,7 +241,7 @@
             <param name="jwtBearerConfigure"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.AddJwt``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
+        <member name="M:XUCore.NetCore.Authorization.JWTAuthorizationServiceCollectionExtensions.AddJwt``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authentication.AuthenticationOptions},System.Object,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions},System.Boolean)">
             <summary>
             添加 JWT 授权
             </summary>
@@ -253,18 +253,18 @@
             <param name="enableGlobalAuthorize"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTAuthorizationServiceCollectionExtensions.ConfigureJWTOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.Authorization.JWTAuthorizationServiceCollectionExtensions.ConfigureJWTOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             添加 JWT 授权
             </summary>
             <param name="services"></param>
         </member>
-        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption">
+        <member name="T:XUCore.NetCore.Authorization.JWTEncryption">
             <summary>
             JWT 加解密
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.Encrypt(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
             <summary>
             生成 Token
             </summary>
@@ -272,7 +272,7 @@
             <param name="expiredTime">过期时间（分钟）</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.Encrypt(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
             <summary>
             生成 Token
             </summary>
@@ -281,7 +281,7 @@
             <param name="algorithm"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Encrypt(System.String,System.String,System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.Encrypt(System.String,System.String,System.String)">
             <summary>
             生成 Token
             </summary>
@@ -290,7 +290,7 @@
             <param name="algorithm"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GenerateRefreshToken(System.String,System.Int32)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.GenerateRefreshToken(System.String,System.Int32)">
             <summary>
             生成刷新 Token
             </summary>
@@ -298,7 +298,7 @@
             <param name="days">刷新 Token 有效期（天）</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Exchange(System.String,System.String,System.Nullable{System.Int64},System.Int64)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.Exchange(System.String,System.String,System.Nullable{System.Int64},System.Int64)">
             <summary>
             通过过期Token 和 刷新Token 换取新的 Token
             </summary>
@@ -308,7 +308,7 @@
             <param name="clockSkew">刷新token容差值，秒做单位</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,System.Nullable{System.Int64},System.Int32,System.String,System.Int64)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,System.Nullable{System.Int64},System.Int32,System.String,System.Int64)">
             <summary>
             自动刷新 Token 信息
             </summary>
@@ -320,14 +320,14 @@
             <param name="clockSkew"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.Validate(System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.Validate(System.String)">
             <summary>
             验证 Token
             </summary>
             <param name="accessToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.ValidateJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.IdentityModel.JsonWebTokens.JsonWebToken@,System.String,System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.ValidateJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.IdentityModel.JsonWebTokens.JsonWebToken@,System.String,System.String)">
             <summary>
             验证 Token
             </summary>
@@ -337,14 +337,14 @@
             <param name="tokenPrefix"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.ReadJwtToken(System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.ReadJwtToken(System.String)">
             <summary>
             读取 Token，不含验证
             </summary>
             <param name="accessToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GetJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.GetJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String)">
             <summary>
             获取 JWT Bearer Token
             </summary>
@@ -353,20 +353,20 @@
             <param name="tokenPrefix"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.GetJWTSettings">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.GetJWTSettings">
             <summary>
             获取 JWT 配置
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.CreateTokenValidationParameters(XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.CreateTokenValidationParameters(XUCore.NetCore.Authorization.JWTSettingsOptions)">
             <summary>
             生成Token验证参数
             </summary>
             <param name="jwtSettings"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.CombinePayload(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.CombinePayload(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
             <summary>
             组合 Claims 负荷
             </summary>
@@ -374,69 +374,69 @@
             <param name="expiredTime">过期时间，单位：分钟</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.SetDefaultJwtSettings(XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions)">
+        <member name="M:XUCore.NetCore.Authorization.JWTEncryption.SetDefaultJwtSettings(XUCore.NetCore.Authorization.JWTSettingsOptions)">
             <summary>
             设置默认 Jwt 配置
             </summary>
             <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="F:XUCore.NetCore.Authorization.JwtBearer.JWTEncryption.StationaryClaimTypes">
+        <member name="F:XUCore.NetCore.Authorization.JWTEncryption.StationaryClaimTypes">
             <summary>
             固定的 Claim 类型
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions">
+        <member name="T:XUCore.NetCore.Authorization.JWTSettingsOptions">
             <summary>
             Jwt 配置
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateIssuerSigningKey">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidateIssuerSigningKey">
             <summary>
             验证签发方密钥
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.IssuerSigningKey">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.IssuerSigningKey">
             <summary>
             签发方密钥
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateIssuer">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidateIssuer">
             <summary>
             验证签发方
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidIssuer">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidIssuer">
             <summary>
             签发方
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateAudience">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidateAudience">
             <summary>
             验证签收方
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidAudience">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidAudience">
             <summary>
             签收方
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ValidateLifetime">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ValidateLifetime">
             <summary>
             验证生存期
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ClockSkew">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ClockSkew">
             <summary>
             过期时间容错值，解决服务器端时间不同步问题（秒）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.ExpiredTime">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.ExpiredTime">
             <summary>
             过期时间（分钟）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Authorization.JwtBearer.JWTSettingsOptions.Algorithm">
+        <member name="P:XUCore.NetCore.Authorization.JWTSettingsOptions.Algorithm">
             <summary>
             加密算法
             </summary>
@@ -1087,40 +1087,40 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:XUCore.NetCore.Extensions.ActionContextExtensions">
+        <member name="T:XUCore.NetCore.ActionContextExtensions">
             <summary>
             操作上下文(<see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>) 扩展
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetAreaName(Microsoft.AspNetCore.Mvc.ActionContext)">
+        <member name="M:XUCore.NetCore.ActionContextExtensions.GetAreaName(Microsoft.AspNetCore.Mvc.ActionContext)">
             <summary>
             获取Area名称
             </summary>
             <param name="context">操作上下文</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetControllerName(Microsoft.AspNetCore.Mvc.ActionContext)">
+        <member name="M:XUCore.NetCore.ActionContextExtensions.GetControllerName(Microsoft.AspNetCore.Mvc.ActionContext)">
             <summary>
             获取Controller名称
             </summary>
             <param name="context">操作上下文</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetActionName(Microsoft.AspNetCore.Mvc.ActionContext)">
+        <member name="M:XUCore.NetCore.ActionContextExtensions.GetActionName(Microsoft.AspNetCore.Mvc.ActionContext)">
             <summary>
             获取Action名称
             </summary>
             <param name="context">操作上下文</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.GetRouteValues(Microsoft.AspNetCore.Mvc.ActionContext)">
+        <member name="M:XUCore.NetCore.ActionContextExtensions.GetRouteValues(Microsoft.AspNetCore.Mvc.ActionContext)">
             <summary>
             获取所有路由信息
             </summary>
             <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ActionContextExtensions.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
+        <member name="M:XUCore.NetCore.ActionContextExtensions.RouteReplace(Microsoft.AspNetCore.Mvc.ActionContext,System.String)">
             <summary>
             根据路由参数进行模板替换
             </summary>
@@ -1128,7 +1128,7 @@
             <param name="template">比如：static/{area}/{controller}/{action}/{id}.html</param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.NetCore.Extensions.Extensions">
+        <member name="T:XUCore.NetCore.Extensions">
             <summary>
             中间件扩展
             </summary>
@@ -1136,38 +1136,38 @@
             服务扩展
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseErrorLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:XUCore.NetCore.Extensions.UseErrorLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             注册错误日志中间件
             </summary>
             <param name="builder">应用程序生成器</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRequestLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:XUCore.NetCore.Extensions.UseRequestLog(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             注册请求日志中间件
             </summary>
             <param name="builder">应用程序生成器</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseStaticHttpContext(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:XUCore.NetCore.Extensions.UseStaticHttpContext(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             启用静态请求上下文
             </summary>
             <param name="builder">应用程序生成器</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRealIp(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+        <member name="M:XUCore.NetCore.Extensions.UseRealIp(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             注册真实IP中间件
             </summary>
             <param name="builder">应用程序生成器</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.UseRealIp(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.String)">
+        <member name="M:XUCore.NetCore.Extensions.UseRealIp(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.String)">
             <summary>
             注册真实IP
             </summary>
             <param name="hostBuilder">Web主机生成器</param>
             <param name="headerKey">请求头键名</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddFlowMonitoring(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,System.Int32,System.Action{System.Decimal})">
+        <member name="M:XUCore.NetCore.Extensions.AddFlowMonitoring(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32,System.Int32,System.Action{System.Decimal})">
             <summary>
             数据流量控制
             </summary>
@@ -1176,7 +1176,7 @@
             <param name="size">每秒限制的数据大小，单位kb</param>
             <param name="monitoring">监控</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})">
+        <member name="M:XUCore.NetCore.Extensions.AddCacheManager(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})">
             <summary>
             绑定本地缓存管理
             </summary>
@@ -1184,20 +1184,20 @@
             <param name="services">服务集合</param>
             <param name="options"></param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddUploadService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.Extensions.AddUploadService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册上传服务
             </summary>
             <param name="services">服务集合</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddUploadService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.Extensions.AddUploadService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册上传服务
             </summary>
             <typeparam name="TFileUploadService">文件上传服务类型</typeparam>
             <param name="services">服务集合</param>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddOssClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
+        <member name="M:XUCore.NetCore.Extensions.AddOssClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
             <summary>
             注册oss 上传客户端
             </summary>
@@ -1205,7 +1205,7 @@
             <param name="clients"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddOssMultiPartClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
+        <member name="M:XUCore.NetCore.Extensions.AddOssMultiPartClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.ValueTuple{System.String,XUCore.NetCore.Oss.OssOptions}[])">
             <summary>
             注册oss 分片上传客户端
             </summary>
@@ -1213,14 +1213,14 @@
             <param name="clients"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddRazorHtml(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:XUCore.NetCore.Extensions.AddRazorHtml(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             注册Razor静态Html生成器
             </summary>
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:XUCore.NetCore.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
             <summary>
             注册 HttpFactory Service
             </summary>
@@ -1231,7 +1231,7 @@
             <param name="clientBuilder"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:XUCore.NetCore.Extensions.AddHttpService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient},System.Func{System.Net.Http.HttpMessageHandler},System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
             <summary>
             注册 HTTPFactory Srevice
             </summary>
@@ -1241,12 +1241,20 @@
             <param name="messageHandler"></param>
             <param name="clientBuilder"></param>
         </member>
-        <member name="T:XUCore.NetCore.Extensions.ViewResultExtensions">
+        <member name="M:XUCore.NetCore.HttpContextExtensions.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:XUCore.NetCore.ViewResultExtensions">
             <summary>
             视图结果 扩展
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.ViewResult,Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
+        <member name="M:XUCore.NetCore.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.ViewResult,Microsoft.AspNetCore.Http.HttpContext,System.Boolean)">
             <summary>
             转换成Html
             </summary>
@@ -1255,7 +1263,7 @@
             <param name="IsPartialView">是否部分视图，默认：false</param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Extensions.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,System.String)">
+        <member name="M:XUCore.NetCore.ViewResultExtensions.ToHtml(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,System.String)">
             <summary>
             转换成Html
             </summary>
@@ -1376,6 +1384,12 @@
             <summary>
             异常处理过滤器
             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Filters.ExceptionHandlerAttribute.#ctor(Microsoft.Extensions.Logging.ILogger{XUCore.NetCore.Filters.ExceptionHandlerAttribute})">
+            <summary>
+            异常处理过滤器
+            </summary>
+            <param name="logger"></param>
         </member>
         <member name="M:XUCore.NetCore.Filters.ExceptionHandlerAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
             <summary>
@@ -3116,7 +3130,7 @@
             默认文件上传服务
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.SingleFileUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.SingleFileUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传文件。单文件
             </summary>
@@ -3132,21 +3146,21 @@
             <param name="rootPath">根路径</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.MultipleFileUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadAsync(XUCore.NetCore.Uploads.MultipleFileUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传文件。多文件
             </summary>
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.SingleImageUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传图片。单张图片
             </summary>
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.DefaultFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
             <summary>
             上传Base64图片。单张图片
             </summary>
@@ -3198,14 +3212,14 @@
             文件上传服务
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.SingleFileUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.SingleFileUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传文件。单文件
             </summary>
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.SingleImageUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传图片。单张图片
             </summary>
@@ -3213,14 +3227,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadImageAsync(XUCore.NetCore.Uploads.SingleImageBase64UploadParam,System.Threading.CancellationToken)">
             <summary>
             上传Base64图片。单张图片
             </summary>
             <param name="param">参数</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.Params.MultipleFileUploadParam,System.Threading.CancellationToken)">
+        <member name="M:XUCore.NetCore.Uploads.IFileUploadService.UploadAsync(XUCore.NetCore.Uploads.MultipleFileUploadParam,System.Threading.CancellationToken)">
             <summary>
             上传文件。多文件
             </summary>
@@ -3243,182 +3257,182 @@
             <param name="savePath">保存路径</param>
             <param name="cancellationToken">取消令牌</param>
         </member>
-        <member name="T:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam">
+        <member name="T:XUCore.NetCore.Uploads.MultipleFileUploadParam">
             <summary>
             多文件上传参数
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Request">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.Request">
             <summary>
             当前请求
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.FormFiles">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.FormFiles">
             <summary>
             上传的文件对象
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.RootPath">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.RootPath">
             <summary>
             存储根路径
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Module">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.Module">
             <summary>
             模块名称
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.Group">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.Group">
             <summary>
             分组
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.FullPath">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.FullPath">
             <summary>
             完整目录
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.MultipleFileUploadParam.RelativePath">
+        <member name="P:XUCore.NetCore.Uploads.MultipleFileUploadParam.RelativePath">
             <summary>
             相对目录
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Uploads.Params.SingleFileUploadParam">
+        <member name="T:XUCore.NetCore.Uploads.SingleFileUploadParam">
             <summary>
             单文件上传参数
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.Request">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParam.Request">
             <summary>
             当前请求
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParam.FormFile">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParam.FormFile">
             <summary>
             上传的文件对象
             </summary>
         </member>
-        <member name="T:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase">
+        <member name="T:XUCore.NetCore.Uploads.SingleFileUploadParamBase">
             <summary>
             单文件上传参数
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.RootPath">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParamBase.RootPath">
             <summary>
             存储根路径
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.Module">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParamBase.Module">
             <summary>
             模块名称
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.Group">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParamBase.Group">
             <summary>
             分组
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.FullPath">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParamBase.FullPath">
             <summary>
             完整目录
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleFileUploadParamBase.RelativePath">
+        <member name="P:XUCore.NetCore.Uploads.SingleFileUploadParamBase.RelativePath">
             <summary>
             相对目录
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Base64String">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.Base64String">
             <summary>
             图片base64
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.IsZoomOriginal">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.IsZoomOriginal">
             <summary>
             是否等比缩放原图
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Ratio">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.Ratio">
             <summary>
             缩放比率（1-100）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Quality">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.Quality">
             <summary>
             压缩质量（数字越小压缩率越高）1-100
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.IsCutOriginal">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.IsCutOriginal">
             <summary>
             是否裁剪原图
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.AutoCutSize">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.AutoCutSize">
             <summary>
             自动裁剪原图的最大高度和宽度
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.ThumbCutMode">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.ThumbCutMode">
             <summary>
             缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageBase64UploadParam.Thumbs">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageBase64UploadParam.Thumbs">
             <summary>
             裁剪缩略图尺寸 item = 300x400
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Extensions">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.Extensions">
             <summary>
             允许上传的文件扩展名
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Size">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.Size">
             <summary>
             允许上传的图片文件大小，默认2M
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.IsZoomOriginal">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.IsZoomOriginal">
             <summary>
             是否等比缩放原图
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Ratio">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.Ratio">
             <summary>
             缩放比率（1-100）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Quality">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.Quality">
             <summary>
             压缩质量（数字越小压缩率越高）1-100
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.IsCutOriginal">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.IsCutOriginal">
             <summary>
             是否裁剪原图
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.AutoCutSize">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.AutoCutSize">
             <summary>
             自动裁剪原图的最大高度和宽度
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.ThumbCutMode">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.ThumbCutMode">
             <summary>
             缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
             </summary>
         </member>
-        <member name="P:XUCore.NetCore.Uploads.Params.SingleImageUploadParam.Thumbs">
+        <member name="P:XUCore.NetCore.Uploads.SingleImageUploadParam.Thumbs">
             <summary>
             裁剪缩略图尺寸 item = 300x400
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Bus.IMediatorHandler">
+        <member name="T:XUCore.Ddd.Domain.IMediatorHandler">
             <summary>
             消息总线
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Bus.IMediatorHandler.PublishEvent``1(``0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.IMediatorHandler.PublishEvent``1(``0,System.Threading.CancellationToken)">
             <summary>
             发布事件通知
             </summary>
@@ -3427,7 +3441,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Bus.IMediatorHandler.SendCommand``1(XUCore.Ddd.Domain.Commands.Command{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.IMediatorHandler.SendCommand``1(XUCore.Ddd.Domain.Command{``0},System.Threading.CancellationToken)">
             <summary>
             发送命令请求
             </summary>
@@ -3436,17 +3450,17 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Bus.MediatorMemoryBus">
+        <member name="T:XUCore.Ddd.Domain.MediatorMemoryBus">
             <summary>
             Mediator 消息中介发布请求和通知
             </summary>
         </member>
-        <member name="F:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.NotEventStore">
+        <member name="F:XUCore.Ddd.Domain.MediatorMemoryBus.NotEventStore">
             <summary>
             不需要存储的事件
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.PublishEvent``1(``0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.MediatorMemoryBus.PublishEvent``1(``0,System.Threading.CancellationToken)">
             <summary>
             发布事件通知
             </summary>
@@ -3455,7 +3469,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Bus.MediatorMemoryBus.SendCommand``1(XUCore.Ddd.Domain.Commands.Command{``0},System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.MediatorMemoryBus.SendCommand``1(XUCore.Ddd.Domain.Command{``0},System.Threading.CancellationToken)">
             <summary>
             发送命令请求
             </summary>
@@ -3514,75 +3528,75 @@
             数据隔离
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.Command">
+        <member name="T:XUCore.Ddd.Domain.Command">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.Command.ValidationResult">
+        <member name="P:XUCore.Ddd.Domain.Command.ValidationResult">
             <summary>
             命令验证
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command.#ctor">
+        <member name="M:XUCore.Ddd.Domain.Command.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command.GetErrors">
+        <member name="M:XUCore.Ddd.Domain.Command.GetErrors">
             <summary>
             获取验证的错误消息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command.GetErrors(System.String)">
+        <member name="M:XUCore.Ddd.Domain.Command.GetErrors(System.String)">
             <summary>
             获取验证的错误消息
             </summary>
             <param name="separator"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command.IsVaild">
+        <member name="M:XUCore.Ddd.Domain.Command.IsVaild">
             <summary>
             是否验证通过
             </summary>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandHandler`2">
+        <member name="T:XUCore.Ddd.Domain.CommandHandler`2">
             <summary>
             领域命令处理程序
             用来作为全部处理程序的基类，提供公共方法和接口数据
             </summary>
         </member>
-        <member name="F:XUCore.Ddd.Domain.Commands.CommandHandler`2.bus">
+        <member name="F:XUCore.Ddd.Domain.CommandHandler`2.bus">
             <summary>
             注入中介处理接口（目前用不到，在领域事件中用来发布事件）
             </summary>
         </member>
-        <member name="F:XUCore.Ddd.Domain.Commands.CommandHandler`2.mapper">
+        <member name="F:XUCore.Ddd.Domain.CommandHandler`2.mapper">
             <summary>
             AutoMapper
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor">
+        <member name="M:XUCore.Ddd.Domain.CommandHandler`2.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor(XUCore.Ddd.Domain.Bus.IMediatorHandler)">
+        <member name="M:XUCore.Ddd.Domain.CommandHandler`2.#ctor(XUCore.Ddd.Domain.IMediatorHandler)">
             <summary>
             构造函数
             </summary>
             <param name="bus">注入中介处理接口</param>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.#ctor(XUCore.Ddd.Domain.Bus.IMediatorHandler,AutoMapper.IMapper)">
+        <member name="M:XUCore.Ddd.Domain.CommandHandler`2.#ctor(XUCore.Ddd.Domain.IMediatorHandler,AutoMapper.IMapper)">
             <summary>
             构造函数
             </summary>
             <param name="bus">注入中介处理接口</param>
             <param name="mapper">automapper</param>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandHandler`2.Handle(`0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.CommandHandler`2.Handle(`0,System.Threading.CancellationToken)">
             <summary>
             事件执行
             </summary>
@@ -3590,38 +3604,59 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandValidator`1">
+        <member name="T:XUCore.Ddd.Domain.CommandValidator`1">
             <summary>
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.Command`1">
+        <member name="T:XUCore.Ddd.Domain.Command`1">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.Command`1.#ctor">
+        <member name="M:XUCore.Ddd.Domain.Command`1.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandId`2">
+        <member name="T:XUCore.Ddd.Domain.CreateCommand">
+            <summary>
+            创建命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.UpdateCommand`1">
+            <summary>
+            更新命令
+            </summary>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.ListCommand">
+            <summary>
+            列表命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.PageCommand">
+            <summary>
+            分页命令
+            </summary>
+        </member>
+        <member name="T:XUCore.Ddd.Domain.CommandId`2">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.CommandId`2.Id">
+        <member name="P:XUCore.Ddd.Domain.CommandId`2.Id">
             <summary>
             主键Id
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandId`2.#ctor">
+        <member name="M:XUCore.Ddd.Domain.CommandId`2.#ctor">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdValidator`3">
+        <member name="T:XUCore.Ddd.Domain.CommandIdValidator`3">
             <summary>
             命令验证抽象基类
             </summary>
@@ -3629,94 +3664,94 @@
             <typeparam name="TResponse"></typeparam>
             <typeparam name="TKey"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdValidator`3.AddIdValidator">
+        <member name="M:XUCore.Ddd.Domain.CommandIdValidator`3.AddIdValidator">
             <summary>
             Id验证
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandIds`2">
+        <member name="T:XUCore.Ddd.Domain.CommandIds`2">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.CommandIds`2.Ids">
+        <member name="P:XUCore.Ddd.Domain.CommandIds`2.Ids">
             <summary>
             主键Id集合
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandIds`2.#ctor">
+        <member name="M:XUCore.Ddd.Domain.CommandIds`2.#ctor">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandIdsValidator`3">
+        <member name="T:XUCore.Ddd.Domain.CommandIdsValidator`3">
             <summary>
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandIdsValidator`3.AddIdsValidator">
+        <member name="M:XUCore.Ddd.Domain.CommandIdsValidator`3.AddIdsValidator">
             <summary>
             Id集合验证（不可为空）
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandLimit`1">
+        <member name="T:XUCore.Ddd.Domain.CommandLimit`1">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.CommandLimit`1.Limit">
+        <member name="P:XUCore.Ddd.Domain.CommandLimit`1.Limit">
             <summary>
             记录数
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandLimit`1.#ctor">
+        <member name="M:XUCore.Ddd.Domain.CommandLimit`1.#ctor">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandLimitValidator`2">
+        <member name="T:XUCore.Ddd.Domain.CommandLimitValidator`2">
             <summary>
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandLimitValidator`2.AddLimitVaildator(System.Int32)">
+        <member name="M:XUCore.Ddd.Domain.CommandLimitValidator`2.AddLimitVaildator(System.Int32)">
             <summary>
             Limit验证（大于等于0 且小于默认100）
             </summary>
             <param name="max">最大数值（默认100）</param>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandPage`1">
+        <member name="T:XUCore.Ddd.Domain.CommandPage`1">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.CommandPage`1.CurrentPage">
+        <member name="P:XUCore.Ddd.Domain.CommandPage`1.CurrentPage">
             <summary>
             当前页码
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Commands.CommandPage`1.PageSize">
+        <member name="P:XUCore.Ddd.Domain.CommandPage`1.PageSize">
             <summary>
             分页大小
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandPage`1.#ctor">
+        <member name="M:XUCore.Ddd.Domain.CommandPage`1.#ctor">
             <summary>
             抽象命令基类
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Commands.CommandPageValidator`2">
+        <member name="T:XUCore.Ddd.Domain.CommandPageValidator`2">
             <summary>
             命令验证抽象基类
             </summary>
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Commands.CommandPageValidator`2.AddPageVaildator(System.Int32)">
+        <member name="M:XUCore.Ddd.Domain.CommandPageValidator`2.AddPageVaildator(System.Int32)">
             <summary>
             分页验证(当前页码必须大于0，分页大小必须大于0且小于等于指定大小)
             </summary>
@@ -3791,61 +3826,61 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Events.Event">
+        <member name="T:XUCore.Ddd.Domain.Event">
             <summary>
             事件基类
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Event.Timestamp">
+        <member name="P:XUCore.Ddd.Domain.Event.Timestamp">
             <summary>
             当前触发时间
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Events.Event.#ctor">
+        <member name="M:XUCore.Ddd.Domain.Event.#ctor">
             <summary>
             事件基类
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Events.IEventStoreService">
+        <member name="T:XUCore.Ddd.Domain.IEventStoreService">
             <summary>
             领域存储服务接口
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Events.IEventStoreService.Save``1(``0)">
+        <member name="M:XUCore.Ddd.Domain.IEventStoreService.Save``1(``0)">
             <summary>
             将命令模型进行保存
             </summary>
             <typeparam name="T"> 泛型：Event命令模型</typeparam>
             <param name="theEvent"></param>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Events.Message">
+        <member name="T:XUCore.Ddd.Domain.Message">
             <summary>
             抽象类Message，用来获取我们事件执行过程中的类名
             然后并且添加聚合根
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Message.MessageType">
+        <member name="P:XUCore.Ddd.Domain.Message.MessageType">
             <summary>
             消息类型（命令）
             </summary>
         </member>
-        <member name="P:XUCore.Ddd.Domain.Events.Message.AggregateId">
+        <member name="P:XUCore.Ddd.Domain.Message.AggregateId">
             <summary>
             聚合根
             </summary>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Events.Message.#ctor">
+        <member name="M:XUCore.Ddd.Domain.Message.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Events.NotificationEventHandler`1">
+        <member name="T:XUCore.Ddd.Domain.NotificationEventHandler`1">
             <summary>
             事件通知抽象基类
             </summary>
             <typeparam name="TNotification"></typeparam>
         </member>
-        <member name="M:XUCore.Ddd.Domain.Events.NotificationEventHandler`1.Handle(`0,System.Threading.CancellationToken)">
+        <member name="M:XUCore.Ddd.Domain.NotificationEventHandler`1.Handle(`0,System.Threading.CancellationToken)">
             <summary>
             事件执行
             </summary>
@@ -3853,12 +3888,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Filters.CommandValidationAttribute">
+        <member name="T:XUCore.Ddd.Domain.CommandValidationAttribute">
             <summary>
             FluentValidation 验证拦截（因使用动态API，自动验证失效，导致需要手工操作。）
             </summary>
         </member>
-        <member name="T:XUCore.Ddd.Domain.Filters.CommandValidationActionFilter">
+        <member name="T:XUCore.Ddd.Domain.CommandValidationActionFilter">
             <summary>
             FluentValidation 验证拦截（因使用动态API，自动验证失效，导致需要手工操作。）
             </summary>
@@ -3983,14 +4018,6 @@
             验证token是否一致
             </summary>
             <param name="token"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.HttpContextExtensions.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            获取 Action 特性
-            </summary>
-            <typeparam name="TAttribute"></typeparam>
-            <param name="httpContext"></param>
             <returns></returns>
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperViewExtensions.AddMvcAction(Microsoft.Extensions.DependencyInjection.IServiceCollection)">

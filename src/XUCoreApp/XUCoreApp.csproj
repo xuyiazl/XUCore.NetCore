@@ -3,13 +3,13 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Description>
-			XUCore 基础集合库
+			XUCore 基础集合库（不含数据存储组件）
 		</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>xuyi</Authors>
 		<Company>personal</Company>
-		<Description>.NET Core Common 基础集合库</Description>
+		<Description>.NET Core Common 基础集合库（不含数据存储组件）</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
 		<Version>6.0.1</Version>
 		<PackageId>XUCoreApp</PackageId>
@@ -33,10 +33,6 @@
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
-		<ProjectReference Include="..\XUCore.NetCore.Data\XUCore.NetCore.Data.csproj" />
-		<ProjectReference Include="..\XUCore.NetCore.Mongo\XUCore.NetCore.Mongo.csproj" />
-		<ProjectReference Include="..\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
-		<ProjectReference Include="..\XUCore.NetCore.FreeSql\XUCore.NetCore.FreeSql.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

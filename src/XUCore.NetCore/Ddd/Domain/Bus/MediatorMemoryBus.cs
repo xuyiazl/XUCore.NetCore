@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Domain.Commands;
-using XUCore.Ddd.Domain.Events;
 
-namespace XUCore.Ddd.Domain.Bus
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// Mediator 消息中介发布请求和通知

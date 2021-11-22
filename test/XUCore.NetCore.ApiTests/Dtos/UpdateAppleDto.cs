@@ -1,9 +1,5 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain;
 
 namespace XUCore.NetCore.ApiTests.Dtos
 {

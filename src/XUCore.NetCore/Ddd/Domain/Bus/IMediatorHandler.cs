@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Domain.Commands;
-using XUCore.Ddd.Domain.Events;
 
-namespace XUCore.Ddd.Domain.Bus
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 消息总线

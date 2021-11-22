@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using XUCore.Ddd.Domain.Commands;
 using XUCore.Extensions;
 
-namespace XUCore.Ddd.Domain.Filters
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// FluentValidation 验证拦截（因使用动态API，自动验证失效，导致需要手工操作。）

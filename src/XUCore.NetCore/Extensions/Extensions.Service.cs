@@ -18,7 +18,7 @@ using XUCore.NetCore.Signature;
 using XUCore.Configs;
 using XUCore.NetCore.Oss;
 
-namespace XUCore.NetCore.Extensions
+namespace XUCore.NetCore
 {
     /// <summary>
     /// 服务扩展

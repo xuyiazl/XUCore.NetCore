@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using XUCore.Ddd.Domain.Commands;
+using XUCore.Ddd.Domain;
 using XUCore.NetCore.FreeSql.Entity;
 using XUCore.Paging;
 

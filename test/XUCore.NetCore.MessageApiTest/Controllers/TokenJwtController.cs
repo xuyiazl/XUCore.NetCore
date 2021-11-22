@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using XUCore.Extensions;
 using XUCore.Helpers;
-using System;
-using XUCore.NetCore.Authorization.JwtBearer;
-using System.Collections.Generic;
-using XUCore.Serializer;
-using Microsoft.AspNetCore.Authorization;
-using XUCore.NetCore.Swagger;
 using XUCore.NetCore.Authorization;
+using XUCore.NetCore.Swagger;
+using XUCore.Serializer;
 
 namespace XUCore.NetCore.MessageApiTest
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace XUCore.Ddd.Domain.Commands
+namespace XUCore.Ddd.Domain
 {
     /// <summary>
     /// 抽象命令基类

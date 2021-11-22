@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using XUCore.NetCore.Extensions;
 using System.Text;
+using XUCore.NetCore;
 
 namespace XUCore.WebTests
 {

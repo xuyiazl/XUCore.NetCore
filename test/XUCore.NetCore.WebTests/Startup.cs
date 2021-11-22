@@ -1,20 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using XUCore.NetCore.Extensions;
-using XUCore.NetCore.HttpFactory;
+using XUCore.NetCore;
+using XUCore.NetCore.Oss;
 //using XUCore.NetCore.Logging.Log4Net;
 using XUCore.NetCore.Redis;
-using XUCore.NetCore.Data;
-using System;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using XUCore.NetCore.Oss;
 
 namespace XUCore.WebTests
 {

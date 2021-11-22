@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using XUCore.NetCore.Extensions;
 using XUCore.Extensions;
 using XUCore.Helpers;
 using XUCore.IO;
