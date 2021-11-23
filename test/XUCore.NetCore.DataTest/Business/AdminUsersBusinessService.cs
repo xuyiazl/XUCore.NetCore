@@ -106,6 +106,7 @@ namespace XUCore.NetCore.DataTest.Business
         [AspectCache(HashKey = "mytest", Key = "{Id}")]
         public async Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity)
         {
+            rep.Delete<AdminUserEntity>(c => c.Id == 0);
             return entity;
         }
 

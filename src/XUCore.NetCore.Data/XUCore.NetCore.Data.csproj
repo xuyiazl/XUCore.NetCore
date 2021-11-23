@@ -10,7 +10,7 @@
 		<Company>personal</Company>
 		<Description>.NET Core Data 数据库仓储</Description>
 		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.1</Version>
+		<Version>6.0.2</Version>
 		<PackageId>XUCore.NetCore.Data</PackageId>
 		<Product>XUCore.NetCore.Data</Product>
 		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
@@ -29,10 +29,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="BulkExtensions\**" />
+	  <EmbeddedResource Remove="BulkExtensions\**" />
+	  <None Remove="BulkExtensions\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Remove="Aop\TransactionAttribute.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="EFCore.BulkExtensions" Version="6.0.4" />
 		<PackageReference Include="FastMember" Version="1.5.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />

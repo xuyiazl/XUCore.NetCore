@@ -19,29 +19,6 @@
             工作单元AOP
             </summary>
         </member>
-        <member name="M:XUCore.NetCore.Data.BulkExtensions.BatchUtil.GetSqlUpdate``1(System.Linq.IQueryable{``0},Microsoft.EntityFrameworkCore.DbContext,System.Linq.Expressions.Expression{System.Func{``0,``0}})">
-            <summary>
-            get Update Sql
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="query"></param>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.NetCore.Data.BulkExtensions.BatchUtil.CreateUpdateBody(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Linq.Expressions.Expression,XUCore.NetCore.Data.BulkExtensions.DbServer,System.Text.StringBuilder@,System.Collections.Generic.List{System.Object}@)">
-            <summary>
-            Recursive analytic expression 
-            </summary>
-            <param name="tableAlias"></param>
-            <param name="expression"></param>
-            <param name="sqlColumns"></param>
-            <param name="sqlParameters"></param>
-        </member>
-        <member name="M:XUCore.NetCore.Data.BulkExtensions.SqlQueryBuilder.DeleteTable(System.String)">
-            <summary>
-            Used for Sqlite, Truncate table 
-            </summary>
-        </member>
         <member name="T:XUCore.NetCore.Data.DBContextBase">
             <summary>
             基于db上下文拓展工厂，用于拓展XUCore.NetCore.Data.BulkExtensions的GitHub开源项目

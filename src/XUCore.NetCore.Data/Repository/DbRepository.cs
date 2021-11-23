@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Extensions;
 using XUCore.Extensions.Datas;
-using XUCore.NetCore.Data.BulkExtensions;
 using XUCore.Paging;
 
 namespace XUCore.NetCore.Data
@@ -713,7 +713,7 @@ namespace XUCore.NetCore.Data
         /// <returns></returns>
         public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> selector, Expression<Func<TEntity, TEntity>> Update, CancellationToken cancellationToken = default)
         {
-            return await Table.Where(selector).BatchUpdateAsync(Update, cancellationToken);
+            return await Table.Where(selector).BatchUpdateAsync(Update, cancellationToken: cancellationToken);
         }
         /// <summary>
         /// 根据条件批量删除

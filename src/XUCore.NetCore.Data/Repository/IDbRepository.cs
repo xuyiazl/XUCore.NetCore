@@ -1,17 +1,10 @@
-﻿using XUCore.Paging;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data.Common;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Linq;
-using XUCore.NetCore.Data.BulkExtensions;
+using XUCore.Paging;
 
 namespace XUCore.NetCore.Data
 {
