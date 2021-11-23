@@ -17,12 +17,6 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Mongo)				| XUCore.NetCore.Mongo				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.NetCore.Mongo.svg)](https://nuget.org/packages/XUCore.NetCore.Mongo)						| [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Mongo.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Mongo)						| Mongo 仓储组件				|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Redis)				| XUCore.NetCore.Redis				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.NetCore.Redis.svg)](https://nuget.org/packages/XUCore.NetCore.Redis)						| [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.Redis.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.Redis)						| Redis 仓储组件				|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.AspectCore)		| XUCore.NetCore.AspectCore			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.NetCore.AspectCore.svg)](https://nuget.org/packages/XUCore.NetCore.AspectCore)			| [![nuget](https://img.shields.io/nuget/v/XUCore.NetCore.AspectCore.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.NetCore.AspectCore)				| Aspect AOP扩展				|
-| -					| XUCore.Drawing					| -									| -									| Drawing 绘图扩展，合并到XUCore			|
-| -		| XUCore.NetCore.DynamicWebApi      | -		| -		| 动态WebApi组件，合并到NetCore				|
-| -		| XUCore.NetCore.AccessControl		| -		| -		| 资源授权插件（权限），合并到NetCore		|
-| -			| XUCore.NetCore.Swagger			| -					| -					| Swagger文档扩展，合并到NetCore			|
-| -				| XUCore.NetCore.Jwt				| -							| -							| Jwt的实现，正式弃用					|
-| -				| XUCore.Ddd.Domain					| -							| -								| Ddd Domain扩展	，合并到NetCore			|
 
 
 ## 🥥 框架包
@@ -46,12 +40,6 @@
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Mongo)				| XUCore.NetCore.Mongo				| Mongo 仓储组件																		|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.Redis)				| XUCore.NetCore.Redis				| Redis 仓储组件																		|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.NetCore.AspectCore)		| XUCore.NetCore.AspectCore			| Aspect扩展，缓存拦截器、事务等，自定义AOP											|
-| -					| XUCore.Drawing					| Drawing 绘图扩展，验证码、图片缩放裁剪、图像灰度等操作处理，合并到NetCore							|
-| -		| XUCore.NetCore.DynamicWebApi		| 动态WebApi组件，简化开发，Restful，合并到NetCore													|
-| -		| XUCore.NetCore.AccessControl		| 资源授权插件（权限），支持MVC、Razor，API端请用XUCore.NetCore内的JWT，合并到NetCore					|
-| -			| XUCore.NetCore.Swagger			| Swagger文档扩展，支持jwt登录存储，合并到NetCore													|
-| -				| XUCore.NetCore.Jwt				| Jwt的实现，目前【弃用】准备用微软自带的，正式弃用											|
-| -				| XUCore.Ddd.Domain					| 基于MediatR的Ddd Domain扩展，合并到NetCore														|
 
 
 ## 🍄 框架脚手架
@@ -59,8 +47,6 @@
 |																																		| 名称								| 下载																																		| 版本																																								| 描述										|
 | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Ddd)				| XUCore.Template.Ddd				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Ddd.svg)](https://nuget.org/packages/XUCore.Template.Ddd)					| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Ddd.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Ddd)						| Ddd 架构模板（Mvc/Api,底层相通）				|
-| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)		| XUCore.Template.EasyLayer			| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.EasyLayer.svg)](https://nuget.org/packages/XUCore.Template.EasyLayer)				| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.EasyLayer.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.EasyLayer)					| 精简分层模板(默认WebApi,底层相通)						|
-| [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| XUCore.Template.Easy				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.Easy.svg)](https://nuget.org/packages/XUCore.Template.Easy)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.Easy.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.Easy)				| 单层应用模板(默认WebApi,底层相通)					|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.FreeSql)				| XUCore.Template.FreeSql				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.FreeSql.svg)](https://nuget.org/packages/XUCore.Template.FreeSql)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.FreeSql.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.FreeSql)				| 基于FreeSql的 Api分层应用模板(默认WebApi,底层相通)					|
 | [![nuget](https://shields.io/badge/-Nuget-blue?cacheSeconds=604800)](https://www.nuget.org/packages/XUCore.Template.EasyFreeSql)				| XUCore.Template.EasyFreeSql				| [![Downloads](https://img.shields.io/nuget/dt/XUCore.Template.EasyFreeSql.svg)](https://nuget.org/packages/XUCore.Template.EasyFreeSql)		| [![nuget](https://img.shields.io/nuget/v/XUCore.Template.EasyFreeSql.svg?cacheSeconds=10800)](https://www.nuget.org/packages/XUCore.Template.EasyFreeSql)				| 基于FreeSql的 Api 单层应用模板(默认WebApi,底层相通)					|
 
@@ -72,13 +58,7 @@
 
 ### [XUCore.Template.Ddd](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Ddd)
 
-### [XUCore.Template.EasyLayer](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.EasyLayer) 
-
-建议使用，基于EFCore的简单分层应用（动态API+业务+EFCore的数据层），缩减了Controller，独立业务，数据持久化
-
-### [XUCore.Template.Easy](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.Easy) 
-
-不太建议使用，毕竟单层（动态API+业务+数据）集合在一起。
+基于Ddd模型架构，使用EFCore
 
 ### [XUCore.Template.FreeSql](https://github.com/xuyiazl/XUCore.Template/tree/main/XUCore.Template.FreeSql)
 
