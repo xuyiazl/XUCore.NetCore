@@ -14,6 +14,10 @@ namespace XUCore.NetCore.Controllers
     [ApiElapsedTime]
     public abstract class ApiControllerBase : Controller
     {
+        /// <summary>
+        /// WebApi控制器基类
+        /// </summary>
+        /// <param name="logger"></param>
         public ApiControllerBase(ILogger logger)
         {
             _logger = logger;
@@ -44,6 +48,6 @@ namespace XUCore.NetCore.Controllers
         /// <param name="subCode">业务状态码</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        protected IActionResult Fail(string subCode, string message) => new Result(StateCode.Fail, subCode, message);
+        protected virtual IActionResult Fail(string subCode, string message) => new Result(StateCode.Fail, subCode, message);
     }
 }

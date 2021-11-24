@@ -89,7 +89,7 @@ namespace XUCore.Script
         /// Evaluate the function
         /// </summary>
         /// <returns></returns>
-        public override void  Execute()
+        public override void Execute()
         {
             _continueRunning = true;
             _result = null;
@@ -103,9 +103,9 @@ namespace XUCore.Script
                     if (!_continueRunning) break;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
             finally
             {

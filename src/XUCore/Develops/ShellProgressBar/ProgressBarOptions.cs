@@ -11,7 +11,7 @@ namespace XUCore.Develops.ShellProgressBar
 	public class ProgressBarOptions
 	{
 		private bool _enableTaskBarProgress;
-		public static readonly ProgressBarOptions Default = new ProgressBarOptions();
+		public static readonly ProgressBarOptions Default = new();
 
 		/// <summary> The foreground color of the progress bar, message and time</summary>
 		public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Green;
@@ -49,12 +49,12 @@ namespace XUCore.Develops.ShellProgressBar
 		/// </summary>
 		public bool ProgressBarOnBottom { get; set; }
 
-		/// <summary>
-		/// Whether to show the estimated time. It can be set when
-		/// <see cref="ProgressBarBase.Tick"/> is called or the property
-		/// <see cref="ProgressBarBase.EstimatedDuration"/> is set.
-		/// </summary>
-		public bool ShowEstimatedDuration { get; set; }
+        /// <summary>
+        /// Whether to show the estimated time. It can be set when
+        /// <see cref="ProgressBarBase.Tick"/> is called or the property
+        /// <see cref="ProgressBarBase.EstimatedDuration"/> is set.
+        /// </summary>
+        public bool ShowEstimatedDuration { get; set; }
 
 		/// <summary>
 		/// Use Windows' task bar to display progress.

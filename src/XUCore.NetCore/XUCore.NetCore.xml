@@ -477,6 +477,12 @@
             WebApi控制器基类
             </summary>
         </member>
+        <member name="M:XUCore.NetCore.Controllers.ApiControllerBase.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            WebApi控制器基类
+            </summary>
+            <param name="logger"></param>
+        </member>
         <member name="F:XUCore.NetCore.Controllers.ApiControllerBase._logger">
             <summary>
             日志
@@ -503,6 +509,12 @@
             <summary>
             WebApi的区域控制器基类
             </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Controllers.AreaApiControllerBase.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            WebApi的区域控制器基类
+            </summary>
+            <param name="logger"></param>
         </member>
         <member name="T:XUCore.NetCore.DependencyInjection">
             <summary>
