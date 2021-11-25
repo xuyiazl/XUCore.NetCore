@@ -30,12 +30,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Quartz" Version="3.3.3" />
 		<PackageReference Include="AspectCore.Core" Version="2.2.0" />
 		<PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.2.0" />
 		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
-		<PackageReference Include="Quartz" Version="3.3.3" />
 	</ItemGroup>
 
 	<ItemGroup>
