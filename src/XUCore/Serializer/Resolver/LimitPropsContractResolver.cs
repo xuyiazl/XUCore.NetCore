@@ -82,7 +82,11 @@ namespace XUCore.Serializer
             this.PropsRename = propsRename;
             this.Resolver = resolver;
         }
-
+        /// <summary>
+        /// 重写字段名
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         protected override string ResolvePropertyName(string propertyName)
         {
             if (PropsRename == null || PropsRename.Count == 0)
@@ -93,7 +97,12 @@ namespace XUCore.Serializer
             else
                 return base.ResolvePropertyName(ResolverPropertyName(propertyName));
         }
-
+        /// <summary>
+        /// 限制属性字段的输出
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="memberSerialization"></param>
+        /// <returns></returns>
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             IList<JsonProperty> list = base.CreateProperties(type, memberSerialization);
@@ -108,7 +117,12 @@ namespace XUCore.Serializer
                     return !Props.Any(a => a.ToLower() == p.PropertyName.ToLower());
             }).ToList();
         }
-
+        /// <summary>
+        /// 处理JsonPropertyAttribute标识不处理的问题
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="memberSerialization"></param>
+        /// <returns></returns>
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty prop = base.CreateProperty(member, memberSerialization);
@@ -118,7 +132,11 @@ namespace XUCore.Serializer
 
             return prop;
         }
-
+        /// <summary>
+        /// 驼峰处理
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         private string ResolverPropertyName(string propertyName)
         {
             switch (Resolver)

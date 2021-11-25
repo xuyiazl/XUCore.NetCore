@@ -30,10 +30,5 @@
 		<PackageReference Include="ExcelNumberFormat" Version="1.1.0" />
 		<PackageReference Include="SpreadsheetCellRef" Version="1.0.1" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="XUCore.Excel.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
+	
 </Project>

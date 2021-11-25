@@ -11,7 +11,7 @@
         </member>
         <member name="M:XUCore.Excel.DictionaryContainer.#ctor(System.Int32)">
             <summary>
-            
+            构造函数
             </summary>
             <param name="cap">最大长度设置</param>
         </member>
@@ -54,6 +54,11 @@
             清空容器
             </summary>
         </member>
+        <member name="M:XUCore.Excel.DictionaryContainer.Dispose">
+            <summary>
+            释放字段资源
+            </summary>
+        </member>
         <member name="T:XUCore.Excel.ExcelReader">
             <summary>
             A reader for the entire workbook. Access an individual worksheet by the worksheet name indexer,
@@ -89,6 +94,11 @@
             <summary>
             Defines how the reader will handle null cells when using <c>SheetReader.ReadNext()</c>
             and <c>SheetReader.ReadNextInRow()</c>
+            </summary>
+        </member>
+        <member name="M:XUCore.Excel.ExcelReader.Dispose">
+            <summary>
+            释放资源
             </summary>
         </member>
         <member name="T:XUCore.Excel.ReadNextBehaviour">
@@ -279,23 +289,23 @@
         </member>
         <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]},System.Int32)">
             <summary>
-            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            �����֪���У����ж�ȡ���ֲ��󲿷��ļ�û�и��� dimension ref="A1:..." �����޷���ȡ�����������������⣩
             </summary>
-            <param name="minColumnRefString">当前表格列的第一个位置，如A1，则是第1列</param>
-            <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
-            <param name="rowCount">输出总行数</param>
+            <param name="minColumnRefString">��ǰ�����еĵ�һ��λ�ã���A1�����ǵ�1��</param>
+            <param name="maxColumnRefString">��ǰ�����е����λ�ã���F1�����ǵ�6��</param>
+            <param name="rowCount">���������</param>
             <param name="rowAction"></param>
-            <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
+            <param name="clearMemory">���ֵ�ﵽָ������������ֵ䣬����ռ���ڴ����</param>
         </member>
         <member name="M:XUCore.Excel.SheetReader.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]},System.Int32)">
             <summary>
-            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            �����֪���У����ж�ȡ���ֲ��󲿷��ļ�û�и��� dimension ref="A1:..." �����޷���ȡ�����������������⣩
             </summary>
-            <param name="minColumnNubmer">当前表格列的第一个位置</param>
-            <param name="maxColumnNumber">当前表格列的最后位置</param>
-            <param name="rowCount">输出总行数</param>
+            <param name="minColumnNubmer">��ǰ�����еĵ�һ��λ��</param>
+            <param name="maxColumnNumber">��ǰ�����е����λ��</param>
+            <param name="rowCount">���������</param>
             <param name="rowAction"></param>
-            <param name="clearMemory">当字典达到指定数量后，清空字典，避免占用内存过大</param>
+            <param name="clearMemory">���ֵ�ﵽָ������������ֵ䣬����ռ���ڴ����</param>
         </member>
         <member name="T:XUCore.Excel.SheetReader_old">
             <summary>
@@ -462,21 +472,26 @@
         </member>
         <member name="M:XUCore.Excel.SheetReader_old.ReadNextInRow(System.String,System.String,System.Int32@,System.Action{System.Int32,System.Object[]})">
             <summary>
-            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            �����֪���У����ж�ȡ���ֲ��󲿷��ļ�û�и��� dimension ref="A1:..." �����޷���ȡ�����������������⣩
             </summary>
-            <param name="minColumnRefString">当前表格列的第一个位置，如A1，则是第1列</param>
-            <param name="maxColumnRefString">当前表格列的最后位置，如F1，则是第6列</param>
-            <param name="rowCount">输出总行数</param>
+            <param name="minColumnRefString">��ǰ�����еĵ�һ��λ�ã���A1�����ǵ�1��</param>
+            <param name="maxColumnRefString">��ǰ�����е����λ�ã���F1�����ǵ�6��</param>
+            <param name="rowCount">���������</param>
             <param name="rowAction"></param>
         </member>
         <member name="M:XUCore.Excel.SheetReader_old.ReadNextInRow(System.Int32,System.Int32,System.Int32@,System.Action{System.Int32,System.Object[]})">
             <summary>
-            针对已知的列，逐行读取（弥补大部分文件没有更新 dimension ref="A1:..." 导致无法获取到行数和列数的问题）
+            �����֪���У����ж�ȡ���ֲ��󲿷��ļ�û�и��� dimension ref="A1:..." �����޷���ȡ�����������������⣩
             </summary>
-            <param name="minColumnNubmer">当前表格列的第一个位置</param>
-            <param name="maxColumnNumber">当前表格列的最后位置</param>
-            <param name="rowCount">输出总行数</param>
+            <param name="minColumnNubmer">��ǰ�����еĵ�һ��λ��</param>
+            <param name="maxColumnNumber">��ǰ�����е����λ��</param>
+            <param name="rowCount">���������</param>
             <param name="rowAction"></param>
+        </member>
+        <member name="M:XUCore.Excel.SheetReader_old.Dispose">
+            <summary>
+            释放资源
+            </summary>
         </member>
         <member name="T:XUCore.Excel.WorksheetDimension">
             <summary>

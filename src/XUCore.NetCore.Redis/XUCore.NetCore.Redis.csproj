@@ -52,10 +52,5 @@
 			<DependentUpon>StackExchangeRedis.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
-	<ItemGroup>
-		<None Update="XUCore.NetCore.Redis.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 
 </Project>

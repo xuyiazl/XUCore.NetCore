@@ -25,7 +25,15 @@
                 _parameters = new SortedDictionary<string, object>();
 
         private string _host;
+        /// <summary>
+        /// 客户端名（自定义标识）
+        /// </summary>
+        /// <value></value>
         public string ClientName { get; set; }
+        /// <summary>
+        /// 请求地址
+        /// </summary>
+        /// <value></value>
         public string Url { get; private set; }
         private bool _isCompleteParameter = true;
 
@@ -46,7 +54,7 @@
         {
             get
             {
-                return new FormUrlEncodedContent(_parameters.Select(m => new KeyValuePair<string?, string?>(m.Key, m.Value.SafeString())));
+                return new FormUrlEncodedContent(_parameters.Select(m => new KeyValuePair<string, string>(m.Key, m.Value.SafeString())));
             }
         }
         /// <summary>
@@ -59,7 +67,9 @@
                 return _parameters.Select(m => m.Key + "=" + m.Value).DefaultIfEmpty().Aggregate((m, n) => m + "&" + n);
             }
         }
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public UrlBuilder()
         {
         }

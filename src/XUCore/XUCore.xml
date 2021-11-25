@@ -17714,10 +17714,48 @@
             <param name="propsRename">重命名对照表</param>
             <param name="resolver">解析器 camelcase 小驼峰 ， default 默认大写</param>
         </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.ResolvePropertyName(System.String)">
+            <summary>
+            重写字段名
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            限制属性字段的输出
+            </summary>
+            <param name="type"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            处理JsonPropertyAttribute标识不处理的问题
+            </summary>
+            <param name="member"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+        <member name="M:XUCore.Serializer.LimitPropsContractResolver.ResolverPropertyName(System.String)">
+            <summary>
+            驼峰处理
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.Serializer.SnakeCaseContractResolver">
             <summary>
             驼峰处理，如果使用CamelCasePropertyNamesContractResolver的话，JsonProperty指定大写失效
             </summary>
+        </member>
+        <member name="M:XUCore.Serializer.SnakeCaseContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            重写CreateProperty
+            </summary>
+            <param name="member"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
         </member>
         <member name="T:XUCore.Threading.Asyncs.AsyncLock">
             <summary>
@@ -17930,6 +17968,7 @@
             将时间转换为Js时间格式（Date.getTiem()）
             </summary>
             <param name="dateTime">时间点</param>
+            <param name="milsec">是否启用毫秒</param>
         </member>
         <member name="M:XUCore.Timing.DateTimeExtensions.SetTime(System.DateTime,System.TimeSpan)">
             <summary>
@@ -19229,6 +19268,36 @@
             cookie有效期枚举
             </summary>
         </member>
+        <member name="F:XUCore.Webs.ExpiresType.Seconds">
+            <summary>
+             秒
+             </summary>
+        </member>
+        <member name="F:XUCore.Webs.ExpiresType.Minutes">
+            <summary>
+             分
+             </summary>
+        </member>
+        <member name="F:XUCore.Webs.ExpiresType.Hours">
+            <summary>
+             时
+             </summary>
+        </member>
+        <member name="F:XUCore.Webs.ExpiresType.Days">
+            <summary>
+             天
+             </summary>
+        </member>
+        <member name="F:XUCore.Webs.ExpiresType.Months">
+            <summary>
+             月
+             </summary>
+        </member>
+        <member name="F:XUCore.Webs.ExpiresType.Years">
+            <summary>
+             年
+             </summary>
+        </member>
         <member name="T:XUCore.Webs.CookieHelper">
             <summary>
             Cookie 操作辅助类
@@ -19348,7 +19417,14 @@
             <param name="cookieName"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XUCore.Webs.CookieHelper.GetCookie``1(System.String)" -->
+        <member name="M:XUCore.Webs.CookieHelper.GetCookie``1(System.String)">
+            <summary>
+            获取Cookie的value值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cookieName"></param>
+            <returns></returns>
+        </member>
         <member name="M:XUCore.Webs.CookieHelper.GetCookie``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>
             获取Cookie的value值
@@ -19391,6 +19467,18 @@
             Url构造器
             </summary>
         </member>
+        <member name="P:XUCore.Webs.UrlBuilder.ClientName">
+            <summary>
+            客户端名（自定义标识）
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:XUCore.Webs.UrlBuilder.Url">
+            <summary>
+            请求地址
+            </summary>
+            <value></value>
+        </member>
         <member name="P:XUCore.Webs.UrlBuilder.Parameters">
             <summary>
             参数列表
@@ -19404,6 +19492,11 @@
         <member name="P:XUCore.Webs.UrlBuilder.ParameterString">
             <summary>
             参数字符串
+            </summary>
+        </member>
+        <member name="M:XUCore.Webs.UrlBuilder.#ctor">
+            <summary>
+            构造函数
             </summary>
         </member>
         <member name="M:XUCore.Webs.UrlBuilder.#ctor(System.String)">
@@ -19527,6 +19620,12 @@
             <summary>
             操作系统字典
             </summary>
+        </member>
+        <member name="P:XUCore.Webs.UserAgentHelper.BrowserDict">
+            <summary>
+            浏览器标识
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:XUCore.Webs.UserAgentHelper.GetOperatingSystemName(System.String)">
             <summary>

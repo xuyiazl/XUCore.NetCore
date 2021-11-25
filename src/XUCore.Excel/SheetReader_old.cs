@@ -605,20 +605,20 @@ namespace XUCore.Excel
         }
 
         /// <summary>
-        /// уК╤тряж╙╣дапё╛жПпп╤ах║ё╗цж╡╧╢С╡©╥жнд╪Чц╩сп╦Эпб dimension ref="A1:..." ╣╪жбнч╥╗╩Ях║╣╫ппйЩ╨мапйЩ╣днйлБё╘
+        /// О©╫О©╫О©╫О©╫О©╫ж╙О©╫О©╫О©╫пёО©╫О©╫О©╫О©╫п╤О©╫х║О©╫О©╫О©╫ж╡О©╫О©╫С╡©╥О©╫О©╫д╪О©╫ц╩О©╫п╦О©╫О©╫О©╫ dimension ref="A1:..." О©╫О©╫О©╫О©╫О©╫ч╥О©╫О©╫О©╫х║О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫Бё╘
         /// </summary>
-        /// <param name="minColumnRefString">╣╠г╟╠М╦Яап╣д╣зр╩╦Жн╩жцё╛хГA1ё╛тРйг╣з1ап</param>
-        /// <param name="maxColumnRefString">╣╠г╟╠М╦Яап╣двН╨Сн╩жцё╛хГF1ё╛тРйг╣з6ап</param>
-        /// <param name="rowCount">йДЁЖвэппйЩ</param>
+        /// <param name="minColumnRefString">О©╫О©╫г╟О©╫О©╫О©╫О©╫О©╫п╣д╣О©╫р╩О©╫О©╫н╩О©╫цёО©╫О©╫О©╫A1О©╫О©╫О©╫О©╫О©╫г╣О©╫1О©╫О©╫</param>
+        /// <param name="maxColumnRefString">О©╫О©╫г╟О©╫О©╫О©╫О©╫О©╫п╣О©╫О©╫О©╫О©╫н╩О©╫цёО©╫О©╫О©╫F1О©╫О©╫О©╫О©╫О©╫г╣О©╫6О©╫О©╫</param>
+        /// <param name="rowCount">О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫</param>
         /// <param name="rowAction"></param>
         public void ReadNextInRow(string minColumnRefString, string maxColumnRefString, out int rowCount, Action<int, object[]> rowAction)
             => ReadNextInRow(new CellRef(minColumnRefString).ColumnNumber, new CellRef(maxColumnRefString).ColumnNumber, out rowCount, rowAction);
         /// <summary>
-        /// уК╤тряж╙╣дапё╛жПпп╤ах║ё╗цж╡╧╢С╡©╥жнд╪Чц╩сп╦Эпб dimension ref="A1:..." ╣╪жбнч╥╗╩Ях║╣╫ппйЩ╨мапйЩ╣днйлБё╘
+        /// О©╫О©╫О©╫О©╫О©╫ж╙О©╫О©╫О©╫пёО©╫О©╫О©╫О©╫п╤О©╫х║О©╫О©╫О©╫ж╡О©╫О©╫С╡©╥О©╫О©╫д╪О©╫ц╩О©╫п╦О©╫О©╫О©╫ dimension ref="A1:..." О©╫О©╫О©╫О©╫О©╫ч╥О©╫О©╫О©╫х║О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫Бё╘
         /// </summary>
-        /// <param name="minColumnNubmer">╣╠г╟╠М╦Яап╣д╣зр╩╦Жн╩жц</param>
-        /// <param name="maxColumnNumber">╣╠г╟╠М╦Яап╣двН╨Сн╩жц</param>
-        /// <param name="rowCount">йДЁЖвэппйЩ</param>
+        /// <param name="minColumnNubmer">О©╫О©╫г╟О©╫О©╫О©╫О©╫О©╫п╣д╣О©╫р╩О©╫О©╫н╩О©╫О©╫</param>
+        /// <param name="maxColumnNumber">О©╫О©╫г╟О©╫О©╫О©╫О©╫О©╫п╣О©╫О©╫О©╫О©╫н╩О©╫О©╫</param>
+        /// <param name="rowCount">О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫</param>
         /// <param name="rowAction"></param>
         public void ReadNextInRow(int minColumnNubmer, int maxColumnNumber, out int rowCount, Action<int, object[]> rowAction)
         {
@@ -653,7 +653,9 @@ namespace XUCore.Excel
 
             rowCount = rowNumber;
         }
-
+        /// <summary>
+        /// И┤┼Ф■╬Х╣└Ф╨░
+        /// </summary>
         public void Dispose()
         {
             _values.Clear();

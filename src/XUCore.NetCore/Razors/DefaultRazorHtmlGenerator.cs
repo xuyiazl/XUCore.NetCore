@@ -26,6 +26,7 @@ namespace XUCore.NetCore.Razors
         /// <summary>
         /// 初始化一个<see cref="DefaultRazorHtmlGenerator"/>类型的实例
         /// </summary>
+        /// <param name="logger"></param>
         /// <param name="routeAnalyzer">路由分析器</param>
         public DefaultRazorHtmlGenerator(ILogger<DefaultRazorHtmlGenerator> logger, IRouteAnalyzer routeAnalyzer)
         {

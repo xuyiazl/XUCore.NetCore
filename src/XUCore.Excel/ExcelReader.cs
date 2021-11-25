@@ -176,7 +176,9 @@ namespace XUCore.Excel
         {
             return _zippedXlsxFile.IsDateTimeStream.GetFirstDateTimeStyle();
         }
-
+        /// <summary>
+        /// 释放资源
+        /// </summary>
         public void Dispose()
         {
             _zippedXlsxFile.Dispose();

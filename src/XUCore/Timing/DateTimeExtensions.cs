@@ -86,6 +86,7 @@ namespace XUCore.Timing
         /// 将时间转换为Js时间格式（Date.getTiem()）
         /// </summary>
         /// <param name="dateTime">时间点</param>
+        /// <param name="milsec">是否启用毫秒</param>
         public static string ToJsGetTime(this DateTime dateTime, bool milsec = true)
         {
             DateTime utc = dateTime.ToUniversalTime();

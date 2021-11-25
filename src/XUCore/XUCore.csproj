@@ -63,9 +63,4 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="XUCore.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 </Project>

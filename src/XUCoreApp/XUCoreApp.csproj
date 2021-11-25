@@ -35,9 +35,4 @@
 		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="XUCoreApp.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 </Project>

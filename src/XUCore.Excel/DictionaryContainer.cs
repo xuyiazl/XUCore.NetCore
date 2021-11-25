@@ -14,7 +14,7 @@ namespace XUCore.Excel
         private int capacity; // 每个Dictionary的固定容量
         private List<Dictionary<string, object>> container;
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
         /// <param name="cap">最大长度设置</param>
         public DictionaryContainer(int cap = 4000000)
@@ -105,7 +105,9 @@ namespace XUCore.Excel
             container.Clear();
             container.Add(new Dictionary<string, object>(capacity));
         }
-
+        /// <summary>
+        /// 释放字段资源
+        /// </summary>
         public void Dispose()
         {
             container.Clear();

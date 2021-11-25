@@ -14,6 +14,12 @@ namespace XUCore.Serializer
     /// </summary>
     public class SnakeCaseContractResolver : DefaultContractResolver
     {
+        /// <summary>
+        /// 重写CreateProperty
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="memberSerialization"></param>
+        /// <returns></returns>
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty prop = base.CreateProperty(member, memberSerialization);

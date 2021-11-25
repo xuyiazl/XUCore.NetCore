@@ -104,10 +104,4 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="XUCore.NetCore.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>

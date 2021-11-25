@@ -43,11 +43,4 @@
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
 
-
-	<ItemGroup>
-		<None Update="XUCore.NetCore.AspectCore.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>

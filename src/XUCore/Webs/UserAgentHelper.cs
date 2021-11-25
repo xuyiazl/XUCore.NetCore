@@ -26,7 +26,10 @@ namespace XUCore.Webs
             {"SunOs","Solaris" },
             {"FreeBSD","FreeBSD" },
         };
-
+        /// <summary>
+        /// 浏览器标识
+        /// </summary>
+        /// <returns></returns>
         public static IDictionary<string, string> BrowserDict { get; set; } = new Dictionary<string, string>()
         {
             {"Maxthon","遨游浏览器" },

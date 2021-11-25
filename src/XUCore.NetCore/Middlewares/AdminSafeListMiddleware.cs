@@ -28,6 +28,7 @@ namespace XUCore.NetCore.Middlewares
         /// 初始化一个<see cref="AdminSafeListMiddleware"/>类型的实例
         /// </summary>
         /// <param name="next">方法</param>
+        /// <param name="logger"></param>
         /// <param name="whitelist">IP白名单</param>
         public AdminSafeListMiddleware(RequestDelegate next, ILogger<AdminSafeListMiddleware> logger, string whitelist)
         {

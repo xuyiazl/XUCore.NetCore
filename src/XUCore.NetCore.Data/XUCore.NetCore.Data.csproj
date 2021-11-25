@@ -66,10 +66,5 @@
 			<DependentUpon>DbRepository.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
-	<ItemGroup>
-		<None Update="XUCore.NetCore.Data.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 
 </Project>

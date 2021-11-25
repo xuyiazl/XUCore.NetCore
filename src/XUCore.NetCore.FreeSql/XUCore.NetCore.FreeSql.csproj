@@ -40,10 +40,5 @@
 		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-		<None Update="XUCore.NetCore.FreeSql.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 
 </Project>

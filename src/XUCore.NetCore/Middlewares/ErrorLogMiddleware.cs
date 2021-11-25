@@ -50,7 +50,7 @@ namespace XUCore.NetCore.Middlewares
         /// 记录错误日志
         /// </summary>
         /// <param name="context">Http上下文</param>
-        /// <param name="ex">异常</param>
+        /// <param name="exception">异常</param>
         private void WriteLog(HttpContext context, Exception exception)
         {
             if (context == null)

@@ -9,11 +9,29 @@ namespace XUCore.Webs
     /// </summary>
     public enum ExpiresType
     {
+        ///<summary>
+        /// 秒
+        /// </summary>
         Seconds,
+        ///<summary>
+        /// 分
+        /// </summary>
         Minutes,
+        ///<summary>
+        /// 时
+        /// </summary>
         Hours,
+        ///<summary>
+        /// 天
+        /// </summary>
         Days,
+        ///<summary>
+        /// 月
+        /// </summary>
         Months,
+        ///<summary>
+        /// 年
+        /// </summary>
         Years
     }
 
@@ -224,13 +242,13 @@ namespace XUCore.Webs
             if (context.Request.Cookies.TryGetValue(cookieName, out string value))
                 return value;
             return string.Empty;
-        }/// <summary>
-
-         /// 获取Cookie的value值
-         /// </summary>
-         /// <typeparam name="T"></typeparam>
-         /// <param name="cookieName"></param>
-         /// <returns></returns>
+        }
+        /// <summary>
+        /// 获取Cookie的value值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cookieName"></param>
+        /// <returns></returns>
         public static T GetCookie<T>(string cookieName)
             => GetCookie<T>(Web.HttpContext, cookieName);
 

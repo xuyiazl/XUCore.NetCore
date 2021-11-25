@@ -35,10 +35,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-		<None Update="XUCore.NetCore.Mongo.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 
 </Project>
