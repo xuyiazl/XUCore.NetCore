@@ -177,14 +177,16 @@ namespace XUCore.Tests
         [Fact]
         public void Test_GroupByPrefix()
         {
-            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
-            dict.Add("001", new List<string>());
-            dict.Add("002", new List<string>());
-            dict.Add("003", new List<string>());
-            dict.Add("004", new List<string>());
-            dict.Add("005", new List<string>());
-            dict.Add("006", new List<string>());
-            dict.Add("007", new List<string>());
+            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>
+            {
+                { "001", new List<string>() },
+                { "002", new List<string>() },
+                { "003", new List<string>() },
+                { "004", new List<string>() },
+                { "005", new List<string>() },
+                { "006", new List<string>() },
+                { "007", new List<string>() }
+            };
             List<string> list = new List<string>()
             {
                 "001.8.desc.json",
@@ -281,19 +283,19 @@ namespace XUCore.Tests
                 return;
             }
 
-            //// 加密初始化
-            //short sign = 1;
-            //int num = 0, tmp;
-            //if (change < 0)
-            //{
-            //    sign = -1;
-            //    change = -change;
-            //}
+            // 加密初始化
+            short sign = 1;
+            int num = 0, tmp;
+            if (change < 0)
+            {
+                sign = -1;
+                change = -change;
+            }
 
             var fileName = Path.GetFileNameWithoutExtension(filePath);
             var fileSize = FileHelper.GetFileSize(filePath);
             var total = Conv.ToInt(fileSize.GetSizeByK() / kbLength);
-            using (FileStream readStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            using (var readStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
                 byte[] data = new byte[1024];// 流读取，缓存空间
                 int len = 0, i = 1;// 记录子文件累积读取的KB大小，分割的子文件序号
@@ -308,24 +310,24 @@ namespace XUCore.Tests
                         writeStream = new FileStream($"{outPutPath}\\{fileName}.{i++}.{total}.bin", FileMode.Create);
                     }
 
-                    //// 加密逻辑，对data的首字节进行逻辑偏移加密
-                    //if (num == 0)
-                    //{
-                    //    num = change;
-                    //}
+                    // 加密逻辑，对data的首字节进行逻辑偏移加密
+                    if (num == 0)
+                    {
+                        num = change;
+                    }
 
-                    //tmp = data[0] + sign * (num % 3 + 3);
-                    //if (tmp > 255)
-                    //{
-                    //    tmp -= 255;
-                    //}
-                    //else if(tmp<0)
-                    //{
-                    //    tmp += 255;
-                    //}
+                    tmp = data[0] + sign * (num % 3 + 3);
+                    if (tmp > 255)
+                    {
+                        tmp -= 255;
+                    }
+                    else if (tmp < 0)
+                    {
+                        tmp += 255;
+                    }
 
-                    //data[0] = (byte) tmp;
-                    //num /= 3;
+                    data[0] = (byte)tmp;
+                    num /= 3;
 
                     // 输出，缓存数据写入子文件
                     writeStream.Write(data, 0, readLen);
@@ -371,53 +373,51 @@ namespace XUCore.Tests
             var keys = Path.GetFileName(filePaths[0]).Split('.');
             var total = keys[2].ToInt();
 
-            using (FileStream writeStream = new FileStream(outFileName, FileMode.Create))
+            using var writeStream = new FileStream(outFileName, FileMode.Create);
+            filePaths.Sort();
+
+            foreach (var filePath in filePaths)
             {
-                filePaths.Sort();
-
-                foreach (var filePath in filePaths)
+                if (filePath == null || !File.Exists(filePath))
                 {
-                    if (filePath == null || !File.Exists(filePath))
+                    continue;
+                }
+
+                var readStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                byte[] data = new byte[1024];// 流读取，缓存空间
+                int readLen = 0;// 每次实际读取的字节大小
+
+                // 读取数据
+                while ((readLen = readStream.Read(data, 0, data.Length)) > 0)
+                {
+                    // 解密逻辑，对data的首字节进行逻辑偏移解密
+                    if (num == 0)
                     {
-                        continue;
+                        num = change;
                     }
 
-                    FileStream readStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                    byte[] data = new byte[1024];// 流读取，缓存空间
-                    int readLen = 0;// 每次实际读取的字节大小
-
-                    // 读取数据
-                    while ((readLen = readStream.Read(data, 0, data.Length)) > 0)
+                    tmp = data[0] + sign * (num % 3 + 3);
+                    if (tmp > 255)
                     {
-                        //// 解密逻辑，对data的首字节进行逻辑偏移解密
-                        //if (num == 0)
-                        //{
-                        //    num = change;
-                        //}
-
-                        //tmp = data[0] + sign * (num % 3 + 3);
-                        //if (tmp > 255)
-                        //{
-                        //    tmp -= 255;
-                        //}
-                        //else if(tmp<0)
-                        //{
-                        //    tmp += 255;
-                        //}
-
-                        //data[0] = (byte) tmp;
-                        //num /= 3;
-
-                        writeStream.Write(data, 0, readLen);
-                        writeStream.Flush();
+                        tmp -= 255;
+                    }
+                    else if (tmp < 0)
+                    {
+                        tmp += 255;
                     }
 
-                    readStream.Close();
+                    data[0] = (byte)tmp;
+                    num /= 3;
 
-                    if (delete)
-                    {
-                        FileHelper.Delete(filePath);
-                    }
+                    writeStream.Write(data, 0, readLen);
+                    writeStream.Flush();
+                }
+
+                readStream.Close();
+
+                if (delete)
+                {
+                    FileHelper.Delete(filePath);
                 }
             }
         }

@@ -110,7 +110,7 @@
 
         public void Enqueue(List<string> str)
         {
-            List<string> tmp = new List<string>();
+            var tmp = new List<string>();
 
             lock (SyObject)
             {
@@ -151,7 +151,7 @@
             {
                 UpdateState();
 
-                List<string> R = new List<string>(n);
+                var R = new List<string>(n);
                 int Index = 0;
 
                 while (true)
@@ -176,21 +176,19 @@
         {
             lock (this.SyObject)
             {
-                List<string> R = new List<string>();
-                using (var tmpFile = new StreamRW(FileName))
+                var R = new List<string>();
+                using var tmpFile = new StreamRW(FileName);
+                tmpFile.Seek(12, SeekOrigin.Begin);
+
+                while (true)
                 {
-                    tmpFile.Seek(12, SeekOrigin.Begin);
+                    var E = tmpFile.ReadStringEntry();
 
-                    while (true)
-                    {
-                        var E = tmpFile.ReadStringEntry();
+                    if (E == null) return R;
 
-                        if (E == null) return R;
-
-                        R.Add(E.Value);
-                    }
-                    return R;
+                    R.Add(E.Value);
                 }
+                return R;
             }
         }
 
@@ -209,10 +207,7 @@
 
         #region IDisposable Members
 
-        public void Dispose()
-        {
-            dataFile.Dispose();
-        }
+        public void Dispose() => dataFile.Dispose();
 
         #endregion IDisposable Members
     }

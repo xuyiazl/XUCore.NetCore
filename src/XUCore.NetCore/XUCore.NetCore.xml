@@ -1988,6 +1988,7 @@
             初始化一个<see cref="T:XUCore.NetCore.Middlewares.AdminSafeListMiddleware"/>类型的实例
             </summary>
             <param name="next">方法</param>
+            <param name="logger"></param>
             <param name="whitelist">IP白名单</param>
         </member>
         <member name="M:XUCore.NetCore.Middlewares.AdminSafeListMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
@@ -2047,7 +2048,7 @@
             记录错误日志
             </summary>
             <param name="context">Http上下文</param>
-            <param name="ex">异常</param>
+            <param name="exception">异常</param>
         </member>
         <member name="T:XUCore.NetCore.Middlewares.IMiddleware">
             <summary>
@@ -2126,6 +2127,7 @@
             初始化一个<see cref="T:XUCore.NetCore.Middlewares.RequestLogMiddleware"/>类型的实例
             </summary>
             <param name="next">方法</param>
+            <param name="logger"></param>
         </member>
         <member name="M:XUCore.NetCore.Middlewares.RequestLogMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -2478,6 +2480,7 @@
             <summary>
             初始化一个<see cref="T:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator"/>类型的实例
             </summary>
+            <param name="logger"></param>
             <param name="routeAnalyzer">路由分析器</param>
         </member>
         <member name="M:XUCore.NetCore.Razors.DefaultRazorHtmlGenerator.Generate">

@@ -31,6 +31,8 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestQueryAsync()
         {
+            await Task.CompletedTask;
+
             //await TestDbAsync();
 
             var page = new SqlPage(rep)
@@ -54,10 +56,12 @@ namespace XUCore.NetCore.DataTest.Business
 
         public async Task TestDbAsync()
         {
+            await Task.CompletedTask;
+
             //rep.IsAutoCommit = false;
 
             var list = rep.Context.User.Include(c => c.AdminUserAddress).ToList();
-            
+
             var entity = BuildRecords(1)[0];
 
             var l = new List<AdminUserAddressEntity> { new AdminUserAddressEntity
@@ -106,6 +110,8 @@ namespace XUCore.NetCore.DataTest.Business
         [AspectCache(HashKey = "mytest", Key = "{Id}")]
         public async Task<AdminUserEntity> TestCacheAdd(AdminUserEntity entity)
         {
+            await Task.CompletedTask;
+
             rep.Delete<AdminUserEntity>(c => c.Id == 0);
             return entity;
         }
@@ -172,7 +178,7 @@ namespace XUCore.NetCore.DataTest.Business
 
                         tran.Commit();
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         tran.Rollback();
                     }
@@ -194,7 +200,7 @@ namespace XUCore.NetCore.DataTest.Business
 
                         tran.Commit();
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         tran.Rollback();
                     }
@@ -291,7 +297,7 @@ namespace XUCore.NetCore.DataTest.Business
 
                             tran.Commit();
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             tran.Rollback();
                         }
@@ -315,7 +321,7 @@ namespace XUCore.NetCore.DataTest.Business
 
                             tran.Commit();
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             tran.Rollback();
                         }
@@ -385,13 +391,12 @@ namespace XUCore.NetCore.DataTest.Business
 
                         tran.Complete();
                     }
-                    catch (Exception ex)
+                    catch
                     {
 
                     }
                 }
             }
-            return;
 
             {
                 //var all = await nigelDb.GetListAsync();

@@ -1282,8 +1282,8 @@
             <example>Split id=1,name=zhangsan to "id":"1","name":"zhangsan"</example>
             </summary>
             <param name="delimitedText">文本</param>
-            <param name="keyValuePairDelimiter">KeyValePair分隔符<see cref="!:,"/></param>
-            <param name="keyValueDelimeter">KeyValue分隔符<see cref="!:="/></param>
+            <param name="keyValuePairDelimiter">KeyValePair分隔符 exp：“,”</param>
+            <param name="keyValueDelimeter">KeyValue分隔符 exp：“=”</param>
             <param name="makeKeysCaseSensitive">是否转换为小写副本</param>
             <param name="makeValueCaseSensitive">是否转换为小写副本</param>
             <param name="trimValues">是否去除空格</param>
@@ -6789,7 +6789,7 @@
             <param name="text_length"></param>
             <returns></returns>
         </member>
-        <member name="M:XUCore.Helpers.Encrypt.chr(System.Int32)">
+        <member name="M:XUCore.Helpers.Encrypt.Chr(System.Int32)">
             <summary>
             将数字转化成ASCII码对应的字符，用于对明文进行补码
             </summary>
@@ -13820,8 +13820,22 @@
             <param name="value"></param>
             <param name="expirationMinute">间隔分钟</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XUCore.Cache.CacheManager.Set(System.String,System.Object,System.DateTimeOffset)" -->
-        <!-- Badly formed XML comment ignored for member "M:XUCore.Cache.CacheManager.SetSliding(System.String,System.Object,System.TimeSpan)" -->
+        <member name="M:XUCore.Cache.CacheManager.Set(System.String,System.Object,System.DateTimeOffset)">
+            <summary>
+            设置缓存,绝对过期
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="expirationTime">DateTimeOffset 结束时间</param>
+        </member>
+        <member name="M:XUCore.Cache.CacheManager.SetSliding(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置缓存,相对过期时间
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="t"></param>
+        </member>
         <member name="M:XUCore.Cache.CacheManager.Set(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
             <summary>
             添加缓存
@@ -14000,8 +14014,22 @@
             <param name="value"></param>
             <param name="expirationMinute">间隔分钟</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:XUCore.Cache.ICacheManager.Set(System.String,System.Object,System.DateTimeOffset)" -->
-        <!-- Badly formed XML comment ignored for member "M:XUCore.Cache.ICacheManager.SetSliding(System.String,System.Object,System.TimeSpan)" -->
+        <member name="M:XUCore.Cache.ICacheManager.Set(System.String,System.Object,System.DateTimeOffset)">
+            <summary>
+            设置缓存,绝对过期
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="expirationTime">DateTimeOffset 结束时间</param>
+        </member>
+        <member name="M:XUCore.Cache.ICacheManager.SetSliding(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置缓存,相对过期时间
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="t"></param>
+        </member>
         <member name="M:XUCore.Cache.ICacheManager.Set(System.String,System.Object,System.TimeSpan,System.TimeSpan)">
             <summary>
             添加缓存

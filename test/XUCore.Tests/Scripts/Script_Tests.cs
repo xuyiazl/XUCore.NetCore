@@ -16,7 +16,7 @@ namespace XUCore.Tests.Scripts
             for (int ndx = 0; ndx < statements.Count; ndx++)
             {
                 var stmt = statements[ndx];
-                Interpreter i = new Interpreter();
+                var i = new Interpreter();
                 if (initializer != null)
                     initializer(i);
 
@@ -38,7 +38,7 @@ namespace XUCore.Tests.Scripts
             for (int ndx = 0; ndx < statements.Count; ndx++)
             {
                 var stmt = statements[ndx];
-                Interpreter i = new Interpreter();
+                var i = new Interpreter();
                 object result = null;
 
                 string funcCallTxt = stmt.Item5;
@@ -658,7 +658,7 @@ namespace XUCore.Tests.Scripts
         [Fact]
         public void Can_Do_Single_Assignment_New_Expressions()
         {
-            Interpreter i = new Interpreter();
+            var i = new Interpreter();
             i.Context.Types.Register(typeof(Person), null);
             i.Execute("var result = new Person();");
             Assert.Equal(typeof(Person), i.Scope.Get<object>("result").GetType());
@@ -800,7 +800,7 @@ namespace XUCore.Tests.Scripts
             for (int ndx = 0; ndx < testcases.Count; ndx++)
             {
                 var test = testcases[ndx];
-                Interpreter i = new Interpreter();
+                var i = new Interpreter();
                 i.Context.Types.Register(typeof(Person), null);
                 i.Execute(test.Item4);
 
@@ -947,8 +947,7 @@ namespace XUCore.Tests.Scripts
             foreach (var script in scripts)
             {
                 var i = new Interpreter();
-                if (initializer != null)
-                    initializer(i, i.Context.Settings);
+                initializer?.Invoke(i, i.Context.Settings);
 
                 i.Execute(script);
 
@@ -959,8 +958,7 @@ namespace XUCore.Tests.Scripts
                     Assert.False(i.Result.Success);
                     Assert.StartsWith("Limit Error", i.Result.Message);
                 }
-                if (assertCallback != null)
-                    assertCallback(i);
+                assertCallback?.Invoke(i);
             }
         }
 
@@ -1216,7 +1214,7 @@ namespace XUCore.Tests.Scripts
                 new Tuple<string,Type, object, string>("result", typeof(string),   "common@lib",  "var file = new File('c:\tmp\test.txt'); file.Delete();")
             };
             try { Parse(statements); }
-            catch (Exception ex) { result = false; }
+            catch { result = false; }
             Assert.False(result);
         }
 

@@ -103,7 +103,6 @@ namespace XUCore.Cache
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="expirationTime">DateTimeOffset 结束时间</param>
-        /// CommonManager.CacheObj.Save<RedisCacheHelper>("test", "RedisCache works!", DateTimeOffset.Now.AddSeconds(30));
         void Set(string key, object value, DateTimeOffset expirationTime);
         /// <summary>
         /// 设置缓存,相对过期时间
@@ -111,7 +110,6 @@ namespace XUCore.Cache
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="t"></param>
-        /// CommonManager.CacheObj.SaveSlidingCache<MemoryCacheHelper>("test", "MemoryCache works!",TimeSpan.FromSeconds(30));
         void SetSliding(string key, object value, TimeSpan t);
 
         /// <summary>

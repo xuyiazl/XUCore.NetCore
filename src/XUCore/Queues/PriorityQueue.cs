@@ -20,7 +20,7 @@
     /// </summary>
     public sealed class PriorityQueue : IEnumerable
     {
-        private static object syncLock = new object();
+        private static readonly object syncLock = new();
 
         private const int _queuesCount = PriorityEnums.Level_9 - PriorityEnums.Level_0 + 1;
 

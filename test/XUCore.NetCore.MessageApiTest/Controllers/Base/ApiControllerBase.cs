@@ -35,7 +35,7 @@ namespace XUCore.NetCore.MessageApiTest
         /// <param name="data"></param>
         /// <returns></returns>
         protected virtual Result<T> Success<T>(string subCode, string message, T data = default) =>
-            new Result<T>()
+            new()
             {
                 Code = 0,
                 SubCode = subCode,
@@ -53,7 +53,7 @@ namespace XUCore.NetCore.MessageApiTest
         /// <param name="data"></param>
         /// <returns></returns>
         protected Result<T> Fail<T>(string subCode, string message, T data = default) =>
-             new Result<T>()
+             new()
              {
                  Code = 0,
                  SubCode = subCode,

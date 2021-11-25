@@ -2586,6 +2586,56 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:XUCore.NetCore.Data.SqlPage">
+            <summary>
+            sql分页
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.SqlPage.#ctor(XUCore.NetCore.Data.ISqlRepository)">
+            <summary>
+            sql分页
+            </summary>
+            <param name="sqlRepository"></param>
+        </member>
+        <member name="P:XUCore.NetCore.Data.SqlPage.Fields">
+            <summary>
+            需要查询的字段
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.SqlPage.Table">
+            <summary>
+            表，可以是多表组合，视图
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.SqlPage.Where">
+            <summary>
+            where条件
+            </summary>
+        </member>
+        <member name="P:XUCore.NetCore.Data.SqlPage.Orderby">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.SqlPage.PageSql(System.Int32,System.Int32)">
+            <summary>
+            分页SQL
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.SqlPage.CountSql">
+            <summary>
+            count SQL
+            </summary>
+        </member>
+        <member name="M:XUCore.NetCore.Data.SqlPage.GetPage``1(System.Int32,System.Int32,System.Object)">
+            <summary>
+            获取分页数据
+            </summary>
+            <param name="currentPage">当前页码</param>
+            <param name="pageSize">分页大小</param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:XUCore.NetCore.Data.ISqlRepository">
             <summary>
             sql仓储
@@ -2595,7 +2645,7 @@
             <summary>
             SQL查询并返回第一条记录
             </summary>
-            <typeparam name="TEntity"></typeparam>
+            <typeparam name="T"></typeparam>
             <param name="sql">sql语句</param>
             <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
             <param name="type"></param>
@@ -2605,7 +2655,7 @@
             <summary>
             SQL查询并返回第一条记录
             </summary>
-            <typeparam name="TEntity"></typeparam>
+            <typeparam name="T"></typeparam>
             <param name="sql">sql语句</param>
             <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
             <param name="type"></param>
@@ -2616,7 +2666,7 @@
             <summary>
             SQL查询
             </summary>
-            <typeparam name="TEntity"></typeparam>
+            <typeparam name="T"></typeparam>
             <param name="sql">sql语句</param>
             <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
             <param name="type"></param>
@@ -2626,7 +2676,7 @@
             <summary>
             SQL查询
             </summary>
-            <typeparam name="TEntity"></typeparam>
+            <typeparam name="T"></typeparam>
             <param name="sql">sql语句</param>
             <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
             <param name="type"></param>
@@ -2709,56 +2759,6 @@
             <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
             <param name="type"></param>
             <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:XUCore.NetCore.Data.SqlPage">
-            <summary>
-            sql分页
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.SqlPage.#ctor(XUCore.NetCore.Data.ISqlRepository)">
-            <summary>
-            sql分页
-            </summary>
-            <param name="sqlRepository"></param>
-        </member>
-        <member name="P:XUCore.NetCore.Data.SqlPage.Fields">
-            <summary>
-            需要查询的字段
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.SqlPage.Table">
-            <summary>
-            表，可以是多表组合，视图
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.SqlPage.Where">
-            <summary>
-            where条件
-            </summary>
-        </member>
-        <member name="P:XUCore.NetCore.Data.SqlPage.Orderby">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.SqlPage.PageSql(System.Int32,System.Int32)">
-            <summary>
-            分页SQL
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.SqlPage.CountSql">
-            <summary>
-            count SQL
-            </summary>
-        </member>
-        <member name="M:XUCore.NetCore.Data.SqlPage.GetPage``1(System.Int32,System.Int32,System.Object)">
-            <summary>
-            获取分页数据
-            </summary>
-            <param name="currentPage">当前页码</param>
-            <param name="pageSize">分页大小</param>
-            <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:XUCore.NetCore.Data.TransactionExtensions.CreateTransaction(XUCore.NetCore.Data.IUnitOfWork,System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction},System.Action{Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction,System.Exception})">

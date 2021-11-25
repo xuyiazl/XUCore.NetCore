@@ -16,41 +16,41 @@ namespace XUCore.NetCore.Data
         /// <summary>
         /// SQL查询并返回第一条记录
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="sql">sql语句</param>
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text);
+        T SqlFirst<T>(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// SQL查询并返回第一条记录
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="sql">sql语句</param>
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<T> SqlFirstAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
         /// <summary>
         /// SQL查询
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="sql">sql语句</param>
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <returns></returns>
-        IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text);
+        IList<T> SqlQuery<T>(string sql, object model = null, CommandType type = CommandType.Text);
         /// <summary>
         /// SQL查询
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="sql">sql语句</param>
         /// <param name="model">参数，匿名对象，模型，字典，DbParamter集合</param>
         /// <param name="type"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
+        Task<IList<T>> SqlQueryAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default);
         /// <summary>
         /// SQL查询，返回DataTable
         /// </summary>

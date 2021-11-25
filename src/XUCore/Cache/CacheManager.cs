@@ -30,8 +30,7 @@ namespace XUCore.Cache
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
-
-            return _cache.TryGetValue<object>(key, out object v);
+            return _cache.TryGetValue<object>(key, out _);
         }
         /// <summary>
         /// 取得缓存数据
@@ -139,9 +138,7 @@ namespace XUCore.Cache
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
-
-
-            if (_cache.TryGetValue(key, out object v))
+            if (_cache.TryGetValue(key, out _))
                 _cache.Remove(key);
             _cache.Set(key, value);
             return Exists(key);
@@ -171,8 +168,7 @@ namespace XUCore.Cache
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
-
-            if (_cache.TryGetValue(key, out object v))
+            if (_cache.TryGetValue(key, out _))
                 _cache.Remove(key);
             DateTime now = DateTime.Now;
             TimeSpan ts = now.AddMinutes(expirationMinute) - DateTime.Now;
@@ -185,15 +181,13 @@ namespace XUCore.Cache
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="expirationTime">DateTimeOffset 结束时间</param>
-        /// CommonManager.CacheObj.Save<RedisCacheHelper>("test", "RedisCache works!", DateTimeOffset.Now.AddSeconds(30));
         public void Set(string key, object value, DateTimeOffset expirationTime)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
-
-            if (_cache.TryGetValue(key, out object v))
+            if (_cache.TryGetValue(key, out _))
                 _cache.Remove(key);
 
             _cache.Set(key, value, expirationTime);
@@ -205,16 +199,13 @@ namespace XUCore.Cache
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="t"></param>
-        /// CommonManager.CacheObj.SaveSlidingCache<MemoryCacheHelper>("test", "MemoryCache works!",TimeSpan.FromSeconds(30));
         public void SetSliding(string key, object value, TimeSpan t)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
-
-            object v = null;
-            if (_cache.TryGetValue(key, out v))
+            if (_cache.TryGetValue(key, out _))
                 _cache.Remove(key);
 
             _cache.Set(key, value, new MemoryCacheEntryOptions()
@@ -447,7 +438,6 @@ namespace XUCore.Cache
         {
             if (_cache != null)
                 _cache.Dispose();
-            GC.SuppressFinalize(this);
         }
 
 

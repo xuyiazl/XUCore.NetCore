@@ -49,10 +49,12 @@ namespace XUCore.Tests.Extensions
         [Fact]
         public void Test_ClonePropertyFrom_SameType()
         {
-            var a = new TestClassA();
-            a.Id = 0;
-            a.Index = 1;
-            a.Description = "test class A";
+            var a = new TestClassA
+            {
+                Id = 0,
+                Index = 1,
+                Description = "test class A"
+            };
 
             var b = new TestClassA();
             var cnt = b.ClonePropertyFrom(a);
@@ -69,10 +71,12 @@ namespace XUCore.Tests.Extensions
         [Fact]
         public void Test_ClonePropertyFrom_SameType_ExcludeField()
         {
-            var a = new TestClassA();
-            a.Id = 1;
-            a.Index = 1;
-            a.Description = "test class A";
+            var a = new TestClassA
+            {
+                Id = 1,
+                Index = 1,
+                Description = "test class A"
+            };
 
             var exField = new List<string>() { "Id" };
             var b = new TestClassA();
@@ -90,10 +94,12 @@ namespace XUCore.Tests.Extensions
         [Fact]
         public void Test_ClonePropertyFrom_DiffType()
         {
-            var a = new TestClassA();
-            a.Id = 1;
-            a.Index = 1;
-            a.Description = "test class A";
+            var a = new TestClassA
+            {
+                Id = 1,
+                Index = 1,
+                Description = "test class A"
+            };
 
             var b = new TestClassB();
             var cnt = b.ClonePropertyFrom(a);
@@ -109,10 +115,12 @@ namespace XUCore.Tests.Extensions
         [Fact]
         public void Test_ClonePropertyTo_DiffType()
         {
-            var a = new TestClassA();
-            a.Id = 1;
-            a.Index = 1;
-            a.Description = "test class A";
+            var a = new TestClassA
+            {
+                Id = 1,
+                Index = 1,
+                Description = "test class A"
+            };
 
             var b = new TestClassB();
             var cnt = a.ClonePropertyTo(b);

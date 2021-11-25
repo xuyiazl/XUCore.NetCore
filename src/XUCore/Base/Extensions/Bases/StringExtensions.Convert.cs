@@ -27,7 +27,7 @@ namespace XUCore.Extensions
         /// <returns>byte[]数组</returns>
         public static byte[] ToBytes(this string value, Encoding encoding = null)
         {
-            encoding = (encoding ?? Encoding.UTF8);
+            encoding ??= Encoding.UTF8;
             return encoding.GetBytes(value);
         }
 
@@ -148,7 +148,7 @@ namespace XUCore.Extensions
             {
                 return null;
             }
-            SecureString temp = new SecureString();
+            var temp = new SecureString();
             foreach (char c in value)
             {
                 temp.AppendChar(c);
@@ -171,7 +171,7 @@ namespace XUCore.Extensions
         /// <returns>普通字符串</returns>
         public static string ToUnSecureString(this SecureString value)
         {
-            if (ReferenceEquals(value, null))
+            if (value is null)
             {
                 return null;
             }
@@ -254,11 +254,12 @@ namespace XUCore.Extensions
         {
             if (timeStamp.Length > 10)
             {
-                timeStamp = timeStamp.Substring(0, 10);
+                timeStamp = timeStamp[..10];
             }
-            DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            
+            DateTime dateTimeStart = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
             long lIime = long.Parse(timeStamp + "0000000");
-            TimeSpan toNow = new TimeSpan(lIime);
+            var toNow = new TimeSpan(lIime);
             return dateTimeStart.Add(toNow);
         }
 

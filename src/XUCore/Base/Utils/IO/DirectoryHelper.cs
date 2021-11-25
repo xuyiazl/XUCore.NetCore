@@ -173,9 +173,9 @@ namespace XUCore.IO
                 var fileNames = GetFileNames(directoryPath, searchPattern, isSearchChild);
                 return fileNames.Length != 0;
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
         }
 
@@ -237,7 +237,7 @@ namespace XUCore.IO
             {
                 foreach (var dir in dirs)
                 {
-                    Copy(dir, targetPath + dir.Substring(dir.LastIndexOf("\\", StringComparison.Ordinal)));
+                    Copy(dir, targetPath + dir[dir.LastIndexOf("\\", StringComparison.Ordinal)..]);
                 }
             }
 
@@ -253,7 +253,7 @@ namespace XUCore.IO
 
                     foreach (var file in files)
                     {
-                        File.Copy(file, targetPath + file.Substring(file.LastIndexOf("\\", StringComparison.Ordinal)));
+                        File.Copy(file, targetPath + file[file.LastIndexOf("\\", StringComparison.Ordinal)..]);
                     }
                 }
             }
@@ -267,7 +267,7 @@ namespace XUCore.IO
 
                 foreach (var file in files)
                 {
-                    File.Copy(file, targetPath + file.Substring(file.LastIndexOf("\\", StringComparison.Ordinal)));
+                    File.Copy(file, targetPath + file[file.LastIndexOf("\\", StringComparison.Ordinal)..]);
                 }
             }
         }
@@ -287,17 +287,17 @@ namespace XUCore.IO
             directory.CheckNotNullOrEmpty(nameof(directory));
 
             bool flag = false;
-            DirectoryInfo dirPathInfo = new DirectoryInfo(directory);
+            var dirPathInfo = new DirectoryInfo(directory);
             if (dirPathInfo.Exists)
             {
                 //删除目录下所有文件
-                foreach (FileInfo fileInfo in dirPathInfo.GetFiles())
+                foreach (var fileInfo in dirPathInfo.GetFiles())
                 {
                     fileInfo.Delete();
                 }
 
                 //递归删除所有子目录
-                foreach (DirectoryInfo subDirectory in dirPathInfo.GetDirectories())
+                foreach (var subDirectory in dirPathInfo.GetDirectories())
                 {
                     Delete(subDirectory.FullName);
                 }
@@ -329,7 +329,7 @@ namespace XUCore.IO
         {
             directory.CheckNotNullOrEmpty(nameof(directory));
 
-            DirectoryInfo di = new DirectoryInfo(directory);
+            var di = new DirectoryInfo(directory);
             if (!di.Exists)
             {
                 throw new DirectoryNotFoundException("设置目录属性时指定文件夹不存在");
@@ -337,11 +337,11 @@ namespace XUCore.IO
 
             if (isSet)
             {
-                di.Attributes = di.Attributes | attribute;
+                di.Attributes |= attribute;
             }
             else
             {
-                di.Attributes = di.Attributes & ~attribute;
+                di.Attributes &= ~attribute;
             }
         }
 

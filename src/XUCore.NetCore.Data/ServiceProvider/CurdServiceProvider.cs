@@ -72,7 +72,7 @@ namespace XUCore.NetCore.Data
                 return entity.Id;
             }
             else
-                return default(TKey);
+                return default;
         }
         /// <summary>
         /// 修改数据

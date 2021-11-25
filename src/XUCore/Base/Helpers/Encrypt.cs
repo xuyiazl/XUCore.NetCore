@@ -75,7 +75,7 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            var md5 = new MD5CryptoServiceProvider();
+            var md5 = MD5.Create();
             string result;
             try
             {
@@ -99,7 +99,7 @@ namespace XUCore.Helpers
         /// <summary>
         /// DES密钥，24位字符串
         /// </summary>
-        public static string DesKey = "#s^un2ye21fcv%|f0XpR,+vh";
+        private static string DesKey = "#s^un2ye21fcv%|f0XpR,+vh";
 
         /// <summary>
         /// DES加密
@@ -136,10 +136,8 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            using (var transform = CreateDesProvider(key).CreateEncryptor())
-            {
-                return GetEncryptResult(text, encoding, transform);
-            }
+            using var transform = CreateDesProvider(key).CreateEncryptor();
+            return GetEncryptResult(text, encoding, transform);
         }
 
         /// <summary>
@@ -162,14 +160,13 @@ namespace XUCore.Helpers
         /// </summary>
         /// <param name="key">密钥，24位</param>
         /// <returns></returns>
-        private static TripleDESCryptoServiceProvider CreateDesProvider(string key)
+        private static TripleDES CreateDesProvider(string key)
         {
-            return new TripleDESCryptoServiceProvider()
-            {
-                Key = Encoding.ASCII.GetBytes(key),
-                Mode = CipherMode.ECB,
-                Padding = PaddingMode.PKCS7
-            };
+            var des = TripleDES.Create();
+            des.Key = Encoding.ASCII.GetBytes(key);
+            des.Mode = CipherMode.ECB;
+            des.Padding = PaddingMode.PKCS7;
+            return des;
         }
 
         /// <summary>
@@ -222,10 +219,8 @@ namespace XUCore.Helpers
                 return string.Empty;
             }
 
-            using (var transform = CreateDesProvider(key).CreateDecryptor())
-            {
-                return GetDecryptResult(text, encoding, transform);
-            }
+            using var transform = CreateDesProvider(key).CreateDecryptor();
+            return GetDecryptResult(text, encoding, transform);
         }
 
         /// <summary>
@@ -274,7 +269,7 @@ namespace XUCore.Helpers
         /// <summary>
         /// AES密钥
         /// </summary>
-        public static string AesKey = "QaP1AF8utIarcBqdhYTZpVGbiNQ9M6IL";
+        private static string AesKey = "QaP1AF8utIarcBqdhYTZpVGbiNQ9M6IL";
 
         /// <summary>
         /// AES加密
@@ -311,10 +306,8 @@ namespace XUCore.Helpers
                 return string.Empty;
             }
             var rijndaelManaged = CreateRijndaelManaged(key);
-            using (var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV))
-            {
-                return GetEncryptResult(value, encoding, transform);
-            }
+            using var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV);
+            return GetEncryptResult(value, encoding, transform);
         }
 
         /// <summary>
@@ -369,10 +362,8 @@ namespace XUCore.Helpers
             }
 
             var rijndaelManaged = CreateRijndaelManaged(key);
-            using (var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV))
-            {
-                return GetDecryptResult(value, encoding, transform);
-            }
+            using var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV);
+            return GetDecryptResult(value, encoding, transform);
         }
 
         #endregion AES加密
@@ -457,13 +448,15 @@ namespace XUCore.Helpers
         /// <returns></returns>
         private static byte[] AesDecrypt(string input, byte[] Iv, byte[] Key)
         {
-            RijndaelManaged aes = new RijndaelManaged();
-            aes.KeySize = 256;
-            aes.BlockSize = 128;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.None;
-            aes.Key = Key;
-            aes.IV = Iv;
+            var aes = new RijndaelManaged
+            {
+                KeySize = 256,
+                BlockSize = 128,
+                Mode = CipherMode.CBC,
+                Padding = PaddingMode.None,
+                Key = Key,
+                IV = Iv
+            };
             var decrypt = aes.CreateDecryptor(aes.Key, aes.IV);
             byte[] xBuff = null;
             using (var ms = new MemoryStream())
@@ -477,14 +470,14 @@ namespace XUCore.Helpers
 
                     cs.Write(baseStr, 0, baseStr.Length);
                 }
-                xBuff = decode2(ms.ToArray());
+                xBuff = Decode2(ms.ToArray());
             }
             return xBuff;
         }
 
-        private static byte[] decode2(byte[] decrypted)
+        private static byte[] Decode2(byte[] decrypted)
         {
-            int pad = (int)decrypted[decrypted.Length - 1];
+            int pad = (int)decrypted[^1];
             if (pad < 1 || pad > 32)
                 pad = 0;
             byte[] res = new byte[decrypted.Length - pad];
@@ -536,17 +529,19 @@ namespace XUCore.Helpers
         /// <returns></returns>
         private static string AesEncrypt(byte[] input, byte[] Iv, byte[] Key)
         {
-            var aes = new RijndaelManaged();
-            //秘钥的大小，以位为单位
-            aes.KeySize = 256;
-            //支持的块大小
-            aes.BlockSize = 128;
-            //填充模式
-            //aes.Padding = PaddingMode.PKCS7;
-            aes.Padding = PaddingMode.None;
-            aes.Mode = CipherMode.CBC;
-            aes.Key = Key;
-            aes.IV = Iv;
+            var aes = new RijndaelManaged
+            {
+                //秘钥的大小，以位为单位
+                KeySize = 256,
+                //支持的块大小
+                BlockSize = 128,
+                //填充模式
+                //aes.Padding = PaddingMode.PKCS7;
+                Padding = PaddingMode.None,
+                Mode = CipherMode.CBC,
+                Key = Key,
+                IV = Iv
+            };
             var encrypt = aes.CreateEncryptor(aes.Key, aes.IV);
             byte[] xBuff = null;
 
@@ -585,7 +580,7 @@ namespace XUCore.Helpers
                 amount_to_pad = block_size;
             }
             // 获得补位所用的字符
-            char pad_chr = chr(amount_to_pad);
+            char pad_chr = Chr(amount_to_pad);
             string tmp = "";
             for (int index = 0; index < amount_to_pad; index++)
             {
@@ -598,7 +593,7 @@ namespace XUCore.Helpers
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        private static char chr(int a)
+        private static char Chr(int a)
         {
             byte target = (byte)(a & 0xFF);
             return (char)target;
@@ -932,11 +927,9 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            using (var sha1 = SHA1.Create())
-            {
-                var hash = sha1.ComputeHash(encoding.GetBytes(value));
-                return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
-            }
+            using var sha1 = SHA1.Create();
+            var hash = sha1.ComputeHash(encoding.GetBytes(value));
+            return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
         }
 
         #endregion SHA1加密
@@ -965,11 +958,9 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            using (var sha = SHA256.Create())
-            {
-                var hash = sha.ComputeHash(encoding.GetBytes(value));
-                return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
-            }
+            using var sha = SHA256.Create();
+            var hash = sha.ComputeHash(encoding.GetBytes(value));
+            return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
         }
 
         #endregion SHA256加密
@@ -998,11 +989,9 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            using (var sha = SHA384.Create())
-            {
-                var hash = sha.ComputeHash(encoding.GetBytes(value));
-                return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
-            }
+            using var sha = SHA384.Create();
+            var hash = sha.ComputeHash(encoding.GetBytes(value));
+            return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
         }
 
         #endregion SHA384加密
@@ -1031,11 +1020,9 @@ namespace XUCore.Helpers
             {
                 return string.Empty;
             }
-            using (var sha = SHA512.Create())
-            {
-                var hash = sha.ComputeHash(encoding.GetBytes(value));
-                return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
-            }
+            using var sha = SHA512.Create();
+            var hash = sha.ComputeHash(encoding.GetBytes(value));
+            return string.Join("", hash.ToList().Select(x => x.ToString("x2")).ToArray());
         }
 
         #endregion SHA512加密

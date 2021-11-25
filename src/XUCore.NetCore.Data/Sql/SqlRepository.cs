@@ -17,28 +17,28 @@ namespace XUCore.NetCore.Data
             this.dbContext = dbContext;
         }
 
-        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
+        public virtual T SqlFirst<T>(string sql, object model = null, CommandType type = CommandType.Text)
         {
-            return SqlQuery<TEntity>(sql, model, type).FirstOrDefault();
+            return SqlQuery<T>(sql, model, type).FirstOrDefault();
         }
 
-        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+        public virtual async Task<T> SqlFirstAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
-            var res = await SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
+            var res = await SqlQueryAsync<T>(sql, model, type, cancellationToken);
 
             return res.FirstOrDefault();
         }
 
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
+        public virtual IList<T> SqlQuery<T>(string sql, object model = null, CommandType type = CommandType.Text)
         {
-            return SqlReader(sql, model, type).ToList<TEntity>();
+            return SqlReader(sql, model, type).ToList<T>();
         }
 
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+        public virtual async Task<IList<T>> SqlQueryAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
             var res = await SqlReaderAsync(sql, model, type, cancellationToken);
 
-            return res.ToList<TEntity>();
+            return res.ToList<T>();
         }
 
         public virtual DataTable SqlReader(string sql, object model = null, CommandType type = CommandType.Text)

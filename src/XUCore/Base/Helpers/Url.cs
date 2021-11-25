@@ -64,17 +64,17 @@ namespace XUCore.Helpers
         /// <returns></returns>
         private static string GetUrl(string url)
         {
-            if (!url.Contains("?"))
+            if (!url.Contains('?'))
             {
                 return $"{url}?";
             }
 
-            if (url.EndsWith("?"))
+            if (url.EndsWith('?'))
             {
                 return url;
             }
 
-            if (url.EndsWith("&"))
+            if (url.EndsWith('&'))
             {
                 return url;
             }

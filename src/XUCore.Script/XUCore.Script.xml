@@ -3586,31 +3586,6 @@
             <param name="token"></param>
             <returns></returns>
         </member>
-        <member name="T:XUCore.Script.Alias">
-            <summary>
-            Alias that maps one text to another text or series of texts
-            </summary>
-        </member>
-        <member name="F:XUCore.Script.Alias.Name">
-            <summary>
-            Name of the alias
-            </summary>
-        </member>
-        <member name="F:XUCore.Script.Alias.IsEmptyAlias">
-            <summary>
-            Whether this alias is empty ( doesn't refer to anything ).
-            </summary>
-        </member>
-        <member name="F:XUCore.Script.Alias.Reference">
-            <summary>
-            The actual text this alias refers to.
-            </summary>
-        </member>
-        <member name="F:XUCore.Script.Alias.Tokens">
-            <summary>
-            The tokenized form of the reference.
-            </summary>
-        </member>
         <member name="T:XUCore.Script.AstNode">
             <summary>
             Abstract syntax tree node.

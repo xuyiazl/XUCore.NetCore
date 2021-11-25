@@ -26,6 +26,9 @@ namespace XUCore
         /// <summary>
         /// 释放资源
         /// </summary>
-        public void Dispose() => _action();
+        public void Dispose()
+        {
+            _action();
+        }
     }
 }

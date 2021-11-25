@@ -22,7 +22,7 @@ namespace XUCore.NetCore.Data
     /// <typeparam name="TEntity"></typeparam>
     public abstract class DbRepository<TEntity> : SqlRepository, IDbRepository<TEntity> where TEntity : class, new()
     {
-        protected string _connectionString { get; set; } = "";
+        protected string ConnectionString { get; set; } = "";
         protected readonly IDbContext _context;
         protected readonly IUnitOfWork unitOfWork;
         protected readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace XUCore.NetCore.Data
         /// <param name="context"></param>
         public DbRepository(IDbContext context) : base(context)
         {
-            _connectionString = context.ConnectionStrings;
+            ConnectionString = context.ConnectionStrings;
             _context = context;
             unitOfWork = new UnitOfWorkService(context);
         }
@@ -43,7 +43,7 @@ namespace XUCore.NetCore.Data
         /// <param name="mapper"></param>
         public DbRepository(IDbContext context, IMapper mapper) : base(context)
         {
-            _connectionString = context.ConnectionStrings;
+            ConnectionString = context.ConnectionStrings;
             _context = context;
             _mapper = mapper;
             unitOfWork = new UnitOfWorkService(context);

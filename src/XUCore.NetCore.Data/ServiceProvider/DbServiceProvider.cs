@@ -543,24 +543,24 @@ namespace XUCore.NetCore.Data
         #region [ AdoNet ]
 
 
-        public virtual TEntity SqlFirst<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
+        public virtual T SqlFirst<T>(string sql, object model = null, CommandType type = CommandType.Text)
         {
-            return Read.SqlFirst<TEntity>(sql, model, type);
+            return Read.SqlFirst<T>(sql, model, type);
         }
 
-        public virtual async Task<TEntity> SqlFirstAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+        public virtual async Task<T> SqlFirstAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
-            return await Read.SqlFirstAsync<TEntity>(sql, model, type, cancellationToken);
+            return await Read.SqlFirstAsync<T>(sql, model, type, cancellationToken);
         }
 
-        public virtual IList<TEntity> SqlQuery<TEntity>(string sql, object model = null, CommandType type = CommandType.Text)
+        public virtual IList<T> SqlQuery<T>(string sql, object model = null, CommandType type = CommandType.Text)
         {
-            return Read.SqlQuery<TEntity>(sql, model, type);
+            return Read.SqlQuery<T>(sql, model, type);
         }
 
-        public virtual async Task<IList<TEntity>> SqlQueryAsync<TEntity>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
+        public virtual async Task<IList<T>> SqlQueryAsync<T>(string sql, object model = null, CommandType type = CommandType.Text, CancellationToken cancellationToken = default)
         {
-            return await Read.SqlQueryAsync<TEntity>(sql, model, type, cancellationToken);
+            return await Read.SqlQueryAsync<T>(sql, model, type, cancellationToken);
         }
 
         public virtual DataTable SqlReader(string sql, object model = null, CommandType type = CommandType.Text)

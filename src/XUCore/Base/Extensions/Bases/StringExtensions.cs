@@ -178,9 +178,9 @@ namespace XUCore.Extensions
             }
             if (isLeft)
             {
-                return value.Substring(index);
+                return value[index..];
             }
-            return value.Substring(0, value.Length - index);
+            return value[..^index];
         }
 
         /// <summary>
@@ -308,8 +308,8 @@ namespace XUCore.Extensions
         /// <example>Split id=1,name=zhangsan to "id":"1","name":"zhangsan"</example>
         /// </summary>
         /// <param name="delimitedText">文本</param>
-        /// <param name="keyValuePairDelimiter">KeyValePair分隔符<see cref=","/></param>
-        /// <param name="keyValueDelimeter">KeyValue分隔符<see cref="="/></param>
+        /// <param name="keyValuePairDelimiter">KeyValePair分隔符 exp：“,”</param>
+        /// <param name="keyValueDelimeter">KeyValue分隔符 exp：“=”</param>
         /// <param name="makeKeysCaseSensitive">是否转换为小写副本</param>
         /// <param name="makeValueCaseSensitive">是否转换为小写副本</param>
         /// <param name="trimValues">是否去除空格</param>
@@ -393,7 +393,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string TrimToMaxLength(this string value, int maxLength)
         {
-            return (value == null || value.Length <= maxLength ? value : value.Substring(0, maxLength));
+            return value == null || value.Length <= maxLength ? value : value[..maxLength];
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string TrimToMaxLength(this string value, int maxLength, string suffix)
         {
-            return (value == null || value.Length <= maxLength ? value : string.Concat(value.Substring(0, maxLength), suffix));
+            return value == null || value.Length <= maxLength ? value : string.Concat(value[..maxLength], suffix);
         }
 
         #endregion TrimToMaxLength(切割字符串)
@@ -426,7 +426,7 @@ namespace XUCore.Extensions
             if (txt.Length <= maxChars)
                 return txt;
 
-            return txt.Substring(0, maxChars);
+            return txt[..maxChars];
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace XUCore.Extensions
             if (txt.Length <= maxChars)
                 return txt;
 
-            string partial = txt.Substring(0, maxChars);
+            string partial = txt[..maxChars];
             return partial + suffix;
         }
 
@@ -486,7 +486,7 @@ namespace XUCore.Extensions
             }
             else if (diff < 0)
             {
-                return value.Substring(0, width);
+                return value[..width];
             }
             else
             {
@@ -589,7 +589,7 @@ namespace XUCore.Extensions
         public static string GetBefore(this string value, string x)
         {
             var xPos = value.IndexOf(x, StringComparison.Ordinal);
-            return xPos == -1 ? string.Empty : value.Substring(0, xPos);
+            return xPos == -1 ? string.Empty : value[..xPos];
         }
 
         /// <summary>
@@ -608,7 +608,7 @@ namespace XUCore.Extensions
                 return string.Empty;
             }
             var startIndex = xPos + x.Length;
-            return startIndex >= yPos ? string.Empty : value.Substring(startIndex, yPos - startIndex).Trim();
+            return startIndex >= yPos ? string.Empty : value[startIndex..yPos].Trim();
         }
 
         /// <summary>
@@ -625,7 +625,7 @@ namespace XUCore.Extensions
                 return string.Empty;
             }
             var startIndex = xPos + x.Length;
-            return startIndex >= value.Length ? string.Empty : value.Substring(startIndex).Trim();
+            return startIndex >= value.Length ? string.Empty : value[startIndex..].Trim();
         }
 
         /// <summary>
@@ -636,7 +636,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string SubstringFrom(this string value, int index)
         {
-            return index < 0 && index < value.Length ? value : value.Substring(index, value.Length - index);
+            return index < 0 && index < value.Length ? value : value[index..];
         }
 
         #endregion Get(获取范围字符串)
@@ -1105,7 +1105,7 @@ namespace XUCore.Extensions
                 throw new ArgumentNullException(nameof(value));
             if (length >= value.Length)
                 throw new ArgumentOutOfRangeException(nameof(length), length, $"{nameof(length)} 不能大于给定字符串的长度");
-            return value.Substring(0, length);
+            return value[..length];
         }
 
         #endregion Left(获取从字符串开头指定长度的子字符串)

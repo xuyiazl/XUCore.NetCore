@@ -105,7 +105,7 @@ namespace XUCore.Extensions
                 8218, 8220, 8221, 8222, 8224, 8225, 8226, 8230, 8240, 8242, 8243, 8249, 8250, 8254, 8364, 8482, 8592,
                 8593, 8594, 8595, 8596, 8629, 8968, 8969, 8970, 8971, 9674, 9824, 9827, 9829, 9830
             };
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (var item in value)
             {
                 if (all || entities.Contains(item))
@@ -134,7 +134,7 @@ namespace XUCore.Extensions
         /// <returns>Base64编码字符串</returns>
         public static string EncodeBase64(this string value, Encoding encoding = null)
         {
-            encoding = (encoding ?? Encoding.UTF8);
+            encoding ??= Encoding.UTF8;
             var bytes = encoding.GetBytes(value);
             return Convert.ToBase64String(bytes);
         }
@@ -151,7 +151,7 @@ namespace XUCore.Extensions
         /// <returns>解码字符串</returns>
         public static string DecodeBase64(this string value, Encoding encoding = null)
         {
-            encoding = (encoding ?? Encoding.UTF8);
+            encoding ??= Encoding.UTF8;
             var bytes = Convert.FromBase64String(value);
             return encoding.GetString(bytes);
         }
@@ -183,7 +183,7 @@ namespace XUCore.Extensions
         private static byte[] CryptBytes(string pwd, byte[] bytes, bool encrypt)
         {
             //第三方加密服务商
-            var desProvider = new TripleDESCryptoServiceProvider();
+            var desProvider = TripleDES.Create();
             //找到此提供程序的有效密钥大小
             int keySizeBits = 0;
             for (int i = 1024; i >= 1; i--)

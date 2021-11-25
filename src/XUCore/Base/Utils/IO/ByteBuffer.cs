@@ -61,13 +61,13 @@ namespace XUCore.IO
         /// 构建一个指定长度的字节缓冲区对象
         /// </summary>
         /// <param name="capacity">容量</param>
-        public static ByteBuffer Allocate(int capacity) => new ByteBuffer(capacity);
+        public static ByteBuffer Allocate(int capacity) => new(capacity);
 
         /// <summary>
         /// 构建一个指定字节数组的字节缓冲区对象
         /// </summary>
         /// <param name="bytes">字节数组</param>
-        public static ByteBuffer Allocate(byte[] bytes) => new ByteBuffer(bytes);
+        public static ByteBuffer Allocate(byte[] bytes) => new(bytes);
 
         /// <summary>
         /// 修正长度。

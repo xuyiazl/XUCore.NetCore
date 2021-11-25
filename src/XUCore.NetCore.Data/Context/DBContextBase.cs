@@ -10,8 +10,6 @@ namespace XUCore.NetCore.Data
     {
         protected DBContextBase(DbContextOptions options) : base(options) { }
 
-        public virtual DatabaseFacade Database => base.Database;
-
         public virtual string ConnectionStrings { get; set; }
     }
 }

@@ -18,11 +18,9 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
         public WeatherForecastController(ILogger<WeatherForecastController> logger) : base(logger)
         {
-            _logger = logger;
+
         }
         [HttpGet]
         public Result<IList<WeatherForecast>> Get()
@@ -99,7 +97,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PostWeather");
 
-            WeatherForecast weather = new WeatherForecast
+            var weather = new WeatherForecast
             {
                 Date = DateTime.UtcNow,
                 Summary = "测试POST",
@@ -125,7 +123,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PutWeather");
 
-            WeatherForecast weather = new WeatherForecast
+            var weather = new WeatherForecast
             {
                 Date = DateTime.UtcNow,
                 Summary = "测试POST",
@@ -151,7 +149,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         {
             var url = UrlBuilder.Create("msgpack", "api/WeatherForecast/PatchWeather");
 
-            WeatherForecast weather = new WeatherForecast
+            var weather = new WeatherForecast
             {
                 Date = DateTime.UtcNow,
                 Summary = "测试patch",
@@ -186,7 +184,7 @@ namespace XUCore.NetCore.MessageApiTest.Controllers
         [HttpDelete]
         public Result<WeatherForecast> DeleteWeather()
         {
-            WeatherForecast weather = new WeatherForecast
+            var weather = new WeatherForecast
             {
                 Date = DateTime.UtcNow,
                 Summary = "我是删除后返回的数据",
