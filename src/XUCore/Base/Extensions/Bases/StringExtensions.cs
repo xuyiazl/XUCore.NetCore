@@ -190,7 +190,7 @@ namespace XUCore.Extensions
         /// <returns>调整后的字符串</returns>
         public static string RemoveAllSpecialCharacters(this string value)
         {
-            StringBuilder sb = new StringBuilder(value.Length);
+            var sb = new StringBuilder(value.Length);
             foreach (var c in value.Where(Char.IsLetterOrDigit))
             {
                 sb.Append(c);
@@ -263,7 +263,7 @@ namespace XUCore.Extensions
         /// <returns>格式化后的字符串</returns>
         public static string FormatWith(this string format, params object[] args)
         {
-            format.CheckNotNull("format");
+            format.CheckNotNull(nameof(format));
             return string.Format(CultureInfo.CurrentCulture, format, args);
         }
 
@@ -278,7 +278,7 @@ namespace XUCore.Extensions
         /// <returns>反转后的字符串</returns>
         public static string ReverseString(this string value)
         {
-            value.CheckNotNull("value");
+            value.CheckNotNull(nameof(value));
             return new string(value.Reverse().ToArray());
         }
 
@@ -557,7 +557,7 @@ namespace XUCore.Extensions
             {
                 separator = string.Empty;
             }
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(value);
             sb.Append(separator);
             sb.Append(string.Join(separator, Array.ConvertAll(obj, o => o.ToString())));
@@ -719,7 +719,7 @@ namespace XUCore.Extensions
             int index = singular.LastIndexOf(" of ", StringComparison.Ordinal);
             if (index > 0)
             {
-                return (singular.Substring(0, index)) + singular.Remove(0, index).ToPlural();
+                return string.Concat(singular.AsSpan(0, index), singular.Remove(0, index).ToPlural());
             }
             //单数形式单词规则
             //-es为后缀结束规则
@@ -763,7 +763,7 @@ namespace XUCore.Extensions
         public static string ReplaceAll(this string value, IEnumerable<string> oldValues,
             Func<string, string> replacePredicate)
         {
-            StringBuilder sb = new StringBuilder(value);
+            var sb = new StringBuilder(value);
             foreach (var oldValue in oldValues)
             {
                 var newValue = replacePredicate(oldValue);
@@ -789,7 +789,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string ReplaceAll(this string value, IEnumerable<string> oldValues, string newValue)
         {
-            StringBuilder sb = new StringBuilder(value);
+            var sb = new StringBuilder(value);
             foreach (var oldValue in oldValues)
             {
                 sb.Replace(oldValue, newValue);
@@ -815,19 +815,19 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static string ReplaceAll(this string value, IEnumerable<string> oldValues, IEnumerable<string> newValues)
         {
-            StringBuilder sb = new StringBuilder(value);
+            var sb = new StringBuilder(value);
             var newValueEnum = newValues.GetEnumerator();
             foreach (var oldValue in oldValues)
             {
                 if (!newValueEnum.MoveNext())
                 {
-                    throw new ArgumentOutOfRangeException("newValues", "newValues sequence is shorter than oldValues sequence");
+                    throw new ArgumentOutOfRangeException(nameof(newValues), "newValues sequence is shorter than oldValues sequence");
                 }
                 sb.Replace(oldValue, newValueEnum.Current);
             }
             if (newValueEnum.MoveNext())
             {
-                throw new ArgumentOutOfRangeException("newValues", "newValues sequence is longer than oldValues sequence");
+                throw new ArgumentOutOfRangeException(nameof(newValues), "newValues sequence is longer than oldValues sequence");
             }
             return sb.ToString();
         }
@@ -983,8 +983,7 @@ namespace XUCore.Extensions
                 }
                 if (repl.Length > 0)
                 {
-                    tempHtmlEncode = tempHtmlEncode.Substring(0, i - 1) +
-                                     repl + tempHtmlEncode.Substring(i);
+                    tempHtmlEncode = string.Concat(tempHtmlEncode.AsSpan(0, i - 1), repl, tempHtmlEncode.AsSpan(i));
                 }
             }
             return tempHtmlEncode;

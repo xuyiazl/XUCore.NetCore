@@ -9,6 +9,10 @@ namespace XUCore.NetCore.Controllers
     [Route("api/[area]/[controller]")]
     public abstract class AreaApiControllerBase : ApiControllerBase
     {
+        /// <summary>
+        /// WebApi的区域控制器基类
+        /// </summary>
+        /// <param name="logger"></param>
         public AreaApiControllerBase(ILogger logger)
             : base(logger)
         {

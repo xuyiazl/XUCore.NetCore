@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using XUCore.Helpers;
 
 // ReSharper disable once CheckNamespace
 namespace XUCore.Extensions
@@ -31,13 +33,10 @@ namespace XUCore.Extensions
             {
                 throw new NotSupportedException($"当前对象未标记特性“{typeof(SerializableAttribute)}”，无法进行DeepClone操作");
             }
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                formatter.Serialize(ms, obj);
-                ms.Seek(0, SeekOrigin.Begin);
-                return (T)formatter.Deserialize(ms);
-            }
+
+            var res = Serialize.ToBinary(obj);
+
+            return Serialize.FromBytes<T>(res);
         }
 
         #endregion DeepClone(对象深拷贝)

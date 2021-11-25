@@ -22,13 +22,9 @@ namespace XUCore.Drawing
         /// <param name="maxWH">最大高宽，标识指定高宽不得超过该值</param>
         public static void MakeThumbnail(string sourceImagePath, string destImage, int maxWH)
         {
-            using (var sourceImage = Image.FromFile(sourceImagePath))
-            {
-                using (var resultImage = MakeThumbnail(sourceImage, maxWH))
-                {
-                    resultImage.Save(destImage, sourceImage.RawFormat);
-                }
-            }
+            using var sourceImage = Image.FromFile(sourceImagePath);
+            using var resultImage = MakeThumbnail(sourceImage, maxWH);
+            resultImage.Save(destImage, sourceImage.RawFormat);
         }
         /// <summary>
         /// 生成缩略图（指定最大高宽，自动选择不变形缩放）
@@ -111,9 +107,9 @@ namespace XUCore.Drawing
                     GraphicsUnit.Pixel);
                 return bitmap;
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -130,10 +126,8 @@ namespace XUCore.Drawing
         /// <param name="mode">缩略图方式</param>
         public static Image MakeThumbnail(byte[] imgBytes, int width, int height, ThumbnailMode mode)
         {
-            using (var sourceImage = FromBytes(imgBytes))
-            {
-                return MakeThumbnail(sourceImage, width, height, mode);
-            }
+            using var sourceImage = FromBytes(imgBytes);
+            return MakeThumbnail(sourceImage, width, height, mode);
         }
 
         /// <summary>
@@ -147,13 +141,9 @@ namespace XUCore.Drawing
         public static void MakeThumbnail(string sourceImagePath, string thumbnailPath, int width, int height,
             ThumbnailMode mode)
         {
-            using (var sourceImage = Image.FromFile(sourceImagePath))
-            {
-                using (var resultImage = MakeThumbnail(sourceImage, width, height, mode))
-                {
-                    resultImage.Save(thumbnailPath, sourceImage.RawFormat);
-                }
-            }
+            using var sourceImage = Image.FromFile(sourceImagePath);
+            using var resultImage = MakeThumbnail(sourceImage, width, height, mode);
+            resultImage.Save(thumbnailPath, sourceImage.RawFormat);
         }
 
         #endregion MakeThumbnail(生成缩略图)
@@ -204,8 +194,8 @@ namespace XUCore.Drawing
         /// <returns></returns>
         public static void ZoomImage(Image sourImage, string destPath, int ratio = 50, int quality = 100)
         {
-            using (var destImage = ZoomImage(sourImage, ratio, quality))
-                destImage.Save(destPath, sourImage.RawFormat);
+            using var destImage = ZoomImage(sourImage, ratio, quality);
+            destImage.Save(destPath, sourImage.RawFormat);
         }
         /// <summary>
         /// 等比例缩放图片
@@ -233,7 +223,7 @@ namespace XUCore.Drawing
         {
             try
             {
-                ImageCodecInfo ici = GetEncoder(ImageFormat.Jpeg);
+                var ici = GetEncoder(ImageFormat.Jpeg);
                 int width = 0, height = 0;
                 //按比例缩放
                 int sourWidth = sourImage.Width;
@@ -256,8 +246,8 @@ namespace XUCore.Drawing
                     width = sourWidth;
                     height = sourHeight;
                 }
-                Bitmap destBitmap = new Bitmap(destWidth, destHeight);
-                Graphics g = Graphics.FromImage(destBitmap);
+                var destBitmap = new Bitmap(destWidth, destHeight);
+                var g = Graphics.FromImage(destBitmap);
                 g.Clear(Color.Transparent);
                 //设置画布的描绘质量
                 g.CompositingQuality = CompositingQuality.HighQuality;
@@ -267,7 +257,7 @@ namespace XUCore.Drawing
                 g.DrawImage(sourImage, new Rectangle((destWidth - width) / 2, (destHeight - height) / 2, width, height), 0, 0, sourImage.Width, sourImage.Height, GraphicsUnit.Pixel);
                 g.Dispose();
                 //设置压缩质量
-                EncoderParameters encoderParams = new EncoderParameters();
+                var encoderParams = new EncoderParameters();
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, new long[1] { quality });
 
                 return destBitmap;
@@ -384,14 +374,10 @@ namespace XUCore.Drawing
         /// <param name="filePath">文件路径</param>
         public static void DeleteCoordinate(string filePath)
         {
-            using (var ms = new MemoryStream(File.ReadAllBytes(filePath)))
-            {
-                using (var image = Image.FromStream(ms))
-                {
-                    DeleteCoordinate(image);
-                    image.Save(filePath);
-                }
-            }
+            using var ms = new MemoryStream(File.ReadAllBytes(filePath));
+            using var image = Image.FromStream(ms);
+            DeleteCoordinate(image);
+            image.Save(filePath);
         }
 
         /// <summary>
@@ -401,14 +387,10 @@ namespace XUCore.Drawing
         /// <param name="savePath">保存文件路径</param>
         public static void DeleteCoordinate(string filePath, string savePath)
         {
-            using (var ms = new MemoryStream(File.ReadAllBytes(filePath)))
-            {
-                using (var image = Image.FromStream(ms))
-                {
-                    DeleteCoordinate(image);
-                    image.Save(savePath);
-                }
-            }
+            using var ms = new MemoryStream(File.ReadAllBytes(filePath));
+            using var image = Image.FromStream(ms);
+            DeleteCoordinate(image);
+            image.Save(savePath);
         }
 
         /// <summary>
@@ -451,7 +433,7 @@ namespace XUCore.Drawing
         /// <returns></returns>
         public static Bitmap BrightnessHandle(Bitmap bitmap, int width, int height, int val)
         {
-            Bitmap bm = new Bitmap(width, height);
+            Bitmap bm = new(width, height);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -578,7 +560,7 @@ namespace XUCore.Drawing
         /// <returns></returns>
         public static Bitmap TwistImage(Bitmap bitmap, bool isTwist, double shapeMultValue, double shapePhase)
         {
-            Bitmap destBitmap = new Bitmap(bitmap.Width, bitmap.Height);
+            Bitmap destBitmap = new(bitmap.Width, bitmap.Height);
             // 将位图背景填充为白色
             Graphics g = Graphics.FromImage(destBitmap);
             g.FillRectangle(new SolidBrush(Color.White), 0, 0, destBitmap.Width, destBitmap.Height);
@@ -632,15 +614,15 @@ namespace XUCore.Drawing
             int w2 = (int)(Math.Max(Math.Abs(w1 * cos - h1 * sin), Math.Abs(w1 * cos + h1 * sin)));
             int h2 = (int)(Math.Max(Math.Abs(w1 * sin - h1 * cos), Math.Abs(w1 * sin + h1 * cos)));
             // 目标位图
-            Bitmap newBmp = new Bitmap(w2, h2);
+            Bitmap newBmp = new(w2, h2);
             Graphics graphics = Graphics.FromImage(newBmp);
             graphics.InterpolationMode = InterpolationMode.Bilinear;
             graphics.SmoothingMode = SmoothingMode.HighQuality;
             // 计算偏移量
-            Point offset = new Point((w2 - w1) / 2, (h2 - h1) / 2);
+            Point offset = new((w2 - w1) / 2, (h2 - h1) / 2);
             // 构造图像显示区域：使原始图像与目标图像中心点一致
-            Rectangle rect = new Rectangle(offset.X, offset.Y, w1, h1);
-            Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+            Rectangle rect = new(offset.X, offset.Y, w1, h1);
+            Point center = new(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
             graphics.TranslateTransform(center.X, center.Y);
             graphics.RotateTransform(360 - angle);
             // 恢复图像在水平和垂直方向的平移
@@ -862,7 +844,7 @@ namespace XUCore.Drawing
             {
                 for (int i = 0; i < width; i++)
                 {
-                    Random rnd = new Random();
+                    Random rnd = new();
                     int k = rnd.Next(123456);
                     // 像素块大小
                     int dx = i + k % 19;

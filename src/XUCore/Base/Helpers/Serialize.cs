@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace XUCore.Helpers
 {
@@ -41,7 +43,6 @@ namespace XUCore.Helpers
             var obj = Marshal.PtrToStructure(ptr, type);
             return (T)obj;
         }
-
         /// <summary>
         /// 将数据序列化为二进制数组
         /// </summary>
@@ -50,13 +51,12 @@ namespace XUCore.Helpers
         public static byte[] ToBinary(object data)
         {
             data.CheckNotNull(nameof(data));
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, data);
-                ms.Seek(0, SeekOrigin.Begin);
-                return ms.ToArray();
-            }
+
+            using var memoryStream = new MemoryStream();
+            var ser = new DataContractSerializer(typeof(object));
+            ser.WriteObject(memoryStream, data);
+            var res = memoryStream.ToArray();
+            return res;
         }
 
         /// <summary>
@@ -68,11 +68,12 @@ namespace XUCore.Helpers
         public static T FromBinary<T>(byte[] bytes)
         {
             bytes.CheckNotNullOrEmpty(nameof(bytes));
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                return (T)formatter.Deserialize(ms);
-            }
+
+            using var memoryStream = new MemoryStream(bytes);
+            var reader = XmlDictionaryReader.CreateTextReader(memoryStream, new XmlDictionaryReaderQuotas());
+            var ser = new DataContractSerializer(typeof(T));
+            var result = (T)ser.ReadObject(reader, true);
+            return result;
         }
 
         /// <summary>
@@ -84,11 +85,9 @@ namespace XUCore.Helpers
         {
             fileName.CheckNotNull(nameof(fileName));
             data.CheckNotNull(nameof(data));
-            using (var fs = new FileStream(fileName, FileMode.Create))
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(fs, data);
-            }
+            using var fs = new FileStream(fileName, FileMode.Create);
+            var ser = new DataContractSerializer(typeof(object));
+            ser.WriteObject(fs, data);
         }
 
         /// <summary>
@@ -100,11 +99,10 @@ namespace XUCore.Helpers
         public static T FromBinaryFile<T>(string fileName)
         {
             fileName.CheckFileExists(nameof(fileName));
-            using (var fs = new FileStream(fileName, FileMode.Open))
-            {
-                var formatter = new BinaryFormatter();
-                return (T)formatter.Deserialize(fs);
-            }
+            using var fs = new FileStream(fileName, FileMode.Open);
+            var reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+            var ser = new DataContractSerializer(typeof(T));
+            return (T)ser.ReadObject(reader, true);
         }
 
         #endregion 二进制序列化
@@ -119,13 +117,11 @@ namespace XUCore.Helpers
         public static string ToXml(object data)
         {
             data.CheckNotNull(nameof(data));
-            using (var ms = new MemoryStream())
-            {
-                var serializer = new XmlSerializer(data.GetType());
-                serializer.Serialize(ms, data);
-                ms.Seek(0, SeekOrigin.Begin);
-                return Encoding.Default.GetString(ms.ToArray());
-            }
+            using var ms = new MemoryStream();
+            var serializer = new XmlSerializer(data.GetType());
+            serializer.Serialize(ms, data);
+            ms.Seek(0, SeekOrigin.Begin);
+            return Encoding.Default.GetString(ms.ToArray());
         }
 
         /// <summary>
@@ -138,11 +134,9 @@ namespace XUCore.Helpers
         {
             xml.CheckNotNull(nameof(xml));
             byte[] bytes = Encoding.Default.GetBytes(xml);
-            using (var ms = new MemoryStream(bytes))
-            {
-                var serializer = new XmlSerializer(typeof(T));
-                return (T)serializer.Deserialize(ms);
-            }
+            using var ms = new MemoryStream(bytes);
+            var serializer = new XmlSerializer(typeof(T));
+            return (T)serializer.Deserialize(ms);
         }
 
         /// <summary>
@@ -154,11 +148,9 @@ namespace XUCore.Helpers
         {
             fileName.CheckNotNull(nameof(fileName));
             data.CheckNotNull(nameof(data));
-            using (var fs = new FileStream(fileName, FileMode.Create))
-            {
-                var serializer = new XmlSerializer(data.GetType());
-                serializer.Serialize(fs, data);
-            }
+            using var fs = new FileStream(fileName, FileMode.Create);
+            var serializer = new XmlSerializer(data.GetType());
+            serializer.Serialize(fs, data);
         }
 
         /// <summary>
@@ -170,11 +162,9 @@ namespace XUCore.Helpers
         public static T FromXmlFile<T>(string fileName)
         {
             fileName.CheckFileExists(nameof(fileName));
-            using (var fs = new FileStream(fileName, FileMode.Open))
-            {
-                var serializer = new XmlSerializer(typeof(T));
-                return (T)serializer.Deserialize(fs);
-            }
+            using var fs = new FileStream(fileName, FileMode.Open);
+            var serializer = new XmlSerializer(typeof(T));
+            return (T)serializer.Deserialize(fs);
         }
 
         #endregion Xml序列化
