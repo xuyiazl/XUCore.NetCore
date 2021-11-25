@@ -392,13 +392,13 @@ namespace XUCore.NetCore
         /// <summary>
         /// Web客户端，用于发送Http请求
         /// </summary>
-        public static XUCore.Webs.Clients.WebClient Client() => new XUCore.Webs.Clients.WebClient();
+        public static XUCore.Webs.Clients.WebClient Client() => new();
 
         /// <summary>
         /// Web客户端，用于发送Http请求
         /// </summary>
         /// <typeparam name="TResult">返回结果类型</typeparam>
-        public static XUCore.Webs.Clients.WebClient<TResult> Client<TResult>() where TResult : class => new XUCore.Webs.Clients.WebClient<TResult>();
+        public static XUCore.Webs.Clients.WebClient<TResult> Client<TResult>() where TResult : class => new();
 
         #endregion Client(Web客户端)
 

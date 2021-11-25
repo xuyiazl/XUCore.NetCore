@@ -117,7 +117,7 @@ namespace XUCore.Extensions
         /// <returns></returns>
         public static async Task<PagedList<T>> ToPagedListAsync<T>(this IQueryable<T> query, int currentPage, int pageSize, CancellationToken cancellationToken = default)
         {
-            var count = await query.LongCountAsync();
+            var count = await query.LongCountAsync(cancellationToken);
 
             var list = await query.PageBy((currentPage - 1) * pageSize, pageSize).ToListAsync(cancellationToken);
 

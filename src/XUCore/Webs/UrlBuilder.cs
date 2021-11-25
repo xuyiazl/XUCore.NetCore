@@ -123,7 +123,7 @@
         /// 创建一个新的构造器
         /// </summary>
         /// <returns></returns>
-        public static UrlBuilder Create() => new UrlBuilder();
+        public static UrlBuilder Create() => new();
         /// <summary>
         /// 创建一个新的构造器
         /// </summary>
@@ -136,7 +136,7 @@
         /// <param name="clientName"></param>
         /// <param name="requestUrl"></param>
         /// <returns></returns>
-        public static UrlBuilder Create(string clientName, string requestUrl) => new UrlBuilder(clientName, requestUrl);
+        public static UrlBuilder Create(string clientName, string requestUrl) => new(clientName, requestUrl);
         /// <summary>
         /// 是否合并参数
         /// </summary>
@@ -244,7 +244,7 @@
         /// <returns></returns>
         public UrlBuilder Complete()
         {
-            StringBuilder url = new StringBuilder();
+            var url = new StringBuilder();
             url.Append(_host);
 
             if (_isCompleteParameter)
