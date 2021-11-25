@@ -3,6 +3,7 @@ using XUCore.Parameters.Formats;
 using System;
 using System.Collections.Generic;
 using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace XUCore.Parameters
 {
@@ -99,9 +100,9 @@ namespace XUCore.Parameters
         /// <summary>
         /// 从Request加载表单参数
         /// </summary>
-        public void LoadForm()
+        public void LoadForm(HttpRequest request)
         {
-            var form = Web.Request?.Form;
+            var form = request?.Form;
             if (form == null)
             {
                 return;
@@ -123,9 +124,9 @@ namespace XUCore.Parameters
         /// <summary>
         /// 从Request加载查询参数
         /// </summary>
-        public void LoadQuery()
+        public void LoadQuery(HttpRequest request)
         {
-            var query = Web.Request?.Query;
+            var query = request?.Query;
             if (query == null)
             {
                 return;

@@ -3,6 +3,7 @@ using XUCore.Helpers;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace XUCore.Files
 {
@@ -28,13 +29,13 @@ namespace XUCore.Files
         /// <summary>
         /// 保存文件，返回完整文件路径
         /// </summary>
+        /// <param name="file"></param>
+        /// <param name="savePath"></param>
         /// <returns></returns>
-        public async Task<string> SaveAsync()
+        public async Task<string> SaveAsync(IFormFile file, string savePath)
         {
-            var fileControl = Web.GetFile();
-            var path = _pathGenerator.Generate(fileControl.FileName);
-            var physicalPath = Common.GetWebRootPath(path);
-            var directory = Path.GetDirectoryName(physicalPath);
+            var path = _pathGenerator.Generate(file.FileName);
+            var directory = Path.GetDirectoryName(savePath);
             if (string.IsNullOrEmpty(directory))
             {
                 throw new ArgumentException("上传失败");
@@ -45,9 +46,9 @@ namespace XUCore.Files
                 Directory.CreateDirectory(directory);
             }
 
-            using (var stream = new FileStream(physicalPath, FileMode.Create))
+            using (var stream = new FileStream(savePath, FileMode.Create))
             {
-                await fileControl.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
             }
 
             return path;

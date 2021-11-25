@@ -84,7 +84,7 @@ namespace XUCore.NetCore.Razors
         {
             if (MinInterval <= 0) return true;
 
-            var path = Common.GetWebRootPath(relativePath);
+            var path = Web.GetWebRootPath(relativePath);
 
             var fi = new FileInfo(path);
 
@@ -110,7 +110,7 @@ namespace XUCore.NetCore.Razors
             var _logger = Web.GetService<ILogger<HtmlStaticAttribute>>();
             try
             {
-                var path = Common.GetWebRootPath(context.RouteReplace(Template));
+                var path = Web.GetWebRootPath(context.RouteReplace(Template));
 
                 FileHelper.Create(path, responseContent);
             }

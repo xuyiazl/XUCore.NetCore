@@ -2,7 +2,7 @@
 using XUCore.Helpers;
 using System;
 
-namespace XUCore.Webs
+namespace XUCore.NetCore
 {
     /// <summary>
     /// cookie有效期枚举

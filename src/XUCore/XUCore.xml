@@ -6137,18 +6137,6 @@
             换行符
             </summary>
         </member>
-        <member name="M:XUCore.Helpers.Common.GetPhysicalPath(System.String)">
-            <summary>
-            获取物理路径
-            </summary>
-            <param name="relativePath">相对路径</param>
-        </member>
-        <member name="M:XUCore.Helpers.Common.GetWebRootPath(System.String)">
-            <summary>
-            获取wwwroot路径
-            </summary>
-            <param name="relativePath">相对路径</param>
-        </member>
         <member name="M:XUCore.Helpers.Common.Swap``1(``0@,``0@)">
             <summary>
             交换值。交换两个提供的变量中的值
@@ -9563,312 +9551,6 @@
             <param name="bindableObject">The bindable object.</param>
             <returns>System.Object.</returns>
         </member>
-        <member name="T:XUCore.Helpers.Web">
-            <summary>
-            Web操作
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.HttpContextAccessor">
-            <summary>
-            Http上下文访问器
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.HttpContext">
-            <summary>
-            当前Http上下文
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetService``1">
-            <summary>
-            Http上下文中获取服务
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Environment">
-            <summary>
-            宿主环境
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Request">
-            <summary>
-            当前Http请求
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Response">
-            <summary>
-            当前Http响应
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.LocalIpAddress">
-            <summary>
-            本地IP
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.RequestType">
-            <summary>
-            请求类型
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Form">
-            <summary>
-            Form表单
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Body">
-            <summary>
-            请求正文
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Url">
-            <summary>
-            请求地址
-            </summary>
-        </member>
-        <member name="F:XUCore.Helpers.Web._ip">
-            <summary>
-            IP地址
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.SetIp(System.String)">
-            <summary>
-            设置IP地址
-            </summary>
-            <param name="ip">IP地址</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.ResetIp">
-            <summary>
-            重置IP地址
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.IP">
-            <summary>
-            客户端IP地址
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetLanIP">
-            <summary>
-            获取局域网IP
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetLanIP(System.Net.NetworkInformation.NetworkInterfaceType)">
-            <summary>
-            获取局域网IP。
-            参考地址：https://stackoverflow.com/questions/6803073/get-local-ip-address/28621250#28621250
-            解决OSX下获取IP地址产生"Device not configured"的问题
-            </summary>
-            <param name="type">网络接口类型</param>
-            <returns></returns>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Host">
-            <summary>
-            主机
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetClientHostName">
-            <summary>
-            获取Web客户端主机名
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetRemoteAddress">
-            <summary>
-            获取远程地址
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:XUCore.Helpers.Web.Browser">
-            <summary>
-            浏览器
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.RootPath">
-            <summary>
-            根路径
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.WebRootPath">
-            <summary>
-            Web根路径，即wwwroot
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.ContentType">
-            <summary>
-            内容类型
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.QueryString">
-            <summary>
-            参数
-            </summary>
-        </member>
-        <member name="P:XUCore.Helpers.Web.IsLocal">
-            <summary>
-            是否本地请求
-            </summary>
-        </member>
-        <member name="F:XUCore.Helpers.Web.NullIpAddress">
-            <summary>
-            空IP地址
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.IsSet(System.Net.IPAddress)">
-            <summary>
-            是否已设置IP地址
-            </summary>
-            <param name="address">IP地址</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.#cctor">
-            <summary>
-            静态构造函数
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.Client">
-            <summary>
-            Web客户端，用于发送Http请求
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.Client``1">
-            <summary>
-            Web客户端，用于发送Http请求
-            </summary>
-            <typeparam name="TResult">返回结果类型</typeparam>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetFiles">
-            <summary>
-            获取客户端文件集合
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetFile">
-            <summary>
-            获取客户端文件
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetParam(System.String)">
-            <summary>
-            获取请求参数，搜索路径：查询参数->表单参数->请求头
-            </summary>
-            <param name="name">参数名</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.UrlEncode(System.String,System.Boolean)">
-            <summary>
-            Url编码
-            </summary>
-            <param name="url">url</param>
-            <param name="isUpper">编码字符是否转成大写，范例："http://"转成"http%3A%2F%2F"</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.UrlEncode(System.String,System.String,System.Boolean)">
-            <summary>
-            Url编码
-            </summary>
-            <param name="url">url</param>
-            <param name="encoding">字符编码</param>
-            <param name="isUpper">编码字符是否转成大写，范例："http://"转成"http%3A%2F%2F"</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.UrlEncode(System.String,System.Text.Encoding,System.Boolean)">
-            <summary>
-            Url编码
-            </summary>
-            <param name="url">url</param>
-            <param name="encoding">字符编码</param>
-            <param name="isUpper">编码字符是否转成大写，范例："http://"转成"http%3A%2F%2F"</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetUpperEncode(System.String)">
-            <summary>
-            获取大写编码字符串
-            </summary>
-            <param name="encode">编码字符串</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.UrlDecode(System.String)">
-            <summary>
-            Url解码
-            </summary>
-            <param name="url">url</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.UrlDecode(System.String,System.Text.Encoding)">
-            <summary>
-            Url解码
-            </summary>
-            <param name="url">url</param>
-            <param name="encoding">字符编码</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.Redirect(System.String)">
-            <summary>
-            跳转到指定链接
-            </summary>
-            <param name="url">链接</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.Write(System.String)">
-            <summary>
-            输出内容
-            </summary>
-            <param name="text">内容</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.Write(System.IO.FileStream)">
-            <summary>
-            输出文件
-            </summary>
-            <param name="stream">文件流</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetBodyAsync">
-            <summary>
-            获取请求正文
-            </summary>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadFileAsync(System.String,System.String)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="filePath">文件绝对路径</param>
-            <param name="fileName">文件名。包含扩展名</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadFileAsync(System.String,System.String,System.Text.Encoding)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="filePath">文件绝对路径</param>
-            <param name="fileName">文件名。包含扩展名</param>
-            <param name="encoding">字符编码</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadAsync(System.IO.Stream,System.String)">
-            <summary>
-            下载
-            </summary>
-            <param name="stream">流</param>
-            <param name="fileName">文件名。包含扩展名</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadAsync(System.IO.Stream,System.String,System.Text.Encoding)">
-            <summary>
-            下载
-            </summary>
-            <param name="stream">流</param>
-            <param name="fileName">文件名。包含扩展名</param>
-            <param name="encoding">字符编码</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadAsync(System.Byte[],System.String)">
-            <summary>
-            下载
-            </summary>
-            <param name="bytes">字节流</param>
-            <param name="fileName">文件名。包含扩展名</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.DownloadAsync(System.Byte[],System.String,System.Text.Encoding)">
-            <summary>
-            下载
-            </summary>
-            <param name="bytes">字节流</param>
-            <param name="fileName">文件名。包含扩展名</param>
-            <param name="encoding">字符编码</param>
-        </member>
-        <member name="M:XUCore.Helpers.Web.GetRefererUrlAddress(Microsoft.AspNetCore.Http.HttpRequest,System.String)">
-            <summary>
-            获取来源地址
-            </summary>
-            <param name="request"></param>
-            <param name="refererHeaderKey"></param>
-            <returns></returns>
-        </member>
         <member name="T:XUCore.Helpers.Xml">
             <summary>
             Xml操作 - 生成器
@@ -11646,10 +11328,12 @@
             </summary>
             <param name="pathGenerator">路径生成器</param>
         </member>
-        <member name="M:XUCore.Files.DefaultFileStore.SaveAsync">
+        <member name="M:XUCore.Files.DefaultFileStore.SaveAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             保存文件，返回完整文件路径
             </summary>
+            <param name="file"></param>
+            <param name="savePath"></param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Files.FileInfo">
@@ -11817,10 +11501,12 @@
             文件存储服务
             </summary>
         </member>
-        <member name="M:XUCore.Files.IFileStore.SaveAsync">
+        <member name="M:XUCore.Files.IFileStore.SaveAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             保存文件，返回完整文件路径
             </summary>
+            <param name="file"></param>
+            <param name="savePath">保存地址</param>
             <returns></returns>
         </member>
         <member name="T:XUCore.Files.Paths.DefaultBasePath">
@@ -13532,12 +13218,12 @@
             </summary>
             <param name="url">url</param>
         </member>
-        <member name="M:XUCore.Parameters.UrlParameterBuilder.LoadForm">
+        <member name="M:XUCore.Parameters.UrlParameterBuilder.LoadForm(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             从Request加载表单参数
             </summary>
         </member>
-        <member name="M:XUCore.Parameters.UrlParameterBuilder.LoadQuery">
+        <member name="M:XUCore.Parameters.UrlParameterBuilder.LoadQuery(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             从Request加载查询参数
             </summary>
@@ -19290,205 +18976,6 @@
             Delete请求
             </summary>
             <param name="url">请求地址</param>
-        </member>
-        <member name="T:XUCore.Webs.ExpiresType">
-            <summary>
-            cookie有效期枚举
-            </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Seconds">
-            <summary>
-             秒
-             </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Minutes">
-            <summary>
-             分
-             </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Hours">
-            <summary>
-             时
-             </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Days">
-            <summary>
-             天
-             </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Months">
-            <summary>
-             月
-             </summary>
-        </member>
-        <member name="F:XUCore.Webs.ExpiresType.Years">
-            <summary>
-             年
-             </summary>
-        </member>
-        <member name="T:XUCore.Webs.CookieHelper">
-            <summary>
-            Cookie 操作辅助类
-            </summary>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String)">
-            <summary>
-            设置cookie
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,System.String)">
-            <summary>
-            设置cookie
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="domain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,System.String,System.Int32)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,System.String,System.Int32,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-            <param name="domain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,System.String,System.Int32,System.Boolean,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-            <param name="httponly"></param>
-            <param name="domain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.String,System.Int32,System.Boolean,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="context">Http上下文</param>
-            <param name="cookieName">cookie名称</param>
-            <param name="value">值</param>
-            <param name="expirestype">有效期类型 s 秒 m 分，h 时，d 天，M 月，y 年</param>
-            <param name="expires">有效期 分钟</param>
-            <param name="httponly">客户端脚本访问</param>
-            <param name="domain">域</param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,XUCore.Webs.ExpiresType,System.Int32)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,XUCore.Webs.ExpiresType,System.Int32,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-            <param name="domain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(System.String,System.String,XUCore.Webs.ExpiresType,System.Int32,System.Boolean,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="cookieName"></param>
-            <param name="value"></param>
-            <param name="expiresType"></param>
-            <param name="expires"></param>
-            <param name="httponly"></param>
-            <param name="domain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.SetCookie(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,XUCore.Webs.ExpiresType,System.Int32,System.Boolean,System.String)">
-            <summary>
-            设置cookie 。eType: s 秒 m 分，h 时，d 天，M 月，y 年
-            </summary>
-            <param name="context">Http上下文</param>
-            <param name="cookieName">cookie名称</param>
-            <param name="value">值</param>
-            <param name="expiresType">有效期类型 s 秒 m 分，h 时，d 天，M 月，y 年</param>
-            <param name="expires">有效期 分钟</param>
-            <param name="httponly">客户端脚本访问</param>
-            <param name="domain">域</param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.GetCookie(System.String)">
-            <summary>
-            获取Cookie的value值
-            </summary>
-            <param name="cookieName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.GetCookie(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-            获取Cookie的value值
-            </summary>
-            <param name="context">Http上下文</param>
-            <param name="cookieName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.GetCookie``1(System.String)">
-            <summary>
-            获取Cookie的value值
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="cookieName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.GetCookie``1(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-            获取Cookie的value值
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="context">Http上下文</param>
-            <param name="cookieName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.Delete(System.String)">
-            <summary>
-            删除cookie
-            </summary>
-            <param name="cookieName"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.Delete(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-            删除cookie
-            </summary>
-            <param name="context">Http上下文</param>
-            <param name="cookieName"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.Delete(System.String,System.String)">
-            <summary>
-            删除指定域下cookie
-            </summary>
-            <param name="cookieName"></param>
-            <param name="cookieDomain"></param>
-        </member>
-        <member name="M:XUCore.Webs.CookieHelper.Delete(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String)">
-            <summary>
-            删除指定域下cookie
-            </summary>
-            <param name="context">Http上下文</param>
-            <param name="cookieName"></param>
-            <param name="cookieDomain"></param>
         </member>
         <member name="T:XUCore.Webs.UrlBuilder">
             <summary>

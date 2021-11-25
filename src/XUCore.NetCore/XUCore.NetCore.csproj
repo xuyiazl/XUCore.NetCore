@@ -29,51 +29,57 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Logging\**" />
-	  <EmbeddedResource Remove="Logging\**" />
-	  <None Remove="Logging\**" />
+		<Compile Remove="Logging\**" />
+		<EmbeddedResource Remove="Logging\**" />
+		<None Remove="Logging\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Swagger\Assets\index-mini-profiler.html" />
-	  <None Remove="Swagger\Assets\index.html" />
+		<None Remove="Swagger\Assets\index-mini-profiler.html" />
+		<None Remove="Swagger\Assets\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Swagger\Assets\index-mini-profiler.html" />
-	  <EmbeddedResource Include="Swagger\Assets\index.html" />
+		<EmbeddedResource Include="Swagger\Assets\index-mini-profiler.html" />
+		<EmbeddedResource Include="Swagger\Assets\index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.14" />
+		<!--<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.14" />
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />-->
+		<!--<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.0" />-->
+		<!--<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />-->
+		<!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />-->
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.MongoDB" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.MySql" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.Redis" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.SqlServer" Version="4.2.22" />
+
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
+
 		<PackageReference Include="Aliyun.OSS.SDK.NetCore" Version="2.13.0" />
 		<!--<PackageReference Include="log4net" Version="2.0.12" />-->
 		<PackageReference Include="Quartz" Version="3.3.3" />
 		<PackageReference Include="Scrutor" Version="3.3.0" />
+
 		<PackageReference Include="FluentValidation" Version="10.3.4" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
+
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

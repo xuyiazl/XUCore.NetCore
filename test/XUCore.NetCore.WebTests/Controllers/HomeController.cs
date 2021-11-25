@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XUCore.Helpers;
+using XUCore.NetCore;
 using XUCore.NetCore.HttpFactory;
 using XUCore.NetCore.Oss;
 using XUCore.NetCore.Razors;

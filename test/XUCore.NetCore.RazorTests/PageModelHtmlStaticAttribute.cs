@@ -72,7 +72,7 @@ namespace XUCore.NetCore.RazorTests
         {
             if (MinInterval <= 0) return true;
 
-            var path = Common.GetWebRootPath(relativePath);
+            var path = Web.GetWebRootPath(relativePath);
 
             var fi = new FileInfo(path);
 
@@ -90,7 +90,7 @@ namespace XUCore.NetCore.RazorTests
         protected void WriteHtml(ResultExecutedContext context, PageResult pageResult)
         {
             if (pageResult == null) return;
-
+            
             var _logger = Web.GetService<ILogger<PageModelHtmlStaticAttribute>>();
             try
             {
@@ -102,7 +102,7 @@ namespace XUCore.NetCore.RazorTests
 
                 if (string.IsNullOrWhiteSpace(html)) return;
 
-                var path = Common.GetWebRootPath(context.RouteReplace(Template));
+                var path = Web.GetWebRootPath(context.RouteReplace(Template));
 
                 FileHelper.Create(path, html);
             }

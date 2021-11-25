@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace XUCore.Files
 {
@@ -10,7 +11,9 @@ namespace XUCore.Files
         /// <summary>
         /// 保存文件，返回完整文件路径
         /// </summary>
+        /// <param name="file"></param>
+        /// <param name="savePath">保存地址</param>
         /// <returns></returns>
-        Task<string> SaveAsync();
+        Task<string> SaveAsync(IFormFile file, string savePath);
     }
 }

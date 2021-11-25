@@ -1,10 +1,11 @@
-﻿using XUCore.Extensions;
-using XUCore.Helpers;
-using XUCore.Serializer;
-using XUCore.Parameters.Formats;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Web;
+using XUCore.Extensions;
+using XUCore.Parameters.Formats;
+using XUCore.Serializer;
 
 namespace XUCore.Parameters
 {
@@ -137,7 +138,7 @@ namespace XUCore.Parameters
         {
             if (isUrlEncode)
             {
-                return Web.UrlEncode(value.SafeString(), encoding);
+                return HttpUtility.UrlEncode(value.SafeString(), Encoding.GetEncoding(encoding));
             }
 
             return value;

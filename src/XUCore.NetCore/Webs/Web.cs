@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using XUCore.Extensions;
-using XUCore.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +12,11 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using XUCore.Extensions;
+using XUCore.Helpers;
+using XUCore.IO;
 
-namespace XUCore.Helpers
+namespace XUCore.NetCore
 {
     /// <summary>
     /// Web操作
@@ -49,7 +50,13 @@ namespace XUCore.Helpers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T GetService<T>() => HttpContext.RequestServices.GetRequiredService<T>();
+        public static T GetService<T>() => HttpContext.RequestServices.GetService<T>();
+        /// <summary>
+        /// Http上下文中获取服务
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T GetRequiredService<T>() => HttpContext.RequestServices.GetRequiredService<T>();
 
         #endregion IServiceProvider(Http上下文中获取服务)
 
@@ -58,7 +65,7 @@ namespace XUCore.Helpers
         /// <summary>
         /// 宿主环境
         /// </summary>
-        public static IHostingEnvironment Environment { get; set; }
+        public static IWebHostEnvironment Environment { get; set; }
 
         #endregion Environment(宿主环境)
 
@@ -663,6 +670,43 @@ namespace XUCore.Helpers
             return request.Headers[refererHeaderKey].SafeString();
         }
         #endregion GetRefererUrlAddress(获取来源地址)
+
+        #region GetPhysicalPath(获取物理路径)
+
+        /// <summary>
+        /// 获取物理路径
+        /// </summary>
+        /// <param name="relativePath">相对路径</param>
+        public static string GetPhysicalPath(string relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(relativePath))
+                return string.Empty;
+            var rootPath = RootPath;
+            if (string.IsNullOrWhiteSpace(rootPath))
+                return Path.GetFullPath(relativePath);
+            return Path.Combine(RootPath, relativePath.Replace("/", "\\").TrimStart('\\'));
+        }
+
+        #endregion GetPhysicalPath(获取物理路径)
+
+        #region GetWebRootPath(获取wwwroot路径)
+
+        /// <summary>
+        /// 获取wwwroot路径
+        /// </summary>
+        /// <param name="relativePath">相对路径</param>
+        public static string GetWebRootPath(string relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(relativePath))
+                return string.Empty;
+            var rootPath = WebRootPath;
+            if (string.IsNullOrWhiteSpace(rootPath))
+                return Path.GetFullPath(relativePath);
+            return Path.Combine(WebRootPath, relativePath.Replace("/", "\\").TrimStart('\\'));
+        }
+
+        #endregion GetWebRootPath(获取wwwroot路径)
+
 
     }
 }

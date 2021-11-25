@@ -33,42 +33,6 @@ namespace XUCore.Helpers
 
         #endregion Line(换行符)
 
-        #region GetPhysicalPath(获取物理路径)
-
-        /// <summary>
-        /// 获取物理路径
-        /// </summary>
-        /// <param name="relativePath">相对路径</param>
-        public static string GetPhysicalPath(string relativePath)
-        {
-            if (string.IsNullOrWhiteSpace(relativePath))
-                return string.Empty;
-            var rootPath = Web.RootPath;
-            if (string.IsNullOrWhiteSpace(rootPath))
-                return Path.GetFullPath(relativePath);
-            return $"{Web.RootPath}\\{relativePath.Replace("/", "\\").TrimStart('\\')}";
-        }
-
-        #endregion GetPhysicalPath(获取物理路径)
-
-        #region GetWebRootPath(获取wwwroot路径)
-
-        /// <summary>
-        /// 获取wwwroot路径
-        /// </summary>
-        /// <param name="relativePath">相对路径</param>
-        public static string GetWebRootPath(string relativePath)
-        {
-            if (string.IsNullOrWhiteSpace(relativePath))
-                return string.Empty;
-            var rootPath = Web.WebRootPath;
-            if (string.IsNullOrWhiteSpace(rootPath))
-                return Path.GetFullPath(relativePath);
-            return $"{Web.WebRootPath}\\{relativePath.Replace("/", "\\").TrimStart('\\')}";
-        }
-
-        #endregion GetWebRootPath(获取wwwroot路径)
-
         #region Swap(交换值)
 
         /// <summary>

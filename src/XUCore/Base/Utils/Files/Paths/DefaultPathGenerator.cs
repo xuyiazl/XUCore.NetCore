@@ -1,4 +1,5 @@
-﻿using XUCore.Randoms;
+﻿using System.IO;
+using XUCore.Randoms;
 
 namespace XUCore.Files.Paths
 {
@@ -29,7 +30,7 @@ namespace XUCore.Files.Paths
         /// <returns></returns>
         protected override string GeneratePath(string fileName)
         {
-            return $"{_basePath.GetPath()}/{fileName}";
+            return Path.Combine(_basePath.GetPath(), fileName);
         }
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using XUCore.Extensions;
 using XUCore.Helpers;
+using XUCore.NetCore;
 using XUCore.NetCore.Authorization;
 using XUCore.NetCore.Controllers;
 using XUCore.NetCore.Swagger;

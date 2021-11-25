@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using XUCore.Helpers;
+using XUCore.NetCore;
 using XUCore.NetCore.Authorization;
 
 namespace XUCore.NetCore.MessageApiTest

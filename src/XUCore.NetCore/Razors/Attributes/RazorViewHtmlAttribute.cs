@@ -63,7 +63,7 @@ namespace XUCore.NetCore.Razors
         {
             if (MinInterval <= 0) return true;
 
-            var path = Common.GetWebRootPath(context.RouteReplace(Template));
+            var path = Web.GetWebRootPath(context.RouteReplace(Template));
 
             var fi = new FileInfo(path);
 
@@ -88,7 +88,7 @@ namespace XUCore.NetCore.Razors
 
                 if (string.IsNullOrWhiteSpace(html)) return;
 
-                var path = Common.GetWebRootPath(context.RouteReplace(Template));
+                var path = Web.GetWebRootPath(context.RouteReplace(Template));
 
                 FileHelper.Create(path, html);
             }

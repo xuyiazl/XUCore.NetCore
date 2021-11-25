@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using XUCore.NetCore.Middlewares;
-using XUCore.Helpers;
+using Microsoft.Extensions.Hosting;
 using System;
+using XUCore.Helpers;
+using XUCore.NetCore.Middlewares;
 
 namespace XUCore.NetCore
 {
@@ -38,7 +39,7 @@ namespace XUCore.NetCore
         public static IApplicationBuilder UseStaticHttpContext(this IApplicationBuilder builder)
         {
             Web.HttpContextAccessor = builder.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
-            Web.Environment = builder.ApplicationServices.GetRequiredService<IHostingEnvironment>();
+            Web.Environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
             return builder;
         }
 

@@ -27,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\src\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\..\src\XUCore.Script\XUCore.Script.csproj" />
 		<ProjectReference Include="..\..\src\XUCore\XUCore.csproj" />
 	</ItemGroup>
