@@ -1,33 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Description>
-			基于 AspectCore 的拦截器扩展插件
-		</Description>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>xuyi</Authors>
-		<Company>personal</Company>
-		<Description>.NET Core AspectCore 拦截器扩展插件</Description>
-		<Copyright>Copyright © XUCore 2021</Copyright>
-		<Version>6.0.2</Version>
 		<PackageId>XUCore.NetCore.AspectCore</PackageId>
-		<Product>XUCore.NetCore.AspectCore</Product>
-		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+		<Description>.NET Core AspectCore 拦截器扩展插件</Description>
+		<DocumentationFile>XUCore.NetCore.AspectCore.xml</DocumentationFile>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.AspectCore.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<OutputPath>..\..\release\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.AspectCore.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Quartz" Version="3.3.3" />

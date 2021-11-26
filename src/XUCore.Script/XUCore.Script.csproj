@@ -1,32 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Description>
-			XUCore.Script 动态执行脚本
-		</Description>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>xuyi</Authors>
-		<Company>personal</Company>
-		<Description>.NET Core Script 动态执行脚本</Description>
-		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.2</Version>
 		<PackageId>XUCore.Script</PackageId>
-		<Product>XUCore.Script</Product>
-		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+		<Description>.NET Core Script 动态执行脚本</Description>
+		<DocumentationFile>XUCore.Script.xml</DocumentationFile>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>XUCore.Script.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<OutputPath>..\..\release\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.Script.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
 
 </Project>

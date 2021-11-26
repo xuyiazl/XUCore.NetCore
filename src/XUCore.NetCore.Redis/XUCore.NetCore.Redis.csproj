@@ -1,32 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Description>
-			Redis封装服务，基础类库 StackExchange.Redis,JSON、MessageagePack、RedisValue数据格式自由切换。
-		</Description>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>xuyi</Authors>
-		<Company>personal</Company>
-		<Description>.NET Core Redis 封装服务</Description>
-		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.2</Version>
 		<PackageId>XUCore.NetCore.Redis</PackageId>
-		<Product>XUCore.NetCore.Redis</Product>
-		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Description>.NET Core Redis 封装服务</Description>
 		<DocumentationFile>XUCore.NetCore.Redis.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<OutputPath>..\..\release\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.Redis.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>

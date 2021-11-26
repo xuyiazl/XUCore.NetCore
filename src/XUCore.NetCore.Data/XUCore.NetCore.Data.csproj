@@ -1,31 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Description>
-			数据库仓储，MYSQL和MSSQL自由切换
-		</Description>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>xuyi</Authors>
-		<Company>personal</Company>
-		<Description>.NET Core Data 数据库仓储</Description>
-		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.2</Version>
 		<PackageId>XUCore.NetCore.Data</PackageId>
-		<Product>XUCore.NetCore.Data</Product>
-		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Description>.NET Core Data 数据库仓储</Description>
 		<DocumentationFile>XUCore.NetCore.Data.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<OutputPath>..\..\release\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.NetCore.Data.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>

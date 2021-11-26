@@ -1,29 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Authors>xuyi</Authors>
-		<Company>personal</Company>
-		<Description>.NET Core ExcelReader Excel大文件读取</Description>
-		<Copyright>Copyright © XUCore 2020</Copyright>
-		<Version>6.0.2</Version>
 		<PackageId>XUCore.Excel</PackageId>
-		<Product>XUCore.Excel</Product>
-		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
-		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<Description>.NET Core ExcelReader Excel大文件读取</Description>
 		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<OutputPath>..\..\release\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>

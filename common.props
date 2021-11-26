@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <Version>6.0.3</Version>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/xuyiazl/XUCore.NetCore</RepositoryUrl>
+		<Authors>xuyi</Authors>
+		<Company>personal</Company>
+		<Product>XUCore</Product>
+		<Copyright>Copyright © XUCore 2020</Copyright>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageIconUrl>http://www.3624091.com/favicon.ico</PackageIconUrl>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PackageLicenseExpression>MulanPSL-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
+		<PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+
+</Project>
