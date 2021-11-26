@@ -23,5 +23,4 @@
 		<ProjectReference Include="..\XUCore.NetCore.Redis\XUCore.NetCore.Redis.csproj" />
 		<ProjectReference Include="..\XUCore\XUCore.csproj" />
 	</ItemGroup>
-
 </Project>

@@ -13,5 +13,4 @@
 		<PackageReference Include="ExcelNumberFormat" Version="1.1.0" />
 		<PackageReference Include="SpreadsheetCellRef" Version="1.0.1" />
 	</ItemGroup>
-	
 </Project>

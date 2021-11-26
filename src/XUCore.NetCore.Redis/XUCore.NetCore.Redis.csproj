@@ -27,5 +27,4 @@
 			<DependentUpon>StackExchangeRedis.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
-
 </Project>

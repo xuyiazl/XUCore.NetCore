@@ -7,6 +7,7 @@ namespace XUCore.NetCore.FreeSql.Curd
     /// <summary>
     /// IdleBus FreeSql CurdService（租户FreeSql实例）
     /// </summary>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
     public class IdleBusCurdService<TKey, TEntity> : CurdService<TKey, TEntity> where TEntity : EntityFull<TKey>, new()
     {

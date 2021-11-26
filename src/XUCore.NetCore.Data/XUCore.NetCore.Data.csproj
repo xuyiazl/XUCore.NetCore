@@ -47,5 +47,4 @@
 			<DependentUpon>DbRepository.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
-
 </Project>

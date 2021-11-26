@@ -117,6 +117,7 @@
             注册缓存拦截服务
             </summary>
             <param name="services"></param>
+            <param name="options"></param>
         </member>
         <member name="M:XUCore.NetCore.AspectCore.Cache.CacheServiceCollectionExtensions.UseCacheTiggerService(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>

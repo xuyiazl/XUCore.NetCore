@@ -60,6 +60,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C246C56-4E98-4406-B590-ECF0BFA160D8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		common.props = common.props
+		common.ps1 = common.ps1
+		pack.ps1 = pack.ps1
+		push_packages.ps1 = push_packages.ps1
 	EndProjectSection
 EndProject
 Global

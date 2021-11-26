@@ -28,6 +28,7 @@ namespace XUCore.Ddd.Domain
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public abstract class CommandIdsValidator<TCommand, TResponse, TKey> : AbstractValidator<TCommand>
         where TCommand : CommandIds<TResponse, TKey>
     {

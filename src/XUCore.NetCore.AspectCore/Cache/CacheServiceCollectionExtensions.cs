@@ -17,6 +17,7 @@ namespace XUCore.NetCore.AspectCore.Cache
         /// 注册缓存拦截服务
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="options"></param>
         public static IServiceCollection AddCacheInterceptor(this IServiceCollection services, Action<CacheOptions> options = null)
         {
             options ??= new Action<CacheOptions>((option) =>

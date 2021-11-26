@@ -14,5 +14,4 @@
 		<ProjectReference Include="..\XUCore.NetCore\XUCore.NetCore.csproj" />
 		<ProjectReference Include="..\XUCore.NetCore.AspectCore\XUCore.NetCore.AspectCore.csproj" />
 	</ItemGroup>
-
 </Project>

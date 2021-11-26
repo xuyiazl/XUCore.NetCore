@@ -8,6 +8,4 @@
 		<Description>.NET Core Script 动态执行脚本</Description>
 		<DocumentationFile>XUCore.Script.xml</DocumentationFile>
 	</PropertyGroup>
-
-
 </Project>

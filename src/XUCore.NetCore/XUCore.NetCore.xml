@@ -2035,6 +2035,7 @@
             初始化一个<see cref="T:XUCore.NetCore.Middlewares.ErrorLogMiddleware"/>类型的实例
             </summary>
             <param name="next">方法</param>
+            <param name="logger"></param>
         </member>
         <member name="M:XUCore.NetCore.Middlewares.ErrorLogMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -4229,6 +4230,7 @@
             </summary>
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
+            <typeparam name="TKey"></typeparam>
         </member>
         <member name="M:XUCore.Ddd.Domain.CommandIdsValidator`3.AddIdsValidator">
             <summary>

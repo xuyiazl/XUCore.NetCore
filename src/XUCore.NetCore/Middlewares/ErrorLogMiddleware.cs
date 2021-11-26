@@ -22,6 +22,7 @@ namespace XUCore.NetCore.Middlewares
         /// 初始化一个<see cref="ErrorLogMiddleware"/>类型的实例
         /// </summary>
         /// <param name="next">方法</param>
+        /// <param name="logger"></param>
         public ErrorLogMiddleware(RequestDelegate next, ILogger<ErrorLogMiddleware> logger)
         {
             _next = next;
