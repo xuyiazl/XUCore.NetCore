@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore</PackageId>
+		<PackageTags>C#;NetCore;Middlewares;动态API;jwt;Ddd;EasyQuartz;Filters;Formatter;Swagger;Uploads;RestFull</PackageTags>
 		<Description>.NET Core 项目中间件</Description>
-		<DocumentationFile>XUCore.NetCore.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

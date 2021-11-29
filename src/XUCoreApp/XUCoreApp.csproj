@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCoreApp</PackageId>
+		<PackageTags>C#;NetCore;集合库</PackageTags>
 		<Description>.NET Core Common 基础集合库（不含数据存储组件）</Description>
-		<DocumentationFile>XUCoreApp.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

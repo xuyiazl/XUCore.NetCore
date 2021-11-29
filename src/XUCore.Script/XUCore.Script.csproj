@@ -5,7 +5,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.Script</PackageId>
+		<PackageTags>C#;NetCore;Script</PackageTags>
 		<Description>.NET Core Script 动态执行脚本</Description>
-		<DocumentationFile>XUCore.Script.xml</DocumentationFile>
 	</PropertyGroup>
 </Project>

@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore.Mongo</PackageId>
+		<PackageTags>C#;NetCore;Mongo</PackageTags>
 		<Description>.NET Core Mongo 操作封装</Description>
-		<DocumentationFile>XUCore.NetCore.Mongo.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

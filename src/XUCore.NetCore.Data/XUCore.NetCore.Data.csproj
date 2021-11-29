@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore.Data</PackageId>
+		<PackageTags>C#;NetCore;EFCore</PackageTags>
 		<Description>.NET Core Data 数据库仓储</Description>
-		<DocumentationFile>XUCore.NetCore.Data.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

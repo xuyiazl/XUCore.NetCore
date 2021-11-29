@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore.AspectCore</PackageId>
+		<PackageTags>C#;NetCore;AspectCore;AOP</PackageTags>
 		<Description>.NET Core AspectCore 拦截器扩展插件</Description>
-		<DocumentationFile>XUCore.NetCore.AspectCore.xml</DocumentationFile>
 	</PropertyGroup>
 
 

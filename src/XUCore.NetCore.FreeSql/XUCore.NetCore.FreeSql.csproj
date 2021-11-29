@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore.FreeSql</PackageId>
+		<PackageTags>C#;NetCore;FreeSql</PackageTags>
 		<Description>.NET Core FreeSql 数据库仓储</Description>
-		<DocumentationFile>XUCore.NetCore.FreeSql.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

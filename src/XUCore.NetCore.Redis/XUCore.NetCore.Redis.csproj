@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.NetCore.Redis</PackageId>
+		<PackageTags>C#;NetCore;Redis</PackageTags>
 		<Description>.NET Core Redis 封装服务</Description>
-		<DocumentationFile>XUCore.NetCore.Redis.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

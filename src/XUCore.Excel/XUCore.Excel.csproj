@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore.Excel</PackageId>
+		<PackageTags>C#;NetCore;ExcelReader</PackageTags>
 		<Description>.NET Core ExcelReader Excel大文件读取</Description>
-		<DocumentationFile>XUCore.Excel.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
