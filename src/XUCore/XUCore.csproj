@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	
+
 	<Import Project="..\..\common.props" />
-		
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>XUCore</PackageId>
 		<PackageTags>C#;NetCore;基础库;Helper操作;类型扩展;等</PackageTags>
 		<Description>.NET Core Common 基础库</Description>
 	</PropertyGroup>
+
 
 	<ItemGroup>
 		<Compile Remove="Queues\BinaryQueuedFile.cs" />
@@ -31,11 +32,11 @@
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-		
+
 		<PackageReference Include="MessagePack" Version="2.3.85" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="AspectCore.Extensions.Reflection" Version="2.2.0" />
-		
+
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 	</ItemGroup>
 

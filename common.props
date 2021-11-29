@@ -1,9 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>6.0.3</Version>
-	</PropertyGroup>
-
-	<PropertyGroup>
+		<Version>6.0.7</Version>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/xuyiazl/XUCore.NetCore</RepositoryUrl>
@@ -15,12 +12,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageIcon>icon.png</PackageIcon>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PackageLicenseExpression>MulanPSL-2.0</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/xuyiazl/XUCore.NetCore</PackageProjectUrl>
-		<PackAsTool>true</PackAsTool>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
 
