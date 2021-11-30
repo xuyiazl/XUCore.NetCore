@@ -1,6 +1,8 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using XUCore.Extensions;
 
 namespace XUCore.Ddd.Domain
 {
@@ -29,6 +31,11 @@ namespace XUCore.Ddd.Domain
                 Error(validationResult.Errors);
 
             return true;
+        }
+
+        public static string GetError(this ValidationException ex)
+        {
+            return ex.Failures.Select(c => c.Value.Join("")).Join("");
         }
     }
 }
