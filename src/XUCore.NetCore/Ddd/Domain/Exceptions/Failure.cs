@@ -33,9 +33,10 @@ namespace XUCore.Ddd.Domain
             return true;
         }
 
-        public static string GetError(this ValidationException ex)
+
+        public static string GetErrors(this ValidationException ex, string separator = "", string field = "")
         {
-            return ex.Failures.Select(c => c.Value.Join("")).Join("");
+            return ex.Failures.Select(c => c.Value.Join(separator)).Join(field);
         }
     }
 }
