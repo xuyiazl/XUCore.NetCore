@@ -16,7 +16,18 @@ namespace XUCore.Drawing
         /// 从指定文件创建图片
         /// </summary>
         /// <param name="filePath">文件的绝对路径</param>
-        public static Image FromFile(string filePath) => Image.FromFile(filePath);
+        /// <param name="isSafeOpen">是否安全打开，解决图片独占问题，默认false</param>
+        public static Image FromFile(string filePath, bool isSafeOpen = false)
+        {
+            if (isSafeOpen)
+            {
+                using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+                return FromStream(fs);
+            }
+
+            return Image.FromFile(filePath);
+        }
 
         #endregion
 
@@ -38,10 +49,9 @@ namespace XUCore.Drawing
         /// <param name="bytes">字节数组</param>
         public static Image FromBytes(byte[] bytes)
         {
-            using (var ms = new MemoryStream(bytes))
-            {
-                return Image.FromStream(ms);
-            }
+            using var ms = new MemoryStream(bytes);
+
+            return Image.FromStream(ms);
         }
 
         #endregion
@@ -55,10 +65,10 @@ namespace XUCore.Drawing
         public static Image FromBase64String(string base64String)
         {
             byte[] bytes = Convert.FromBase64String(GetBase64String(base64String));
-            using (var ms = new MemoryStream(bytes))
-            {
-                return Image.FromStream(ms);
-            }
+
+            using var ms = new MemoryStream(bytes);
+
+            return Image.FromStream(ms);
         }
 
         /// <summary>

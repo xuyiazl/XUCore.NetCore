@@ -1,6 +1,9 @@
 ﻿using MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -42,6 +45,37 @@ namespace XUCore.ConsoleTests
     {
         static void Main(string[] args)
         {
+            {
+                //测试图片打水印
+                //文字水印
+                string savePath = "";
+                var filePath = "";
+                var sourceImage = ImageHelper.FromFile(filePath);
+
+                var watermark = new WatermarkProcess();
+                var img = watermark.MakeImageWatermark(sourceImage, new WatermarkSettings()
+                {
+                    WatermarkTextEnable = true,
+                    WatermarkText = "优惠活动专用水印",
+                    TextColor = Color.Red,
+                    TextRotatedDegree = -45,
+                    WatermarkPictureEnable = true,
+                    TextSettings = new CommonSettings()
+                    {
+                        Size = 60,
+                        Opacity = 0.4,
+                        PositionList = new List<WatermarkPosition>(new WatermarkPosition[] { WatermarkPosition.Center })
+                    },
+                    PictureSettings = new CommonSettings()
+                    {
+                        Opacity = 0.5,
+                        PositionList = new List<WatermarkPosition>(new WatermarkPosition[] { WatermarkPosition.BottomLeftCorner })
+                    }
+                });
+                img.Save(savePath, ImageFormat.Jpeg);
+                img.Dispose();
+
+            }
             {
                 {
                     using var excelReader = new ExcelReader(@"C:\Users\Nigel\Downloads\结算-出港结算明细_导出任务_20210917_11783720.xlsx");
