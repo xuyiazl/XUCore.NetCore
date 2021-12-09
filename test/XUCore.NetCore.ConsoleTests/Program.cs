@@ -48,28 +48,28 @@ namespace XUCore.ConsoleTests
             {
                 //测试图片打水印
                 //文字水印
-                string savePath = "";
-                var filePath = "";
-                var sourceImage = ImageHelper.FromFile(filePath);
+                string savePath = "Y:\\p-1.jpg";
+                var filePath = "Y:\\p.jpg";
+                var sourceImage = ImageHelper.FromFile(filePath, true);
 
-                var watermark = new WatermarkProcess();
-                var img = watermark.MakeImageWatermark(sourceImage, new WatermarkSettings()
+                var watermark = new WatermarkProcess("Y:\\logo.jpg");
+                var img = watermark.MakeImageWatermark(sourceImage, new()
                 {
                     WatermarkTextEnable = true,
                     WatermarkText = "优惠活动专用水印",
                     TextColor = Color.Red,
                     TextRotatedDegree = -45,
-                    WatermarkPictureEnable = true,
-                    TextSettings = new CommonSettings()
+                    TextSettings = new()
                     {
                         Size = 60,
                         Opacity = 0.4,
-                        PositionList = new List<WatermarkPosition>(new WatermarkPosition[] { WatermarkPosition.Center })
+                        PositionList = new(new[] { WatermarkPosition.Center })
                     },
-                    PictureSettings = new CommonSettings()
+                    WatermarkPictureEnable = true,
+                    PictureSettings = new()
                     {
                         Opacity = 0.5,
-                        PositionList = new List<WatermarkPosition>(new WatermarkPosition[] { WatermarkPosition.BottomLeftCorner })
+                        PositionList = new(new[] { WatermarkPosition.BottomLeftCorner })
                     }
                 });
                 img.Save(savePath, ImageFormat.Jpeg);
