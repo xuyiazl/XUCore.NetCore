@@ -61,7 +61,7 @@ namespace XUCore.Drawing
                     PlaceTextWatermark(destBitmap, currentSettings);
                 }
 
-                if (currentSettings.WatermarkPictureEnable && watermarkBitmap.Value != null)
+                if (currentSettings.WatermarkPictureEnable && watermarkBitmap?.Value != null)
                 {
                     PlaceImageWatermark(destBitmap, watermarkBitmap.Value, currentSettings);
                 }
