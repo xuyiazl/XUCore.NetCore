@@ -41,7 +41,7 @@
 		
 		-->
 
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
 
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
@@ -60,8 +60,8 @@
 		<PackageReference Include="Quartz" Version="3.3.3" />
 		<PackageReference Include="Scrutor" Version="3.3.0" />
 
-		<PackageReference Include="FluentValidation" Version="10.3.4" />
-		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
+		<PackageReference Include="FluentValidation" Version="10.3.6" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
 
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
