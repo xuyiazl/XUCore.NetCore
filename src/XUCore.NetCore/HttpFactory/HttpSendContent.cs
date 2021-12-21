@@ -26,10 +26,10 @@ namespace XUCore.NetCore.HttpFactory
             switch (mediaType)
             {
                 case HttpMediaType.MessagePack:
-                    content = new ByteArrayContent(model.ToMsgPackBytes());
+                    content = new ByteArrayContent(model.ToMessagePackBytes());
                     break;
                 case HttpMediaType.MessagePackJackson:
-                    content = new StringContent(model.ToMsgPackJson(), encoding ?? Encoding.UTF8);
+                    content = new StringContent(model.ToMessagePackJson(), encoding ?? Encoding.UTF8);
                     break;
                 default:
                     content = new StringContent(model.ToJson(), encoding ?? Encoding.UTF8);

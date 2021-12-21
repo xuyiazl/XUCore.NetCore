@@ -20,7 +20,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static string ToMsgPackJson(this object target, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static string ToMessagePackJson(this object target, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToJson(target, options, cancellationToken);
         }
@@ -31,7 +31,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static byte[] ToMsgPackBytesFromJson(this string json, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static byte[] ToMessagePackBytesFromJson(this string json, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToBytesFromJson(json, options, cancellationToken);
         }
@@ -42,7 +42,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static string ToMsgPackJsonFromBytes(this byte[] bytes, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static string ToMessagePackJsonFromBytes(this byte[] bytes, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToJsonFromBytes(bytes, options, cancellationToken);
         }
@@ -53,7 +53,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static byte[] ToMsgPackBytes(this object target, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static byte[] ToMessagePackBytes(this object target, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToBytes(target, options, cancellationToken);
         }
@@ -64,7 +64,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T ToMsgPackObject<T>(this byte[] bytes, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static T ToMessagePackObject<T>(this byte[] bytes, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToObject<T>(bytes, options, cancellationToken);
         }
@@ -75,7 +75,7 @@ namespace XUCore.Serializer
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T ToMsgPackObject<T>(this Stream stream, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
+        public static T ToMessagePackObject<T>(this Stream stream, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
             return MessagePackHelper.ToObject<T>(stream, options, cancellationToken);
         }

@@ -40,13 +40,13 @@ namespace XUCore.NetCore.HttpFactory
                     {
                         var res = await httpContent.ReadAsByteArrayAsync();
 
-                        return res.ToMsgPackObject<TModel>(options);
+                        return res.ToMessagePackObject<TModel>(options);
                     }
                 case HttpMediaType.MessagePackJackson:
                     {
                         var res = await httpContent.ReadAsStringAsync();
 
-                        return res.ToMsgPackBytesFromJson(options).ToMsgPackObject<TModel>(options);
+                        return res.ToMessagePackBytesFromJson(options).ToMessagePackObject<TModel>(options);
                     }
                 default:
                     {

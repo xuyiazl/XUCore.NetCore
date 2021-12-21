@@ -14,19 +14,19 @@ namespace XUCore.NetCore.Sample
 
             var user = SampleData.GetUser();
 
-            var jj = user.ToMsgPackJson();
+            var jj = user.ToMessagePackJson();
 
-            var _dict = user.ToMsgPackBytes();
+            var _dict = user.ToMessagePackBytes();
 
-            var _dict1 = _dict.ToMsgPackObject<User>();
+            var _dict1 = _dict.ToMessagePackObject<User>();
 
-            var _user1 = user.ToMsgPackBytes().ToMsgPackObject<User>();
+            var _user1 = user.ToMessagePackBytes().ToMessagePackObject<User>();
 
-            var json = user.ToMsgPackJson(MessagePackSerializerResolver.UnixDateTimeOptions);
+            var json = user.ToMessagePackJson(MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            var jsonBytes = json.ToMsgPackBytesFromJson(MessagePackSerializerResolver.UnixDateTimeOptions);
+            var jsonBytes = json.ToMessagePackBytesFromJson(MessagePackSerializerResolver.UnixDateTimeOptions);
 
-            var data = jsonBytes.ToMsgPackObject<User>(MessagePackSerializerResolver.UnixDateTimeOptions);
+            var data = jsonBytes.ToMessagePackObject<User>(MessagePackSerializerResolver.UnixDateTimeOptions);
 
             //var dict = new Dictionary<string, object>();
             //dict.Add("Id", 1);

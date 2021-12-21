@@ -15,14 +15,14 @@ namespace XUCore.NetCore.Redis
         {
             if (value == null) return RedisValue.Null;
 
-            return value.ToMsgPackBytes();
+            return value.ToMessagePackBytes();
         }
 
         public virtual T Deserialize<T>(RedisValue value)
         {
             if (value == RedisValue.Null) return default;
 
-            return Conv.To<byte[]>(value).ToMsgPackObject<T>();
+            return Conv.To<byte[]>(value).ToMessagePackObject<T>();
         }
 
         public virtual IList<T> Deserialize<T>(RedisValue[] value)
@@ -35,7 +35,7 @@ namespace XUCore.NetCore.Redis
                 if (v == RedisValue.Null)
                     list.Add(default);
                 else
-                    list.Add(Conv.To<byte[]>(value).ToMsgPackObject<T>());
+                    list.Add(Conv.To<byte[]>(value).ToMessagePackObject<T>());
             }
 
             return list;
