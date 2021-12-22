@@ -21,15 +21,35 @@ namespace XUCore.Ddd.Domain
         /// </summary>
         public readonly IMediatorHandler bus;
         /// <summary>
+        /// IMediator
+        /// </summary>
+        public readonly IMediator mediator;
+        /// <summary>
         /// AutoMapper
         /// </summary>
         public readonly IMapper mapper;
         /// <summary>
         /// 构造函数
         /// </summary>
-        public CommandHandler()
-        {
+        public CommandHandler() { }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="mediator">注入中介处理接口</param>
+        public CommandHandler(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="mediator">注入中介处理接口</param>
+        /// <param name="mapper">automapper</param>
+        public CommandHandler(IMediator mediator, IMapper mapper)
+        {
+            this.mediator = mediator;
+            this.mapper = mapper;
         }
         /// <summary>
         /// 构造函数
@@ -38,6 +58,7 @@ namespace XUCore.Ddd.Domain
         public CommandHandler(IMediatorHandler bus)
         {
             this.bus = bus;
+            this.mediator = bus.Mediator;
         }
         /// <summary>
         /// 构造函数
@@ -47,6 +68,7 @@ namespace XUCore.Ddd.Domain
         public CommandHandler(IMediatorHandler bus, IMapper mapper)
         {
             this.bus = bus;
+            this.mediator = bus.Mediator;
             this.mapper = mapper;
         }
         /// <summary>

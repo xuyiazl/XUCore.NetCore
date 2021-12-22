@@ -18,12 +18,12 @@ namespace XUCore.Ddd.Domain
     public class User : IUser
     {
         private readonly IHttpContextAccessor accessor;
-        private readonly ICacheManager cacheManager;
+        //private readonly ICacheManager cacheManager;
 
         public User(IServiceProvider serviceProvider)
         {
             accessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
-            cacheManager = serviceProvider.GetRequiredService<ICacheManager>();
+            //cacheManager = serviceProvider.GetRequiredService<ICacheManager>();
         }
         /// <summary>
         /// IIdentity
@@ -55,14 +55,14 @@ namespace XUCore.Ddd.Domain
         /// <param name="token"></param>
         public virtual void SetToken(string id, string token)
         {
-            cacheManager.Set($"{ClaimAttributes.UserToken}_{Id}", token);
+            //cacheManager.Set($"{ClaimAttributes.UserToken}_{Id}", token);
         }
         /// <summary>
         /// 删除登录标记，模拟退出
         /// </summary>
         public virtual void RemoveToken()
         {
-            cacheManager.Remove($"{ClaimAttributes.UserToken}_{Id}");
+            //cacheManager.Remove($"{ClaimAttributes.UserToken}_{Id}");
         }
         /// <summary>
         /// 验证token是否一致
@@ -71,9 +71,11 @@ namespace XUCore.Ddd.Domain
         /// <returns></returns>
         public virtual bool VaildToken(string token)
         {
-            var cacheToken = cacheManager.Get<string>($"{ClaimAttributes.UserToken}_{Id}");
+            //var cacheToken = cacheManager.Get<string>($"{ClaimAttributes.UserToken}_{Id}");
 
-            return token == cacheToken;
+            //return token == cacheToken;
+
+            return false;
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace XUCore.Ddd.Domain
 {
@@ -12,6 +9,10 @@ namespace XUCore.Ddd.Domain
     /// </summary>
     public interface IMediatorHandler
     {
+        /// <summary>
+        /// IMediator
+        /// </summary>
+        IMediator Mediator { get; set; }
         /// <summary>
         /// 发布事件通知
         /// </summary>

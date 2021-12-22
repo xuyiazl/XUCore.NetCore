@@ -10,17 +10,24 @@ namespace XUCore.Ddd.Domain
     /// </summary>
     public class MediatorMemoryStoreHandler : IMediatorHandler
     {
-        //构造函数注入
-        private readonly IMediator mediator;
-        // 事件仓储服务
+        /// <summary>
+        /// IMediator
+        /// </summary>
+        public IMediator Mediator { get; set; }
+
+        /// <summary>
+        /// 事件仓储服务
+        /// </summary>
         private readonly IEventStoreService eventStoreService;
+
         /// <summary>
         /// 不需要存储的事件
         /// </summary>
         public IList<string> NotEventStore = new List<string>() { "DomainNotification" };
+
         public MediatorMemoryStoreHandler(IMediator mediator, IEventStoreService eventStoreService)
         {
-            this.mediator = mediator;
+            this.Mediator = mediator;
             this.eventStoreService = eventStoreService;
         }
 
@@ -38,7 +45,7 @@ namespace XUCore.Ddd.Domain
                 eventStoreService?.Save(@event);
 
             // MediatR中介者模式中的第二种方法，发布/订阅模式
-            return mediator.Publish(@event);
+            return Mediator.Publish(@event);
         }
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace XUCore.Ddd.Domain
         /// <returns></returns>
         public Task<TResponse> SendCommand<TResponse>(Command<TResponse> command, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return mediator.Send(command, cancellationToken);
+            return Mediator.Send(command, cancellationToken);
         }
     }
 
@@ -59,11 +66,14 @@ namespace XUCore.Ddd.Domain
     /// </summary>
     public class MediatorMemoryHandler : IMediatorHandler
     {
-        private readonly IMediator mediator;
+        /// <summary>
+        /// IMediator
+        /// </summary>
+        public IMediator Mediator { get; set; }
 
         public MediatorMemoryHandler(IMediator mediator)
         {
-            this.mediator = mediator;
+            this.Mediator = mediator;
         }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace XUCore.Ddd.Domain
         public Task PublishEvent<TNotification>(TNotification @event, CancellationToken cancellationToken = default(CancellationToken)) where TNotification : Event
         {
             // MediatR中介者模式中的第二种方法，发布/订阅模式
-            return mediator.Publish(@event);
+            return Mediator.Publish(@event);
         }
 
         /// <summary>
@@ -88,7 +98,7 @@ namespace XUCore.Ddd.Domain
         /// <returns></returns>
         public Task<TResponse> SendCommand<TResponse>(Command<TResponse> command, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return mediator.Send(command, cancellationToken);
+            return Mediator.Send(command, cancellationToken);
         }
     }
 }
