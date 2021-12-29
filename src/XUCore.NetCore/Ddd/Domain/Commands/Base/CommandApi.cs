@@ -1,23 +1,23 @@
-﻿using MediatR;
+﻿using System;
+using System.Collections.Generic;
+using FluentValidation.Results;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using XUCore.NetCore.DynamicWebApi;
 
 namespace XUCore.Ddd.Domain
 {
     /// <summary>
-    /// 抽象命令基类
+    /// 命令Api基类
     /// </summary>
-    //public abstract class Command<TResponse> : Message, IRequest<TResponse>
-    public abstract class Command<TResponse> : Command, IRequest<TResponse>
+    [DynamicWebApi]
+    public abstract class CommandApi<TResponse> : Command<TResponse>, IDynamicWebApi
     {
-        ///// <summary>
-        ///// 时间戳
-        ///// </summary>
-        //public DateTime Timestamp { get; private set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        protected Command() : base()
+        protected readonly IMediator mediator;
+
+        protected CommandApi(IServiceProvider serviceProvider) : base()
         {
-            //Timestamp = DateTime.Now;
+            this.mediator = serviceProvider.GetRequiredService<IMediator>();
         }
     }
 }

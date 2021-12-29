@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using System.Collections.Generic;
+using XUCore.NetCore.DynamicWebApi;
 
 namespace XUCore.Ddd.Domain
 {
@@ -16,9 +17,7 @@ namespace XUCore.Ddd.Domain
             get;
             set;
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         protected Command()
         {
             ValidationResult = new ValidationResult();
@@ -27,17 +26,20 @@ namespace XUCore.Ddd.Domain
         /// 获取验证的错误消息
         /// </summary>
         /// <returns></returns>
+        [NonDynamicMethod]
         public virtual IList<ValidationFailure> GetErrors() => ValidationResult.Errors;
         /// <summary>
         /// 获取验证的错误消息
         /// </summary>
         /// <param name="separator"></param>
         /// <returns></returns>
+        [NonDynamicMethod]
         public virtual string GetErrors(string separator) => ValidationResult.ToString(separator);
         /// <summary>
         /// 是否验证通过
         /// </summary>
         /// <returns></returns>
+        [NonDynamicMethod]
         public virtual bool IsVaild() => ValidationResult.IsValid;
     }
 }
