@@ -1,52 +1,69 @@
 ﻿using AspectCore.DynamicProxy;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Transactions;
 using XUCore.NetCore.AspectCore;
 
-namespace XUCore.NetCore.Data.DbService
+namespace XUCore.NetCore.Data
 {
     /// <summary>
-    /// 事务AOP
+    /// 工作单元AOP（使用事务执行）
     /// </summary>
-    public class TransactionAttribute : InterceptorBase
+    [AttributeUsage(AttributeTargets.Method)]
+    public class UnitOfWorkAttribute : InterceptorBase, IActionFilter
     {
         /// <summary>
-        /// Type of DbContext
+        /// 事务范围选项
         /// </summary>
-        public Type DbType { get; set; }
+        public TransactionScopeOption ScopeOption { get; set; } = TransactionScopeOption.Required;
         /// <summary>
-        /// 事务AOP
+        /// 隔离级别
         /// </summary>
-        /// <param name="dbType">上下文<see cref="IDbContext"/></param>
-        public TransactionAttribute(Type dbType)
+        public IsolationLevel Level { get; set; } = IsolationLevel.ReadCommitted;
+        /// <summary>
+        /// 工作单元AOP
+        /// </summary>
+        public UnitOfWorkAttribute()
         {
-            DbType = dbType;
+
         }
 
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            var dbContext = context.ServiceProvider.GetService(DbType) as IDbContext;
+            using (var scope = new TransactionScope(ScopeOption, new TransactionOptions { IsolationLevel = Level }))
+            {
+                await next(context);
 
-            if (dbContext == null) throw new ArgumentNullException("DbType is null");
+                scope.Complete();
+            }
+        }
 
-            IUnitOfWork unitOfWork = new UnitOfWorkService(dbContext);
+        private TransactionScope scope;
 
-            await unitOfWork.CreateTransactionAsync(
-                async (tran, cancel) =>
-                {
-                    await next(context);
-                },
-                async (tran, error, cancel) =>
-                {
-                    await Task.CompletedTask;
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
+            scope = new TransactionScope(ScopeOption, new TransactionOptions
+            {
+                IsolationLevel = Level
+            });
+        }
 
-                    throw error;
-                },
-                CancellationToken.None);
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
+            try
+            {
+                if (context.Exception == null)
+                    scope.Complete();
+
+                scope.Dispose();
+            }
+            catch { }
         }
     }
 }
