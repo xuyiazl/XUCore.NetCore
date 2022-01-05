@@ -69,9 +69,10 @@ namespace XUCore.NetCore.Data
 
         Task OnAfter(Exception ex)
         {
-            scope.Complete();
             try
             {
+                scope.Complete();
+
                 scope.Dispose();
             }
             catch { }
