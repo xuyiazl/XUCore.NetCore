@@ -70,7 +70,11 @@ namespace XUCore.NetCore.Data
         Task OnAfter(Exception ex)
         {
             scope.Complete();
-            scope.Dispose();
+            try
+            {
+                scope.Dispose();
+            }
+            catch { }
             return Task.FromResult(false);
         }
     }
