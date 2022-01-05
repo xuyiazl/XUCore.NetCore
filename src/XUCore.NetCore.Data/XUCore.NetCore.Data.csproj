@@ -16,9 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Remove="Aop\TransactionAttribute.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
 		<PackageReference Include="EFCore.BulkExtensions" Version="6.2.6" />
 		<PackageReference Include="FastMember" Version="1.5.0" />

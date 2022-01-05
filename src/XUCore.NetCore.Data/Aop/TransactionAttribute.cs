@@ -15,8 +15,17 @@ namespace XUCore.NetCore.Data
     /// <summary>
     /// 工作单元AOP（使用事务执行）
     /// </summary>
+    [Obsolete("请使用 TransactionAttribute")]
+    public class UnitOfWorkAttribute
+    {
+
+    }
+
+    /// <summary>
+    /// 工作单元AOP（使用事务执行）
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class UnitOfWorkAttribute : InterceptorBase, IActionFilter
+    public class TransactionAttribute : InterceptorBase, IActionFilter
     {
         /// <summary>
         /// 事务范围选项
@@ -25,18 +34,18 @@ namespace XUCore.NetCore.Data
         /// <summary>
         /// 隔离级别
         /// </summary>
-        public IsolationLevel Level { get; set; } = IsolationLevel.ReadCommitted;
+        public IsolationLevel IsolationLevel { get; set; } = IsolationLevel.ReadCommitted;
         /// <summary>
         /// 工作单元AOP
         /// </summary>
-        public UnitOfWorkAttribute()
+        public TransactionAttribute()
         {
 
         }
 
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            using (var scope = new TransactionScope(ScopeOption, new TransactionOptions { IsolationLevel = Level }))
+            using (var scope = new TransactionScope(ScopeOption, new TransactionOptions { IsolationLevel = IsolationLevel }))
             {
                 await next(context);
 
@@ -50,7 +59,7 @@ namespace XUCore.NetCore.Data
         {
             scope = new TransactionScope(ScopeOption, new TransactionOptions
             {
-                IsolationLevel = Level
+                IsolationLevel = IsolationLevel
             });
         }
 
