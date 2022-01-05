@@ -34,49 +34,36 @@ namespace XUCore.NetCore.Data
 
         }
 
-        TransactionScope scope;
-
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            try
+            using (var scope = new TransactionScope(ScopeOption, new TransactionOptions { IsolationLevel = Level }))
             {
-                await OnBefore();
-
                 await next(context);
 
-                await OnAfter(null);
-            }
-            catch (Exception ex)
-            {
-                await OnAfter(ex);
-
-                throw;
+                scope.Complete();
             }
         }
 
-        public void OnActionExecuting(ActionExecutingContext context) => OnBefore();
-        public void OnActionExecuted(ActionExecutedContext context) => OnAfter(context.Exception);
+        private TransactionScope scope;
 
-        Task OnBefore()
+        public void OnActionExecuting(ActionExecutingContext context)
         {
             scope = new TransactionScope(ScopeOption, new TransactionOptions
             {
                 IsolationLevel = Level
             });
-
-            return Task.FromResult(false);
         }
 
-        Task OnAfter(Exception ex)
+        public void OnActionExecuted(ActionExecutedContext context)
         {
             try
             {
-                scope.Complete();
+                if (context.Exception == null)
+                    scope.Complete();
 
                 scope.Dispose();
             }
             catch { }
-            return Task.FromResult(false);
         }
     }
 }
