@@ -26,6 +26,9 @@ namespace XUCore.NetCore.FreeSql
         /// 事务传播方式
         /// </summary>
         public Propagation Propagation { get; set; } = Propagation.Required;
+        /// <summary>
+        /// 事务级别
+        /// </summary>
         public IsolationLevel IsolationLevel { get => _IsolationLevelPriv.Value; set => _IsolationLevelPriv = value; }
 
         IsolationLevel? _IsolationLevelPriv;
