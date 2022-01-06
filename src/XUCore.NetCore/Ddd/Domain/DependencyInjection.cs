@@ -8,6 +8,23 @@ namespace XUCore.Ddd.Domain
     public static class DependencyInjection
     {
         /// <summary>
+        /// 注册 Mediator
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="action"></param>
+        /// <param name="handlerAssemblyMarkerTypes"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddMediator(this IServiceCollection services, Action<RequestOptions> action = null, params Type[] handlerAssemblyMarkerTypes)
+        {
+            // Mediator
+            services.AddMediatR(handlerAssemblyMarkerTypes);
+
+            // 注册 DDD Mediator 监控等插件
+            services.AddRequestBehaviour(action);
+
+            return services;
+        }
+        /// <summary>
         /// 注册 DDD Mediator 监控等插件
         /// </summary>
         /// <param name="services"></param>
