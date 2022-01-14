@@ -8,6 +8,7 @@ $projects = (
     "XUCore",
     "XUCore.Excel",
     "XUCore.Script",
+    "XUCore.WeChat",
     "XUCore.NetCore",
     "XUCore.NetCore.AspectCore",
     "XUCore.NetCore.Data",
