@@ -13,7 +13,7 @@
 //  
 // =======================================================================
 
-namespace XUCore.WeChat.AspNet.ServerMessages.From
+namespace XUCore.WeChat.Net.ServerMessages.From
 {
     using Newtonsoft.Json;
     using System.Collections.Generic;

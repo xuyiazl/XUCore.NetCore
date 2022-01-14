@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace XUCore.WeChat.AspNet.ServerMessages.To
+namespace XUCore.WeChat.Net.ServerMessages.To
 {
     public class ToNullMessage : ToMessageBase
     {

@@ -1,14 +1,12 @@
-﻿using XUCore.WeChat.AspNet.Controllers;
-using XUCore.WeChat.AspNet.ServerMessages;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Text;
+using XUCore.WeChat.Net.Controllers;
+using XUCore.WeChat.Net.ServerMessages;
 
-namespace XUCore.WeChat.AspNet
+namespace XUCore.WeChat.Net
 {
     public static class Extentions
     {

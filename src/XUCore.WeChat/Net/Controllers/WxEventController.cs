@@ -1,4 +1,4 @@
-﻿using XUCore.WeChat.AspNet.ServerMessages;
+﻿using XUCore.WeChat.Net.ServerMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUCore.WeChat.AspNet.Controllers
+namespace XUCore.WeChat.Net.Controllers
 {
     /// <summary>
     /// 服务器事件处理控制器

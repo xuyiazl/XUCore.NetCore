@@ -1,4 +1,4 @@
-﻿namespace XUCore.WeChat.AspNet
+﻿namespace XUCore.WeChat.Net
 {
     public enum OAuthLevels
     {

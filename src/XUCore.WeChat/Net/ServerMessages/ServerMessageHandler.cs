@@ -13,10 +13,10 @@
 //
 // =======================================================================
 
-namespace XUCore.WeChat.AspNet.ServerMessages
+namespace XUCore.WeChat.Net.ServerMessages
 {
-    using XUCore.WeChat.AspNet.ServerMessages.From;
-    using XUCore.WeChat.AspNet.ServerMessages.To;
+    using XUCore.WeChat.Net.ServerMessages.From;
+    using XUCore.WeChat.Net.ServerMessages.To;
     using XUCore.WeChat.Helper;
     using Microsoft.Extensions.Logging;
     using System;

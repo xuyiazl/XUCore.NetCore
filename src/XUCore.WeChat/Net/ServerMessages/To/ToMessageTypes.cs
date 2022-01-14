@@ -13,7 +13,7 @@
 //  
 // =======================================================================
 
-namespace XUCore.WeChat.AspNet.ServerMessages.To
+namespace XUCore.WeChat.Net.ServerMessages.To
 {
     /// <summary>
     /// Defines the ToMessageTypes

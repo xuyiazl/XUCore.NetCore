@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using XUCore.WeChat.Apis.Sns;
-using XUCore.WeChat.AspNet;
 
 namespace XUCore.WeChat.Net
 {

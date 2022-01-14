@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace XUCore.WeChat.AspNet
+namespace XUCore.WeChat.Net
 {
     /// <summary>
     /// 

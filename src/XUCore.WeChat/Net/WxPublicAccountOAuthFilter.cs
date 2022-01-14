@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace XUCore.WeChat.AspNet
+namespace XUCore.WeChat.Net
 {
     /// <summary>
     /// 公众号网页授权筛选器
