@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	
+
 	<Import Project="..\..\common.props" />
 
 	<PropertyGroup>
@@ -44,11 +44,11 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
 
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
-		<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
+		<!--<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.MongoDB" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.MySql" Version="4.2.22" />
 		<PackageReference Include="MiniProfiler.Providers.Redis" Version="4.2.22" />
-		<PackageReference Include="MiniProfiler.Providers.SqlServer" Version="4.2.22" />
+		<PackageReference Include="MiniProfiler.Providers.SqlServer" Version="4.2.22" />-->
 
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />

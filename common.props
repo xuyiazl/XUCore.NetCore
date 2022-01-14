@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>6.0.12</Version>
+		<Version>6.0.13</Version>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/xuyiazl/XUCore.NetCore</RepositoryUrl>

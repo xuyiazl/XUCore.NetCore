@@ -213,22 +213,21 @@ namespace XUCore.NetCore.Swagger
         /// <param name="services"></param>
         /// <param name="swaggerGenAction"></param>
         /// <param name="miniProfilerAction"></param>
-        public static void AddMiniSwagger(this IServiceCollection services, Action<SwaggerGenOptions> swaggerGenAction = null, Action<MiniProfilerOptions> miniProfilerAction = null)
+        public static IMiniProfilerBuilder AddMiniSwagger(this IServiceCollection services, Action<SwaggerGenOptions> swaggerGenAction = null, Action<MiniProfilerOptions> miniProfilerAction = null)
         {
             services.AddSwaggerGen(options =>
             {
                 swaggerGenAction?.Invoke(options);
             });
 
-            services.AddMiniProfiler(options =>
+            return services.AddMiniProfiler(options =>
             {
                 options.RouteBasePath = "/index-mini-profiler";
                 options.EnableMvcFilterProfiling = false;
                 options.EnableMvcViewProfiling = false;
 
                 miniProfilerAction?.Invoke(options);
-            })                
-            .AddEntityFramework();
+            });
         }
         /// <summary>
         /// 启用中间件服务生成Swagger
