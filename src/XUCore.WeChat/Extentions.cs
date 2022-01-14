@@ -33,11 +33,15 @@ namespace XUCore.WeChat
             services.AddHttpApi<ISnsApi>();
             services.AddHttpApi<ITemplateApi>();
             services.AddHttpApi<IMenuApi>();
-            services.AddSingleton<ITokenManager, TokenManager>();
             services.AddHttpApi<IKfAccountApi>();
             services.AddHttpApi<IMediaApi>();
             services.AddHttpApi<IUserApi>();
             services.AddHttpApi<ITagsApi>();
+
+            services.AddSingleton<ITokenManager, TokenManager>();
+            services.AddSingleton<ITicketManager, TicketManager>();
+            services.AddSingleton<IWebShareSignature, WebShareSignature>();
+
             return services;
         }
 
