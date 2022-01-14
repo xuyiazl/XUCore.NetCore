@@ -67,6 +67,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUCore.WeChat", "src\XUCore.WeChat\XUCore.WeChat.csproj", "{549E2C91-763B-4492-B21E-062AD7E7C564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,10 @@ Global
 		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{363A2133-C5BC-47AE-8E0A-063FDA919216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549E2C91-763B-4492-B21E-062AD7E7C564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549E2C91-763B-4492-B21E-062AD7E7C564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549E2C91-763B-4492-B21E-062AD7E7C564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549E2C91-763B-4492-B21E-062AD7E7C564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +193,7 @@ Global
 		{6003DE59-3D99-4224-84CF-C1BBADF416F2} = {92703396-7DAE-44DA-A928-F27BBB82161A}
 		{363A2133-C5BC-47AE-8E0A-063FDA919216} = {92703396-7DAE-44DA-A928-F27BBB82161A}
 		{92703396-7DAE-44DA-A928-F27BBB82161A} = {C8DFC589-0B10-4CF2-B7B2-688A1236D2D2}
+		{549E2C91-763B-4492-B21E-062AD7E7C564} = {92703396-7DAE-44DA-A928-F27BBB82161A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63C60367-AD3A-442A-A79A-F9D652E5089F}
