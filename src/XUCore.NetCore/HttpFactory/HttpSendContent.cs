@@ -19,6 +19,9 @@ namespace XUCore.NetCore.HttpFactory
         public static HttpContent MessagePackContent<TModel>(TModel model, Encoding encoding = null)
             => Create(model, encoding, HttpMediaType.MessagePack);
 
+        public static HttpContent FormContent(IDictionary<string, string> nameValueCollection)
+            => new FormUrlEncodedContent(nameValueCollection);
+
         public static HttpContent Create<TModel>(TModel model, Encoding encoding = null, HttpMediaType mediaType = HttpMediaType.Json)
         {
             HttpContent content;
