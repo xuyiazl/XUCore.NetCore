@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using XUCore.Drawing;
-using XUCore.Extensions;
-using XUCore.Files;
-using XUCore.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
+using XUCore.Extensions;
+using XUCore.Files;
+using XUCore.IO;
 using FileInfo = XUCore.Files.FileInfo;
 
 namespace XUCore.NetCore.Uploads
@@ -61,9 +64,7 @@ namespace XUCore.NetCore.Uploads
 
             var fullDir = System.IO.Path.Combine(rootPath, fileInfo.Path);
             if (!Directory.Exists(fullDir))
-            {
                 Directory.CreateDirectory(fullDir);
-            }
 
             var fullPath = Path.Combine(fullDir, fileInfo.SaveName);
             fileInfo.Md5 = await SaveWithMd5Async(formFile, fullPath, cancellationToken);
@@ -121,7 +122,7 @@ namespace XUCore.NetCore.Uploads
                 throw new Exception("上传图片扩展名是不允许的扩展名。只允许" + param.Extensions.Join(",") + "格式。");
 
             if (param.FormFile.Length > param.Size)
-                throw new Exception($"上传文件大小超过限制。图片大小不能超过{new FileSize(param.Size, FileSizeUnit.M).ToString()}。");
+                throw new Exception($"上传文件大小超过限制。图片大小不能超过{new FileSize(param.Size, FileSizeUnit.Byte).ToString()}。");
 
             var imageInfo = await SaveImageAsync(param.FormFile, param.RelativePath, param.RootPath, cancellationToken);
 
@@ -130,8 +131,17 @@ namespace XUCore.NetCore.Uploads
                 string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
                 string thumPath = $"{orgin}-tmp";
 
-                using (var source = ImageHelper.FromFile(orgin))
-                    ImageHelper.ZoomImage(source, thumPath, param.Ratio, param.Quality);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var ratio = param.Ratio / 100.0;
+                    ctx.Resize((int)(source.Width * ratio), (int)(source.Height * ratio));
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = param.Quality };
+
+                await source.SaveAsync(thumPath, jpegEncoder, cancellationToken);
 
                 File.Move(thumPath, orgin, true);
             }
@@ -141,7 +151,32 @@ namespace XUCore.NetCore.Uploads
                 string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
                 string thumPath = $"{orgin}-tmp";
 
-                ImageHelper.MakeThumbnail(orgin, thumPath, param.AutoCutSize);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var towidth = source.Width;
+                    var toheight = source.Height;
+                    if (source.Width >= source.Height && source.Width > param.AutoCutSize)
+                    {
+                        towidth = param.AutoCutSize;
+                        toheight = source.Height * param.AutoCutSize / source.Width;
+                    }
+                    if (source.Height >= source.Width && source.Height > param.AutoCutSize)
+                    {
+                        towidth = source.Width * param.AutoCutSize / source.Height;
+                        toheight = param.AutoCutSize;
+                    }
+                    ctx.Resize(new ResizeOptions
+                    {
+                        Mode = ResizeMode.Crop,
+                        Size = new Size(towidth, toheight)
+                    });
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = 100 };
+
+                await source.SaveAsync(thumPath, jpegEncoder, cancellationToken);
 
                 File.Move(thumPath, orgin, true);
             }
@@ -158,7 +193,24 @@ namespace XUCore.NetCore.Uploads
                 var thumb = Path.Combine(param.RootPath, thumbPath);
                 var orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
 
-                ImageHelper.MakeThumbnail(orgin, thumb, _size[0].ToInt(), _size[1].ToInt(), param.ThumbCutMode);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var towidth = _size[0].ToInt();
+                    var toheight = _size[1].ToInt();
+
+                    ctx.Resize(new ResizeOptions
+                    {
+                        Mode = ResizeMode.Crop,
+                        Position = AnchorPositionMode.Center,
+                        Size = new Size(towidth, toheight)
+                    });
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = 100 };
+
+                await source.SaveAsync(thumb, jpegEncoder,cancellationToken);
 
                 imageInfo.Thumbs.TryAdd(thumbSize, thumbPath);
             }
@@ -179,13 +231,23 @@ namespace XUCore.NetCore.Uploads
 
             var imageInfo = await SaveImageAsync(param.Base64String, param.RelativePath, param.RootPath, cancellationToken);
 
+
             if (param.IsZoomOriginal)
             {
                 string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
                 string thumPath = $"{orgin}-tmp";
 
-                using (var source = ImageHelper.FromFile(orgin))
-                    ImageHelper.ZoomImage(source, thumPath, param.Ratio, param.Quality);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var ratio = param.Ratio / 100.0;
+                    ctx.Resize((int)(source.Width * ratio), (int)(source.Height * ratio));
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = param.Quality };
+
+                await source.SaveAsync(thumPath, jpegEncoder, cancellationToken);
 
                 File.Move(thumPath, orgin, true);
             }
@@ -195,7 +257,32 @@ namespace XUCore.NetCore.Uploads
                 string orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
                 string thumPath = $"{orgin}-tmp";
 
-                ImageHelper.MakeThumbnail(orgin, thumPath, param.AutoCutSize);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var towidth = source.Width;
+                    var toheight = source.Height;
+                    if (source.Width >= source.Height && source.Width > param.AutoCutSize)
+                    {
+                        towidth = param.AutoCutSize;
+                        toheight = source.Height * param.AutoCutSize / source.Width;
+                    }
+                    if (source.Height >= source.Width && source.Height > param.AutoCutSize)
+                    {
+                        towidth = source.Width * param.AutoCutSize / source.Height;
+                        toheight = param.AutoCutSize;
+                    }
+                    ctx.Resize(new ResizeOptions
+                    {
+                        Mode = ResizeMode.Crop,
+                        Size = new Size(towidth, toheight)
+                    });
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = 100 };
+
+                await source.SaveAsync(thumPath, jpegEncoder, cancellationToken);
 
                 File.Move(thumPath, orgin, true);
             }
@@ -212,11 +299,27 @@ namespace XUCore.NetCore.Uploads
                 var thumb = Path.Combine(param.RootPath, thumbPath);
                 var orgin = Path.Combine(param.RootPath, imageInfo.FullPath);
 
-                ImageHelper.MakeThumbnail(orgin, thumb, _size[0].ToInt(), _size[1].ToInt(), param.ThumbCutMode);
+                using var source = Image.Load(orgin, out IImageFormat format);
+
+                source.Mutate(ctx =>
+                {
+                    var towidth = _size[0].ToInt();
+                    var toheight = _size[1].ToInt();
+
+                    ctx.Resize(new ResizeOptions
+                    {
+                        Mode = ResizeMode.Crop,
+                        Position = AnchorPositionMode.Center,
+                        Size = new Size(towidth, toheight)
+                    });
+                });
+
+                var jpegEncoder = new JpegEncoder { Quality = 100 };
+
+                await source.SaveAsync(thumb, jpegEncoder, cancellationToken);
 
                 imageInfo.Thumbs.TryAdd(thumbSize, thumbPath);
             }
-
 
             return imageInfo;
         }
@@ -250,7 +353,7 @@ namespace XUCore.NetCore.Uploads
 
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
-                byte[] bytes = ImageHelper.GetBytesFromBase64String(base64String);
+                byte[] bytes = XUCore.Drawing.ImageHelper.GetBytesFromBase64String(base64String);
 
                 await stream.WriteAsync(bytes, cancellationToken);
 

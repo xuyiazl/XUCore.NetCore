@@ -36,11 +36,6 @@ namespace XUCore.NetCore.Uploads
         public int AutoCutSize { get; set; }
 
         /// <summary>
-        /// 缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
-        /// </summary>
-        public ThumbnailMode ThumbCutMode { get; set; }
-
-        /// <summary>
         /// 裁剪缩略图尺寸 item = 300x400
         /// </summary>
         public List<string> Thumbs { get; set; }

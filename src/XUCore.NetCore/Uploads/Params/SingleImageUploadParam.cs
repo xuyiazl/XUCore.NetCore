@@ -1,5 +1,4 @@
-﻿using XUCore.Drawing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace XUCore.NetCore.Uploads
 {
@@ -13,7 +12,7 @@ namespace XUCore.NetCore.Uploads
         /// <summary>
         /// 允许上传的图片文件大小，默认2M
         /// </summary>
-        public long Size { get; set; } = 1024 * 1024 * 2;
+        public long Size { get; set; } = 1024 * 1024 * 5;
 
         /// <summary>
         /// 是否等比缩放原图
@@ -39,11 +38,6 @@ namespace XUCore.NetCore.Uploads
         /// 自动裁剪原图的最大高度和宽度
         /// </summary>
         public int AutoCutSize { get; set; }
-
-        /// <summary>
-        /// 缩略图裁剪方式（原图不动，若设置了裁剪尺寸，则启用该选项）
-        /// </summary>
-        public ThumbnailMode ThumbCutMode { get; set; }
 
         /// <summary>
         /// 裁剪缩略图尺寸 item = 300x400
