@@ -41,7 +41,7 @@
 		
 		-->
 
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
 
 		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
 		<!--<PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
@@ -58,16 +58,16 @@
 		<!--<PackageReference Include="log4net" Version="2.0.12" />-->
 
 		<PackageReference Include="Quartz" Version="3.3.3" />
-		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<PackageReference Include="Scrutor" Version="4.0.0" />
 
 		<PackageReference Include="FluentValidation" Version="10.3.6" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
 
-		<PackageReference Include="AutoMapper" Version="10.1.1" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="AutoMapper" Version="11.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 
-		<PackageReference Include="MediatR" Version="9.0.0" />
-		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="MediatR" Version="10.0.1" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

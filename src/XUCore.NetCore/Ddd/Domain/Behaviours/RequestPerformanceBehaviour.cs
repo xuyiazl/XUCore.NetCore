@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace XUCore.Ddd.Domain
 {
     public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
         private readonly Stopwatch timer;
         private readonly ILogger<TRequest> logger;

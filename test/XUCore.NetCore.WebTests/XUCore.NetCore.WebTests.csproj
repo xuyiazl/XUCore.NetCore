@@ -6,10 +6,10 @@
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'XUCore.WebTests' " />
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
-		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+		<PackageReference Include="Scrutor" Version="4.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
